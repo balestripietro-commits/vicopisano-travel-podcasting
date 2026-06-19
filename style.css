@@ -261,9 +261,21 @@ audio {
 }
 
 .intro-quote-title {
+  position: relative;
+  padding-left: 1.2em;
   margin-top: 2px;
   font-size: 1rem;
   letter-spacing: 0.015em;
+}
+
+.intro-quote-title::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -0.08em;
+  color: var(--accent-warm);
+  font-size: 1.7em;
+  line-height: 1;
 }
 
 .intro-quote {
