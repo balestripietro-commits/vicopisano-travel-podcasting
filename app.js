@@ -275,6 +275,8 @@ const highlightTitle = document.getElementById("highlight-title");
 const highlightText = document.getElementById("highlight-text");
 const locateMeButton = document.getElementById("locate-me-button");
 const locateMeStatus = document.getElementById("locate-me-status");
+const mapFullscreenButton = document.getElementById("map-fullscreen-button");
+const mapStageFrame = document.querySelector(".map-stage-frame");
 const globalLanguageChips = document.getElementById("global-language-chips");
 const miniPlayer = document.getElementById("mini-player");
 const miniPlayerOpen = document.getElementById("mini-player-open");
@@ -898,6 +900,65 @@ function locateUser() {
 
 function bindLocateButton() {
   locateMeButton.addEventListener("click", locateUser);
+}
+
+function isMapFullscreenActive() {
+  return (
+    document.fullscreenElement === mapStageFrame ||
+    document.webkitFullscreenElement === mapStageFrame
+  );
+}
+
+function updateMapFullscreenButton() {
+  if (!mapFullscreenButton) {
+    return;
+  }
+
+  const isFullscreen = isMapFullscreenActive();
+  mapFullscreenButton.textContent = isFullscreen ? "⤡" : "⤢";
+  mapFullscreenButton.setAttribute(
+    "aria-label",
+    isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo"
+  );
+}
+
+async function toggleMapFullscreen() {
+  if (!mapStageFrame) {
+    return;
+  }
+
+  try {
+    if (!isMapFullscreenActive()) {
+      if (mapStageFrame.requestFullscreen) {
+        await mapStageFrame.requestFullscreen();
+      } else if (mapStageFrame.webkitRequestFullscreen) {
+        mapStageFrame.webkitRequestFullscreen();
+      }
+    } else if (document.exitFullscreen) {
+      await document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  } catch (error) {
+    console.warn("Fullscreen mappa non disponibile:", error);
+  }
+}
+
+function bindMapFullscreenButton() {
+  if (!mapFullscreenButton || !mapStageFrame) {
+    return;
+  }
+
+  updateMapFullscreenButton();
+  mapFullscreenButton.addEventListener("click", toggleMapFullscreen);
+
+  const syncFullscreenState = () => {
+    updateMapFullscreenButton();
+    setTimeout(() => map.invalidateSize(), 150);
+  };
+
+  document.addEventListener("fullscreenchange", syncFullscreenState);
+  document.addEventListener("webkitfullscreenchange", syncFullscreenState);
 }
 
 function getLanguageDisplayName(languageCode, uiLanguage = currentLanguage) {
@@ -1546,5 +1607,6 @@ renderMap();
 renderStaticTexts();
 renderGlobalLanguageSelector();
 bindLocateButton();
+bindMapFullscreenButton();
 bindPlayerControls();
 focusStop(tappe[0], { skipFly: true });
