@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Podcasting Vicopisano</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="style.css?v=20260616-1405" />
+  </head>
+  <body>
+    <div class="announcement-strip" aria-hidden="true">
+      <div id="announcement-track" class="announcement-track"></div>
+    </div>
+
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="brand-lockup">
+          <img class="hero-logo" src="logo_vicopisano.png" alt="Stemma di Vicopisano" />
+          <div class="brand-copy">
+            <p class="brand-name" id="brand-name">Travel podcasting</p>
+            <p class="brand-tag" id="brand-tag">Vicopisano</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <div class="global-language-selector" aria-label="Selettore lingua del sito">
+            <div id="global-language-chips" class="language-chips"></div>
+          </div>
+        </div>
+      </header>
+
+
+
+        <section class="map-stage" aria-label="Mappa interattiva del percorso">
+          <div class="map-stage-frame">
+            <div class="map-floating-controls">
+              <button type="button" id="locate-me-button" class="map-action-button">
+                Trova la mia posizione
+              </button>
+              <p id="locate-me-status" class="map-status" aria-live="polite"></p>
+            </div>
+            <div id="map" class="map" role="application" aria-label="Mappa delle tappe"></div>
+          </div>
+        </section>
+
+        <section class="hero-copy">
+          <p class="eyebrow" id="eyebrow-text">Prototipo</p>
+          <h1 id="landing-title">Travel Podcasting Vicopisano: scopri il borgo attraverso la mappa sonora</h1>
+          <p class="intro" id="intro-text">
+            Un itinerario culturale con 7 tappe geolocalizzate nel borgo di Vicopisano.
+            Seleziona una tappa dalla lista oppure clicca sulla mappa per leggere il
+            contenuto e ascoltare l'audio disponibile.
+          </p>
+        </section>
+
+        <section class="stops-panel" aria-labelledby="stops-title">
+          <div class="controls-toolbar">
+            <div class="controls-copy">
+              <h2 id="stops-title">Tappe del percorso</h2>
+              <p id="stops-subtitle">7 punti di ascolto lungo il borgo.</p>
+            </div>
+          </div>
+          <ul id="stops-list" class="stops-list" aria-label="Elenco delle tappe"></ul>
+        </section>
+
+        <section class="story-grid">
+          <article class="story-card">
+            <h2 id="instructions-title">Istruzioni</h2>
+            <p id="instructions-text">
+              La mappa mostra il percorso completo da 1 a 7. Quando scegli una tappa, il
+              sito la evidenzia, centra la mappa sul punto corrispondente e apre i dettagli.
+            </p>
+          </article>
+
+          <article class="story-card story-card-highlight">
+            <h2 id="highlight-title">Esperienza full page</h2>
+            <p id="highlight-text">
+              La mappa resta il cuore dell'esperienza, mentre il player fisso in basso ti
+              accompagna durante l'ascolto senza togliere spazio alla navigazione.
+            </p>
+          </article>
+        </section>
+
+        <footer class="platforms-panel" aria-labelledby="platforms-eyebrow">
+          <p class="platforms-eyebrow" id="platforms-eyebrow">
+            Trovi "il travel podcasting di Vicopisano" anche su:
+          </p>
+          <div class="platforms-logos" aria-label="Piattaforme esterne">
+            <a
+              class="platform-logo logo-izi"
+              href="https://izi.travel/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="platform-logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                  <rect width="88" height="88" rx="18" fill="#F5F3F2"/>
+                  <path d="M8 16L28 8L52 18L80 10" stroke="#E7E3E1" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M4 40L18 28L34 40L52 24L70 38L86 28" stroke="#E4DFDC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 72L24 54L40 64L58 48L80 60" stroke="#E6E2DF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <text x="16" y="56" fill="#D81F4D" font-size="34" font-weight="800" font-family="Georgia, serif">izi</text>
+                  <circle cx="72" cy="56" r="4.8" stroke="#D81F4D" stroke-width="3"/>
+                </svg>
+              </span>
+              <span class="platform-logo-text"><span class="brand-izi">izi</span><span class="brand-travel">.TRAVEL</span></span>
+            </a>
+            <a
+              class="platform-logo logo-loquis"
+              href="https://www.loquis.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="platform-logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                  <circle cx="44" cy="44" r="44" fill="url(#loquisGrad)"/>
+                  <path d="M14 46H24V34H32V54H40V20H48V68H56V28H64V54H74V42" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="loquisGrad" x1="0" y1="0" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#24B47E"/>
+                      <stop offset="1" stop-color="#53C88D"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+              <span class="platform-logo-text">Loquis</span>
+            </a>
+            <a
+              class="platform-logo logo-spotify"
+              href="https://open.spotify.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="platform-logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                  <circle cx="12" cy="12" r="12" fill="#1ED760"/>
+                  <path d="M17.3 11.6C15.0 10.3 11.3 10.1 9.1 10.8C8.8 10.9 8.4 10.7 8.3 10.4C8.2 10.0 8.4 9.6 8.7 9.5C11.3 8.7 15.4 8.9 18.0 10.4C18.3 10.6 18.4 11.0 18.2 11.3C18.0 11.6 17.6 11.7 17.3 11.6ZM17.2 13.8C17.0 14.1 16.6 14.2 16.3 14.0C14.5 12.9 11.7 12.5 9.5 13.2C9.2 13.3 8.8 13.1 8.7 12.8C8.6 12.4 8.8 12.0 9.1 11.9C11.7 11.1 14.7 11.5 16.9 12.9C17.2 13.1 17.3 13.5 17.2 13.8ZM15.9 15.8C15.7 16.1 15.4 16.2 15.1 16.0C13.6 15.1 11.6 14.8 9.3 15.4C9.0 15.5 8.7 15.3 8.6 14.9C8.5 14.6 8.7 14.3 9.1 14.2C11.6 13.6 13.8 13.9 15.6 15.0C15.8 15.2 15.9 15.5 15.9 15.8Z" fill="#191414"/>
+                </svg>
+              </span>
+              <span class="platform-logo-text">Spotify</span>
+            </a>
+          </div>
+        </footer>
+
+        <section class="share-panel" aria-labelledby="share-title">
+          <h2 id="share-title" class="share-title">Share with your friends</h2>
+          <div class="share-icons" aria-label="Condivisione social">
+            <a id="share-facebook" class="share-icon share-facebook" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su Facebook"><span aria-hidden="true">f</span></a>
+            <a id="share-x" class="share-icon share-x" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su X"><span aria-hidden="true">X</span></a>
+            <a id="share-linkedin" class="share-icon share-linkedin" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su LinkedIn"><span aria-hidden="true">in</span></a>
+            <a id="share-whatsapp" class="share-icon share-whatsapp" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su WhatsApp"><span aria-hidden="true">wa</span></a>
+            <a id="share-mail" class="share-icon share-mail" href="#" aria-label="Condividi via email"><span aria-hidden="true">✉</span></a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="mini-player" class="mini-player is-hidden" aria-live="polite">
+      <button type="button" id="mini-player-open" class="mini-player-main">
+        <img
+          id="mini-player-artwork"
+          class="mini-player-artwork"
+          src="mascotte_vicopisano.png"
+          alt="Artwork della traccia"
+        />
+        <span class="mini-player-text">
+          <strong id="mini-player-title"></strong>
+          <span id="mini-player-subtitle"></span>
+        </span>
+      </button>
+
+      <div class="mini-player-center">
+        <div class="mini-player-controls" aria-label="Controlli player compatto">
+          <button
+            type="button"
+            id="mini-player-prev"
+            class="mini-player-control"
+            aria-label="Traccia precedente"
+          >
+            ⏮
+          </button>
+          <button type="button" id="mini-player-toggle" class="mini-player-toggle" aria-label="Play">
+            ▶
+          </button>
+          <button
+            type="button"
+            id="mini-player-next"
+            class="mini-player-control"
+            aria-label="Traccia successiva"
+          >
+            ⏭
+          </button>
+          <button
+            type="button"
+            id="mini-player-repeat"
+            class="mini-player-control"
+            aria-label="Ripeti traccia"
+          >
+            ↺
+          </button>
+        </div>
+
+        <div class="mini-player-timeline">
+          <span id="mini-player-current-time" class="mini-player-time">00:00</span>
+          <span class="mini-player-progress">
+            <span id="mini-player-progress-bar" class="mini-player-progress-bar"></span>
+          </span>
+          <span id="mini-player-duration-total" class="mini-player-time">00:00</span>
+        </div>
+      </div>
+
+      <div class="mini-player-volume-block">
+        <span class="mini-player-volume-icon" aria-hidden="true">🔊</span>
+        <input
+          id="mini-player-volume"
+          class="mini-player-volume"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.85"
+          aria-label="Volume player"
+        />
+      </div>
+    </div>
+
+    <section id="player-overlay" class="player-overlay is-hidden" aria-hidden="true">
+      <button
+        type="button"
+        id="player-backdrop"
+        class="player-backdrop"
+        aria-label="Chiudi player"
+      ></button>
+      <article class="player-sheet" aria-live="polite" aria-labelledby="detail-title">
+        <div class="player-topbar">
+          <p id="detail-number" class="player-kicker"></p>
+          <button type="button" id="player-close-button" class="player-close-button">×</button>
+        </div>
+        <div class="player-artwork">
+          <img
+            id="detail-artwork-image"
+            class="detail-artwork-image"
+            src="mascotte_vicopisano.png"
+            alt="Immagine della traccia"
+          />
+        </div>
+        <div class="player-side">
+          <div class="player-meta">
+            <p id="detail-status" class="detail-status"></p>
+            <h2 id="detail-title"></h2>
+            <p id="detail-duration" class="detail-duration"></p>
+          </div>
+          <div id="audio-wrapper" class="audio-wrapper"></div>
+          <div class="player-timeline">
+            <span id="player-current-time" class="player-time">00:00</span>
+            <input
+              id="player-progress-input"
+              class="player-progress-input"
+              type="range"
+              min="0"
+              max="100"
+              step="0.1"
+              value="0"
+              aria-label="Posizione della traccia"
+            />
+            <span id="player-duration-total" class="player-time">00:00</span>
+          </div>
+          <div class="player-controls" aria-label="Controlli player">
+            <button type="button" id="player-prev-button" class="player-control-button">
+              ⏮
+            </button>
+            <button type="button" id="player-play-button" class="player-control-button is-primary">
+              ▶
+            </button>
+            <button type="button" id="player-next-button" class="player-control-button">
+              ⏭
+            </button>
+            <button type="button" id="player-repeat-button" class="player-control-button">
+              ↺
+            </button>
+          </div>
+          <div class="player-volume-block">
+            <span class="player-volume-icon" aria-hidden="true">🔊</span>
+            <input
+              id="player-volume"
+              class="player-volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.85"
+              aria-label="Volume player esteso"
+            />
+          </div>
+          <details class="detail-copy" id="detail-copy-box">
+            <summary id="detail-copy-title">Testo descrittivo</summary>
+            <div class="detail-copy-content">
+              <p id="detail-description"></p>
+            </div>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="app.js?v=20260616-1405"></script>
+  </body>
+</html>
