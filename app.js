@@ -396,72 +396,73 @@ const STOP_ARTWORKS = {
 const stopTitles = {
   1: {
     IT: "Torre delle Quattro Porte",
-    EN: "Torre delle Quattro Porte",
-    DE: "Torre delle Quattro Porte",
-    FR: "Torre delle Quattro Porte",
-    ES: "Torre delle Quattro Porte",
-    PT: "Torre delle Quattro Porte",
-    RU: "Torre delle Quattro Porte",
+    EN: "Tower of the Four Gates",
+    DE: "Turm der Vier Tore",
+    FR: "Tour des Quatre Portes",
+    ES: "Torre de las Cuatro Puertas",
+    PT: "Torre das Quatro Portas",
+    RU: "Bashnya chetyrekh vorot",
   },
   2: {
     IT: "Torre e Camminamento del Soccorso",
-    EN: "Torre e Camminamento del Soccorso",
-    DE: "Torre e Camminamento del Soccorso",
-    FR: "Torre e Camminamento del Soccorso",
-    ES: "Torre e Camminamento del Soccorso",
-    PT: "Torre e Camminamento del Soccorso",
-    RU: "Torre e Camminamento del Soccorso",
+    EN: "Soccorso Tower and Walkway",
+    DE: "Turm und Wehrgang del Soccorso",
+    FR: "Tour et chemin de ronde del Soccorso",
+    ES: "Torre y camino de ronda del Soccorso",
+    PT: "Torre e caminho de ronda del Soccorso",
+    RU: "Bashnya i boevoy khod del Soccorso",
   },
   3: {
     IT: "Palazzo Pretorio",
-    EN: "Palazzo Pretorio",
-    DE: "Palazzo Pretorio",
-    FR: "Palazzo Pretorio",
-    ES: "Palazzo Pretorio",
-    PT: "Palazzo Pretorio",
-    RU: "Palatstso Pretorio",
+    EN: "Praetorian Palace",
+    DE: "Praetorischer Palast",
+    FR: "Palais prétorien",
+    ES: "Palacio Pretorio",
+    PT: "Palácio Pretório",
+    RU: "Pretorskiy dvorets",
   },
   4: {
     IT: "Rocca del Brunelleschi",
-    EN: "Rocca del Brunelleschi",
-    DE: "Rocca del Brunelleschi",
-    FR: "Rocca del Brunelleschi",
-    ES: "Rocca del Brunelleschi",
-    PT: "Rocca del Brunelleschi",
-    RU: "Rocca del Brunelleschi",
+    EN: "Brunelleschi Fortress",
+    DE: "Brunelleschi-Festung",
+    FR: "Forteresse de Brunelleschi",
+    ES: "Fortaleza de Brunelleschi",
+    PT: "Fortaleza de Brunelleschi",
+    RU: "Krepost Brunelleski",
   },
   5: {
     IT: "Torri Gemelle",
-    EN: "Torri Gemelle",
-    DE: "Torri Gemelle",
-    FR: "Torri Gemelle",
-    ES: "Torri Gemelle",
-    PT: "Torri Gemelle",
-    RU: "Torri Gemelle",
+    EN: "Twin Towers",
+    DE: "Zwillingstürme",
+    FR: "Tours jumelles",
+    ES: "Torres Gemelas",
+    PT: "Torres Gémeas",
+    RU: "Bashni-bliznetsy",
   },
   6: {
     IT: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    EN: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    DE: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    FR: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    ES: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    PT: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    RU: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
+    EN: "Parish of Santa Maria Addolorata and Saint John the Apostle",
+    DE: "Pfarrkirche Santa Maria Addolorata und Sankt Johannes Apostel",
+    FR: "Paroisse de Santa Maria Addolorata et Saint Jean Apôtre",
+    ES: "Parroquia de Santa Maria Addolorata y San Juan Apóstol",
+    PT: "Paróquia de Santa Maria Addolorata e São João Apóstolo",
+    RU: "Prikhod Santa Mariya Addolorata i Svyatogo Ioanna Apostola",
   },
   7: {
     IT: "Palazzo Comunale Vicopisano",
-    EN: "Palazzo Comunale Vicopisano",
-    DE: "Palazzo Comunale Vicopisano",
-    FR: "Palazzo Comunale Vicopisano",
-    ES: "Palazzo Comunale Vicopisano",
-    PT: "Palazzo Comunale Vicopisano",
-    RU: "Palazzo Comunale Vicopisano",
+    EN: "Vicopisano Town Hall",
+    DE: "Rathaus von Vicopisano",
+    FR: "Hôtel de ville de Vicopisano",
+    ES: "Ayuntamiento de Vicopisano",
+    PT: "Prefeitura de Vicopisano",
+    RU: "Munitsipalitet Vikopizano",
   },
 };
 
 const uiStrings = {
   IT: {
     prototype: "",
+    introLead: "Sono Filippo Brunelleschi.",
     intro:
       "Un tempo ho osservato queste mura per immaginare difese, passaggi e punti di vista. Ora ti accompagno tra le storie del borgo, tappa dopo tappa. Seguimi tra torri, camminamenti e scorci del borgo: ogni tappa apre una voce, una storia, un frammento di Vicopisano.",
     instructionsTitle: "Istruzioni",
@@ -513,6 +514,7 @@ const uiStrings = {
   },
   EN: {
     prototype: "",
+    introLead: "I am Filippo Brunelleschi.",
     intro:
       "Once I studied these walls to imagine defenses, passages, and viewpoints. Now I guide you through the village's stories, stop by stop. Follow me through towers, walkways, and glimpses of the borgo: each stop opens a voice, a story, a fragment of Vicopisano.",
     instructionsTitle: "Instructions",
@@ -564,6 +566,7 @@ const uiStrings = {
   },
   DE: {
     prototype: "",
+    introLead: "Ich bin Filippo Brunelleschi.",
     intro:
       "Einst betrachtete ich diese Mauern, um Verteidigungen, Übergänge und Blickpunkte zu erahnen. Jetzt begleite ich Sie Schritt für Schritt durch die Geschichten des Ortes. Folgen Sie mir durch Türme, Wehrgänge und Ausblicke: Jede Station öffnet eine Stimme, eine Geschichte, ein Stück Vicopisano.",
     instructionsTitle: "Anleitung",
@@ -615,6 +618,7 @@ const uiStrings = {
   },
   FR: {
     prototype: "",
+    introLead: "Je suis Filippo Brunelleschi.",
     intro:
       "Autrefois, j’observais ces murailles pour imaginer défenses, passages et points de vue. Aujourd’hui, je vous accompagne à travers les histoires du bourg, étape après étape. Suivez-moi entre tours, cheminements et aperçus du village : chaque étape ouvre une voix, une histoire, un fragment de Vicopisano.",
     instructionsTitle: "Instructions",
@@ -666,6 +670,7 @@ const uiStrings = {
   },
   ES: {
     prototype: "",
+    introLead: "Soy Filippo Brunelleschi.",
     intro:
       "Alguna vez observé estas murallas para imaginar defensas, pasajes y puntos de vista. Ahora te acompaño por las historias del pueblo, etapa tras etapa. Sígueme entre torres, pasarelas y rincones del borgo: cada etapa abre una voz, una historia, un fragmento de Vicopisano.",
     instructionsTitle: "Instrucciones",
@@ -717,6 +722,7 @@ const uiStrings = {
   },
   PT: {
     prototype: "",
+    introLead: "Sou Filippo Brunelleschi.",
     intro:
       "Em tempos observei estas muralhas para imaginar defesas, passagens e pontos de vista. Agora acompanho-o pelas histórias da vila, etapa após etapa. Siga-me entre torres, passadiços e recantos do borgo: cada etapa abre uma voz, uma história, um fragmento de Vicopisano.",
     instructionsTitle: "Instruções",
@@ -768,6 +774,7 @@ const uiStrings = {
   },
   RU: {
     prototype: "",
+    introLead: "Ya Filippo Brunelleschi.",
     intro:
       "Когда-то я изучал эти стены, чтобы представить оборону, проходы и точки обзора. Теперь я веду вас по историям поселка, остановка за остановкой. Следуйте за мной через башни, переходы и виды борго: каждая остановка открывает голос, историю, частицу Vicopisano.",
     instructionsTitle: "Instruktsii",
@@ -824,7 +831,17 @@ function getUiStrings(languageCode = "IT") {
 }
 
 function getStopTitle(tappa, languageCode = currentLanguage) {
-  return stopTitles[tappa.numero]?.[languageCode] || tappa.titolo;
+  const titles = stopTitles[tappa.numero];
+  if (!titles) {
+    return tappa.titolo;
+  }
+
+  if (languageCode === "IT") {
+    return titles.IT || tappa.titolo;
+  }
+
+  const translatedTitle = titles[languageCode] || titles.IT || tappa.titolo;
+  return `${titles.IT || tappa.titolo} / ${translatedTitle}`;
 }
 
 function setCurrentLanguage(languageCode) {
@@ -964,10 +981,7 @@ function bindLocateButton() {
 }
 
 function isMapFullscreenActive() {
-  return (
-    document.fullscreenElement === mapStageFrame ||
-    document.webkitFullscreenElement === mapStageFrame
-  );
+  return mapStageFrame?.classList.contains("is-expanded");
 }
 
 function updateMapFullscreenButton() {
@@ -988,21 +1002,9 @@ async function toggleMapFullscreen() {
     return;
   }
 
-  try {
-    if (!isMapFullscreenActive()) {
-      if (mapStageFrame.requestFullscreen) {
-        await mapStageFrame.requestFullscreen();
-      } else if (mapStageFrame.webkitRequestFullscreen) {
-        mapStageFrame.webkitRequestFullscreen();
-      }
-    } else if (document.exitFullscreen) {
-      await document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-  } catch (error) {
-    console.warn("Fullscreen mappa non disponibile:", error);
-  }
+  mapStageFrame.classList.toggle("is-expanded");
+  updateMapFullscreenButton();
+  setTimeout(() => map.invalidateSize(), 150);
 }
 
 function bindMapFullscreenButton() {
@@ -1012,14 +1014,6 @@ function bindMapFullscreenButton() {
 
   updateMapFullscreenButton();
   mapFullscreenButton.addEventListener("click", toggleMapFullscreen);
-
-  const syncFullscreenState = () => {
-    updateMapFullscreenButton();
-    setTimeout(() => map.invalidateSize(), 150);
-  };
-
-  document.addEventListener("fullscreenchange", syncFullscreenState);
-  document.addEventListener("webkitfullscreenchange", syncFullscreenState);
 }
 
 function getLanguageDisplayName(languageCode, uiLanguage = currentLanguage) {
@@ -1255,14 +1249,19 @@ function renderPlayerLanguageSelector(tappa = null) {
 
   if (!shouldShowSelector) {
     playerLanguageChips.innerHTML = "";
+    if (playerLanguageLabel) {
+      playerLanguageLabel.hidden = true;
+    }
     return;
   }
 
   buildLanguageChips(playerLanguageChips, {
-    languageTitle:
-      getUiStrings(currentLanguage).languageSelectorTitle || "Lingua disponibile",
-    includeLabel: true,
+    includeLabel: false,
   });
+
+  if (playerLanguageLabel) {
+    playerLanguageLabel.hidden = true;
+  }
 }
 
 function renderDetailCopy(tappa) {
@@ -1284,16 +1283,11 @@ function popupHtml(tappa) {
 
 function renderAudioContent(tappa) {
   audioWrapper.innerHTML = "";
-  const audioOptions = getAudioOptions(tappa);
   const selectedOption = getSelectedAudioOption(tappa);
   const strings = getUiStrings(currentLanguage);
   currentSelectedOption = selectedOption;
 
   if (!selectedOption || !selectedOption.audioDisponibile) {
-    const message = document.createElement("p");
-    message.className = "audio-unavailable";
-    message.textContent = strings.audioUnavailable;
-    audioWrapper.appendChild(message);
     currentAudio = null;
     updateMiniPlayerPlayback();
     return;
@@ -1516,6 +1510,7 @@ function renderStaticTexts() {
   document.documentElement.lang = currentLanguage.toLowerCase();
   renderAnnouncementTrack();
   eyebrowText.textContent = strings.prototype;
+  if (introLeadText) introLeadText.textContent = strings.introLead;
   introText.textContent = strings.intro;
   stopsTitle.textContent = strings.routeTitle;
   stopsSubtitle.textContent = strings.routeSubtitle;
@@ -1622,16 +1617,6 @@ function renderStopsList() {
   const fragment = document.createDocumentFragment();
 
   tappe.forEach((tappa) => {
-    const availableAudioOptions = getAudioOptions(tappa).filter((option) => option.audioDisponibile);
-    const availabilityLabel =
-      tappa.numero === 1
-        ? ""
-        : availableAudioOptions.length > 1
-        ? getUiStrings(currentLanguage).listAudioAvailableInLanguages(availableAudioOptions.length)
-        : tappa.audioDisponibile
-          ? getUiStrings(currentLanguage).audioAvailable
-          : getUiStrings(currentLanguage).audioUnavailable;
-
     const item = document.createElement("li");
     const button = document.createElement("button");
     button.type = "button";
@@ -1644,7 +1629,6 @@ function renderStopsList() {
         <strong class="stop-title">${getStopTitle(tappa)}</strong>
         ${hasMeaningfulDuration(tappa.durata) ? `<span class="stop-meta">${tappa.durata}</span>` : ""}
       </span>
-      ${availabilityLabel ? `<span class="stop-availability ${tappa.audioDisponibile ? "" : "is-unavailable"}">${availabilityLabel}</span>` : ""}
     `;
 
     button.addEventListener("click", () => {
