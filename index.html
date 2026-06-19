@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travel Podcasting Vicopisano</title>
+    <title>Travel Podcasting Comune di Vicopisano</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -23,7 +23,7 @@
           <img class="hero-logo" src="logo_vicopisano.png" alt="Stemma di Vicopisano" />
           <div class="brand-copy">
             <p class="brand-name" id="brand-name">Travel podcasting</p>
-            <p class="brand-tag" id="brand-tag">Vicopisano</p>
+            <p class="brand-tag" id="brand-tag">Comune di Vicopisano</p>
           </div>
         </div>
 
@@ -70,15 +70,17 @@
             />
           </div>
           <div class="intro-copy">
-            <p class="eyebrow" id="eyebrow-text">Vicopisano</p>
+            <p class="eyebrow" id="eyebrow-text">Comune di Vicopisano</p>
             <h1 id="landing-title">Buon dì!</h1>
-            <p class="intro intro-lead" id="intro-lead-text">“Sono Filippo Brunelleschi”</p>
-            <p class="intro intro-quote" id="intro-text">
-              Un tempo ho osservato queste mura per immaginare difese, passaggi e punti di vista.
-              Ora ti accompagno tra le storie del borgo, tappa dopo tappa. Seguimi tra torri,
-              camminamenti e scorci del borgo: ogni tappa apre una voce, una storia, un
-              frammento di Vicopisano.
-            </p>
+            <div class="intro-quote-block" id="intro-quote-block">
+              <p class="intro intro-lead intro-quote-title" id="intro-lead-text">“Sono Filippo Brunelleschi.</p>
+              <p class="intro intro-quote" id="intro-text">
+                Un tempo ho osservato queste mura per immaginare difese, passaggi e punti di vista.
+                Ora ti accompagno tra le storie del borgo, tappa dopo tappa. Seguimi tra torri,
+                camminamenti e scorci del borgo: ogni tappa apre una voce, una storia, un
+                frammento di Vicopisano.”
+              </p>
+            </div>
           </div>
         </section>
 
@@ -99,20 +101,10 @@
           <div class="platforms-logos" aria-label="Piattaforme esterne">
             <a
               class="platform-logo logo-izi"
-              href="https://izi.travel/"
+              href="https://izi.travel/it/e5c2-vicopisano-travel-podcasting/it"
               target="_blank"
               rel="noreferrer"
             >
-              <span class="platform-logo-mark" aria-hidden="true">
-                <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-                  <rect width="88" height="88" rx="18" fill="#F5F3F2"/>
-                  <path d="M8 16L28 8L52 18L80 10" stroke="#E7E3E1" stroke-width="4" stroke-linecap="round"/>
-                  <path d="M4 40L18 28L34 40L52 24L70 38L86 28" stroke="#E4DFDC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M10 72L24 54L40 64L58 48L80 60" stroke="#E6E2DF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                  <text x="16" y="56" fill="#D81F4D" font-size="34" font-weight="800" font-family="Georgia, serif">izi</text>
-                  <circle cx="72" cy="56" r="4.8" stroke="#D81F4D" stroke-width="3"/>
-                </svg>
-              </span>
               <span class="platform-logo-text"><span class="brand-izi">izi</span><span class="brand-travel">.TRAVEL</span></span>
             </a>
             <a
@@ -121,18 +113,6 @@
               target="_blank"
               rel="noreferrer"
             >
-              <span class="platform-logo-mark" aria-hidden="true">
-                <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-                  <circle cx="44" cy="44" r="44" fill="url(#loquisGrad)"/>
-                  <path d="M14 46H24V34H32V54H40V20H48V68H56V28H64V54H74V42" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <defs>
-                    <linearGradient id="loquisGrad" x1="0" y1="0" x2="88" y2="88" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#24B47E"/>
-                      <stop offset="1" stop-color="#53C88D"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
               <span class="platform-logo-text">Loquis</span>
             </a>
             <a
@@ -141,12 +121,6 @@
               target="_blank"
               rel="noreferrer"
             >
-              <span class="platform-logo-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-                  <circle cx="12" cy="12" r="12" fill="#1ED760"/>
-                  <path d="M17.3 11.6C15.0 10.3 11.3 10.1 9.1 10.8C8.8 10.9 8.4 10.7 8.3 10.4C8.2 10.0 8.4 9.6 8.7 9.5C11.3 8.7 15.4 8.9 18.0 10.4C18.3 10.6 18.4 11.0 18.2 11.3C18.0 11.6 17.6 11.7 17.3 11.6ZM17.2 13.8C17.0 14.1 16.6 14.2 16.3 14.0C14.5 12.9 11.7 12.5 9.5 13.2C9.2 13.3 8.8 13.1 8.7 12.8C8.6 12.4 8.8 12.0 9.1 11.9C11.7 11.1 14.7 11.5 16.9 12.9C17.2 13.1 17.3 13.5 17.2 13.8ZM15.9 15.8C15.7 16.1 15.4 16.2 15.1 16.0C13.6 15.1 11.6 14.8 9.3 15.4C9.0 15.5 8.7 15.3 8.6 14.9C8.5 14.6 8.7 14.3 9.1 14.2C11.6 13.6 13.8 13.9 15.6 15.0C15.8 15.2 15.9 15.5 15.9 15.8Z" fill="#191414"/>
-                </svg>
-              </span>
               <span class="platform-logo-text">Spotify</span>
             </a>
           </div>
@@ -255,12 +229,16 @@
           />
         </div>
         <div class="player-side">
-          <div class="player-meta">
-            <p id="detail-status" class="detail-status"></p>
-            <h2 id="detail-title"></h2>
-            <p id="detail-duration" class="detail-duration"></p>
-          </div>
-          <div id="audio-wrapper" class="audio-wrapper"></div>
+        <div class="player-meta">
+          <p id="detail-status" class="detail-status"></p>
+          <h2 id="detail-title"></h2>
+          <p id="detail-duration" class="detail-duration"></p>
+        </div>
+        <div id="player-language-selector" class="player-language-selector" aria-label="Selettore lingua del player">
+          <p class="player-language-label" id="player-language-label">Lingua disponibile per la Tappa 1</p>
+          <div id="player-language-chips" class="language-chips"></div>
+        </div>
+        <div id="audio-wrapper" class="audio-wrapper"></div>
           <div class="player-timeline">
             <span id="player-current-time" class="player-time">00:00</span>
             <input

@@ -132,7 +132,7 @@ const tappe = [
   },
   {
     numero: 7,
-    titolo: "Via del Pretorio 1 / Comune di Vicopisano",
+    titolo: "Palazzo Comunale Vicopisano",
     latitudine: 43.6998526,
     longitudine: 10.5844138,
     fileAudio: "audio/07_comune_info_point_vicopisano.mp3",
@@ -209,6 +209,63 @@ const stopDescriptions = {
   },
 };
 
+const routeGeoJson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: {
+        name: "Percorso Vicopisano",
+      },
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [10.5863858, 43.700429],
+          [10.586608, 43.700366],
+          [10.586932, 43.700222],
+          [10.587198, 43.700041],
+          [10.5873698, 43.6998788],
+          [10.587321, 43.699765],
+          [10.587262, 43.699661],
+          [10.587182, 43.69955],
+          [10.587082, 43.699437],
+          [10.586963, 43.699335],
+          [10.586845, 43.699257],
+          [10.5867826, 43.6992056],
+          [10.586692, 43.699235],
+          [10.586598, 43.699286],
+          [10.586503, 43.699344],
+          [10.586432, 43.699401],
+          [10.58639, 43.699421],
+          [10.5863793, 43.6994864],
+          [10.586253, 43.699532],
+          [10.586098, 43.699584],
+          [10.585905, 43.699637],
+          [10.585706, 43.699695],
+          [10.585484, 43.69975],
+          [10.585214, 43.699805],
+          [10.584962, 43.699853],
+          [10.584741, 43.699886],
+          [10.5842514, 43.6999256],
+          [10.584134, 43.699954],
+          [10.583985, 43.699999],
+          [10.58382, 43.700043],
+          [10.583677, 43.70008],
+          [10.583537, 43.700132],
+          [10.5833924, 43.7002026],
+          [10.583517, 43.70015],
+          [10.58366, 43.700091],
+          [10.583817, 43.700041],
+          [10.583981, 43.699998],
+          [10.584145, 43.69995],
+          [10.584275, 43.69991],
+          [10.5844138, 43.6998526],
+        ],
+      },
+    },
+  ],
+};
+
 const map = L.map("map", {
   scrollWheelZoom: true,
   attributionControl: false,
@@ -276,6 +333,9 @@ const locateMeStatus = document.getElementById("locate-me-status");
 const mapFullscreenButton = document.getElementById("map-fullscreen-button");
 const mapStageFrame = document.querySelector(".map-stage-frame");
 const globalLanguageChips = document.getElementById("global-language-chips");
+const playerLanguageSelector = document.getElementById("player-language-selector");
+const playerLanguageLabel = document.getElementById("player-language-label");
+const playerLanguageChips = document.getElementById("player-language-chips");
 const miniPlayer = document.getElementById("mini-player");
 const miniPlayerOpen = document.getElementById("mini-player-open");
 const miniPlayerToggle = document.getElementById("mini-player-toggle");
@@ -336,21 +396,21 @@ const STOP_ARTWORKS = {
 const stopTitles = {
   1: {
     IT: "Torre delle Quattro Porte",
-    EN: "Tower of the Four Gates",
-    DE: "Turm der Vier Tore",
-    FR: "Tour des Quatre Portes",
-    ES: "Torre de las Cuatro Puertas",
-    PT: "Torre das Quatro Portas",
-    RU: "Bashnya chetyrekh vorot",
+    EN: "Torre delle Quattro Porte",
+    DE: "Torre delle Quattro Porte",
+    FR: "Torre delle Quattro Porte",
+    ES: "Torre delle Quattro Porte",
+    PT: "Torre delle Quattro Porte",
+    RU: "Torre delle Quattro Porte",
   },
   2: {
     IT: "Torre e Camminamento del Soccorso",
-    EN: "Relief Tower and Walkway",
-    DE: "Hilfsturm und Wehrgang",
-    FR: "Tour et chemin de ronde du secours",
-    ES: "Torre y pasarela del Socorro",
-    PT: "Torre e caminho do Socorro",
-    RU: "Bashnya i prokhod Soccorso",
+    EN: "Torre e Camminamento del Soccorso",
+    DE: "Torre e Camminamento del Soccorso",
+    FR: "Torre e Camminamento del Soccorso",
+    ES: "Torre e Camminamento del Soccorso",
+    PT: "Torre e Camminamento del Soccorso",
+    RU: "Torre e Camminamento del Soccorso",
   },
   3: {
     IT: "Palazzo Pretorio",
@@ -363,39 +423,39 @@ const stopTitles = {
   },
   4: {
     IT: "Rocca del Brunelleschi",
-    EN: "Brunelleschi Fortress",
-    DE: "Brunelleschi-Festung",
-    FR: "Forteresse de Brunelleschi",
-    ES: "Fortaleza de Brunelleschi",
-    PT: "Fortaleza de Brunelleschi",
-    RU: "Krepost Brunelleschi",
+    EN: "Rocca del Brunelleschi",
+    DE: "Rocca del Brunelleschi",
+    FR: "Rocca del Brunelleschi",
+    ES: "Rocca del Brunelleschi",
+    PT: "Rocca del Brunelleschi",
+    RU: "Rocca del Brunelleschi",
   },
   5: {
     IT: "Torri Gemelle",
-    EN: "Twin Towers",
-    DE: "Zwillingstürme",
-    FR: "Tours Jumelles",
-    ES: "Torres Gemelas",
-    PT: "Torres Gêmeas",
-    RU: "Bashni-bliznetsy",
+    EN: "Torri Gemelle",
+    DE: "Torri Gemelle",
+    FR: "Torri Gemelle",
+    ES: "Torri Gemelle",
+    PT: "Torri Gemelle",
+    RU: "Torri Gemelle",
   },
   6: {
     IT: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    EN: "Parish of Santa Maria Addolorata and Saint John the Apostle",
-    DE: "Pfarrei Santa Maria Addolorata und Sankt Johannes Apostel",
-    FR: "Paroisse de Santa Maria Addolorata et Saint Jean Apôtre",
-    ES: "Parroquia de Santa Maria Addolorata y San Juan Apóstol",
-    PT: "Paróquia de Santa Maria Addolorata e São João Apóstolo",
-    RU: "Prikhod Santa Maria Addolorata i Svyatogo Ioanna Apostola",
+    EN: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
+    DE: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
+    FR: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
+    ES: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
+    PT: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
+    RU: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
   },
   7: {
-    IT: "Via del Pretorio 1 / Comune di Vicopisano",
-    EN: "Via del Pretorio 1 / Municipality of Vicopisano",
-    DE: "Via del Pretorio 1 / Gemeinde Vicopisano",
-    FR: "Via del Pretorio 1 / Commune de Vicopisano",
-    ES: "Via del Pretorio 1 / Ayuntamiento de Vicopisano",
-    PT: "Via del Pretorio 1 / Municipio de Vicopisano",
-    RU: "Via del Pretorio 1 / Munitsipalitet Vicopisano",
+    IT: "Palazzo Comunale Vicopisano",
+    EN: "Palazzo Comunale Vicopisano",
+    DE: "Palazzo Comunale Vicopisano",
+    FR: "Palazzo Comunale Vicopisano",
+    ES: "Palazzo Comunale Vicopisano",
+    PT: "Palazzo Comunale Vicopisano",
+    RU: "Palazzo Comunale Vicopisano",
   },
 };
 
@@ -436,7 +496,7 @@ const uiStrings = {
     playerNext: "Vai alla tappa successiva",
     playerRepeat: "Ripeti traccia",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Tocca i marker o usa le tappe sotto per aprire il player audio del percorso.",
     highlightTitle: "Durante l'ascolto",
@@ -487,7 +547,7 @@ const uiStrings = {
     playerNext: "Go to next stop",
     playerRepeat: "Repeat track",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Touch the markers or use the stops below to open the route's audio player.",
     highlightTitle: "During listening",
@@ -538,7 +598,7 @@ const uiStrings = {
     playerNext: "Zur nächsten Station",
     playerRepeat: "Titel wiederholen",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Tippen Sie auf die Marker oder nutzen Sie die Stationen unten, um den Audioplayer der Route zu öffnen.",
     highlightTitle: "Während des Hörens",
@@ -589,7 +649,7 @@ const uiStrings = {
     playerNext: "Aller à l’étape suivante",
     playerRepeat: "Répéter la piste",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Touchez les marqueurs ou utilisez les étapes ci-dessous pour ouvrir le lecteur audio du parcours.",
     highlightTitle: "Expérience plein écran",
@@ -640,7 +700,7 @@ const uiStrings = {
     playerNext: "Ir a la etapa siguiente",
     playerRepeat: "Repetir pista",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Toca los marcadores o usa las etapas a continuación para abrir el reproductor de audio de la ruta.",
     highlightTitle: "Experiencia a pantalla completa",
@@ -691,7 +751,7 @@ const uiStrings = {
     playerNext: "Ir para a próxima etapa",
     playerRepeat: "Repetir faixa",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Toque nos marcadores ou use as etapas abaixo para abrir o reprodutor de áudio do percurso.",
     highlightTitle: "Experiência em ecrã inteiro",
@@ -742,7 +802,7 @@ const uiStrings = {
     playerNext: "Pereyti k sleduyushchey ostanovke",
     playerRepeat: "Povtoryat trek",
     brandName: "Travel podcasting",
-    brandTag: "Vicopisano",
+    brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
     mapStageNote: "Nazhmite na markery ili ispolzuyte shagi nizhe, chtoby otkryt audiopleer marshruta.",
     highlightTitle: "Polnoekrannyy rezhim",
@@ -967,6 +1027,44 @@ function getLanguageDisplayName(languageCode, uiLanguage = currentLanguage) {
   return strings.languageNames?.[languageCode] || languageCode;
 }
 
+function buildLanguageChips(container, { languageTitle, includeLabel = false } = {}) {
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+  const strings = getUiStrings(currentLanguage);
+
+  if (includeLabel && playerLanguageLabel) {
+    playerLanguageLabel.textContent =
+      languageTitle || strings.languageSelectorTitle || "Lingua disponibile";
+  }
+
+  siteLanguages.forEach((languageCode) => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "language-chip";
+    chip.textContent =
+      getAudioOptions(tappe[0]).find((option) => option.codice === languageCode)?.bandiera ||
+      languageCode;
+    chip.classList.toggle("is-active", languageCode === currentLanguage);
+    chip.setAttribute("aria-pressed", languageCode === currentLanguage ? "true" : "false");
+    chip.setAttribute("aria-label", getLanguageDisplayName(languageCode, currentLanguage));
+    chip.title = getLanguageDisplayName(languageCode, currentLanguage);
+    chip.addEventListener("click", () => {
+      if (languageCode === currentLanguage) {
+        return;
+      }
+
+      setCurrentLanguage(languageCode);
+    });
+    fragment.appendChild(chip);
+  });
+
+  container.appendChild(fragment);
+}
+
 function renderAnnouncementTrack() {
   const labels = siteLanguages.map((languageCode) => {
     const strings = getUiStrings(languageCode);
@@ -1128,7 +1226,7 @@ function getDetailCopy(tappa, selectedOption) {
   const strings = getUiStrings(currentLanguage);
   if (selectedOption && selectedOption.trascrizione) {
     return {
-      title: `${strings.transcriptTitle} ${getLanguageDisplayName(selectedOption.codice)}`,
+      title: strings.transcriptTitle,
       text: selectedOption.trascrizione,
     };
   }
@@ -1140,30 +1238,31 @@ function getDetailCopy(tappa, selectedOption) {
 }
 
 function renderGlobalLanguageSelector() {
-  globalLanguageChips.innerHTML = "";
-  const fragment = document.createDocumentFragment();
+  buildLanguageChips(globalLanguageChips);
+}
 
-  siteLanguages.forEach((languageCode) => {
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "language-chip";
-    chip.textContent =
-      getAudioOptions(tappe[0]).find((option) => option.codice === languageCode)?.bandiera || languageCode;
-    chip.classList.toggle("is-active", languageCode === currentLanguage);
-    chip.setAttribute("aria-pressed", languageCode === currentLanguage ? "true" : "false");
-    chip.setAttribute("aria-label", getLanguageDisplayName(languageCode, currentLanguage));
-    chip.title = getLanguageDisplayName(languageCode, currentLanguage);
-    chip.addEventListener("click", () => {
-      if (languageCode === currentLanguage) {
-        return;
-      }
+function renderPlayerLanguageSelector(tappa = null) {
+  if (!playerLanguageSelector || !playerLanguageChips) {
+    return;
+  }
 
-      setCurrentLanguage(languageCode);
-    });
-    fragment.appendChild(chip);
+  const targetStop = tappa || tappe.find((item) => item.numero === activeStopNumber) || tappe[0];
+  const audioOptions = targetStop ? getAudioOptions(targetStop) : [];
+  const availableLanguages = audioOptions.filter((option) => option.audioDisponibile);
+  const shouldShowSelector = availableLanguages.length > 1;
+
+  playerLanguageSelector.hidden = !shouldShowSelector;
+
+  if (!shouldShowSelector) {
+    playerLanguageChips.innerHTML = "";
+    return;
+  }
+
+  buildLanguageChips(playerLanguageChips, {
+    languageTitle:
+      getUiStrings(currentLanguage).languageSelectorTitle || "Lingua disponibile",
+    includeLabel: true,
   });
-
-  globalLanguageChips.appendChild(fragment);
 }
 
 function renderDetailCopy(tappa) {
@@ -1441,6 +1540,7 @@ function renderStaticTexts() {
   if (mapStageNote) mapStageNote.textContent = strings.mapStageNote;
   updateShareLinks();
   updateMiniPlayerPlayback();
+  renderPlayerLanguageSelector(activeStopNumber ? tappe.find((tappa) => tappa.numero === activeStopNumber) : tappe[0]);
 }
 
 function refreshMarkerPopups() {
@@ -1474,6 +1574,7 @@ function focusStop(tappa, options = {}) {
   detailStatus.hidden = true;
   renderDetailCopy(tappa);
   updateMiniPlayer(tappa, selectedOption);
+  renderPlayerLanguageSelector(tappa);
 
   stopCurrentAudio();
   renderAudioContent(tappa);
@@ -1562,13 +1663,15 @@ function renderStopsList() {
 }
 
 function renderMap() {
-  const coordinates = tappe.map((tappa) => [tappa.latitudine, tappa.longitudine]);
-
-  const routeLine = L.polyline(coordinates, {
-    color: "#a44c24",
-    weight: 4,
-    opacity: 0.75,
-    dashArray: "8 8",
+  const routeLayer = L.geoJSON(routeGeoJson, {
+    style: {
+      color: "#a44c24",
+      weight: 4,
+      opacity: 0.8,
+      dashArray: "8 8",
+      lineCap: "round",
+      lineJoin: "round",
+    },
   }).addTo(map);
 
   tappe.forEach((tappa) => {
@@ -1592,7 +1695,7 @@ function renderMap() {
     markersByStop.set(tappa.numero, marker);
   });
 
-  map.fitBounds(routeLine.getBounds(), {
+  map.fitBounds(routeLayer.getBounds(), {
     padding: [40, 40],
   });
 }

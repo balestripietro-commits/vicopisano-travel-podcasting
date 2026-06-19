@@ -7,8 +7,8 @@
 ## Contenuto
 
 - `index.html`: pagina principale del prototipo statico.
-- `style.css`: stile full-page editoriale con hero ampio, mappa dominante, sezione tappe in card grid, mini-player fisso e player esteso con seek, volume e trascrizione cliccabile.
-- `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio con seek custom, share links e geolocalizzazione.
+- `style.css`: stile full-page editoriale con hero ampio, mappa dominante, sezione tappe in card grid, mini-player fisso e player esteso con seek, volume, selettore lingua e trascrizione cliccabile.
+- `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio con seek custom, share links, geolocalizzazione e selettore lingua duplicato nel player.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
 - `logo_vicopisano.png`: stemma usato nell'intestazione del sito.
 - `mascotte_vicopisano.png`: immagine mascotte di supporto tenuta nel progetto.

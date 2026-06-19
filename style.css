@@ -196,7 +196,7 @@ audio {
   gap: 34px;
   align-items: center;
   justify-items: stretch;
-  padding: 26px 0 8px;
+  padding: 26px 0 22px;
 }
 
 .intro-visual {
@@ -219,6 +219,12 @@ audio {
   display: grid;
   gap: 14px;
   width: 100%;
+}
+
+.intro-quote-block {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .eyebrow {
@@ -254,6 +260,12 @@ audio {
   max-width: none;
 }
 
+.intro-quote-title {
+  margin-top: 2px;
+  font-size: 1rem;
+  letter-spacing: 0.015em;
+}
+
 .intro-quote {
   position: relative;
   padding-left: 1.2em;
@@ -269,6 +281,12 @@ audio {
   color: var(--accent-warm);
   font-size: 1.7em;
   line-height: 1;
+}
+
+.intro-copy h1,
+.intro-quote-title,
+.intro-quote {
+  max-width: 920px;
 }
 
 .intro-grid {
@@ -700,16 +718,12 @@ audio {
   margin-top: 38px;
 }
 
+.platforms-panel .platforms-eyebrow {
+  text-align: center;
+}
+
 .platform-logo-mark {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  border-radius: 12px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  display: none;
 }
 
 .platform-logo-text {
@@ -724,9 +738,7 @@ audio {
 }
 
 .logo-izi .platform-logo-mark {
-  background: transparent;
-  border-radius: 14px;
-  overflow: hidden;
+  display: none;
 }
 
 .logo-izi .platform-logo-text {
@@ -753,9 +765,7 @@ audio {
 }
 
 .logo-loquis .platform-logo-mark {
-  background: transparent;
-  border-radius: 999px;
-  overflow: hidden;
+  display: none;
 }
 
 .logo-loquis .platform-logo-text {
@@ -771,15 +781,25 @@ audio {
 }
 
 .logo-spotify .platform-logo-mark {
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
-  background: linear-gradient(135deg, #35d46d 0%, #159447 100%);
-  border-radius: 14px;
+  display: none;
 }
 
 .logo-spotify .platform-logo-text {
-  color: #159447;
+  color: #111111;
+  font-family: "Circular Std", "Avenir Next", "Helvetica Neue", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  font-size: 1.28rem;
+  transform: scaleY(1.01) skewX(-2deg);
+  transform-origin: left center;
+}
+
+.platforms-logos {
+  justify-items: center;
+}
+
+.platform-logo {
+  justify-content: center;
 }
 
 .mini-player {
@@ -1016,6 +1036,20 @@ audio {
 .player-meta {
   width: min(100%, 640px);
   margin: 0 auto;
+}
+
+.player-language-selector {
+  width: min(100%, 640px);
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
+
+.player-language-label {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
 }
 
 .detail-status {
@@ -1347,6 +1381,7 @@ audio {
   }
 
   .player-meta,
+  .player-language-selector,
   .audio-wrapper,
   .player-timeline,
   .player-controls,
@@ -1424,24 +1459,31 @@ audio {
   .intro-panel {
     gap: 18px;
     padding-top: 16px;
-    grid-template-columns: 1fr;
+    padding-bottom: 18px;
+    grid-template-columns: minmax(128px, 0.42fr) minmax(0, 0.58fr);
+    align-items: start;
   }
 
   .intro-portrait {
-    width: min(100%, 240px);
-    max-height: 260px;
+    width: min(100%, 180px);
+    max-height: 220px;
   }
 
   .intro-copy h1 {
-    font-size: clamp(2.6rem, 14vw, 4rem);
+    font-size: clamp(2.1rem, 9vw, 3.1rem);
+  }
+
+  .intro-quote-block {
+    gap: 6px;
   }
 
   .intro {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   .platforms-logos {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
   }
 
@@ -1450,13 +1492,6 @@ audio {
     padding: 10px 12px;
     gap: 8px;
     border-radius: var(--radius-sm);
-  }
-
-  .platform-logo-mark {
-    width: 30px;
-    height: 30px;
-    flex: 0 0 30px;
-    padding: 2px;
   }
 
   .platform-logo-text {
@@ -1479,6 +1514,11 @@ audio {
 
   .logo-loquis .platform-logo-text {
     font-size: 0.9rem;
+  }
+
+  .logo-spotify .platform-logo-text {
+    font-size: 1.05rem;
+    letter-spacing: -0.055em;
   }
 
   .share-panel {
@@ -1576,6 +1616,10 @@ audio {
 
   .player-side {
     gap: 12px;
+  }
+
+  .player-language-selector {
+    gap: 8px;
   }
 
   .detail-copy {

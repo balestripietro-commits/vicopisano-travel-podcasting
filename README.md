@@ -18,6 +18,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
 - Player audio esteso aperto da click su marker mappa, tappa lista o qualunque punto del mini-player non occupato da pulsanti o slider.
 - Nella schermata estesa restano sempre disponibili precedente, play/pausa, successiva, repeat, barra seek trascinabile, volume e trascrizione cliccabile.
+- Il player esteso replica anche il selettore lingua della home, posizionandolo tra il titolo della tappa e i controlli audio.
 - Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.
 - Traduzione globale del sito nelle 7 lingue supportate quando cambia la lingua attiva.
 
@@ -111,6 +112,6 @@ audioDisponibile: true
 ## Nota sul prototipo attuale
 
 - La Tappa 1 supporta 7 lingue selezionabili: italiano, inglese, tedesco, francese, spagnolo, portoghese e russo.
-- Le lingue vengono cambiate dal selettore globale sotto il titolo, non piu dentro il box audio.
+- Le lingue vengono cambiate dal selettore globale sotto il titolo e anche dal selettore aggiunto nel player esteso.
 - Il click su una tappa o su un marker apre il player esteso e prova ad avviare l'audio quando disponibile.
 - Le tappe 2-7 restano predisposte ma senza audio attivo finche non vengono aggiunti gli MP3 e attivato `audioDisponibile: true`.
