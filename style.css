@@ -51,7 +51,7 @@ audio {
 .app-shell {
   width: min(100%, var(--max-width));
   margin: 0 auto;
-  padding: 18px 16px 122px;
+  padding: 18px 16px calc(220px + env(safe-area-inset-bottom, 0px));
 }
 
 .announcement-strip {
@@ -190,10 +190,35 @@ audio {
   color: #fff;
 }
 
-.hero-copy {
+.intro-panel {
   display: grid;
-  gap: 18px;
-  padding: 30px 0 6px;
+  grid-template-columns: minmax(210px, 0.34fr) minmax(0, 0.66fr);
+  gap: 34px;
+  align-items: center;
+  justify-items: stretch;
+  padding: 26px 0 8px;
+}
+
+.intro-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.intro-portrait {
+  width: min(100%, 420px);
+  max-height: 500px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 28px rgba(36, 92, 82, 0.14));
+}
+
+.intro-copy {
+  display: grid;
+  gap: 14px;
+  width: 100%;
 }
 
 .eyebrow {
@@ -204,20 +229,78 @@ audio {
   color: var(--accent);
 }
 
-.hero-copy h1 {
+.intro-copy h1 {
   margin: 0;
-  max-width: 1260px;
-  font-size: clamp(2.7rem, 5.3vw, 5.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.04em;
+  max-width: 920px;
+  font-size: clamp(3rem, 6.2vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
 }
 
 .intro {
   margin: 0;
-  max-width: 860px;
+  max-width: 840px;
   font-size: 1.14rem;
   color: var(--muted);
+  line-height: 1.8;
+}
+
+.intro-lead {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  font-style: italic;
+  color: var(--accent);
+  max-width: none;
+}
+
+.intro-quote {
+  position: relative;
+  padding-left: 1.2em;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.intro-quote::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -0.08em;
+  color: var(--accent-warm);
+  font-size: 1.7em;
+  line-height: 1;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.intro-block {
+  background: rgba(255, 252, 249, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(36, 92, 82, 0.08);
+  padding: 22px 22px 20px;
+}
+
+.intro-block h2 {
+  margin: 0 0 10px;
+  font-size: 1.18rem;
+}
+
+.intro-block p {
+  margin: 0;
+  color: var(--muted);
   line-height: 1.75;
+}
+
+.intro-block-highlight {
+  background:
+    radial-gradient(circle at top right, rgba(232, 195, 109, 0.22), transparent 34%),
+    rgba(255, 252, 249, 0.88);
 }
 
 .controls-toolbar {
@@ -263,12 +346,21 @@ audio {
 .map-action-button {
   border: 1px solid rgba(45, 106, 93, 0.16);
   border-radius: 999px;
-  padding: 14px 22px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
   background: var(--accent);
   color: #ffffff;
   font-weight: 700;
   box-shadow: 0 12px 22px rgba(36, 92, 82, 0.12);
   cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+}
+
+.map-action-icon {
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 .map-action-button:hover,
@@ -351,26 +443,21 @@ audio {
   left: 24px;
   bottom: 24px;
   z-index: 1000;
-  min-height: 46px;
-  padding: 0 16px;
+  width: 46px;
+  height: 46px;
+  padding: 0;
   border: 1px solid rgba(45, 106, 93, 0.18);
   border-radius: 999px;
   background: rgba(45, 106, 93, 0.96);
   color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
-  font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1;
+  display: inline-grid;
+  place-items: center;
   box-shadow: 0 12px 22px rgba(36, 92, 82, 0.12);
   cursor: pointer;
 }
 
 .map-fullscreen-icon {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .map-fullscreen-button:hover,
@@ -417,14 +504,10 @@ audio {
   line-height: 1.6;
 }
 
-.story-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 26px;
-  margin-top: 38px;
+.platforms-eyebrow-strong {
+  font-weight: 700;
 }
 
-.story-card,
 .stops-panel,
 .platforms-panel {
   background: rgba(255, 252, 249, 0.72);
@@ -432,42 +515,6 @@ audio {
   border-radius: var(--radius-lg);
   box-shadow: 0 20px 40px rgba(36, 92, 82, 0.08);
   padding: 24px;
-}
-
-.section-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 18px;
-}
-
-.section-heading h2,
-.section-heading p {
-  margin: 0;
-}
-
-.section-heading h2 {
-  font-size: 1.2rem;
-}
-
-.section-heading p {
-  color: var(--muted);
-}
-
-.story-card-highlight {
-  background:
-    radial-gradient(circle at top right, rgba(232, 195, 109, 0.28), transparent 34%),
-    rgba(255, 252, 249, 0.84);
-}
-
-.story-card h2 {
-  margin: 0 0 10px;
-  font-size: 1.15rem;
-}
-
-.story-card p {
-  margin: 0;
 }
 
 .stop-button {
@@ -666,8 +713,10 @@ audio {
 }
 
 .platform-logo-text {
+  font-family: Georgia, "Times New Roman", serif;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  color: var(--accent);
 }
 
 .logo-izi {
@@ -711,10 +760,10 @@ audio {
 
 .logo-loquis .platform-logo-text {
   color: #42b883;
-  font-size: 1.7rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: none;
 }
 
 .logo-spotify {
@@ -722,7 +771,11 @@ audio {
 }
 
 .logo-spotify .platform-logo-mark {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
   background: linear-gradient(135deg, #35d46d 0%, #159447 100%);
+  border-radius: 14px;
 }
 
 .logo-spotify .platform-logo-text {
@@ -1153,7 +1206,25 @@ audio {
 }
 
 .map-marker {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #7f62db 0%, #9a6bec 100%);
   border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 18px rgba(127, 98, 219, 0.28);
+}
+
+.map-marker-number {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(53, 33, 127, 0.55);
+  pointer-events: none;
 }
 
 .leaflet-popup-content-wrapper,
@@ -1247,7 +1318,7 @@ audio {
 
 @media (min-width: 740px) {
   .app-shell {
-    padding: 24px 24px 128px;
+    padding: 24px 24px calc(248px + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -1291,8 +1362,9 @@ audio {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .story-grid {
-    grid-template-columns: 1fr;
+  .intro-portrait {
+    width: min(100%, 300px);
+    max-height: 360px;
   }
 }
 
@@ -1349,9 +1421,23 @@ audio {
     grid-template-columns: 1fr;
   }
 
-  .section-heading {
-    flex-direction: column;
-    align-items: start;
+  .intro-panel {
+    gap: 18px;
+    padding-top: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .intro-portrait {
+    width: min(100%, 240px);
+    max-height: 260px;
+  }
+
+  .intro-copy h1 {
+    font-size: clamp(2.6rem, 14vw, 4rem);
+  }
+
+  .intro {
+    font-size: 0.95rem;
   }
 
   .platforms-logos {
@@ -1430,10 +1516,6 @@ audio {
     padding: 0 12px;
     font-size: 0.84rem;
     gap: 6px;
-  }
-
-  .map-fullscreen-label {
-    max-width: 96px;
   }
 
   .osm-info-control {

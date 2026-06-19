@@ -271,12 +271,9 @@ const brandNameEl = document.getElementById("brand-name");
 const brandTagEl = document.getElementById("brand-tag");
 const landingTitle = document.getElementById("landing-title");
 const mapStageNote = document.getElementById("map-stage-note");
-const highlightTitle = document.getElementById("highlight-title");
-const highlightText = document.getElementById("highlight-text");
 const locateMeButton = document.getElementById("locate-me-button");
 const locateMeStatus = document.getElementById("locate-me-status");
 const mapFullscreenButton = document.getElementById("map-fullscreen-button");
-const mapFullscreenLabel = document.querySelector(".map-fullscreen-label");
 const mapStageFrame = document.querySelector(".map-stage-frame");
 const globalLanguageChips = document.getElementById("global-language-chips");
 const miniPlayer = document.getElementById("mini-player");
@@ -329,8 +326,11 @@ const WHITE_ARTWORK =
 const STOP_ARTWORKS = {
   1: "tappa_1_torre_delle_quattro_porte.jpg",
   2: "tappa_2_torre_e_camminamento_del_soccorso.jpg",
-  3: "tappa_3_palazzo_pretorio.jpg",
+  3: "tappa_3_palazzo_pretorio.webp",
   4: "tappa_4_rocca_del_brunelleschi.jpeg",
+  5: "tappa_5_torri_gemelle.jpg",
+  6: "tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.jpg",
+  7: "tappa_7_palazzo_comunale.jpg",
 };
 
 const stopTitles = {
@@ -401,12 +401,12 @@ const stopTitles = {
 
 const uiStrings = {
   IT: {
-    prototype: "Prototipo",
+    prototype: "",
     intro:
-      "Un itinerario culturale con 7 tappe geolocalizzate nel borgo di Vicopisano. Seleziona una tappa dalla lista oppure clicca sulla mappa per leggere il contenuto e ascoltare l'audio disponibile.",
+      "Un tempo ho osservato queste mura per immaginare difese, passaggi e punti di vista. Ora ti accompagno tra le storie del borgo, tappa dopo tappa. Seguimi tra torri, camminamenti e scorci del borgo: ogni tappa apre una voce, una storia, un frammento di Vicopisano.",
     instructionsTitle: "Istruzioni",
     instructionsText:
-      "La mappa mostra il percorso completo da 1 a 7. Quando scegli una tappa, il sito la evidenzia, centra la mappa sul punto corrispondente e apre i dettagli.",
+      "La mappa mostra l’intero percorso, con le tappe da 1 a 7. Puoi selezionare una tappa dalla lista oppure cliccare direttamente sulla mappa: il sito evidenzierà il punto scelto, centrerà la visuale e aprirà i contenuti dedicati.",
     routeTitle: "Tappe del percorso",
     routeSubtitle: "7 punti di ascolto lungo il borgo.",
     platformsEyebrow: 'Trovi "il travel podcasting di Vicopisano" anche su:',
@@ -437,10 +437,10 @@ const uiStrings = {
     playerRepeat: "Ripeti traccia",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano: scopri il borgo attraverso la mappa sonora",
+    mainTitle: "Buon dì!",
     mapStageNote: "Tocca i marker o usa le tappe sotto per aprire il player audio del percorso.",
-    highlightTitle: "Esperienza full page",
-    highlightText: "La mappa resta il cuore dell'esperienza, mentre il player fisso in basso ti accompagna durante l'ascolto senza togliere spazio alla navigazione.",
+    highlightTitle: "Durante l'ascolto",
+    highlightText: "La mappa resta al centro dell’esperienza, mentre il player fisso in basso ti accompagna durante l’ascolto senza interrompere la navigazione. Così puoi continuare a esplorare il percorso in modo semplice e intuitivo.",
     languageNames: {
       IT: "Italiano",
       EN: "Inglese",
@@ -452,12 +452,12 @@ const uiStrings = {
     },
   },
   EN: {
-    prototype: "Prototype",
+    prototype: "",
     intro:
-      "A cultural itinerary with 7 geolocated stops in the village of Vicopisano. Select a stop from the list or click on the map to read the content and listen to the available audio.",
+      "Once I studied these walls to imagine defenses, passages, and viewpoints. Now I guide you through the village's stories, stop by stop. Follow me through towers, walkways, and glimpses of the borgo: each stop opens a voice, a story, a fragment of Vicopisano.",
     instructionsTitle: "Instructions",
     instructionsText:
-      "The map shows the complete route from 1 to 7. When you choose a stop, the site highlights it, centers the map on the corresponding point and opens the details.",
+      "The map shows the full route, with stops from 1 to 7. You can select a stop from the list or click directly on the map: the site will highlight the chosen point, center the view, and open the dedicated content.",
     routeTitle: "Route Stops",
     routeSubtitle: "7 listening points in the village.",
     platformsEyebrow: 'You can also find "Travel Podcasting Vicopisano" on:',
@@ -488,10 +488,10 @@ const uiStrings = {
     playerRepeat: "Repeat track",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano: discover the village through the sound map",
+    mainTitle: "Buon dì!",
     mapStageNote: "Touch the markers or use the stops below to open the route's audio player.",
-    highlightTitle: "Full-page experience",
-    highlightText: "The map remains the heart of the experience, while the fixed player at the bottom accompanies you during listening without taking up navigation space.",
+    highlightTitle: "During listening",
+    highlightText: "The map stays at the center of the experience, while the fixed player at the bottom accompanies you during listening without interrupting navigation. That way you can keep exploring the route in a simple, intuitive way.",
     languageNames: {
       IT: "Italian",
       EN: "English",
@@ -503,12 +503,12 @@ const uiStrings = {
     },
   },
   DE: {
-    prototype: "Prototyp",
+    prototype: "",
     intro:
-      "Eine kulturelle Route mit 7 geolokalisierten Stationen im Ort Vicopisano. Wählen Sie eine Station aus der Liste oder klicken Sie auf die Karte, um die Inhalte zu lesen und das verfügbare Audio zu hören.",
+      "Einst betrachtete ich diese Mauern, um Verteidigungen, Übergänge und Blickpunkte zu erahnen. Jetzt begleite ich Sie Schritt für Schritt durch die Geschichten des Ortes. Folgen Sie mir durch Türme, Wehrgänge und Ausblicke: Jede Station öffnet eine Stimme, eine Geschichte, ein Stück Vicopisano.",
     instructionsTitle: "Anleitung",
     instructionsText:
-      "Die Karte zeigt die gesamte Route von 1 bis 7. Wenn Sie eine Station auswählen, hebt die Website sie hervor, zentriert die Karte auf den entsprechenden Punkt und öffnet die Details.",
+      "Die Karte zeigt die gesamte Route mit den Stationen 1 bis 7. Sie können eine Station aus der Liste wählen oder direkt auf die Karte klicken: Die Website hebt den gewählten Punkt hervor, zentriert die Ansicht und öffnet die zugehörigen Inhalte.",
     routeTitle: "Stationen der Route",
     routeSubtitle: "7 Hörstationen im Ort.",
     platformsEyebrow: 'Du findest "Travel Podcasting Vicopisano" auch auf:',
@@ -539,10 +539,10 @@ const uiStrings = {
     playerRepeat: "Titel wiederholen",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano: Entdecken Sie das Dorf über die Soundmap",
+    mainTitle: "Buon dì!",
     mapStageNote: "Tippen Sie auf die Marker oder nutzen Sie die Stationen unten, um den Audioplayer der Route zu öffnen.",
-    highlightTitle: "Vollbild-Erlebnis",
-    highlightText: "Die Karte bleibt das Herzstück des Erlebnisses, während der feste Player unten Sie beim Hören begleitet, ohne Platz für die Navigation wegzunehmen.",
+    highlightTitle: "Während des Hörens",
+    highlightText: "Die Karte bleibt das Zentrum des Erlebnisses, während der feste Player unten Sie beim Hören begleitet, ohne die Navigation zu unterbrechen. So können Sie die Route einfach und intuitiv weiter erkunden.",
     languageNames: {
       IT: "Italienisch",
       EN: "Englisch",
@@ -554,9 +554,9 @@ const uiStrings = {
     },
   },
   FR: {
-    prototype: "Prototype",
+    prototype: "",
     intro:
-      "Un itinéraire culturel avec 7 étapes géolocalisées dans le bourg de Vicopisano. Sélectionnez une étape dans la liste ou cliquez sur la carte pour lire le contenu et écouter l’audio disponible.",
+      "Autrefois, j’observais ces murailles pour imaginer défenses, passages et points de vue. Aujourd’hui, je vous accompagne à travers les histoires du bourg, étape après étape. Suivez-moi entre tours, cheminements et aperçus du village : chaque étape ouvre une voix, une histoire, un fragment de Vicopisano.",
     instructionsTitle: "Instructions",
     instructionsText:
       "La carte montre l’itinéraire complet de 1 à 7. Lorsque vous choisissez une étape, le site la met en évidence, centre la carte sur le point correspondant et ouvre les détails.",
@@ -590,7 +590,7 @@ const uiStrings = {
     playerRepeat: "Répéter la piste",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano : découvrez le village à travers la carte sonore",
+    mainTitle: "Buon dì!",
     mapStageNote: "Touchez les marqueurs ou utilisez les étapes ci-dessous pour ouvrir le lecteur audio du parcours.",
     highlightTitle: "Expérience plein écran",
     highlightText: "La carte reste le cœur de l'expérience, tandis que le lecteur fixe en bas vous accompagne pendant l'écoute sans encombrer l'espace de navigation.",
@@ -605,9 +605,9 @@ const uiStrings = {
     },
   },
   ES: {
-    prototype: "Prototipo",
+    prototype: "",
     intro:
-      "Un itinerario cultural con 7 etapas geolocalizadas en el pueblo de Vicopisano. Selecciona una etapa de la lista o haz clic en el mapa para leer el contenido y escuchar el audio disponible.",
+      "Alguna vez observé estas murallas para imaginar defensas, pasajes y puntos de vista. Ahora te acompaño por las historias del pueblo, etapa tras etapa. Sígueme entre torres, pasarelas y rincones del borgo: cada etapa abre una voz, una historia, un fragmento de Vicopisano.",
     instructionsTitle: "Instrucciones",
     instructionsText:
       "El mapa muestra el recorrido completo del 1 al 7. Cuando eliges una etapa, el sitio la resalta, centra el mapa en el punto correspondiente y abre los detalles.",
@@ -641,7 +641,7 @@ const uiStrings = {
     playerRepeat: "Repetir pista",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano: descubre el pueblo a través del mapa sonoro",
+    mainTitle: "Buon dì!",
     mapStageNote: "Toca los marcadores o usa las etapas a continuación para abrir el reproductor de audio de la ruta.",
     highlightTitle: "Experiencia a pantalla completa",
     highlightText: "El mapa sigue siendo el corazón de la experiencia, mientras que el reproductor fijo en la parte inferior te acompaña durante la escucha sin restar espacio a la navegación.",
@@ -656,9 +656,9 @@ const uiStrings = {
     },
   },
   PT: {
-    prototype: "Prototipo",
+    prototype: "",
     intro:
-      "Um itinerário cultural com 7 etapas geolocalizadas na vila de Vicopisano. Selecione uma etapa da lista ou clique no mapa para ler o conteúdo e ouvir o áudio disponível.",
+      "Em tempos observei estas muralhas para imaginar defesas, passagens e pontos de vista. Agora acompanho-o pelas histórias da vila, etapa após etapa. Siga-me entre torres, passadiços e recantos do borgo: cada etapa abre uma voz, uma história, um fragmento de Vicopisano.",
     instructionsTitle: "Instruções",
     instructionsText:
       "O mapa mostra o percurso completo de 1 a 7. Quando você escolhe uma etapa, o site a destaca, centraliza o mapa no ponto correspondente e abre os detalhes.",
@@ -692,7 +692,7 @@ const uiStrings = {
     playerRepeat: "Repetir faixa",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano: descubra a vila através do mapa sonoro",
+    mainTitle: "Buon dì!",
     mapStageNote: "Toque nos marcadores ou use as etapas abaixo para abrir o reprodutor de áudio do percurso.",
     highlightTitle: "Experiência em ecrã inteiro",
     highlightText: "O mapa continua a ser o coração da experiência, enquanto o leitor fixo na parte inferior acompanha-o durante a audição sem ocupar espaço de navegação.",
@@ -707,9 +707,9 @@ const uiStrings = {
     },
   },
   RU: {
-    prototype: "Prototip",
+    prototype: "",
     intro:
-      "Kulturnyy marshrut s 7 geolokatsionnymi ostanovkami v poselke Vicopisano. Vyberite ostanovku iz spiska ili nazhmite na kartu, chtoby prochitat soderzhanie i proslyshat dostupnoe audio.",
+      "Когда-то я изучал эти стены, чтобы представить оборону, проходы и точки обзора. Теперь я веду вас по историям поселка, остановка за остановкой. Следуйте за мной через башни, переходы и виды борго: каждая остановка открывает голос, историю, частицу Vicopisano.",
     instructionsTitle: "Instruktsii",
     instructionsText:
       "Karta pokazyvaet polnyy marshrut ot 1 do 7. Kogda vy vybiraete ostanovku, sayt vydelyaet ee, tsentriruet kartu na nuzhnoy tochke i otkryvaet podrobnosti.",
@@ -743,7 +743,7 @@ const uiStrings = {
     playerRepeat: "Povtoryat trek",
     brandName: "Travel podcasting",
     brandTag: "Vicopisano",
-    mainTitle: "Travel Podcasting Vicopisano: otkroyte dlya sebya poselok cherez zvukovuyu kartu",
+    mainTitle: "Buon dì!",
     mapStageNote: "Nazhmite na markery ili ispolzuyte shagi nizhe, chtoby otkryt audiopleer marshruta.",
     highlightTitle: "Polnoekrannyy rezhim",
     highlightText: "Karta ostaetsya serdtsem prilozheniya, a fiksirovannyy pleer vnimu soprovozhdaet vas vo vremya proslushivaniya, ne zanimaya mesto dlya navigatsii.",
@@ -920,9 +920,7 @@ function updateMapFullscreenButton() {
     "aria-label",
     isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo"
   );
-  if (mapFullscreenLabel) {
-    mapFullscreenLabel.textContent = isFullscreen ? "Chiudi mappa" : "Schermo intero";
-  }
+  mapFullscreenButton.title = isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo";
 }
 
 async function toggleMapFullscreen() {
@@ -1091,10 +1089,10 @@ function bindAudioLifecycle(audio) {
 function createMarkerIcon(stopNumber) {
   return L.divIcon({
     className: "",
-    html: `<div class="map-marker">${stopNumber}</div>`,
-    iconSize: [36, 36],
-    iconAnchor: [18, 18],
-    popupAnchor: [0, -16],
+    html: `<div class="map-marker" aria-hidden="true"><span class="map-marker-number">${stopNumber}</span></div>`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -18],
   });
 }
 
@@ -1420,13 +1418,10 @@ function renderStaticTexts() {
   renderAnnouncementTrack();
   eyebrowText.textContent = strings.prototype;
   introText.textContent = strings.intro;
-  instructionsTitle.textContent = strings.instructionsTitle;
-  instructionsText.textContent = strings.instructionsText;
   stopsTitle.textContent = strings.routeTitle;
   stopsSubtitle.textContent = strings.routeSubtitle;
   platformsEyebrow.textContent = strings.platformsEyebrow;
   shareTitle.textContent = strings.shareTitle;
-  locateMeButton.textContent = strings.locateMe;
   locateMeButton.setAttribute("aria-label", strings.locateMe);
   detailCopyTitle.textContent = strings.descriptiveText;
   stopsList.setAttribute("aria-label", strings.routeTitle);
@@ -1444,9 +1439,6 @@ function renderStaticTexts() {
   if (brandTagEl) brandTagEl.textContent = strings.brandTag;
   if (landingTitle) landingTitle.textContent = strings.mainTitle;
   if (mapStageNote) mapStageNote.textContent = strings.mapStageNote;
-  if (highlightTitle) highlightTitle.textContent = strings.highlightTitle;
-  if (highlightText) highlightText.textContent = strings.highlightText;
-  
   updateShareLinks();
   updateMiniPlayerPlayback();
 }
@@ -1531,7 +1523,9 @@ function renderStopsList() {
   tappe.forEach((tappa) => {
     const availableAudioOptions = getAudioOptions(tappa).filter((option) => option.audioDisponibile);
     const availabilityLabel =
-      availableAudioOptions.length > 1
+      tappa.numero === 1
+        ? ""
+        : availableAudioOptions.length > 1
         ? getUiStrings(currentLanguage).listAudioAvailableInLanguages(availableAudioOptions.length)
         : tappa.audioDisponibile
           ? getUiStrings(currentLanguage).audioAvailable
@@ -1549,13 +1543,11 @@ function renderStopsList() {
         <strong class="stop-title">${getStopTitle(tappa)}</strong>
         ${hasMeaningfulDuration(tappa.durata) ? `<span class="stop-meta">${tappa.durata}</span>` : ""}
       </span>
-      <span class="stop-availability ${tappa.audioDisponibile ? "" : "is-unavailable"}">
-        ${availabilityLabel}
-      </span>
+      ${availabilityLabel ? `<span class="stop-availability ${tappa.audioDisponibile ? "" : "is-unavailable"}">${availabilityLabel}</span>` : ""}
     `;
 
     button.addEventListener("click", () => {
-      focusStop(tappa, { autoplay: true, openOverlay: true });
+      focusStop(tappa, { autoplay: true, openOverlay: false });
     });
 
     item.appendChild(button);
@@ -1588,7 +1580,7 @@ function renderMap() {
       .bindPopup(popupHtml(tappa));
 
     marker.on("click", () => {
-      focusStop(tappa, { skipFly: true, autoplay: true, openOverlay: true });
+      focusStop(tappa, { skipFly: true, autoplay: true, openOverlay: false });
     });
 
     marker.on("popupopen", () => {

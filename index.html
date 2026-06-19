@@ -39,8 +39,13 @@
         <section class="map-stage" aria-label="Mappa interattiva del percorso">
           <div class="map-stage-frame">
             <div class="map-floating-controls">
-              <button type="button" id="locate-me-button" class="map-action-button">
-                Trova la mia posizione
+              <button
+                type="button"
+                id="locate-me-button"
+                class="map-action-button"
+                aria-label="Trova la mia posizione"
+              >
+                <span class="map-action-icon" aria-hidden="true">⌖</span>
               </button>
               <p id="locate-me-status" class="map-status" aria-live="polite"></p>
             </div>
@@ -51,20 +56,30 @@
               aria-label="Apri la mappa a tutto schermo"
             >
               <span class="map-fullscreen-icon" aria-hidden="true">⤢</span>
-              <span class="map-fullscreen-label">Schermo intero</span>
             </button>
             <div id="map" class="map" role="application" aria-label="Mappa delle tappe"></div>
           </div>
         </section>
 
-        <section class="hero-copy">
-          <p class="eyebrow" id="eyebrow-text">Prototipo</p>
-          <h1 id="landing-title">Travel Podcasting Vicopisano: scopri il borgo attraverso la mappa sonora</h1>
-          <p class="intro" id="intro-text">
-            Un itinerario culturale con 7 tappe geolocalizzate nel borgo di Vicopisano.
-            Seleziona una tappa dalla lista oppure clicca sulla mappa per leggere il
-            contenuto e ascoltare l'audio disponibile.
-          </p>
+        <section class="intro-panel" aria-labelledby="landing-title">
+          <div class="intro-visual" aria-hidden="true">
+            <img
+              class="intro-portrait"
+              src="brunelleschi-intro.png"
+              alt=""
+            />
+          </div>
+          <div class="intro-copy">
+            <p class="eyebrow" id="eyebrow-text">Vicopisano</p>
+            <h1 id="landing-title">Buon dì!</h1>
+            <p class="intro intro-lead" id="intro-lead-text">“Sono Filippo Brunelleschi”</p>
+            <p class="intro intro-quote" id="intro-text">
+              Un tempo ho osservato queste mura per immaginare difese, passaggi e punti di vista.
+              Ora ti accompagno tra le storie del borgo, tappa dopo tappa. Seguimi tra torri,
+              camminamenti e scorci del borgo: ogni tappa apre una voce, una storia, un
+              frammento di Vicopisano.
+            </p>
+          </div>
         </section>
 
         <section class="stops-panel" aria-labelledby="stops-title">
@@ -77,26 +92,8 @@
           <ul id="stops-list" class="stops-list" aria-label="Elenco delle tappe"></ul>
         </section>
 
-        <section class="story-grid">
-          <article class="story-card">
-            <h2 id="instructions-title">Istruzioni</h2>
-            <p id="instructions-text">
-              La mappa mostra il percorso completo da 1 a 7. Quando scegli una tappa, il
-              sito la evidenzia, centra la mappa sul punto corrispondente e apre i dettagli.
-            </p>
-          </article>
-
-          <article class="story-card story-card-highlight">
-            <h2 id="highlight-title">Esperienza full page</h2>
-            <p id="highlight-text">
-              La mappa resta il cuore dell'esperienza, mentre il player fisso in basso ti
-              accompagna durante l'ascolto senza togliere spazio alla navigazione.
-            </p>
-          </article>
-        </section>
-
         <footer class="platforms-panel" aria-labelledby="platforms-eyebrow">
-          <p class="platforms-eyebrow" id="platforms-eyebrow">
+          <p class="platforms-eyebrow platforms-eyebrow-strong" id="platforms-eyebrow">
             Trovi "il travel podcasting di Vicopisano" anche su:
           </p>
           <div class="platforms-logos" aria-label="Piattaforme esterne">
