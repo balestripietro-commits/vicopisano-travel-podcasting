@@ -350,20 +350,27 @@ audio {
   position: absolute;
   left: 24px;
   bottom: 24px;
-  z-index: 451;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(45, 106, 93, 0.16);
+  z-index: 1000;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid rgba(45, 106, 93, 0.18);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--accent);
+  background: rgba(45, 106, 93, 0.96);
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  gap: 8px;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
   line-height: 1;
   box-shadow: 0 12px 22px rgba(36, 92, 82, 0.12);
   cursor: pointer;
+}
+
+.map-fullscreen-icon {
+  font-size: 1rem;
 }
 
 .map-fullscreen-button:hover,
@@ -1419,9 +1426,14 @@ audio {
   .map-fullscreen-button {
     left: 16px;
     bottom: 16px;
-    width: 44px;
-    height: 44px;
-    font-size: 1.15rem;
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 0.84rem;
+    gap: 6px;
+  }
+
+  .map-fullscreen-label {
+    max-width: 96px;
   }
 
   .osm-info-control {

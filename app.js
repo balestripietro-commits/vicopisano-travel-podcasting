@@ -276,6 +276,7 @@ const highlightText = document.getElementById("highlight-text");
 const locateMeButton = document.getElementById("locate-me-button");
 const locateMeStatus = document.getElementById("locate-me-status");
 const mapFullscreenButton = document.getElementById("map-fullscreen-button");
+const mapFullscreenLabel = document.querySelector(".map-fullscreen-label");
 const mapStageFrame = document.querySelector(".map-stage-frame");
 const globalLanguageChips = document.getElementById("global-language-chips");
 const miniPlayer = document.getElementById("mini-player");
@@ -915,11 +916,13 @@ function updateMapFullscreenButton() {
   }
 
   const isFullscreen = isMapFullscreenActive();
-  mapFullscreenButton.textContent = isFullscreen ? "⤡" : "⤢";
   mapFullscreenButton.setAttribute(
     "aria-label",
     isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo"
   );
+  if (mapFullscreenLabel) {
+    mapFullscreenLabel.textContent = isFullscreen ? "Chiudi mappa" : "Schermo intero";
+  }
 }
 
 async function toggleMapFullscreen() {
