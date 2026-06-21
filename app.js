@@ -221,44 +221,11 @@ const routeGeoJson = {
         type: "LineString",
         coordinates: [
           [10.5863858, 43.700429],
-          [10.586608, 43.700366],
-          [10.586932, 43.700222],
-          [10.587198, 43.700041],
           [10.5873698, 43.6998788],
-          [10.587321, 43.699765],
-          [10.587262, 43.699661],
-          [10.587182, 43.69955],
-          [10.587082, 43.699437],
-          [10.586963, 43.699335],
-          [10.586845, 43.699257],
           [10.5867826, 43.6992056],
-          [10.586692, 43.699235],
-          [10.586598, 43.699286],
-          [10.586503, 43.699344],
-          [10.586432, 43.699401],
-          [10.58639, 43.699421],
           [10.5863793, 43.6994864],
-          [10.586253, 43.699532],
-          [10.586098, 43.699584],
-          [10.585905, 43.699637],
-          [10.585706, 43.699695],
-          [10.585484, 43.69975],
-          [10.585214, 43.699805],
-          [10.584962, 43.699853],
-          [10.584741, 43.699886],
           [10.5842514, 43.6999256],
-          [10.584134, 43.699954],
-          [10.583985, 43.699999],
-          [10.58382, 43.700043],
-          [10.583677, 43.70008],
-          [10.583537, 43.700132],
           [10.5833924, 43.7002026],
-          [10.583517, 43.70015],
-          [10.58366, 43.700091],
-          [10.583817, 43.700041],
-          [10.583981, 43.699998],
-          [10.584145, 43.69995],
-          [10.584275, 43.69991],
           [10.5844138, 43.6998526],
         ],
       },
@@ -311,6 +278,7 @@ const detailDescription = document.getElementById("detail-description");
 const audioWrapper = document.getElementById("audio-wrapper");
 const detailArtworkImage = document.getElementById("detail-artwork-image");
 const eyebrowText = document.getElementById("eyebrow-text");
+const introLeadText = document.getElementById("intro-lead-text");
 const introText = document.getElementById("intro-text");
 const instructionsTitle = document.getElementById("instructions-title");
 const instructionsText = document.getElementById("instructions-text");

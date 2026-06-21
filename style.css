@@ -367,6 +367,8 @@ audio {
 }
 
 .map-action-button {
+  position: relative;
+  z-index: 1250;
   border: 1px solid rgba(45, 106, 93, 0.16);
   border-radius: 999px;
   width: 48px;
@@ -410,12 +412,17 @@ audio {
   position: absolute;
   top: 24px;
   right: 24px;
-  z-index: 450;
+  z-index: 1250;
   display: flex;
   flex-direction: column;
   align-items: end;
   gap: 8px;
   max-width: min(280px, calc(100% - 48px));
+  pointer-events: none;
+}
+
+.map-floating-controls > * {
+  pointer-events: auto;
 }
 
 .stops-list {
@@ -429,6 +436,7 @@ audio {
 
 .map-stage-frame {
   position: relative;
+  isolation: isolate;
   background: rgba(255, 255, 255, 0.54);
   border: 1px solid rgba(255, 255, 255, 0.82);
   box-shadow: var(--shadow);
@@ -466,7 +474,7 @@ audio {
   position: absolute;
   left: 24px;
   bottom: 24px;
-  z-index: 1000;
+  z-index: 1250;
   width: 46px;
   height: 46px;
   padding: 0;
@@ -817,6 +825,7 @@ audio {
   right: 0;
   bottom: 0;
   z-index: 950;
+  isolation: isolate;
   background: linear-gradient(180deg, var(--player-soft) 0%, var(--player) 100%);
   color: #ffffff;
   box-shadow: 0 -16px 34px rgba(8, 37, 57, 0.24);
@@ -832,6 +841,8 @@ audio {
 }
 
 .mini-player-main {
+  position: relative;
+  z-index: 2;
   border: 0;
   background: transparent;
   color: inherit;
@@ -881,6 +892,8 @@ audio {
 }
 
 .mini-player-center {
+  position: relative;
+  z-index: 2;
   display: grid;
   gap: 10px;
 }
@@ -898,9 +911,9 @@ audio {
   color: rgba(255, 255, 255, 0.9);
   font-size: 1.1rem;
   cursor: pointer;
-  padding: 0;
-  min-width: 28px;
-  min-height: 28px;
+  padding: 4px;
+  min-width: 36px;
+  min-height: 36px;
 }
 
 .mini-player-control.is-active {
@@ -950,6 +963,8 @@ audio {
 }
 
 .mini-player-volume-block {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: end;
