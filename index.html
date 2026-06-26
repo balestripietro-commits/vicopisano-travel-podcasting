@@ -58,6 +58,7 @@
               <span class="map-fullscreen-icon" aria-hidden="true">⤢</span>
             </button>
             <div id="map" class="map" role="application" aria-label="Mappa delle tappe"></div>
+            <p id="map-load-status" class="map-load-status" aria-live="polite"></p>
           </div>
         </section>
 
@@ -90,7 +91,7 @@
           <div class="controls-toolbar">
             <div class="controls-copy">
               <h2 id="stops-title">Tappe del percorso</h2>
-              <p id="stops-subtitle">7 punti di ascolto lungo il borgo.</p>
+              <p id="stops-subtitle" hidden></p>
             </div>
           </div>
           <ul id="stops-list" class="stops-list" aria-label="Elenco delle tappe"></ul>
@@ -166,7 +167,7 @@
             ⏮
           </button>
           <button type="button" id="mini-player-toggle" class="mini-player-toggle" aria-label="Play">
-            ▶
+            <span class="playback-icon" aria-hidden="true">▶</span>
           </button>
           <button
             type="button"
@@ -241,6 +242,7 @@
           <div id="player-language-chips" class="language-chips"></div>
         </div>
         <div id="audio-wrapper" class="audio-wrapper"></div>
+        <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
           <div class="player-timeline">
             <span id="player-current-time" class="player-time">00:00</span>
             <input
@@ -260,7 +262,7 @@
               ⏮
             </button>
             <button type="button" id="player-play-button" class="player-control-button is-primary">
-              ▶
+              <span class="playback-icon" aria-hidden="true">▶</span>
             </button>
             <button type="button" id="player-next-button" class="player-control-button">
               ⏭

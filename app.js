@@ -238,9 +238,10 @@ const map = L.map("map", {
   attributionControl: false,
 });
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+const baseTileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
-}).addTo(map);
+});
+baseTileLayer.addTo(map);
 
 const openStreetMapInfoControl = L.control({ position: "bottomright" });
 
@@ -300,6 +301,7 @@ const locateMeButton = document.getElementById("locate-me-button");
 const locateMeStatus = document.getElementById("locate-me-status");
 const mapFullscreenButton = document.getElementById("map-fullscreen-button");
 const mapStageFrame = document.querySelector(".map-stage-frame");
+const mapLoadStatus = document.getElementById("map-load-status");
 const globalLanguageChips = document.getElementById("global-language-chips");
 const playerLanguageSelector = document.getElementById("player-language-selector");
 const playerLanguageLabel = document.getElementById("player-language-label");
@@ -328,6 +330,7 @@ const playerCurrentTime = document.getElementById("player-current-time");
 const playerDurationTotal = document.getElementById("player-duration-total");
 const playerProgressInput = document.getElementById("player-progress-input");
 const playerVolume = document.getElementById("player-volume");
+const audioFeedback = document.getElementById("audio-feedback");
 
 let currentAudio = null;
 let activeStopNumber = null;
@@ -340,6 +343,11 @@ let repeatEnabled = false;
 let currentVolume = 0.85;
 let isSeekingFromOverlay = false;
 let lastPrevInteractionAt = 0;
+let miniPlayerResizeObserver = null;
+let currentMapStatusKey = "";
+let currentAudioStatusKey = "";
+let hasMapLoadedTiles = false;
+let tileErrorCount = 0;
 
 const markersByStop = new Map();
 const buttonsByStop = new Map();
@@ -794,6 +802,44 @@ const uiStrings = {
   },
 };
 
+const statusMessages = {
+  IT: {
+    offlineStatus: "Sei offline o la connessione e instabile.",
+    mapLoadError: "La mappa non si sta caricando bene. Riprova tra un attimo.",
+    audioLoadError: "L'audio non e disponibile in questo momento. Riprova tra poco.",
+  },
+  EN: {
+    offlineStatus: "You are offline or the connection is unstable.",
+    mapLoadError: "The map is not loading correctly. Please try again in a moment.",
+    audioLoadError: "Audio is not available right now. Please try again shortly.",
+  },
+  DE: {
+    offlineStatus: "Sie sind offline oder die Verbindung ist instabil.",
+    mapLoadError: "Die Karte wird nicht richtig geladen. Bitte versuchen Sie es gleich erneut.",
+    audioLoadError: "Das Audio ist im Moment nicht verfugbar. Bitte versuchen Sie es in Kurze erneut.",
+  },
+  FR: {
+    offlineStatus: "Vous etes hors ligne ou la connexion est instable.",
+    mapLoadError: "La carte ne se charge pas correctement. Reessayez dans un instant.",
+    audioLoadError: "L'audio n'est pas disponible pour le moment. Reessayez dans un instant.",
+  },
+  ES: {
+    offlineStatus: "Estas sin conexion o la red es inestable.",
+    mapLoadError: "El mapa no se esta cargando correctamente. Vuelve a intentarlo en un momento.",
+    audioLoadError: "El audio no esta disponible en este momento. Vuelve a intentarlo dentro de poco.",
+  },
+  PT: {
+    offlineStatus: "Estas offline ou a ligacao esta instavel.",
+    mapLoadError: "O mapa nao esta a carregar corretamente. Tenta novamente dentro de instantes.",
+    audioLoadError: "O audio nao esta disponivel neste momento. Tenta novamente daqui a pouco.",
+  },
+  RU: {
+    offlineStatus: "Vy ne v seti ili soedinenie nestabilno.",
+    mapLoadError: "Karta zagruzhaetsya s oshibkoy. Poprobuyte eshche raz cherez mgnovenie.",
+    audioLoadError: "Audio seychas nedostupno. Poprobuyte povtorit cherez nekotoroe vremya.",
+  },
+};
+
 function getUiStrings(languageCode = "IT") {
   return uiStrings[languageCode] || uiStrings.IT;
 }
@@ -834,10 +880,219 @@ function setCurrentLanguage(languageCode) {
       focusStop(activeStop, { skipFly: true, preservePlayback: true });
     }
   }
+
+  pulseActiveLanguageChips();
+  animateTranslatedContent();
 }
 
 function setLocateStatus(message = "") {
   locateMeStatus.textContent = message;
+}
+
+function replayAnimationClass(element, className, duration = 420) {
+  if (!element) {
+    return;
+  }
+
+  element.classList.remove(className);
+  void element.offsetWidth;
+  element.classList.add(className);
+
+  window.setTimeout(() => {
+    element.classList.remove(className);
+  }, duration);
+}
+
+function animateTranslatedContent() {
+  const textTargets = [
+    eyebrowText,
+    introLeadText,
+    introText,
+    stopsTitle,
+    stopsSubtitle,
+    platformsEyebrow,
+    shareTitle,
+    detailTitle,
+    detailDescription,
+    miniPlayerTitle,
+    miniPlayerSubtitle,
+    brandNameEl,
+    brandTagEl,
+    landingTitle,
+    mapStageNote,
+    detailCopyTitle,
+  ];
+
+  textTargets.forEach((element) => {
+    replayAnimationClass(element, "is-translating");
+  });
+
+  if (stopsList) {
+    stopsList.querySelectorAll(".stop-title, .stop-meta, .stop-availability").forEach((element) => {
+      replayAnimationClass(element, "is-translating");
+    });
+  }
+}
+
+function pulseActiveLanguageChips() {
+  document.querySelectorAll(".language-chip.is-active").forEach((chip) => {
+    replayAnimationClass(chip, "is-pulsing", 500);
+  });
+}
+
+function pulseActiveStopCard(stopNumber = activeStopNumber) {
+  const activeButton = buttonsByStop.get(stopNumber);
+  replayAnimationClass(activeButton, "is-pulsing", 360);
+}
+
+function highlightActiveMarker(stopNumber = activeStopNumber) {
+  markersByStop.forEach((marker, numero) => {
+    const markerElement = marker.getElement()?.querySelector(".map-marker");
+    if (!markerElement) {
+      return;
+    }
+
+    markerElement.classList.remove("is-highlighted");
+
+    if (numero === stopNumber) {
+      void markerElement.offsetWidth;
+      markerElement.classList.add("is-highlighted");
+      window.setTimeout(() => {
+        markerElement.classList.remove("is-highlighted");
+      }, 720);
+    }
+  });
+}
+
+function getStatusMessage(statusKey) {
+  if (!statusKey) {
+    return "";
+  }
+
+  const localizedStatusMessages = statusMessages[currentLanguage] || statusMessages.IT;
+  return localizedStatusMessages[statusKey] || statusMessages.IT[statusKey] || "";
+}
+
+function setMapLoadStatusByKey(statusKey = "") {
+  currentMapStatusKey = statusKey;
+
+  if (!mapLoadStatus) {
+    return;
+  }
+
+  if (!statusKey) {
+    mapLoadStatus.textContent = "";
+    mapLoadStatus.classList.remove("is-visible");
+    return;
+  }
+
+  mapLoadStatus.textContent = getStatusMessage(statusKey);
+  mapLoadStatus.classList.add("is-visible");
+}
+
+function setAudioFeedbackByKey(statusKey = "") {
+  currentAudioStatusKey = statusKey;
+
+  if (!audioFeedback) {
+    return;
+  }
+
+  if (!statusKey) {
+    audioFeedback.textContent = "";
+    audioFeedback.classList.remove("is-visible");
+    return;
+  }
+
+  audioFeedback.textContent = getStatusMessage(statusKey);
+  audioFeedback.classList.add("is-visible");
+}
+
+function bindMapLoadFeedback(tileLayer) {
+  if (!tileLayer) {
+    return;
+  }
+
+  tileLayer.on("load", () => {
+    hasMapLoadedTiles = true;
+    tileErrorCount = 0;
+
+    if (currentMapStatusKey === "mapLoadError" || currentMapStatusKey === "offlineStatus") {
+      setMapLoadStatusByKey("");
+    }
+  });
+
+  tileLayer.on("tileerror", () => {
+    tileErrorCount += 1;
+
+    if (tileErrorCount >= 2 || !hasMapLoadedTiles) {
+      setMapLoadStatusByKey(navigator.onLine ? "mapLoadError" : "offlineStatus");
+    }
+  });
+
+  window.addEventListener("offline", () => {
+    setMapLoadStatusByKey("offlineStatus");
+    if (currentAudio) {
+      setAudioFeedbackByKey("offlineStatus");
+    }
+  });
+
+  window.addEventListener("online", () => {
+    if (currentMapStatusKey === "offlineStatus") {
+      setMapLoadStatusByKey("");
+    }
+
+    if (currentAudioStatusKey === "offlineStatus") {
+      setAudioFeedbackByKey("");
+    }
+  });
+}
+
+function consumeControlEvent(event) {
+  if (!event) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+function stopControlPropagation(event) {
+  if (!event) {
+    return;
+  }
+
+  event.stopPropagation();
+}
+
+function syncMiniPlayerReservedSpace() {
+  const root = document.documentElement;
+  const safeBuffer = 24;
+
+  if (!miniPlayer || miniPlayer.classList.contains("is-hidden")) {
+    root.style.setProperty("--mini-player-reserved-space", `${118 + safeBuffer}px`);
+    return;
+  }
+
+  const measuredHeight = Math.ceil(miniPlayer.getBoundingClientRect().height);
+  const reservedSpace = Math.max(118, measuredHeight + safeBuffer);
+  root.style.setProperty("--mini-player-reserved-space", `${reservedSpace}px`);
+}
+
+function bindMiniPlayerLayoutSync() {
+  syncMiniPlayerReservedSpace();
+
+  if (typeof ResizeObserver === "function" && miniPlayer && !miniPlayerResizeObserver) {
+    miniPlayerResizeObserver = new ResizeObserver(() => {
+      syncMiniPlayerReservedSpace();
+      if (mapStageFrame.classList.contains("is-expanded")) {
+        requestAnimationFrame(() => map.invalidateSize());
+      }
+    });
+    miniPlayerResizeObserver.observe(miniPlayer);
+  }
+
+  window.addEventListener("resize", syncMiniPlayerReservedSpace);
+  window.addEventListener("orientationchange", syncMiniPlayerReservedSpace);
 }
 
 function setUserLocation(latitude, longitude, accuracy) {
@@ -945,7 +1200,17 @@ function locateUser() {
 }
 
 function bindLocateButton() {
-  locateMeButton.addEventListener("click", locateUser);
+  if (!locateMeButton) {
+    return;
+  }
+
+  L.DomEvent.disableClickPropagation(locateMeButton);
+  L.DomEvent.disableScrollPropagation(locateMeButton);
+
+  locateMeButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    locateUser();
+  });
 }
 
 function isMapFullscreenActive() {
@@ -980,8 +1245,13 @@ function bindMapFullscreenButton() {
     return;
   }
 
+  L.DomEvent.disableClickPropagation(mapFullscreenButton);
+  L.DomEvent.disableScrollPropagation(mapFullscreenButton);
   updateMapFullscreenButton();
-  mapFullscreenButton.addEventListener("click", toggleMapFullscreen);
+  mapFullscreenButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    toggleMapFullscreen();
+  });
 }
 
 function getLanguageDisplayName(languageCode, uiLanguage = currentLanguage) {
@@ -1061,6 +1331,10 @@ function stopCurrentAudio(exceptAudio = null) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
   }
+
+  if (!exceptAudio) {
+    setAudioFeedbackByKey("");
+  }
 }
 
 function formatPlayerTime(seconds) {
@@ -1074,12 +1348,40 @@ function formatPlayerTime(seconds) {
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 }
 
+function setPlaybackButtonIcon(button, icon, isPlaying = false) {
+  if (!button) {
+    return;
+  }
+
+  const iconEl = button.querySelector(".playback-icon");
+
+  if (!iconEl) {
+    button.textContent = icon;
+    button.classList.toggle("is-playing", isPlaying);
+    return;
+  }
+
+  if (iconEl.textContent === icon) {
+    button.classList.toggle("is-playing", isPlaying);
+    return;
+  }
+
+  button.classList.add("is-morphing");
+  window.setTimeout(() => {
+    iconEl.textContent = icon;
+    button.classList.toggle("is-playing", isPlaying);
+    requestAnimationFrame(() => {
+      button.classList.remove("is-morphing");
+    });
+  }, 110);
+}
+
 function updateMiniPlayerPlayback() {
   const strings = getUiStrings(currentLanguage);
   if (!currentAudio) {
-    miniPlayerToggle.textContent = "▶";
+    setPlaybackButtonIcon(miniPlayerToggle, "▶", false);
     miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
-    playerPlayButton.textContent = "▶";
+    setPlaybackButtonIcon(playerPlayButton, "▶", false);
     playerPlayButton.setAttribute("aria-label", strings.playerPlay);
     miniPlayerProgressBar.style.width = "0%";
     playerRepeatButton.classList.toggle("is-active", repeatEnabled);
@@ -1093,12 +1395,12 @@ function updateMiniPlayerPlayback() {
   }
 
   const isPlaying = !currentAudio.paused && !currentAudio.ended;
-  miniPlayerToggle.textContent = isPlaying ? "❚❚" : "▶";
+  setPlaybackButtonIcon(miniPlayerToggle, isPlaying ? "❚❚" : "▶", isPlaying);
   miniPlayerToggle.setAttribute(
     "aria-label",
     isPlaying ? strings.playerPause : strings.playerPlay
   );
-  playerPlayButton.textContent = isPlaying ? "❚❚" : "▶";
+  setPlaybackButtonIcon(playerPlayButton, isPlaying ? "❚❚" : "▶", isPlaying);
   playerPlayButton.setAttribute(
     "aria-label",
     isPlaying ? strings.playerPause : strings.playerPlay
@@ -1126,6 +1428,7 @@ function bindAudioLifecycle(audio) {
   audio.addEventListener("play", () => {
     stopCurrentAudio(audio);
     currentAudio = audio;
+    setAudioFeedbackByKey("");
     updateMiniPlayerPlayback();
   });
 
@@ -1137,10 +1440,25 @@ function bindAudioLifecycle(audio) {
 
   audio.addEventListener("timeupdate", updateMiniPlayerPlayback);
   audio.addEventListener("loadedmetadata", updateMiniPlayerPlayback);
+  audio.addEventListener("loadeddata", () => {
+    setAudioFeedbackByKey("");
+    updateMiniPlayerPlayback();
+  });
+  audio.addEventListener("canplay", () => {
+    setAudioFeedbackByKey("");
+  });
+  audio.addEventListener("stalled", () => {
+    setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
+  });
+  audio.addEventListener("error", () => {
+    setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
+    updateMiniPlayerPlayback();
+  });
 
   audio.addEventListener("ended", () => {
     if (currentAudio === audio) {
       audio.currentTime = 0;
+      setAudioFeedbackByKey("");
       updateMiniPlayerPlayback();
     }
   });
@@ -1251,6 +1569,7 @@ function popupHtml(tappa) {
 
 function renderAudioContent(tappa) {
   audioWrapper.innerHTML = "";
+  setAudioFeedbackByKey("");
   const selectedOption = getSelectedAudioOption(tappa);
   const strings = getUiStrings(currentLanguage);
   currentSelectedOption = selectedOption;
@@ -1330,7 +1649,9 @@ function playCurrentRenderedAudio() {
 
   const playPromise = audio.play();
   if (playPromise && typeof playPromise.catch === "function") {
-    playPromise.catch(() => {});
+    playPromise.catch(() => {
+      setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
+    });
   }
 }
 
@@ -1346,6 +1667,7 @@ function openPlayerOverlay() {
   playerOverlay.classList.remove("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "false");
   document.body.classList.add("player-open");
+  syncMiniPlayerReservedSpace();
 }
 
 function closePlayerOverlay() {
@@ -1353,6 +1675,7 @@ function closePlayerOverlay() {
   playerOverlay.classList.add("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "true");
   document.body.classList.remove("player-open");
+  syncMiniPlayerReservedSpace();
 }
 
 function updateMiniPlayer(tappa, selectedOption) {
@@ -1365,6 +1688,7 @@ function updateMiniPlayer(tappa, selectedOption) {
   detailArtworkImage.src = artworkSrc;
   detailArtworkImage.alt = `Immagine tappa ${tappa.numero}`;
   updateMiniPlayerPlayback();
+  requestAnimationFrame(syncMiniPlayerReservedSpace);
 }
 
 function toggleMiniPlayerPlayback() {
@@ -1379,7 +1703,9 @@ function toggleMiniPlayerPlayback() {
   if (audio.paused) {
     const playPromise = audio.play();
     if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {});
+      playPromise.catch(() => {
+        setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
+      });
     }
     return;
   }
@@ -1394,37 +1720,54 @@ function bindPlayerControls() {
     }
     openPlayerOverlay();
   });
-  miniPlayerOpen.addEventListener("click", openPlayerOverlay);
+  miniPlayerOpen.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    openPlayerOverlay();
+  });
   miniPlayerToggle.addEventListener("click", (event) => {
-    event.stopPropagation();
+    consumeControlEvent(event);
     toggleMiniPlayerPlayback();
   });
   miniPlayerPrev.addEventListener("click", (event) => {
-    event.stopPropagation();
+    consumeControlEvent(event);
     handlePreviousAction();
   });
   miniPlayerNext.addEventListener("click", (event) => {
-    event.stopPropagation();
+    consumeControlEvent(event);
     focusStopByOffset(1);
   });
   miniPlayerRepeat.addEventListener("click", (event) => {
-    event.stopPropagation();
+    consumeControlEvent(event);
     toggleRepeatMode();
   });
-  playerPrevButton.addEventListener("click", () => {
+  playerPrevButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
     handlePreviousAction();
   });
-  playerPlayButton.addEventListener("click", () => {
+  playerPlayButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
     toggleMiniPlayerPlayback();
   });
-  playerNextButton.addEventListener("click", () => {
+  playerNextButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
     focusStopByOffset(1);
   });
-  playerRepeatButton.addEventListener("click", () => {
+  playerRepeatButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
     toggleRepeatMode();
   });
-  playerBackdrop.addEventListener("click", closePlayerOverlay);
-  playerCloseButton.addEventListener("click", closePlayerOverlay);
+  playerBackdrop.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    closePlayerOverlay();
+  });
+  playerCloseButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    closePlayerOverlay();
+  });
+  [miniPlayerVolume, playerVolume, playerProgressInput].forEach((control) => {
+    control.addEventListener("click", stopControlPropagation);
+    control.addEventListener("pointerdown", stopControlPropagation);
+  });
   miniPlayerVolume.addEventListener("input", () => {
     currentVolume = Number(miniPlayerVolume.value);
     playerVolume.value = String(currentVolume);
@@ -1481,7 +1824,8 @@ function renderStaticTexts() {
   if (introLeadText) introLeadText.textContent = strings.introLead;
   introText.textContent = strings.intro;
   stopsTitle.textContent = strings.routeTitle;
-  stopsSubtitle.textContent = strings.routeSubtitle;
+  stopsSubtitle.textContent = "";
+  stopsSubtitle.hidden = true;
   platformsEyebrow.textContent = strings.platformsEyebrow;
   shareTitle.textContent = strings.shareTitle;
   locateMeButton.setAttribute("aria-label", strings.locateMe);
@@ -1504,6 +1848,14 @@ function renderStaticTexts() {
   updateShareLinks();
   updateMiniPlayerPlayback();
   renderPlayerLanguageSelector(activeStopNumber ? tappe.find((tappa) => tappa.numero === activeStopNumber) : tappe[0]);
+
+  if (currentMapStatusKey) {
+    setMapLoadStatusByKey(currentMapStatusKey);
+  }
+
+  if (currentAudioStatusKey) {
+    setAudioFeedbackByKey(currentAudioStatusKey);
+  }
 }
 
 function refreshMarkerPopups() {
@@ -1577,6 +1929,9 @@ function focusStop(tappa, options = {}) {
     }
     marker.openPopup();
   }
+
+  pulseActiveStopCard(tappa.numero);
+  highlightActiveMarker(tappa.numero);
 }
 
 function renderStopsList() {
@@ -1635,7 +1990,7 @@ function renderMap() {
       .bindPopup(popupHtml(tappa));
 
     marker.on("click", () => {
-      focusStop(tappa, { skipFly: true, autoplay: true, openOverlay: false });
+      focusStop(tappa, { skipFly: true, autoplay: true, openOverlay: true });
     });
 
     marker.on("popupopen", () => {
@@ -1656,7 +2011,13 @@ renderStopsList();
 renderMap();
 renderStaticTexts();
 renderGlobalLanguageSelector();
+bindMapLoadFeedback(baseTileLayer);
 bindLocateButton();
 bindMapFullscreenButton();
 bindPlayerControls();
+bindMiniPlayerLayoutSync();
 focusStop(tappe[0], { skipFly: true });
+
+if (!navigator.onLine) {
+  setMapLoadStatusByKey("offlineStatus");
+}
