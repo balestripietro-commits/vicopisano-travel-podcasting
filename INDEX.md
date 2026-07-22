@@ -13,6 +13,7 @@
 - `logo_vicopisano.png`: stemma usato nell'intestazione del sito.
 - `mascotte_vicopisano.png`: immagine mascotte di supporto tenuta nel progetto.
 - `mascotte_vicopisano_saluto.mp4`: asset legacy non più usato nella schermata estesa corrente.
+- `assets/mascotte-mouth/`: frame mascotte Rhubarb `A-H` + `X` usati nella home per sincronizzare la bocca con l'audio.
 - `tappa_1_torre_delle_quattro_porte.jpg`: foto reale associata alla Tappa 1.
 - `tappa_2_torre_e_camminamento_del_soccorso.jpg`: foto reale associata alla Tappa 2.
 - `tappa_3_palazzo_pretorio.jpg`: foto reale associata alla Tappa 3.
@@ -25,5 +26,6 @@
 - `audio/01_torre_quattro_porte_es.mp3`: audio Tappa 1 in spagnolo.
 - `audio/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
 - `audio/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
+- `audio/cues/`: cue JSON generati con Rhubarb per sincronizzare la bocca della mascotte sugli audio disponibili.
 - `outputs/`: cartella riservata a deliverable utente.
 - `work/`: cartella di lavoro temporanea.

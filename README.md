@@ -54,6 +54,44 @@ http://<IP-del-computer>:8000
 
 Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare poi il sito in HTTPS.
 
+
+
+## Primo accesso, lingua e aiuto
+
+- Al primo accesso il sito mostra una schermata pulita di scelta lingua prima di entrare nell'esperienza.
+- La lingua iniziale viene scelta da URL se presente, poi dalla lingua salvata nel browser, poi dalla lingua di sistema; se non e supportata, il fallback e inglese.
+- Dopo la prima scelta la preferenza viene salvata in `localStorage`, quindi la schermata iniziale non ricompare a ogni visita.
+- Per rivedere la schermata iniziale in fase di test si puo aprire il sito con `?welcome=1`.
+- Il tasto `Aiuto` nell'header apre una guida breve in 3 step, tradotta nella lingua attiva, che spiega mappa, lista tappe e player.
+- La lingua resta comunque modificabile dai chip in alto e dal selettore del player esteso.
+
+## Link diretti a tappe e lingue
+
+Il sito supporta parametri URL condivisibili:
+
+- `?tappa=1` apre e centra la tappa indicata.
+- `?lang=en` imposta la lingua iniziale.
+- I parametri sono combinabili, per esempio `?tappa=3&lang=fr`.
+- Eventuali parametri tecnici gia presenti, come `refresh`, vengono preservati quando il sito aggiorna l'URL.
+
+## Mascotte animata con Rhubarb
+
+- La mascotte nella home usa i frame in `assets/mascotte-mouth/`.
+- I frame richiesti da Rhubarb sono presenti: `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H` e `X` per la bocca a riposo.
+- Rhubarb e installato localmente in `/Users/pietrobalestri/.local/bin/rhubarb`.
+- I cue di sincronizzazione sono salvati in `audio/cues/` e vengono caricati automaticamente quando parte un audio.
+- La logica del sito associa ogni file `audio/nome_file.mp3` al cue `audio/cues/nome_file.json`.
+- Al momento sono stati generati i cue per la Tappa 1 in tutte le lingue disponibili.
+- Le tappe senza audio attivo non animano la mascotte: quando aggiungeremo nuovi MP3, andra generato anche il relativo JSON Rhubarb.
+
+Workflow per una nuova tappa o una nuova lingua:
+
+1. Copia l'MP3 definitivo dentro `audio/`.
+2. Converti temporaneamente l'MP3 in WAV con `ffmpeg`.
+3. Esegui Rhubarb sul WAV.
+4. Salva il JSON in `audio/cues/` con lo stesso nome base dell'MP3.
+5. Verifica che in `app.js` la tappa punti al file audio corretto e abbia `audioDisponibile: true`.
+
 ## Dove mettere i file audio
 
 - Inserisci gli MP3 dentro la cartella `audio/`.

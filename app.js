@@ -277,7 +277,10 @@ const detailCopyBox = document.getElementById("detail-copy-box");
 const detailCopyTitle = document.getElementById("detail-copy-title");
 const detailDescription = document.getElementById("detail-description");
 const audioWrapper = document.getElementById("audio-wrapper");
+const playerArtwork = document.getElementById("player-artwork");
 const detailArtworkImage = document.getElementById("detail-artwork-image");
+const detailMascotImage = document.getElementById("detail-mascot-image");
+const artworkFlipToggle = document.getElementById("artwork-flip-toggle");
 const eyebrowText = document.getElementById("eyebrow-text");
 const introLeadText = document.getElementById("intro-lead-text");
 const introText = document.getElementById("intro-text");
@@ -303,6 +306,17 @@ const mapFullscreenButton = document.getElementById("map-fullscreen-button");
 const mapStageFrame = document.querySelector(".map-stage-frame");
 const mapLoadStatus = document.getElementById("map-load-status");
 const globalLanguageChips = document.getElementById("global-language-chips");
+const helpButton = document.getElementById("help-button");
+const onboardingOverlay = document.getElementById("onboarding-overlay");
+const onboardingTitle = document.getElementById("onboarding-title");
+const onboardingHint = document.getElementById("onboarding-hint");
+const onboardingLanguageChips = document.getElementById("onboarding-language-chips");
+const guideLayer = document.getElementById("guide-layer");
+const guideCard = document.getElementById("guide-card");
+const guideStepText = document.getElementById("guide-step-text");
+const guideSkipButton = document.getElementById("guide-skip-button");
+const guidePrevButton = document.getElementById("guide-prev-button");
+const guideNextButton = document.getElementById("guide-next-button");
 const playerLanguageSelector = document.getElementById("player-language-selector");
 const playerLanguageLabel = document.getElementById("player-language-label");
 const playerLanguageChips = document.getElementById("player-language-chips");
@@ -312,6 +326,7 @@ const miniPlayerToggle = document.getElementById("mini-player-toggle");
 const miniPlayerPrev = document.getElementById("mini-player-prev");
 const miniPlayerNext = document.getElementById("mini-player-next");
 const miniPlayerRepeat = document.getElementById("mini-player-repeat");
+const miniPlayerExpand = document.getElementById("mini-player-expand");
 const miniPlayerTitle = document.getElementById("mini-player-title");
 const miniPlayerSubtitle = document.getElementById("mini-player-subtitle");
 const miniPlayerArtwork = document.getElementById("mini-player-artwork");
@@ -331,6 +346,7 @@ const playerDurationTotal = document.getElementById("player-duration-total");
 const playerProgressInput = document.getElementById("player-progress-input");
 const playerVolume = document.getElementById("player-volume");
 const audioFeedback = document.getElementById("audio-feedback");
+const heroMascot = document.getElementById("hero-mascot");
 
 let currentAudio = null;
 let activeStopNumber = null;
@@ -342,6 +358,7 @@ let currentSelectedOption = null;
 let repeatEnabled = false;
 let currentVolume = 0.85;
 let isSeekingFromOverlay = false;
+let detailArtworkMode = "photo";
 let lastPrevInteractionAt = 0;
 let miniPlayerResizeObserver = null;
 let currentMapStatusKey = "";
@@ -353,7 +370,32 @@ const markersByStop = new Map();
 const buttonsByStop = new Map();
 const selectedLanguageByStop = new Map();
 
+const MASCOT_FRAME_BASE_PATH = "assets/mascotte-mouth";
+const MASCOT_REST_FRAME = `${MASCOT_FRAME_BASE_PATH}/mascotte_X.png`;
+const MASCOT_FRAME_PATHS = {
+  A: `${MASCOT_FRAME_BASE_PATH}/mascotte_A.png`,
+  B: `${MASCOT_FRAME_BASE_PATH}/mascotte_B.png`,
+  C: `${MASCOT_FRAME_BASE_PATH}/mascotte_C.png`,
+  D: `${MASCOT_FRAME_BASE_PATH}/mascotte_D.png`,
+  E: `${MASCOT_FRAME_BASE_PATH}/mascotte_E.png`,
+  F: `${MASCOT_FRAME_BASE_PATH}/mascotte_F.png`,
+  G: `${MASCOT_FRAME_BASE_PATH}/mascotte_G.png`,
+  H: `${MASCOT_FRAME_BASE_PATH}/mascotte_H.png`,
+  X: MASCOT_REST_FRAME,
+};
+
+const mascotCueCache = new Map();
+const mascotFrameImages = new Map();
+let mascotAnimationFrame = null;
+let mascotActiveAudio = null;
+let mascotActiveCues = [];
+let mascotCueIndex = 0;
+let mascotSyncToken = 0;
+let currentMascotFrame = "X";
+
 const siteLanguages = ["IT", "EN", "DE", "FR", "ES", "PT", "RU"];
+const LANGUAGE_STORAGE_KEY = "vicopisano-language";
+const ONBOARDING_STORAGE_KEY = "vicopisano-language-onboarding";
 const WHITE_ARTWORK =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(
@@ -472,6 +514,7 @@ const uiStrings = {
     playerPause: "Metti in pausa audio",
     playerNext: "Vai alla tappa successiva",
     playerRepeat: "Ripeti traccia",
+    playerExpand: "Apri player a schermo intero",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -524,6 +567,7 @@ const uiStrings = {
     playerPause: "Pause audio",
     playerNext: "Go to next stop",
     playerRepeat: "Repeat track",
+    playerExpand: "Open full-screen player",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -576,6 +620,7 @@ const uiStrings = {
     playerPause: "Audio pausieren",
     playerNext: "Zur nächsten Station",
     playerRepeat: "Titel wiederholen",
+    playerExpand: "Player im Vollbild öffnen",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -628,6 +673,7 @@ const uiStrings = {
     playerPause: "Mettre l’audio en pause",
     playerNext: "Aller à l’étape suivante",
     playerRepeat: "Répéter la piste",
+    playerExpand: "Ouvrir le lecteur en plein écran",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -680,6 +726,7 @@ const uiStrings = {
     playerPause: "Pausar audio",
     playerNext: "Ir a la etapa siguiente",
     playerRepeat: "Repetir pista",
+    playerExpand: "Abrir reproductor a pantalla completa",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -732,6 +779,7 @@ const uiStrings = {
     playerPause: "Pausar áudio",
     playerNext: "Ir para a próxima etapa",
     playerRepeat: "Repetir faixa",
+    playerExpand: "Abrir player em tela cheia",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -784,6 +832,7 @@ const uiStrings = {
     playerPause: "Postavit audio na pauzu",
     playerNext: "Pereyti k sleduyushchey ostanovke",
     playerRepeat: "Povtoryat trek",
+    playerExpand: "Otkryt pleer na ves ekran",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -840,8 +889,111 @@ const statusMessages = {
   },
 };
 
+const onboardingUiStrings = {
+  IT: {
+    onboardingTitle: "Scegli la lingua per iniziare il percorso",
+    onboardingHint: "Potrai cambiarla in ogni momento.",
+    helpButton: "Aiuto",
+    guideSkip: "Chiudi",
+    guideBack: "Indietro",
+    guideNext: "Avanti",
+    guideDone: "Fine",
+    guideMap: "La mappa mostra le tappe del percorso. Tocca un numero per aprire la tappa e avviare il player.",
+    guideStops: "Puoi scegliere una tappa anche dalla lista: il sito centra la mappa e prepara l'audio.",
+    guidePlatforms: "Qui trovi i collegamenti alle piattaforme esterne dove pubblicare o consultare il percorso.",
+    guideShare: "Da qui puoi condividere il prototipo con amici e contatti tramite social, WhatsApp o email.",
+    guidePlayer: "Il player resta in basso durante la visita. Clicca o tocca la barra del player per aprire la vista completa.",
+  },
+  EN: {
+    onboardingTitle: "Choose your language to start the route",
+    onboardingHint: "You can change it at any time.",
+    helpButton: "Help",
+    guideSkip: "Close",
+    guideBack: "Back",
+    guideNext: "Next",
+    guideDone: "Done",
+    guideMap: "The map shows the route stops. Tap a number to open the stop and start the player.",
+    guideStops: "You can also choose a stop from the list: the site centers the map and prepares the audio.",
+    guidePlatforms: "Here you find links to the external platforms where the route can be published or viewed.",
+    guideShare: "Use these buttons to share the prototype with friends and contacts through social channels, WhatsApp or email.",
+    guidePlayer: "The player stays at the bottom during the visit. Click or tap the player bar to open the full view.",
+  },
+  DE: {
+    onboardingTitle: "Waehle deine Sprache, um die Route zu starten",
+    onboardingHint: "Du kannst sie jederzeit aendern.",
+    helpButton: "Hilfe",
+    guideSkip: "Schliessen",
+    guideBack: "Zurueck",
+    guideNext: "Weiter",
+    guideDone: "Fertig",
+    guideMap: "Die Karte zeigt die Stationen der Route. Tippe auf eine Nummer, um die Station zu oeffnen und den Player zu starten.",
+    guideStops: "Du kannst eine Station auch aus der Liste waehlen: Die Karte wird zentriert und das Audio vorbereitet.",
+    guidePlatforms: "Hier findest du Links zu den externen Plattformen, auf denen die Route veroeffentlicht oder angesehen werden kann.",
+    guideShare: "Mit diesen Tasten kannst du den Prototyp ueber Social Media, WhatsApp oder E-Mail teilen.",
+    guidePlayer: "Der Player bleibt waehrend des Besuchs unten sichtbar. Tippe oder klicke auf die Player-Leiste, um die Vollansicht zu oeffnen.",
+  },
+  FR: {
+    onboardingTitle: "Choisissez la langue pour commencer le parcours",
+    onboardingHint: "Vous pourrez la changer a tout moment.",
+    helpButton: "Aide",
+    guideSkip: "Fermer",
+    guideBack: "Retour",
+    guideNext: "Suivant",
+    guideDone: "Terminer",
+    guideMap: "La carte affiche les etapes du parcours. Touchez un numero pour ouvrir l'etape et lancer le lecteur.",
+    guideStops: "Vous pouvez aussi choisir une etape dans la liste : le site centre la carte et prepare l'audio.",
+    guidePlatforms: "Ici se trouvent les liens vers les plateformes externes ou le parcours peut etre publie ou consulte.",
+    guideShare: "Ces boutons permettent de partager le prototype via les reseaux sociaux, WhatsApp ou e-mail.",
+    guidePlayer: "Le lecteur reste en bas pendant la visite. Touchez ou cliquez sur la barre du lecteur pour ouvrir la vue complete.",
+  },
+  ES: {
+    onboardingTitle: "Elige el idioma para iniciar el recorrido",
+    onboardingHint: "Podras cambiarlo en cualquier momento.",
+    helpButton: "Ayuda",
+    guideSkip: "Cerrar",
+    guideBack: "Atras",
+    guideNext: "Siguiente",
+    guideDone: "Fin",
+    guideMap: "El mapa muestra las paradas del recorrido. Toca un numero para abrir la parada e iniciar el reproductor.",
+    guideStops: "Tambien puedes elegir una parada desde la lista: el sitio centra el mapa y prepara el audio.",
+    guidePlatforms: "Aqui encuentras los enlaces a las plataformas externas donde se puede publicar o consultar el recorrido.",
+    guideShare: "Usa estos botones para compartir el prototipo por redes sociales, WhatsApp o email.",
+    guidePlayer: "El reproductor permanece abajo durante la visita. Haz clic o toca la barra del reproductor para abrir la vista completa.",
+  },
+  PT: {
+    onboardingTitle: "Escolhe o idioma para iniciar o percurso",
+    onboardingHint: "Podes altera-lo a qualquer momento.",
+    helpButton: "Ajuda",
+    guideSkip: "Fechar",
+    guideBack: "Voltar",
+    guideNext: "Seguinte",
+    guideDone: "Fim",
+    guideMap: "O mapa mostra as paragens do percurso. Toca num numero para abrir a paragem e iniciar o leitor.",
+    guideStops: "Tambem podes escolher uma paragem na lista: o site centra o mapa e prepara o audio.",
+    guidePlatforms: "Aqui encontras as ligacoes para as plataformas externas onde o percurso pode ser publicado ou consultado.",
+    guideShare: "Usa estes botoes para partilhar o prototipo nas redes sociais, WhatsApp ou email.",
+    guidePlayer: "O leitor fica em baixo durante a visita. Clica ou toca na barra do leitor para abrir a vista completa.",
+  },
+  RU: {
+    onboardingTitle: "Vyberite yazyk, chtoby nachat marshrut",
+    onboardingHint: "Vy smozhete izmenit ego v lyuboy moment.",
+    helpButton: "Pomoshch",
+    guideSkip: "Zakryt",
+    guideBack: "Nazad",
+    guideNext: "Dalee",
+    guideDone: "Gotovo",
+    guideMap: "Karta pokazyvaet ostanovki marshruta. Kosnites nomera, chtoby otkryt ostanovku i zapustit pleer.",
+    guideStops: "Ostanovku mozhno vybrat i v spiske: sayt sotsentriruet kartu i podgotovit audio.",
+    guidePlatforms: "Zdes est ssylki na vneshnie platformy, gde marshrut mozhno opublikovat ili posmotret.",
+    guideShare: "Eti knopki pozvolyayut podelitsya prototipom v sotssetyakh, WhatsApp ili po email.",
+    guidePlayer: "Pleer ostayetsya vnizu vo vremya poseshcheniya. Kosnites ili nazhmite na panel pleera, chtoby otkryt polnyy vid.",
+  },
+};
+
 function getUiStrings(languageCode = "IT") {
-  return uiStrings[languageCode] || uiStrings.IT;
+  const baseStrings = uiStrings[languageCode] || uiStrings.IT;
+  const onboardingStrings = onboardingUiStrings[languageCode] || onboardingUiStrings.EN;
+  return { ...baseStrings, ...onboardingStrings };
 }
 
 function getStopTitle(tappa, languageCode = currentLanguage) {
@@ -858,31 +1010,129 @@ function getStopTitle(tappa, languageCode = currentLanguage) {
   return `${titles.IT || tappa.titolo} / ${translatedTitle}`;
 }
 
-function setCurrentLanguage(languageCode) {
-  currentLanguage = languageCode;
+function getUrlState() {
+  const params = new URLSearchParams(window.location.search);
+  const rawStop = params.get("tappa") || params.get("stop");
+  const stopNumber = Number.parseInt(rawStop || "", 10);
+  const linkedStop = tappe.find((tappa) => tappa.numero === stopNumber) || null;
+  const rawLanguage = params.get("lang") || params.get("lingua");
+  const linkedLanguage = rawLanguage ? rawLanguage.trim().toUpperCase() : null;
 
+  return {
+    stop: linkedStop,
+    language: siteLanguages.includes(linkedLanguage) ? linkedLanguage : null,
+  };
+}
+
+function normalizeLanguageCode(value) {
+  if (!value) {
+    return null;
+  }
+
+  const normalized = String(value).trim().slice(0, 2).toUpperCase();
+  return siteLanguages.includes(normalized) ? normalized : null;
+}
+
+function getStoredValue(key) {
+  try {
+    return window.localStorage?.getItem(key) || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function setStoredValue(key, value) {
+  try {
+    window.localStorage?.setItem(key, value);
+  } catch (error) {
+    // Local storage can be unavailable in private browsing or strict contexts.
+  }
+}
+
+function getBrowserLanguage() {
+  const browserLanguages = navigator.languages?.length ? navigator.languages : [navigator.language];
+  for (const language of browserLanguages) {
+    const normalized = normalizeLanguageCode(language);
+    if (normalized) {
+      return normalized;
+    }
+  }
+
+  return "EN";
+}
+
+function getInitialLanguage(urlLanguage) {
+  return (
+    normalizeLanguageCode(urlLanguage) ||
+    normalizeLanguageCode(getStoredValue(LANGUAGE_STORAGE_KEY)) ||
+    getBrowserLanguage() ||
+    "EN"
+  );
+}
+
+function syncSelectedLanguagesForCurrentLanguage() {
   tappe.forEach((tappa) => {
-    const option = getAudioOptions(tappa).find((audioOption) => audioOption.codice === languageCode);
+    const option = getAudioOptions(tappa).find((audioOption) => audioOption.codice === currentLanguage);
     if (option) {
-      selectedLanguageByStop.set(tappa.numero, languageCode);
+      selectedLanguageByStop.set(tappa.numero, currentLanguage);
     }
   });
+}
+
+function syncUrlState({ replace = false } = {}) {
+  if (!window.history || !activeStopNumber) {
+    return;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  params.set("tappa", String(activeStopNumber));
+  params.set("lang", currentLanguage.toLowerCase());
+
+  const nextUrl = `${window.location.pathname}?${params.toString()}`;
+  const currentUrl = `${window.location.pathname}${window.location.search}`;
+
+  if (nextUrl === currentUrl) {
+    return;
+  }
+
+  const method = replace ? "replaceState" : "pushState";
+  window.history[method]({ tappa: activeStopNumber, lang: currentLanguage }, "", nextUrl);
+}
+
+function setCurrentLanguage(languageCode, options = {}) {
+  currentLanguage = normalizeLanguageCode(languageCode) || "EN";
+  syncSelectedLanguagesForCurrentLanguage();
+
+  if (options.persist !== false) {
+    setStoredValue(LANGUAGE_STORAGE_KEY, currentLanguage);
+  }
 
   stopCurrentAudio();
   renderStaticTexts();
   renderGlobalLanguageSelector();
+  renderOnboardingTexts();
+  renderOnboardingLanguageSelector();
   renderStopsList();
   refreshMarkerPopups();
 
   if (activeStopNumber !== null) {
     const activeStop = tappe.find((tappa) => tappa.numero === activeStopNumber);
     if (activeStop) {
-      focusStop(activeStop, { skipFly: true, preservePlayback: true });
+      focusStop(activeStop, {
+        skipFly: true,
+        preservePlayback: true,
+        replaceUrl: true,
+        syncUrl: options.syncUrl,
+      });
     }
+  } else if (options.syncUrl !== false) {
+    syncUrlState({ replace: true });
   }
 
   pulseActiveLanguageChips();
-  animateTranslatedContent();
+  if (options.animate !== false) {
+    animateTranslatedContent();
+  }
 }
 
 function setLocateStatus(message = "") {
@@ -1259,7 +1509,10 @@ function getLanguageDisplayName(languageCode, uiLanguage = currentLanguage) {
   return strings.languageNames?.[languageCode] || languageCode;
 }
 
-function buildLanguageChips(container, { languageTitle, includeLabel = false } = {}) {
+function buildLanguageChips(
+  container,
+  { languageTitle, includeLabel = false, onSelect = null } = {},
+) {
   if (!container) {
     return;
   }
@@ -1285,7 +1538,13 @@ function buildLanguageChips(container, { languageTitle, includeLabel = false } =
     chip.setAttribute("aria-label", getLanguageDisplayName(languageCode, currentLanguage));
     chip.title = getLanguageDisplayName(languageCode, currentLanguage);
     chip.addEventListener("click", () => {
+      if (onSelect) {
+        onSelect(languageCode, chip);
+        return;
+      }
+
       if (languageCode === currentLanguage) {
+        replayAnimationClass(chip, "is-pulsing", 460);
         return;
       }
 
@@ -1298,10 +1557,9 @@ function buildLanguageChips(container, { languageTitle, includeLabel = false } =
 }
 
 function renderAnnouncementTrack() {
-  const labels = siteLanguages.map((languageCode) => {
-    const strings = getUiStrings(languageCode);
-    return `${strings.intro}`;
-  });
+  if (!announcementTrack) return;
+
+  const labels = Array.from({ length: 4 }, () => "Travel podcasting - Comune di Vicopisano");
 
   const buildSegment = () => {
     const segment = document.createElement("div");
@@ -1326,14 +1584,208 @@ function hasMeaningfulDuration(durationText) {
   return Boolean(durationText && durationText.trim());
 }
 
+function preloadMascotFrames() {
+  Object.entries(MASCOT_FRAME_PATHS).forEach(([frame, src]) => {
+    if (mascotFrameImages.has(frame)) {
+      return;
+    }
+
+    const image = new Image();
+    image.decoding = "async";
+    image.loading = "eager";
+    image.src = src;
+    mascotFrameImages.set(frame, image);
+
+    if (image.decode) {
+      image.decode().catch(() => {});
+    }
+  });
+}
+
+function getMascotTargets() {
+  return [heroMascot, detailMascotImage].filter(Boolean);
+}
+
+function setMascotFrame(frame) {
+  const mascotTargets = getMascotTargets();
+
+  if (!mascotTargets.length) {
+    return;
+  }
+
+  const normalizedFrame = MASCOT_FRAME_PATHS[frame] ? frame : "X";
+  const nextSrc = MASCOT_FRAME_PATHS[normalizedFrame];
+  const cachedImage = mascotFrameImages.get(normalizedFrame);
+  const resolvedSrc = cachedImage?.src || nextSrc;
+
+  currentMascotFrame = normalizedFrame;
+  mascotTargets.forEach((target) => {
+    target.dataset.mouthFrame = normalizedFrame;
+
+    if (target.getAttribute("src") !== resolvedSrc) {
+      target.src = resolvedSrc;
+    }
+  });
+}
+
+function setMascotSpeakingState(isSpeaking) {
+  getMascotTargets().forEach((target) => {
+    target.classList.toggle("is-speaking", Boolean(isSpeaking));
+  });
+}
+
+function setDetailArtworkMode(mode) {
+  detailArtworkMode = mode === "mascot" ? "mascot" : "photo";
+
+  if (playerArtwork) {
+    playerArtwork.classList.toggle("is-mascot-mode", detailArtworkMode === "mascot");
+  }
+
+  if (artworkFlipToggle) {
+    const isMascotMode = detailArtworkMode === "mascot";
+    artworkFlipToggle.setAttribute("aria-pressed", String(isMascotMode));
+    artworkFlipToggle.setAttribute(
+      "aria-label",
+      isMascotMode ? "Mostra foto della tappa" : "Mostra mascotte animata",
+    );
+  }
+}
+
+function getMouthCuePath(audioPath) {
+  if (!audioPath) {
+    return "";
+  }
+
+  const fileName = audioPath.split("/").pop();
+
+  if (!fileName) {
+    return "";
+  }
+
+  return `audio/cues/${fileName.replace(/\.[^.]+$/, ".json")}`;
+}
+
+function loadMascotCues(cuePath) {
+  if (!cuePath) {
+    return Promise.resolve([]);
+  }
+
+  if (mascotCueCache.has(cuePath)) {
+    return mascotCueCache.get(cuePath);
+  }
+
+  const cuePromise = fetch(cuePath)
+    .then((response) => (response.ok ? response.json() : null))
+    .then((data) => (Array.isArray(data?.mouthCues) ? data.mouthCues : []))
+    .catch(() => []);
+
+  mascotCueCache.set(cuePath, cuePromise);
+  return cuePromise;
+}
+
+function stopMascotLipSync(resetFrame = true) {
+  mascotSyncToken += 1;
+
+  if (mascotAnimationFrame) {
+    cancelAnimationFrame(mascotAnimationFrame);
+    mascotAnimationFrame = null;
+  }
+
+  mascotActiveAudio = null;
+  mascotActiveCues = [];
+  mascotCueIndex = 0;
+  setMascotSpeakingState(false);
+
+  if (resetFrame) {
+    setMascotFrame("X");
+  }
+}
+
+function findMascotCue(time) {
+  if (!mascotActiveCues.length) {
+    return null;
+  }
+
+  while (
+    mascotCueIndex < mascotActiveCues.length - 1 &&
+    time >= mascotActiveCues[mascotCueIndex].end
+  ) {
+    mascotCueIndex += 1;
+  }
+
+  while (mascotCueIndex > 0 && time < mascotActiveCues[mascotCueIndex].start) {
+    mascotCueIndex -= 1;
+  }
+
+  const cue = mascotActiveCues[mascotCueIndex];
+  return cue && time >= cue.start && time < cue.end ? cue : null;
+}
+
+function tickMascotLipSync(token) {
+  if (
+    token !== mascotSyncToken ||
+    !mascotActiveAudio ||
+    mascotActiveAudio.paused ||
+    mascotActiveAudio.ended
+  ) {
+    setMascotSpeakingState(false);
+    setMascotFrame("X");
+    mascotAnimationFrame = null;
+    return;
+  }
+
+  const cue = findMascotCue(mascotActiveAudio.currentTime);
+  setMascotFrame(cue?.value || "X");
+  mascotAnimationFrame = requestAnimationFrame(() => tickMascotLipSync(token));
+}
+
+function startMascotLipSync(audio) {
+  if (!heroMascot || !audio) {
+    return;
+  }
+
+  const cuePath = audio.dataset.mouthCues;
+  if (!cuePath) {
+    setMascotSpeakingState(false);
+    setMascotFrame("X");
+    return;
+  }
+
+  stopMascotLipSync(false);
+  setMascotSpeakingState(true);
+  const token = mascotSyncToken;
+
+  loadMascotCues(cuePath).then((cues) => {
+    if (
+      token !== mascotSyncToken ||
+      !audio ||
+      audio.paused ||
+      audio.ended ||
+      cues.length === 0
+    ) {
+      setMascotSpeakingState(false);
+      setMascotFrame("X");
+      return;
+    }
+
+    setMascotSpeakingState(true);
+    mascotActiveAudio = audio;
+    mascotActiveCues = cues;
+    mascotCueIndex = 0;
+    tickMascotLipSync(token);
+  });
+}
+
 function stopCurrentAudio(exceptAudio = null) {
   if (currentAudio && currentAudio !== exceptAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
+    stopMascotLipSync();
   }
 
   if (!exceptAudio) {
     setAudioFeedbackByKey("");
+    stopMascotLipSync();
   }
 }
 
@@ -1386,6 +1838,10 @@ function updateMiniPlayerPlayback() {
     miniPlayerProgressBar.style.width = "0%";
     playerRepeatButton.classList.toggle("is-active", repeatEnabled);
     miniPlayerRepeat.classList.toggle("is-active", repeatEnabled);
+    if (miniPlayerExpand) {
+      miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
+      miniPlayerExpand.title = strings.playerExpand;
+    }
     miniPlayerCurrentTime.textContent = "00:00";
     miniPlayerDurationTotal.textContent = "00:00";
     playerCurrentTime.textContent = "00:00";
@@ -1409,6 +1865,10 @@ function updateMiniPlayerPlayback() {
   playerRepeatButton.setAttribute("aria-label", strings.playerRepeat);
   miniPlayerRepeat.classList.toggle("is-active", repeatEnabled);
   miniPlayerRepeat.setAttribute("aria-label", strings.playerRepeat);
+  if (miniPlayerExpand) {
+    miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
+    miniPlayerExpand.title = strings.playerExpand;
+  }
 
   const progress =
     currentAudio.duration && Number.isFinite(currentAudio.duration)
@@ -1425,15 +1885,25 @@ function updateMiniPlayerPlayback() {
 }
 
 function bindAudioLifecycle(audio) {
-  audio.addEventListener("play", () => {
+  const startAudioAndMascot = () => {
     stopCurrentAudio(audio);
     currentAudio = audio;
+    startMascotLipSync(audio);
     setAudioFeedbackByKey("");
     updateMiniPlayerPlayback();
+  };
+
+  audio.addEventListener("play", startAudioAndMascot);
+  audio.addEventListener("playing", startAudioAndMascot);
+  audio.addEventListener("seeked", () => {
+    if (currentAudio === audio && !audio.paused && !audio.ended) {
+      startMascotLipSync(audio);
+    }
   });
 
   audio.addEventListener("pause", () => {
     if (currentAudio === audio) {
+      stopMascotLipSync();
       updateMiniPlayerPlayback();
     }
   });
@@ -1451,6 +1921,7 @@ function bindAudioLifecycle(audio) {
     setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
   });
   audio.addEventListener("error", () => {
+    stopMascotLipSync();
     setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
     updateMiniPlayerPlayback();
   });
@@ -1458,6 +1929,7 @@ function bindAudioLifecycle(audio) {
   audio.addEventListener("ended", () => {
     if (currentAudio === audio) {
       audio.currentTime = 0;
+      stopMascotLipSync();
       setAudioFeedbackByKey("");
       updateMiniPlayerPlayback();
     }
@@ -1521,6 +1993,199 @@ function renderGlobalLanguageSelector() {
   buildLanguageChips(globalLanguageChips);
 }
 
+function renderOnboardingTexts() {
+  const strings = getUiStrings(currentLanguage);
+  if (onboardingTitle) {
+    onboardingTitle.textContent = strings.onboardingTitle;
+  }
+  if (onboardingHint) {
+    onboardingHint.textContent = strings.onboardingHint;
+  }
+  if (onboardingLanguageChips) {
+    onboardingLanguageChips.setAttribute("aria-label", strings.onboardingTitle);
+  }
+  if (helpButton) {
+    helpButton.textContent = "?";
+    helpButton.setAttribute("aria-label", strings.helpButton);
+    helpButton.title = strings.helpButton;
+  }
+}
+
+function renderOnboardingLanguageSelector() {
+  buildLanguageChips(onboardingLanguageChips, {
+    onSelect: (languageCode, chip) => {
+      setCurrentLanguage(languageCode);
+      replayAnimationClass(chip, "is-pulsing", 460);
+      closeOnboarding();
+    },
+  });
+}
+
+function shouldShowOnboarding() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("welcome") === "1" || getStoredValue(ONBOARDING_STORAGE_KEY) !== "done";
+}
+
+function showOnboardingIfNeeded() {
+  if (!onboardingOverlay || !shouldShowOnboarding()) {
+    return;
+  }
+
+  renderOnboardingTexts();
+  renderOnboardingLanguageSelector();
+  onboardingOverlay.classList.remove("is-hidden");
+  document.body.classList.add("onboarding-open");
+}
+
+function closeOnboarding() {
+  if (!onboardingOverlay) {
+    return;
+  }
+
+  setStoredValue(ONBOARDING_STORAGE_KEY, "done");
+  onboardingOverlay.classList.add("is-hidden");
+  document.body.classList.remove("onboarding-open");
+  animateTranslatedContent();
+}
+
+function clearGuideHighlight() {
+  document.querySelectorAll(".is-guide-highlighted").forEach((element) => {
+    element.classList.remove("is-guide-highlighted");
+  });
+}
+
+let activeGuideStepIndex = 0;
+
+function getGuideSteps() {
+  const strings = getUiStrings(currentLanguage);
+  return [
+    { target: mapStageFrame, text: strings.guideMap },
+    { target: document.querySelector(".stops-panel"), text: strings.guideStops },
+    { target: document.querySelector(".platforms-panel"), text: strings.guidePlatforms },
+    { target: document.querySelector(".share-panel"), text: strings.guideShare },
+    { target: miniPlayer, text: strings.guidePlayer },
+  ];
+}
+
+function getGuideSafeBottom() {
+  const playerHeight = miniPlayer?.offsetHeight || 0;
+  return window.innerHeight - playerHeight - 18;
+}
+
+function scrollGuideTargetIntoView(target) {
+  if (!target || target === document.body) {
+    return;
+  }
+
+  const rect = target.getBoundingClientRect();
+  const safeTop = 18;
+  const safeBottom = Math.max(180, getGuideSafeBottom());
+  const targetTop = rect.top + window.scrollY;
+  const targetCenter = targetTop + rect.height / 2;
+  const safeCenter = safeTop + (safeBottom - safeTop) / 2;
+  const nextScrollTop = Math.max(0, targetCenter - safeCenter);
+
+  if (Math.abs(nextScrollTop - window.scrollY) > 10) {
+    window.scrollTo({ top: nextScrollTop, behavior: "smooth" });
+  }
+}
+
+function positionGuideCard(target) {
+  if (!guideCard || !target) {
+    return;
+  }
+
+  const rect = target.getBoundingClientRect();
+  const cardWidth = Math.min(360, window.innerWidth - 32);
+  const cardHeight = guideCard.offsetHeight || 190;
+  const safeBottom = Math.max(190, getGuideSafeBottom());
+  const preferredLeft = rect.left + Math.min(rect.width * 0.58, rect.width - cardWidth);
+  const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
+  const maxTop = Math.max(16, safeBottom - cardHeight);
+  const preferredTop = rect.top + Math.min(24, Math.max(0, rect.height * 0.15));
+  const top = Math.max(16, Math.min(maxTop, preferredTop));
+  guideCard.style.left = `${left}px`;
+  guideCard.style.top = `${top}px`;
+}
+
+function renderGuideStep() {
+  if (!guideLayer || !guideStepText || !guideSkipButton || !guidePrevButton || !guideNextButton) {
+    return;
+  }
+
+  const steps = getGuideSteps();
+  const step = steps[activeGuideStepIndex];
+  const guideTarget = step.target || document.body;
+  const strings = getUiStrings(currentLanguage);
+  clearGuideHighlight();
+  step.target?.classList.add("is-guide-highlighted");
+  guideStepText.textContent = step.text;
+  const isFirstGuideStep = activeGuideStepIndex === 0;
+  const isLastGuideStep = activeGuideStepIndex === steps.length - 1;
+  const prevGuideLabel = strings.guideBack || "Indietro";
+  const nextGuideLabel = isLastGuideStep ? strings.guideDone : strings.guideNext;
+  guideSkipButton.textContent = "×";
+  guideSkipButton.setAttribute("aria-label", strings.guideSkip);
+  guideSkipButton.title = strings.guideSkip;
+  guidePrevButton.textContent = "←";
+  guidePrevButton.disabled = isFirstGuideStep;
+  guidePrevButton.classList.toggle("is-disabled", isFirstGuideStep);
+  guidePrevButton.setAttribute("aria-label", prevGuideLabel);
+  guidePrevButton.title = prevGuideLabel;
+  guideNextButton.textContent = isLastGuideStep ? "✓" : "→";
+  guideNextButton.setAttribute("aria-label", nextGuideLabel);
+  guideNextButton.title = nextGuideLabel;
+  guideLayer.classList.remove("is-hidden");
+  scrollGuideTargetIntoView(guideTarget);
+  requestAnimationFrame(() => {
+    positionGuideCard(guideTarget);
+    window.setTimeout(() => positionGuideCard(guideTarget), 280);
+  });
+}
+
+function closeGuide() {
+  if (!guideLayer) {
+    return;
+  }
+
+  guideLayer.classList.add("is-hidden");
+  clearGuideHighlight();
+}
+
+function startGuide() {
+  activeGuideStepIndex = 0;
+  renderGuideStep();
+}
+
+function bindHelpControls() {
+  helpButton?.addEventListener("click", startGuide);
+  guideSkipButton?.addEventListener("click", closeGuide);
+  guidePrevButton?.addEventListener("click", () => {
+    if (activeGuideStepIndex <= 0) {
+      return;
+    }
+
+    activeGuideStepIndex -= 1;
+    renderGuideStep();
+  });
+  guideNextButton?.addEventListener("click", () => {
+    const steps = getGuideSteps();
+    if (activeGuideStepIndex >= steps.length - 1) {
+      closeGuide();
+      return;
+    }
+
+    activeGuideStepIndex += 1;
+    renderGuideStep();
+  });
+  window.addEventListener("resize", () => {
+    if (!guideLayer || guideLayer.classList.contains("is-hidden")) {
+      return;
+    }
+    renderGuideStep();
+  });
+}
+
 function renderPlayerLanguageSelector(tappa = null) {
   if (!playerLanguageSelector || !playerLanguageChips) {
     return;
@@ -1575,6 +2240,7 @@ function renderAudioContent(tappa) {
   currentSelectedOption = selectedOption;
 
   if (!selectedOption || !selectedOption.audioDisponibile) {
+    stopMascotLipSync();
     currentAudio = null;
     updateMiniPlayerPlayback();
     return;
@@ -1584,6 +2250,7 @@ function renderAudioContent(tappa) {
   audio.controls = false;
   audio.preload = "none";
   audio.src = selectedOption.fileAudio;
+  audio.dataset.mouthCues = getMouthCuePath(selectedOption.fileAudio);
   audio.loop = repeatEnabled;
   audio.volume = currentVolume;
   audio.setAttribute(
@@ -1663,6 +2330,7 @@ function updateActiveListItem(stopNumber) {
 }
 
 function openPlayerOverlay() {
+  closeGuide();
   overlayOpen = true;
   playerOverlay.classList.remove("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "false");
@@ -1687,6 +2355,12 @@ function updateMiniPlayer(tappa, selectedOption) {
   miniPlayerArtwork.alt = `Artwork tappa ${tappa.numero}`;
   detailArtworkImage.src = artworkSrc;
   detailArtworkImage.alt = `Immagine tappa ${tappa.numero}`;
+
+  if (detailMascotImage) {
+    detailMascotImage.src = MASCOT_FRAME_PATHS[currentMascotFrame] || MASCOT_REST_FRAME;
+    detailMascotImage.alt = `Mascotte animata di Brunelleschi per tappa ${tappa.numero}`;
+  }
+
   updateMiniPlayerPlayback();
   requestAnimationFrame(syncMiniPlayerReservedSpace);
 }
@@ -1714,6 +2388,13 @@ function toggleMiniPlayerPlayback() {
 }
 
 function bindPlayerControls() {
+  if (artworkFlipToggle) {
+    artworkFlipToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setDetailArtworkMode(detailArtworkMode === "mascot" ? "photo" : "mascot");
+    });
+  }
+
   miniPlayer.addEventListener("click", (event) => {
     if (event.target.closest("button, input")) {
       return;
@@ -1724,6 +2405,12 @@ function bindPlayerControls() {
     consumeControlEvent(event);
     openPlayerOverlay();
   });
+  if (miniPlayerExpand) {
+    miniPlayerExpand.addEventListener("click", (event) => {
+      consumeControlEvent(event);
+      openPlayerOverlay();
+    });
+  }
   miniPlayerToggle.addEventListener("click", (event) => {
     consumeControlEvent(event);
     toggleMiniPlayerPlayback();
@@ -1839,6 +2526,10 @@ function renderStaticTexts() {
   miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
   miniPlayerNext.setAttribute("aria-label", strings.playerNext);
   miniPlayerRepeat.setAttribute("aria-label", strings.playerRepeat);
+  if (miniPlayerExpand) {
+    miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
+    miniPlayerExpand.title = strings.playerExpand;
+  }
   
   // Newly translated static text elements
   if (brandNameEl) brandNameEl.textContent = strings.brandName;
@@ -1875,6 +2566,8 @@ function focusStop(tappa, options = {}) {
   const shouldOpenOverlay = options.openOverlay === true;
   const shouldAutoplay = options.autoplay === true;
   const preservePlayback = options.preservePlayback === true;
+  const shouldSyncUrl = options.syncUrl !== false;
+  const shouldReplaceUrl = options.replaceUrl === true;
   const previousCurrentTime = currentAudio?.currentTime || 0;
   const previousWasPlaying = currentAudio ? !currentAudio.paused : false;
 
@@ -1890,6 +2583,10 @@ function focusStop(tappa, options = {}) {
   renderDetailCopy(tappa);
   updateMiniPlayer(tappa, selectedOption);
   renderPlayerLanguageSelector(tappa);
+
+  if (shouldSyncUrl) {
+    syncUrlState({ replace: shouldReplaceUrl });
+  }
 
   stopCurrentAudio();
   renderAudioContent(tappa);
@@ -2007,16 +2704,27 @@ function renderMap() {
   });
 }
 
+const initialUrlState = getUrlState();
+currentLanguage = getInitialLanguage(initialUrlState.language);
+syncSelectedLanguagesForCurrentLanguage();
+
+preloadMascotFrames();
+setMascotFrame("X");
+setDetailArtworkMode("photo");
 renderStopsList();
 renderMap();
 renderStaticTexts();
 renderGlobalLanguageSelector();
+renderOnboardingTexts();
+renderOnboardingLanguageSelector();
 bindMapLoadFeedback(baseTileLayer);
 bindLocateButton();
 bindMapFullscreenButton();
 bindPlayerControls();
 bindMiniPlayerLayoutSync();
-focusStop(tappe[0], { skipFly: true });
+bindHelpControls();
+focusStop(initialUrlState.stop || tappe[0], { skipFly: true, replaceUrl: true });
+showOnboardingIfNeeded();
 
 if (!navigator.onLine) {
   setMapLoadStatusByKey("offlineStatus");

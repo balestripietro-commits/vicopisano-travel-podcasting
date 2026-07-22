@@ -10,11 +10,41 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="style.css?v=20260619-2112" />
+    <link rel="stylesheet" href="style.css?v=20260722-player-help1" />
   </head>
   <body>
     <div class="announcement-strip" aria-hidden="true">
       <div id="announcement-track" class="announcement-track"></div>
+    </div>
+
+    <div
+      id="onboarding-overlay"
+      class="onboarding-overlay is-hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="onboarding-title"
+    >
+      <div class="onboarding-card translated-content">
+        <p class="onboarding-kicker">Travel podcasting</p>
+        <h2 id="onboarding-title">Scegli la lingua per iniziare il percorso</h2>
+        <p id="onboarding-hint" class="onboarding-hint">Potrai cambiarla in ogni momento.</p>
+        <div
+          id="onboarding-language-chips"
+          class="language-chips onboarding-language-chips"
+          aria-label="Seleziona lingua"
+        ></div>
+      </div>
+    </div>
+
+    <div id="guide-layer" class="guide-layer is-hidden" aria-live="polite">
+      <div id="guide-card" class="guide-card">
+        <p id="guide-step-text"></p>
+          <div class="guide-actions">
+            <button type="button" id="guide-skip-button" class="guide-button guide-button-secondary" aria-label="Chiudi">×</button>
+            <button type="button" id="guide-prev-button" class="guide-button guide-button-secondary" aria-label="Indietro">←</button>
+            <button type="button" id="guide-next-button" class="guide-button guide-button-primary" aria-label="Avanti">→</button>
+          </div>
+      </div>
     </div>
 
     <div class="app-shell">
@@ -28,6 +58,7 @@
         </div>
 
         <div class="header-actions">
+          <button type="button" id="help-button" class="help-button" aria-label="Aiuto">?</button>
           <div class="global-language-selector" aria-label="Selettore lingua del sito">
             <div id="global-language-chips" class="language-chips"></div>
           </div>
@@ -66,8 +97,9 @@
           <div class="intro-hero-row">
             <div class="intro-visual" aria-hidden="true">
               <img
+                id="hero-mascot"
                 class="intro-portrait"
-                src="brunelleschi-intro.png"
+                src="assets/mascotte-mouth/mascotte_X.png"
                 alt=""
               />
             </div>
@@ -209,6 +241,16 @@
           aria-label="Volume player"
         />
       </div>
+
+      <button
+        type="button"
+        id="mini-player-expand"
+        class="mini-player-expand"
+        aria-label="Apri player a schermo intero"
+        title="Apri player a schermo intero"
+      >
+        <span aria-hidden="true">⤢</span>
+      </button>
     </div>
 
     <section id="player-overlay" class="player-overlay is-hidden" aria-hidden="true">
@@ -223,13 +265,30 @@
           <p id="detail-number" class="player-kicker"></p>
           <button type="button" id="player-close-button" class="player-close-button">×</button>
         </div>
-        <div class="player-artwork">
-          <img
-            id="detail-artwork-image"
-            class="detail-artwork-image"
-            src="mascotte_vicopisano.png"
-            alt="Immagine della traccia"
-          />
+        <div id="player-artwork" class="player-artwork">
+          <div class="player-artwork-stack" aria-live="off">
+            <img
+              id="detail-artwork-image"
+              class="detail-artwork-image player-artwork-layer is-photo-layer"
+              src="mascotte_vicopisano.png"
+              alt="Immagine della traccia"
+            />
+            <img
+              id="detail-mascot-image"
+              class="detail-mascot-image player-artwork-layer is-mascot-layer"
+              src="assets/mascotte-mouth/mascotte_X.png"
+              alt="Mascotte animata di Brunelleschi"
+            />
+          </div>
+          <button
+            type="button"
+            id="artwork-flip-toggle"
+            class="artwork-flip-toggle"
+            aria-label="Mostra mascotte animata"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">⇄</span>
+          </button>
         </div>
         <div class="player-side">
         <div class="player-meta">
@@ -240,6 +299,15 @@
         <div id="player-language-selector" class="player-language-selector" aria-label="Selettore lingua del player">
           <p class="player-language-label" id="player-language-label">Lingua disponibile per la Tappa 1</p>
           <div id="player-language-chips" class="language-chips"></div>
+        </div>
+        <button id="player-help-button" class="player-help-button" type="button" aria-label="Aiuto player">?</button>
+        <div id="player-help-box" class="player-help-box is-hidden" aria-live="polite">
+          <p id="player-help-text" class="player-help-text"></p>
+          <div class="player-help-actions">
+            <button id="player-help-close-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Chiudi">×</button>
+            <button id="player-help-prev-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Indietro">←</button>
+            <button id="player-help-next-button" class="player-help-action player-help-action-primary" type="button" aria-label="Avanti">→</button>
+          </div>
         </div>
         <div id="audio-wrapper" class="audio-wrapper"></div>
         <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
@@ -299,6 +367,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260619-2112"></script>
+    <script src="app.js?v=20260722-player-help1"></script>
   </body>
 </html>
