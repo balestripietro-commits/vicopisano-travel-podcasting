@@ -1,0 +1,58 @@
+:root,
+:root[data-tp-theme="vicopisano"],
+.tp-theme-vicopisano {
+  --tp-color-primary: #245c52;
+  --tp-color-on-primary: #ffffff;
+  --tp-color-primary-container: #d9eee8;
+  --tp-color-on-primary-container: #0e332d;
+  --tp-color-secondary: #2c6da3;
+  --tp-color-on-secondary: #ffffff;
+  --tp-color-secondary-container: #d8e9f7;
+  --tp-color-tertiary: #e8c36d;
+  --tp-color-accent: #f4d85a;
+  --tp-color-surface: #fff7ed;
+  --tp-color-surface-dim: #eadfd3;
+  --tp-color-surface-bright: #fffdf7;
+  --tp-color-surface-container-lowest: #ffffff;
+  --tp-color-surface-container-low: #fffaf2;
+  --tp-color-surface-container: #f7efe5;
+  --tp-color-surface-container-high: #efe2d5;
+  --tp-color-surface-container-highest: #e3d4c5;
+  --tp-color-on-surface: #1f5f53;
+  --tp-color-on-surface-variant: #63837c;
+  --tp-color-outline: #adc2bd;
+  --tp-color-outline-variant: #d9e5e1;
+  --tp-color-success: #1e7c55;
+  --tp-color-warning: #b36a00;
+  --tp-color-error: #b3261e;
+
+  --tp-legacy-stop-purple: #8f63e8;
+  --tp-legacy-stop-purple-strong: #7d4fe0;
+  --tp-legacy-stop-purple-glow: rgba(143, 99, 232, 0.28);
+  --tp-stop-identifier-vicopisano: var(--tp-color-secondary);
+  --tp-stop-identifier-vicopisano-glow: rgba(44, 109, 163, 0.24);
+  --tp-stop-identifier-travel-tertiary: var(--tp-legacy-stop-purple);
+}
+
+.tp-theme-vicopisano .tp-brand-strip {
+  border-radius: var(--tp-radius-xxl);
+  padding: var(--tp-space-6);
+  color: var(--tp-color-primary);
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--tp-color-tertiary) 28%, transparent), transparent 32%),
+    linear-gradient(135deg, var(--tp-color-surface-bright), var(--tp-color-surface));
+  box-shadow: var(--tp-elevation-2);
+}
+
+.tp-theme-vicopisano .tp-brand-accent {
+  color: var(--tp-color-secondary);
+}
+
+.tp-theme-vicopisano .tp-highlight {
+  color: var(--tp-color-tertiary);
+}
+
+.tp-theme-vicopisano .tp-legacy-stop-number {
+  background: var(--tp-legacy-stop-purple);
+  box-shadow: 0 0 0 6px var(--tp-legacy-stop-purple-glow), var(--tp-elevation-2);
+}

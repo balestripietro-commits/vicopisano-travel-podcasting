@@ -305,6 +305,11 @@ const locateMeStatus = document.getElementById("locate-me-status");
 const mapFullscreenButton = document.getElementById("map-fullscreen-button");
 const mapStageFrame = document.querySelector(".map-stage-frame");
 const mapLoadStatus = document.getElementById("map-load-status");
+const mapExploreStop = document.getElementById("map-explore-stop");
+const mapExploreStopNumber = document.getElementById("map-explore-stop-number");
+const mapExploreStopTitle = document.getElementById("map-explore-stop-title");
+const mapExploreStopAudio = document.getElementById("map-explore-stop-audio");
+const mapExploreOpenPlayer = document.getElementById("map-explore-open-player");
 const globalLanguageChips = document.getElementById("global-language-chips");
 const helpButton = document.getElementById("help-button");
 const onboardingOverlay = document.getElementById("onboarding-overlay");
@@ -319,6 +324,8 @@ const guidePrevButton = document.getElementById("guide-prev-button");
 const guideNextButton = document.getElementById("guide-next-button");
 const playerLanguageSelector = document.getElementById("player-language-selector");
 const playerLanguageLabel = document.getElementById("player-language-label");
+const playerLanguageCurrent = document.getElementById("player-language-current");
+const playerLanguageCurrentLabel = document.getElementById("player-language-current-label");
 const playerLanguageChips = document.getElementById("player-language-chips");
 const miniPlayer = document.getElementById("mini-player");
 const miniPlayerOpen = document.getElementById("mini-player-open");
@@ -346,7 +353,14 @@ const playerDurationTotal = document.getElementById("player-duration-total");
 const playerProgressInput = document.getElementById("player-progress-input");
 const playerVolume = document.getElementById("player-volume");
 const audioFeedback = document.getElementById("audio-feedback");
+const playerNextPreview = document.getElementById("player-next-preview");
+const playerNextPreviewLabel = document.getElementById("player-next-preview-label");
+const playerNextPreviewTitle = document.getElementById("player-next-preview-title");
+const playerNextStopButton = document.getElementById("player-next-stop-button");
+const playerNextStopLabel = document.getElementById("player-next-stop-label");
 const heroMascot = document.getElementById("hero-mascot");
+const appShell = document.querySelector(".app-shell");
+const playerSheet = document.querySelector(".player-sheet");
 
 let currentAudio = null;
 let activeStopNumber = null;
@@ -357,6 +371,7 @@ let overlayOpen = false;
 let currentSelectedOption = null;
 let repeatEnabled = false;
 let currentVolume = 0.85;
+let audioHasEnded = false;
 let isSeekingFromOverlay = false;
 let detailArtworkMode = "photo";
 let lastPrevInteractionAt = 0;
@@ -365,22 +380,24 @@ let currentMapStatusKey = "";
 let currentAudioStatusKey = "";
 let hasMapLoadedTiles = false;
 let tileErrorCount = 0;
+let lastPlayerTrigger = null;
 
 const markersByStop = new Map();
 const buttonsByStop = new Map();
 const selectedLanguageByStop = new Map();
 
+const MASCOT_ASSET_VERSION = "20260814";
 const MASCOT_FRAME_BASE_PATH = "assets/mascotte-mouth";
-const MASCOT_REST_FRAME = `${MASCOT_FRAME_BASE_PATH}/mascotte_X.png`;
+const MASCOT_REST_FRAME = `${MASCOT_FRAME_BASE_PATH}/mascotte_X.png?v=${MASCOT_ASSET_VERSION}`;
 const MASCOT_FRAME_PATHS = {
-  A: `${MASCOT_FRAME_BASE_PATH}/mascotte_A.png`,
-  B: `${MASCOT_FRAME_BASE_PATH}/mascotte_B.png`,
-  C: `${MASCOT_FRAME_BASE_PATH}/mascotte_C.png`,
-  D: `${MASCOT_FRAME_BASE_PATH}/mascotte_D.png`,
-  E: `${MASCOT_FRAME_BASE_PATH}/mascotte_E.png`,
-  F: `${MASCOT_FRAME_BASE_PATH}/mascotte_F.png`,
-  G: `${MASCOT_FRAME_BASE_PATH}/mascotte_G.png`,
-  H: `${MASCOT_FRAME_BASE_PATH}/mascotte_H.png`,
+  A: `${MASCOT_FRAME_BASE_PATH}/mascotte_A.png?v=${MASCOT_ASSET_VERSION}`,
+  B: `${MASCOT_FRAME_BASE_PATH}/mascotte_B.png?v=${MASCOT_ASSET_VERSION}`,
+  C: `${MASCOT_FRAME_BASE_PATH}/mascotte_C.png?v=${MASCOT_ASSET_VERSION}`,
+  D: `${MASCOT_FRAME_BASE_PATH}/mascotte_D.png?v=${MASCOT_ASSET_VERSION}`,
+  E: `${MASCOT_FRAME_BASE_PATH}/mascotte_E.png?v=${MASCOT_ASSET_VERSION}`,
+  F: `${MASCOT_FRAME_BASE_PATH}/mascotte_F.png?v=${MASCOT_ASSET_VERSION}`,
+  G: `${MASCOT_FRAME_BASE_PATH}/mascotte_G.png?v=${MASCOT_ASSET_VERSION}`,
+  H: `${MASCOT_FRAME_BASE_PATH}/mascotte_H.png?v=${MASCOT_ASSET_VERSION}`,
   X: MASCOT_REST_FRAME,
 };
 
@@ -392,9 +409,12 @@ let mascotActiveCues = [];
 let mascotCueIndex = 0;
 let mascotSyncToken = 0;
 let currentMascotFrame = "X";
+let mascotMotionController = null;
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const siteLanguages = ["IT", "EN", "DE", "FR", "ES", "PT", "RU"];
 const LANGUAGE_STORAGE_KEY = "vicopisano-language";
+const LAST_STOP_STORAGE_KEY = "vicopisano-last-stop";
 const ONBOARDING_STORAGE_KEY = "vicopisano-language-onboarding";
 const WHITE_ARTWORK =
   "data:image/svg+xml;utf8," +
@@ -515,6 +535,8 @@ const uiStrings = {
     playerNext: "Vai alla tappa successiva",
     playerRepeat: "Ripeti traccia",
     playerExpand: "Apri player a schermo intero",
+    nextStopPreview: "Prossima tappa",
+    openNextStop: "Apri prossima tappa",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -568,6 +590,8 @@ const uiStrings = {
     playerNext: "Go to next stop",
     playerRepeat: "Repeat track",
     playerExpand: "Open full-screen player",
+    nextStopPreview: "Next stop",
+    openNextStop: "Open next stop",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -855,36 +879,57 @@ const statusMessages = {
   IT: {
     offlineStatus: "Sei offline o la connessione e instabile.",
     mapLoadError: "La mappa non si sta caricando bene. Riprova tra un attimo.",
+    audioLoading: "Caricamento audio...",
+    audioBuffering: "Buffering audio...",
+    audioComplete: "Ascolto concluso. Puoi aprire la prossima tappa.",
     audioLoadError: "L'audio non e disponibile in questo momento. Riprova tra poco.",
   },
   EN: {
     offlineStatus: "You are offline or the connection is unstable.",
     mapLoadError: "The map is not loading correctly. Please try again in a moment.",
+    audioLoading: "Loading audio...",
+    audioBuffering: "Buffering audio...",
+    audioComplete: "Listening complete. You can open the next stop.",
     audioLoadError: "Audio is not available right now. Please try again shortly.",
   },
   DE: {
     offlineStatus: "Sie sind offline oder die Verbindung ist instabil.",
     mapLoadError: "Die Karte wird nicht richtig geladen. Bitte versuchen Sie es gleich erneut.",
+    audioLoading: "Audio wird geladen...",
+    audioBuffering: "Audio wird gepuffert...",
+    audioComplete: "Wiedergabe beendet. Sie konnen die nachste Station offnen.",
     audioLoadError: "Das Audio ist im Moment nicht verfugbar. Bitte versuchen Sie es in Kurze erneut.",
   },
   FR: {
     offlineStatus: "Vous etes hors ligne ou la connexion est instable.",
     mapLoadError: "La carte ne se charge pas correctement. Reessayez dans un instant.",
+    audioLoading: "Chargement de l'audio...",
+    audioBuffering: "Mise en memoire tampon...",
+    audioComplete: "Ecoute terminee. Vous pouvez ouvrir l'etape suivante.",
     audioLoadError: "L'audio n'est pas disponible pour le moment. Reessayez dans un instant.",
   },
   ES: {
     offlineStatus: "Estas sin conexion o la red es inestable.",
     mapLoadError: "El mapa no se esta cargando correctamente. Vuelve a intentarlo en un momento.",
+    audioLoading: "Cargando audio...",
+    audioBuffering: "Cargando el audio...",
+    audioComplete: "Escucha terminada. Puedes abrir la siguiente etapa.",
     audioLoadError: "El audio no esta disponible en este momento. Vuelve a intentarlo dentro de poco.",
   },
   PT: {
     offlineStatus: "Estas offline ou a ligacao esta instavel.",
     mapLoadError: "O mapa nao esta a carregar corretamente. Tenta novamente dentro de instantes.",
+    audioLoading: "A carregar audio...",
+    audioBuffering: "A preparar o audio...",
+    audioComplete: "Escuta concluida. Podes abrir a proxima etapa.",
     audioLoadError: "O audio nao esta disponivel neste momento. Tenta novamente daqui a pouco.",
   },
   RU: {
     offlineStatus: "Vy ne v seti ili soedinenie nestabilno.",
     mapLoadError: "Karta zagruzhaetsya s oshibkoy. Poprobuyte eshche raz cherez mgnovenie.",
+    audioLoading: "Zagruzka audio...",
+    audioBuffering: "Buffering audio...",
+    audioComplete: "Proslushivanie zakoncheno. Otkroyte sleduyushchuyu ostanovku.",
     audioLoadError: "Audio seychas nedostupno. Poprobuyte povtorit cherez nekotoroe vremya.",
   },
 };
@@ -1014,7 +1059,9 @@ function getUrlState() {
   const params = new URLSearchParams(window.location.search);
   const rawStop = params.get("tappa") || params.get("stop");
   const stopNumber = Number.parseInt(rawStop || "", 10);
-  const linkedStop = tappe.find((tappa) => tappa.numero === stopNumber) || null;
+  const storedStop = Number.parseInt(getStoredValue(LAST_STOP_STORAGE_KEY), 10);
+  const linkedStop = tappe.find((tappa) => tappa.numero === stopNumber) ||
+    tappe.find((tappa) => tappa.numero === storedStop) || null;
   const rawLanguage = params.get("lang") || params.get("lingua");
   const linkedLanguage = rawLanguage ? rawLanguage.trim().toUpperCase() : null;
 
@@ -1115,6 +1162,11 @@ function setCurrentLanguage(languageCode, options = {}) {
   renderStopsList();
   refreshMarkerPopups();
 
+  // Keep an already open help guide aligned with the newly selected UI language.
+  if (guideLayer && !guideLayer.classList.contains("is-hidden")) {
+    renderGuideStep();
+  }
+
   if (activeStopNumber !== null) {
     const activeStop = tappe.find((tappa) => tappa.numero === activeStopNumber);
     if (activeStop) {
@@ -1202,9 +1254,11 @@ function highlightActiveMarker(stopNumber = activeStopNumber) {
       return;
     }
 
+    const isSelected = numero === stopNumber;
+    markerElement.classList.toggle("is-selected", isSelected);
     markerElement.classList.remove("is-highlighted");
 
-    if (numero === stopNumber) {
+    if (isSelected) {
       void markerElement.offsetWidth;
       markerElement.classList.add("is-highlighted");
       window.setTimeout(() => {
@@ -1467,12 +1521,39 @@ function isMapFullscreenActive() {
   return mapStageFrame?.classList.contains("is-expanded");
 }
 
+function updateMapExploreStop(tappa = activeStopNumber ? tappe.find((item) => item.numero === activeStopNumber) : null) {
+  if (!mapExploreStop) {
+    return;
+  }
+
+  const shouldShow = Boolean(isMapFullscreenActive() && tappa);
+  mapExploreStop.hidden = !shouldShow;
+  if (!shouldShow || !tappa) {
+    return;
+  }
+
+  const selectedOption = getSelectedAudioOption(tappa);
+  const hasAudio = Boolean(selectedOption?.audioDisponibile);
+  mapExploreStopNumber.textContent = tappa.numero;
+  mapExploreStopTitle.textContent = getStopTitle(tappa);
+  mapExploreStopAudio.textContent = hasAudio ? "headphones" : "headphones_off";
+  mapExploreStop.setAttribute(
+    "aria-label",
+    `${tappa.numero}. ${getStopTitle(tappa)}${hasAudio ? ", audio" : ""}`,
+  );
+  mapExploreOpenPlayer?.setAttribute("aria-label", getUiStrings(currentLanguage).playerExpand);
+}
+
 function updateMapFullscreenButton() {
   if (!mapFullscreenButton) {
     return;
   }
 
   const isFullscreen = isMapFullscreenActive();
+  const fullscreenIcon = mapFullscreenButton.querySelector(".material-symbols-rounded");
+  if (fullscreenIcon) {
+    fullscreenIcon.textContent = isFullscreen ? "fullscreen_exit" : "fullscreen";
+  }
   mapFullscreenButton.setAttribute(
     "aria-label",
     isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo"
@@ -1487,7 +1568,8 @@ async function toggleMapFullscreen() {
 
   mapStageFrame.classList.toggle("is-expanded");
   updateMapFullscreenButton();
-  setTimeout(() => map.invalidateSize(), 150);
+  updateMapExploreStop();
+  setTimeout(() => map.invalidateSize(), 240);
 }
 
 function bindMapFullscreenButton() {
@@ -1501,6 +1583,11 @@ function bindMapFullscreenButton() {
   mapFullscreenButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
     toggleMapFullscreen();
+  });
+
+  mapExploreOpenPlayer?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    openPlayerOverlay(event.currentTarget);
   });
 }
 
@@ -1529,12 +1616,16 @@ function buildLanguageChips(
   siteLanguages.forEach((languageCode) => {
     const chip = document.createElement("button");
     chip.type = "button";
-    chip.className = "language-chip";
+    chip.className = "language-chip tp-chip";
     chip.textContent =
       getAudioOptions(tappe[0]).find((option) => option.codice === languageCode)?.bandiera ||
       languageCode;
     chip.classList.toggle("is-active", languageCode === currentLanguage);
+    if (container === playerLanguageChips) {
+      chip.setAttribute("role", "option");
+    }
     chip.setAttribute("aria-pressed", languageCode === currentLanguage ? "true" : "false");
+    chip.setAttribute("aria-selected", languageCode === currentLanguage ? "true" : "false");
     chip.setAttribute("aria-label", getLanguageDisplayName(languageCode, currentLanguage));
     chip.title = getLanguageDisplayName(languageCode, currentLanguage);
     chip.addEventListener("click", () => {
@@ -1606,6 +1697,198 @@ function getMascotTargets() {
   return [heroMascot, detailMascotImage].filter(Boolean);
 }
 
+function getMascotMotionShells() {
+  return getMascotTargets()
+    .map((target) => target.closest(".mascot-motion-shell"))
+    .filter(Boolean);
+}
+
+function getMascotBreathingShells() {
+  return getMascotTargets()
+    .map((target) => target.closest(".mascot-breathing-shell"))
+    .filter(Boolean);
+}
+
+function createMascotMotionController() {
+  const timedClasses = [
+    "is-idle-sway",
+    "is-play-reaction",
+    "is-pause-reaction",
+    "is-end-reaction",
+    "is-speaking-emphasis",
+    "is-stop-transition",
+  ];
+  let idleTimer = null;
+  let emphasisTimer = null;
+  let reactionTimer = null;
+  let state = "idle";
+  let visible = detailArtworkMode === "mascot";
+  let playing = false;
+  let reduced = reducedMotionQuery.matches;
+
+  const randomBetween = (min, max) => min + Math.random() * (max - min);
+
+  const shells = () => getMascotMotionShells();
+
+  const clearTimer = (timer) => {
+    if (timer) {
+      window.clearTimeout(timer);
+    }
+    return null;
+  };
+
+  const clearReactiveClasses = () => {
+    shells().forEach((shell) => {
+      timedClasses.forEach((className) => shell.classList.remove(className));
+    });
+  };
+
+  const runClass = (className, duration) => {
+    if (reduced) {
+      return;
+    }
+
+    clearReactiveClasses();
+    shells().forEach((shell) => {
+      void shell.offsetWidth;
+      shell.classList.add(className);
+    });
+    reactionTimer = clearTimer(reactionTimer);
+    reactionTimer = window.setTimeout(() => {
+      shells().forEach((shell) => shell.classList.remove(className));
+      reactionTimer = null;
+    }, duration);
+  };
+
+  const canUseDetailMascot = () => visible || !playerArtwork || !overlayOpen;
+
+  const scheduleIdle = () => {
+    idleTimer = clearTimer(idleTimer);
+
+    if (reduced || playing || state !== "idle") {
+      return;
+    }
+
+    idleTimer = window.setTimeout(() => {
+      if (reduced || playing || state !== "idle") {
+        scheduleIdle();
+        return;
+      }
+
+      shells().forEach((shell) => {
+        shell.style.setProperty("--mascot-idle-rotate", `${randomBetween(-0.75, 0.75).toFixed(2)}deg`);
+        shell.style.setProperty("--mascot-idle-x", `${randomBetween(-2.5, 2.5).toFixed(1)}px`);
+        shell.style.setProperty("--mascot-idle-y", `${randomBetween(-2.5, 1.6).toFixed(1)}px`);
+        shell.style.setProperty("--mascot-idle-duration", `${Math.round(randomBetween(900, 1500))}ms`);
+      });
+      runClass("is-idle-sway", 1450);
+      scheduleIdle();
+    }, randomBetween(4000, 9000));
+  };
+
+  const scheduleEmphasis = () => {
+    emphasisTimer = clearTimer(emphasisTimer);
+
+    if (reduced || !playing) {
+      return;
+    }
+
+    emphasisTimer = window.setTimeout(() => {
+      if (!reduced && playing && state === "playing") {
+        runClass("is-speaking-emphasis", 520);
+      }
+      scheduleEmphasis();
+    }, randomBetween(4000, 10000));
+  };
+
+  const updateBreathing = () => {
+    getMascotBreathingShells().forEach((shell) => {
+      shell.classList.toggle("is-speaking", playing && !reduced);
+      shell.classList.toggle("is-idle", !playing && !reduced);
+      shell.classList.toggle("is-paused", state === "paused" && !reduced);
+    });
+  };
+
+  const setState = (nextState) => {
+    state = nextState;
+    updateBreathing();
+    scheduleIdle();
+  };
+
+  return {
+    start() {
+      updateBreathing();
+      scheduleIdle();
+    },
+    setVisible(nextVisible) {
+      visible = Boolean(nextVisible);
+      setState(visible ? (playing ? "playing" : "idle") : "hidden");
+    },
+    play() {
+      const wasPlaying = playing;
+      playing = true;
+      idleTimer = clearTimer(idleTimer);
+      setState("playing");
+      if (!wasPlaying && canUseDetailMascot()) {
+        runClass("is-play-reaction", 340);
+      }
+      scheduleEmphasis();
+    },
+    pause() {
+      if (!playing) {
+        setState("paused");
+        return;
+      }
+
+      playing = false;
+      emphasisTimer = clearTimer(emphasisTimer);
+      setState("paused");
+      if (canUseDetailMascot()) {
+        runClass("is-pause-reaction", 460);
+      }
+    },
+    end() {
+      playing = false;
+      emphasisTimer = clearTimer(emphasisTimer);
+      setState("ending");
+      if (canUseDetailMascot()) {
+        runClass("is-end-reaction", 680);
+      }
+      window.setTimeout(() => {
+        if (state === "ending") {
+          setState("idle");
+        }
+      }, reduced ? 80 : 700);
+    },
+    stopTransition() {
+      if (reduced || (!visible && overlayOpen)) {
+        return;
+      }
+
+      state = "entering";
+      idleTimer = clearTimer(idleTimer);
+      runClass("is-stop-transition", 460);
+      window.setTimeout(() => {
+        if (state === "entering") {
+          setState(playing ? "playing" : "idle");
+        }
+      }, 480);
+    },
+    updateReducedMotion() {
+      reduced = reducedMotionQuery.matches;
+      clearReactiveClasses();
+      updateBreathing();
+      if (reduced) {
+        idleTimer = clearTimer(idleTimer);
+        emphasisTimer = clearTimer(emphasisTimer);
+        return;
+      }
+      scheduleIdle();
+      scheduleEmphasis();
+    },
+  };
+}
+
 function setMascotFrame(frame) {
   const mascotTargets = getMascotTargets();
 
@@ -1632,6 +1915,10 @@ function setMascotSpeakingState(isSpeaking) {
   getMascotTargets().forEach((target) => {
     target.classList.toggle("is-speaking", Boolean(isSpeaking));
   });
+  getMascotBreathingShells().forEach((target) => {
+    target.classList.toggle("is-speaking", Boolean(isSpeaking) && !reducedMotionQuery.matches);
+    target.classList.toggle("is-idle", !isSpeaking && !reducedMotionQuery.matches);
+  });
 }
 
 function setDetailArtworkMode(mode) {
@@ -1649,6 +1936,8 @@ function setDetailArtworkMode(mode) {
       isMascotMode ? "Mostra foto della tappa" : "Mostra mascotte animata",
     );
   }
+
+  mascotMotionController?.setVisible(detailArtworkMode === "mascot");
 }
 
 function getMouthCuePath(audioPath) {
@@ -1828,43 +2117,112 @@ function setPlaybackButtonIcon(button, icon, isPlaying = false) {
   }, 110);
 }
 
+function updateMediaSession(tappa, selectedOption) {
+  if (!("mediaSession" in navigator) || !window.MediaMetadata || !tappa) {
+    return;
+  }
+
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: getStopTitle(tappa),
+    artist: "Travel Podcasting Vicopisano",
+    album: "Percorso di Vicopisano",
+    artwork: [
+      {
+        src: STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK,
+        sizes: "512x512",
+        type: "image/jpeg",
+      },
+    ],
+  });
+
+  const audio = currentAudio;
+  const actions = {
+    play: () => audio?.play(),
+    pause: () => audio?.pause(),
+    seekbackward: () => seekCurrentAudio(-10),
+    seekforward: () => seekCurrentAudio(10),
+  };
+
+  Object.entries(actions).forEach(([action, handler]) => {
+    try {
+      navigator.mediaSession.setActionHandler(action, handler);
+    } catch (error) {
+      // Some browsers expose Media Session but omit individual actions.
+    }
+  });
+}
+
+function seekCurrentAudio(offset) {
+  if (!currentAudio || !Number.isFinite(currentAudio.duration)) {
+    return;
+  }
+
+  currentAudio.currentTime = Math.max(
+    0,
+    Math.min(currentAudio.duration, currentAudio.currentTime + offset),
+  );
+  updateMiniPlayerPlayback();
+}
+
+function updateNextStopPreview(tappa) {
+  if (!playerNextPreview || !tappa) {
+    return;
+  }
+
+  const currentIndex = tappe.findIndex((item) => item.numero === tappa.numero);
+  const nextStop = currentIndex >= 0 ? tappe[currentIndex + 1] : null;
+  playerNextPreview.hidden = !nextStop;
+
+  if (nextStop) {
+    const strings = getUiStrings(currentLanguage);
+    playerNextPreviewLabel.textContent = strings.nextStopPreview || "Prossima tappa";
+    playerNextPreviewTitle.textContent = `${nextStop.numero}. ${getStopTitle(nextStop)}`;
+    playerNextStopLabel.textContent = strings.openNextStop || "Apri prossima tappa";
+  }
+}
+
 function updateMiniPlayerPlayback() {
   const strings = getUiStrings(currentLanguage);
   if (!currentAudio) {
-    setPlaybackButtonIcon(miniPlayerToggle, "▶", false);
+    setPlaybackButtonIcon(miniPlayerToggle, "play_arrow", false);
     miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
-    setPlaybackButtonIcon(playerPlayButton, "▶", false);
+    setPlaybackButtonIcon(playerPlayButton, "play_arrow", false);
     playerPlayButton.setAttribute("aria-label", strings.playerPlay);
     miniPlayerProgressBar.style.width = "0%";
     playerRepeatButton.classList.toggle("is-active", repeatEnabled);
     miniPlayerRepeat.classList.toggle("is-active", repeatEnabled);
+    playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
+    miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
     if (miniPlayerExpand) {
       miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
       miniPlayerExpand.title = strings.playerExpand;
     }
     miniPlayerCurrentTime.textContent = "00:00";
-    miniPlayerDurationTotal.textContent = "00:00";
+    miniPlayerDurationTotal.textContent = "--:--";
     playerCurrentTime.textContent = "00:00";
     playerDurationTotal.textContent = "00:00";
     playerProgressInput.value = "0";
+    playerNextPreview && (playerNextPreview.hidden = true);
     return;
   }
 
   const isPlaying = !currentAudio.paused && !currentAudio.ended;
-  setPlaybackButtonIcon(miniPlayerToggle, isPlaying ? "❚❚" : "▶", isPlaying);
+  setPlaybackButtonIcon(miniPlayerToggle, isPlaying ? "pause" : "play_arrow", isPlaying);
   miniPlayerToggle.setAttribute(
     "aria-label",
     isPlaying ? strings.playerPause : strings.playerPlay
   );
-  setPlaybackButtonIcon(playerPlayButton, isPlaying ? "❚❚" : "▶", isPlaying);
+  setPlaybackButtonIcon(playerPlayButton, isPlaying ? "pause" : "play_arrow", isPlaying);
   playerPlayButton.setAttribute(
     "aria-label",
     isPlaying ? strings.playerPause : strings.playerPlay
   );
   playerRepeatButton.classList.toggle("is-active", repeatEnabled);
   playerRepeatButton.setAttribute("aria-label", strings.playerRepeat);
+  playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
   miniPlayerRepeat.classList.toggle("is-active", repeatEnabled);
   miniPlayerRepeat.setAttribute("aria-label", strings.playerRepeat);
+  miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
   if (miniPlayerExpand) {
     miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
     miniPlayerExpand.title = strings.playerExpand;
@@ -1876,11 +2234,18 @@ function updateMiniPlayerPlayback() {
       : 0;
   miniPlayerProgressBar.style.width = `${Math.max(0, Math.min(progress, 100))}%`;
   miniPlayerCurrentTime.textContent = formatPlayerTime(currentAudio.currentTime);
-  miniPlayerDurationTotal.textContent = formatPlayerTime(currentAudio.duration);
+  miniPlayerDurationTotal.textContent = Number.isFinite(currentAudio.duration)
+    ? formatPlayerTime(currentAudio.duration)
+    : "--:--";
   playerCurrentTime.textContent = formatPlayerTime(currentAudio.currentTime);
   playerDurationTotal.textContent = formatPlayerTime(currentAudio.duration);
   if (!isSeekingFromOverlay) {
     playerProgressInput.value = `${Math.max(0, Math.min(progress, 100))}`;
+  }
+  playerProgressInput.style.setProperty("--seek-progress", `${Math.max(0, Math.min(progress, 100))}%`);
+
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
   }
 }
 
@@ -1888,7 +2253,9 @@ function bindAudioLifecycle(audio) {
   const startAudioAndMascot = () => {
     stopCurrentAudio(audio);
     currentAudio = audio;
+    audioHasEnded = false;
     startMascotLipSync(audio);
+    mascotMotionController?.play();
     setAudioFeedbackByKey("");
     updateMiniPlayerPlayback();
   };
@@ -1904,33 +2271,47 @@ function bindAudioLifecycle(audio) {
   audio.addEventListener("pause", () => {
     if (currentAudio === audio) {
       stopMascotLipSync();
+      if (!audio.ended) {
+        mascotMotionController?.pause();
+      }
       updateMiniPlayerPlayback();
     }
   });
 
   audio.addEventListener("timeupdate", updateMiniPlayerPlayback);
-  audio.addEventListener("loadedmetadata", updateMiniPlayerPlayback);
+  audio.addEventListener("loadedmetadata", () => {
+    setAudioFeedbackByKey("");
+    updateMiniPlayerPlayback();
+  });
+  audio.addEventListener("waiting", () => {
+    if (!audio.paused) {
+      setAudioFeedbackByKey("audioBuffering");
+    }
+  });
   audio.addEventListener("loadeddata", () => {
     setAudioFeedbackByKey("");
     updateMiniPlayerPlayback();
   });
   audio.addEventListener("canplay", () => {
     setAudioFeedbackByKey("");
+    updateMiniPlayerPlayback();
   });
   audio.addEventListener("stalled", () => {
     setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
   });
   audio.addEventListener("error", () => {
     stopMascotLipSync();
+    mascotMotionController?.pause();
     setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
     updateMiniPlayerPlayback();
   });
 
   audio.addEventListener("ended", () => {
     if (currentAudio === audio) {
-      audio.currentTime = 0;
+      audioHasEnded = true;
       stopMascotLipSync();
-      setAudioFeedbackByKey("");
+      mascotMotionController?.end();
+      setAudioFeedbackByKey("audioComplete");
       updateMiniPlayerPlayback();
     }
   });
@@ -1939,7 +2320,7 @@ function bindAudioLifecycle(audio) {
 function createMarkerIcon(stopNumber) {
   return L.divIcon({
     className: "",
-    html: `<div class="map-marker" aria-hidden="true"><span class="map-marker-number">${stopNumber}</span></div>`,
+    html: `<div class="map-marker tp-map-marker" aria-hidden="true"><span class="map-marker-number">${stopNumber}</span></div>`,
     iconSize: [40, 40],
     iconAnchor: [20, 20],
     popupAnchor: [0, -18],
@@ -2005,7 +2386,6 @@ function renderOnboardingTexts() {
     onboardingLanguageChips.setAttribute("aria-label", strings.onboardingTitle);
   }
   if (helpButton) {
-    helpButton.textContent = "?";
     helpButton.setAttribute("aria-label", strings.helpButton);
     helpButton.title = strings.helpButton;
   }
@@ -2197,6 +2577,9 @@ function renderPlayerLanguageSelector(tappa = null) {
   const shouldShowSelector = availableLanguages.length > 1;
 
   playerLanguageSelector.hidden = !shouldShowSelector;
+  playerLanguageSelector.classList.remove("is-open");
+  playerLanguageCurrent?.setAttribute("aria-expanded", "false");
+  playerLanguageChips.classList.add("is-menu-hidden");
 
   if (!shouldShowSelector) {
     playerLanguageChips.innerHTML = "";
@@ -2206,12 +2589,68 @@ function renderPlayerLanguageSelector(tappa = null) {
     return;
   }
 
-  buildLanguageChips(playerLanguageChips, {
-    includeLabel: false,
+  const selectedCode = selectedLanguageByStop.get(targetStop.numero) || availableLanguages[0]?.codice;
+  const selectedOption = availableLanguages.find((option) => option.codice === selectedCode) || availableLanguages[0];
+  if (playerLanguageCurrentLabel) {
+    playerLanguageCurrentLabel.textContent = `${selectedOption?.bandiera || ""} ${getLanguageDisplayName(selectedOption?.codice || currentLanguage)}`.trim();
+  }
+  if (playerLanguageCurrent) {
+    playerLanguageCurrent.setAttribute("aria-label", `Lingua corrente: ${getLanguageDisplayName(selectedOption?.codice || currentLanguage)}`);
+  }
+
+  playerLanguageChips.innerHTML = "";
+  availableLanguages.forEach((option) => {
+    const languageCode = option.codice;
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "language-chip tp-chip player-language-option";
+    chip.setAttribute("role", "option");
+    chip.setAttribute("aria-selected", String(languageCode === selectedOption?.codice));
+    chip.textContent = `${languageCode} · ${getLanguageDisplayName(languageCode, languageCode)}`;
+    chip.addEventListener("click", () => {
+      closePlayerLanguageMenu();
+      setCurrentLanguage(languageCode);
+      replayAnimationClass(chip, "is-pulsing", 460);
+    });
+    playerLanguageChips.appendChild(chip);
   });
 
   if (playerLanguageLabel) {
     playerLanguageLabel.hidden = true;
+  }
+}
+
+function closePlayerLanguageMenu() {
+  playerLanguageSelector?.classList.remove("is-open");
+  playerOverlay?.classList.remove("is-language-menu-open");
+  playerLanguageChips?.classList.add("is-menu-hidden");
+  playerLanguageCurrent?.setAttribute("aria-expanded", "false");
+}
+
+function syncPlayerLanguageMenuSurface() {
+  if (!playerLanguageChips || !playerLanguageSelector || !playerOverlay) {
+    return;
+  }
+
+  const isMobile = window.matchMedia("(max-width: 859px)").matches;
+  const destination = isMobile ? playerOverlay : playerLanguageSelector;
+  if (playerLanguageChips.parentElement !== destination) {
+    destination.appendChild(playerLanguageChips);
+  }
+}
+
+function togglePlayerLanguageMenu() {
+  if (!playerLanguageSelector || playerLanguageSelector.hidden) {
+    return;
+  }
+
+  syncPlayerLanguageMenuSurface();
+  const isOpen = playerLanguageSelector.classList.toggle("is-open");
+  playerOverlay?.classList.toggle("is-language-menu-open", isOpen);
+  playerLanguageChips.classList.toggle("is-menu-hidden", !isOpen);
+  playerLanguageCurrent?.setAttribute("aria-expanded", String(isOpen));
+  if (isOpen) {
+    playerLanguageChips.querySelector("[aria-selected=\"true\"]")?.focus();
   }
 }
 
@@ -2238,17 +2677,23 @@ function renderAudioContent(tappa) {
   const selectedOption = getSelectedAudioOption(tappa);
   const strings = getUiStrings(currentLanguage);
   currentSelectedOption = selectedOption;
+  audioHasEnded = false;
+  updateNextStopPreview(tappa);
 
   if (!selectedOption || !selectedOption.audioDisponibile) {
     stopMascotLipSync();
     currentAudio = null;
+    const unavailable = document.createElement("p");
+    unavailable.className = "audio-unavailable";
+    unavailable.textContent = strings.audioUnavailable;
+    audioWrapper.appendChild(unavailable);
     updateMiniPlayerPlayback();
     return;
   }
 
   const audio = document.createElement("audio");
   audio.controls = false;
-  audio.preload = "none";
+  audio.preload = "metadata";
   audio.src = selectedOption.fileAudio;
   audio.dataset.mouthCues = getMouthCuePath(selectedOption.fileAudio);
   audio.loop = repeatEnabled;
@@ -2262,6 +2707,7 @@ function renderAudioContent(tappa) {
   bindAudioLifecycle(audio);
   audioWrapper.appendChild(audio);
   currentAudio = audio;
+  updateMediaSession(tappa, selectedOption);
   updateMiniPlayerPlayback();
 }
 
@@ -2305,6 +2751,8 @@ function toggleRepeatMode() {
   if (currentAudio) {
     currentAudio.loop = repeatEnabled;
   }
+  playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
+  miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
   updateMiniPlayerPlayback();
 }
 
@@ -2326,23 +2774,114 @@ function updateActiveListItem(stopNumber) {
   buttonsByStop.forEach((button, numero) => {
     button.classList.toggle("is-active", numero === stopNumber);
     button.setAttribute("aria-pressed", numero === stopNumber ? "true" : "false");
+    button.setAttribute("aria-current", numero === stopNumber ? "true" : "false");
   });
 }
 
-function openPlayerOverlay() {
+function setPlayerBackgroundInert(isInert) {
+  [appShell, miniPlayer].filter(Boolean).forEach((element) => {
+    if ("inert" in element) {
+      element.inert = isInert;
+      return;
+    }
+
+    if (isInert) {
+      element.setAttribute("aria-hidden", "true");
+    } else {
+      element.removeAttribute("aria-hidden");
+    }
+    element.classList.toggle("is-player-background-inert", isInert);
+  });
+}
+
+function getPlayerFocusableElements() {
+  if (!playerSheet) {
+    return [];
+  }
+
+  return Array.from(
+    playerSheet.querySelectorAll(
+      'button:not([disabled]), input:not([disabled]), summary, [href], [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((element) => !element.hidden && element.offsetParent !== null);
+}
+
+function handlePlayerKeydown(event) {
+  if (event.key === "Escape") {
+    if (playerLanguageSelector?.classList.contains("is-open")) {
+      closePlayerLanguageMenu();
+      playerLanguageCurrent?.focus();
+      return;
+    }
+
+    if (overlayOpen) {
+      event.preventDefault();
+      closePlayerOverlay();
+    }
+    return;
+  }
+
+  if (!overlayOpen || event.key !== "Tab") {
+    return;
+  }
+
+  const focusable = getPlayerFocusableElements();
+  if (!focusable.length) {
+    event.preventDefault();
+    playerSheet?.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+function openPlayerOverlay(trigger = document.activeElement) {
   closeGuide();
+  lastPlayerTrigger = trigger instanceof HTMLElement ? trigger : null;
   overlayOpen = true;
+  playerOverlay.classList.remove("is-closing");
   playerOverlay.classList.remove("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "false");
+  miniPlayer.classList.add("is-transitioning-to-sheet");
+  setPlayerBackgroundInert(true);
   document.body.classList.add("player-open");
+  document.addEventListener("keydown", handlePlayerKeydown);
+  window.setTimeout(() => {
+    if (!overlayOpen) {
+      return;
+    }
+
+    const focusTarget = playerCloseButton || playerSheet;
+    focusTarget?.focus({ preventScroll: true });
+    if (document.activeElement !== focusTarget) {
+      playerSheet?.focus({ preventScroll: true });
+    }
+  }, 80);
   syncMiniPlayerReservedSpace();
 }
 
 function closePlayerOverlay() {
+  if (!overlayOpen) {
+    return;
+  }
   overlayOpen = false;
+  closePlayerLanguageMenu();
+  playerOverlay.classList.add("is-closing");
   playerOverlay.classList.add("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "true");
+  miniPlayer.classList.remove("is-transitioning-to-sheet");
+  setPlayerBackgroundInert(false);
   document.body.classList.remove("player-open");
+  document.removeEventListener("keydown", handlePlayerKeydown);
+  window.setTimeout(() => lastPlayerTrigger?.focus(), 120);
   syncMiniPlayerReservedSpace();
 }
 
@@ -2369,7 +2908,7 @@ function toggleMiniPlayerPlayback() {
   const audio = audioWrapper.querySelector("audio");
   if (!audio) {
     if (activeStopNumber !== null) {
-      openPlayerOverlay();
+      openPlayerOverlay(miniPlayerToggle);
     }
     return;
   }
@@ -2399,16 +2938,16 @@ function bindPlayerControls() {
     if (event.target.closest("button, input")) {
       return;
     }
-    openPlayerOverlay();
+    openPlayerOverlay(miniPlayer);
   });
   miniPlayerOpen.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    openPlayerOverlay();
+    openPlayerOverlay(event.currentTarget);
   });
   if (miniPlayerExpand) {
     miniPlayerExpand.addEventListener("click", (event) => {
       consumeControlEvent(event);
-      openPlayerOverlay();
+      openPlayerOverlay(event.currentTarget);
     });
   }
   miniPlayerToggle.addEventListener("click", (event) => {
@@ -2417,11 +2956,11 @@ function bindPlayerControls() {
   });
   miniPlayerPrev.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    handlePreviousAction();
+    seekCurrentAudio(-10);
   });
   miniPlayerNext.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    focusStopByOffset(1);
+    seekCurrentAudio(10);
   });
   miniPlayerRepeat.addEventListener("click", (event) => {
     consumeControlEvent(event);
@@ -2429,7 +2968,7 @@ function bindPlayerControls() {
   });
   playerPrevButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    handlePreviousAction();
+    seekCurrentAudio(-10);
   });
   playerPlayButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
@@ -2437,7 +2976,7 @@ function bindPlayerControls() {
   });
   playerNextButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    focusStopByOffset(1);
+    seekCurrentAudio(10);
   });
   playerRepeatButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
@@ -2450,6 +2989,28 @@ function bindPlayerControls() {
   playerCloseButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
     closePlayerOverlay();
+  });
+  playerLanguageCurrent?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    togglePlayerLanguageMenu();
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (
+      playerLanguageSelector?.classList.contains("is-open") &&
+      !playerLanguageSelector.contains(event.target) &&
+      !playerLanguageChips.contains(event.target)
+    ) {
+      closePlayerLanguageMenu();
+    }
+  });
+  window.addEventListener("resize", () => {
+    if (playerLanguageSelector?.classList.contains("is-open")) {
+      syncPlayerLanguageMenuSurface();
+    }
+  });
+  playerNextStopButton?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    focusStopByOffset(1);
   });
   [miniPlayerVolume, playerVolume, playerProgressInput].forEach((control) => {
     control.addEventListener("click", stopControlPropagation);
@@ -2476,6 +3037,7 @@ function bindPlayerControls() {
     isSeekingFromOverlay = true;
     const nextTime = (Number(playerProgressInput.value) / 100) * currentAudio.duration;
     playerCurrentTime.textContent = formatPlayerTime(nextTime);
+    playerProgressInput.style.setProperty("--seek-progress", `${playerProgressInput.value}%`);
   });
   playerProgressInput.addEventListener("change", () => {
     if (!currentAudio || !Number.isFinite(currentAudio.duration)) {
@@ -2518,13 +3080,13 @@ function renderStaticTexts() {
   locateMeButton.setAttribute("aria-label", strings.locateMe);
   detailCopyTitle.textContent = strings.descriptiveText;
   stopsList.setAttribute("aria-label", strings.routeTitle);
-  playerPrevButton.setAttribute("aria-label", strings.playerPrevious);
+  playerPrevButton.setAttribute("aria-label", "Indietro di 10 secondi");
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
-  playerNextButton.setAttribute("aria-label", strings.playerNext);
+  playerNextButton.setAttribute("aria-label", "Avanti di 10 secondi");
   playerRepeatButton.setAttribute("aria-label", strings.playerRepeat);
-  miniPlayerPrev.setAttribute("aria-label", strings.playerPrevious);
+  miniPlayerPrev.setAttribute("aria-label", "Indietro di 10 secondi");
   miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
-  miniPlayerNext.setAttribute("aria-label", strings.playerNext);
+  miniPlayerNext.setAttribute("aria-label", "Avanti di 10 secondi");
   miniPlayerRepeat.setAttribute("aria-label", strings.playerRepeat);
   if (miniPlayerExpand) {
     miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
@@ -2570,8 +3132,10 @@ function focusStop(tappa, options = {}) {
   const shouldReplaceUrl = options.replaceUrl === true;
   const previousCurrentTime = currentAudio?.currentTime || 0;
   const previousWasPlaying = currentAudio ? !currentAudio.paused : false;
+  const isChangingStop = activeStopNumber !== null && activeStopNumber !== tappa.numero;
 
   activeStopNumber = tappa.numero;
+  setStoredValue(LAST_STOP_STORAGE_KEY, String(tappa.numero));
   updateActiveListItem(tappa.numero);
 
   detailNumber.textContent = tappa.numero;
@@ -2583,6 +3147,10 @@ function focusStop(tappa, options = {}) {
   renderDetailCopy(tappa);
   updateMiniPlayer(tappa, selectedOption);
   renderPlayerLanguageSelector(tappa);
+
+  if (isChangingStop) {
+    mascotMotionController?.stopTransition();
+  }
 
   if (shouldSyncUrl) {
     syncUrlState({ replace: shouldReplaceUrl });
@@ -2624,11 +3192,12 @@ function focusStop(tappa, options = {}) {
         duration: 0.8,
       });
     }
-    marker.openPopup();
+    marker.closePopup();
   }
 
   pulseActiveStopCard(tappa.numero);
   highlightActiveMarker(tappa.numero);
+  updateMapExploreStop(tappa);
 }
 
 function renderStopsList() {
@@ -2640,8 +3209,9 @@ function renderStopsList() {
     const item = document.createElement("li");
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "stop-button";
+    button.className = "stop-button tp-stop-card";
     button.setAttribute("aria-pressed", "false");
+    button.setAttribute("aria-current", "false");
 
     button.innerHTML = `
       <span class="stop-index">${tappa.numero}</span>
@@ -2669,10 +3239,10 @@ function renderStopsList() {
 function renderMap() {
   const routeLayer = L.geoJSON(routeGeoJson, {
     style: {
-      color: "#a44c24",
+      color: "#216f62",
       weight: 4,
-      opacity: 0.8,
-      dashArray: "8 8",
+      opacity: 0.64,
+      dashArray: "7 9",
       lineCap: "round",
       lineJoin: "round",
     },
@@ -2710,6 +3280,11 @@ syncSelectedLanguagesForCurrentLanguage();
 
 preloadMascotFrames();
 setMascotFrame("X");
+mascotMotionController = createMascotMotionController();
+mascotMotionController.start();
+reducedMotionQuery.addEventListener("change", () => {
+  mascotMotionController?.updateReducedMotion();
+});
 setDetailArtworkMode("photo");
 renderStopsList();
 renderMap();
