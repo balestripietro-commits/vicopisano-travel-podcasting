@@ -1531,7 +1531,7 @@ body.is-map-fullscreen .map-explore-stop {
   position: absolute;
   inset: 0;
   border: 0;
-  background: #061d2c;
+  background: #092f2c;
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   opacity: 1;
@@ -2473,24 +2473,40 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .site-header {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    text-align: center;
-    gap: 16px;
-    padding: 12px 0 20px;
+    text-align: left;
+    gap: 10px;
+    padding: 10px 0 18px;
   }
 
   .brand-lockup {
-    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-direction: row;
     gap: 8px;
   }
 
   .hero-logo {
-    width: 48px;
+    width: 38px;
+    flex: 0 0 auto;
   }
 
   .brand-copy {
-    justify-items: center;
+    min-width: 0;
+    justify-items: start;
+  }
+
+  .brand-name {
+    max-width: 38vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.98rem;
+  }
+
+  .brand-tag {
+    display: none;
   }
 
   .controls-toolbar {
@@ -2499,13 +2515,15 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .header-actions {
-    width: 100%;
-    max-width: 100%;
-    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    justify-content: flex-end;
+    gap: 8px;
   }
 
   .header-actions .global-language-selector {
-    width: min(100%, calc(100vw - 92px));
+    width: auto;
   }
 
   .language-chips {
@@ -2869,7 +2887,7 @@ body.is-map-fullscreen .map-explore-stop {
 .TPPlayerSheet {
   display: flex;
   align-items: flex-end;
-  background: #041816;
+  background: #092f2c;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -4057,10 +4075,9 @@ body.guide-open {
     grid-template-areas:
       "topbar topbar"
       "artwork player"
-      "artwork support"
       "artwork next";
     grid-template-columns: minmax(340px, 0.95fr) minmax(420px, 1fr);
-    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    grid-template-rows: auto minmax(0, 1fr) auto;
     column-gap: 34px;
     row-gap: 20px;
   }
@@ -4078,12 +4095,6 @@ body.guide-open {
     min-width: 0;
   }
 
-  .TPPlayerSheet .player-artwork-support {
-    grid-area: support;
-    align-self: start;
-    min-width: 0;
-  }
-
   .TPPlayerSheet .player-stop-navigation {
     grid-area: next;
     align-self: start;
@@ -4093,13 +4104,19 @@ body.guide-open {
   .TPPlayerSheet .player-command-row {
     grid-template-areas:
       "language controls"
-      "volume controls";
+      "volume controls"
+      "support support";
     grid-template-columns: minmax(190px, 0.8fr) minmax(300px, 1.2fr);
-    grid-template-rows: 44px 36px;
+    grid-template-rows: 44px 36px auto;
     align-items: stretch;
     min-height: 88px;
     column-gap: 18px;
     row-gap: 8px;
+  }
+
+  .TPPlayerSheet .player-command-row .player-artwork-support {
+    grid-area: support;
+    min-width: 0;
   }
 
   .TPPlayerSheet .player-command-row .player-language-row {
@@ -4140,6 +4157,54 @@ body.guide-open {
 
   .TPPlayerSheet .player-artwork-support .detail-copy { margin: 0; }
 
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) {
+    grid-template-areas: "support volume controls";
+    grid-template-columns: 44px minmax(190px, 0.8fr) minmax(300px, 1.2fr);
+    grid-template-rows: 48px;
+    min-height: 48px;
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .player-artwork-support {
+    position: relative;
+    align-self: center;
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .player-volume-block {
+    width: calc(100% - 32px);
+    justify-self: start;
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .detail-copy {
+    width: 44px;
+    padding: 0;
+    overflow: visible;
+    border-radius: var(--tp-radius-full);
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .detail-copy summary {
+    min-height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .detail-copy summary::after {
+    display: none;
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .detail-copy-content {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 4;
+    width: min(360px, calc(100vw - 72px));
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--tp-radius-md);
+    background: #103c37;
+    box-shadow: var(--tp-elevation-3);
+  }
+
   .TPPlayerSheet .player-artwork .is-photo-layer,
   .TPPlayerSheet .player-artwork.is-mascot-mode .is-photo-layer {
     opacity: 1;
@@ -4168,7 +4233,7 @@ body.guide-open {
 
 @media (max-width: 390px) {
   .TPPlayerSheet .player-controls {
-    margin-bottom: 52px;
+    margin-bottom: 0;
   }
 
   .TPPlayerSheet .player-transport-group {
@@ -4181,25 +4246,112 @@ body.guide-open {
   }
 
   .TPPlayerSheet #player-repeat-button {
-    top: calc(100% + 8px);
+    top: auto;
     right: 0;
   }
 }
 
-/* Mobile mascot mode: use the artwork frame more deliberately without altering its motion layers. */
+/* Mobile artwork mirrors the desktop composition: photo base with a compact mascot overlay. */
 @media (max-width: 860px) {
-  .player-artwork.is-mascot-mode {
-    padding: 10px;
+  .TPPlayerSheet .player-command-row {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    margin-top: 2px;
   }
 
-  .player-artwork.is-mascot-mode .player-artwork-stack {
-    max-height: 48vh;
+  .TPPlayerSheet .player-command-row .player-language-row {
+    display: none;
   }
 
-  .player-artwork.is-mascot-mode .detail-mascot-image {
-    transform: scale(1.18);
-    transform-origin: center bottom;
+  .TPPlayerSheet .player-command-row .player-artwork-support {
+    position: relative;
+    min-width: 0;
   }
+
+  .TPPlayerSheet .player-command-row .detail-copy {
+    width: 44px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border-radius: var(--tp-radius-full);
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .TPPlayerSheet .player-command-row .detail-copy summary {
+    min-height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .TPPlayerSheet .player-command-row .detail-copy summary::after {
+    display: none;
+  }
+
+  .TPPlayerSheet .player-command-row .detail-copy-content {
+    position: absolute;
+    left: 0;
+    z-index: 5;
+    width: min(300px, calc(100vw - 56px));
+    margin-top: 10px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--tp-radius-md);
+    background: #103c37;
+    box-shadow: var(--tp-elevation-3);
+  }
+
+  .TPPlayerSheet .player-command-row .player-controls {
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .TPPlayerSheet .player-transport-group {
+    grid-template-columns: 44px minmax(90px, 1fr) 44px;
+    gap: 6px;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button {
+    min-width: 44px;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
+    min-width: 90px;
+  }
+
+  .TPPlayerSheet #player-repeat-button {
+    position: static;
+    flex: 0 0 44px;
+    margin-left: 6px;
+  }
+
+  .TPPlayerSheet .player-artwork .is-photo-layer,
+  .TPPlayerSheet .player-artwork.is-mascot-mode .is-photo-layer {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .TPPlayerSheet .player-artwork .is-mascot-layer,
+  .TPPlayerSheet .player-artwork.is-mascot-mode .is-mascot-layer {
+    inset: auto -4% -4% auto;
+    width: 40%;
+    height: 58%;
+    opacity: 1;
+    pointer-events: none;
+    transform: none;
+    filter: drop-shadow(0 12px 16px rgba(4, 24, 22, 0.32));
+  }
+
+  .TPPlayerSheet .player-artwork .detail-mascot-image {
+    object-fit: contain;
+    object-position: center bottom;
+    transform: none;
+  }
+
+  .TPPlayerSheet .artwork-flip-toggle { display: none; }
 }
 
 .onboarding-card {
@@ -4367,6 +4519,31 @@ body.guide-open {
     top: auto !important;
     bottom: calc(var(--mini-player-reserved-space) + 18px);
     width: auto;
+  }
+
+  .guide-card.is-above-guide-target {
+    top: var(--guide-card-mobile-top) !important;
+    bottom: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .intro-hero-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .intro-visual {
+    justify-content: center;
+  }
+
+  .intro-portrait {
+    width: min(100%, 180px);
+    max-height: 220px;
+  }
+
+  .intro-copy {
+    padding-left: 1.2em;
   }
 }
 

@@ -950,6 +950,7 @@ const onboardingUiStrings = {
     guideNext: "Avanti",
     guideDone: "Fine",
     guideMap: "La mappa mostra le tappe del percorso. Tocca un numero per aprire la tappa e avviare il player.",
+    guideDirections: "Questo pulsante apre Google Maps con le indicazioni pedonali verso la tappa selezionata.",
     guideStops: "Puoi scegliere una tappa anche dalla lista: il sito centra la mappa e prepara l'audio.",
     guidePlatforms: "Qui trovi i collegamenti alle piattaforme esterne dove pubblicare o consultare il percorso.",
     guideShare: "Da qui puoi condividere il prototipo con amici e contatti tramite social, WhatsApp o email.",
@@ -964,6 +965,7 @@ const onboardingUiStrings = {
     guideNext: "Next",
     guideDone: "Done",
     guideMap: "The map shows the route stops. Tap a number to open the stop and start the player.",
+    guideDirections: "This button opens Google Maps with walking directions to the selected stop.",
     guideStops: "You can also choose a stop from the list: the site centers the map and prepares the audio.",
     guidePlatforms: "Here you find links to the external platforms where the route can be published or viewed.",
     guideShare: "Use these buttons to share the prototype with friends and contacts through social channels, WhatsApp or email.",
@@ -978,6 +980,7 @@ const onboardingUiStrings = {
     guideNext: "Weiter",
     guideDone: "Fertig",
     guideMap: "Die Karte zeigt die Stationen der Route. Tippe auf eine Nummer, um die Station zu oeffnen und den Player zu starten.",
+    guideDirections: "Diese Taste oeffnet Google Maps mit Fussweg-Hinweisen zur ausgewaehlten Station.",
     guideStops: "Du kannst eine Station auch aus der Liste waehlen: Die Karte wird zentriert und das Audio vorbereitet.",
     guidePlatforms: "Hier findest du Links zu den externen Plattformen, auf denen die Route veroeffentlicht oder angesehen werden kann.",
     guideShare: "Mit diesen Tasten kannst du den Prototyp ueber Social Media, WhatsApp oder E-Mail teilen.",
@@ -992,6 +995,7 @@ const onboardingUiStrings = {
     guideNext: "Suivant",
     guideDone: "Terminer",
     guideMap: "La carte affiche les etapes du parcours. Touchez un numero pour ouvrir l'etape et lancer le lecteur.",
+    guideDirections: "Ce bouton ouvre Google Maps avec l'itineraire a pied vers l'etape selectionnee.",
     guideStops: "Vous pouvez aussi choisir une etape dans la liste : le site centre la carte et prepare l'audio.",
     guidePlatforms: "Ici se trouvent les liens vers les plateformes externes ou le parcours peut etre publie ou consulte.",
     guideShare: "Ces boutons permettent de partager le prototype via les reseaux sociaux, WhatsApp ou e-mail.",
@@ -1006,6 +1010,7 @@ const onboardingUiStrings = {
     guideNext: "Siguiente",
     guideDone: "Fin",
     guideMap: "El mapa muestra las paradas del recorrido. Toca un numero para abrir la parada e iniciar el reproductor.",
+    guideDirections: "Este boton abre Google Maps con indicaciones a pie hacia la parada seleccionada.",
     guideStops: "Tambien puedes elegir una parada desde la lista: el sitio centra el mapa y prepara el audio.",
     guidePlatforms: "Aqui encuentras los enlaces a las plataformas externas donde se puede publicar o consultar el recorrido.",
     guideShare: "Usa estos botones para compartir el prototipo por redes sociales, WhatsApp o email.",
@@ -1020,6 +1025,7 @@ const onboardingUiStrings = {
     guideNext: "Seguinte",
     guideDone: "Fim",
     guideMap: "O mapa mostra as paragens do percurso. Toca num numero para abrir a paragem e iniciar o leitor.",
+    guideDirections: "Este botao abre o Google Maps com indicacoes a pe ate a paragem selecionada.",
     guideStops: "Tambem podes escolher uma paragem na lista: o site centra o mapa e prepara o audio.",
     guidePlatforms: "Aqui encontras as ligacoes para as plataformas externas onde o percurso pode ser publicado ou consultado.",
     guideShare: "Usa estes botoes para partilhar o prototipo nas redes sociais, WhatsApp ou email.",
@@ -1034,6 +1040,7 @@ const onboardingUiStrings = {
     guideNext: "Dalee",
     guideDone: "Gotovo",
     guideMap: "Karta pokazyvaet ostanovki marshruta. Kosnites nomera, chtoby otkryt ostanovku i zapustit pleer.",
+    guideDirections: "Eta knopka otkryvaet Google Maps s peshimi ukazaniyami k vybrannoy ostanovke.",
     guideStops: "Ostanovku mozhno vybrat i v spiske: sayt sotsentriruet kartu i podgotovit audio.",
     guidePlatforms: "Zdes est ssylki na vneshnie platformy, gde marshrut mozhno opublikovat ili posmotret.",
     guideShare: "Eti knopki pozvolyayut podelitsya prototipom v sotssetyakh, WhatsApp ili po email.",
@@ -1228,6 +1235,49 @@ function scrollRouteIntoView() {
     0,
     Math.min(
       window.scrollY + routeExperience.getBoundingClientRect().top - 20,
+      document.documentElement.scrollHeight - window.innerHeight,
+    ),
+  );
+
+  if (reducedMotionQuery.matches || Math.abs(targetTop - window.scrollY) < 2) {
+    window.scrollTo({ top: targetTop, behavior: "auto" });
+    return;
+  }
+
+  if (routeScrollAnimationFrame !== null) {
+    window.cancelAnimationFrame(routeScrollAnimationFrame);
+  }
+
+  const startTop = window.scrollY;
+  const distance = targetTop - startTop;
+  const duration = getRouteSelectionDuration();
+  const startTime = performance.now();
+
+  const step = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 4);
+    window.scrollTo({ top: startTop + distance * easedProgress, behavior: "auto" });
+
+    if (progress < 1) {
+      routeScrollAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    routeScrollAnimationFrame = null;
+  };
+
+  routeScrollAnimationFrame = window.requestAnimationFrame(step);
+}
+
+function scrollMapStageIntoView() {
+  if (!mapStageFrame) {
+    return;
+  }
+
+  const targetTop = Math.max(
+    0,
+    Math.min(
+      window.scrollY + mapStageFrame.getBoundingClientRect().top - 12,
       document.documentElement.scrollHeight - window.innerHeight,
     ),
   );
@@ -2815,6 +2865,7 @@ function getGuideSteps() {
   const strings = getUiStrings(currentLanguage);
   return [
     { target: mapStageFrame, text: strings.guideMap },
+    { target: mapDirectionsButton, text: strings.guideDirections },
     { target: document.querySelector(".stops-panel"), text: strings.guideStops },
     { target: document.querySelector(".platforms-panel"), text: strings.guidePlatforms },
     { target: document.querySelector(".share-panel"), text: strings.guideShare },
@@ -2836,6 +2887,18 @@ function scrollGuideTargetIntoView(target) {
   const safeTop = 18;
   const safeBottom = Math.max(180, getGuideSafeBottom());
   const targetTop = rect.top + window.scrollY;
+  const isSectionGuideOnMobile =
+    target.matches?.(".stops-panel, .platforms-panel, .share-panel") &&
+    window.matchMedia("(max-width: 760px)").matches;
+
+  if (isSectionGuideOnMobile) {
+    const nextScrollTop = Math.max(0, targetTop - safeTop);
+    if (Math.abs(nextScrollTop - window.scrollY) > 10) {
+      window.scrollTo({ top: nextScrollTop, behavior: "smooth" });
+    }
+    return;
+  }
+
   const targetCenter = targetTop + rect.height / 2;
   const safeCenter = safeTop + (safeBottom - safeTop) / 2;
   const nextScrollTop = Math.max(0, targetCenter - safeCenter);
@@ -2853,7 +2916,32 @@ function positionGuideCard(target) {
   const rect = target.getBoundingClientRect();
   const cardWidth = Math.min(360, window.innerWidth - 32);
   const cardHeight = guideCard.offsetHeight || 190;
+  const shouldPlaceAboveTarget =
+    target.matches?.(".platforms-panel, .share-panel") &&
+    window.matchMedia("(max-width: 760px)").matches;
+
+  guideCard.classList.toggle("is-above-guide-target", shouldPlaceAboveTarget);
+  if (shouldPlaceAboveTarget) {
+    guideCard.style.setProperty(
+      "--guide-card-mobile-top",
+      `${Math.max(16, rect.top - cardHeight - 16)}px`,
+    );
+    return;
+  }
+
+  guideCard.style.removeProperty("--guide-card-mobile-top");
   const safeBottom = Math.max(190, getGuideSafeBottom());
+  const isDirectionsGuideTarget = target === mapDirectionsButton;
+  if (isDirectionsGuideTarget) {
+    const preferredLeft = rect.left - cardWidth - 16;
+    const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
+    const maxTop = Math.max(16, safeBottom - cardHeight);
+    const top = Math.max(16, Math.min(maxTop, rect.top));
+    guideCard.style.left = `${left}px`;
+    guideCard.style.top = `${top}px`;
+    return;
+  }
+
   const preferredLeft = rect.left + Math.min(rect.width * 0.58, rect.width - cardWidth);
   const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
   const maxTop = Math.max(16, safeBottom - cardHeight);
@@ -2896,6 +2984,7 @@ function renderGuideStep() {
   requestAnimationFrame(() => {
     positionGuideCard(guideTarget);
     window.setTimeout(() => positionGuideCard(guideTarget), 280);
+    window.setTimeout(() => positionGuideCard(guideTarget), 720);
   });
 }
 
@@ -2984,7 +3073,7 @@ function renderPlayerLanguageSelector(tappa = null) {
   const targetStop = tappa || tappe.find((item) => item.numero === activeStopNumber) || tappe[0];
   const audioOptions = targetStop ? getAudioOptions(targetStop) : [];
   const availableLanguages = audioOptions.filter((option) => option.audioDisponibile);
-  const shouldShowSelector = availableLanguages.length > 1;
+  const shouldShowSelector = false;
 
   playerLanguageSelector.hidden = !shouldShowSelector;
   playerLanguageSelector.classList.remove("is-open");
@@ -3647,8 +3736,17 @@ function focusStop(tappa, options = {}) {
     highlightActiveMarker(tappa.numero);
   };
   const scrollToRoute = () => {
-    if (options.scrollRouteIntoView && window.matchMedia("(min-width: 1024px)").matches) {
+    if (!options.scrollRouteIntoView) {
+      return;
+    }
+
+    if (window.matchMedia("(min-width: 1024px)").matches) {
       scrollRouteIntoView();
+      return;
+    }
+
+    if (window.matchMedia("(max-width: 860px)").matches) {
+      scrollMapStageIntoView();
     }
   };
 
