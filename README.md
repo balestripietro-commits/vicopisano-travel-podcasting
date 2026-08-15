@@ -188,6 +188,7 @@ La Fase 3 aggiorna esclusivamente l'esperienza audio:
 - Un solo `<audio>` attivo controlla mini-player, sheet, seek e Media Session quando disponibile.
 - Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, repeat secondario, volume desktop, trascrizione collassata e CTA per la tappa successiva.
 - Il selettore lingua del player mostra solo le tracce disponibili: bottom sheet compatto sotto 860px e popover ancorato al controllo su desktop. Il player sheet gestisce focus, Escape, background inerte e ritorno del focus all'apertura.
+- Sotto 860px il selettore lingua della home mostra solo la lingua corrente e apre le opzioni al tap; nel player la foto resta artwork predefinito e la mascotte si apre solo tramite lo switch manuale.
 - Stati loading, buffering, errore, audio non disponibile e ascolto concluso senza autoplay della tappa seguente.
 - Rhubarb, breathing e micro-motion della mascotte restano attivi; lo switch foto/mascotte resta manuale.
 - Lingua e ultima tappa vengono ricordate con `localStorage`.

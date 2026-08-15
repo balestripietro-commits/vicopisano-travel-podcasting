@@ -35,6 +35,7 @@
 
 - `DESIGN_SYSTEM.md` - documento guida del design system Travel Podcasting, con architettura Core/Theme, token, component vocabulary, accessibilita, legacy exceptions e roadmap.
 - Fase 3 audio: `TPMiniPlayer` e `TPPlayerSheet` sono implementati in `index.html`/`style.css`; `app.js` mantiene una sola source of truth `<audio>`, seek Material 3, stati audio, Media Session feature-detected, lingua in bottom sheet/popover accessibile, CTA prossima tappa e persistence lingua/ultima tappa.
+- Refinement mobile: il selettore lingua home e compatto sotto 860px; il player mantiene i quattro controlli su una riga e la foto resta artwork predefinito fino allo switch manuale della mascotte.
 - Fase 4 mappa: `TPMapMarker` e `TPMapControl` sono implementati nel runtime Leaflet esistente; la route usa il verde Vicopisano, marker/card condividono lo stato selected, e la fullscreen fornisce Explore mode con card contestuale e mini-player accessibile.
 - `design-system.css` - token CSS core `--tp-*`, primitive UI, `TPChip`, `TPIconButton`, `TPStopCard`, Typography Lab e token di confronto identificatore tappa.
 - `theme-vicopisano.css` - tema Vicopisano con palette verde, blu stemma, oro, superfici crema, alias legacy controllati e token per identificatore Vicopisano vs viola Travel Podcasting.

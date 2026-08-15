@@ -11,7 +11,7 @@
 <body class="tp-page tp-theme-vicopisano">
   <main class="tp-shell">
     <section class="tp-brand-strip">
-      <p class="tp-label">Phase 1 foundation</p>
+      <p class="tp-label">Phases 1-5 runtime aligned</p>
       <h1 class="tp-display">Travel Podcasting Design System</h1>
       <p class="tp-body">Core tokens, reusable component vocabulary, and Vicopisano territory theme. This playground is separate from the live site.</p>
     </section>
@@ -91,7 +91,7 @@
           <span class="tp-stop-number">1</span>
           <div>
             <h3 class="tp-title">Torre delle Quattro Porte</h3>
-            <p class="tp-body">TPStopCard selected state with legacy purple identifier and visible non-color selected cues.</p>
+            <p class="tp-body">TPStopCard selected state: tonal cue, legacy purple identifier and expressive selected shape.</p>
           </div>
         </article>
         <article class="tp-stop-card">
@@ -102,6 +102,7 @@
           </div>
         </article>
         <div class="tp-card">
+          <p class="tp-body">Bounded transport feedback: centered trio, dominant Play/Pause, secondary repeat.</p>
           <div class="tp-row">
             <span class="tp-map-marker is-active">2</span>
             <button class="tp-map-control" aria-label="Full screen"><span class="material-symbols-rounded" aria-hidden="true">fullscreen</span></button>
@@ -136,22 +137,23 @@
       <div class="tp-grid">
         <div class="tp-card">
           <div class="tp-row">
+            <div class="tp-audio-transport-group">
             <button class="tp-audio-control" aria-label="Indietro di 10 secondi"><span class="material-symbols-rounded" aria-hidden="true">replay_10</span></button>
             <button class="tp-audio-control tp-audio-control--primary" aria-label="Play"><span class="material-symbols-rounded" aria-hidden="true">play_arrow</span></button>
             <button class="tp-audio-control" aria-label="Avanti di 10 secondi"><span class="material-symbols-rounded" aria-hidden="true">forward_10</span></button>
+            </div>
             <button class="tp-audio-control" aria-label="Repeat"><span class="material-symbols-rounded" aria-hidden="true">repeat</span></button>
           </div>
         </div>
         <div class="tp-mini-player">
           <img src="tappa_1_torre_delle_quattro_porte.jpg" alt="Torre delle Quattro Porte">
-          <strong>Torre delle Quattro Porte</strong>
-          <span>00:42 / 03:48</span>
+          <div><strong>Torre delle Quattro Porte</strong><span>00:42 / 03:48</span><span class="tp-mini-progress" aria-hidden="true"><span></span></span></div>
           <button class="tp-icon-button" aria-label="Open full player"><span class="material-symbols-rounded" aria-hidden="true">open_in_full</span></button>
         </div>
         <div class="tp-player-sheet">
           <button class="tp-chip" aria-label="Lingua corrente">IT · Italiano <span class="material-symbols-rounded" aria-hidden="true">expand_more</span></button>
-          <div class="tp-row"><span>00:42</span><input type="range" min="0" max="100" value="18" aria-label="Posizione traccia"><span>03:48</span></div>
-          <div class="tp-row"><button class="tp-audio-control" aria-label="Indietro di 10 secondi"><span class="material-symbols-rounded" aria-hidden="true">replay_10</span></button><button class="tp-audio-control tp-audio-control--primary" aria-label="Play"><span class="material-symbols-rounded" aria-hidden="true">play_arrow</span></button><button class="tp-audio-control" aria-label="Avanti di 10 secondi"><span class="material-symbols-rounded" aria-hidden="true">forward_10</span></button></div>
+          <div class="tp-row"><span>00:42</span><input class="tp-audio-seek" type="range" min="0" max="100" value="18" aria-label="Posizione traccia"><span>03:48</span></div>
+          <div class="tp-row"><div class="tp-audio-transport-group"><button class="tp-audio-control tp-audio-control--secondary" aria-label="Indietro di 10 secondi"><span class="material-symbols-rounded" aria-hidden="true">replay_10</span></button><button class="tp-audio-control tp-audio-control--primary" aria-label="Play"><span class="material-symbols-rounded" aria-hidden="true">play_arrow</span></button><button class="tp-audio-control tp-audio-control--secondary" aria-label="Avanti di 10 secondi"><span class="material-symbols-rounded" aria-hidden="true">forward_10</span></button></div><button class="tp-audio-control tp-audio-control--repeat" aria-label="Repeat"><span class="material-symbols-rounded" aria-hidden="true">repeat</span></button></div>
         </div>
       </div>
     </section>

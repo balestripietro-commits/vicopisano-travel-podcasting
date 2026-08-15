@@ -1,6 +1,6 @@
-# Travel Podcasting Design System - Phase 1, Phase 2 e Phase 3
+# Travel Podcasting Design System - Phases 1-5
 
-Status: foundation only. This phase creates the core design language and Vicopisano theme without importing it into the live page. The current runtime files `index.html`, `style.css`, and `app.js` remain the active site implementation until a later migration phase.
+Status: active runtime migration. `design-system.css` and `theme-vicopisano.css` are loaded before `style.css` in production. The live page uses the core tokens and the component classes introduced through Phases 1-5; `style.css` remains the scoped integration layer for Leaflet, layout and legacy selectors.
 
 ## 01 Vision
 Travel Podcasting is a mobile-first cultural audio guide system for places, routes, museums, villages, and local territories. The interface must feel editorial, civic, warm, and reliable while staying practical for visitors walking outdoors with one hand on a phone.
@@ -117,8 +117,10 @@ Shape tokens:
 - `--tp-radius-xl: 34px`
 - `--tp-radius-xxl: 48px`
 - `--tp-radius-full: 999px`
+- `--tp-shape-stop-selected: 32px 32px 32px 14px`
+- `--tp-shape-stop-selected-leading: 32px 0 0 14px`
 
-Use expressive rounded shapes for player and map controls, but keep compact controls readable.
+Use expressive rounded shapes for player and map controls, but keep compact controls readable. `TPStopCard` uses `--tp-shape-stop-selected` only for the selected state, alongside its border and tonal cue.
 
 ## 09 Elevation
 Elevation levels:
@@ -181,7 +183,7 @@ Icon-only controls must include accessible names. Map controls and player contro
 ## 13 Iconography
 Direction: Material Symbols Rounded.
 
-Do not mass-replace existing Unicode icons in the live app during Phase 1. The playground may use text symbols as placeholders. Later migration should standardize icon buttons and ARIA labels.
+Functional controls use Material Symbols Rounded in production and in the playground. Textual marks, platform logos and social identifiers remain textual where a Material symbol would not convey the intended brand or meaning.
 
 ## 14 Accessibility
 Accessibility requirements:
@@ -219,7 +221,7 @@ Core component vocabulary:
 - `TPDialog`
 - `TPToast`
 
-These names define intent for future migration. Phase 1 provides CSS playground classes, not a JavaScript framework.
+These components are CSS and semantic contracts, not a JavaScript framework. `TPChip`, `TPIconButton`, `TPStopCard`, `TPMapMarker`, `TPMapControl`, `TPAudioControl`, `TPMiniPlayer` and `TPPlayerSheet` are active in the Vicopisano runtime.
 
 ## 16 Responsive/adaptive strategy
 Primary breakpoints are behavior-based, not device-brand based.
@@ -253,33 +255,27 @@ Vicopisano theme direction:
 - Mascot: optional narrative layer, not required for all future territories.
 
 ## 19 Legacy exceptions
-Legacy visual exception — purple stop identifier.
+Product visual rule — purple stop identifier.
 
-The current purple numbered markers and stop identifiers are retained in Phase 1 because they are already recognizable in the prototype and tied to the map/list mental model. They should be documented, made tokenized, and revisited in a later theme pass instead of removed abruptly.
+The purple numbered marker is the Travel Podcasting tertiary identifier for route stops. Vicopisano green, crest blue and gold provide territorial context, selected state layers and progress accents. The route itself uses Vicopisano green so it remains subordinate to the markers.
 
 Legacy aliases may exist to bridge current CSS, but new system code should use `--tp-*` tokens and `TP*` component language.
 
-## 20 Migration strategy
-Phase 1 does not rewrite the app.
+## 20 Audio component contract
+`TPPlayerSheet` and `TPMiniPlayer` share one `<audio>` element. Audio hierarchy is `seek -> -10 / primary Play-Pause / +10 -> repeat secondary`: the centered transport trio is one functional group, Play/Pause uses the expressive tertiary/gold shape, and repeat stays smaller and visually separate. Tap feedback is bounded: primary Play/Pause expands while lateral controls settle; a skip control expands only when invoked. The sheet uses a continuous Material 3 seek slider with active/inactive track, visible thumb, 44px touch target and keyboard focus state; its track becomes thicker only on hover, focus or drag. The mini-player shows only a non-draggable progress bar without a thumb.
 
-Suggested migration path:
+The photo is the default player artwork. The mascot appears only through the explicit photo/mascot switch; Rhubarb, breathing, lip-sync and play/pause/end reactions remain contained in the manual mascot mode.
 
-1. Add tokens and playground files.
-2. Map existing live styles to `--tp-*` aliases without visual regression.
-3. Extract buttons, chips, map controls, stop cards, and player controls into consistent classes.
-4. Recheck z-index and pointer-events after each step.
-5. Migrate typography and spacing progressively.
-6. Keep regression tests around language switching, map marker selection, mini-player, full-screen player, and mobile layout.
+Language selection follows one shared pattern: onboarding exposes the full set of named language options because language is the primary task; runtime uses a compact current-language control that opens the available choices. Flags are decorative, while the language name provides the accessible label.
 
-## 21 Roadmap
-Phase 1: design system foundation, token vocabulary, Vicopisano theme, playground, documentation.
+## 21 Map component contract
+`TPMapMarker` is a compact, high-contrast Leaflet `divIcon` with a readable route number. Selected stop cards and markers share a clear selected state; selecting a card centers the map without opening a popup, while tapping a marker selects the stop and opens the player directly.
 
-Phase 2: token bridge into current `style.css` with minimal visual changes.
+`TPMapControl` provides manual geolocation and Explore mode with Material Symbols Rounded and 48px-or-larger outdoor touch targets. Explore mode keeps Leaflet and OpenStreetMap intact, leaves the mini-player accessible, and exposes only a compact contextual stop surface.
 
-Phase 3: audio experience mobile-first with `TPMiniPlayer`, `TPPlayerSheet`, shared `<audio>`, expressive sheet motion, seek controls, Media Session, audio states, language menu, transcript and next-stop completion CTA.
-
-Phase 4: component migration for remaining map controls and future map-specific work.
-
-Phase 4: accessibility hardening, interaction testing, reduced-motion testing, keyboard testing.
-
-Phase 5: multi-territory theming and reusable documentation for new municipalities.
+## 22 Delivered phases
+1. Phase 1: core tokens, Vicopisano theme, component vocabulary, playground and documentation.
+2. Phase 2: production cascade, `TPChip`, `TPIconButton`, `TPStopCard`, Typography Lab and selected stop styling.
+3. Phase 3: mobile-first audio experience with shared `<audio>`, `TPMiniPlayer`, `TPPlayerSheet`, Media Session, language control, transcript, completion and persistence states.
+4. Phase 4: Leaflet composition, `TPMapMarker`, `TPMapControl`, route hierarchy, selected marker/card synchronization, Explore mode and desktop split view.
+5. Phase 5: cleanup and alignment of iconography, compact mobile home language control, design-system audio contract, accessibility and regression documentation.

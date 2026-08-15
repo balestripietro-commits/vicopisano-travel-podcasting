@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260814-player-help3" />
+    <link rel="stylesheet" href="style.css?v=20260815-intro-map-gap" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -46,9 +46,9 @@
       <div id="guide-card" class="guide-card">
         <p id="guide-step-text"></p>
           <div class="guide-actions">
-            <button type="button" id="guide-skip-button" class="guide-button guide-button-secondary" aria-label="Chiudi">×</button>
-            <button type="button" id="guide-prev-button" class="guide-button guide-button-secondary" aria-label="Indietro">←</button>
-            <button type="button" id="guide-next-button" class="guide-button guide-button-primary" aria-label="Avanti">→</button>
+            <button type="button" id="guide-skip-button" class="guide-button guide-button-secondary" aria-label="Chiudi"><span class="material-symbols-rounded" aria-hidden="true">close</span></button>
+            <button type="button" id="guide-prev-button" class="guide-button guide-button-secondary" aria-label="Indietro"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span></button>
+            <button type="button" id="guide-next-button" class="guide-button guide-button-primary" aria-label="Avanti"><span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
           </div>
       </div>
     </div>
@@ -68,7 +68,11 @@
             <span class="material-symbols-rounded" aria-hidden="true">help</span>
           </button>
           <div class="global-language-selector" aria-label="Selettore lingua del sito">
-            <div id="global-language-chips" class="language-chips"></div>
+            <button type="button" id="global-language-current" class="global-language-current tp-chip" aria-haspopup="listbox" aria-controls="global-language-chips" aria-expanded="false">
+              <span id="global-language-current-label">Italiano</span>
+              <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+            </button>
+            <div id="global-language-chips" class="language-chips" role="listbox"></div>
           </div>
         </div>
       </header>
@@ -114,6 +118,18 @@
                 >
                   <span class="map-action-icon material-symbols-rounded" aria-hidden="true">my_location</span>
                 </button>
+                <a
+                  id="map-directions-button"
+                  class="map-action-button map-directions-button tp-icon-button tp-map-control"
+                  href="#"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Apri indicazioni"
+                  title="Apri indicazioni"
+                  hidden
+                >
+                  <span class="map-action-icon material-symbols-rounded" aria-hidden="true">directions_walk</span>
+                </a>
                 <p id="locate-me-status" class="map-status" aria-live="polite"></p>
               </div>
               <button
@@ -136,6 +152,18 @@
               </div>
             </div>
           </section>
+
+          <aside id="stop-preview" class="stop-preview TPStopPreview" aria-live="polite" aria-atomic="true" hidden>
+            <div class="stop-preview-copy">
+              <div class="stop-preview-heading">
+                <span id="stop-preview-number" class="stop-preview-number"></span>
+                <div>
+                  <h3 id="stop-preview-title" class="stop-preview-title"></h3>
+                </div>
+              </div>
+            </div>
+            <img id="stop-preview-image" class="stop-preview-image" src="" alt="" />
+          </aside>
 
           <section class="stops-panel" aria-labelledby="stops-title">
             <div class="controls-toolbar">
@@ -209,29 +237,31 @@
 
       <div class="mini-player-center">
         <div class="mini-player-controls" aria-label="Controlli player compatto">
-          <button
-            type="button"
-            id="mini-player-prev"
-            class="mini-player-control tp-audio-control"
-            aria-label="Indietro di 10 secondi"
-          >
-            <span class="material-symbols-rounded" aria-hidden="true">replay_10</span>
-          </button>
-          <button type="button" id="mini-player-toggle" class="mini-player-toggle tp-audio-control tp-audio-control--primary" aria-label="Play">
-            <span class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
-          </button>
-          <button
-            type="button"
-            id="mini-player-next"
-            class="mini-player-control tp-audio-control"
-            aria-label="Avanti di 10 secondi"
-          >
-            <span class="material-symbols-rounded" aria-hidden="true">forward_10</span>
-          </button>
+          <div class="mini-player-transport-group">
+            <button
+              type="button"
+              id="mini-player-prev"
+              class="mini-player-control tp-audio-control tp-audio-control--secondary"
+              aria-label="Indietro di 10 secondi"
+            >
+              <span class="material-symbols-rounded" aria-hidden="true">replay_10</span>
+            </button>
+            <button type="button" id="mini-player-toggle" class="mini-player-toggle tp-audio-control tp-audio-control--primary" aria-label="Play">
+              <span class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
+            </button>
+            <button
+              type="button"
+              id="mini-player-next"
+              class="mini-player-control tp-audio-control tp-audio-control--secondary"
+              aria-label="Avanti di 10 secondi"
+            >
+              <span class="material-symbols-rounded" aria-hidden="true">forward_10</span>
+            </button>
+          </div>
           <button
             type="button"
             id="mini-player-repeat"
-            class="mini-player-control tp-audio-control"
+            class="mini-player-control tp-audio-control tp-audio-control--repeat"
             aria-label="Ripeti traccia"
           >
             <span class="material-symbols-rounded" aria-hidden="true">repeat</span>
@@ -251,7 +281,7 @@
       </div>
 
       <div class="mini-player-volume-block">
-        <span class="mini-player-volume-icon" aria-hidden="true">🔊</span>
+        <span class="mini-player-volume-icon material-symbols-rounded" aria-hidden="true">volume_up</span>
         <input
           id="mini-player-volume"
           class="mini-player-volume"
@@ -315,39 +345,17 @@
             aria-label="Mostra mascotte animata"
             aria-pressed="false"
           >
-            <span aria-hidden="true">⇄</span>
+            <span class="material-symbols-rounded" aria-hidden="true">swap_horiz</span>
           </button>
         </div>
         <div class="player-side">
-        <div class="player-meta">
-          <p id="detail-status" class="detail-status"></p>
-          <h2 id="detail-title"></h2>
-          <p id="detail-duration" class="detail-duration"></p>
-        </div>
-        <div class="player-language-row">
-          <div id="player-language-selector" class="player-language-selector" aria-label="Selettore lingua del player">
-            <button type="button" id="player-language-current" class="player-language-current tp-chip" aria-haspopup="listbox" aria-controls="player-language-chips" aria-expanded="false">
-              <span class="material-symbols-rounded" aria-hidden="true">translate</span>
-              <span id="player-language-current-label">Italiano</span>
-              <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
-            </button>
-            <p class="player-language-label" id="player-language-label">Lingua disponibile per la Tappa 1</p>
-            <div id="player-language-chips" class="language-chips" role="listbox"></div>
+          <div class="player-meta">
+            <p id="detail-status" class="detail-status"></p>
+            <h2 id="detail-title"></h2>
+            <p id="detail-duration" class="detail-duration"></p>
           </div>
-          <button id="player-help-button" class="player-help-button tp-icon-button" type="button" aria-label="Aiuto player">
-            <span class="material-symbols-rounded" aria-hidden="true">help</span>
-          </button>
-        </div>
-        <div id="player-help-box" class="player-help-box is-hidden" aria-live="polite">
-          <p id="player-help-text" class="player-help-text"></p>
-          <div class="player-help-actions">
-            <button id="player-help-close-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Chiudi">×</button>
-            <button id="player-help-prev-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Indietro">←</button>
-            <button id="player-help-next-button" class="player-help-action player-help-action-primary" type="button" aria-label="Avanti">→</button>
-          </div>
-        </div>
-        <div id="audio-wrapper" class="audio-wrapper"></div>
-        <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
+          <div id="audio-wrapper" class="audio-wrapper"></div>
+          <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
           <div class="player-timeline">
             <span id="player-current-time" class="player-time">00:00</span>
             <input
@@ -362,45 +370,89 @@
             />
             <span id="player-duration-total" class="player-time">00:00</span>
           </div>
-          <div class="player-controls" aria-label="Controlli player">
-            <button type="button" id="player-prev-button" class="player-control-button tp-audio-control" aria-label="Indietro di 10 secondi">
-              <span class="material-symbols-rounded" aria-hidden="true">replay_10</span>
-            </button>
-            <button type="button" id="player-play-button" class="player-control-button tp-audio-control tp-audio-control--primary is-primary">
-              <span class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
-            </button>
-            <button type="button" id="player-next-button" class="player-control-button tp-audio-control" aria-label="Avanti di 10 secondi">
-              <span class="material-symbols-rounded" aria-hidden="true">forward_10</span>
-            </button>
-            <button type="button" id="player-repeat-button" class="player-control-button tp-audio-control">
-              <span class="material-symbols-rounded" aria-hidden="true">repeat</span>
-            </button>
+          <div class="player-command-row">
+            <div class="player-language-row">
+              <div id="player-language-selector" class="player-language-selector" aria-label="Selettore lingua del player">
+                <button type="button" id="player-language-current" class="player-language-current tp-chip" aria-haspopup="listbox" aria-controls="player-language-chips" aria-expanded="false">
+                  <span id="player-language-current-label">Italiano</span>
+                  <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                </button>
+                <p class="player-language-label" id="player-language-label">Lingua disponibile per la Tappa 1</p>
+              <div id="player-language-chips" class="language-chips" role="listbox"></div>
+              </div>
+            </div>
+            <div class="player-volume-block">
+              <span class="player-volume-icon material-symbols-rounded" aria-hidden="true">volume_up</span>
+              <input
+                id="player-volume"
+                class="player-volume"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.85"
+                aria-label="Volume player esteso"
+              />
+            </div>
+            <div class="player-controls" aria-label="Controlli player">
+              <div class="player-transport-group">
+                <button type="button" id="player-prev-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Indietro di 10 secondi">
+                  <span class="material-symbols-rounded" aria-hidden="true">replay_10</span>
+                </button>
+                <button type="button" id="player-play-button" class="player-control-button tp-audio-control tp-audio-control--primary is-primary">
+                  <span class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
+                </button>
+                <button type="button" id="player-next-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Avanti di 10 secondi">
+                  <span class="material-symbols-rounded" aria-hidden="true">forward_10</span>
+                </button>
+              </div>
+              <button type="button" id="player-repeat-button" class="player-control-button tp-audio-control tp-audio-control--repeat">
+                <span class="material-symbols-rounded" aria-hidden="true">repeat</span>
+              </button>
+            </div>
           </div>
-          <div class="player-volume-block">
-            <span class="player-volume-icon" aria-hidden="true">🔊</span>
-            <input
-              id="player-volume"
-              class="player-volume"
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value="0.85"
-              aria-label="Volume player esteso"
-            />
+          <div id="player-help-box" class="player-help-box is-hidden" aria-live="polite">
+            <p id="player-help-text" class="player-help-text"></p>
+            <div class="player-help-actions">
+              <button id="player-help-close-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Chiudi"><span class="material-symbols-rounded" aria-hidden="true">close</span></button>
+              <button id="player-help-prev-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Indietro"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span></button>
+              <button id="player-help-next-button" class="player-help-action player-help-action-primary" type="button" aria-label="Avanti"><span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
+            </div>
           </div>
+        </div>
+        <div class="player-artwork-support">
           <details class="detail-copy" id="detail-copy-box">
-            <summary id="detail-copy-title">Testo descrittivo</summary>
+            <summary id="detail-copy-title" aria-label="Trascrizione" title="Trascrizione">
+              <span class="detail-copy-summary-icon material-symbols-rounded" aria-hidden="true">article</span>
+            </summary>
             <div class="detail-copy-content">
               <p id="detail-description"></p>
             </div>
           </details>
-          <div id="player-next-preview" class="player-next-preview" hidden>
-            <span class="player-next-preview-label" id="player-next-preview-label">Prossima tappa</span>
-            <strong id="player-next-preview-title"></strong>
-            <button type="button" id="player-next-stop-button" class="player-next-stop-button">
+        </div>
+        <div class="player-stop-navigation" aria-label="Navigazione tra tappe">
+          <div id="player-previous-preview" class="player-stop-preview player-previous-preview" hidden>
+            <div class="player-next-preview-content">
+              <img id="player-previous-preview-image" class="player-next-preview-image" src="" alt="" />
+              <div class="player-next-preview-copy">
+                <span class="player-next-preview-label" id="player-previous-preview-label">Tappa precedente</span>
+                <strong id="player-previous-preview-title"></strong>
+              </div>
+            </div>
+            <button type="button" id="player-previous-stop-button" class="player-next-stop-button" aria-label="Apri tappa precedente" title="Apri tappa precedente">
+              <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+            </button>
+          </div>
+          <div id="player-next-preview" class="player-stop-preview player-next-preview" hidden>
+            <div class="player-next-preview-content">
+              <img id="player-next-preview-image" class="player-next-preview-image" src="" alt="" />
+              <div class="player-next-preview-copy">
+                <span class="player-next-preview-label" id="player-next-preview-label">Prossima tappa</span>
+                <strong id="player-next-preview-title"></strong>
+              </div>
+            </div>
+            <button type="button" id="player-next-stop-button" class="player-next-stop-button" aria-label="Apri prossima tappa" title="Apri prossima tappa">
               <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
-              <span id="player-next-stop-label">Apri prossima tappa</span>
             </button>
           </div>
         </div>
@@ -412,6 +464,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260814-mascot"></script>
+    <script src="app.js?v=20260815-transcript-icon-fix"></script>
   </body>
 </html>

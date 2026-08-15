@@ -80,8 +80,8 @@ const tappe = [
     titolo: "Torre e Camminamento del Soccorso",
     latitudine: 43.6998788,
     longitudine: 10.5873698,
-    fileAudio: "audio/02_torre_camminamento_soccorso.mp3",
-    audioDisponibile: false,
+    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    audioDisponibile: true,
     durata: "",
     descrizione:
       "Tappa dedicata al sistema difensivo collegato alla Rocca e alla possibilità di rifornire o soccorrere la fortezza in caso di assedio.",
@@ -91,8 +91,8 @@ const tappe = [
     titolo: "Palazzo Pretorio",
     latitudine: 43.6992056,
     longitudine: 10.5867826,
-    fileAudio: "audio/03_palazzo_pretorio.mp3",
-    audioDisponibile: false,
+    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    audioDisponibile: true,
     durata: "",
     descrizione:
       "Luogo del potere civile e amministrativo. Dopo la guerra e la conquista, il controllo del borgo passa anche attraverso istituzioni, giustizia e governo.",
@@ -102,8 +102,8 @@ const tappe = [
     titolo: "Rocca del Brunelleschi",
     latitudine: 43.6994864,
     longitudine: 10.5863793,
-    fileAudio: "audio/04_rocca_brunelleschi.mp3",
-    audioDisponibile: false,
+    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    audioDisponibile: true,
     durata: "",
     descrizione:
       "Cuore militare dell'itinerario. Qui il racconto si concentra su Brunelleschi, sulla trasformazione del borgo in fortezza e sulla logica della resistenza.",
@@ -113,8 +113,8 @@ const tappe = [
     titolo: "Torri Gemelle",
     latitudine: 43.6999256,
     longitudine: 10.5842514,
-    fileAudio: "audio/05_torri_gemelle.mp3",
-    audioDisponibile: false,
+    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    audioDisponibile: true,
     durata: "",
     descrizione:
       "Tappa dedicata alla presenza diffusa delle torri nel borgo e al ruolo delle strutture verticali come elementi di prestigio, osservazione e difesa.",
@@ -124,8 +124,8 @@ const tappe = [
     titolo: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
     latitudine: 43.7002026,
     longitudine: 10.5833924,
-    fileAudio: "audio/06_parrocchia_santa_maria_san_giovanni.mp3",
-    audioDisponibile: false,
+    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    audioDisponibile: true,
     durata: "",
     descrizione:
       "Tappa di respiro dedicata alla dimensione religiosa e comunitaria di Vicopisano, oltre la sola narrazione militare.",
@@ -135,8 +135,8 @@ const tappe = [
     titolo: "Palazzo Comunale Vicopisano",
     latitudine: 43.6998526,
     longitudine: 10.5844138,
-    fileAudio: "audio/07_comune_info_point_vicopisano.mp3",
-    audioDisponibile: false,
+    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    audioDisponibile: true,
     durata: "",
     descrizione:
       "Chiusura contemporanea del percorso: dal borgo fortificato al Comune che oggi accoglie, racconta e valorizza la propria storia.",
@@ -219,15 +219,7 @@ const routeGeoJson = {
       },
       geometry: {
         type: "LineString",
-        coordinates: [
-          [10.5863858, 43.700429],
-          [10.5873698, 43.6998788],
-          [10.5867826, 43.6992056],
-          [10.5863793, 43.6994864],
-          [10.5842514, 43.6999256],
-          [10.5833924, 43.7002026],
-          [10.5844138, 43.6998526],
-        ],
+        coordinates: [[10.58639,43.700434],[10.586355,43.700447],[10.586374,43.700472],[10.586421,43.700526],[10.586465,43.700564],[10.586531,43.700592],[10.58663,43.700563],[10.586752,43.700497],[10.586952,43.700408],[10.587042,43.700356],[10.587123,43.700305],[10.587231,43.700206],[10.587296,43.700128],[10.587358,43.70003],[10.587405,43.699929],[10.587419,43.699888],[10.587479,43.699719],[10.587482,43.699705],[10.587512,43.699593],[10.587534,43.699509],[10.587461,43.699463],[10.587434,43.699459],[10.587401,43.699446],[10.587378,43.699419],[10.587363,43.699392],[10.587358,43.699338],[10.587354,43.699303],[10.587347,43.699262],[10.587335,43.699225],[10.587323,43.699196],[10.587299,43.699164],[10.58728,43.69915],[10.58726,43.699154],[10.587232,43.699168],[10.587204,43.69917],[10.58716,43.699162],[10.587127,43.699139],[10.587114,43.699123],[10.587084,43.699121],[10.587075,43.699134],[10.587067,43.699144],[10.587062,43.699149],[10.587056,43.699153],[10.58705,43.699157],[10.587037,43.699156],[10.587033,43.69915],[10.587035,43.699136],[10.587043,43.699116],[10.587047,43.699104],[10.587041,43.699103],[10.58702,43.699106],[10.586958,43.699088],[10.586902,43.699126],[10.586958,43.699088],[10.58702,43.699106],[10.587041,43.699103],[10.587047,43.699104],[10.587043,43.699116],[10.587035,43.699136],[10.587033,43.69915],[10.587037,43.699156],[10.58705,43.699157],[10.587056,43.699153],[10.587062,43.699149],[10.587067,43.699144],[10.587075,43.699134],[10.587084,43.699121],[10.587091,43.699091],[10.587097,43.699047],[10.587088,43.699021],[10.587061,43.698995],[10.587032,43.698983],[10.586965,43.698961],[10.586949,43.698944],[10.586942,43.698875],[10.586941,43.698853],[10.586941,43.698813],[10.586941,43.698771],[10.586941,43.698728],[10.586883,43.698729],[10.58684,43.698729],[10.586724,43.698737],[10.586618,43.698763],[10.586532,43.698789],[10.586469,43.698809],[10.586479,43.698816],[10.586492,43.698823],[10.586507,43.698828],[10.58652,43.698832],[10.586536,43.698835],[10.586551,43.69884],[10.586559,43.698844],[10.586565,43.698848],[10.586571,43.698853],[10.586576,43.698858],[10.586579,43.698868],[10.586589,43.698908],[10.586623,43.69904],[10.586633,43.699083],[10.586634,43.699093],[10.586616,43.699096],[10.586598,43.699101],[10.586596,43.699112],[10.586598,43.699124],[10.586596,43.699112],[10.586598,43.699101],[10.586616,43.699096],[10.586634,43.699093],[10.586633,43.699083],[10.586623,43.69904],[10.586589,43.698908],[10.586486,43.698919],[10.586406,43.698928],[10.586304,43.698937],[10.586211,43.698947],[10.586172,43.698965],[10.586106,43.698993],[10.586051,43.699002],[10.586012,43.699],[10.585969,43.698989],[10.585893,43.698986],[10.585784,43.699017],[10.585695,43.699053],[10.585637,43.69908],[10.585592,43.699103],[10.58554,43.699129],[10.585451,43.699182],[10.585395,43.699203],[10.585337,43.699209],[10.58526,43.699203],[10.585232,43.699206],[10.585159,43.699238],[10.585097,43.699275],[10.585072,43.699304],[10.585065,43.699318],[10.58505,43.69935],[10.585004,43.699375],[10.58484,43.699456],[10.584673,43.699539],[10.584538,43.699623],[10.584512,43.699651],[10.584505,43.69968],[10.584503,43.699704],[10.584508,43.699737],[10.584519,43.699764],[10.584457,43.699779],[10.584406,43.699787],[10.584339,43.699797],[10.584267,43.699804],[10.584241,43.699808],[10.584216,43.699829],[10.584174,43.699881],[10.584149,43.699904],[10.584106,43.699919],[10.584002,43.699925],[10.583942,43.699928],[10.583888,43.699942],[10.58384,43.700072],[10.583821,43.70017],[10.583557,43.70015],[10.5834,43.70014],[10.583557,43.70015],[10.583821,43.70017],[10.58384,43.700072],[10.583888,43.699942],[10.583942,43.699928],[10.584002,43.699925],[10.584106,43.699919],[10.584149,43.699904],[10.58418,43.699876],[10.584216,43.699829],[10.584241,43.699808],[10.584267,43.699804],[10.584339,43.699797],[10.584396,43.699789]],
       },
     },
   ],
@@ -302,6 +294,7 @@ const landingTitle = document.getElementById("landing-title");
 const mapStageNote = document.getElementById("map-stage-note");
 const locateMeButton = document.getElementById("locate-me-button");
 const locateMeStatus = document.getElementById("locate-me-status");
+const mapDirectionsButton = document.getElementById("map-directions-button");
 const mapFullscreenButton = document.getElementById("map-fullscreen-button");
 const mapStageFrame = document.querySelector(".map-stage-frame");
 const mapLoadStatus = document.getElementById("map-load-status");
@@ -310,7 +303,14 @@ const mapExploreStopNumber = document.getElementById("map-explore-stop-number");
 const mapExploreStopTitle = document.getElementById("map-explore-stop-title");
 const mapExploreStopAudio = document.getElementById("map-explore-stop-audio");
 const mapExploreOpenPlayer = document.getElementById("map-explore-open-player");
+const stopPreview = document.getElementById("stop-preview");
+const stopPreviewNumber = document.getElementById("stop-preview-number");
+const stopPreviewTitle = document.getElementById("stop-preview-title");
+const stopPreviewImage = document.getElementById("stop-preview-image");
 const globalLanguageChips = document.getElementById("global-language-chips");
+const globalLanguageSelector = document.querySelector(".global-language-selector");
+const globalLanguageCurrent = document.getElementById("global-language-current");
+const globalLanguageCurrentLabel = document.getElementById("global-language-current-label");
 const helpButton = document.getElementById("help-button");
 const onboardingOverlay = document.getElementById("onboarding-overlay");
 const onboardingTitle = document.getElementById("onboarding-title");
@@ -356,8 +356,13 @@ const audioFeedback = document.getElementById("audio-feedback");
 const playerNextPreview = document.getElementById("player-next-preview");
 const playerNextPreviewLabel = document.getElementById("player-next-preview-label");
 const playerNextPreviewTitle = document.getElementById("player-next-preview-title");
+const playerNextPreviewImage = document.getElementById("player-next-preview-image");
 const playerNextStopButton = document.getElementById("player-next-stop-button");
-const playerNextStopLabel = document.getElementById("player-next-stop-label");
+const playerPreviousPreview = document.getElementById("player-previous-preview");
+const playerPreviousPreviewLabel = document.getElementById("player-previous-preview-label");
+const playerPreviousPreviewTitle = document.getElementById("player-previous-preview-title");
+const playerPreviousPreviewImage = document.getElementById("player-previous-preview-image");
+const playerPreviousStopButton = document.getElementById("player-previous-stop-button");
 const heroMascot = document.getElementById("hero-mascot");
 const appShell = document.querySelector(".app-shell");
 const playerSheet = document.querySelector(".player-sheet");
@@ -404,6 +409,8 @@ const MASCOT_FRAME_PATHS = {
 const mascotCueCache = new Map();
 const mascotFrameImages = new Map();
 let mascotAnimationFrame = null;
+let routeScrollAnimationFrame = null;
+let routeSelectionTimers = [];
 let mascotActiveAudio = null;
 let mascotActiveCues = [];
 let mascotCueIndex = 0;
@@ -415,7 +422,6 @@ const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
 const siteLanguages = ["IT", "EN", "DE", "FR", "ES", "PT", "RU"];
 const LANGUAGE_STORAGE_KEY = "vicopisano-language";
 const LAST_STOP_STORAGE_KEY = "vicopisano-last-stop";
-const ONBOARDING_STORAGE_KEY = "vicopisano-language-onboarding";
 const WHITE_ARTWORK =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(
@@ -870,7 +876,7 @@ const uiStrings = {
       FR: "Frantsuzskiy",
       ES: "Ispanskiy",
       PT: "Portugalskiy",
-      RU: "Russkiy",
+      RU: "Русский",
     },
   },
 };
@@ -1149,6 +1155,7 @@ function syncUrlState({ replace = false } = {}) {
 function setCurrentLanguage(languageCode, options = {}) {
   currentLanguage = normalizeLanguageCode(languageCode) || "EN";
   syncSelectedLanguagesForCurrentLanguage();
+  closeGlobalLanguageMenu();
 
   if (options.persist !== false) {
     setStoredValue(LANGUAGE_STORAGE_KEY, currentLanguage);
@@ -1205,6 +1212,86 @@ function replayAnimationClass(element, className, duration = 420) {
   }, duration);
 }
 
+function getRouteSelectionDuration() {
+  return Number.parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue("--tp-motion-route-selection"),
+  ) || 620;
+}
+
+function scrollRouteIntoView() {
+  const routeExperience = document.querySelector(".route-experience");
+  if (!routeExperience) {
+    return;
+  }
+
+  const targetTop = Math.max(
+    0,
+    Math.min(
+      window.scrollY + routeExperience.getBoundingClientRect().top - 20,
+      document.documentElement.scrollHeight - window.innerHeight,
+    ),
+  );
+
+  if (reducedMotionQuery.matches || Math.abs(targetTop - window.scrollY) < 2) {
+    window.scrollTo({ top: targetTop, behavior: "auto" });
+    return;
+  }
+
+  if (routeScrollAnimationFrame !== null) {
+    window.cancelAnimationFrame(routeScrollAnimationFrame);
+  }
+
+  const startTop = window.scrollY;
+  const distance = targetTop - startTop;
+  const duration = getRouteSelectionDuration();
+  const startTime = performance.now();
+
+  const step = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 4);
+    window.scrollTo({ top: startTop + distance * easedProgress, behavior: "auto" });
+
+    if (progress < 1) {
+      routeScrollAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    routeScrollAnimationFrame = null;
+  };
+
+  routeScrollAnimationFrame = window.requestAnimationFrame(step);
+}
+
+function scrollPageToTop() {
+  if (reducedMotionQuery.matches || window.scrollY < 2) {
+    window.scrollTo({ top: 0, behavior: "auto" });
+    return;
+  }
+
+  if (routeScrollAnimationFrame !== null) {
+    window.cancelAnimationFrame(routeScrollAnimationFrame);
+  }
+
+  const startTop = window.scrollY;
+  const duration = getRouteSelectionDuration();
+  const startTime = performance.now();
+
+  const step = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 4);
+    window.scrollTo({ top: startTop * (1 - easedProgress), behavior: "auto" });
+
+    if (progress < 1) {
+      routeScrollAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    routeScrollAnimationFrame = null;
+  };
+
+  routeScrollAnimationFrame = window.requestAnimationFrame(step);
+}
+
 function animateTranslatedContent() {
   const textTargets = [
     eyebrowText,
@@ -1245,6 +1332,29 @@ function pulseActiveLanguageChips() {
 function pulseActiveStopCard(stopNumber = activeStopNumber) {
   const activeButton = buttonsByStop.get(stopNumber);
   replayAnimationClass(activeButton, "is-pulsing", 360);
+}
+
+function clearRouteSelectionTimers() {
+  routeSelectionTimers.forEach((timer) => window.clearTimeout(timer));
+  routeSelectionTimers = [];
+}
+
+function scheduleRouteSelection(callback, delay) {
+  const timer = window.setTimeout(() => {
+    routeSelectionTimers = routeSelectionTimers.filter((item) => item !== timer);
+    callback();
+  }, delay);
+  routeSelectionTimers.push(timer);
+}
+
+function animateRouteSelectionCard(stopNumber = activeStopNumber) {
+  const activeButton = buttonsByStop.get(stopNumber);
+  replayAnimationClass(activeButton, "is-route-selecting", 420);
+  pulseActiveStopCard(stopNumber);
+}
+
+function reactToTransport(group, reaction) {
+  replayAnimationClass(group, `is-transport-${reaction}`, 420);
 }
 
 function highlightActiveMarker(stopNumber = activeStopNumber) {
@@ -1544,6 +1654,61 @@ function updateMapExploreStop(tappa = activeStopNumber ? tappe.find((item) => it
   mapExploreOpenPlayer?.setAttribute("aria-label", getUiStrings(currentLanguage).playerExpand);
 }
 
+function getDirectionsLabel() {
+  const labels = {
+    IT: "Apri indicazioni",
+    EN: "Open directions",
+    DE: "Route öffnen",
+    FR: "Ouvrir l'itinéraire",
+    ES: "Abrir indicaciones",
+    PT: "Abrir direções",
+    RU: "Otkryt marshrut",
+  };
+
+  return labels[currentLanguage] || labels.IT;
+}
+
+function updateMapDirectionsButton(tappa = activeStopNumber ? tappe.find((item) => item.numero === activeStopNumber) : null) {
+  if (!mapDirectionsButton) {
+    return;
+  }
+
+  mapDirectionsButton.hidden = !tappa;
+  if (!tappa) {
+    return;
+  }
+
+  const label = getDirectionsLabel();
+  const title = getStopTitle(tappa);
+  const destination = encodeURIComponent(`${tappa.latitudine},${tappa.longitudine}`);
+  mapDirectionsButton.href = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=walking`;
+  mapDirectionsButton.setAttribute("aria-label", `${label}: ${title}`);
+  mapDirectionsButton.title = `${label}: ${title}`;
+}
+
+function updateStopPreview(tappa, { animate = false } = {}) {
+  if (!stopPreview || !tappa) {
+    return;
+  }
+
+  const activeStopItem = buttonsByStop.get(tappa.numero)?.closest("li");
+  if (activeStopItem && stopPreview.parentElement !== activeStopItem) {
+    activeStopItem.appendChild(stopPreview);
+  }
+
+  const title = getStopTitle(tappa);
+
+  stopPreview.hidden = false;
+  stopPreviewNumber.textContent = tappa.numero;
+  stopPreviewTitle.textContent = title;
+  stopPreviewImage.src = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
+  stopPreviewImage.alt = `Immagine ${title}`;
+
+  if (animate && !reducedMotionQuery.matches) {
+    replayAnimationClass(stopPreview, "is-entering", getRouteSelectionDuration());
+  }
+}
+
 function updateMapFullscreenButton() {
   if (!mapFullscreenButton) {
     return;
@@ -1567,6 +1732,7 @@ async function toggleMapFullscreen() {
   }
 
   mapStageFrame.classList.toggle("is-expanded");
+  document.body.classList.toggle("is-map-fullscreen", isMapFullscreenActive());
   updateMapFullscreenButton();
   updateMapExploreStop();
   setTimeout(() => map.invalidateSize(), 240);
@@ -1589,6 +1755,7 @@ function bindMapFullscreenButton() {
     consumeControlEvent(event);
     openPlayerOverlay(event.currentTarget);
   });
+
 }
 
 function getLanguageDisplayName(languageCode, uiLanguage = currentLanguage) {
@@ -1615,19 +1782,22 @@ function buildLanguageChips(
 
   siteLanguages.forEach((languageCode) => {
     const chip = document.createElement("button");
+    const languageName = getLanguageDisplayName(languageCode, languageCode);
+    const isRuntimeGlobal = container === globalLanguageChips;
+    const isOnboarding = container === onboardingLanguageChips;
     chip.type = "button";
     chip.className = "language-chip tp-chip";
-    chip.textContent =
-      getAudioOptions(tappe[0]).find((option) => option.codice === languageCode)?.bandiera ||
-      languageCode;
+    chip.classList.toggle("runtime-language-option", isRuntimeGlobal);
+    chip.classList.toggle("onboarding-language-option", isOnboarding);
+    chip.textContent = isRuntimeGlobal || isOnboarding ? `${languageCode} · ${languageName}` : languageCode;
     chip.classList.toggle("is-active", languageCode === currentLanguage);
-    if (container === playerLanguageChips) {
+    if (container === playerLanguageChips || container === globalLanguageChips) {
       chip.setAttribute("role", "option");
     }
     chip.setAttribute("aria-pressed", languageCode === currentLanguage ? "true" : "false");
     chip.setAttribute("aria-selected", languageCode === currentLanguage ? "true" : "false");
-    chip.setAttribute("aria-label", getLanguageDisplayName(languageCode, currentLanguage));
-    chip.title = getLanguageDisplayName(languageCode, currentLanguage);
+    chip.setAttribute("aria-label", languageName);
+    chip.title = languageName;
     chip.addEventListener("click", () => {
       if (onSelect) {
         onSelect(languageCode, chip);
@@ -1635,6 +1805,9 @@ function buildLanguageChips(
       }
 
       if (languageCode === currentLanguage) {
+        if (isRuntimeGlobal) {
+          closeGlobalLanguageMenu();
+        }
         replayAnimationClass(chip, "is-pulsing", 460);
         return;
       }
@@ -1760,7 +1933,11 @@ function createMascotMotionController() {
     }, duration);
   };
 
-  const canUseDetailMascot = () => visible || !playerArtwork || !overlayOpen;
+  const canUseDetailMascot = () =>
+    visible ||
+    window.matchMedia("(min-width: 1024px)").matches ||
+    !playerArtwork ||
+    !overlayOpen;
 
   const scheduleIdle = () => {
     idleTimer = clearTimer(idleTimer);
@@ -1861,7 +2038,10 @@ function createMascotMotionController() {
       }, reduced ? 80 : 700);
     },
     stopTransition() {
-      if (reduced || (!visible && overlayOpen)) {
+      if (
+        reduced ||
+        (!visible && !window.matchMedia("(min-width: 1024px)").matches && overlayOpen)
+      ) {
         return;
       }
 
@@ -2164,6 +2344,59 @@ function seekCurrentAudio(offset) {
   updateMiniPlayerPlayback();
 }
 
+function isCurrentStopWithoutAudio() {
+  return Boolean(currentSelectedOption && !currentSelectedOption.audioDisponibile);
+}
+
+function setControlIcon(button, iconName) {
+  const icon = button?.querySelector(".material-symbols-rounded");
+  if (icon) {
+    icon.textContent = iconName;
+  }
+}
+
+function updateStopNavigationControls() {
+  const isNoAudioStop = isCurrentStopWithoutAudio();
+  const strings = getUiStrings(currentLanguage);
+  const playerTransport = document.querySelector(".player-transport-group");
+  const miniTransport = document.querySelector(".mini-player-transport-group");
+  const playerTimeline = document.querySelector(".player-timeline");
+
+  playerTimeline.hidden = isNoAudioStop;
+  playerTransport?.classList.toggle("is-stop-navigation", isNoAudioStop);
+  miniTransport?.classList.toggle("is-stop-navigation", isNoAudioStop);
+  playerTimeline.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
+  playerPlayButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
+  miniPlayerToggle.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
+  playerRepeatButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
+  miniPlayerRepeat.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
+  playerPlayButton.hidden = isNoAudioStop;
+  miniPlayerToggle.hidden = isNoAudioStop;
+  playerRepeatButton.hidden = isNoAudioStop;
+  miniPlayerRepeat.hidden = isNoAudioStop;
+
+  if (isNoAudioStop) {
+    setControlIcon(playerPrevButton, "skip_previous");
+    setControlIcon(playerNextButton, "skip_next");
+    setControlIcon(miniPlayerPrev, "skip_previous");
+    setControlIcon(miniPlayerNext, "skip_next");
+    playerPrevButton.setAttribute("aria-label", strings.playerPrevious);
+    playerNextButton.setAttribute("aria-label", strings.playerNext);
+    miniPlayerPrev.setAttribute("aria-label", strings.playerPrevious);
+    miniPlayerNext.setAttribute("aria-label", strings.playerNext);
+    return;
+  }
+
+  setControlIcon(playerPrevButton, "replay_10");
+  setControlIcon(playerNextButton, "forward_10");
+  setControlIcon(miniPlayerPrev, "replay_10");
+  setControlIcon(miniPlayerNext, "forward_10");
+  playerPrevButton.setAttribute("aria-label", "Indietro di 10 secondi");
+  playerNextButton.setAttribute("aria-label", "Avanti di 10 secondi");
+  miniPlayerPrev.setAttribute("aria-label", "Indietro di 10 secondi");
+  miniPlayerNext.setAttribute("aria-label", "Avanti di 10 secondi");
+}
+
 function updateNextStopPreview(tappa) {
   if (!playerNextPreview || !tappa) {
     return;
@@ -2172,17 +2405,43 @@ function updateNextStopPreview(tappa) {
   const currentIndex = tappe.findIndex((item) => item.numero === tappa.numero);
   const nextStop = currentIndex >= 0 ? tappe[currentIndex + 1] : null;
   playerNextPreview.hidden = !nextStop;
+  playerNextPreview.classList.toggle("is-completion-prominent", Boolean(nextStop && audioHasEnded));
 
   if (nextStop) {
     const strings = getUiStrings(currentLanguage);
     playerNextPreviewLabel.textContent = strings.nextStopPreview || "Prossima tappa";
     playerNextPreviewTitle.textContent = `${nextStop.numero}. ${getStopTitle(nextStop)}`;
-    playerNextStopLabel.textContent = strings.openNextStop || "Apri prossima tappa";
+    playerNextPreviewImage.src = STOP_ARTWORKS[nextStop.numero] || WHITE_ARTWORK;
+    playerNextPreviewImage.alt = `Immagine ${getStopTitle(nextStop)}`;
+    playerNextStopButton?.setAttribute("aria-label", strings.openNextStop || "Apri prossima tappa");
+    playerNextStopButton.title = strings.openNextStop || "Apri prossima tappa";
+  }
+}
+
+function updatePreviousStopPreview(tappa) {
+  if (!playerPreviousPreview || !tappa) {
+    return;
+  }
+
+  const currentIndex = tappe.findIndex((item) => item.numero === tappa.numero);
+  const previousStop = currentIndex > 0 ? tappe[currentIndex - 1] : null;
+  playerPreviousPreview.hidden = !previousStop;
+
+  if (previousStop) {
+    const strings = getUiStrings(currentLanguage);
+    playerPreviousPreviewLabel.textContent = strings.playerPrevious;
+    playerPreviousPreviewTitle.textContent = `${previousStop.numero}. ${getStopTitle(previousStop)}`;
+    playerPreviousPreviewImage.src = STOP_ARTWORKS[previousStop.numero] || WHITE_ARTWORK;
+    playerPreviousPreviewImage.alt = `Immagine ${getStopTitle(previousStop)}`;
+    playerPreviousStopButton?.setAttribute("aria-label", strings.playerPrevious);
+    playerPreviousStopButton.title = strings.playerPrevious;
   }
 }
 
 function updateMiniPlayerPlayback() {
   const strings = getUiStrings(currentLanguage);
+  updateStopNavigationControls();
+  playerNextPreview?.classList.toggle("is-completion-prominent", audioHasEnded);
   if (!currentAudio) {
     setPlaybackButtonIcon(miniPlayerToggle, "play_arrow", false);
     miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
@@ -2202,7 +2461,6 @@ function updateMiniPlayerPlayback() {
     playerCurrentTime.textContent = "00:00";
     playerDurationTotal.textContent = "00:00";
     playerProgressInput.value = "0";
-    playerNextPreview && (playerNextPreview.hidden = true);
     return;
   }
 
@@ -2327,6 +2585,55 @@ function createMarkerIcon(stopNumber) {
   });
 }
 
+function getRouteDirectionPoints(coordinates, count = 4) {
+  const segments = [];
+  let totalDistance = 0;
+
+  for (let index = 1; index < coordinates.length; index += 1) {
+    const [startLongitude, startLatitude] = coordinates[index - 1];
+    const [endLongitude, endLatitude] = coordinates[index];
+    const deltaLongitude = (endLongitude - startLongitude) * Math.cos((startLatitude * Math.PI) / 180);
+    const deltaLatitude = endLatitude - startLatitude;
+    const distance = Math.hypot(deltaLongitude, deltaLatitude);
+
+    if (distance > 0) {
+      totalDistance += distance;
+      segments.push({
+        startLongitude,
+        startLatitude,
+        endLongitude,
+        endLatitude,
+        distance,
+        totalDistance,
+      });
+    }
+  }
+
+  return Array.from({ length: count }, (_, index) => {
+    const targetDistance = (totalDistance * (index + 1)) / (count + 1);
+    const segment = segments.find((item) => item.totalDistance >= targetDistance);
+    const previousDistance = segment.totalDistance - segment.distance;
+    const progress = (targetDistance - previousDistance) / segment.distance;
+    const latitude = segment.startLatitude + (segment.endLatitude - segment.startLatitude) * progress;
+    const longitude = segment.startLongitude + (segment.endLongitude - segment.startLongitude) * progress;
+    const bearing = (Math.atan2(
+      (segment.endLongitude - segment.startLongitude) * Math.cos((latitude * Math.PI) / 180),
+      segment.endLatitude - segment.startLatitude,
+    ) * 180) / Math.PI;
+
+    return { latitude, longitude, bearing };
+  });
+}
+
+function createRouteDirectionIcon(bearing) {
+  return L.divIcon({
+    className: "route-direction-icon",
+    html: `<span class="material-symbols-rounded" aria-hidden="true" style="transform: rotate(${bearing}deg)">navigation</span>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  });
+}
+
 function getAudioOptions(tappa) {
   if (Array.isArray(tappa.audioVarianti) && tappa.audioVarianti.length > 0) {
     return tappa.audioVarianti;
@@ -2357,6 +2664,15 @@ function getSelectedAudioOption(tappa) {
 
 function getDetailCopy(tappa, selectedOption) {
   const strings = getUiStrings(currentLanguage);
+  const descriptiveText = stopDescriptions[tappa.numero]?.[currentLanguage] || tappa.descrizione;
+
+  if (!selectedOption?.audioDisponibile) {
+    return {
+      title: strings.transcriptTitle,
+      text: descriptiveText,
+    };
+  }
+
   if (selectedOption && selectedOption.trascrizione) {
     return {
       title: strings.transcriptTitle,
@@ -2365,13 +2681,70 @@ function getDetailCopy(tappa, selectedOption) {
   }
 
   return {
-    title: strings.descriptiveText,
-    text: stopDescriptions[tappa.numero]?.[currentLanguage] || tappa.descrizione,
+    title: strings.transcriptTitle,
+    text: descriptiveText,
   };
 }
 
 function renderGlobalLanguageSelector() {
-  buildLanguageChips(globalLanguageChips);
+  buildLanguageChips(globalLanguageChips, {
+    onSelect: (languageCode) => {
+      if (languageCode === currentLanguage) {
+        closeGlobalLanguageMenu();
+        return;
+      }
+
+      setCurrentLanguage(languageCode);
+      startGuide();
+    },
+  });
+  if (globalLanguageCurrentLabel) {
+    globalLanguageCurrentLabel.textContent = getLanguageDisplayName(currentLanguage, currentLanguage);
+  }
+  globalLanguageCurrent?.setAttribute(
+    "aria-label",
+    `Lingua corrente: ${getLanguageDisplayName(currentLanguage, currentLanguage)}`,
+  );
+}
+
+function closeGlobalLanguageMenu() {
+  globalLanguageSelector?.classList.remove("is-open");
+  globalLanguageCurrent?.setAttribute("aria-expanded", "false");
+}
+
+function toggleGlobalLanguageMenu() {
+  if (!globalLanguageSelector || !globalLanguageCurrent) {
+    return;
+  }
+
+  const isOpen = globalLanguageSelector.classList.toggle("is-open");
+  globalLanguageCurrent.setAttribute("aria-expanded", String(isOpen));
+  if (isOpen) {
+    globalLanguageChips.querySelector('[aria-selected="true"]')?.focus();
+  }
+}
+
+function bindGlobalLanguageSelector() {
+  globalLanguageCurrent?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    toggleGlobalLanguageMenu();
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (
+      globalLanguageSelector?.classList.contains("is-open") &&
+      !globalLanguageSelector.contains(event.target)
+    ) {
+      closeGlobalLanguageMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && globalLanguageSelector?.classList.contains("is-open")) {
+      closeGlobalLanguageMenu();
+      globalLanguageCurrent?.focus();
+    }
+  });
 }
 
 function renderOnboardingTexts() {
@@ -2396,14 +2769,13 @@ function renderOnboardingLanguageSelector() {
     onSelect: (languageCode, chip) => {
       setCurrentLanguage(languageCode);
       replayAnimationClass(chip, "is-pulsing", 460);
-      closeOnboarding();
+      closeOnboarding({ startGuide: true });
     },
   });
 }
 
 function shouldShowOnboarding() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("welcome") === "1" || getStoredValue(ONBOARDING_STORAGE_KEY) !== "done";
+  return true;
 }
 
 function showOnboardingIfNeeded() {
@@ -2417,15 +2789,18 @@ function showOnboardingIfNeeded() {
   document.body.classList.add("onboarding-open");
 }
 
-function closeOnboarding() {
+function closeOnboarding({ startGuide: shouldStartGuide = false } = {}) {
   if (!onboardingOverlay) {
     return;
   }
 
-  setStoredValue(ONBOARDING_STORAGE_KEY, "done");
   onboardingOverlay.classList.add("is-hidden");
   document.body.classList.remove("onboarding-open");
   animateTranslatedContent();
+
+  if (shouldStartGuide) {
+    window.requestAnimationFrame(startGuide);
+  }
 }
 
 function clearGuideHighlight() {
@@ -2516,6 +2891,7 @@ function renderGuideStep() {
   guideNextButton.setAttribute("aria-label", nextGuideLabel);
   guideNextButton.title = nextGuideLabel;
   guideLayer.classList.remove("is-hidden");
+  document.body.classList.add("guide-open");
   scrollGuideTargetIntoView(guideTarget);
   requestAnimationFrame(() => {
     positionGuideCard(guideTarget);
@@ -2529,10 +2905,23 @@ function closeGuide() {
   }
 
   guideLayer.classList.add("is-hidden");
+  document.body.classList.remove("guide-open");
   clearGuideHighlight();
+  scrollPageToTop();
 }
 
 function startGuide() {
+  const firstStop = tappe[0];
+
+  if (firstStop && activeStopNumber !== firstStop.numero) {
+    focusStop(firstStop, {
+      skipFly: true,
+      autoplay: false,
+      openOverlay: false,
+      replaceUrl: true,
+    });
+  }
+
   activeGuideStepIndex = 0;
   renderGuideStep();
 }
@@ -2552,6 +2941,7 @@ function bindHelpControls() {
     const steps = getGuideSteps();
     if (activeGuideStepIndex >= steps.length - 1) {
       closeGuide();
+      scrollPageToTop();
       return;
     }
 
@@ -2563,6 +2953,26 @@ function bindHelpControls() {
       return;
     }
     renderGuideStep();
+  });
+
+  const preventGuideScroll = (event) => {
+    if (!guideLayer || guideLayer.classList.contains("is-hidden")) {
+      return;
+    }
+    event.preventDefault();
+  };
+
+  window.addEventListener("wheel", preventGuideScroll, { passive: false });
+  window.addEventListener("touchmove", preventGuideScroll, { passive: false });
+  window.addEventListener("keydown", (event) => {
+    if (!guideLayer || guideLayer.classList.contains("is-hidden")) {
+      return;
+    }
+
+    const scrollKeys = [" ", "PageDown", "PageUp", "ArrowDown", "ArrowUp", "Home", "End"];
+    if (scrollKeys.includes(event.key) && !event.target.closest("button")) {
+      event.preventDefault();
+    }
   });
 }
 
@@ -2592,10 +3002,19 @@ function renderPlayerLanguageSelector(tappa = null) {
   const selectedCode = selectedLanguageByStop.get(targetStop.numero) || availableLanguages[0]?.codice;
   const selectedOption = availableLanguages.find((option) => option.codice === selectedCode) || availableLanguages[0];
   if (playerLanguageCurrentLabel) {
-    playerLanguageCurrentLabel.textContent = `${selectedOption?.bandiera || ""} ${getLanguageDisplayName(selectedOption?.codice || currentLanguage)}`.trim();
+    playerLanguageCurrentLabel.textContent = getLanguageDisplayName(
+      selectedOption?.codice || currentLanguage,
+      selectedOption?.codice || currentLanguage,
+    );
   }
   if (playerLanguageCurrent) {
-    playerLanguageCurrent.setAttribute("aria-label", `Lingua corrente: ${getLanguageDisplayName(selectedOption?.codice || currentLanguage)}`);
+    playerLanguageCurrent.setAttribute(
+      "aria-label",
+      `Lingua corrente: ${getLanguageDisplayName(
+        selectedOption?.codice || currentLanguage,
+        selectedOption?.codice || currentLanguage,
+      )}`,
+    );
   }
 
   playerLanguageChips.innerHTML = "";
@@ -2657,7 +3076,8 @@ function togglePlayerLanguageMenu() {
 function renderDetailCopy(tappa) {
   const selectedOption = getSelectedAudioOption(tappa);
   const detailCopy = getDetailCopy(tappa, selectedOption);
-  detailCopyTitle.textContent = detailCopy.title;
+  detailCopyTitle.setAttribute("aria-label", detailCopy.title);
+  detailCopyTitle.title = detailCopy.title;
   detailDescription.textContent = detailCopy.text;
   detailCopyBox.open = false;
 }
@@ -2679,14 +3099,11 @@ function renderAudioContent(tappa) {
   currentSelectedOption = selectedOption;
   audioHasEnded = false;
   updateNextStopPreview(tappa);
+  updatePreviousStopPreview(tappa);
 
   if (!selectedOption || !selectedOption.audioDisponibile) {
     stopMascotLipSync();
     currentAudio = null;
-    const unavailable = document.createElement("p");
-    unavailable.className = "audio-unavailable";
-    unavailable.textContent = strings.audioUnavailable;
-    audioWrapper.appendChild(unavailable);
     updateMiniPlayerPlayback();
     return;
   }
@@ -2952,14 +3369,25 @@ function bindPlayerControls() {
   }
   miniPlayerToggle.addEventListener("click", (event) => {
     consumeControlEvent(event);
+    reactToTransport(document.querySelector(".mini-player-transport-group"), "play");
     toggleMiniPlayerPlayback();
   });
   miniPlayerPrev.addEventListener("click", (event) => {
     consumeControlEvent(event);
+    reactToTransport(document.querySelector(".mini-player-transport-group"), "prev");
+    if (isCurrentStopWithoutAudio()) {
+      focusStopByOffset(-1);
+      return;
+    }
     seekCurrentAudio(-10);
   });
   miniPlayerNext.addEventListener("click", (event) => {
     consumeControlEvent(event);
+    reactToTransport(document.querySelector(".mini-player-transport-group"), "next");
+    if (isCurrentStopWithoutAudio()) {
+      focusStopByOffset(1);
+      return;
+    }
     seekCurrentAudio(10);
   });
   miniPlayerRepeat.addEventListener("click", (event) => {
@@ -2968,14 +3396,25 @@ function bindPlayerControls() {
   });
   playerPrevButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
+    reactToTransport(document.querySelector(".player-transport-group"), "prev");
+    if (isCurrentStopWithoutAudio()) {
+      focusStopByOffset(-1);
+      return;
+    }
     seekCurrentAudio(-10);
   });
   playerPlayButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
+    reactToTransport(document.querySelector(".player-transport-group"), "play");
     toggleMiniPlayerPlayback();
   });
   playerNextButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
+    reactToTransport(document.querySelector(".player-transport-group"), "next");
+    if (isCurrentStopWithoutAudio()) {
+      focusStopByOffset(1);
+      return;
+    }
     seekCurrentAudio(10);
   });
   playerRepeatButton.addEventListener("click", (event) => {
@@ -3011,6 +3450,10 @@ function bindPlayerControls() {
   playerNextStopButton?.addEventListener("click", (event) => {
     consumeControlEvent(event);
     focusStopByOffset(1);
+  });
+  playerPreviousStopButton?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    focusStopByOffset(-1);
   });
   [miniPlayerVolume, playerVolume, playerProgressInput].forEach((control) => {
     control.addEventListener("click", stopControlPropagation);
@@ -3078,7 +3521,8 @@ function renderStaticTexts() {
   platformsEyebrow.textContent = strings.platformsEyebrow;
   shareTitle.textContent = strings.shareTitle;
   locateMeButton.setAttribute("aria-label", strings.locateMe);
-  detailCopyTitle.textContent = strings.descriptiveText;
+  detailCopyTitle.setAttribute("aria-label", strings.transcriptTitle);
+  detailCopyTitle.title = strings.transcriptTitle;
   stopsList.setAttribute("aria-label", strings.routeTitle);
   playerPrevButton.setAttribute("aria-label", "Indietro di 10 secondi");
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
@@ -3185,19 +3629,46 @@ function focusStop(tappa, options = {}) {
     openPlayerOverlay();
   }
 
-  if (marker) {
-    if (!options.skipFly) {
-      map.flyTo([tappa.latitudine, tappa.longitudine], Math.max(map.getZoom(), 17), {
-        animate: true,
-        duration: 0.8,
-      });
+  updateMapExploreStop(tappa);
+  updateMapDirectionsButton(tappa);
+  updateStopPreview(tappa, { animate: false });
+
+  const shouldAnimateRoute = options.animateRoute === true && !reducedMotionQuery.matches;
+  const focusMap = () => {
+    if (marker) {
+      if (!options.skipFly) {
+        map.flyTo([tappa.latitudine, tappa.longitudine], Math.max(map.getZoom(), 17), {
+          animate: true,
+          duration: 0.8,
+        });
+      }
+      marker.closePopup();
     }
-    marker.closePopup();
+    highlightActiveMarker(tappa.numero);
+  };
+  const scrollToRoute = () => {
+    if (options.scrollRouteIntoView && window.matchMedia("(min-width: 1024px)").matches) {
+      scrollRouteIntoView();
+    }
+  };
+
+  clearRouteSelectionTimers();
+  if (shouldAnimateRoute) {
+    animateRouteSelectionCard(tappa.numero);
+    scheduleRouteSelection(() => {
+      focusMap();
+      scrollToRoute();
+    }, 80);
+    scheduleRouteSelection(() => {
+      updateStopPreview(tappa, { animate: true });
+    }, 160);
+    return;
   }
 
+  focusMap();
   pulseActiveStopCard(tappa.numero);
-  highlightActiveMarker(tappa.numero);
-  updateMapExploreStop(tappa);
+  updateStopPreview(tappa, { animate: options.animatePreview === true });
+  scrollToRoute();
 }
 
 function renderStopsList() {
@@ -3222,7 +3693,13 @@ function renderStopsList() {
     `;
 
     button.addEventListener("click", () => {
-      focusStop(tappa, { autoplay: true, openOverlay: false });
+      focusStop(tappa, {
+        autoplay: true,
+        openOverlay: false,
+        scrollRouteIntoView: true,
+        animatePreview: true,
+        animateRoute: true,
+      });
     });
 
     item.appendChild(button);
@@ -3240,13 +3717,22 @@ function renderMap() {
   const routeLayer = L.geoJSON(routeGeoJson, {
     style: {
       color: "#216f62",
-      weight: 4,
-      opacity: 0.64,
-      dashArray: "7 9",
+      weight: 5,
+      opacity: 0.8,
       lineCap: "round",
       lineJoin: "round",
     },
   }).addTo(map);
+
+  const routeCoordinates = routeGeoJson.features[0].geometry.coordinates;
+  getRouteDirectionPoints(routeCoordinates).forEach(({ latitude, longitude, bearing }) => {
+    L.marker([latitude, longitude], {
+      icon: createRouteDirectionIcon(bearing),
+      interactive: false,
+      keyboard: false,
+      zIndexOffset: -500,
+    }).addTo(map);
+  });
 
   tappe.forEach((tappa) => {
     const marker = L.marker([tappa.latitudine, tappa.longitudine], {
@@ -3257,7 +3743,12 @@ function renderMap() {
       .bindPopup(popupHtml(tappa));
 
     marker.on("click", () => {
-      focusStop(tappa, { skipFly: true, autoplay: true, openOverlay: true });
+      focusStop(tappa, {
+        autoplay: true,
+        animateRoute: true,
+        // In map fullscreen the persistent mini-player remains the visible audio control.
+        openOverlay: !isMapFullscreenActive(),
+      });
     });
 
     marker.on("popupopen", () => {
@@ -3290,6 +3781,7 @@ renderStopsList();
 renderMap();
 renderStaticTexts();
 renderGlobalLanguageSelector();
+bindGlobalLanguageSelector();
 renderOnboardingTexts();
 renderOnboardingLanguageSelector();
 bindMapLoadFeedback(baseTileLayer);
