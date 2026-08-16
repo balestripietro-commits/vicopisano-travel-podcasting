@@ -267,6 +267,7 @@ const detailStatus = document.getElementById("detail-status");
 const detailDuration = document.getElementById("detail-duration");
 const detailCopyBox = document.getElementById("detail-copy-box");
 const detailCopyTitle = document.getElementById("detail-copy-title");
+const detailCopyPanel = document.getElementById("detail-copy-panel");
 const detailDescription = document.getElementById("detail-description");
 const audioWrapper = document.getElementById("audio-wrapper");
 const playerArtwork = document.getElementById("player-artwork");
@@ -2078,6 +2079,9 @@ function createMascotMotionController() {
         runClass("is-pause-reaction", 460);
       }
     },
+    tapReaction() {
+      runClass(playing ? "is-play-reaction" : "is-pause-reaction", playing ? 340 : 460);
+    },
     end() {
       playing = false;
       emphasisTimer = clearTimer(emphasisTimer);
@@ -2172,6 +2176,14 @@ function setDetailArtworkMode(mode) {
   }
 
   mascotMotionController?.setVisible(detailArtworkMode === "mascot");
+}
+
+function syncDetailCopyPanel() {
+  const isOpen = Boolean(detailCopyBox?.open);
+  if (detailCopyPanel) {
+    detailCopyPanel.hidden = !isOpen;
+  }
+  playerArtwork?.classList.toggle("is-transcript-open", isOpen);
 }
 
 function getMouthCuePath(audioPath) {
@@ -3210,6 +3222,7 @@ function renderDetailCopy(tappa) {
   detailCopyTitle.title = detailCopy.title;
   detailDescription.textContent = detailCopy.text;
   detailCopyBox.open = false;
+  syncDetailCopyPanel();
 }
 
 function popupHtml(tappa) {
@@ -3474,6 +3487,28 @@ function toggleMiniPlayerPlayback() {
 }
 
 function bindPlayerControls() {
+  if (detailCopyBox) {
+    detailCopyBox.addEventListener("toggle", syncDetailCopyPanel);
+  }
+
+  getMascotMotionShells().forEach((shell) => {
+    shell.setAttribute("role", "button");
+    shell.setAttribute("tabindex", "0");
+    shell.setAttribute("aria-label", "Anima mascotte");
+    shell.addEventListener("click", (event) => {
+      event.stopPropagation();
+      mascotMotionController?.tapReaction();
+    });
+    shell.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      mascotMotionController?.tapReaction();
+    });
+  });
+
   if (artworkFlipToggle) {
     artworkFlipToggle.addEventListener("click", (event) => {
       event.stopPropagation();

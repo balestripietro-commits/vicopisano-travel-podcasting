@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260816-mobile-header-row" />
+    <link rel="stylesheet" href="style.css?v=20260816-mobile-player-fit" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -327,7 +327,13 @@
               src="mascotte_vicopisano.webp?v=20260816"
               alt="Immagine della traccia"
             />
-            <div class="player-artwork-layer is-mascot-layer mascot-motion-shell" data-mascot-motion="detail">
+            <div
+              class="player-artwork-layer is-mascot-layer mascot-motion-shell"
+              data-mascot-motion="detail"
+              role="button"
+              tabindex="0"
+              aria-label="Anima mascotte"
+            >
               <div class="mascot-breathing-shell">
                 <img
                   id="detail-mascot-image"
@@ -337,6 +343,9 @@
                 />
               </div>
             </div>
+          </div>
+          <div id="detail-copy-panel" class="detail-copy-content detail-copy-artwork-panel" hidden>
+            <p id="detail-description"></p>
           </div>
           <button
             type="button"
@@ -386,9 +395,6 @@
                 <summary id="detail-copy-title" aria-label="Trascrizione" title="Trascrizione">
                   <span class="detail-copy-summary-icon material-symbols-rounded" aria-hidden="true">article</span>
                 </summary>
-                <div class="detail-copy-content">
-                  <p id="detail-description"></p>
-                </div>
               </details>
             </div>
             <div class="player-volume-block">
@@ -464,6 +470,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260816-mascot-webp"></script>
+    <script src="app.js?v=20260816-mascot-tap"></script>
   </body>
 </html>

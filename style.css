@@ -358,8 +358,14 @@ button:active,
   position: relative;
   width: 100%;
   height: 100%;
+  cursor: pointer;
   transform-origin: center bottom;
   will-change: transform, opacity;
+}
+
+.mascot-motion-shell:focus-visible {
+  outline: 3px solid rgba(247, 224, 79, 0.88);
+  outline-offset: 4px;
 }
 
 .mascot-motion-shell--hero {
@@ -2186,6 +2192,27 @@ body.is-map-fullscreen .map-explore-stop {
   scrollbar-color: rgba(247, 224, 79, 0.72) rgba(255, 255, 255, 0.08);
 }
 
+.detail-copy-artwork-panel {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  z-index: 5;
+  max-height: min(220px, 34%);
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--tp-radius-md);
+  background: rgba(6, 42, 37, 0.84);
+  box-shadow: var(--tp-elevation-3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overscroll-behavior: contain;
+}
+
+.detail-copy-artwork-panel[hidden] {
+  display: none;
+}
+
 .detail-copy-content::-webkit-scrollbar {
   width: 8px;
 }
@@ -2504,16 +2531,7 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .brand-copy {
-    min-width: 0;
-    justify-items: start;
-  }
-
-  .brand-name {
-    max-width: 38vw;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 0.98rem;
+    display: none;
   }
 
   .brand-tag {
@@ -4083,6 +4101,7 @@ body.guide-open::before {
 
 .player-command-row {
   display: grid;
+  position: relative;
   gap: 14px;
 }
 
@@ -4198,7 +4217,7 @@ body.guide-open::before {
   }
 
   .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .player-artwork-support {
-    position: relative;
+    position: static;
     align-self: center;
   }
 
@@ -4210,6 +4229,7 @@ body.guide-open::before {
   .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .detail-copy {
     width: 44px;
     padding: 0;
+    transform: none;
     overflow: visible;
     border-radius: var(--tp-radius-full);
     background: rgba(255, 255, 255, 0.07);
@@ -4225,17 +4245,11 @@ body.guide-open::before {
     display: none;
   }
 
-  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .detail-copy-content {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    z-index: 4;
-    width: min(360px, calc(100vw - 72px));
-    padding: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: var(--tp-radius-md);
-    background: #103c37;
-    box-shadow: var(--tp-elevation-3);
+  .TPPlayerSheet .detail-copy-artwork-panel {
+    top: 34px;
+    left: 34px;
+    right: 34px;
+    max-height: min(230px, 35%);
   }
 
   .TPPlayerSheet .player-artwork .is-photo-layer,
@@ -4251,9 +4265,10 @@ body.guide-open::before {
     width: 52%;
     height: 64%;
     opacity: 1;
-    pointer-events: none;
+    pointer-events: auto;
     transform: none;
     filter: drop-shadow(0 14px 18px rgba(4, 24, 22, 0.34));
+    touch-action: manipulation;
   }
 
   .TPPlayerSheet .player-artwork .detail-mascot-image {
@@ -4290,7 +4305,7 @@ body.guide-open::before {
     display: grid;
     grid-template-columns: 44px minmax(0, 1fr);
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     margin-top: 2px;
   }
 
@@ -4299,7 +4314,7 @@ body.guide-open::before {
   }
 
   .TPPlayerSheet .player-command-row .player-artwork-support {
-    position: relative;
+    position: static;
     min-width: 0;
   }
 
@@ -4307,6 +4322,8 @@ body.guide-open::before {
     width: 44px;
     margin: 0;
     padding: 0;
+    transform: none;
+    position: static;
     overflow: visible;
     border-radius: var(--tp-radius-full);
     background: rgba(255, 255, 255, 0.07);
@@ -4322,42 +4339,57 @@ body.guide-open::before {
     display: none;
   }
 
-  .TPPlayerSheet .player-command-row .detail-copy-content {
-    position: absolute;
-    left: 0;
-    z-index: 5;
-    width: min(300px, calc(100vw - 56px));
-    margin-top: 10px;
+  .TPPlayerSheet .detail-copy-artwork-panel {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    max-height: min(170px, 32%);
     padding: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: var(--tp-radius-md);
-    background: #103c37;
-    box-shadow: var(--tp-elevation-3);
   }
 
   .TPPlayerSheet .player-command-row .player-controls {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    justify-content: stretch;
+    align-items: center;
+    gap: 6px;
     width: 100%;
     min-width: 0;
   }
 
   .TPPlayerSheet .player-transport-group {
-    grid-template-columns: 44px minmax(90px, 1fr) 44px;
-    gap: 6px;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: 44px minmax(96px, 1fr) 44px;
+    gap: 4px;
   }
 
   .TPPlayerSheet .player-transport-group .player-control-button {
+    width: 44px;
     min-width: 44px;
+    min-height: 52px;
   }
 
   .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
-    min-width: 90px;
+    width: 100%;
+    min-width: 96px;
+    min-height: 64px;
   }
 
   .TPPlayerSheet #player-repeat-button {
     position: static;
-    flex: 0 0 44px;
-    margin-left: 6px;
+    width: 44px;
+    min-width: 44px;
+    min-height: 52px;
+    margin-left: 0;
+  }
+
+  .TPPlayerSheet .player-previous-preview {
+    display: none;
+  }
+
+  .TPPlayerSheet .player-stop-navigation {
+    gap: 0;
   }
 
   .TPPlayerSheet .player-artwork .is-photo-layer,
@@ -4373,9 +4405,10 @@ body.guide-open::before {
     width: 40%;
     height: 58%;
     opacity: 1;
-    pointer-events: none;
+    pointer-events: auto;
     transform: none;
     filter: drop-shadow(0 12px 16px rgba(4, 24, 22, 0.32));
+    touch-action: manipulation;
   }
 
   .TPPlayerSheet .player-artwork .detail-mascot-image {
@@ -4814,5 +4847,177 @@ body.guide-open::before {
   .TPMiniPlayer .mini-player-transport-group.is-transport-prev #mini-player-prev,
   .TPMiniPlayer .mini-player-transport-group.is-transport-next #mini-player-next {
     transform: none;
+  }
+}
+
+.TPPlayerSheet {
+  align-items: stretch;
+  background: #092f2c;
+}
+
+.TPPlayerSheet .player-backdrop {
+  background: #092f2c;
+}
+
+.TPPlayerSheet .player-sheet {
+  width: 100%;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  border-radius: 0;
+  background: #092f2c;
+  box-shadow: none;
+}
+
+@supports not (height: 100dvh) {
+  .TPPlayerSheet .player-sheet {
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+@media (max-width: 860px) {
+  .TPPlayerSheet .player-stop-navigation .player-previous-preview,
+  .TPPlayerSheet #player-previous-preview {
+    display: none !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .TPPlayerSheet .player-sheet {
+    display: grid;
+    grid-template-rows: auto minmax(210px, 38dvh) minmax(0, auto) auto;
+    gap: clamp(8px, 1.6dvh, 14px);
+    overflow: hidden;
+    padding:
+      max(12px, env(safe-area-inset-top))
+      16px
+      max(12px, env(safe-area-inset-bottom));
+  }
+
+  .TPPlayerSheet .player-topbar {
+    min-height: 44px;
+  }
+
+  .TPPlayerSheet .player-artwork {
+    align-self: stretch;
+    width: min(100%, 430px);
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 24px;
+  }
+
+  .TPPlayerSheet .player-artwork-stack {
+    height: 100%;
+    max-height: none;
+    aspect-ratio: auto;
+    border-radius: 20px;
+  }
+
+  .TPPlayerSheet .player-artwork-layer {
+    border-radius: 20px;
+  }
+
+  .TPPlayerSheet .player-side {
+    display: grid;
+    align-content: start;
+    gap: clamp(8px, 1.4dvh, 12px);
+    min-height: 0;
+  }
+
+  .TPPlayerSheet .player-meta h2 {
+    display: -webkit-box;
+    max-height: 3.08em;
+    margin: 0;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    font-size: clamp(2rem, 8.6vw, 2.75rem);
+    line-height: 1.02;
+  }
+
+  .TPPlayerSheet .detail-status,
+  .TPPlayerSheet .detail-duration,
+  .TPPlayerSheet .audio-feedback {
+    display: none;
+  }
+
+  .TPPlayerSheet .player-timeline {
+    gap: 8px;
+  }
+
+  .TPPlayerSheet .player-command-row {
+    margin-top: 0;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button {
+    min-height: 50px;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
+    min-height: 62px;
+  }
+
+  .TPPlayerSheet #player-repeat-button {
+    min-height: 50px;
+  }
+
+  .TPPlayerSheet .player-stop-navigation {
+    align-self: end;
+    min-height: 0;
+  }
+
+  .TPPlayerSheet .player-stop-preview {
+    min-height: 64px;
+    margin-top: 0;
+    padding: 10px 12px;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    gap: 8px;
+  }
+
+  .TPPlayerSheet .player-next-preview-image {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .TPPlayerSheet .player-next-preview-label {
+    font-size: 0.72rem;
+  }
+
+  .TPPlayerSheet .player-next-preview-title {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 1rem;
+    line-height: 1.05;
+  }
+
+  .TPPlayerSheet .player-next-stop-button {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 390px) {
+  .TPPlayerSheet .player-sheet {
+    grid-template-rows: auto minmax(190px, 34dvh) minmax(0, auto) auto;
+    gap: 8px;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      14px
+      max(10px, env(safe-area-inset-bottom));
+  }
+
+  .TPPlayerSheet .player-meta h2 {
+    font-size: clamp(1.7rem, 8vw, 2.25rem);
+  }
+
+  .TPPlayerSheet .player-stop-preview {
+    min-height: 58px;
+    padding: 8px 10px;
   }
 }
