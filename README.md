@@ -76,7 +76,7 @@ Il sito supporta parametri URL condivisibili:
 
 ## Mascotte animata con Rhubarb
 
-- La mascotte nella home usa i frame in `assets/mascotte-mouth/`.
+- La mascotte nella home usa i frame WebP ottimizzati in `assets/mascotte-mouth/`.
 - I frame richiesti da Rhubarb sono presenti: `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H` e `X` per la bocca a riposo.
 - La mascotte usa wrapper separati per motion, breathing e mouth frame: Rhubarb continua a cambiare solo lo sprite della bocca, mentre `style.css` e `app.js` gestiscono micro-movimenti deterministici.
 - Il motion system resta sobrio: breathing quasi impercettibile, micro-sway idle occasionale, reazioni leggere a play/pausa/fine traccia, transizione foto/mascotte e micro transizione al cambio tappa.

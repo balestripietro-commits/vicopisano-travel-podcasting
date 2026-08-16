@@ -11,9 +11,8 @@
 - `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio, share links, geolocalizzazione, selettore lingua duplicato nel player e stati motion della mascotte.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
 - `logo_vicopisano.png`: stemma usato nell'intestazione del sito.
-- `mascotte_vicopisano.png`: immagine mascotte di supporto tenuta nel progetto.
-- `mascotte_vicopisano_saluto.mp4`: asset legacy non più usato nella schermata estesa corrente.
-- `assets/mascotte-mouth/`: frame mascotte Rhubarb `A-H` + `X` usati nella home per sincronizzare la bocca con l'audio.
+- `mascotte_vicopisano.webp`: immagine mascotte ottimizzata per il runtime.
+- `assets/mascotte-mouth/`: frame mascotte Rhubarb `A-H` + `X` in WebP ottimizzato, usati nella home e nel player per sincronizzare la bocca con l'audio.
 - Motion mascotte: wrapper annidati in `index.html`, animazioni CSS in `style.css` e controller deterministico in `app.js` separano movimento, breathing e mouth layer Rhubarb.
 - `tappa_1_torre_delle_quattro_porte.jpg`: foto reale associata alla Tappa 1.
 - `tappa_2_torre_e_camminamento_del_soccorso.jpg`: foto reale associata alla Tappa 2.

@@ -391,18 +391,18 @@ const markersByStop = new Map();
 const buttonsByStop = new Map();
 const selectedLanguageByStop = new Map();
 
-const MASCOT_ASSET_VERSION = "20260814";
+const MASCOT_ASSET_VERSION = "20260816";
 const MASCOT_FRAME_BASE_PATH = "assets/mascotte-mouth";
-const MASCOT_REST_FRAME = `${MASCOT_FRAME_BASE_PATH}/mascotte_X.png?v=${MASCOT_ASSET_VERSION}`;
+const MASCOT_REST_FRAME = `${MASCOT_FRAME_BASE_PATH}/mascotte_X.webp?v=${MASCOT_ASSET_VERSION}`;
 const MASCOT_FRAME_PATHS = {
-  A: `${MASCOT_FRAME_BASE_PATH}/mascotte_A.png?v=${MASCOT_ASSET_VERSION}`,
-  B: `${MASCOT_FRAME_BASE_PATH}/mascotte_B.png?v=${MASCOT_ASSET_VERSION}`,
-  C: `${MASCOT_FRAME_BASE_PATH}/mascotte_C.png?v=${MASCOT_ASSET_VERSION}`,
-  D: `${MASCOT_FRAME_BASE_PATH}/mascotte_D.png?v=${MASCOT_ASSET_VERSION}`,
-  E: `${MASCOT_FRAME_BASE_PATH}/mascotte_E.png?v=${MASCOT_ASSET_VERSION}`,
-  F: `${MASCOT_FRAME_BASE_PATH}/mascotte_F.png?v=${MASCOT_ASSET_VERSION}`,
-  G: `${MASCOT_FRAME_BASE_PATH}/mascotte_G.png?v=${MASCOT_ASSET_VERSION}`,
-  H: `${MASCOT_FRAME_BASE_PATH}/mascotte_H.png?v=${MASCOT_ASSET_VERSION}`,
+  A: `${MASCOT_FRAME_BASE_PATH}/mascotte_A.webp?v=${MASCOT_ASSET_VERSION}`,
+  B: `${MASCOT_FRAME_BASE_PATH}/mascotte_B.webp?v=${MASCOT_ASSET_VERSION}`,
+  C: `${MASCOT_FRAME_BASE_PATH}/mascotte_C.webp?v=${MASCOT_ASSET_VERSION}`,
+  D: `${MASCOT_FRAME_BASE_PATH}/mascotte_D.webp?v=${MASCOT_ASSET_VERSION}`,
+  E: `${MASCOT_FRAME_BASE_PATH}/mascotte_E.webp?v=${MASCOT_ASSET_VERSION}`,
+  F: `${MASCOT_FRAME_BASE_PATH}/mascotte_F.webp?v=${MASCOT_ASSET_VERSION}`,
+  G: `${MASCOT_FRAME_BASE_PATH}/mascotte_G.webp?v=${MASCOT_ASSET_VERSION}`,
+  H: `${MASCOT_FRAME_BASE_PATH}/mascotte_H.webp?v=${MASCOT_ASSET_VERSION}`,
   X: MASCOT_REST_FRAME,
 };
 
@@ -1381,7 +1381,7 @@ function pulseActiveLanguageChips() {
 
 function pulseActiveStopCard(stopNumber = activeStopNumber) {
   const activeButton = buttonsByStop.get(stopNumber);
-  replayAnimationClass(activeButton, "is-pulsing", 360);
+  replayAnimationClass(activeButton, "is-pulsing", Math.min(getRouteSelectionDuration(), 560));
 }
 
 function clearRouteSelectionTimers() {
@@ -1399,7 +1399,7 @@ function scheduleRouteSelection(callback, delay) {
 
 function animateRouteSelectionCard(stopNumber = activeStopNumber) {
   const activeButton = buttonsByStop.get(stopNumber);
-  replayAnimationClass(activeButton, "is-route-selecting", 420);
+  replayAnimationClass(activeButton, "is-route-selecting", getRouteSelectionDuration());
   pulseActiveStopCard(stopNumber);
 }
 
@@ -1423,7 +1423,7 @@ function highlightActiveMarker(stopNumber = activeStopNumber) {
       markerElement.classList.add("is-highlighted");
       window.setTimeout(() => {
         markerElement.classList.remove("is-highlighted");
-      }, 720);
+      }, getRouteSelectionDuration() + 80);
     }
   });
 }
@@ -1741,8 +1741,12 @@ function updateStopPreview(tappa, { animate = false } = {}) {
     return;
   }
 
+  const isDesktopRoute = window.matchMedia("(min-width: 1024px)").matches;
+  const routeExperience = document.querySelector(".route-experience");
   const activeStopItem = buttonsByStop.get(tappa.numero)?.closest("li");
-  if (activeStopItem && stopPreview.parentElement !== activeStopItem) {
+  if (isDesktopRoute && routeExperience && stopPreview.parentElement !== routeExperience) {
+    routeExperience.insertBefore(stopPreview, document.querySelector(".stops-panel"));
+  } else if (!isDesktopRoute && activeStopItem && stopPreview.parentElement !== activeStopItem) {
     activeStopItem.appendChild(stopPreview);
   }
 
@@ -2857,6 +2861,8 @@ function clearGuideHighlight() {
   document.querySelectorAll(".is-guide-highlighted").forEach((element) => {
     element.classList.remove("is-guide-highlighted");
   });
+  document.documentElement.style.removeProperty("--guide-spotlight-x");
+  document.documentElement.style.removeProperty("--guide-spotlight-y");
 }
 
 let activeGuideStepIndex = 0;
@@ -2926,6 +2932,7 @@ function positionGuideCard(target) {
       "--guide-card-mobile-top",
       `${Math.max(16, rect.top - cardHeight - 16)}px`,
     );
+    updateGuidePointer(target);
     return;
   }
 
@@ -2939,6 +2946,7 @@ function positionGuideCard(target) {
     const top = Math.max(16, Math.min(maxTop, rect.top));
     guideCard.style.left = `${left}px`;
     guideCard.style.top = `${top}px`;
+    updateGuidePointer(target);
     return;
   }
 
@@ -2949,6 +2957,39 @@ function positionGuideCard(target) {
   const top = Math.max(16, Math.min(maxTop, preferredTop));
   guideCard.style.left = `${left}px`;
   guideCard.style.top = `${top}px`;
+  updateGuidePointer(target);
+}
+
+function updateGuidePointer(target) {
+  if (!guideCard || !target) {
+    return;
+  }
+
+  const cardRect = guideCard.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+  const cardCenterX = cardRect.left + cardRect.width / 2;
+  const cardCenterY = cardRect.top + cardRect.height / 2;
+  const targetCenterX = targetRect.left + targetRect.width / 2;
+  const targetCenterY = targetRect.top + targetRect.height / 2;
+  const deltaX = targetCenterX - cardCenterX;
+  const deltaY = targetCenterY - cardCenterY;
+  const pointerClasses = [
+    "is-pointing-left",
+    "is-pointing-right",
+    "is-pointing-up",
+    "is-pointing-down",
+  ];
+
+  guideCard.classList.remove(...pointerClasses);
+  document.documentElement.style.setProperty("--guide-spotlight-x", `${targetCenterX}px`);
+  document.documentElement.style.setProperty("--guide-spotlight-y", `${targetCenterY}px`);
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    guideCard.classList.add(deltaX > 0 ? "is-pointing-right" : "is-pointing-left");
+    return;
+  }
+
+  guideCard.classList.add(deltaY > 0 ? "is-pointing-down" : "is-pointing-up");
 }
 
 function renderGuideStep() {
@@ -3756,10 +3797,10 @@ function focusStop(tappa, options = {}) {
     scheduleRouteSelection(() => {
       focusMap();
       scrollToRoute();
-    }, 80);
+    }, 120);
     scheduleRouteSelection(() => {
       updateStopPreview(tappa, { animate: true });
-    }, 160);
+    }, 260);
     return;
   }
 

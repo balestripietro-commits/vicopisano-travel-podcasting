@@ -23,7 +23,7 @@
   --tp-motion-fast: 180ms;
   --tp-motion-standard: 280ms;
   --tp-motion-expressive: 420ms;
-  --tp-motion-route-selection: 620ms;
+  --tp-motion-route-selection: 680ms;
   --tp-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --tp-ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
   --tp-ease-decelerate: cubic-bezier(0, 0, 0, 1);
@@ -1019,7 +1019,7 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .stop-button.is-pulsing {
-  animation: stop-card-pulse 320ms ease;
+  animation: stop-card-pulse 520ms var(--tp-ease-emphasized);
 }
 
 .stop-index,
@@ -2227,8 +2227,9 @@ body.is-map-fullscreen .map-explore-stop {
 .map-marker.is-highlighted {
   box-shadow:
     0 0 0 10px rgba(154, 107, 236, 0.16),
+    0 0 0 18px color-mix(in srgb, var(--tp-color-tertiary) 20%, transparent),
     0 14px 30px rgba(127, 98, 219, 0.38);
-  animation: marker-highlight-pulse 620ms ease;
+  animation: marker-highlight-pulse var(--tp-motion-route-selection) var(--tp-ease-emphasized);
 }
 
 .map-marker-number {
@@ -2356,18 +2357,24 @@ body.is-map-fullscreen .map-explore-stop {
 
 @keyframes stop-card-pulse {
   0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(36, 92, 82, 0);
+    transform: translateY(-2px) scale(1);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--tp-color-tertiary) 22%, transparent),
+      0 18px 42px rgba(36, 92, 82, 0.18);
   }
 
-  40% {
-    transform: scale(0.988);
-    box-shadow: 0 14px 30px rgba(36, 92, 82, 0.12);
+  46% {
+    transform: translateY(-6px) scale(1.012);
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--tp-color-tertiary) 34%, transparent),
+      0 24px 52px rgba(36, 92, 82, 0.24);
   }
 
   100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(36, 92, 82, 0);
+    transform: translateY(-2px) scale(1);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--tp-color-tertiary) 38%, transparent),
+      0 18px 42px rgba(36, 92, 82, 0.18);
   }
 }
 
@@ -2385,11 +2392,15 @@ body.is-map-fullscreen .map-explore-stop {
 
 @keyframes marker-highlight-pulse {
   0% {
-    transform: scale(0.94);
+    transform: scale(0.9);
   }
 
   45% {
-    transform: scale(1.08);
+    transform: scale(1.14);
+  }
+
+  72% {
+    transform: scale(0.98);
   }
 
   100% {
@@ -3339,6 +3350,20 @@ body.guide-open {
   overscroll-behavior: none;
 }
 
+body.guide-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 4200;
+  background:
+    radial-gradient(circle at var(--guide-spotlight-x, 50%) var(--guide-spotlight-y, 45%),
+      rgba(255, 248, 232, 0.08) 0,
+      rgba(255, 248, 232, 0.08) 16%,
+      rgba(20, 49, 44, 0.18) 46%,
+      rgba(20, 49, 44, 0.26) 100%);
+  pointer-events: none;
+}
+
 /* Phase 4: map-led route composition. */
 .route-experience {
   display: grid;
@@ -3466,26 +3491,32 @@ body.guide-open {
 }
 
 .stops-list > li .stop-preview.is-entering {
-  animation: tp-stop-preview-fan-in var(--tp-motion-expressive) var(--tp-ease-emphasized);
+  animation: tp-stop-preview-fan-in var(--tp-motion-route-selection) var(--tp-ease-emphasized);
 }
 
 @keyframes tp-stop-preview-fan-in {
   from {
     opacity: 0;
-    clip-path: inset(0 46% 100% 46% round var(--tp-radius-lg));
-    transform: translateY(-12px) scaleY(0.82);
+    clip-path: inset(0 50% 100% 50% round var(--tp-radius-lg));
+    transform: translateY(-18px) scale(0.965, 0.78);
   }
 
-  68% {
+  42% {
+    opacity: 0.78;
+    clip-path: inset(0 18% 44% 18% round var(--tp-radius-lg));
+    transform: translateY(-8px) scale(0.985, 0.92);
+  }
+
+  74% {
     opacity: 1;
     clip-path: inset(0 0 0 0 round var(--tp-radius-lg));
-    transform: translateY(1px) scaleY(1.015);
+    transform: translateY(2px) scale(1.006, 1.018);
   }
 
   to {
     opacity: 1;
     clip-path: inset(0 0 0 0 round var(--tp-radius-lg));
-    transform: translateY(0) scaleY(1);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -3749,14 +3780,16 @@ body.guide-open {
 
   .route-experience .stops-panel {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
     min-width: 0;
   }
 
   .route-experience .stop-preview {
     grid-column: 2;
     grid-row: 1;
-    justify-self: start;
+    justify-self: stretch;
+    width: 100%;
+    max-height: 420px;
   }
 
   .route-experience .stops-list > li .stop-preview {
@@ -4336,7 +4369,7 @@ body.guide-open {
 
   .TPPlayerSheet .player-artwork .is-mascot-layer,
   .TPPlayerSheet .player-artwork.is-mascot-mode .is-mascot-layer {
-    inset: auto -4% -4% auto;
+    inset: auto auto -4% -4%;
     width: 40%;
     height: 58%;
     opacity: 1;
@@ -4417,16 +4450,59 @@ body.guide-open {
 
 .guide-card {
   position: fixed;
+  z-index: 4300;
   width: min(360px, calc(100vw - 32px));
   padding: 18px;
-  border: 1px solid rgba(36, 92, 82, 0.16);
+  border: 1px solid color-mix(in srgb, var(--tp-color-tertiary) 34%, rgba(36, 92, 82, 0.18));
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 20px 48px rgba(36, 92, 82, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.52) inset,
+    0 20px 48px rgba(36, 92, 82, 0.22);
   color: var(--accent);
   pointer-events: auto;
   transform: translateY(0);
   animation: guide-card-in 220ms ease both;
+}
+
+.guide-card::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid color-mix(in srgb, var(--tp-color-tertiary) 34%, rgba(36, 92, 82, 0.18));
+  box-shadow: -4px -4px 12px rgba(36, 92, 82, 0.04);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.guide-card.is-pointing-left::before {
+  left: -9px;
+  top: calc(50% - 9px);
+  border-top: 0;
+  border-right: 0;
+}
+
+.guide-card.is-pointing-right::before {
+  right: -9px;
+  top: calc(50% - 9px);
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.guide-card.is-pointing-up::before {
+  top: -9px;
+  left: calc(50% - 9px);
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.guide-card.is-pointing-down::before {
+  bottom: -9px;
+  left: calc(50% - 9px);
+  border-top: 0;
+  border-left: 0;
 }
 
 .guide-card p {
@@ -4479,8 +4555,12 @@ body.guide-open {
 
 .is-guide-highlighted {
   position: relative;
-  z-index: 2;
-  box-shadow: 0 0 0 4px rgba(232, 195, 109, 0.42), 0 22px 58px rgba(36, 92, 82, 0.2) !important;
+  z-index: 4250 !important;
+  box-shadow:
+    0 0 0 4px rgba(232, 195, 109, 0.48),
+    0 0 0 10px rgba(255, 255, 255, 0.5),
+    0 22px 58px rgba(36, 92, 82, 0.24) !important;
+  isolation: isolate;
 }
 
 @keyframes guide-card-in {
@@ -4574,7 +4654,7 @@ body.guide-open {
 }
 
 .stop-button.is-route-selecting {
-  animation: tp-stop-card-select var(--tp-motion-expressive) var(--tp-ease-emphasized);
+  animation: tp-stop-card-select var(--tp-motion-route-selection) var(--tp-ease-emphasized);
 }
 
 @keyframes tp-stop-card-select {
@@ -4583,9 +4663,14 @@ body.guide-open {
     border-radius: var(--tp-radius-lg);
   }
 
-  58% {
+  48% {
     transform: translateY(-7px) scale(1.012);
     border-radius: var(--tp-radius-xl) var(--tp-radius-xl) var(--tp-radius-lg) var(--tp-radius-md);
+  }
+
+  72% {
+    transform: translateY(-4px) scale(1.004);
+    border-radius: var(--tp-radius-xl) var(--tp-radius-lg) var(--tp-radius-xl) var(--tp-radius-md);
   }
 
   100% {
