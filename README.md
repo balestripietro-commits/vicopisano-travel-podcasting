@@ -7,7 +7,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 ## Architettura attuale dell'interfaccia
 
 - Landing full-page ispirata a directory editoriali/mappe immersive:
-  - strip superiore in evidenza con marquee continua e testi generati dalle lingue selezionabili;
+  - strip superiore in evidenza: marquee visibile su mobile e banda verde pulita su desktop;
   - header arioso con brand, selettore lingua e menu;
   - hero tipografico ampio con titolo e introduzione;
   - mappa dominante a tutta larghezza del contenuto con caption sovrapposta;
@@ -17,8 +17,8 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
 - Player audio esteso aperto da click su marker mappa, tappa lista o qualunque punto del mini-player non occupato da pulsanti o slider.
-- Nella schermata estesa restano sempre disponibili precedente, play/pausa, successiva, repeat, barra seek trascinabile, volume e trascrizione cliccabile.
-- Il player esteso replica anche il selettore lingua della home, posizionandolo tra il titolo della tappa e i controlli audio.
+- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, repeat, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione tra tappe.
+- Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
 - Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.
 - Traduzione globale del sito nelle 7 lingue supportate quando cambia la lingua attiva.
 
@@ -58,12 +58,11 @@ Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare p
 
 ## Primo accesso, lingua e aiuto
 
-- Al primo accesso il sito mostra una schermata pulita di scelta lingua prima di entrare nell'esperienza.
+- A ogni apertura il sito mostra una schermata pulita di scelta lingua prima di entrare nell'esperienza.
 - La lingua iniziale viene scelta da URL se presente, poi dalla lingua salvata nel browser, poi dalla lingua di sistema; se non e supportata, il fallback e inglese.
-- Dopo la prima scelta la preferenza viene salvata in `localStorage`, quindi la schermata iniziale non ricompare a ogni visita.
-- Per rivedere la schermata iniziale in fase di test si puo aprire il sito con `?welcome=1`.
-- Il tasto `Aiuto` nell'header apre una guida breve in 3 step, tradotta nella lingua attiva, che spiega mappa, lista tappe e player.
-- La lingua resta comunque modificabile dai chip in alto e dal selettore del player esteso.
+- Dopo la scelta lingua parte la guida contestuale tradotta nella lingua attiva.
+- Il tasto `Aiuto` nell'header riapre la guida contestuale, che spiega mappa, indicazioni Google Maps, lista tappe, piattaforme, condivisione e player.
+- La lingua resta modificabile dal selettore compatto in alto.
 
 ## Link diretti a tappe e lingue
 

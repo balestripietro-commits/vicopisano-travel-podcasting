@@ -419,6 +419,7 @@ let mascotSyncToken = 0;
 let currentMascotFrame = "X";
 let mascotMotionController = null;
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mascotTapQuery = window.matchMedia("(max-width: 860px)");
 
 const siteLanguages = ["IT", "EN", "DE", "FR", "ES", "PT", "RU"];
 const LANGUAGE_STORAGE_KEY = "vicopisano-language";
@@ -1061,12 +1062,7 @@ function getStopTitle(tappa, languageCode = currentLanguage) {
     return tappa.titolo;
   }
 
-  if (languageCode === "IT") {
-    return titles.IT || tappa.titolo;
-  }
-
-  const translatedTitle = titles[languageCode] || titles.IT || tappa.titolo;
-  return `${titles.IT || tappa.titolo} / ${translatedTitle}`;
+  return titles.IT || tappa.titolo;
 }
 
 function getUrlState() {
@@ -1935,6 +1931,21 @@ function getMascotBreathingShells() {
   return getMascotTargets()
     .map((target) => target.closest(".mascot-breathing-shell"))
     .filter(Boolean);
+}
+
+function syncMascotTapSemantics() {
+  getMascotMotionShells().forEach((shell) => {
+    if (mascotTapQuery.matches) {
+      shell.setAttribute("role", "button");
+      shell.setAttribute("tabindex", "0");
+      shell.setAttribute("aria-label", "Anima mascotte");
+      return;
+    }
+
+    shell.removeAttribute("role");
+    shell.removeAttribute("tabindex");
+    shell.removeAttribute("aria-label");
+  });
 }
 
 function createMascotMotionController() {
@@ -2879,12 +2890,16 @@ function clearGuideHighlight() {
 
 let activeGuideStepIndex = 0;
 
+function getStopsGuideTarget() {
+  return buttonsByStop.get(1) || stopsList?.querySelector(".stop-button") || document.querySelector(".stops-panel");
+}
+
 function getGuideSteps() {
   const strings = getUiStrings(currentLanguage);
   return [
     { target: mapStageFrame, text: strings.guideMap },
     { target: mapDirectionsButton, text: strings.guideDirections },
-    { target: document.querySelector(".stops-panel"), text: strings.guideStops },
+    { target: getStopsGuideTarget(), text: strings.guideStops },
     { target: document.querySelector(".platforms-panel"), text: strings.guidePlatforms },
     { target: document.querySelector(".share-panel"), text: strings.guideShare },
     { target: miniPlayer, text: strings.guidePlayer },
@@ -2898,6 +2913,10 @@ function getGuideSafeBottom() {
 
 function scrollGuideTargetIntoView(target) {
   if (!target || target === document.body) {
+    return;
+  }
+
+  if (target === miniPlayer) {
     return;
   }
 
@@ -3491,18 +3510,23 @@ function bindPlayerControls() {
     detailCopyBox.addEventListener("toggle", syncDetailCopyPanel);
   }
 
+  syncMascotTapSemantics();
+  mascotTapQuery.addEventListener("change", syncMascotTapSemantics);
+
   getMascotMotionShells().forEach((shell) => {
-    shell.setAttribute("role", "button");
-    shell.setAttribute("tabindex", "0");
-    shell.setAttribute("aria-label", "Anima mascotte");
     shell.addEventListener("click", (event) => {
+      if (!mascotTapQuery.matches) {
+        return;
+      }
+
       event.stopPropagation();
       mascotMotionController?.tapReaction();
     });
     shell.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") {
+      if (!mascotTapQuery.matches || (event.key !== "Enter" && event.key !== " ")) {
         return;
       }
+
       event.preventDefault();
       event.stopPropagation();
       mascotMotionController?.tapReaction();

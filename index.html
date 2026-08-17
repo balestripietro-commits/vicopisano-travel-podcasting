@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260816-mobile-player-fit" />
+    <link rel="stylesheet" href="style.css?v=20260817-desktop-strip-empty" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -330,9 +330,6 @@
             <div
               class="player-artwork-layer is-mascot-layer mascot-motion-shell"
               data-mascot-motion="detail"
-              role="button"
-              tabindex="0"
-              aria-label="Anima mascotte"
             >
               <div class="mascot-breathing-shell">
                 <img
@@ -435,31 +432,31 @@
               <button id="player-help-next-button" class="player-help-action player-help-action-primary" type="button" aria-label="Avanti"><span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
             </div>
           </div>
-          </div>
-        <div class="player-stop-navigation" aria-label="Navigazione tra tappe">
-          <div id="player-previous-preview" class="player-stop-preview player-previous-preview" hidden>
-            <div class="player-next-preview-content">
-              <img id="player-previous-preview-image" class="player-next-preview-image" src="" alt="" />
-              <div class="player-next-preview-copy">
-                <span class="player-next-preview-label" id="player-previous-preview-label">Tappa precedente</span>
-                <strong id="player-previous-preview-title"></strong>
+          <div class="player-stop-navigation" aria-label="Navigazione tra tappe">
+            <div id="player-previous-preview" class="player-stop-preview player-previous-preview" hidden>
+              <div class="player-next-preview-content">
+                <img id="player-previous-preview-image" class="player-next-preview-image" src="" alt="" />
+                <div class="player-next-preview-copy">
+                  <span class="player-next-preview-label" id="player-previous-preview-label">Tappa precedente</span>
+                  <strong id="player-previous-preview-title"></strong>
+                </div>
               </div>
+              <button type="button" id="player-previous-stop-button" class="player-next-stop-button" aria-label="Apri tappa precedente" title="Apri tappa precedente">
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+              </button>
             </div>
-            <button type="button" id="player-previous-stop-button" class="player-next-stop-button" aria-label="Apri tappa precedente" title="Apri tappa precedente">
-              <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
-            </button>
-          </div>
-          <div id="player-next-preview" class="player-stop-preview player-next-preview" hidden>
-            <div class="player-next-preview-content">
-              <img id="player-next-preview-image" class="player-next-preview-image" src="" alt="" />
-              <div class="player-next-preview-copy">
-                <span class="player-next-preview-label" id="player-next-preview-label">Prossima tappa</span>
-                <strong id="player-next-preview-title"></strong>
+            <div id="player-next-preview" class="player-stop-preview player-next-preview" hidden>
+              <div class="player-next-preview-content">
+                <img id="player-next-preview-image" class="player-next-preview-image" src="" alt="" />
+                <div class="player-next-preview-copy">
+                  <span class="player-next-preview-label" id="player-next-preview-label">Prossima tappa</span>
+                  <strong id="player-next-preview-title"></strong>
+                </div>
               </div>
+              <button type="button" id="player-next-stop-button" class="player-next-stop-button" aria-label="Apri prossima tappa" title="Apri prossima tappa">
+                <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+              </button>
             </div>
-            <button type="button" id="player-next-stop-button" class="player-next-stop-button" aria-label="Apri prossima tappa" title="Apri prossima tappa">
-              <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
-            </button>
           </div>
         </div>
       </article>
@@ -470,6 +467,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260816-mascot-tap"></script>
+    <script src="app.js?v=20260817-stop-titles-it"></script>
   </body>
 </html>

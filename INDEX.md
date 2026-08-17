@@ -8,7 +8,7 @@
 
 - `index.html`: pagina principale del prototipo statico.
 - `style.css`: stile full-page editoriale con hero ampio, mappa dominante, sezione tappe in card grid, mini-player fisso, player esteso e motion system leggero della mascotte.
-- `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio, share links, geolocalizzazione, selettore lingua duplicato nel player e stati motion della mascotte.
+- `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio, share links, geolocalizzazione, guida contestuale e stati motion della mascotte.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
 - `logo_vicopisano.png`: stemma usato nell'intestazione del sito.
 - `mascotte_vicopisano.webp`: immagine mascotte ottimizzata per il runtime.
@@ -33,7 +33,8 @@
 ## Design system Phase 1, Phase 2 e Phase 3
 
 - `DESIGN_SYSTEM.md` - documento guida del design system Travel Podcasting, con architettura Core/Theme, token, component vocabulary, accessibilita, legacy exceptions e roadmap.
-- Fase 3 audio: `TPMiniPlayer` e `TPPlayerSheet` sono implementati in `index.html`/`style.css`; `app.js` mantiene una sola source of truth `<audio>`, seek Material 3, stati audio, Media Session feature-detected, lingua in bottom sheet/popover accessibile, CTA prossima tappa e persistence lingua/ultima tappa.
+- Fase 3 audio: `TPMiniPlayer` e `TPPlayerSheet` sono implementati in `index.html`/`style.css`; `app.js` mantiene una sola source of truth `<audio>`, seek Material 3, stati audio, Media Session feature-detected, CTA precedente/prossima tappa e persistence lingua/ultima tappa.
+- Refinement corrente: il player esteso usa un solo layer full-screen verde scuro, senza selettore lingua interno; i nomi delle tappe restano in italiano anche quando cambia la lingua dell'interfaccia.
 - Refinement mobile: il selettore lingua home e compatto sotto 860px; il player mantiene i quattro controlli su una riga e la foto resta artwork predefinito fino allo switch manuale della mascotte.
 - Fase 4 mappa: `TPMapMarker` e `TPMapControl` sono implementati nel runtime Leaflet esistente; la route usa il verde Vicopisano, marker/card condividono lo stato selected, e la fullscreen fornisce Explore mode con card contestuale e mini-player accessibile.
 - `design-system.css` - token CSS core `--tp-*`, primitive UI, `TPChip`, `TPIconButton`, `TPStopCard`, Typography Lab e token di confronto identificatore tappa.
