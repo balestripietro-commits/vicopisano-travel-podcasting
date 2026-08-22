@@ -2718,6 +2718,7 @@ body.is-map-fullscreen .map-explore-stop {
     margin-bottom: 6px;
     font-size: 0.95rem;
     line-height: normal;
+    text-align: left;
   }
 
   .outbound-panels {
