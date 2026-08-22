@@ -1158,7 +1158,6 @@ function setCurrentLanguage(languageCode, options = {}) {
     setStoredValue(LANGUAGE_STORAGE_KEY, currentLanguage);
   }
 
-  stopCurrentAudio();
   renderStaticTexts();
   renderGlobalLanguageSelector();
   renderOnboardingTexts();
@@ -2724,7 +2723,7 @@ function getRouteDirectionPoints(coordinates, count = 4) {
 function createRouteDirectionIcon(bearing) {
   return L.divIcon({
     className: "route-direction-icon",
-    html: `<span class="material-symbols-rounded" aria-hidden="true" style="transform: rotate(${bearing}deg)">navigation</span>`,
+    html: `<span translate="no" class="material-symbols-rounded" aria-hidden="true" style="transform: rotate(${bearing}deg)">navigation</span>`,
     iconSize: [32, 32],
     iconAnchor: [16, 16],
   });
@@ -3550,7 +3549,6 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   playerOverlay.classList.remove("is-closing");
   playerOverlay.classList.remove("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "false");
-  miniPlayer.classList.add("is-transitioning-to-sheet");
   setPlayerBackgroundInert(true);
   document.body.classList.add("player-open");
   document.addEventListener("keydown", handlePlayerKeydown);
@@ -3578,7 +3576,6 @@ function closePlayerOverlay() {
   playerOverlay.classList.add("is-closing");
   playerOverlay.classList.add("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "true");
-  miniPlayer.classList.remove("is-transitioning-to-sheet");
   setPlayerBackgroundInert(false);
   document.body.classList.remove("player-open");
   document.removeEventListener("keydown", handlePlayerKeydown);
@@ -3915,7 +3912,19 @@ function focusStop(tappa, options = {}) {
     renderedAudio &&
     selectedOption?.audioDisponibile
   ) {
-    renderedAudio.currentTime = previousCurrentTime;
+    const restoreCurrentTime = () => {
+      const maximumTime = Number.isFinite(renderedAudio.duration)
+        ? Math.max(0, renderedAudio.duration - 0.01)
+        : previousCurrentTime;
+      renderedAudio.currentTime = Math.min(previousCurrentTime, maximumTime);
+    };
+
+    if (renderedAudio.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      restoreCurrentTime();
+    } else {
+      renderedAudio.addEventListener("loadedmetadata", restoreCurrentTime, { once: true });
+    }
+
     if (previousWasPlaying) {
       const playPromise = renderedAudio.play();
       if (playPromise && typeof playPromise.catch === "function") {
@@ -4078,6 +4087,14 @@ function renderMap() {
   });
 }
 
+function protectMaterialSymbolsFromTranslation(root = document) {
+  root.querySelectorAll?.(".material-symbols-rounded").forEach((icon) => {
+    icon.setAttribute("translate", "no");
+    icon.classList.add("notranslate");
+  });
+}
+
+protectMaterialSymbolsFromTranslation();
 const initialUrlState = getUrlState();
 currentLanguage = getInitialLanguage(initialUrlState.language);
 syncSelectedLanguagesForCurrentLanguage();

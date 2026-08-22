@@ -32,6 +32,7 @@
 
 .material-symbols-rounded {
   font-family: "Material Symbols Rounded";
+  unicode-bidi: isolate;
   font-weight: normal;
   font-style: normal;
   font-size: 1.35rem;
@@ -591,10 +592,11 @@ button:active,
 }
 
 .intro-lead {
+  font-style: normal !important;
+  font-synthesis-style: none;
   font-size: 2rem;
   line-height: 1.25;
   letter-spacing: 0.01em;
-  font-style: italic;
   color: var(--text);
   max-width: none;
 }
@@ -607,7 +609,8 @@ button:active,
 
 .intro-quote {
   margin-top: 0;
-  font-style: italic;
+  font-style: normal !important;
+  font-synthesis-style: none;
 }
 
 .intro-copy h1,
@@ -3165,12 +3168,6 @@ body.is-map-fullscreen .map-explore-stop {
   font-family: var(--tp-font-ui);
 }
 
-.TPMiniPlayer.is-transitioning-to-sheet {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(14px) scale(0.94);
-}
-
 .is-player-background-inert {
   pointer-events: none;
   user-select: none;
@@ -4252,7 +4249,7 @@ body.guide-open::before {
 
   .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) {
     grid-template-areas: "support volume controls";
-    grid-template-columns: 44px minmax(190px, 0.8fr) minmax(300px, 1.2fr);
+    grid-template-columns: 44px minmax(120px, 0.8fr) minmax(270px, 1.2fr);
     grid-template-rows: 48px;
     min-height: 48px;
   }
@@ -4341,7 +4338,7 @@ body.guide-open::before {
 }
 
 /* Mobile artwork mirrors the desktop composition: photo base with a compact mascot overlay. */
-@media (max-width: 860px) {
+@media (max-width: 1023px) {
   .TPPlayerSheet .player-command-row {
     display: grid;
     grid-template-columns: 44px minmax(0, 1fr);
@@ -4351,6 +4348,10 @@ body.guide-open::before {
   }
 
   .TPPlayerSheet .player-command-row .player-language-row {
+    display: none;
+  }
+
+  .TPPlayerSheet .player-command-row .player-volume-block {
     display: none;
   }
 
@@ -4390,6 +4391,8 @@ body.guide-open::before {
 
   .TPPlayerSheet .player-command-row .player-controls {
     display: grid;
+    grid-column: 2;
+    grid-row: 1;
     grid-template-columns: minmax(0, 1fr) 44px;
     justify-content: stretch;
     align-items: center;
@@ -4399,8 +4402,9 @@ body.guide-open::before {
   }
 
   .TPPlayerSheet .player-transport-group {
-    width: 100%;
+    width: min(100%, 300px);
     min-width: 0;
+    justify-self: center;
     grid-template-columns: 44px minmax(96px, 1fr) 44px;
     gap: 4px;
   }
@@ -4980,7 +4984,9 @@ body.guide-open::before {
   .mascot-motion-shell {
     cursor: pointer;
   }
+}
 
+@media (max-width: 1023px) {
   .TPPlayerSheet .player-sheet {
     display: grid;
     grid-template-rows: auto minmax(210px, 38dvh) minmax(0, auto) auto;
@@ -5024,14 +5030,13 @@ body.guide-open::before {
   }
 
   .TPPlayerSheet .player-meta h2 {
-    display: -webkit-box;
-    max-height: 3.08em;
+    display: block;
+    max-height: none;
     margin: 0;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    font-size: clamp(2rem, 8.6vw, 2.75rem);
-    line-height: 1.02;
+    overflow: visible;
+    font-size: clamp(1.72rem, 7.8vw, 2.72rem);
+    line-height: 1.05;
+    text-wrap: balance;
   }
 
   .TPPlayerSheet .detail-status,
@@ -5150,6 +5155,33 @@ body.guide-open::before {
   box-shadow: none;
 }
 
+.player-overlay.TPPlayerSheet,
+.player-overlay.TPPlayerSheet .player-sheet,
+.player-overlay.TPPlayerSheet .player-backdrop,
+.player-overlay.TPPlayerSheet .player-artwork,
+.player-overlay.TPPlayerSheet .player-side,
+.player-overlay.TPPlayerSheet .player-meta,
+.player-overlay.TPPlayerSheet .player-language-selector,
+.player-overlay.TPPlayerSheet .player-timeline,
+.player-overlay.TPPlayerSheet .player-controls,
+.player-overlay.TPPlayerSheet .player-volume-block,
+.player-overlay.TPPlayerSheet .detail-copy {
+  transition: none !important;
+}
+
+.player-overlay.TPPlayerSheet.is-hidden .player-sheet,
+.player-overlay.TPPlayerSheet.is-hidden .player-artwork,
+.player-overlay.TPPlayerSheet.is-hidden .player-side,
+.player-overlay.TPPlayerSheet.is-hidden .player-meta,
+.player-overlay.TPPlayerSheet.is-hidden .player-language-selector,
+.player-overlay.TPPlayerSheet.is-hidden .player-timeline,
+.player-overlay.TPPlayerSheet.is-hidden .player-controls,
+.player-overlay.TPPlayerSheet.is-hidden .player-volume-block,
+.player-overlay.TPPlayerSheet.is-hidden .detail-copy {
+  transform: none;
+  transition-delay: 0ms;
+}
+
 @media (min-width: 1024px) {
   .player-overlay.TPPlayerSheet .player-sheet {
     grid-template-areas:
@@ -5190,13 +5222,13 @@ body.guide-open::before {
   }
 
   .player-overlay.TPPlayerSheet .player-meta h2 {
-    display: -webkit-box;
+    display: block;
     margin: 0;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    font-size: clamp(2.7rem, 4.35vw, 5.2rem);
-    line-height: 1.02;
+    max-width: 100%;
+    overflow: visible;
+    font-size: clamp(2.45rem, 3.85vw, 5.2rem);
+    line-height: 1.04;
+    text-wrap: balance;
   }
 
   .player-overlay.TPPlayerSheet .player-timeline,
@@ -5230,7 +5262,7 @@ body.guide-open::before {
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1023px) {
   .player-overlay.TPPlayerSheet .player-sheet {
     width: 100vw;
     height: 100dvh;
@@ -5264,13 +5296,12 @@ body.guide-open::before {
   }
 
   .player-overlay.TPPlayerSheet .player-meta h2 {
-    display: -webkit-box;
-    max-height: 2.08em;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    font-size: clamp(2rem, 9vw, 2.9rem);
-    line-height: 1.04;
+    display: block;
+    max-height: none;
+    overflow: visible;
+    font-size: clamp(1.72rem, 7.8vw, 2.72rem);
+    line-height: 1.05;
+    text-wrap: balance;
   }
 
   .player-overlay.TPPlayerSheet .player-timeline {
@@ -5324,7 +5355,7 @@ body.guide-open::before {
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1023px) {
   .player-overlay.TPPlayerSheet .player-stop-navigation {
     margin-top: 4px;
   }
@@ -5401,7 +5432,7 @@ body.guide-open::before {
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1023px) {
   .player-overlay.TPPlayerSheet .player-stop-navigation {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -5449,7 +5480,7 @@ body.guide-open::before {
   }
 }
 
-@media (max-width: 860px) and (max-height: 620px) {
+@media (max-width: 1023px) and (max-height: 620px) {
   .player-overlay.TPPlayerSheet .player-sheet {
     grid-template-rows: auto clamp(118px, 27dvh, 168px) minmax(0, 1fr) auto;
     gap: 6px;

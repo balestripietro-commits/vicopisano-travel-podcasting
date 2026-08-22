@@ -63,6 +63,7 @@ Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare p
 - Dopo la scelta lingua parte la guida contestuale tradotta nella lingua attiva.
 - Il tasto `Aiuto` nell'header riapre la guida contestuale, che spiega mappa, indicazioni Google Maps, lista tappe, mini-player e vista completa del player.
 - La lingua resta modificabile dal selettore compatto in alto.
+- Il cambio lingua conserva posizione e stato di riproduzione della traccia attiva.
 
 ## Link diretti a tappe e lingue
 
