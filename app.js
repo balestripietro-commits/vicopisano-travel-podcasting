@@ -516,7 +516,7 @@ const uiStrings = {
       "La mappa mostra l’intero percorso, con le tappe da 1 a 7. Puoi selezionare una tappa dalla lista oppure cliccare direttamente sulla mappa: il sito evidenzierà il punto scelto, centrerà la visuale e aprirà i contenuti dedicati.",
     routeTitle: "Tappe del percorso",
     routeSubtitle: "7 punti di ascolto lungo il borgo.",
-    platformsEyebrow: "Trovi il travel podcasting di Vicopisano anche su:",
+    platformsEyebrow: "Scopri Vicopisano anche su:",
     shareTitle: "Condividi con i tuoi amici",
     locateMe: "Trova la mia posizione",
     locatingMe: "Sto cercando la tua posizione...",
