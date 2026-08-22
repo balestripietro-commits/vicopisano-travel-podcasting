@@ -4606,14 +4606,14 @@ body.guide-open::before {
 
 .guide-card.is-pointing-up::before {
   top: -9px;
-  left: calc(50% - 9px);
+  left: calc(var(--guide-pointer-x, 50%) - 9px);
   border-right: 0;
   border-bottom: 0;
 }
 
 .guide-card.is-pointing-down::before {
   bottom: -9px;
-  left: calc(50% - 9px);
+  left: calc(var(--guide-pointer-x, 50%) - 9px);
   border-top: 0;
   border-left: 0;
 }

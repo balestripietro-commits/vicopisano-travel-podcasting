@@ -3086,7 +3086,7 @@ function positionGuideCard(target, step = null) {
     const top = Math.max(16, Math.min(maxTop, rect.top));
     guideCard.style.left = `${left}px`;
     guideCard.style.top = `${top}px`;
-    updateGuidePointer(target);
+    updateGuidePointer(target, isMobile ? "up" : null, isMobile);
     return;
   }
 
@@ -3100,7 +3100,7 @@ function positionGuideCard(target, step = null) {
   updateGuidePointer(target);
 }
 
-function updateGuidePointer(target, forcedDirection = null) {
+function updateGuidePointer(target, forcedDirection = null, alignPointerToTarget = false) {
   if (!guideCard || !target) {
     return;
   }
@@ -3114,8 +3114,14 @@ function updateGuidePointer(target, forcedDirection = null) {
   const deltaX = targetCenterX - cardCenterX;
   const deltaY = targetCenterY - cardCenterY;
   clearGuidePointer();
+  guideCard.style.removeProperty("--guide-pointer-x");
   document.documentElement.style.setProperty("--guide-spotlight-x", `${targetCenterX}px`);
   document.documentElement.style.setProperty("--guide-spotlight-y", `${targetCenterY}px`);
+
+  if (alignPointerToTarget && (forcedDirection === "up" || forcedDirection === "down")) {
+    const pointerX = Math.max(18, Math.min(cardRect.width - 18, targetCenterX - cardRect.left));
+    guideCard.style.setProperty("--guide-pointer-x", `${pointerX}px`);
+  }
 
   if (forcedDirection) {
     guideCard.classList.add(`is-pointing-${forcedDirection}`);
