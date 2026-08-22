@@ -4396,10 +4396,6 @@ body.guide-open::before {
     margin-left: 0;
   }
 
-  .TPPlayerSheet .player-previous-preview {
-    display: none;
-  }
-
   .TPPlayerSheet .player-stop-navigation {
     gap: 0;
   }
@@ -4952,13 +4948,6 @@ body.guide-open::before {
 }
 
 @media (max-width: 860px) {
-  .TPPlayerSheet .player-stop-navigation .player-previous-preview,
-  .TPPlayerSheet #player-previous-preview {
-    display: none !important;
-  }
-}
-
-@media (max-width: 860px) {
   .mascot-motion-shell {
     cursor: pointer;
   }
@@ -5218,7 +5207,7 @@ body.guide-open::before {
     height: 100dvh;
     min-height: 100dvh;
     max-height: 100dvh;
-    grid-template-rows: auto minmax(190px, 39dvh) minmax(0, auto) minmax(62px, auto);
+    grid-template-rows: auto clamp(140px, 36dvh, 310px) minmax(0, 1fr) auto;
     gap: 8px;
     padding:
       max(10px, env(safe-area-inset-top))
@@ -5231,7 +5220,7 @@ body.guide-open::before {
   .player-overlay.TPPlayerSheet .player-artwork {
     align-self: stretch;
     min-height: 0;
-    max-height: 39dvh;
+    max-height: clamp(140px, 36dvh, 310px);
     padding: 10px;
   }
 
@@ -5314,7 +5303,7 @@ body.guide-open::before {
 
 @media (max-width: 390px) {
   .player-overlay.TPPlayerSheet .player-sheet {
-    grid-template-rows: auto minmax(178px, 36dvh) minmax(0, auto) minmax(58px, auto);
+    grid-template-rows: auto clamp(132px, 32dvh, 210px) minmax(0, 1fr) auto;
     gap: 7px;
     padding:
       max(8px, env(safe-area-inset-top))
@@ -5323,7 +5312,7 @@ body.guide-open::before {
   }
 
   .player-overlay.TPPlayerSheet .player-artwork {
-    max-height: 36dvh;
+    max-height: clamp(132px, 32dvh, 210px);
   }
 
   .player-overlay.TPPlayerSheet .player-meta h2 {
@@ -5344,5 +5333,116 @@ body.guide-open::before {
   .player-overlay.TPPlayerSheet .player-transport-group .player-control-button.is-primary {
     min-width: 92px;
     min-height: 58px;
+  }
+}
+
+.player-overlay.TPPlayerSheet .player-meta {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.player-overlay.TPPlayerSheet .player-meta h2 {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  transform: translateX(0);
+}
+
+.player-overlay.TPPlayerSheet .player-meta h2.is-overflowing {
+  text-overflow: clip;
+  animation: player-title-overflow var(--player-title-duration, 10s) ease-in-out 1 both;
+}
+
+@keyframes player-title-overflow {
+  0%,
+  16% {
+    transform: translateX(0);
+  }
+
+  54%,
+  70% {
+    transform: translateX(calc(-1 * var(--player-title-travel, 0px)));
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .player-overlay.TPPlayerSheet .player-stop-navigation {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-stop-navigation.has-two-stops {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .player-overlay.TPPlayerSheet .player-stop-preview {
+    min-width: 0;
+    min-height: 54px;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    gap: 6px;
+    padding: 7px 8px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-image {
+    display: none;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-content {
+    gap: 0;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-copy {
+    gap: 2px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-label {
+    font-size: 0.64rem;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-title {
+    font-size: 0.86rem;
+    line-height: 1.04;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-stop-button {
+    width: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 860px) and (max-height: 620px) {
+  .player-overlay.TPPlayerSheet .player-sheet {
+    grid-template-rows: auto clamp(118px, 27dvh, 168px) minmax(0, 1fr) auto;
+    gap: 6px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-artwork {
+    max-height: clamp(118px, 27dvh, 168px);
+  }
+
+  .player-overlay.TPPlayerSheet .player-side {
+    gap: 6px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-stop-preview {
+    min-height: 50px;
+    padding-block: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing {
+    animation: none;
+    text-overflow: ellipsis;
   }
 }

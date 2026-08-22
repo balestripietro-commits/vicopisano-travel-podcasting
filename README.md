@@ -16,8 +16,8 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
   - sezione finale share con link reali per Facebook, LinkedIn, X, WhatsApp e mail.
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
-- Player audio esteso aperto da click su marker mappa, tappa lista o qualunque punto del mini-player non occupato da pulsanti o slider.
-- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, repeat, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione tra tappe.
+- Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player; il player esteso si apre solo dal controllo dedicato del mini-player.
+- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, repeat, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
 - Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
 - Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.
 - Traduzione globale del sito nelle 7 lingue supportate quando cambia la lingua attiva.
@@ -153,7 +153,7 @@ audioDisponibile: true
 
 - La Tappa 1 supporta 7 lingue selezionabili: italiano, inglese, tedesco, francese, spagnolo, portoghese e russo.
 - Le lingue vengono cambiate dal selettore globale sotto il titolo e anche dal selettore aggiunto nel player esteso.
-- Il click su una tappa o su un marker apre il player esteso e prova ad avviare l'audio quando disponibile.
+- Il click su una tappa o su un marker seleziona la traccia e prova ad avviare l'audio nel mini-player senza aprire il player esteso.
 - Le tappe 2-7 restano predisposte ma senza audio attivo finche non vengono aggiunti gli MP3 e attivato `audioDisponibile: true`.
 
 ## Design system Phase 1, Phase 2 e Phase 3
@@ -185,7 +185,7 @@ La Fase 3 aggiorna esclusivamente l'esperienza audio:
 - `TPMiniPlayer`: player flottante mobile con artwork, progress essenziale e Play/Pause dominante.
 - `TPPlayerSheet`: bottom sheet immersivo mobile e split layout desktop con foto della tappa come artwork predefinito.
 - Un solo `<audio>` attivo controlla mini-player, sheet, seek e Media Session quando disponibile.
-- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, repeat secondario, volume desktop, trascrizione collassata e CTA per la tappa successiva.
+- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, repeat secondario, volume desktop, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva.
 - Il selettore lingua del player mostra solo le tracce disponibili: bottom sheet compatto sotto 860px e popover ancorato al controllo su desktop. Il player sheet gestisce focus, Escape, background inerte e ritorno del focus all'apertura.
 - Sotto 860px il selettore lingua della home mostra solo la lingua corrente e apre le opzioni al tap; nel player la foto resta artwork predefinito e la mascotte si apre solo tramite lo switch manuale.
 - Stati loading, buffering, errore, audio non disponibile e ascolto concluso senza autoplay della tappa seguente.
@@ -198,7 +198,7 @@ La Fase 4 aggiorna esclusivamente mappa e composizione:
 
 - Home mobile in ordine intro compatta, mappa protagonista e tappe; desktop con split view sticky tra mappa e lista.
 - `TPMapMarker` mantiene il viola Travel Podcasting per gli identificatori e usa il verde Vicopisano per la route; card e marker condividono lo stato selected.
-- La selezione da card centra la mappa senza popup automatico; il tap su marker mantiene apertura diretta del player.
+- La selezione da card centra la mappa senza popup automatico; il tap su marker seleziona e avvia la traccia nel mini-player senza aprire il full player.
 - La fullscreen diventa Explore mode con controlli Material, mini-player disponibile e una card contestuale compatta per la tappa selezionata.
 
 Per vedere il playground quando il server locale e attivo:

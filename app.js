@@ -329,7 +329,6 @@ const playerLanguageCurrent = document.getElementById("player-language-current")
 const playerLanguageCurrentLabel = document.getElementById("player-language-current-label");
 const playerLanguageChips = document.getElementById("player-language-chips");
 const miniPlayer = document.getElementById("mini-player");
-const miniPlayerOpen = document.getElementById("mini-player-open");
 const miniPlayerToggle = document.getElementById("mini-player-toggle");
 const miniPlayerPrev = document.getElementById("mini-player-prev");
 const miniPlayerNext = document.getElementById("mini-player-next");
@@ -364,6 +363,7 @@ const playerPreviousPreviewLabel = document.getElementById("player-previous-prev
 const playerPreviousPreviewTitle = document.getElementById("player-previous-preview-title");
 const playerPreviousPreviewImage = document.getElementById("player-previous-preview-image");
 const playerPreviousStopButton = document.getElementById("player-previous-stop-button");
+const playerStopNavigation = document.querySelector(".player-stop-navigation");
 const heroMascot = document.getElementById("hero-mascot");
 const appShell = document.querySelector(".app-shell");
 const playerSheet = document.querySelector(".player-sheet");
@@ -387,6 +387,7 @@ let currentAudioStatusKey = "";
 let hasMapLoadedTiles = false;
 let tileErrorCount = 0;
 let lastPlayerTrigger = null;
+let playerTitleOverflowFrame = null;
 
 const markersByStop = new Map();
 const buttonsByStop = new Map();
@@ -2508,6 +2509,52 @@ function updatePreviousStopPreview(tappa) {
   }
 }
 
+function updateStopNavigationPreviews(tappa) {
+  updateNextStopPreview(tappa);
+  updatePreviousStopPreview(tappa);
+  playerStopNavigation?.classList.toggle(
+    "has-two-stops",
+    Boolean(!playerPreviousPreview?.hidden && !playerNextPreview?.hidden),
+  );
+}
+
+function resetPlayerTitleOverflow() {
+  if (!detailTitle) {
+    return;
+  }
+
+  detailTitle.classList.remove("is-overflowing");
+  detailTitle.style.removeProperty("--player-title-travel");
+  detailTitle.style.removeProperty("--player-title-duration");
+}
+
+function updatePlayerTitleOverflow() {
+  playerTitleOverflowFrame = null;
+  resetPlayerTitleOverflow();
+
+  if (!overlayOpen || reducedMotionQuery.matches || !detailTitle) {
+    return;
+  }
+
+  const overflowDistance = Math.ceil(detailTitle.scrollWidth - detailTitle.clientWidth);
+  if (overflowDistance <= 1) {
+    return;
+  }
+
+  const duration = Math.max(8, Math.min(20, 8 + overflowDistance / 45));
+  detailTitle.style.setProperty("--player-title-travel", `${overflowDistance}px`);
+  detailTitle.style.setProperty("--player-title-duration", `${duration}s`);
+  detailTitle.classList.add("is-overflowing");
+}
+
+function schedulePlayerTitleOverflow() {
+  if (playerTitleOverflowFrame !== null) {
+    window.cancelAnimationFrame(playerTitleOverflowFrame);
+  }
+
+  playerTitleOverflowFrame = window.requestAnimationFrame(updatePlayerTitleOverflow);
+}
+
 function updateMiniPlayerPlayback() {
   const strings = getUiStrings(currentLanguage);
   updateStopNavigationControls();
@@ -3354,8 +3401,7 @@ function renderAudioContent(tappa) {
   const strings = getUiStrings(currentLanguage);
   currentSelectedOption = selectedOption;
   audioHasEnded = false;
-  updateNextStopPreview(tappa);
-  updatePreviousStopPreview(tappa);
+  updateStopNavigationPreviews(tappa);
 
   if (!selectedOption || !selectedOption.audioDisponibile) {
     stopMascotLipSync();
@@ -3529,6 +3575,7 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   setPlayerBackgroundInert(true);
   document.body.classList.add("player-open");
   document.addEventListener("keydown", handlePlayerKeydown);
+  schedulePlayerTitleOverflow();
   window.setTimeout(() => {
     if (!overlayOpen) {
       return;
@@ -3636,16 +3683,6 @@ function bindPlayerControls() {
     });
   }
 
-  miniPlayer.addEventListener("click", (event) => {
-    if (event.target.closest("button, input")) {
-      return;
-    }
-    openPlayerOverlay(miniPlayer);
-  });
-  miniPlayerOpen.addEventListener("click", (event) => {
-    consumeControlEvent(event);
-    openPlayerOverlay(event.currentTarget);
-  });
   if (miniPlayerExpand) {
     miniPlayerExpand.addEventListener("click", (event) => {
       consumeControlEvent(event);
@@ -3731,7 +3768,9 @@ function bindPlayerControls() {
     if (playerLanguageSelector?.classList.contains("is-open")) {
       syncPlayerLanguageMenuSurface();
     }
+    schedulePlayerTitleOverflow();
   });
+  reducedMotionQuery.addEventListener("change", schedulePlayerTitleOverflow);
   playerNextStopButton?.addEventListener("click", (event) => {
     consumeControlEvent(event);
     focusStopByOffset(1);
@@ -3869,6 +3908,9 @@ function focusStop(tappa, options = {}) {
 
   detailNumber.textContent = tappa.numero;
   detailTitle.textContent = getStopTitle(tappa);
+  if (overlayOpen) {
+    schedulePlayerTitleOverflow();
+  }
   detailDuration.textContent = hasMeaningfulDuration(tappa.durata) ? tappa.durata : "";
   detailDuration.hidden = !hasMeaningfulDuration(tappa.durata);
   detailStatus.textContent = "";
@@ -4040,8 +4082,7 @@ function renderMap() {
       focusStop(tappa, {
         autoplay: true,
         animateRoute: true,
-        // In map fullscreen the persistent mini-player remains the visible audio control.
-        openOverlay: !isMapFullscreenActive(),
+        openOverlay: false,
       });
     });
 
