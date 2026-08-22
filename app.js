@@ -2680,53 +2680,28 @@ function createMarkerIcon(stopNumber) {
   });
 }
 
-function getRouteDirectionPoints(coordinates, count = 4) {
-  const segments = [];
-  let totalDistance = 0;
+function getDisplayRouteCoordinates(coordinates) {
+  const displayCoordinates = coordinates.map(([longitude, latitude]) => [longitude, latitude]);
+  let searchStartIndex = 0;
 
-  for (let index = 1; index < coordinates.length; index += 1) {
-    const [startLongitude, startLatitude] = coordinates[index - 1];
-    const [endLongitude, endLatitude] = coordinates[index];
-    const deltaLongitude = (endLongitude - startLongitude) * Math.cos((startLatitude * Math.PI) / 180);
-    const deltaLatitude = endLatitude - startLatitude;
-    const distance = Math.hypot(deltaLongitude, deltaLatitude);
+  tappe.forEach((tappa) => {
+    let nearestIndex = searchStartIndex;
+    let nearestDistance = Number.POSITIVE_INFINITY;
 
-    if (distance > 0) {
-      totalDistance += distance;
-      segments.push({
-        startLongitude,
-        startLatitude,
-        endLongitude,
-        endLatitude,
-        distance,
-        totalDistance,
-      });
+    for (let index = searchStartIndex; index < displayCoordinates.length; index += 1) {
+      const [longitude, latitude] = displayCoordinates[index];
+      const distance = Math.hypot(longitude - tappa.longitudine, latitude - tappa.latitudine);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
     }
-  }
 
-  return Array.from({ length: count }, (_, index) => {
-    const targetDistance = (totalDistance * (index + 1)) / (count + 1);
-    const segment = segments.find((item) => item.totalDistance >= targetDistance);
-    const previousDistance = segment.totalDistance - segment.distance;
-    const progress = (targetDistance - previousDistance) / segment.distance;
-    const latitude = segment.startLatitude + (segment.endLatitude - segment.startLatitude) * progress;
-    const longitude = segment.startLongitude + (segment.endLongitude - segment.startLongitude) * progress;
-    const bearing = (Math.atan2(
-      (segment.endLongitude - segment.startLongitude) * Math.cos((latitude * Math.PI) / 180),
-      segment.endLatitude - segment.startLatitude,
-    ) * 180) / Math.PI;
-
-    return { latitude, longitude, bearing };
+    displayCoordinates[nearestIndex] = [tappa.longitudine, tappa.latitudine];
+    searchStartIndex = Math.min(nearestIndex + 1, displayCoordinates.length - 1);
   });
-}
 
-function createRouteDirectionIcon(bearing) {
-  return L.divIcon({
-    className: "route-direction-icon",
-    html: `<span translate="no" class="material-symbols-rounded" aria-hidden="true" style="transform: rotate(${bearing}deg)">navigation</span>`,
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
-  });
+  return displayCoordinates;
 }
 
 function getAudioOptions(tappa) {
@@ -4048,25 +4023,15 @@ function renderStopsList() {
 }
 
 function renderMap() {
-  const routeLayer = L.geoJSON(routeGeoJson, {
-    style: {
-      color: "#216f62",
-      weight: 5,
-      opacity: 0.8,
-      lineCap: "round",
-      lineJoin: "round",
-    },
+  const routeCoordinates = getDisplayRouteCoordinates(routeGeoJson.features[0].geometry.coordinates);
+  const routeLayer = L.polyline(routeCoordinates.map(([longitude, latitude]) => [latitude, longitude]), {
+    color: "#216f62",
+    weight: 5,
+    opacity: 0.8,
+    lineCap: "round",
+    lineJoin: "round",
+    smoothFactor: 2,
   }).addTo(map);
-
-  const routeCoordinates = routeGeoJson.features[0].geometry.coordinates;
-  getRouteDirectionPoints(routeCoordinates).forEach(({ latitude, longitude, bearing }) => {
-    L.marker([latitude, longitude], {
-      icon: createRouteDirectionIcon(bearing),
-      interactive: false,
-      keyboard: false,
-      zIndexOffset: -500,
-    }).addTo(map);
-  });
 
   tappe.forEach((tappa) => {
     const marker = L.marker([tappa.latitudine, tappa.longitudine], {

@@ -862,26 +862,6 @@ body.is-map-fullscreen .map-explore-stop {
   pointer-events: auto;
 }
 
-.route-direction-icon {
-  background: transparent;
-  border: 0;
-  pointer-events: none;
-}
-
-.route-direction-icon .material-symbols-rounded {
-  display: grid;
-  width: 32px;
-  height: 32px;
-  place-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  border-radius: var(--tp-radius-full);
-  background: var(--tp-color-primary);
-  box-shadow: 0 5px 12px rgba(13, 58, 51, 0.24);
-  color: var(--tp-color-tertiary);
-  font-size: 18px;
-  line-height: 1;
-}
-
 .map-directions-button[hidden] {
   display: none;
 }
