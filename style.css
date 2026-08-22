@@ -1139,6 +1139,23 @@ body.is-map-fullscreen .map-explore-stop {
     align-items: stretch;
     gap: 24px;
   }
+
+  .outbound-panels > .platforms-panel {
+    display: grid;
+    grid-template-columns: minmax(170px, auto) minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+  }
+
+  .outbound-panels > .platforms-panel .platforms-eyebrow {
+    margin: 0;
+    text-align: left;
+  }
+
+  .outbound-panels > .platforms-panel .platforms-logos {
+    width: min(100%, 620px);
+    justify-self: end;
+  }
 }
 
 .share-icons {
