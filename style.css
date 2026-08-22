@@ -1120,6 +1120,27 @@ body.is-map-fullscreen .map-explore-stop {
   color: var(--accent);
 }
 
+.outbound-panels {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.outbound-panels > .platforms-panel,
+.outbound-panels > .share-panel {
+  min-width: 0;
+  height: 100%;
+  margin-top: 0;
+}
+
+@media (min-width: 861px) {
+  .outbound-panels {
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+    align-items: stretch;
+    gap: 24px;
+  }
+}
+
 .share-icons {
   display: flex;
   flex-wrap: wrap;
@@ -1207,6 +1228,8 @@ body.is-map-fullscreen .map-explore-stop {
 
 .platforms-panel .platforms-eyebrow {
   text-align: center;
+  font-size: 1.1rem;
+  line-height: normal;
 }
 
 .platform-logo-mark {
@@ -2695,9 +2718,13 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .platforms-panel .platforms-eyebrow {
-    margin-bottom: 8px;
-    font-size: 1.05rem;
-    line-height: 1.25;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    line-height: normal;
+  }
+
+  .outbound-panels {
+    margin-top: 18px;
   }
 
   .share-panel {

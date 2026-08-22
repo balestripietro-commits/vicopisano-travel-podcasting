@@ -13,7 +13,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
   - mappa dominante a tutta larghezza del contenuto con caption sovrapposta;
   - sezione tappe separata sotto la mappa, in card grid;
   - sezioni editoriali di supporto sotto la mappa;
-  - sezione finale share con link reali per Facebook, LinkedIn, X, WhatsApp e mail.
+  - blocco finale con piattaforme e share affiancati su desktop e impilati su mobile, con link reali per Facebook, LinkedIn, X, WhatsApp e mail.
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
 - Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player; il player esteso si apre solo dal controllo dedicato del mini-player.
