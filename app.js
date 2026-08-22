@@ -3005,6 +3005,7 @@ function positionGuideCard(target, step = null) {
     return;
   }
 
+  guideCard.classList.remove("is-mobile-directions-guide");
   const isFloatingFullPlayerStep = step?.floatingPlacement === "fullPlayerTop";
   guideCard.classList.toggle("is-floating-guide-card", isFloatingFullPlayerStep);
   if (isFloatingFullPlayerStep) {
@@ -3020,6 +3021,8 @@ function positionGuideCard(target, step = null) {
   const cardHeight = guideCard.offsetHeight || 190;
   const isMobile = window.matchMedia("(max-width: 760px)").matches;
   const isMiniPlayerGuideTarget = target === miniPlayer;
+  const isDirectionsGuideTarget = target === mapDirectionsButton;
+  guideCard.classList.toggle("is-mobile-directions-guide", isMobile && isDirectionsGuideTarget);
 
   if (isMiniPlayerGuideTarget) {
     const safeGap = 16;
@@ -3053,12 +3056,15 @@ function positionGuideCard(target, step = null) {
 
   guideCard.style.removeProperty("--guide-card-mobile-top");
   const safeBottom = Math.max(190, getGuideSafeBottom());
-  const isDirectionsGuideTarget = target === mapDirectionsButton;
   if (isDirectionsGuideTarget) {
     const preferredLeft = rect.left - cardWidth - 16;
     const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
     const maxTop = Math.max(16, safeBottom - cardHeight);
-    const top = Math.max(16, Math.min(maxTop, rect.top));
+    const preferredTop = isMobile ? rect.bottom + 12 : rect.top;
+    const top = Math.max(16, Math.min(maxTop, preferredTop));
+    if (isMobile) {
+      guideCard.style.setProperty("--guide-card-mobile-top", `${top}px`);
+    }
     guideCard.style.left = `${left}px`;
     guideCard.style.top = `${top}px`;
     updateGuidePointer(target, isMobile ? "up" : null, isMobile);

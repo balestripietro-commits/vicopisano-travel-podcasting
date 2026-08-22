@@ -4762,6 +4762,11 @@ body.guide-open::before {
     top: var(--guide-card-mobile-top) !important;
     bottom: auto;
   }
+
+  .guide-card.is-mobile-directions-guide {
+    top: var(--guide-card-mobile-top) !important;
+    bottom: auto;
+  }
 }
 
 @media (max-width: 600px) {
