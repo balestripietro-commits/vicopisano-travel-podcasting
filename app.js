@@ -3058,7 +3058,7 @@ function positionGuideCard(target, step = null) {
     guideCard.style.setProperty("--guide-card-mobile-top", `${top}px`);
     guideCard.style.left = `${left}px`;
     guideCard.style.top = `${top}px`;
-    updateGuidePointer(target);
+    updateGuidePointer(target, "down");
     return;
   }
 
@@ -3100,7 +3100,7 @@ function positionGuideCard(target, step = null) {
   updateGuidePointer(target);
 }
 
-function updateGuidePointer(target) {
+function updateGuidePointer(target, forcedDirection = null) {
   if (!guideCard || !target) {
     return;
   }
@@ -3116,6 +3116,11 @@ function updateGuidePointer(target) {
   clearGuidePointer();
   document.documentElement.style.setProperty("--guide-spotlight-x", `${targetCenterX}px`);
   document.documentElement.style.setProperty("--guide-spotlight-y", `${targetCenterY}px`);
+
+  if (forcedDirection) {
+    guideCard.classList.add(`is-pointing-${forcedDirection}`);
+    return;
+  }
 
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
     guideCard.classList.add(deltaX > 0 ? "is-pointing-right" : "is-pointing-left");
