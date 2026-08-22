@@ -7,8 +7,8 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 ## Architettura attuale dell'interfaccia
 
 - Landing full-page ispirata a directory editoriali/mappe immersive:
-  - strip superiore in evidenza: marquee visibile su mobile e banda verde pulita su desktop;
-  - header arioso con brand, selettore lingua e menu;
+  - banda verde superiore sottile e vuota su desktop e mobile;
+  - header arioso con stemma e brand affiancati, selettore lingua e menu anche su mobile;
   - hero tipografico ampio con titolo e introduzione;
   - mappa dominante a tutta larghezza del contenuto con caption sovrapposta;
   - sezione tappe separata sotto la mappa, in card grid;
@@ -79,6 +79,7 @@ Il sito supporta parametri URL condivisibili:
 - I frame richiesti da Rhubarb sono presenti: `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H` e `X` per la bocca a riposo.
 - La mascotte usa wrapper separati per motion, breathing e mouth frame: Rhubarb continua a cambiare solo lo sprite della bocca, mentre `style.css` e `app.js` gestiscono micro-movimenti deterministici.
 - Il motion system resta sobrio: breathing quasi impercettibile, micro-sway idle occasionale, reazioni leggere a play/pausa/fine traccia, transizione foto/mascotte e micro transizione al cambio tappa.
+- Click desktop e tap mobile sulla mascotte della home riusano la stessa reazione, senza animazioni al semplice hover.
 - Con `prefers-reduced-motion: reduce` il sito riduce drasticamente breathing, idle, reazioni e transizioni, mantenendo la funzionalita e la sincronizzazione Rhubarb.
 - Rhubarb e installato localmente in `/Users/pietrobalestri/.local/bin/rhubarb`.
 - I cue di sincronizzazione sono salvati in `audio/cues/` e vengono caricati automaticamente quando parte un audio.

@@ -133,6 +133,7 @@ button:active,
   background: var(--accent);
   color: #f6e7b1;
   overflow: hidden;
+  min-height: 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
@@ -141,7 +142,8 @@ button:active,
   display: flex;
   align-items: center;
   gap: 0;
-  padding: 10px 0;
+  display: none;
+  padding: 0;
   font-family: var(--tp-font-ui);
   font-size: 0.95rem;
   white-space: nowrap;
@@ -151,7 +153,7 @@ button:active,
 
 @media (min-width: 861px) {
   .announcement-strip {
-    min-height: 40px;
+    min-height: 18px;
   }
 
   .announcement-track {
@@ -1081,17 +1083,17 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .platforms-eyebrow {
-  margin: 0 0 20px;
-  font-size: 2rem;
+  margin: 0 0 10px;
+  font-size: 1.4rem;
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.2;
   color: var(--accent);
 }
 
 .platforms-logos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
 .platforms-panel,
@@ -1175,8 +1177,8 @@ body.is-map-fullscreen .map-explore-stop {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-height: 74px;
-  padding: 16px 18px;
+  min-height: 58px;
+  padding: 10px 14px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.76);
   border: 1px solid var(--line);
@@ -1196,7 +1198,8 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .platforms-panel {
-  margin-top: 38px;
+  margin-top: 24px;
+  padding: 16px 18px;
 }
 
 .platforms-panel .platforms-eyebrow {
@@ -2543,11 +2546,22 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .brand-copy {
-    display: none;
+    display: grid;
+    min-width: 0;
+    gap: 0;
   }
 
   .brand-tag {
-    display: none;
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .brand-name {
+    font-size: 0.82rem;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
   .controls-toolbar {
@@ -2639,8 +2653,8 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .platform-logo {
-    min-height: 56px;
-    padding: 9px 10px;
+    min-height: 50px;
+    padding: 7px 8px;
     gap: 8px;
     border-radius: var(--radius-sm);
   }
@@ -2670,6 +2684,17 @@ body.is-map-fullscreen .map-explore-stop {
   .logo-spotify .platform-logo-text {
     font-size: 1.05rem;
     letter-spacing: -0.055em;
+  }
+
+  .platforms-panel {
+    margin-top: 18px;
+    padding: 12px;
+  }
+
+  .platforms-panel .platforms-eyebrow {
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    line-height: 1.25;
   }
 
   .share-panel {
@@ -3940,6 +3965,10 @@ body.guide-open::before {
   font: 700 0.94rem/1 var(--tp-font-ui);
   box-shadow: var(--tp-elevation-1);
   cursor: pointer;
+}
+
+.global-language-current-icon {
+  display: none;
 }
 
 .global-language-current .material-symbols-rounded:last-child,
@@ -5444,5 +5473,84 @@ body.guide-open::before {
   .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing {
     animation: none;
     text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header {
+    gap: 6px;
+  }
+
+  .brand-lockup {
+    gap: 6px;
+  }
+
+  .hero-logo {
+    width: 34px;
+  }
+
+  .brand-name {
+    font-size: 0.76rem;
+  }
+
+  .brand-tag {
+    font-size: 0.64rem;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .help-button {
+    width: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
+
+  .global-language-current {
+    width: 56px;
+    min-height: 40px;
+    justify-content: center;
+    gap: 2px;
+    padding: 0 4px;
+  }
+
+  .global-language-current-icon {
+    display: inline-block;
+  }
+
+  #global-language-current-label {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .platforms-logos {
+    gap: 6px;
+    justify-items: stretch;
+  }
+
+  .platform-logo {
+    width: 100%;
+    min-width: 0;
+    padding-inline: 4px;
+  }
+
+  .logo-izi .brand-izi {
+    font-size: 1.1rem;
+  }
+
+  .logo-izi .brand-travel {
+    margin-left: 1px;
+    font-size: 0.62rem;
+  }
+
+  .logo-loquis .platform-logo-text {
+    font-size: 0.82rem;
+  }
+
+  .logo-spotify .platform-logo-text {
+    font-size: 0.9rem;
   }
 }

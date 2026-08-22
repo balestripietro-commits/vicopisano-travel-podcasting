@@ -288,7 +288,6 @@ const shareX = document.getElementById("share-x");
 const shareLinkedin = document.getElementById("share-linkedin");
 const shareWhatsapp = document.getElementById("share-whatsapp");
 const shareMail = document.getElementById("share-mail");
-const announcementTrack = document.getElementById("announcement-track");
 const brandNameEl = document.getElementById("brand-name");
 const brandTagEl = document.getElementById("brand-tag");
 const landingTitle = document.getElementById("landing-title");
@@ -1865,30 +1864,6 @@ function buildLanguageChips(
   container.appendChild(fragment);
 }
 
-function renderAnnouncementTrack() {
-  if (!announcementTrack) return;
-
-  const labels = Array.from({ length: 4 }, () => "Travel podcasting - Comune di Vicopisano");
-
-  const buildSegment = () => {
-    const segment = document.createElement("div");
-    segment.className = "announcement-segment";
-
-    labels.forEach((label) => {
-      const item = document.createElement("span");
-      item.className = "announcement-item";
-      item.textContent = label;
-      segment.appendChild(item);
-    });
-
-    return segment;
-  };
-
-  announcementTrack.innerHTML = "";
-  announcementTrack.appendChild(buildSegment());
-  announcementTrack.appendChild(buildSegment());
-}
-
 function hasMeaningfulDuration(durationText) {
   return Boolean(durationText && durationText.trim());
 }
@@ -1927,9 +1902,13 @@ function getMascotBreathingShells() {
     .filter(Boolean);
 }
 
+function supportsMascotDirectInteraction(shell) {
+  return mascotTapQuery.matches || shell.classList.contains("mascot-motion-shell--hero");
+}
+
 function syncMascotTapSemantics() {
   getMascotMotionShells().forEach((shell) => {
-    if (mascotTapQuery.matches) {
+    if (supportsMascotDirectInteraction(shell)) {
       shell.setAttribute("role", "button");
       shell.setAttribute("tabindex", "0");
       shell.setAttribute("aria-label", "Anima mascotte");
@@ -3658,7 +3637,7 @@ function bindPlayerControls() {
 
   getMascotMotionShells().forEach((shell) => {
     shell.addEventListener("click", (event) => {
-      if (!mascotTapQuery.matches) {
+      if (!supportsMascotDirectInteraction(shell)) {
         return;
       }
 
@@ -3666,7 +3645,7 @@ function bindPlayerControls() {
       mascotMotionController?.tapReaction();
     });
     shell.addEventListener("keydown", (event) => {
-      if (!mascotTapQuery.matches || (event.key !== "Enter" && event.key !== " ")) {
+      if (!supportsMascotDirectInteraction(shell) || (event.key !== "Enter" && event.key !== " ")) {
         return;
       }
 
@@ -3835,7 +3814,6 @@ function updateShareLinks() {
 function renderStaticTexts() {
   const strings = getUiStrings(currentLanguage);
   document.documentElement.lang = currentLanguage.toLowerCase();
-  renderAnnouncementTrack();
   eyebrowText.textContent = strings.prototype;
   if (introLeadText) introLeadText.textContent = strings.introLead;
   introText.textContent = strings.intro;
