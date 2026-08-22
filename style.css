@@ -4522,6 +4522,18 @@ body.guide-open::before {
   pointer-events: none;
 }
 
+.guide-card.is-floating-guide-card {
+  left: var(--guide-floating-left, 16px) !important;
+  right: auto !important;
+  top: var(--guide-floating-top, 16px) !important;
+  bottom: auto !important;
+  width: min(420px, calc(100vw - 32px));
+}
+
+.guide-card.is-floating-guide-card::before {
+  display: none;
+}
+
 .guide-card.is-pointing-left::before {
   left: -9px;
   top: calc(50% - 9px);
@@ -4589,8 +4601,24 @@ body.guide-open::before {
 }
 
 .guide-button-primary {
+  position: relative;
   background: var(--accent);
   color: #fff;
+}
+
+#guide-next-button.guide-button-primary::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  z-index: -1;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--accent-warm) 34%, transparent);
+  box-shadow:
+    0 0 0 0 color-mix(in srgb, var(--accent-warm) 38%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent-warm) 24%, transparent);
+  opacity: 0.72;
+  animation: guide-next-halo 1700ms ease-out infinite;
+  pointer-events: none;
 }
 
 .guide-button-secondary {
@@ -4608,6 +4636,10 @@ body.guide-open::before {
   isolation: isolate;
 }
 
+.mini-player.is-guide-highlighted {
+  position: fixed;
+}
+
 @keyframes guide-card-in {
   from {
     opacity: 0;
@@ -4616,6 +4648,32 @@ body.guide-open::before {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes guide-next-halo {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.62;
+    box-shadow:
+      0 0 0 0 color-mix(in srgb, var(--accent-warm) 32%, transparent),
+      0 0 14px color-mix(in srgb, var(--accent-warm) 18%, transparent);
+  }
+
+  58% {
+    transform: scale(1.08);
+    opacity: 0.34;
+    box-shadow:
+      0 0 0 9px color-mix(in srgb, var(--accent-warm) 0%, transparent),
+      0 0 18px color-mix(in srgb, var(--accent-warm) 20%, transparent);
+  }
+
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+    box-shadow:
+      0 0 0 11px color-mix(in srgb, var(--accent-warm) 0%, transparent),
+      0 0 18px color-mix(in srgb, var(--accent-warm) 0%, transparent);
   }
 }
 
@@ -4821,6 +4879,12 @@ body.guide-open::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  #guide-next-button.guide-button-primary::after {
+    animation: none;
+    opacity: 0.42;
+    transform: none;
+  }
+
   .stop-button,
   .stop-preview.is-entering .stop-preview-copy,
   .TPPlayerSheet .player-transport-group .player-control-button,

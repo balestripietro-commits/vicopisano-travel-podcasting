@@ -951,12 +951,11 @@ const onboardingUiStrings = {
     guideBack: "Indietro",
     guideNext: "Avanti",
     guideDone: "Fine",
-    guideMap: "La mappa mostra le tappe del percorso. Tocca un numero per aprire la tappa e avviare il player.",
-    guideDirections: "Questo pulsante apre Google Maps con le indicazioni pedonali verso la tappa selezionata.",
-    guideStops: "Puoi scegliere una tappa anche dalla lista: il sito centra la mappa e prepara l'audio.",
-    guidePlatforms: "Qui trovi i collegamenti alle piattaforme esterne dove pubblicare o consultare il percorso.",
-    guideShare: "Da qui puoi condividere il prototipo con amici e contatti tramite social, WhatsApp o email.",
-    guidePlayer: "Il player resta in basso durante la visita. Clicca o tocca la barra del player per aprire la vista completa.",
+    guideMap: "Tocca un numero sulla mappa per aprire una tappa e ascoltare il racconto.",
+    guideDirections: "Da qui apri Google Maps con le indicazioni a piedi verso la tappa selezionata.",
+    guideStops: "Puoi scegliere una tappa anche dalla lista.",
+    guidePlayer: "Il player resta sempre disponibile in basso. Toccalo per aprire la vista completa.",
+    guideFullPlayer: "Questa è la vista completa del player: controlli l'audio, apri la trascrizione e passi alle tappe vicine.",
   },
   EN: {
     onboardingTitle: "Choose your language to start the route",
@@ -969,9 +968,8 @@ const onboardingUiStrings = {
     guideMap: "The map shows the route stops. Tap a number to open the stop and start the player.",
     guideDirections: "This button opens Google Maps with walking directions to the selected stop.",
     guideStops: "You can also choose a stop from the list: the site centers the map and prepares the audio.",
-    guidePlatforms: "Here you find links to the external platforms where the route can be published or viewed.",
-    guideShare: "Use these buttons to share the prototype with friends and contacts through social channels, WhatsApp or email.",
     guidePlayer: "The player stays at the bottom during the visit. Click or tap the player bar to open the full view.",
+    guideFullPlayer: "This is the full player view: control the audio, open the transcript and move between nearby stops.",
   },
   DE: {
     onboardingTitle: "Waehle deine Sprache, um die Route zu starten",
@@ -984,9 +982,8 @@ const onboardingUiStrings = {
     guideMap: "Die Karte zeigt die Stationen der Route. Tippe auf eine Nummer, um die Station zu oeffnen und den Player zu starten.",
     guideDirections: "Diese Taste oeffnet Google Maps mit Fussweg-Hinweisen zur ausgewaehlten Station.",
     guideStops: "Du kannst eine Station auch aus der Liste waehlen: Die Karte wird zentriert und das Audio vorbereitet.",
-    guidePlatforms: "Hier findest du Links zu den externen Plattformen, auf denen die Route veroeffentlicht oder angesehen werden kann.",
-    guideShare: "Mit diesen Tasten kannst du den Prototyp ueber Social Media, WhatsApp oder E-Mail teilen.",
     guidePlayer: "Der Player bleibt waehrend des Besuchs unten sichtbar. Tippe oder klicke auf die Player-Leiste, um die Vollansicht zu oeffnen.",
+    guideFullPlayer: "Das ist die Vollansicht des Players: Steuere das Audio, oeffne die Transkription und wechsle zu nahen Stationen.",
   },
   FR: {
     onboardingTitle: "Choisissez la langue pour commencer le parcours",
@@ -999,9 +996,8 @@ const onboardingUiStrings = {
     guideMap: "La carte affiche les etapes du parcours. Touchez un numero pour ouvrir l'etape et lancer le lecteur.",
     guideDirections: "Ce bouton ouvre Google Maps avec l'itineraire a pied vers l'etape selectionnee.",
     guideStops: "Vous pouvez aussi choisir une etape dans la liste : le site centre la carte et prepare l'audio.",
-    guidePlatforms: "Ici se trouvent les liens vers les plateformes externes ou le parcours peut etre publie ou consulte.",
-    guideShare: "Ces boutons permettent de partager le prototype via les reseaux sociaux, WhatsApp ou e-mail.",
     guidePlayer: "Le lecteur reste en bas pendant la visite. Touchez ou cliquez sur la barre du lecteur pour ouvrir la vue complete.",
+    guideFullPlayer: "Voici la vue complete du lecteur : controlez l'audio, ouvrez la transcription et passez aux etapes voisines.",
   },
   ES: {
     onboardingTitle: "Elige el idioma para iniciar el recorrido",
@@ -1014,9 +1010,8 @@ const onboardingUiStrings = {
     guideMap: "El mapa muestra las paradas del recorrido. Toca un numero para abrir la parada e iniciar el reproductor.",
     guideDirections: "Este boton abre Google Maps con indicaciones a pie hacia la parada seleccionada.",
     guideStops: "Tambien puedes elegir una parada desde la lista: el sitio centra el mapa y prepara el audio.",
-    guidePlatforms: "Aqui encuentras los enlaces a las plataformas externas donde se puede publicar o consultar el recorrido.",
-    guideShare: "Usa estos botones para compartir el prototipo por redes sociales, WhatsApp o email.",
     guidePlayer: "El reproductor permanece abajo durante la visita. Haz clic o toca la barra del reproductor para abrir la vista completa.",
+    guideFullPlayer: "Esta es la vista completa del reproductor: controla el audio, abre la transcripcion y pasa a las paradas cercanas.",
   },
   PT: {
     onboardingTitle: "Escolhe o idioma para iniciar o percurso",
@@ -1029,9 +1024,8 @@ const onboardingUiStrings = {
     guideMap: "O mapa mostra as paragens do percurso. Toca num numero para abrir a paragem e iniciar o leitor.",
     guideDirections: "Este botao abre o Google Maps com indicacoes a pe ate a paragem selecionada.",
     guideStops: "Tambem podes escolher uma paragem na lista: o site centra o mapa e prepara o audio.",
-    guidePlatforms: "Aqui encontras as ligacoes para as plataformas externas onde o percurso pode ser publicado ou consultado.",
-    guideShare: "Usa estes botoes para partilhar o prototipo nas redes sociais, WhatsApp ou email.",
     guidePlayer: "O leitor fica em baixo durante a visita. Clica ou toca na barra do leitor para abrir a vista completa.",
+    guideFullPlayer: "Esta e a vista completa do leitor: controla o audio, abre a transcricao e passa para as paragens proximas.",
   },
   RU: {
     onboardingTitle: "Vyberite yazyk, chtoby nachat marshrut",
@@ -1044,9 +1038,8 @@ const onboardingUiStrings = {
     guideMap: "Karta pokazyvaet ostanovki marshruta. Kosnites nomera, chtoby otkryt ostanovku i zapustit pleer.",
     guideDirections: "Eta knopka otkryvaet Google Maps s peshimi ukazaniyami k vybrannoy ostanovke.",
     guideStops: "Ostanovku mozhno vybrat i v spiske: sayt sotsentriruet kartu i podgotovit audio.",
-    guidePlatforms: "Zdes est ssylki na vneshnie platformy, gde marshrut mozhno opublikovat ili posmotret.",
-    guideShare: "Eti knopki pozvolyayut podelitsya prototipom v sotssetyakh, WhatsApp ili po email.",
     guidePlayer: "Pleer ostayetsya vnizu vo vremya poseshcheniya. Kosnites ili nazhmite na panel pleera, chtoby otkryt polnyy vid.",
+    guideFullPlayer: "Eto polnyy vid pleera: upravlyayte audio, otkryvayte rasshifrovku i perekhodite k blizkim ostanovkam.",
   },
 };
 
@@ -2889,9 +2882,24 @@ function clearGuideHighlight() {
 }
 
 let activeGuideStepIndex = 0;
+let guideOpenedPlayerOverlay = false;
+const guidePointerClasses = [
+  "is-pointing-left",
+  "is-pointing-right",
+  "is-pointing-up",
+  "is-pointing-down",
+];
+
+function clearGuidePointer() {
+  guideCard?.classList.remove(...guidePointerClasses);
+}
 
 function getStopsGuideTarget() {
   return buttonsByStop.get(1) || stopsList?.querySelector(".stop-button") || document.querySelector(".stops-panel");
+}
+
+function getFullPlayerGuideTarget() {
+  return document.querySelector(".player-command-row") || playerSheet || playerOverlay || document.body;
 }
 
 function getGuideSteps() {
@@ -2900,15 +2908,28 @@ function getGuideSteps() {
     { target: mapStageFrame, text: strings.guideMap },
     { target: mapDirectionsButton, text: strings.guideDirections },
     { target: getStopsGuideTarget(), text: strings.guideStops },
-    { target: document.querySelector(".platforms-panel"), text: strings.guidePlatforms },
-    { target: document.querySelector(".share-panel"), text: strings.guideShare },
     { target: miniPlayer, text: strings.guidePlayer },
+    {
+      target: getFullPlayerGuideTarget(),
+      text: strings.guideFullPlayer,
+      opensFullPlayer: true,
+      highlight: false,
+      floatingPlacement: "fullPlayerTop",
+    },
   ];
 }
 
 function getGuideSafeBottom() {
-  const playerHeight = miniPlayer?.offsetHeight || 0;
-  return window.innerHeight - playerHeight - 18;
+  if (overlayOpen) {
+    return window.innerHeight - 18;
+  }
+
+  const miniPlayerTop = miniPlayer?.getBoundingClientRect().top;
+  if (Number.isFinite(miniPlayerTop)) {
+    return miniPlayerTop - 18;
+  }
+
+  return window.innerHeight - 18;
 }
 
 function scrollGuideTargetIntoView(target) {
@@ -2916,7 +2937,12 @@ function scrollGuideTargetIntoView(target) {
     return;
   }
 
-  if (target === miniPlayer) {
+  if (
+    target === miniPlayer ||
+    target === playerOverlay ||
+    target === playerSheet ||
+    target.closest?.("#player-overlay")
+  ) {
     return;
   }
 
@@ -2945,17 +2971,75 @@ function scrollGuideTargetIntoView(target) {
   }
 }
 
-function positionGuideCard(target) {
+function positionFullPlayerGuideCard() {
+  if (!guideCard) {
+    return;
+  }
+
+  clearGuidePointer();
+  guideCard.classList.remove("is-above-guide-target");
+  guideCard.style.removeProperty("--guide-card-mobile-top");
+
+  const sheetRect = (playerSheet || playerOverlay || document.body).getBoundingClientRect();
+  const safeLeft = Math.max(16, sheetRect.left + 16);
+  const safeRight = Math.min(window.innerWidth - 16, sheetRect.right - 16);
+  const cardWidth = Math.min(420, window.innerWidth - 32);
+  const cardHeight = guideCard.offsetHeight || 190;
+  const isMobile = window.matchMedia("(max-width: 760px)").matches;
+  const availableWidth = Math.max(cardWidth, safeRight - safeLeft);
+  const preferredLeft = isMobile
+    ? safeLeft + (availableWidth - cardWidth) / 2
+    : safeLeft + Math.max(0, (availableWidth - cardWidth) * 0.58);
+  const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
+  const preferredTop = Math.max(16, sheetRect.top + 16);
+  const top = Math.max(16, Math.min(window.innerHeight - cardHeight - 16, preferredTop));
+
+  guideCard.style.setProperty("--guide-floating-left", `${left}px`);
+  guideCard.style.setProperty("--guide-floating-top", `${top}px`);
+  guideCard.style.left = `${left}px`;
+  guideCard.style.top = `${top}px`;
+}
+
+function positionGuideCard(target, step = null) {
   if (!guideCard || !target) {
     return;
   }
 
+  const isFloatingFullPlayerStep = step?.floatingPlacement === "fullPlayerTop";
+  guideCard.classList.toggle("is-floating-guide-card", isFloatingFullPlayerStep);
+  if (isFloatingFullPlayerStep) {
+    positionFullPlayerGuideCard();
+    return;
+  }
+
+  guideCard.style.removeProperty("--guide-floating-left");
+  guideCard.style.removeProperty("--guide-floating-top");
+
   const rect = target.getBoundingClientRect();
   const cardWidth = Math.min(360, window.innerWidth - 32);
   const cardHeight = guideCard.offsetHeight || 190;
+  const isMobile = window.matchMedia("(max-width: 760px)").matches;
+  const isMiniPlayerGuideTarget = target === miniPlayer;
+
+  if (isMiniPlayerGuideTarget) {
+    const safeGap = 16;
+    const availableAbovePlayer = Math.max(0, rect.top - safeGap * 2);
+    const top = availableAbovePlayer >= cardHeight
+      ? Math.max(safeGap, rect.top - cardHeight - safeGap)
+      : safeGap;
+    const preferredLeft = rect.left + Math.min(rect.width * 0.58, rect.width - cardWidth);
+    const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
+    guideCard.classList.add("is-above-guide-target");
+    guideCard.style.setProperty("--guide-card-mobile-top", `${top}px`);
+    guideCard.style.left = `${left}px`;
+    guideCard.style.top = `${top}px`;
+    updateGuidePointer(target);
+    return;
+  }
+
   const shouldPlaceAboveTarget =
     target.matches?.(".platforms-panel, .share-panel") &&
-    window.matchMedia("(max-width: 760px)").matches;
+    isMobile;
 
   guideCard.classList.toggle("is-above-guide-target", shouldPlaceAboveTarget);
   if (shouldPlaceAboveTarget) {
@@ -3004,14 +3088,7 @@ function updateGuidePointer(target) {
   const targetCenterY = targetRect.top + targetRect.height / 2;
   const deltaX = targetCenterX - cardCenterX;
   const deltaY = targetCenterY - cardCenterY;
-  const pointerClasses = [
-    "is-pointing-left",
-    "is-pointing-right",
-    "is-pointing-up",
-    "is-pointing-down",
-  ];
-
-  guideCard.classList.remove(...pointerClasses);
+  clearGuidePointer();
   document.documentElement.style.setProperty("--guide-spotlight-x", `${targetCenterX}px`);
   document.documentElement.style.setProperty("--guide-spotlight-y", `${targetCenterY}px`);
 
@@ -3030,10 +3107,17 @@ function renderGuideStep() {
 
   const steps = getGuideSteps();
   const step = steps[activeGuideStepIndex];
-  const guideTarget = step.target || document.body;
+  if (step?.opensFullPlayer && !overlayOpen) {
+    guideOpenedPlayerOverlay = true;
+    openPlayerOverlay(miniPlayer || helpButton || document.activeElement, { keepGuideOpen: true });
+  }
+  const guideTarget = step?.opensFullPlayer ? getFullPlayerGuideTarget() : step.target || document.body;
   const strings = getUiStrings(currentLanguage);
   clearGuideHighlight();
-  step.target?.classList.add("is-guide-highlighted");
+  guideCard.classList.toggle("is-floating-guide-card", Boolean(step?.floatingPlacement));
+  if (step?.highlight !== false) {
+    guideTarget?.classList.add("is-guide-highlighted");
+  }
   guideStepText.textContent = step.text;
   const isFirstGuideStep = activeGuideStepIndex === 0;
   const isLastGuideStep = activeGuideStepIndex === steps.length - 1;
@@ -3054,9 +3138,9 @@ function renderGuideStep() {
   document.body.classList.add("guide-open");
   scrollGuideTargetIntoView(guideTarget);
   requestAnimationFrame(() => {
-    positionGuideCard(guideTarget);
-    window.setTimeout(() => positionGuideCard(guideTarget), 280);
-    window.setTimeout(() => positionGuideCard(guideTarget), 720);
+    positionGuideCard(guideTarget, step);
+    window.setTimeout(() => positionGuideCard(guideTarget, step), 280);
+    window.setTimeout(() => positionGuideCard(guideTarget, step), 720);
   });
 }
 
@@ -3065,6 +3149,11 @@ function closeGuide() {
     return;
   }
 
+  const shouldCloseGuidePlayer = guideOpenedPlayerOverlay && overlayOpen;
+  guideOpenedPlayerOverlay = false;
+  if (shouldCloseGuidePlayer) {
+    closePlayerOverlay();
+  }
   guideLayer.classList.add("is-hidden");
   document.body.classList.remove("guide-open");
   clearGuideHighlight();
@@ -3095,6 +3184,11 @@ function bindHelpControls() {
       return;
     }
 
+    const steps = getGuideSteps();
+    if (steps[activeGuideStepIndex]?.opensFullPlayer && guideOpenedPlayerOverlay && overlayOpen) {
+      closePlayerOverlay();
+      guideOpenedPlayerOverlay = false;
+    }
     activeGuideStepIndex -= 1;
     renderGuideStep();
   });
@@ -3422,8 +3516,10 @@ function handlePlayerKeydown(event) {
   }
 }
 
-function openPlayerOverlay(trigger = document.activeElement) {
-  closeGuide();
+function openPlayerOverlay(trigger = document.activeElement, options = {}) {
+  if (!options.keepGuideOpen) {
+    closeGuide();
+  }
   lastPlayerTrigger = trigger instanceof HTMLElement ? trigger : null;
   overlayOpen = true;
   playerOverlay.classList.remove("is-closing");

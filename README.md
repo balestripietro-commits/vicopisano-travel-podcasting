@@ -61,7 +61,7 @@ Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare p
 - A ogni apertura il sito mostra una schermata pulita di scelta lingua prima di entrare nell'esperienza.
 - La lingua iniziale viene scelta da URL se presente, poi dalla lingua salvata nel browser, poi dalla lingua di sistema; se non e supportata, il fallback e inglese.
 - Dopo la scelta lingua parte la guida contestuale tradotta nella lingua attiva.
-- Il tasto `Aiuto` nell'header riapre la guida contestuale, che spiega mappa, indicazioni Google Maps, lista tappe, piattaforme, condivisione e player.
+- Il tasto `Aiuto` nell'header riapre la guida contestuale, che spiega mappa, indicazioni Google Maps, lista tappe, mini-player e vista completa del player.
 - La lingua resta modificabile dal selettore compatto in alto.
 
 ## Link diretti a tappe e lingue
