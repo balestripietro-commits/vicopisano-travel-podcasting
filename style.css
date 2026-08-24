@@ -3663,8 +3663,8 @@ body.guide-open::before {
   width: 40px;
   height: 40px;
   border: 2px solid rgba(255, 255, 255, 0.94);
-  background: linear-gradient(155deg, var(--tp-color-tertiary) 0%, var(--tp-legacy-stop-purple-strong) 100%);
-  box-shadow: 0 6px 16px rgba(62, 40, 122, 0.35);
+  background: linear-gradient(180deg, var(--tp-legacy-stop-purple) 0%, var(--tp-legacy-stop-purple-strong) 100%);
+  box-shadow: 0 6px 16px var(--tp-legacy-stop-purple-glow);
   transform: scale(0.92);
   transform-origin: center;
   transition: transform var(--tp-motion-standard) var(--tp-ease-emphasized), box-shadow var(--tp-motion-standard) var(--tp-ease-standard), background var(--tp-motion-standard) var(--tp-ease-standard);
@@ -3677,7 +3677,7 @@ body.guide-open::before {
 
 .map-marker.tp-map-marker.is-selected {
   transform: scale(1.16);
-  background: linear-gradient(155deg, var(--tp-legacy-stop-purple-strong) 0%, var(--tp-color-tertiary) 100%);
+  background: linear-gradient(180deg, var(--tp-legacy-stop-purple) 0%, var(--tp-legacy-stop-purple-strong) 100%);
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--tp-color-secondary) 76%, transparent), 0 12px 24px rgba(50, 35, 110, 0.46);
 }
 
@@ -3771,14 +3771,14 @@ body.guide-open::before {
   }
 
   .intro-hero-row {
-    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-columns: clamp(160px, 22vw, 190px) minmax(0, 1fr);
     gap: 12px;
     align-items: center;
   }
 
   .intro-portrait {
-    width: 96px;
-    max-height: 132px;
+    width: clamp(160px, 22vw, 190px);
+    max-height: 240px;
   }
 
   .intro-copy {
