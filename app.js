@@ -346,6 +346,8 @@ const playerCloseButton = document.getElementById("player-close-button");
 const playerPrevButton = document.getElementById("player-prev-button");
 const playerPlayButton = document.getElementById("player-play-button");
 const playerNextButton = document.getElementById("player-next-button");
+const playerSpeedButton = document.getElementById("player-speed-button");
+const playerSpeedLabel = document.getElementById("player-speed-label");
 const playerRepeatButton = document.getElementById("player-repeat-button");
 const playerCurrentTime = document.getElementById("player-current-time");
 const playerDurationTotal = document.getElementById("player-duration-total");
@@ -367,6 +369,8 @@ const heroMascot = document.getElementById("hero-mascot");
 const appShell = document.querySelector(".app-shell");
 const playerSheet = document.querySelector(".player-sheet");
 
+const PLAYBACK_RATES = [1, 1.5, 2];
+
 let currentAudio = null;
 let activeStopNumber = null;
 let currentLanguage = "IT";
@@ -375,6 +379,7 @@ let userLocationAccuracyCircle = null;
 let overlayOpen = false;
 let currentSelectedOption = null;
 let repeatEnabled = false;
+let currentPlaybackRate = PLAYBACK_RATES[0];
 let currentVolume = 0.85;
 let audioHasEnded = false;
 let isSeekingFromOverlay = false;
@@ -542,6 +547,7 @@ const uiStrings = {
     playerPause: "Metti in pausa audio",
     playerNext: "Vai alla tappa successiva",
     playerRepeat: "Ripeti traccia",
+    playerSpeed: "Velocità di riproduzione",
     playerExpand: "Apri player a schermo intero",
     nextStopPreview: "Prossima tappa",
     openNextStop: "Apri prossima tappa",
@@ -597,6 +603,7 @@ const uiStrings = {
     playerPause: "Pause audio",
     playerNext: "Go to next stop",
     playerRepeat: "Repeat track",
+    playerSpeed: "Playback speed",
     playerExpand: "Open full-screen player",
     nextStopPreview: "Next stop",
     openNextStop: "Open next stop",
@@ -652,6 +659,7 @@ const uiStrings = {
     playerPause: "Audio pausieren",
     playerNext: "Zur nächsten Station",
     playerRepeat: "Titel wiederholen",
+    playerSpeed: "Wiedergabegeschwindigkeit",
     playerExpand: "Player im Vollbild öffnen",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
@@ -705,6 +713,7 @@ const uiStrings = {
     playerPause: "Mettre l’audio en pause",
     playerNext: "Aller à l’étape suivante",
     playerRepeat: "Répéter la piste",
+    playerSpeed: "Vitesse de lecture",
     playerExpand: "Ouvrir le lecteur en plein écran",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
@@ -758,6 +767,7 @@ const uiStrings = {
     playerPause: "Pausar audio",
     playerNext: "Ir a la etapa siguiente",
     playerRepeat: "Repetir pista",
+    playerSpeed: "Velocidad de reproducción",
     playerExpand: "Abrir reproductor a pantalla completa",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
@@ -811,6 +821,7 @@ const uiStrings = {
     playerPause: "Pausar áudio",
     playerNext: "Ir para a próxima etapa",
     playerRepeat: "Repetir faixa",
+    playerSpeed: "Velocidade de reprodução",
     playerExpand: "Abrir player em tela cheia",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
@@ -864,6 +875,7 @@ const uiStrings = {
     playerPause: "Postavit audio na pauzu",
     playerNext: "Pereyti k sleduyushchey ostanovke",
     playerRepeat: "Povtoryat trek",
+    playerSpeed: "Skorost vosproizvedeniya",
     playerExpand: "Otkryt pleer na ves ekran",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
@@ -2416,10 +2428,12 @@ function updateStopNavigationControls() {
   miniTransport?.classList.toggle("is-stop-navigation", isNoAudioStop);
   playerTimeline.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   playerPlayButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
+  playerSpeedButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   miniPlayerToggle.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   playerRepeatButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   miniPlayerRepeat.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   playerPlayButton.hidden = isNoAudioStop;
+  playerSpeedButton.hidden = isNoAudioStop;
   miniPlayerToggle.hidden = isNoAudioStop;
   playerRepeatButton.hidden = isNoAudioStop;
   miniPlayerRepeat.hidden = isNoAudioStop;
@@ -2536,6 +2550,7 @@ function schedulePlayerTitleOverflow() {
 function updateMiniPlayerPlayback() {
   const strings = getUiStrings(currentLanguage);
   updateStopNavigationControls();
+  updatePlaybackRateControl();
   playerNextPreview?.classList.toggle("is-completion-prominent", audioHasEnded);
   if (!currentAudio) {
     setPlaybackButtonIcon(miniPlayerToggle, "play_arrow", false);
@@ -3386,6 +3401,8 @@ function renderAudioContent(tappa) {
   audio.src = selectedOption.fileAudio;
   audio.dataset.mouthCues = getMouthCuePath(selectedOption.fileAudio);
   audio.loop = repeatEnabled;
+  audio.defaultPlaybackRate = currentPlaybackRate;
+  audio.playbackRate = currentPlaybackRate;
   audio.volume = currentVolume;
   audio.setAttribute(
     "aria-label",
@@ -3443,6 +3460,34 @@ function toggleRepeatMode() {
   playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
   miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
   updateMiniPlayerPlayback();
+}
+
+function formatPlaybackRate(rate) {
+  return `${Number.isInteger(rate) ? rate : rate.toFixed(1)}×`;
+}
+
+function updatePlaybackRateControl() {
+  if (!playerSpeedButton || !playerSpeedLabel) {
+    return;
+  }
+
+  const label = formatPlaybackRate(currentPlaybackRate);
+  const accessibleLabel = `${getUiStrings(currentLanguage).playerSpeed}: ${label}`;
+  playerSpeedLabel.textContent = label;
+  playerSpeedButton.dataset.rate = String(currentPlaybackRate);
+  playerSpeedButton.classList.toggle("is-active", currentPlaybackRate !== PLAYBACK_RATES[0]);
+  playerSpeedButton.setAttribute("aria-label", accessibleLabel);
+  playerSpeedButton.title = accessibleLabel;
+}
+
+function cyclePlaybackRate() {
+  const currentIndex = PLAYBACK_RATES.indexOf(currentPlaybackRate);
+  currentPlaybackRate = PLAYBACK_RATES[(currentIndex + 1) % PLAYBACK_RATES.length];
+  if (currentAudio) {
+    currentAudio.defaultPlaybackRate = currentPlaybackRate;
+    currentAudio.playbackRate = currentPlaybackRate;
+  }
+  updatePlaybackRateControl();
 }
 
 function playCurrentRenderedAudio() {
@@ -3711,6 +3756,10 @@ function bindPlayerControls() {
     consumeControlEvent(event);
     toggleRepeatMode();
   });
+  playerSpeedButton.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    cyclePlaybackRate();
+  });
   playerBackdrop.addEventListener("click", (event) => {
     consumeControlEvent(event);
     closePlayerOverlay();
@@ -3819,6 +3868,7 @@ function renderStaticTexts() {
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
   playerNextButton.setAttribute("aria-label", "Avanti di 10 secondi");
   playerRepeatButton.setAttribute("aria-label", strings.playerRepeat);
+  updatePlaybackRateControl();
   miniPlayerPrev.setAttribute("aria-label", "Indietro di 10 secondi");
   miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
   miniPlayerNext.setAttribute("aria-label", "Avanti di 10 secondi");

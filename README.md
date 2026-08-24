@@ -17,7 +17,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
 - Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player; il player esteso si apre solo dal controllo dedicato del mini-player.
-- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, repeat, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
+- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocita ciclica 1x/1.5x/2x, repeat, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
 - Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
 - Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.
 - Traduzione globale del sito nelle 7 lingue supportate quando cambia la lingua attiva.
@@ -187,7 +187,7 @@ La Fase 3 aggiorna esclusivamente l'esperienza audio:
 - `TPMiniPlayer`: player flottante mobile con artwork, progress essenziale e Play/Pause dominante.
 - `TPPlayerSheet`: bottom sheet immersivo mobile e split layout desktop con foto della tappa come artwork predefinito.
 - Un solo `<audio>` attivo controlla mini-player, sheet, seek e Media Session quando disponibile.
-- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, repeat secondario, volume desktop, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva.
+- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, velocita ciclica 1x/1.5x/2x nel solo full player, repeat secondario, volume desktop, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva.
 - Il selettore lingua del player mostra solo le tracce disponibili: bottom sheet compatto sotto 860px e popover ancorato al controllo su desktop. Il player sheet gestisce focus, Escape, background inerte e ritorno del focus all'apertura.
 - Sotto 860px il selettore lingua della home mostra solo la lingua corrente e apre le opzioni al tap; nel player la foto resta artwork predefinito e la mascotte si apre solo tramite lo switch manuale.
 - Stati loading, buffering, errore, audio non disponibile e ascolto concluso senza autoplay della tappa seguente.

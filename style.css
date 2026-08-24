@@ -5615,3 +5615,94 @@ body.guide-open::before {
     font-size: 0.9rem;
   }
 }
+
+.TPPlayerSheet .player-speed-button {
+  width: 68px;
+  min-width: 68px;
+  min-height: 44px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: var(--tp-radius-full);
+  font-family: var(--tp-font-ui);
+  font-size: 0.84rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+.TPPlayerSheet .player-speed-icon {
+  font-size: 18px;
+}
+
+.TPPlayerSheet .player-speed-label {
+  min-width: 2.6ch;
+  white-space: nowrap;
+}
+
+.TPPlayerSheet .player-speed-button.is-active {
+  border-color: color-mix(in srgb, var(--tp-color-tertiary) 88%, #fff);
+  background: var(--tp-color-tertiary);
+  color: var(--tp-color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tp-color-tertiary) 20%, transparent);
+}
+
+@media (min-width: 1024px) {
+  .TPPlayerSheet .player-command-row #player-speed-button,
+  .TPPlayerSheet .player-command-row #player-repeat-button {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  .TPPlayerSheet .player-command-row #player-speed-button {
+    margin-left: 10px;
+  }
+
+  .TPPlayerSheet .player-command-row #player-repeat-button {
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .TPPlayerSheet .player-command-row {
+    grid-template-columns: 44px 44px minmax(80px, 1fr) 44px 48px 44px;
+    gap: 4px;
+  }
+
+  .TPPlayerSheet .player-command-row .player-controls,
+  .TPPlayerSheet .player-transport-group {
+    display: contents;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button,
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary,
+  .TPPlayerSheet #player-speed-button,
+  .TPPlayerSheet #player-repeat-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    margin: 0;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
+    min-height: 62px;
+  }
+
+  .TPPlayerSheet #player-speed-button {
+    position: static;
+    padding: 0 5px;
+  }
+
+  .TPPlayerSheet .player-speed-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .TPPlayerSheet .player-command-row {
+    grid-template-columns: 38px 38px minmax(72px, 1fr) 38px 44px 38px;
+    gap: 3px;
+  }
+}

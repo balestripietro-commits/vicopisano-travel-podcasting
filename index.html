@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260822-directions-guide-position" />
+    <link rel="stylesheet" href="style.css?v=20260824-playback-speed" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -422,6 +422,10 @@
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
                 </button>
               </div>
+              <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control" aria-label="Velocità di riproduzione: 1×" title="Velocità di riproduzione: 1×">
+                <span translate="no" class="player-speed-icon material-symbols-rounded" aria-hidden="true">speed</span>
+                <span id="player-speed-label" class="player-speed-label">1×</span>
+              </button>
               <button type="button" id="player-repeat-button" class="player-control-button tp-audio-control tp-audio-control--repeat">
                 <span translate="no" class="material-symbols-rounded" aria-hidden="true">repeat</span>
               </button>
@@ -470,6 +474,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260822-directions-guide-position"></script>
+    <script src="app.js?v=20260824-playback-speed"></script>
   </body>
 </html>
