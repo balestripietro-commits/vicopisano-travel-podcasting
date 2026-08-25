@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260824-purple-markers-mascot-sizing" />
+    <link rel="stylesheet" href="style.css?v=20260825-active-route-segment" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -360,7 +360,7 @@
         <div class="player-side">
           <div class="player-meta">
             <p id="detail-status" class="detail-status"></p>
-            <h2 id="detail-title"></h2>
+            <h2 id="detail-title"><span id="detail-title-text" class="player-title-text"></span></h2>
             <p id="detail-duration" class="detail-duration"></p>
           </div>
           <div id="audio-wrapper" class="audio-wrapper"></div>
@@ -422,12 +422,8 @@
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
                 </button>
               </div>
-              <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control" aria-label="Velocità di riproduzione: 1×" title="Velocità di riproduzione: 1×">
-                <span translate="no" class="player-speed-icon material-symbols-rounded" aria-hidden="true">speed</span>
-                <span id="player-speed-label" class="player-speed-label">1×</span>
-              </button>
-              <button type="button" id="player-repeat-button" class="player-control-button tp-audio-control tp-audio-control--repeat">
-                <span translate="no" class="material-symbols-rounded" aria-hidden="true">repeat</span>
+              <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control" aria-label="Velocità di riproduzione: x1" title="Velocità di riproduzione: x1">
+                <span id="player-speed-label" class="player-speed-label">x1</span>
               </button>
             </div>
           </div>
@@ -474,6 +470,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260824-playback-speed"></script>
+    <script src="app.js?v=20260825-active-route-segment"></script>
   </body>
 </html>

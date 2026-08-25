@@ -225,6 +225,17 @@ const routeGeoJson = {
   ],
 };
 
+// The route doubles back after stop 6, so stop 5 must stay anchored to the outbound branch.
+const ROUTE_STOP_ANCHORS = new Map([
+  [1, 0],
+  [2, 15],
+  [3, 52],
+  [4, 103],
+  [5, 150],
+  [6, 160],
+  [7, 174],
+]);
+
 const map = L.map("map", {
   scrollWheelZoom: true,
   attributionControl: false,
@@ -263,6 +274,7 @@ openStreetMapInfoControl.addTo(map);
 const stopsList = document.getElementById("stops-list");
 const detailNumber = document.getElementById("detail-number");
 const detailTitle = document.getElementById("detail-title");
+const detailTitleText = document.getElementById("detail-title-text");
 const detailStatus = document.getElementById("detail-status");
 const detailDuration = document.getElementById("detail-duration");
 const detailCopyBox = document.getElementById("detail-copy-box");
@@ -348,7 +360,6 @@ const playerPlayButton = document.getElementById("player-play-button");
 const playerNextButton = document.getElementById("player-next-button");
 const playerSpeedButton = document.getElementById("player-speed-button");
 const playerSpeedLabel = document.getElementById("player-speed-label");
-const playerRepeatButton = document.getElementById("player-repeat-button");
 const playerCurrentTime = document.getElementById("player-current-time");
 const playerDurationTotal = document.getElementById("player-duration-total");
 const playerProgressInput = document.getElementById("player-progress-input");
@@ -396,6 +407,9 @@ let playerTitleOverflowFrame = null;
 const markersByStop = new Map();
 const buttonsByStop = new Map();
 const selectedLanguageByStop = new Map();
+const routeCoordinateIndexByStop = new Map();
+let displayRouteCoordinates = [];
+let activeRouteLayer = null;
 
 const MASCOT_ASSET_VERSION = "20260816";
 const MASCOT_FRAME_BASE_PATH = "assets/mascotte-mouth";
@@ -2430,12 +2444,10 @@ function updateStopNavigationControls() {
   playerPlayButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   playerSpeedButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   miniPlayerToggle.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
-  playerRepeatButton.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   miniPlayerRepeat.classList.toggle("is-no-audio-control-hidden", isNoAudioStop);
   playerPlayButton.hidden = isNoAudioStop;
   playerSpeedButton.hidden = isNoAudioStop;
   miniPlayerToggle.hidden = isNoAudioStop;
-  playerRepeatButton.hidden = isNoAudioStop;
   miniPlayerRepeat.hidden = isNoAudioStop;
 
   if (isNoAudioStop) {
@@ -2524,11 +2536,11 @@ function updatePlayerTitleOverflow() {
   playerTitleOverflowFrame = null;
   resetPlayerTitleOverflow();
 
-  if (!overlayOpen || reducedMotionQuery.matches || !detailTitle) {
+  if (!overlayOpen || !detailTitle || !detailTitleText) {
     return;
   }
 
-  const overflowDistance = Math.ceil(detailTitle.scrollWidth - detailTitle.clientWidth);
+  const overflowDistance = Math.ceil(detailTitleText.scrollWidth - detailTitle.clientWidth);
   if (overflowDistance <= 1) {
     return;
   }
@@ -2558,9 +2570,7 @@ function updateMiniPlayerPlayback() {
     setPlaybackButtonIcon(playerPlayButton, "play_arrow", false);
     playerPlayButton.setAttribute("aria-label", strings.playerPlay);
     miniPlayerProgressBar.style.width = "0%";
-    playerRepeatButton.classList.toggle("is-active", repeatEnabled);
     miniPlayerRepeat.classList.toggle("is-active", repeatEnabled);
-    playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
     miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
     if (miniPlayerExpand) {
       miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
@@ -2585,9 +2595,6 @@ function updateMiniPlayerPlayback() {
     "aria-label",
     isPlaying ? strings.playerPause : strings.playerPlay
   );
-  playerRepeatButton.classList.toggle("is-active", repeatEnabled);
-  playerRepeatButton.setAttribute("aria-label", strings.playerRepeat);
-  playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
   miniPlayerRepeat.classList.toggle("is-active", repeatEnabled);
   miniPlayerRepeat.setAttribute("aria-label", strings.playerRepeat);
   miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
@@ -2695,28 +2702,64 @@ function createMarkerIcon(stopNumber) {
   });
 }
 
-function getDisplayRouteCoordinates(coordinates) {
-  const displayCoordinates = coordinates.map(([longitude, latitude]) => [longitude, latitude]);
-  let searchStartIndex = 0;
+function getDisplayRouteData(coordinates) {
+  const routeCoordinates = coordinates.map(([longitude, latitude]) => [longitude, latitude]);
+  const coordinateIndexByStop = new Map();
 
   tappe.forEach((tappa) => {
-    let nearestIndex = searchStartIndex;
-    let nearestDistance = Number.POSITIVE_INFINITY;
-
-    for (let index = searchStartIndex; index < displayCoordinates.length; index += 1) {
-      const [longitude, latitude] = displayCoordinates[index];
-      const distance = Math.hypot(longitude - tappa.longitudine, latitude - tappa.latitudine);
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        nearestIndex = index;
-      }
+    const anchorIndex = ROUTE_STOP_ANCHORS.get(tappa.numero);
+    if (anchorIndex === undefined || !routeCoordinates[anchorIndex]) {
+      return;
     }
 
-    displayCoordinates[nearestIndex] = [tappa.longitudine, tappa.latitudine];
-    searchStartIndex = Math.min(nearestIndex + 1, displayCoordinates.length - 1);
+    routeCoordinates[anchorIndex] = [tappa.longitudine, tappa.latitudine];
+    coordinateIndexByStop.set(tappa.numero, anchorIndex);
   });
 
-  return displayCoordinates;
+  return { routeCoordinates, coordinateIndexByStop };
+}
+
+function updateActiveRouteSegment(stopNumber, options = {}) {
+  if (!activeRouteLayer || displayRouteCoordinates.length === 0) {
+    return;
+  }
+
+  activeRouteLayer.getElement()?.classList.remove("is-revealing");
+
+  const stopIndex = tappe.findIndex((tappa) => tappa.numero === stopNumber);
+  if (stopIndex <= 0) {
+    activeRouteLayer.setLatLngs([]);
+    return;
+  }
+
+  const previousStop = tappe[stopIndex - 1];
+  const previousCoordinateIndex = routeCoordinateIndexByStop.get(previousStop.numero);
+  const activeCoordinateIndex = routeCoordinateIndexByStop.get(stopNumber);
+  if (previousCoordinateIndex === undefined || activeCoordinateIndex === undefined) {
+    activeRouteLayer.setLatLngs([]);
+    return;
+  }
+
+  const segmentCoordinates = displayRouteCoordinates
+    .slice(previousCoordinateIndex, activeCoordinateIndex + 1)
+    .map(([longitude, latitude]) => [latitude, longitude]);
+
+  activeRouteLayer.setLatLngs(segmentCoordinates);
+  activeRouteLayer.bringToFront();
+
+  const path = activeRouteLayer.getElement();
+  const shouldAnimate = options.animate === true && !reducedMotionQuery.matches;
+  if (!path || !shouldAnimate) {
+    return;
+  }
+
+  const pathLength = Math.max(1, Math.ceil(path.getTotalLength()));
+  path.style.setProperty("--active-route-length", String(pathLength));
+  void path.getBoundingClientRect();
+  path.classList.add("is-revealing");
+  path.addEventListener("animationend", () => path.classList.remove("is-revealing"), {
+    once: true,
+  });
 }
 
 function getAudioOptions(tappa) {
@@ -3457,13 +3500,13 @@ function toggleRepeatMode() {
   if (currentAudio) {
     currentAudio.loop = repeatEnabled;
   }
-  playerRepeatButton.setAttribute("aria-pressed", String(repeatEnabled));
   miniPlayerRepeat.setAttribute("aria-pressed", String(repeatEnabled));
   updateMiniPlayerPlayback();
 }
 
 function formatPlaybackRate(rate) {
-  return `${Number.isInteger(rate) ? rate : rate.toFixed(1)}×`;
+  const value = Number.isInteger(rate) ? String(rate) : rate.toFixed(1);
+  return `x${value}`;
 }
 
 function updatePlaybackRateControl() {
@@ -3600,6 +3643,7 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
     if (document.activeElement !== focusTarget) {
       playerSheet?.focus({ preventScroll: true });
     }
+    schedulePlayerTitleOverflow();
   }, 80);
   syncMiniPlayerReservedSpace();
 }
@@ -3752,10 +3796,6 @@ function bindPlayerControls() {
     }
     seekCurrentAudio(10);
   });
-  playerRepeatButton.addEventListener("click", (event) => {
-    consumeControlEvent(event);
-    toggleRepeatMode();
-  });
   playerSpeedButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
     cyclePlaybackRate();
@@ -3787,6 +3827,7 @@ function bindPlayerControls() {
     }
     schedulePlayerTitleOverflow();
   });
+  document.fonts?.ready.then(schedulePlayerTitleOverflow);
   reducedMotionQuery.addEventListener("change", schedulePlayerTitleOverflow);
   playerNextStopButton?.addEventListener("click", (event) => {
     consumeControlEvent(event);
@@ -3867,7 +3908,6 @@ function renderStaticTexts() {
   playerPrevButton.setAttribute("aria-label", "Indietro di 10 secondi");
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
   playerNextButton.setAttribute("aria-label", "Avanti di 10 secondi");
-  playerRepeatButton.setAttribute("aria-label", strings.playerRepeat);
   updatePlaybackRateControl();
   miniPlayerPrev.setAttribute("aria-label", "Indietro di 10 secondi");
   miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
@@ -3922,9 +3962,12 @@ function focusStop(tappa, options = {}) {
   activeStopNumber = tappa.numero;
   setStoredValue(LAST_STOP_STORAGE_KEY, String(tappa.numero));
   updateActiveListItem(tappa.numero);
+  updateActiveRouteSegment(tappa.numero, { animate: options.animateRoute === true });
 
   detailNumber.textContent = tappa.numero;
-  detailTitle.textContent = getStopTitle(tappa);
+  const stopTitle = getStopTitle(tappa);
+  detailTitleText.textContent = stopTitle;
+  detailTitle.title = stopTitle;
   if (overlayOpen) {
     schedulePlayerTitleOverflow();
   }
@@ -4079,14 +4122,31 @@ function renderStopsList() {
 }
 
 function renderMap() {
-  const routeCoordinates = getDisplayRouteCoordinates(routeGeoJson.features[0].geometry.coordinates);
-  const routeLayer = L.polyline(routeCoordinates.map(([longitude, latitude]) => [latitude, longitude]), {
+  const routeData = getDisplayRouteData(routeGeoJson.features[0].geometry.coordinates);
+  displayRouteCoordinates = routeData.routeCoordinates;
+  routeCoordinateIndexByStop.clear();
+  routeData.coordinateIndexByStop.forEach((coordinateIndex, stopNumber) => {
+    routeCoordinateIndexByStop.set(stopNumber, coordinateIndex);
+  });
+
+  const routeLayer = L.polyline(displayRouteCoordinates.map(([longitude, latitude]) => [latitude, longitude]), {
     color: "#216f62",
     weight: 5,
     opacity: 0.8,
     lineCap: "round",
     lineJoin: "round",
     smoothFactor: 2,
+  }).addTo(map);
+
+  activeRouteLayer = L.polyline([], {
+    className: "map-route-active",
+    color: "#f4d85a",
+    weight: 9,
+    opacity: 0.98,
+    lineCap: "round",
+    lineJoin: "round",
+    smoothFactor: 2,
+    interactive: false,
   }).addTo(map);
 
   tappe.forEach((tappa) => {

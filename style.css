@@ -3670,6 +3670,29 @@ body.guide-open::before {
   transition: transform var(--tp-motion-standard) var(--tp-ease-emphasized), box-shadow var(--tp-motion-standard) var(--tp-ease-standard), background var(--tp-motion-standard) var(--tp-ease-standard);
 }
 
+.leaflet-overlay-pane .map-route-active {
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(25, 77, 68, 0.42));
+}
+
+.leaflet-overlay-pane .map-route-active.is-revealing {
+  animation: tp-active-route-reveal 520ms var(--tp-ease-emphasized);
+}
+
+@keyframes tp-active-route-reveal {
+  from {
+    stroke-dasharray: var(--active-route-length);
+    stroke-dashoffset: var(--active-route-length);
+    opacity: 0.45;
+  }
+
+  to {
+    stroke-dasharray: var(--active-route-length);
+    stroke-dashoffset: 0;
+    opacity: 0.98;
+  }
+}
+
 .map-marker.tp-map-marker:hover,
 .map-marker.tp-map-marker:focus-visible {
   transform: scale(1);
@@ -3689,6 +3712,12 @@ body.guide-open::before {
   0% { transform: scale(0.92); }
   58% { transform: scale(1.28); }
   100% { transform: scale(1.16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaflet-overlay-pane .map-route-active.is-revealing {
+    animation: none;
+  }
 }
 
 .map-explore-stop {
@@ -4086,15 +4115,6 @@ body.guide-open::before {
   min-width: 64px;
 }
 
-.TPPlayerSheet #player-repeat-button {
-  position: absolute;
-  right: 0;
-  width: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  opacity: 0.78;
-}
-
 .TPMiniPlayer .mini-player-controls {
   display: flex;
   align-items: center;
@@ -4264,12 +4284,6 @@ body.guide-open::before {
     align-self: center;
   }
 
-  .TPPlayerSheet .player-command-row #player-repeat-button {
-    position: static;
-    margin-left: 10px;
-    flex: 0 0 44px;
-  }
-
   .TPPlayerSheet .player-artwork-support .detail-copy { margin: 0; }
 
   .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) {
@@ -4356,10 +4370,6 @@ body.guide-open::before {
     min-width: 112px;
   }
 
-  .TPPlayerSheet #player-repeat-button {
-    top: auto;
-    right: 0;
-  }
 }
 
 /* Mobile artwork mirrors the desktop composition: photo base with a compact mascot overlay. */
@@ -4444,14 +4454,6 @@ body.guide-open::before {
     width: 100%;
     min-width: 96px;
     min-height: 64px;
-  }
-
-  .TPPlayerSheet #player-repeat-button {
-    position: static;
-    width: 44px;
-    min-width: 44px;
-    min-height: 52px;
-    margin-left: 0;
   }
 
   .TPPlayerSheet .player-stop-navigation {
@@ -5091,10 +5093,6 @@ body.guide-open::before {
     min-height: 62px;
   }
 
-  .TPPlayerSheet #player-repeat-button {
-    min-height: 50px;
-  }
-
   .TPPlayerSheet .player-stop-navigation {
     align-self: end;
     min-height: 0;
@@ -5380,7 +5378,8 @@ body.guide-open::before {
 
   .player-overlay.TPPlayerSheet .player-stop-navigation {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }
 }
@@ -5413,8 +5412,7 @@ body.guide-open::before {
     grid-template-columns: 42px minmax(92px, 1fr) 42px;
   }
 
-  .player-overlay.TPPlayerSheet .player-transport-group .player-control-button,
-  .player-overlay.TPPlayerSheet #player-repeat-button {
+  .player-overlay.TPPlayerSheet .player-transport-group .player-control-button {
     width: 42px;
     min-width: 42px;
     min-height: 48px;
@@ -5432,17 +5430,23 @@ body.guide-open::before {
 }
 
 .player-overlay.TPPlayerSheet .player-meta h2 {
+  position: relative;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   text-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.player-overlay.TPPlayerSheet .player-title-text {
+  display: inline-block;
+  min-width: max-content;
   white-space: nowrap;
   transform: translateX(0);
 }
 
-.player-overlay.TPPlayerSheet .player-meta h2.is-overflowing {
-  text-overflow: clip;
+.player-overlay.TPPlayerSheet .player-meta h2.is-overflowing .player-title-text {
   animation: player-title-overflow var(--player-title-duration, 10s) ease-in-out 1 both;
 }
 
@@ -5465,21 +5469,23 @@ body.guide-open::before {
 @media (max-width: 1023px) {
   .player-overlay.TPPlayerSheet .player-stop-navigation {
     display: grid;
+    width: 100%;
     grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
+    gap: 6px;
     margin-top: 2px;
   }
 
   .player-overlay.TPPlayerSheet .player-stop-navigation.has-two-stops {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .player-overlay.TPPlayerSheet .player-stop-preview {
+    width: 100%;
     min-width: 0;
-    min-height: 54px;
+    min-height: 50px;
     grid-template-columns: minmax(0, 1fr) 40px;
     gap: 6px;
-    padding: 7px 8px;
+    padding: 6px 8px;
   }
 
   .player-overlay.TPPlayerSheet .player-next-preview-image {
@@ -5532,8 +5538,16 @@ body.guide-open::before {
 
 @media (prefers-reduced-motion: reduce) {
   .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing {
+    overflow: visible;
+    text-wrap: balance;
+    white-space: normal;
+  }
+
+  .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing .player-title-text {
+    min-width: 0;
+    white-space: normal;
     animation: none;
-    text-overflow: ellipsis;
+    transform: none;
   }
 }
 
@@ -5617,14 +5631,13 @@ body.guide-open::before {
 }
 
 .TPPlayerSheet .player-speed-button {
-  width: 68px;
-  min-width: 68px;
+  width: 56px;
+  min-width: 56px;
   min-height: 44px;
   padding: 0 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   border-radius: var(--tp-radius-full);
   font-family: var(--tp-font-ui);
   font-size: 0.84rem;
@@ -5633,12 +5646,8 @@ body.guide-open::before {
   letter-spacing: 0;
 }
 
-.TPPlayerSheet .player-speed-icon {
-  font-size: 18px;
-}
-
 .TPPlayerSheet .player-speed-label {
-  min-width: 2.6ch;
+  min-width: 3ch;
   white-space: nowrap;
 }
 
@@ -5650,24 +5659,31 @@ body.guide-open::before {
 }
 
 @media (min-width: 1024px) {
-  .TPPlayerSheet .player-command-row #player-speed-button,
-  .TPPlayerSheet .player-command-row #player-repeat-button {
-    position: static;
-    flex: 0 0 auto;
+  .TPPlayerSheet .player-command-row .player-volume-block {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .TPPlayerSheet .player-command-row:has(.player-language-selector[hidden]) .player-volume-block {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .TPPlayerSheet .player-command-row .player-volume {
+    min-width: 0;
   }
 
   .TPPlayerSheet .player-command-row #player-speed-button {
-    margin-left: 10px;
-  }
-
-  .TPPlayerSheet .player-command-row #player-repeat-button {
-    margin-left: 6px;
+    position: static;
+    flex: 0 0 auto;
+    margin-left: 8px;
   }
 }
 
 @media (max-width: 1023px) {
   .TPPlayerSheet .player-command-row {
-    grid-template-columns: 44px 44px minmax(80px, 1fr) 44px 48px 44px;
+    grid-template-columns: 44px 44px minmax(80px, 1fr) 44px 48px;
     gap: 4px;
   }
 
@@ -5678,8 +5694,7 @@ body.guide-open::before {
 
   .TPPlayerSheet .player-transport-group .player-control-button,
   .TPPlayerSheet .player-transport-group .player-control-button.is-primary,
-  .TPPlayerSheet #player-speed-button,
-  .TPPlayerSheet #player-repeat-button {
+  .TPPlayerSheet #player-speed-button {
     width: 100%;
     min-width: 0;
     min-height: 52px;
@@ -5694,15 +5709,11 @@ body.guide-open::before {
     position: static;
     padding: 0 5px;
   }
-
-  .TPPlayerSheet .player-speed-icon {
-    display: none;
-  }
 }
 
 @media (max-width: 340px) {
   .TPPlayerSheet .player-command-row {
-    grid-template-columns: 38px 38px minmax(72px, 1fr) 38px 44px 38px;
+    grid-template-columns: 38px 38px minmax(72px, 1fr) 38px 44px;
     gap: 3px;
   }
 }
