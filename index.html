@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260825-active-route-segment" />
+    <link rel="stylesheet" href="style.css?v=20260825-mobile-artwork" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -272,6 +272,14 @@
         </div>
 
         <div class="mini-player-timeline">
+          <output
+            id="mini-player-seek-feedback"
+            class="seek-feedback mini-player-seek-feedback"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+          ></output>
           <span class="mini-player-time-readout" aria-label="Avanzamento traccia">
             <span id="mini-player-current-time" class="mini-player-time">00:00</span>
             <span class="mini-player-time-separator" aria-hidden="true">/</span>
@@ -284,7 +292,16 @@
       </div>
 
       <div class="mini-player-volume-block">
-        <span translate="no" class="mini-player-volume-icon material-symbols-rounded" aria-hidden="true">volume_up</span>
+        <button
+          type="button"
+          id="mini-player-mute"
+          class="mini-player-volume-toggle"
+          aria-label="Disattiva audio"
+          aria-pressed="false"
+          title="Disattiva audio"
+        >
+          <span translate="no" class="mini-player-volume-icon material-symbols-rounded" aria-hidden="true">volume_up</span>
+        </button>
         <input
           id="mini-player-volume"
           class="mini-player-volume"
@@ -344,7 +361,12 @@
               </div>
             </div>
           </div>
-          <div id="detail-copy-panel" class="detail-copy-content detail-copy-artwork-panel" hidden>
+          <details class="detail-copy detail-copy-trigger" id="detail-copy-box">
+            <summary id="detail-copy-title" aria-label="Trascrizione" aria-controls="detail-copy-panel" title="Trascrizione">
+              <span translate="no" class="detail-copy-summary-icon material-symbols-rounded" aria-hidden="true">article</span>
+            </summary>
+          </details>
+          <div id="detail-copy-panel" class="detail-copy-content detail-copy-artwork-panel" role="region" aria-labelledby="detail-copy-title" hidden>
             <p id="detail-description"></p>
           </div>
           <button
@@ -366,6 +388,14 @@
           <div id="audio-wrapper" class="audio-wrapper"></div>
           <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
           <div class="player-timeline">
+            <output
+              id="player-seek-feedback"
+              class="seek-feedback player-seek-feedback"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              hidden
+            ></output>
             <span id="player-current-time" class="player-time">00:00</span>
             <input
               id="player-progress-input"
@@ -390,15 +420,17 @@
               <div id="player-language-chips" class="language-chips" role="listbox"></div>
               </div>
             </div>
-            <div class="player-artwork-support">
-              <details class="detail-copy" id="detail-copy-box">
-                <summary id="detail-copy-title" aria-label="Trascrizione" title="Trascrizione">
-                  <span translate="no" class="detail-copy-summary-icon material-symbols-rounded" aria-hidden="true">article</span>
-                </summary>
-              </details>
-            </div>
             <div class="player-volume-block">
-              <span translate="no" class="player-volume-icon material-symbols-rounded" aria-hidden="true">volume_up</span>
+              <button
+                type="button"
+                id="player-mute"
+                class="player-volume-toggle"
+                aria-label="Disattiva audio"
+                aria-pressed="false"
+                title="Disattiva audio"
+              >
+                <span translate="no" class="player-volume-icon material-symbols-rounded" aria-hidden="true">volume_up</span>
+              </button>
               <input
                 id="player-volume"
                 class="player-volume"
@@ -470,6 +502,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260825-active-route-segment"></script>
+    <script src="app.js?v=20260825-audio-chain-clean"></script>
   </body>
 </html>

@@ -17,7 +17,12 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
 - Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player; il player esteso si apre solo dal controllo dedicato del mini-player.
-- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocita ciclica x1/x1.5/x2, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
+- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocità ciclica x1/x1.5/x2, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
+- Alla fine di una traccia il percorso passa alla tappa successiva e ne avvia automaticamente l'audio; l'ultima tappa resta nello stato concluso e la modalità repeat continua a riprodurre la traccia corrente.
+- Nei controlli volume di mini-player e full player, il click sull'icona silenzia subito l'audio e accompagna la barra verso zero con una breve transizione Material; un secondo click ripristina l'ultimo volume udibile. Lo stato resta sincronizzato anche cambiando traccia e la transizione è disattivata con `prefers-reduced-motion`.
+- Nel full player il controllo della trascrizione è nell'angolo superiore destro della foto; il pannello si apre con un breve fade/scale originato dal pulsante, resta separato dalla mascotte e usa uno scroll interno quando il testo supera l'altezza disponibile.
+- I seek di 10 secondi mostrano un riscontro numerico temporaneo vicino alla timeline; la geolocalizzazione comunica ricerca, successo ed errore direttamente sul pulsante; l'apertura dal mini-player coordina artwork e titolo con il full player quando il browser supporta View Transitions e usa un fallback CSS negli altri browser.
+- Tutti questi feedback diventano immediati e privi di movimento con `prefers-reduced-motion: reduce`.
 - Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
 - Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.
 - Traduzione globale del sito nelle 7 lingue supportate quando cambia la lingua attiva.
@@ -64,6 +69,17 @@ Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare p
 - Il tasto `Aiuto` nell'header riapre la guida contestuale, che spiega mappa, indicazioni Google Maps, lista tappe, mini-player e vista completa del player.
 - La lingua resta modificabile dal selettore compatto in alto.
 - Il cambio lingua conserva posizione e stato di riproduzione della traccia attiva.
+- Pulsanti, tooltip e nomi accessibili dei controlli di mappa, tutorial, mini-player, full player e condivisione usano lo stesso dizionario localizzato nelle sette lingue; francese, spagnolo, portoghese e tedesco mantengono i propri diacritici e il russo usa il cirillico.
+
+## Matrice E2E prevista: localizzazione
+
+Quando verrà introdotta la suite E2E, un test parametrico dovrà aprire il sito con `lang=it`, `en`, `de`, `fr`, `es`, `pt` e `ru` e verificare:
+
+- il valore corretto di `html[lang]` e l'assenza di fallback italiani nelle lingue non italiane;
+- le etichette di Aiuto, geolocalizzazione, indicazioni, fullscreen mappa, play/pausa, seek, repeat, velocità, apertura/chiusura full player e condivisione;
+- i controlli del tutorial avanti, indietro, chiusura e fine;
+- la conservazione dei diacritici con parole sentinella come `También`, `Atrás`, `Sélecteur`, `Zurück`, `Também` e `Áudio`;
+- l'uso del cirillico per i controlli e i messaggi russi.
 
 ## Link diretti a tappe e lingue
 
@@ -187,7 +203,7 @@ La Fase 3 aggiorna esclusivamente l'esperienza audio:
 - `TPMiniPlayer`: player flottante mobile con artwork, progress essenziale e Play/Pause dominante.
 - `TPPlayerSheet`: bottom sheet immersivo mobile e split layout desktop con foto della tappa come artwork predefinito.
 - Un solo `<audio>` attivo controlla mini-player, sheet, seek e Media Session quando disponibile.
-- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, velocita ciclica x1/x1.5/x2 nel solo full player, volume desktop, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva. Il repeat resta disponibile nel mini-player.
+- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, velocità ciclica x1/x1.5/x2 nel solo full player, volume desktop, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva. Il repeat resta disponibile nel mini-player.
 - Il selettore lingua del player mostra solo le tracce disponibili: bottom sheet compatto sotto 860px e popover ancorato al controllo su desktop. Il player sheet gestisce focus, Escape, background inerte e ritorno del focus all'apertura.
 - Sotto 860px il selettore lingua della home mostra solo la lingua corrente e apre le opzioni al tap; nel player la foto resta artwork predefinito e la mascotte si apre solo tramite lo switch manuale.
 - Stati loading, buffering, errore, audio non disponibile e ascolto concluso senza autoplay della tappa seguente.
@@ -202,6 +218,7 @@ La Fase 4 aggiorna esclusivamente mappa e composizione:
 - `TPMapMarker` mantiene il viola Travel Podcasting per gli identificatori e usa il verde Vicopisano per la route; card e marker condividono lo stato selected.
 - La selezione da card centra la mappa senza popup automatico; il tap su marker seleziona e avvia la traccia nel mini-player senza aprire il full player.
 - Dalla Tappa 2 in poi, la selezione evidenzia in giallo il tratto reale percorso dalla tappa precedente; l'intero itinerario resta visibile in verde e la Tappa 1 non mostra un segmento precedente.
+- Il marker selezionato resta sopra gli altri marker sovrapposti; la selezione da marker o dalla lista delle tappe richiama il pulsante Google Maps con un doppio halo giallo, sostituito da un richiamo statico quando è attivo `prefers-reduced-motion`.
 - La fullscreen diventa Explore mode con controlli Material, mini-player disponibile e una card contestuale compatta per la tappa selezionata.
 
 Per vedere il playground quando il server locale e attivo:

@@ -151,43 +151,43 @@ const stopDescriptions = {
     FR: "Point d’entrée symbolique du bourg et ouverture de l’itinéraire. La tour introduit le thème du parcours : Vicopisano est aujourd’hui un lieu accueillant, mais il est né pour contrôler, défendre et surveiller.",
     ES: "Punto de entrada simbólico al pueblo y apertura del itinerario. La torre introduce el tema del recorrido: Vicopisano es hoy un lugar acogedor, pero nació para controlar, defender y vigilar.",
     PT: "Ponto de entrada simbólico da vila e abertura do itinerário. A torre introduz o tema do percurso: Vicopisano é hoje um lugar acolhedor, mas nasceu para controlar, defender e vigiar.",
-    RU: "Simvolicheskiy vhod v poselok i nachalo marshruta. Bashnya vvodit v osnovnuyu temu puti: segodnya Vicopisano vstrechaet gostey, no kogda-to eto mesto bylo sozdano dlya kontrolya, zashchity i nablyudeniya.",
+    RU: "Символический вход в поселок и начало маршрута. Башня вводит в главную тему пути: сегодня Vicopisano встречает гостей, но когда-то это место было создано для контроля, защиты и наблюдения.",
   },
   2: {
     IT: "Tappa dedicata al sistema difensivo collegato alla Rocca e alla possibilità di rifornire o soccorrere la fortezza in caso di assedio.",
     EN: "Stop dedicated to the defensive system linked to the Rocca and to the possibility of supplying or relieving the fortress during a siege.",
     DE: "Station über das Verteidigungssystem der Rocca und die Möglichkeit, die Festung im Fall einer Belagerung zu versorgen oder zu unterstützen.",
-    FR: "Etape consacree au systeme defensif lie a la Rocca et a la possibilite de ravitailler ou de secourir la forteresse en cas de siege.",
+    FR: "Étape consacrée au système défensif lié à la Rocca et à la possibilité de ravitailler ou de secourir la forteresse en cas de siège.",
     ES: "Etapa dedicada al sistema defensivo vinculado a la Rocca y a la posibilidad de abastecer o socorrer la fortaleza en caso de asedio.",
-    PT: "Etapa dedicada ao sistema defensivo ligado a Rocca e a possibilidade de abastecer ou socorrer a fortaleza em caso de cerco.",
-    RU: "Ostanovka posvyashchena oboronitelnoy sisteme, svyazannoy s Krepostyu, i vozmozhnosti snabzhat ili podderzhivat ee vo vremya osady.",
+    PT: "Etapa dedicada ao sistema defensivo ligado à Rocca e à possibilidade de abastecer ou socorrer a fortaleza em caso de cerco.",
+    RU: "Остановка посвящена оборонительной системе, связанной с Роккой, и возможности снабжать или поддерживать крепость во время осады.",
   },
   3: {
     IT: "Luogo del potere civile e amministrativo. Dopo la guerra e la conquista, il controllo del borgo passa anche attraverso istituzioni, giustizia e governo.",
     EN: "Place of civil and administrative power. After war and conquest, control of the village also passes through institutions, justice and government.",
     DE: "Ort der zivilen und administrativen Macht. Nach Krieg und Eroberung verläuft die Kontrolle über den Ort auch über Institutionen, Justiz und Regierung.",
-    FR: "Lieu du pouvoir civil et administratif. Apres la guerre et la conquete, le controle du bourg passe aussi par les institutions, la justice et le gouvernement.",
-    ES: "Lugar del poder civil y administrativo. Despues de la guerra y la conquista, el control del pueblo pasa tambien por las instituciones, la justicia y el gobierno.",
-    PT: "Lugar do poder civil e administrativo. Depois da guerra e da conquista, o controle da vila passa tambem por instituicoes, justica e governo.",
-    RU: "Mesto grazhdanskoy i administrativnoy vlasti. Posle voyny i zavoevaniya kontrol nad poselkom osushchestvlyalsya takzhe cherez instituty, pravosudie i upravlenie.",
+    FR: "Lieu du pouvoir civil et administratif. Après la guerre et la conquête, le contrôle du bourg passe aussi par les institutions, la justice et le gouvernement.",
+    ES: "Lugar del poder civil y administrativo. Después de la guerra y la conquista, el control del pueblo pasa también por las instituciones, la justicia y el gobierno.",
+    PT: "Lugar do poder civil e administrativo. Depois da guerra e da conquista, o controlo da vila passa também por instituições, justiça e governo.",
+    RU: "Место гражданской и административной власти. После войны и завоевания контроль над поселком осуществлялся также через институты, правосудие и управление.",
   },
   4: {
     IT: "Cuore militare dell'itinerario. Qui il racconto si concentra su Brunelleschi, sulla trasformazione del borgo in fortezza e sulla logica della resistenza.",
     EN: "Military heart of the itinerary. Here the story focuses on Brunelleschi, on the transformation of the village into a fortress, and on the logic of resistance.",
-    DE: "Militarisches Herz der Route. Hier konzentriert sich die Erzahlung auf Brunelleschi, auf die Verwandlung des Ortes in eine Festung und auf die Logik des Widerstands.",
+    DE: "Militärisches Herz der Route. Hier konzentriert sich die Erzählung auf Brunelleschi, auf die Verwandlung des Ortes in eine Festung und auf die Logik des Widerstands.",
     FR: "Cœur militaire de l’itinéraire. Ici, le récit se concentre sur Brunelleschi, sur la transformation du bourg en forteresse et sur la logique de la résistance.",
-    ES: "Corazon militar del itinerario. Aqui el relato se centra en Brunelleschi, en la transformacion del pueblo en fortaleza y en la logica de la resistencia.",
-    PT: "Coracao militar do itinerario. Aqui a narrativa se concentra em Brunelleschi, na transformacao da vila em fortaleza e na logica da resistencia.",
-    RU: "Voennoye serdtse marshruta. Zdes povestvovanie sosredotocheno na Brunelleschi, prevrashchenii poselka v krepost i logike soprotivleniya.",
+    ES: "Corazón militar del itinerario. Aquí el relato se centra en Brunelleschi, en la transformación del pueblo en fortaleza y en la lógica de la resistencia.",
+    PT: "Coração militar do itinerário. Aqui a narrativa concentra-se em Brunelleschi, na transformação da vila em fortaleza e na lógica da resistência.",
+    RU: "Военное сердце маршрута. Здесь повествование сосредоточено на Брунеллески, превращении поселка в крепость и логике сопротивления.",
   },
   5: {
     IT: "Tappa dedicata alla presenza diffusa delle torri nel borgo e al ruolo delle strutture verticali come elementi di prestigio, osservazione e difesa.",
     EN: "Stop dedicated to the widespread presence of towers in the village and to the role of vertical structures as symbols of prestige, observation and defense.",
     DE: "Station über die weit verbreitete Präsenz von Türmen im Ort und über die Rolle vertikaler Bauwerke als Zeichen von Prestige, Beobachtung und Verteidigung.",
-    FR: "Etape consacree a la presence diffuse des tours dans le bourg et au role des structures verticales comme elements de prestige, d'observation et de defense.",
-    ES: "Etapa dedicada a la presencia extendida de las torres en el pueblo y al papel de las estructuras verticales como elementos de prestigio, observacion y defensa.",
-    PT: "Etapa dedicada a presenca difundida das torres na vila e ao papel das estruturas verticais como elementos de prestigio, observacao e defesa.",
-    RU: "Ostanovka posvyashchena rasprostranennomu prisutstviyu bashen v poselke i roli vertikalnykh sooruzheniy kak simvolov prestizha, nablyudeniya i zashchity.",
+    FR: "Étape consacrée à la présence diffuse des tours dans le bourg et au rôle des structures verticales comme éléments de prestige, d’observation et de défense.",
+    ES: "Etapa dedicada a la presencia extendida de las torres en el pueblo y al papel de las estructuras verticales como elementos de prestigio, observación y defensa.",
+    PT: "Etapa dedicada à presença generalizada das torres na vila e ao papel das estruturas verticais como elementos de prestígio, observação e defesa.",
+    RU: "Остановка посвящена многочисленным башням в поселке и роли вертикальных сооружений как символов престижа, наблюдения и защиты.",
   },
   6: {
     IT: "Tappa di respiro dedicata alla dimensione religiosa e comunitaria di Vicopisano, oltre la sola narrazione militare.",
@@ -196,16 +196,16 @@ const stopDescriptions = {
     FR: "Étape de respiration consacrée à la dimension religieuse et communautaire de Vicopisano, au-delà du seul récit militaire.",
     ES: "Etapa de respiro dedicada a la dimensión religiosa y comunitaria de Vicopisano, más allá del relato militar.",
     PT: "Etapa de respiro dedicada à dimensão religiosa e comunitária de Vicopisano, para além da narrativa militar.",
-    RU: "Spokoynaya ostanovka, posvyashchennaya religioznomu i obshchinnomu izmereniyu Vicopisano, za predelami tolko voennogo rasskaza.",
+    RU: "Спокойная остановка, посвященная религиозной и общественной жизни Vicopisano за пределами военной истории.",
   },
   7: {
     IT: "Chiusura contemporanea del percorso: dal borgo fortificato al Comune che oggi accoglie, racconta e valorizza la propria storia.",
     EN: "Contemporary conclusion of the route: from the fortified village to the Municipality that today welcomes visitors, tells its story and enhances its heritage.",
-    DE: "Zeitgenossischer Abschluss der Route: vom befestigten Ort zur heutigen Gemeinde, die ihre Geschichte empfängt, erzahlt und aufwertet.",
-    FR: "Conclusion contemporaine du parcours : du bourg fortifie a la Commune qui aujourd'hui accueille, raconte et valorise son histoire.",
-    ES: "Cierre contemporaneo del recorrido: del pueblo fortificado al Ayuntamiento que hoy acoge, cuenta y pone en valor su historia.",
-    PT: "Encerramento contemporaneo do percurso: da vila fortificada ao Municipio que hoje acolhe, conta e valoriza a propria historia.",
-    RU: "Sovremennoe zavershenie marshruta: ot ukreplennogo poselka k kommunalitetu, kotoryy segodnya prinimaet gostey, rasskazyvaet i tsenit svoyu istoriyu.",
+    DE: "Zeitgenössischer Abschluss der Route: vom befestigten Ort zur heutigen Gemeinde, die ihre Geschichte empfängt, erzählt und aufwertet.",
+    FR: "Conclusion contemporaine du parcours : du bourg fortifié à la commune qui accueille aujourd’hui les visiteurs, raconte son histoire et la met en valeur.",
+    ES: "Cierre contemporáneo del recorrido: del pueblo fortificado al Ayuntamiento que hoy acoge, cuenta y pone en valor su historia.",
+    PT: "Encerramento contemporâneo do percurso: da vila fortificada ao Município que hoje acolhe, conta e valoriza a sua história.",
+    RU: "Современное завершение маршрута: от укрепленного поселка к муниципалитету, который сегодня принимает гостей, рассказывает и бережно хранит свою историю.",
   },
 };
 
@@ -351,6 +351,8 @@ const miniPlayerArtwork = document.getElementById("mini-player-artwork");
 const miniPlayerProgressBar = document.getElementById("mini-player-progress-bar");
 const miniPlayerCurrentTime = document.getElementById("mini-player-current-time");
 const miniPlayerDurationTotal = document.getElementById("mini-player-duration-total");
+const miniPlayerSeekFeedback = document.getElementById("mini-player-seek-feedback");
+const miniPlayerMute = document.getElementById("mini-player-mute");
 const miniPlayerVolume = document.getElementById("mini-player-volume");
 const playerOverlay = document.getElementById("player-overlay");
 const playerBackdrop = document.getElementById("player-backdrop");
@@ -362,7 +364,9 @@ const playerSpeedButton = document.getElementById("player-speed-button");
 const playerSpeedLabel = document.getElementById("player-speed-label");
 const playerCurrentTime = document.getElementById("player-current-time");
 const playerDurationTotal = document.getElementById("player-duration-total");
+const playerSeekFeedback = document.getElementById("player-seek-feedback");
 const playerProgressInput = document.getElementById("player-progress-input");
+const playerMute = document.getElementById("player-mute");
 const playerVolume = document.getElementById("player-volume");
 const audioFeedback = document.getElementById("audio-feedback");
 const playerNextPreview = document.getElementById("player-next-preview");
@@ -381,6 +385,7 @@ const appShell = document.querySelector(".app-shell");
 const playerSheet = document.querySelector(".player-sheet");
 
 const PLAYBACK_RATES = [1, 1.5, 2];
+const VOLUME_UI_ANIMATION_DURATION = 220;
 
 let currentAudio = null;
 let activeStopNumber = null;
@@ -392,6 +397,8 @@ let currentSelectedOption = null;
 let repeatEnabled = false;
 let currentPlaybackRate = PLAYBACK_RATES[0];
 let currentVolume = 0.85;
+let lastAudibleVolume = currentVolume;
+let volumeMuted = false;
 let audioHasEnded = false;
 let isSeekingFromOverlay = false;
 let detailArtworkMode = "photo";
@@ -403,6 +410,13 @@ let hasMapLoadedTiles = false;
 let tileErrorCount = 0;
 let lastPlayerTrigger = null;
 let playerTitleOverflowFrame = null;
+let volumeSliderAnimationFrame = null;
+let volumeIconAnimationTimer = null;
+let detailCopyAnimationTimer = null;
+let seekFeedbackTimer = null;
+let seekFeedbackHideTimer = null;
+let geolocationFeedbackTimer = null;
+let playerOpenTransitionTimer = null;
 
 const markersByStop = new Map();
 const buttonsByStop = new Map();
@@ -431,6 +445,7 @@ const mascotFrameImages = new Map();
 let mascotAnimationFrame = null;
 let routeScrollAnimationFrame = null;
 let routeSelectionTimers = [];
+let mapDirectionsCueTimer = null;
 let mascotActiveAudio = null;
 let mascotActiveCues = [];
 let mascotCueIndex = 0;
@@ -560,9 +575,28 @@ const uiStrings = {
     playerPlay: "Riproduci audio",
     playerPause: "Metti in pausa audio",
     playerNext: "Vai alla tappa successiva",
+    playerRewind: "Indietro di 10 secondi",
+    playerForward: "Avanti di 10 secondi",
     playerRepeat: "Ripeti traccia",
     playerSpeed: "Velocità di riproduzione",
     playerExpand: "Apri player a schermo intero",
+    playerClose: "Chiudi player",
+    playerVolume: "Volume del player",
+    playerMute: "Disattiva audio",
+    playerUnmute: "Riattiva audio",
+    playerProgress: "Posizione della traccia",
+    mapOpenFullscreen: "Apri la mappa a tutto schermo",
+    mapCloseFullscreen: "Chiudi la mappa a tutto schermo",
+    languageSelector: "Selettore lingua",
+    currentLanguage: (language) => `Lingua corrente: ${language}`,
+    showMascot: "Mostra mascotte animata",
+    showPhoto: "Mostra foto della tappa",
+    animateMascot: "Anima mascotte",
+    shareFacebook: "Condividi su Facebook",
+    shareX: "Condividi su X",
+    shareLinkedin: "Condividi su LinkedIn",
+    shareWhatsapp: "Condividi su WhatsApp",
+    shareEmail: "Condividi via email",
     nextStopPreview: "Prossima tappa",
     openNextStop: "Apri prossima tappa",
     brandName: "Travel podcasting",
@@ -616,9 +650,28 @@ const uiStrings = {
     playerPlay: "Play audio",
     playerPause: "Pause audio",
     playerNext: "Go to next stop",
+    playerRewind: "Go back 10 seconds",
+    playerForward: "Go forward 10 seconds",
     playerRepeat: "Repeat track",
     playerSpeed: "Playback speed",
     playerExpand: "Open full-screen player",
+    playerClose: "Close player",
+    playerVolume: "Player volume",
+    playerMute: "Mute audio",
+    playerUnmute: "Unmute audio",
+    playerProgress: "Track position",
+    mapOpenFullscreen: "Open map in full screen",
+    mapCloseFullscreen: "Close full-screen map",
+    languageSelector: "Language selector",
+    currentLanguage: (language) => `Current language: ${language}`,
+    showMascot: "Show animated mascot",
+    showPhoto: "Show stop photo",
+    animateMascot: "Animate mascot",
+    shareFacebook: "Share on Facebook",
+    shareX: "Share on X",
+    shareLinkedin: "Share on LinkedIn",
+    shareWhatsapp: "Share on WhatsApp",
+    shareEmail: "Share by email",
     nextStopPreview: "Next stop",
     openNextStop: "Open next stop",
     brandName: "Travel podcasting",
@@ -672,9 +725,30 @@ const uiStrings = {
     playerPlay: "Audio abspielen",
     playerPause: "Audio pausieren",
     playerNext: "Zur nächsten Station",
+    playerRewind: "10 Sekunden zurück",
+    playerForward: "10 Sekunden vor",
     playerRepeat: "Titel wiederholen",
     playerSpeed: "Wiedergabegeschwindigkeit",
     playerExpand: "Player im Vollbild öffnen",
+    playerClose: "Player schließen",
+    playerVolume: "Player-Lautstärke",
+    playerMute: "Audio stummschalten",
+    playerUnmute: "Audio einschalten",
+    playerProgress: "Wiedergabeposition",
+    mapOpenFullscreen: "Karte im Vollbild öffnen",
+    mapCloseFullscreen: "Vollbildkarte schließen",
+    languageSelector: "Sprachauswahl",
+    currentLanguage: (language) => `Aktuelle Sprache: ${language}`,
+    showMascot: "Animiertes Maskottchen anzeigen",
+    showPhoto: "Foto der Station anzeigen",
+    animateMascot: "Maskottchen animieren",
+    shareFacebook: "Auf Facebook teilen",
+    shareX: "Auf X teilen",
+    shareLinkedin: "Auf LinkedIn teilen",
+    shareWhatsapp: "Über WhatsApp teilen",
+    shareEmail: "Per E-Mail teilen",
+    nextStopPreview: "Nächste Station",
+    openNextStop: "Nächste Station öffnen",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -710,7 +784,7 @@ const uiStrings = {
     geolocationDenied: "Autorisation de localisation refusée.",
     geolocationUnavailable: "Position non disponible.",
     geolocationTimeout: "Délai dépassé pendant la recherche de la position.",
-    geolocationHttpsHint: "Sur smartphone, HTTPS ést nécessaire pour une géolocalisation fiable.",
+    geolocationHttpsHint: "Sur smartphone, HTTPS est nécessaire pour une géolocalisation fiable.",
     detailEmptyTitle: "Sélectionnez une étape",
     detailEmptyText:
       "Ouvrez une étape depuis la liste ou la carte pour voir le titre, la description et le lecteur audio.",
@@ -726,9 +800,30 @@ const uiStrings = {
     playerPlay: "Lire l’audio",
     playerPause: "Mettre l’audio en pause",
     playerNext: "Aller à l’étape suivante",
+    playerRewind: "Reculer de 10 secondes",
+    playerForward: "Avancer de 10 secondes",
     playerRepeat: "Répéter la piste",
     playerSpeed: "Vitesse de lecture",
     playerExpand: "Ouvrir le lecteur en plein écran",
+    playerClose: "Fermer le lecteur",
+    playerVolume: "Volume du lecteur",
+    playerMute: "Couper le son",
+    playerUnmute: "Réactiver le son",
+    playerProgress: "Position de lecture",
+    mapOpenFullscreen: "Ouvrir la carte en plein écran",
+    mapCloseFullscreen: "Fermer la carte en plein écran",
+    languageSelector: "Sélecteur de langue",
+    currentLanguage: (language) => `Langue actuelle : ${language}`,
+    showMascot: "Afficher la mascotte animée",
+    showPhoto: "Afficher la photo de l’étape",
+    animateMascot: "Animer la mascotte",
+    shareFacebook: "Partager sur Facebook",
+    shareX: "Partager sur X",
+    shareLinkedin: "Partager sur LinkedIn",
+    shareWhatsapp: "Partager sur WhatsApp",
+    shareEmail: "Partager par e-mail",
+    nextStopPreview: "Prochaine étape",
+    openNextStop: "Ouvrir l’étape suivante",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -755,7 +850,7 @@ const uiStrings = {
       "El mapa muestra el recorrido completo del 1 al 7. Cuando eliges una etapa, el sitio la resalta, centra el mapa en el punto correspondiente y abre los detalles.",
     routeTitle: "Etapas del recorrido",
     routeSubtitle: "7 puntos de escucha en el pueblo.",
-    platformsEyebrow: "Tambien encuentras Travel Podcasting Vicopisano en:",
+    platformsEyebrow: "También encuentras Travel Podcasting Vicopisano en:",
     shareTitle: "Compártelo con tus amigos",
     locateMe: "Encontrar mi posición",
     locatingMe: "Buscando tu posición...",
@@ -780,9 +875,30 @@ const uiStrings = {
     playerPlay: "Reproducir audio",
     playerPause: "Pausar audio",
     playerNext: "Ir a la etapa siguiente",
+    playerRewind: "Retroceder 10 segundos",
+    playerForward: "Avanzar 10 segundos",
     playerRepeat: "Repetir pista",
     playerSpeed: "Velocidad de reproducción",
     playerExpand: "Abrir reproductor a pantalla completa",
+    playerClose: "Cerrar reproductor",
+    playerVolume: "Volumen del reproductor",
+    playerMute: "Silenciar audio",
+    playerUnmute: "Reactivar audio",
+    playerProgress: "Posición de reproducción",
+    mapOpenFullscreen: "Abrir el mapa a pantalla completa",
+    mapCloseFullscreen: "Cerrar el mapa a pantalla completa",
+    languageSelector: "Selector de idioma",
+    currentLanguage: (language) => `Idioma actual: ${language}`,
+    showMascot: "Mostrar mascota animada",
+    showPhoto: "Mostrar foto de la etapa",
+    animateMascot: "Animar la mascota",
+    shareFacebook: "Compartir en Facebook",
+    shareX: "Compartir en X",
+    shareLinkedin: "Compartir en LinkedIn",
+    shareWhatsapp: "Compartir en WhatsApp",
+    shareEmail: "Compartir por correo electrónico",
+    nextStopPreview: "Siguiente parada",
+    openNextStop: "Abrir la siguiente parada",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -809,7 +925,7 @@ const uiStrings = {
       "O mapa mostra o percurso completo de 1 a 7. Quando você escolhe uma etapa, o site a destaca, centraliza o mapa no ponto correspondente e abre os detalhes.",
     routeTitle: "Etapas do percurso",
     routeSubtitle: "7 pontos de escuta na vila.",
-    platformsEyebrow: "Tambem encontras Travel Podcasting Vicopisano em:",
+    platformsEyebrow: "Também encontras Travel Podcasting Vicopisano em:",
     shareTitle: "Partilha com os teus amigos",
     locateMe: "Encontrar minha localização",
     locatingMe: "Buscando sua localização...",
@@ -825,18 +941,39 @@ const uiStrings = {
     durationUnavailable: "Duração não disponível",
     audioAvailable: "Áudio disponível",
     audioUnavailable: "Áudio ainda não disponível",
-    audioAvailableInLanguages: (count) => `Audio disponivel em ${count} idiomas`,
-    listAudioAvailableInLanguages: (count) => `${count} idiomas disponiveis`,
-    languageSelectorTitle: "Idioma disponivel para a Etapa 1",
+    audioAvailableInLanguages: (count) => `Áudio disponível em ${count} idiomas`,
+    listAudioAvailableInLanguages: (count) => `${count} idiomas disponíveis`,
+    languageSelectorTitle: "Idioma disponível para a Etapa 1",
     descriptiveText: "Texto descritivo",
     transcriptTitle: "Transcrição",
     playerPrevious: "Voltar para a etapa anterior",
     playerPlay: "Reproduzir áudio",
     playerPause: "Pausar áudio",
     playerNext: "Ir para a próxima etapa",
+    playerRewind: "Retroceder 10 segundos",
+    playerForward: "Avançar 10 segundos",
     playerRepeat: "Repetir faixa",
     playerSpeed: "Velocidade de reprodução",
-    playerExpand: "Abrir player em tela cheia",
+    playerExpand: "Abrir leitor em ecrã inteiro",
+    playerClose: "Fechar leitor",
+    playerVolume: "Volume do leitor",
+    playerMute: "Silenciar áudio",
+    playerUnmute: "Reativar áudio",
+    playerProgress: "Posição de reprodução",
+    mapOpenFullscreen: "Abrir o mapa em ecrã inteiro",
+    mapCloseFullscreen: "Fechar o mapa em ecrã inteiro",
+    languageSelector: "Seletor de idioma",
+    currentLanguage: (language) => `Idioma atual: ${language}`,
+    showMascot: "Mostrar mascote animada",
+    showPhoto: "Mostrar fotografia da etapa",
+    animateMascot: "Animar a mascote",
+    shareFacebook: "Partilhar no Facebook",
+    shareX: "Partilhar no X",
+    shareLinkedin: "Partilhar no LinkedIn",
+    shareWhatsapp: "Partilhar no WhatsApp",
+    shareEmail: "Partilhar por e-mail",
+    nextStopPreview: "Próxima paragem",
+    openNextStop: "Abrir a próxima paragem",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
@@ -855,55 +992,76 @@ const uiStrings = {
   },
   RU: {
     prototype: "",
-    introLead: "Ya Filippo Brunelleschi.",
+    introLead: "Я Филиппо Брунеллески.",
     intro:
       "Когда-то я изучал эти стены, чтобы представить оборону, проходы и точки обзора. Теперь я веду вас по историям поселка, остановка за остановкой. Следуйте за мной через башни, переходы и виды борго: каждая остановка открывает голос, историю, частицу Vicopisano.",
-    instructionsTitle: "Instruktsii",
+    instructionsTitle: "Инструкции",
     instructionsText:
-      "Karta pokazyvaet polnyy marshrut ot 1 do 7. Kogda vy vybiraete ostanovku, sayt vydelyaet ee, tsentriruet kartu na nuzhnoy tochke i otkryvaet podrobnosti.",
-    routeTitle: "Ostanovki marshruta",
-    routeSubtitle: "7 tochek dlya proslushivaniya v poselke.",
-    platformsEyebrow: "Ty takzhe naydesh Travel Podcasting Vicopisano na:",
-    shareTitle: "Podelis s druzyami",
-    locateMe: "Nayti moe mesto",
-    locatingMe: "Poisk vashego mestopolozheniya...",
-    locationFound: "Mestopolozhenie naydeno na karte.",
-    geolocationUnsupported: "Geolokatsiya ne podderzhivayetsya etim brauzerom.",
-    geolocationDenied: "Dostup к mestopolozheniyu zapreshchen.",
-    geolocationUnavailable: "Mestopolozhenie nedostupno.",
-    geolocationTimeout: "Vyshlo vremya poiska mestopolozheniya.",
-    geolocationHttpsHint: "Na smartfone dlya nadezhnoy geolokatsii nuzhen HTTPS.",
-    detailEmptyTitle: "Vyberite ostanovku",
+      "Карта показывает полный маршрут с остановками от 1 до 7. Выберите остановку в списке или нажмите на маркер: сайт выделит точку, отцентрирует карту и откроет соответствующие материалы.",
+    routeTitle: "Остановки маршрута",
+    routeSubtitle: "7 точек прослушивания в поселке.",
+    platformsEyebrow: "Travel Podcasting Vicopisano также доступен на:",
+    shareTitle: "Поделиться с друзьями",
+    locateMe: "Найти мое местоположение",
+    locatingMe: "Поиск вашего местоположения...",
+    locationFound: "Местоположение найдено на карте.",
+    geolocationUnsupported: "Этот браузер не поддерживает геолокацию.",
+    geolocationDenied: "Доступ к местоположению запрещен.",
+    geolocationUnavailable: "Местоположение недоступно.",
+    geolocationTimeout: "Время поиска местоположения истекло.",
+    geolocationHttpsHint: "Для надежной геолокации на смартфоне требуется HTTPS.",
+    detailEmptyTitle: "Выберите остановку",
     detailEmptyText:
-      "Otkroyte ostanovku iz spiska ili na karte, chtoby uvidet nazvanie, opisanie i audiopleer.",
-    durationUnavailable: "Dlitelnost nedostupna",
-    audioAvailable: "Audio dostupno",
-    audioUnavailable: "Audio eshche nedostupno",
-    audioAvailableInLanguages: (count) => `Audio dostupno na ${count} yazykakh`,
-    listAudioAvailableInLanguages: (count) => `${count} yazykov dostupno`,
-    languageSelectorTitle: "Dostupnyy yazyk dlya ostanovki 1",
-    descriptiveText: "Opisatelnyy tekst",
-    transcriptTitle: "Transkriptsiya",
-    playerPrevious: "Vernutsya k predydushchey ostanovke",
-    playerPlay: "Vosproizvesti audio",
-    playerPause: "Postavit audio na pauzu",
-    playerNext: "Pereyti k sleduyushchey ostanovke",
-    playerRepeat: "Povtoryat trek",
-    playerSpeed: "Skorost vosproizvedeniya",
-    playerExpand: "Otkryt pleer na ves ekran",
+      "Откройте остановку из списка или на карте, чтобы увидеть название, описание и аудиоплеер.",
+    durationUnavailable: "Продолжительность недоступна",
+    audioAvailable: "Аудио доступно",
+    audioUnavailable: "Аудио пока недоступно",
+    audioAvailableInLanguages: (count) => `Аудио доступно на ${count} языках`,
+    listAudioAvailableInLanguages: (count) => `Доступно языков: ${count}`,
+    languageSelectorTitle: "Доступный язык для остановки 1",
+    descriptiveText: "Описание",
+    transcriptTitle: "Расшифровка",
+    playerPrevious: "Вернуться к предыдущей остановке",
+    playerPlay: "Воспроизвести аудио",
+    playerPause: "Приостановить аудио",
+    playerNext: "Перейти к следующей остановке",
+    playerRewind: "Назад на 10 секунд",
+    playerForward: "Вперед на 10 секунд",
+    playerRepeat: "Повторить дорожку",
+    playerSpeed: "Скорость воспроизведения",
+    playerExpand: "Открыть проигрыватель на весь экран",
+    playerClose: "Закрыть проигрыватель",
+    playerVolume: "Громкость проигрывателя",
+    playerMute: "Выключить звук",
+    playerUnmute: "Включить звук",
+    playerProgress: "Позиция воспроизведения",
+    mapOpenFullscreen: "Открыть карту на весь экран",
+    mapCloseFullscreen: "Закрыть полноэкранную карту",
+    languageSelector: "Выбор языка",
+    currentLanguage: (language) => `Текущий язык: ${language}`,
+    showMascot: "Показать анимированного персонажа",
+    showPhoto: "Показать фотографию остановки",
+    animateMascot: "Запустить анимацию персонажа",
+    shareFacebook: "Поделиться в Facebook",
+    shareX: "Поделиться в X",
+    shareLinkedin: "Поделиться в LinkedIn",
+    shareWhatsapp: "Поделиться в WhatsApp",
+    shareEmail: "Поделиться по электронной почте",
+    nextStopPreview: "Следующая остановка",
+    openNextStop: "Открыть следующую остановку",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
     mainTitle: "Buon dì!",
-    mapStageNote: "Nazhmite na markery ili ispolzuyte shagi nizhe, chtoby otkryt audiopleer marshruta.",
-    highlightTitle: "Polnoekrannyy rezhim",
-    highlightText: "Karta ostaetsya serdtsem prilozheniya, a fiksirovannyy pleer vnimu soprovozhdaet vas vo vremya proslushivaniya, ne zanimaya mesto dlya navigatsii.",
+    mapStageNote: "Нажмите на маркеры или используйте список остановок ниже, чтобы открыть аудиоплеер маршрута.",
+    highlightTitle: "Полноэкранный режим",
+    highlightText: "Карта остается центром приложения, а закрепленный внизу проигрыватель сопровождает прослушивание, не мешая навигации.",
     languageNames: {
-      IT: "Italyanskiy",
-      EN: "Angliyskiy",
-      DE: "Nemetskiy",
-      FR: "Frantsuzskiy",
-      ES: "Ispanskiy",
-      PT: "Portugalskiy",
+      IT: "Итальянский",
+      EN: "Английский",
+      DE: "Немецкий",
+      FR: "Французский",
+      ES: "Испанский",
+      PT: "Португальский",
       RU: "Русский",
     },
   },
@@ -911,19 +1069,17 @@ const uiStrings = {
 
 const statusMessages = {
   IT: {
-    offlineStatus: "Sei offline o la connessione e instabile.",
+    offlineStatus: "Sei offline o la connessione è instabile.",
     mapLoadError: "La mappa non si sta caricando bene. Riprova tra un attimo.",
     audioLoading: "Caricamento audio...",
     audioBuffering: "Buffering audio...",
-    audioComplete: "Ascolto concluso. Puoi aprire la prossima tappa.",
-    audioLoadError: "L'audio non e disponibile in questo momento. Riprova tra poco.",
+    audioLoadError: "L'audio non è disponibile in questo momento. Riprova tra poco.",
   },
   EN: {
     offlineStatus: "You are offline or the connection is unstable.",
     mapLoadError: "The map is not loading correctly. Please try again in a moment.",
     audioLoading: "Loading audio...",
     audioBuffering: "Buffering audio...",
-    audioComplete: "Listening complete. You can open the next stop.",
     audioLoadError: "Audio is not available right now. Please try again shortly.",
   },
   DE: {
@@ -931,40 +1087,35 @@ const statusMessages = {
     mapLoadError: "Die Karte wird nicht richtig geladen. Bitte versuchen Sie es gleich erneut.",
     audioLoading: "Audio wird geladen...",
     audioBuffering: "Audio wird gepuffert...",
-    audioComplete: "Wiedergabe beendet. Sie konnen die nachste Station offnen.",
-    audioLoadError: "Das Audio ist im Moment nicht verfugbar. Bitte versuchen Sie es in Kurze erneut.",
+    audioLoadError: "Das Audio ist im Moment nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
   },
   FR: {
-    offlineStatus: "Vous etes hors ligne ou la connexion est instable.",
-    mapLoadError: "La carte ne se charge pas correctement. Reessayez dans un instant.",
+    offlineStatus: "Vous êtes hors ligne ou la connexion est instable.",
+    mapLoadError: "La carte ne se charge pas correctement. Réessayez dans un instant.",
     audioLoading: "Chargement de l'audio...",
-    audioBuffering: "Mise en memoire tampon...",
-    audioComplete: "Ecoute terminee. Vous pouvez ouvrir l'etape suivante.",
-    audioLoadError: "L'audio n'est pas disponible pour le moment. Reessayez dans un instant.",
+    audioBuffering: "Mise en mémoire tampon...",
+    audioLoadError: "L’audio n’est pas disponible pour le moment. Réessayez dans un instant.",
   },
   ES: {
-    offlineStatus: "Estas sin conexion o la red es inestable.",
-    mapLoadError: "El mapa no se esta cargando correctamente. Vuelve a intentarlo en un momento.",
+    offlineStatus: "Estás sin conexión o la red es inestable.",
+    mapLoadError: "El mapa no se está cargando correctamente. Vuelve a intentarlo en un momento.",
     audioLoading: "Cargando audio...",
     audioBuffering: "Cargando el audio...",
-    audioComplete: "Escucha terminada. Puedes abrir la siguiente etapa.",
-    audioLoadError: "El audio no esta disponible en este momento. Vuelve a intentarlo dentro de poco.",
+    audioLoadError: "El audio no está disponible en este momento. Vuelve a intentarlo dentro de poco.",
   },
   PT: {
-    offlineStatus: "Estas offline ou a ligacao esta instavel.",
-    mapLoadError: "O mapa nao esta a carregar corretamente. Tenta novamente dentro de instantes.",
-    audioLoading: "A carregar audio...",
-    audioBuffering: "A preparar o audio...",
-    audioComplete: "Escuta concluida. Podes abrir a proxima etapa.",
-    audioLoadError: "O audio nao esta disponivel neste momento. Tenta novamente daqui a pouco.",
+    offlineStatus: "Estás offline ou a ligação está instável.",
+    mapLoadError: "O mapa não está a carregar corretamente. Tenta novamente dentro de instantes.",
+    audioLoading: "A carregar áudio...",
+    audioBuffering: "A preparar o áudio...",
+    audioLoadError: "O áudio não está disponível neste momento. Tenta novamente daqui a pouco.",
   },
   RU: {
-    offlineStatus: "Vy ne v seti ili soedinenie nestabilno.",
-    mapLoadError: "Karta zagruzhaetsya s oshibkoy. Poprobuyte eshche raz cherez mgnovenie.",
-    audioLoading: "Zagruzka audio...",
-    audioBuffering: "Buffering audio...",
-    audioComplete: "Proslushivanie zakoncheno. Otkroyte sleduyushchuyu ostanovku.",
-    audioLoadError: "Audio seychas nedostupno. Poprobuyte povtorit cherez nekotoroe vremya.",
+    offlineStatus: "Вы не в сети или соединение нестабильно.",
+    mapLoadError: "Карта загружается с ошибкой. Повторите попытку через несколько секунд.",
+    audioLoading: "Загрузка аудио...",
+    audioBuffering: "Буферизация аудио...",
+    audioLoadError: "Аудио сейчас недоступно. Повторите попытку немного позже.",
   },
 };
 
@@ -998,74 +1149,74 @@ const onboardingUiStrings = {
     guideFullPlayer: "This is the full player view: control the audio, open the transcript and move between nearby stops.",
   },
   DE: {
-    onboardingTitle: "Waehle deine Sprache, um die Route zu starten",
-    onboardingHint: "Du kannst sie jederzeit aendern.",
+    onboardingTitle: "Wähle deine Sprache, um die Route zu starten",
+    onboardingHint: "Du kannst sie jederzeit ändern.",
     helpButton: "Hilfe",
-    guideSkip: "Schliessen",
-    guideBack: "Zurueck",
+    guideSkip: "Schließen",
+    guideBack: "Zurück",
     guideNext: "Weiter",
     guideDone: "Fertig",
-    guideMap: "Die Karte zeigt die Stationen der Route. Tippe auf eine Nummer, um die Station zu oeffnen und den Player zu starten.",
-    guideDirections: "Diese Taste oeffnet Google Maps mit Fussweg-Hinweisen zur ausgewaehlten Station.",
-    guideStops: "Du kannst eine Station auch aus der Liste waehlen: Die Karte wird zentriert und das Audio vorbereitet.",
-    guidePlayer: "Der Player bleibt waehrend des Besuchs unten sichtbar. Tippe oder klicke auf die Player-Leiste, um die Vollansicht zu oeffnen.",
-    guideFullPlayer: "Das ist die Vollansicht des Players: Steuere das Audio, oeffne die Transkription und wechsle zu nahen Stationen.",
+    guideMap: "Die Karte zeigt die Stationen der Route. Tippe auf eine Nummer, um die Station zu öffnen und den Player zu starten.",
+    guideDirections: "Diese Taste öffnet Google Maps mit Fußweg-Hinweisen zur ausgewählten Station.",
+    guideStops: "Du kannst eine Station auch aus der Liste wählen: Die Karte wird zentriert und das Audio vorbereitet.",
+    guidePlayer: "Der Player bleibt während des Besuchs unten sichtbar. Tippe oder klicke auf die Player-Leiste, um die Vollansicht zu öffnen.",
+    guideFullPlayer: "Das ist die Vollansicht des Players: Steuere das Audio, öffne die Transkription und wechsle zu nahen Stationen.",
   },
   FR: {
     onboardingTitle: "Choisissez la langue pour commencer le parcours",
-    onboardingHint: "Vous pourrez la changer a tout moment.",
+    onboardingHint: "Vous pourrez la changer à tout moment.",
     helpButton: "Aide",
     guideSkip: "Fermer",
     guideBack: "Retour",
     guideNext: "Suivant",
     guideDone: "Terminer",
-    guideMap: "La carte affiche les etapes du parcours. Touchez un numero pour ouvrir l'etape et lancer le lecteur.",
-    guideDirections: "Ce bouton ouvre Google Maps avec l'itineraire a pied vers l'etape selectionnee.",
-    guideStops: "Vous pouvez aussi choisir une etape dans la liste : le site centre la carte et prepare l'audio.",
-    guidePlayer: "Le lecteur reste en bas pendant la visite. Touchez ou cliquez sur la barre du lecteur pour ouvrir la vue complete.",
-    guideFullPlayer: "Voici la vue complete du lecteur : controlez l'audio, ouvrez la transcription et passez aux etapes voisines.",
+    guideMap: "La carte affiche les étapes du parcours. Touchez un numéro pour ouvrir l’étape et lancer le lecteur.",
+    guideDirections: "Ce bouton ouvre Google Maps avec l’itinéraire à pied vers l’étape sélectionnée.",
+    guideStops: "Vous pouvez aussi choisir une étape dans la liste : le site centre la carte et prépare l’audio.",
+    guidePlayer: "Le lecteur reste en bas pendant la visite. Touchez ou cliquez sur la barre du lecteur pour ouvrir la vue complète.",
+    guideFullPlayer: "Voici la vue complète du lecteur : contrôlez l’audio, ouvrez la transcription et passez aux étapes voisines.",
   },
   ES: {
     onboardingTitle: "Elige el idioma para iniciar el recorrido",
-    onboardingHint: "Podras cambiarlo en cualquier momento.",
+    onboardingHint: "Podrás cambiarlo en cualquier momento.",
     helpButton: "Ayuda",
     guideSkip: "Cerrar",
-    guideBack: "Atras",
+    guideBack: "Atrás",
     guideNext: "Siguiente",
     guideDone: "Fin",
-    guideMap: "El mapa muestra las paradas del recorrido. Toca un numero para abrir la parada e iniciar el reproductor.",
-    guideDirections: "Este boton abre Google Maps con indicaciones a pie hacia la parada seleccionada.",
-    guideStops: "Tambien puedes elegir una parada desde la lista: el sitio centra el mapa y prepara el audio.",
+    guideMap: "El mapa muestra las paradas del recorrido. Toca un número para abrir la parada e iniciar el reproductor.",
+    guideDirections: "Este botón abre Google Maps con indicaciones a pie hacia la parada seleccionada.",
+    guideStops: "También puedes elegir una parada desde la lista: el sitio centra el mapa y prepara el audio.",
     guidePlayer: "El reproductor permanece abajo durante la visita. Haz clic o toca la barra del reproductor para abrir la vista completa.",
-    guideFullPlayer: "Esta es la vista completa del reproductor: controla el audio, abre la transcripcion y pasa a las paradas cercanas.",
+    guideFullPlayer: "Esta es la vista completa del reproductor: controla el audio, abre la transcripción y pasa a las paradas cercanas.",
   },
   PT: {
     onboardingTitle: "Escolhe o idioma para iniciar o percurso",
-    onboardingHint: "Podes altera-lo a qualquer momento.",
+    onboardingHint: "Podes alterá-lo a qualquer momento.",
     helpButton: "Ajuda",
     guideSkip: "Fechar",
     guideBack: "Voltar",
     guideNext: "Seguinte",
     guideDone: "Fim",
-    guideMap: "O mapa mostra as paragens do percurso. Toca num numero para abrir a paragem e iniciar o leitor.",
-    guideDirections: "Este botao abre o Google Maps com indicacoes a pe ate a paragem selecionada.",
-    guideStops: "Tambem podes escolher uma paragem na lista: o site centra o mapa e prepara o audio.",
+    guideMap: "O mapa mostra as paragens do percurso. Toca num número para abrir a paragem e iniciar o leitor.",
+    guideDirections: "Este botão abre o Google Maps com indicações a pé até à paragem selecionada.",
+    guideStops: "Também podes escolher uma paragem na lista: o site centra o mapa e prepara o áudio.",
     guidePlayer: "O leitor fica em baixo durante a visita. Clica ou toca na barra do leitor para abrir a vista completa.",
-    guideFullPlayer: "Esta e a vista completa do leitor: controla o audio, abre a transcricao e passa para as paragens proximas.",
+    guideFullPlayer: "Esta é a vista completa do leitor: controla o áudio, abre a transcrição e passa para as paragens próximas.",
   },
   RU: {
-    onboardingTitle: "Vyberite yazyk, chtoby nachat marshrut",
-    onboardingHint: "Vy smozhete izmenit ego v lyuboy moment.",
-    helpButton: "Pomoshch",
-    guideSkip: "Zakryt",
-    guideBack: "Nazad",
-    guideNext: "Dalee",
-    guideDone: "Gotovo",
-    guideMap: "Karta pokazyvaet ostanovki marshruta. Kosnites nomera, chtoby otkryt ostanovku i zapustit pleer.",
-    guideDirections: "Eta knopka otkryvaet Google Maps s peshimi ukazaniyami k vybrannoy ostanovke.",
-    guideStops: "Ostanovku mozhno vybrat i v spiske: sayt sotsentriruet kartu i podgotovit audio.",
-    guidePlayer: "Pleer ostayetsya vnizu vo vremya poseshcheniya. Kosnites ili nazhmite na panel pleera, chtoby otkryt polnyy vid.",
-    guideFullPlayer: "Eto polnyy vid pleera: upravlyayte audio, otkryvayte rasshifrovku i perekhodite k blizkim ostanovkam.",
+    onboardingTitle: "Выберите язык, чтобы начать маршрут",
+    onboardingHint: "Язык можно изменить в любой момент.",
+    helpButton: "Помощь",
+    guideSkip: "Закрыть",
+    guideBack: "Назад",
+    guideNext: "Далее",
+    guideDone: "Готово",
+    guideMap: "Карта показывает остановки маршрута. Нажмите на номер, чтобы открыть остановку и запустить проигрыватель.",
+    guideDirections: "Эта кнопка открывает Google Maps с пешим маршрутом до выбранной остановки.",
+    guideStops: "Остановку также можно выбрать в списке: сайт отцентрирует карту и подготовит аудио.",
+    guidePlayer: "Проигрыватель остается внизу во время прогулки. Нажмите на панель проигрывателя, чтобы открыть полный вид.",
+    guideFullPlayer: "Это полный вид проигрывателя: управляйте аудио, открывайте расшифровку и переходите к соседним остановкам.",
   },
 };
 
@@ -1218,6 +1369,47 @@ function setCurrentLanguage(languageCode, options = {}) {
 
 function setLocateStatus(message = "") {
   locateMeStatus.textContent = message;
+}
+
+function setLocateButtonState(state = "idle", message = "") {
+  if (!locateMeButton) {
+    return;
+  }
+
+  window.clearTimeout(geolocationFeedbackTimer);
+  locateMeButton.classList.remove("is-locating", "is-location-success", "is-location-error");
+  locateMeButton.disabled = state === "locating";
+  locateMeButton.setAttribute("aria-busy", String(state === "locating"));
+
+  const icon = locateMeButton.querySelector(".material-symbols-rounded");
+  if (icon) {
+    icon.textContent = state === "success"
+      ? "check"
+      : state === "error"
+        ? "location_disabled"
+        : "my_location";
+  }
+
+  if (state !== "idle") {
+    locateMeButton.classList.add(
+      state === "locating"
+        ? "is-locating"
+        : state === "success"
+          ? "is-location-success"
+          : "is-location-error",
+    );
+  }
+
+  const strings = getUiStrings(currentLanguage);
+  const accessibleLabel = message || (state === "locating" ? strings.locatingMe : strings.locateMe);
+  locateMeButton.setAttribute("aria-label", accessibleLabel);
+  locateMeButton.title = accessibleLabel;
+
+  if (state === "success" || state === "error") {
+    geolocationFeedbackTimer = window.setTimeout(() => {
+      setLocateButtonState("idle");
+    }, reducedMotionQuery.matches ? 500 : 1100);
+  }
 }
 
 function replayAnimationClass(element, className, duration = 420) {
@@ -1424,12 +1616,14 @@ function reactToTransport(group, reaction) {
 
 function highlightActiveMarker(stopNumber = activeStopNumber) {
   markersByStop.forEach((marker, numero) => {
+    const isSelected = numero === stopNumber;
+    marker.setZIndexOffset(isSelected ? 1000 : 0);
+
     const markerElement = marker.getElement()?.querySelector(".map-marker");
     if (!markerElement) {
       return;
     }
 
-    const isSelected = numero === stopNumber;
     markerElement.classList.toggle("is-selected", isSelected);
     markerElement.classList.remove("is-highlighted");
 
@@ -1634,10 +1828,12 @@ function locateUser() {
 
   if (!("geolocation" in navigator)) {
     setLocateStatus(strings.geolocationUnsupported);
+    setLocateButtonState("error", strings.geolocationUnsupported);
     return;
   }
 
   setLocateStatus(strings.locatingMe);
+  setLocateButtonState("locating", strings.locatingMe);
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -1652,23 +1848,26 @@ function locateUser() {
           ? strings.locationFound
           : `${strings.locationFound} ${strings.geolocationHttpsHint}`
       );
+      setLocateButtonState("success", strings.locationFound);
     },
     (error) => {
       if (error.code === error.PERMISSION_DENIED) {
-        setLocateStatus(
-          secureContext
-            ? strings.geolocationDenied
-            : `${strings.geolocationDenied} ${strings.geolocationHttpsHint}`
-        );
+        const message = secureContext
+          ? strings.geolocationDenied
+          : `${strings.geolocationDenied} ${strings.geolocationHttpsHint}`;
+        setLocateStatus(message);
+        setLocateButtonState("error", message);
         return;
       }
 
       if (error.code === error.TIMEOUT) {
         setLocateStatus(strings.geolocationTimeout);
+        setLocateButtonState("error", strings.geolocationTimeout);
         return;
       }
 
       setLocateStatus(strings.geolocationUnavailable);
+      setLocateButtonState("error", strings.geolocationUnavailable);
     },
     {
       enableHighAccuracy: true,
@@ -1708,15 +1907,16 @@ function updateMapExploreStop(tappa = activeStopNumber ? tappe.find((item) => it
   }
 
   const selectedOption = getSelectedAudioOption(tappa);
+  const strings = getUiStrings(currentLanguage);
   const hasAudio = Boolean(selectedOption?.audioDisponibile);
   mapExploreStopNumber.textContent = tappa.numero;
   mapExploreStopTitle.textContent = getStopTitle(tappa);
   mapExploreStopAudio.textContent = hasAudio ? "headphones" : "headphones_off";
   mapExploreStop.setAttribute(
     "aria-label",
-    `${tappa.numero}. ${getStopTitle(tappa)}${hasAudio ? ", audio" : ""}`,
+    `${tappa.numero}. ${getStopTitle(tappa)}${hasAudio ? `, ${strings.audioAvailable.toLowerCase()}` : ""}`,
   );
-  mapExploreOpenPlayer?.setAttribute("aria-label", getUiStrings(currentLanguage).playerExpand);
+  mapExploreOpenPlayer?.setAttribute("aria-label", strings.playerExpand);
 }
 
 function getDirectionsLabel() {
@@ -1727,7 +1927,7 @@ function getDirectionsLabel() {
     FR: "Ouvrir l'itinéraire",
     ES: "Abrir indicaciones",
     PT: "Abrir direções",
-    RU: "Otkryt marshrut",
+    RU: "Открыть маршрут",
   };
 
   return labels[currentLanguage] || labels.IT;
@@ -1749,6 +1949,24 @@ function updateMapDirectionsButton(tappa = activeStopNumber ? tappe.find((item) 
   mapDirectionsButton.href = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=walking`;
   mapDirectionsButton.setAttribute("aria-label", `${label}: ${title}`);
   mapDirectionsButton.title = `${label}: ${title}`;
+}
+
+function cueMapDirectionsButton() {
+  if (!mapDirectionsButton || mapDirectionsButton.hidden) {
+    return;
+  }
+
+  if (mapDirectionsCueTimer !== null) {
+    window.clearTimeout(mapDirectionsCueTimer);
+  }
+
+  mapDirectionsButton.classList.remove("is-directions-cued");
+  void mapDirectionsButton.offsetWidth;
+  mapDirectionsButton.classList.add("is-directions-cued");
+  mapDirectionsCueTimer = window.setTimeout(() => {
+    mapDirectionsButton.classList.remove("is-directions-cued");
+    mapDirectionsCueTimer = null;
+  }, 1100);
 }
 
 function updateStopPreview(tappa, { animate = false } = {}) {
@@ -1784,15 +2002,14 @@ function updateMapFullscreenButton() {
   }
 
   const isFullscreen = isMapFullscreenActive();
+  const strings = getUiStrings(currentLanguage);
+  const label = isFullscreen ? strings.mapCloseFullscreen : strings.mapOpenFullscreen;
   const fullscreenIcon = mapFullscreenButton.querySelector(".material-symbols-rounded");
   if (fullscreenIcon) {
     fullscreenIcon.textContent = isFullscreen ? "fullscreen_exit" : "fullscreen";
   }
-  mapFullscreenButton.setAttribute(
-    "aria-label",
-    isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo"
-  );
-  mapFullscreenButton.title = isFullscreen ? "Chiudi mappa a tutto schermo" : "Apri la mappa a tutto schermo";
+  mapFullscreenButton.setAttribute("aria-label", label);
+  mapFullscreenButton.title = label;
 }
 
 async function toggleMapFullscreen() {
@@ -1932,11 +2149,12 @@ function supportsMascotDirectInteraction(shell) {
 }
 
 function syncMascotTapSemantics() {
+  const strings = getUiStrings(currentLanguage);
   getMascotMotionShells().forEach((shell) => {
     if (supportsMascotDirectInteraction(shell)) {
       shell.setAttribute("role", "button");
       shell.setAttribute("tabindex", "0");
-      shell.setAttribute("aria-label", "Anima mascotte");
+      shell.setAttribute("aria-label", strings.animateMascot);
       return;
     }
 
@@ -2177,11 +2395,13 @@ function setDetailArtworkMode(mode) {
 
   if (artworkFlipToggle) {
     const isMascotMode = detailArtworkMode === "mascot";
+    const strings = getUiStrings(currentLanguage);
     artworkFlipToggle.setAttribute("aria-pressed", String(isMascotMode));
     artworkFlipToggle.setAttribute(
       "aria-label",
-      isMascotMode ? "Mostra foto della tappa" : "Mostra mascotte animata",
+      isMascotMode ? strings.showPhoto : strings.showMascot,
     );
+    artworkFlipToggle.title = isMascotMode ? strings.showPhoto : strings.showMascot;
   }
 
   mascotMotionController?.setVisible(detailArtworkMode === "mascot");
@@ -2189,8 +2409,24 @@ function setDetailArtworkMode(mode) {
 
 function syncDetailCopyPanel() {
   const isOpen = Boolean(detailCopyBox?.open);
-  if (detailCopyPanel) {
-    detailCopyPanel.hidden = !isOpen;
+  window.clearTimeout(detailCopyAnimationTimer);
+
+  if (detailCopyPanel && isOpen) {
+    detailCopyPanel.hidden = false;
+    detailCopyPanel.classList.remove("is-visible");
+    void detailCopyPanel.offsetWidth;
+    detailCopyPanel.classList.add("is-visible");
+  } else if (detailCopyPanel) {
+    detailCopyPanel.classList.remove("is-visible");
+    if (reducedMotionQuery.matches) {
+      detailCopyPanel.hidden = true;
+    } else {
+      detailCopyAnimationTimer = window.setTimeout(() => {
+        if (!detailCopyBox?.open) {
+          detailCopyPanel.hidden = true;
+        }
+      }, 190);
+    }
   }
   playerArtwork?.classList.toggle("is-transcript-open", isOpen);
 }
@@ -2417,6 +2653,41 @@ function seekCurrentAudio(offset) {
     Math.min(currentAudio.duration, currentAudio.currentTime + offset),
   );
   updateMiniPlayerPlayback();
+  showSeekFeedback(offset);
+}
+
+function showSeekFeedback(offset) {
+  const target = overlayOpen ? playerSeekFeedback : miniPlayerSeekFeedback;
+  const inactiveTarget = overlayOpen ? miniPlayerSeekFeedback : playerSeekFeedback;
+  if (!target) {
+    return;
+  }
+
+  window.clearTimeout(seekFeedbackTimer);
+  window.clearTimeout(seekFeedbackHideTimer);
+  [target, inactiveTarget].forEach((feedback) => {
+    feedback?.classList.remove("is-visible");
+    if (feedback && feedback !== target) {
+      feedback.hidden = true;
+    }
+  });
+
+  target.textContent = `${offset > 0 ? "+" : "−"}${Math.abs(offset)}s`;
+  target.hidden = false;
+
+  if (reducedMotionQuery.matches) {
+    target.classList.add("is-visible");
+  } else {
+    void target.offsetWidth;
+    target.classList.add("is-visible");
+  }
+
+  seekFeedbackTimer = window.setTimeout(() => {
+    target.classList.remove("is-visible");
+    seekFeedbackHideTimer = window.setTimeout(() => {
+      target.hidden = true;
+    }, reducedMotionQuery.matches ? 0 : 150);
+  }, reducedMotionQuery.matches ? 500 : 720);
 }
 
 function isCurrentStopWithoutAudio() {
@@ -2466,10 +2737,10 @@ function updateStopNavigationControls() {
   setControlIcon(playerNextButton, "forward_10");
   setControlIcon(miniPlayerPrev, "replay_10");
   setControlIcon(miniPlayerNext, "forward_10");
-  playerPrevButton.setAttribute("aria-label", "Indietro di 10 secondi");
-  playerNextButton.setAttribute("aria-label", "Avanti di 10 secondi");
-  miniPlayerPrev.setAttribute("aria-label", "Indietro di 10 secondi");
-  miniPlayerNext.setAttribute("aria-label", "Avanti di 10 secondi");
+  playerPrevButton.setAttribute("aria-label", strings.playerRewind);
+  playerNextButton.setAttribute("aria-label", strings.playerForward);
+  miniPlayerPrev.setAttribute("aria-label", strings.playerRewind);
+  miniPlayerNext.setAttribute("aria-label", strings.playerForward);
 }
 
 function updateNextStopPreview(tappa) {
@@ -2681,15 +2952,39 @@ function bindAudioLifecycle(audio) {
     updateMiniPlayerPlayback();
   });
 
-  audio.addEventListener("ended", () => {
-    if (currentAudio === audio) {
-      audioHasEnded = true;
-      stopMascotLipSync();
-      mascotMotionController?.end();
-      setAudioFeedbackByKey("audioComplete");
-      updateMiniPlayerPlayback();
-    }
-  });
+  audio.addEventListener("ended", () => handleAudioEnded(audio));
+}
+
+function handleAudioEnded(audio) {
+  if (currentAudio !== audio) {
+    return;
+  }
+
+  stopMascotLipSync();
+  mascotMotionController?.end();
+
+  if (repeatEnabled) {
+    audio.currentTime = 0;
+    playCurrentRenderedAudio();
+    return;
+  }
+
+  const currentIndex = tappe.findIndex((tappa) => tappa.numero === activeStopNumber);
+  const nextStop = currentIndex >= 0 ? tappe[currentIndex + 1] : null;
+
+  if (nextStop) {
+    focusStop(nextStop, {
+      autoplay: true,
+      animateRoute: true,
+      openOverlay: false,
+      skipFly: overlayOpen,
+    });
+    return;
+  }
+
+  audioHasEnded = true;
+  setAudioFeedbackByKey("");
+  updateMiniPlayerPlayback();
 }
 
 function createMarkerIcon(stopNumber) {
@@ -2815,6 +3110,7 @@ function getDetailCopy(tappa, selectedOption) {
 }
 
 function renderGlobalLanguageSelector() {
+  const strings = getUiStrings(currentLanguage);
   buildLanguageChips(globalLanguageChips, {
     onSelect: (languageCode) => {
       if (languageCode === currentLanguage) {
@@ -2831,8 +3127,9 @@ function renderGlobalLanguageSelector() {
   }
   globalLanguageCurrent?.setAttribute(
     "aria-label",
-    `Lingua corrente: ${getLanguageDisplayName(currentLanguage, currentLanguage)}`,
+    strings.currentLanguage(getLanguageDisplayName(currentLanguage, currentLanguage)),
   );
+  globalLanguageSelector?.setAttribute("aria-label", strings.languageSelector);
 }
 
 function closeGlobalLanguageMenu() {
@@ -3312,6 +3609,7 @@ function renderPlayerLanguageSelector(tappa = null) {
   }
 
   const targetStop = tappa || tappe.find((item) => item.numero === activeStopNumber) || tappe[0];
+  const strings = getUiStrings(currentLanguage);
   const audioOptions = targetStop ? getAudioOptions(targetStop) : [];
   const availableLanguages = audioOptions.filter((option) => option.audioDisponibile);
   const shouldShowSelector = false;
@@ -3340,10 +3638,10 @@ function renderPlayerLanguageSelector(tappa = null) {
   if (playerLanguageCurrent) {
     playerLanguageCurrent.setAttribute(
       "aria-label",
-      `Lingua corrente: ${getLanguageDisplayName(
+      strings.currentLanguage(getLanguageDisplayName(
         selectedOption?.codice || currentLanguage,
         selectedOption?.codice || currentLanguage,
-      )}`,
+      )),
     );
   }
 
@@ -3447,6 +3745,7 @@ function renderAudioContent(tappa) {
   audio.defaultPlaybackRate = currentPlaybackRate;
   audio.playbackRate = currentPlaybackRate;
   audio.volume = currentVolume;
+  audio.muted = volumeMuted;
   audio.setAttribute(
     "aria-label",
     `${strings.audioAvailable} ${tappa.numero} ${getLanguageDisplayName(
@@ -3531,6 +3830,124 @@ function cyclePlaybackRate() {
     currentAudio.playbackRate = currentPlaybackRate;
   }
   updatePlaybackRateControl();
+}
+
+function setDisplayedVolume(value) {
+  const nextValue = Math.max(0, Math.min(1, Number(value)));
+  miniPlayerVolume.value = String(nextValue);
+  playerVolume.value = String(nextValue);
+}
+
+function animateDisplayedVolume(targetValue) {
+  if (volumeSliderAnimationFrame !== null) {
+    window.cancelAnimationFrame(volumeSliderAnimationFrame);
+    volumeSliderAnimationFrame = null;
+  }
+
+  const nextValue = Math.max(0, Math.min(1, Number(targetValue)));
+  const startValue = Number(miniPlayerVolume.value);
+  if (reducedMotionQuery.matches || Math.abs(nextValue - startValue) < 0.001) {
+    setDisplayedVolume(nextValue);
+    return;
+  }
+
+  const startedAt = performance.now();
+  const step = (now) => {
+    const progress = Math.min(1, (now - startedAt) / VOLUME_UI_ANIMATION_DURATION);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    setDisplayedVolume(startValue + (nextValue - startValue) * easedProgress);
+
+    if (progress < 1) {
+      volumeSliderAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    setDisplayedVolume(nextValue);
+    volumeSliderAnimationFrame = null;
+  };
+
+  volumeSliderAnimationFrame = window.requestAnimationFrame(step);
+}
+
+function animateVolumeIcons() {
+  if (reducedMotionQuery.matches) {
+    return;
+  }
+
+  if (volumeIconAnimationTimer !== null) {
+    window.clearTimeout(volumeIconAnimationTimer);
+  }
+
+  [miniPlayerMute, playerMute].forEach((button) => {
+    if (!button) {
+      return;
+    }
+    button.classList.remove("is-volume-changing");
+    void button.offsetWidth;
+    button.classList.add("is-volume-changing");
+  });
+
+  volumeIconAnimationTimer = window.setTimeout(() => {
+    [miniPlayerMute, playerMute].forEach((button) => button?.classList.remove("is-volume-changing"));
+    volumeIconAnimationTimer = null;
+  }, VOLUME_UI_ANIMATION_DURATION + 40);
+}
+
+function updateVolumeControls({ animateSlider = false } = {}) {
+  const isSilent = volumeMuted || currentVolume <= 0;
+  const displayedVolume = isSilent ? 0 : currentVolume;
+  const iconName = isSilent ? "volume_off" : currentVolume < 0.5 ? "volume_down" : "volume_up";
+  const strings = getUiStrings(currentLanguage);
+  const accessibleLabel = isSilent ? strings.playerUnmute : strings.playerMute;
+
+  [miniPlayerMute, playerMute].forEach((button) => {
+    const icon = button?.querySelector(".material-symbols-rounded");
+    if (icon) {
+      icon.textContent = iconName;
+    }
+    button?.setAttribute("aria-label", accessibleLabel);
+    button?.setAttribute("aria-pressed", String(isSilent));
+    if (button) {
+      button.title = accessibleLabel;
+    }
+  });
+
+  if (animateSlider) {
+    animateDisplayedVolume(displayedVolume);
+    animateVolumeIcons();
+  } else {
+    if (volumeSliderAnimationFrame !== null) {
+      window.cancelAnimationFrame(volumeSliderAnimationFrame);
+      volumeSliderAnimationFrame = null;
+    }
+    setDisplayedVolume(displayedVolume);
+  }
+  if (currentAudio) {
+    currentAudio.volume = currentVolume;
+    currentAudio.muted = volumeMuted;
+  }
+}
+
+function setVolumeFromControl(value) {
+  currentVolume = Math.max(0, Math.min(1, Number(value)));
+  volumeMuted = currentVolume <= 0;
+  if (currentVolume > 0) {
+    lastAudibleVolume = currentVolume;
+  }
+  updateVolumeControls();
+}
+
+function toggleMuted() {
+  if (volumeMuted || currentVolume <= 0) {
+    volumeMuted = false;
+    if (currentVolume <= 0) {
+      currentVolume = lastAudibleVolume || 0.85;
+    }
+  } else {
+    lastAudibleVolume = currentVolume;
+    volumeMuted = true;
+  }
+  updateVolumeControls({ animateSlider: true });
 }
 
 function playCurrentRenderedAudio() {
@@ -3624,6 +4041,14 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   if (!options.keepGuideOpen) {
     closeGuide();
   }
+  window.clearTimeout(playerOpenTransitionTimer);
+  playerOverlay.classList.remove("is-opening-from-mini");
+  if (options.animateFromMini === true && !reducedMotionQuery.matches) {
+    playerOverlay.classList.add("is-opening-from-mini");
+    playerOpenTransitionTimer = window.setTimeout(() => {
+      playerOverlay.classList.remove("is-opening-from-mini");
+    }, 440);
+  }
   lastPlayerTrigger = trigger instanceof HTMLElement ? trigger : null;
   overlayOpen = true;
   playerOverlay.classList.remove("is-closing");
@@ -3648,11 +4073,55 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   syncMiniPlayerReservedSpace();
 }
 
+function clearPlayerSharedTransitionNames() {
+  [miniPlayerArtwork, miniPlayerTitle, detailArtworkImage, detailTitle].forEach((element) => {
+    if (element) {
+      element.style.viewTransitionName = "";
+    }
+  });
+}
+
+function openPlayerOverlayFromMini(trigger) {
+  if (overlayOpen) {
+    return;
+  }
+
+  if (reducedMotionQuery.matches || typeof document.startViewTransition !== "function") {
+    openPlayerOverlay(trigger, { animateFromMini: !reducedMotionQuery.matches });
+    return;
+  }
+
+  clearPlayerSharedTransitionNames();
+  miniPlayerArtwork.style.viewTransitionName = "tp-player-artwork";
+  miniPlayerTitle.style.viewTransitionName = "tp-player-title";
+
+  try {
+    const transition = document.startViewTransition(() => {
+      miniPlayerArtwork.style.viewTransitionName = "";
+      miniPlayerTitle.style.viewTransitionName = "";
+      detailArtworkImage.style.viewTransitionName = "tp-player-artwork";
+      detailTitle.style.viewTransitionName = "tp-player-title";
+      openPlayerOverlay(trigger);
+    });
+
+    transition.finished.then(
+      clearPlayerSharedTransitionNames,
+      clearPlayerSharedTransitionNames,
+    );
+  } catch (error) {
+    clearPlayerSharedTransitionNames();
+    openPlayerOverlay(trigger, { animateFromMini: true });
+  }
+}
+
 function closePlayerOverlay() {
   if (!overlayOpen) {
     return;
   }
   overlayOpen = false;
+  window.clearTimeout(playerOpenTransitionTimer);
+  playerOverlay.classList.remove("is-opening-from-mini");
+  clearPlayerSharedTransitionNames();
   closePlayerLanguageMenu();
   playerOverlay.classList.add("is-closing");
   playerOverlay.classList.add("is-hidden");
@@ -3743,7 +4212,7 @@ function bindPlayerControls() {
   if (miniPlayerExpand) {
     miniPlayerExpand.addEventListener("click", (event) => {
       consumeControlEvent(event);
-      openPlayerOverlay(event.currentTarget);
+      openPlayerOverlayFromMini(event.currentTarget);
     });
   }
   miniPlayerToggle.addEventListener("click", (event) => {
@@ -3837,23 +4306,21 @@ function bindPlayerControls() {
     consumeControlEvent(event);
     focusStopByOffset(-1);
   });
-  [miniPlayerVolume, playerVolume, playerProgressInput].forEach((control) => {
+  [miniPlayerMute, miniPlayerVolume, playerMute, playerVolume, playerProgressInput].forEach((control) => {
     control.addEventListener("click", stopControlPropagation);
     control.addEventListener("pointerdown", stopControlPropagation);
   });
+  [miniPlayerMute, playerMute].forEach((button) => {
+    button.addEventListener("click", (event) => {
+      consumeControlEvent(event);
+      toggleMuted();
+    });
+  });
   miniPlayerVolume.addEventListener("input", () => {
-    currentVolume = Number(miniPlayerVolume.value);
-    playerVolume.value = String(currentVolume);
-    if (currentAudio) {
-      currentAudio.volume = currentVolume;
-    }
+    setVolumeFromControl(miniPlayerVolume.value);
   });
   playerVolume.addEventListener("input", () => {
-    currentVolume = Number(playerVolume.value);
-    miniPlayerVolume.value = String(currentVolume);
-    if (currentAudio) {
-      currentAudio.volume = currentVolume;
-    }
+    setVolumeFromControl(playerVolume.value);
   });
   playerProgressInput.addEventListener("input", () => {
     if (!currentAudio || !Number.isFinite(currentAudio.duration)) {
@@ -3902,21 +4369,48 @@ function renderStaticTexts() {
   platformsEyebrow.textContent = strings.platformsEyebrow;
   shareTitle.textContent = strings.shareTitle;
   locateMeButton.setAttribute("aria-label", strings.locateMe);
+  locateMeButton.title = strings.locateMe;
   detailCopyTitle.setAttribute("aria-label", strings.transcriptTitle);
   detailCopyTitle.title = strings.transcriptTitle;
   stopsList.setAttribute("aria-label", strings.routeTitle);
-  playerPrevButton.setAttribute("aria-label", "Indietro di 10 secondi");
+  playerPrevButton.setAttribute("aria-label", strings.playerRewind);
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
-  playerNextButton.setAttribute("aria-label", "Avanti di 10 secondi");
+  playerNextButton.setAttribute("aria-label", strings.playerForward);
   updatePlaybackRateControl();
-  miniPlayerPrev.setAttribute("aria-label", "Indietro di 10 secondi");
+  miniPlayerPrev.setAttribute("aria-label", strings.playerRewind);
   miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
-  miniPlayerNext.setAttribute("aria-label", "Avanti di 10 secondi");
+  miniPlayerNext.setAttribute("aria-label", strings.playerForward);
   miniPlayerRepeat.setAttribute("aria-label", strings.playerRepeat);
   if (miniPlayerExpand) {
     miniPlayerExpand.setAttribute("aria-label", strings.playerExpand);
     miniPlayerExpand.title = strings.playerExpand;
   }
+
+  playerBackdrop?.setAttribute("aria-label", strings.playerClose);
+  playerCloseButton?.setAttribute("aria-label", strings.playerClose);
+  playerCloseButton.title = strings.playerClose;
+  miniPlayerVolume?.setAttribute("aria-label", strings.playerVolume);
+  playerVolume?.setAttribute("aria-label", strings.playerVolume);
+  updateVolumeControls();
+  playerProgressInput?.setAttribute("aria-label", strings.playerProgress);
+  shareFacebook?.setAttribute("aria-label", strings.shareFacebook);
+  shareX?.setAttribute("aria-label", strings.shareX);
+  shareLinkedin?.setAttribute("aria-label", strings.shareLinkedin);
+  shareWhatsapp?.setAttribute("aria-label", strings.shareWhatsapp);
+  shareMail?.setAttribute("aria-label", strings.shareEmail);
+  const playerHelpCloseButton = document.getElementById("player-help-close-button");
+  const playerHelpPrevButton = document.getElementById("player-help-prev-button");
+  const playerHelpNextButton = document.getElementById("player-help-next-button");
+  playerHelpCloseButton?.setAttribute("aria-label", strings.guideSkip);
+  playerHelpPrevButton?.setAttribute("aria-label", strings.guideBack);
+  playerHelpNextButton?.setAttribute("aria-label", strings.guideNext);
+  if (playerHelpCloseButton) playerHelpCloseButton.title = strings.guideSkip;
+  if (playerHelpPrevButton) playerHelpPrevButton.title = strings.guideBack;
+  if (playerHelpNextButton) playerHelpNextButton.title = strings.guideNext;
+  updateMapFullscreenButton();
+  setDetailArtworkMode(detailArtworkMode);
+  syncMascotTapSemantics();
+  updateMapDirectionsButton();
   
   // Newly translated static text elements
   if (brandNameEl) brandNameEl.textContent = strings.brandName;
@@ -4108,6 +4602,7 @@ function renderStopsList() {
         animatePreview: true,
         animateRoute: true,
       });
+      cueMapDirectionsButton();
     });
 
     item.appendChild(button);
@@ -4163,6 +4658,7 @@ function renderMap() {
         animateRoute: true,
         openOverlay: false,
       });
+      cueMapDirectionsButton();
     });
 
     marker.on("popupopen", () => {
