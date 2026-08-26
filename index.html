@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260825-mobile-artwork" />
+    <link rel="stylesheet" href="style.css?v=20260825-spotify-player" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -334,9 +334,15 @@
       ></button>
       <article class="player-sheet" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="detail-title" tabindex="-1">
         <div class="player-topbar">
-          <p id="detail-number" class="player-kicker"></p>
+          <div class="player-topbar-leading">
+            <p id="detail-number" class="player-kicker"></p>
+            <button type="button" id="player-share-button" class="player-topbar-button player-share-button" aria-label="Condividi questa tappa" title="Condividi questa tappa">
+              <span translate="no" class="player-share-icon material-symbols-rounded" aria-hidden="true">share</span>
+            </button>
+            <span id="player-share-status" class="sr-only" role="status" aria-live="polite"></span>
+          </div>
           <button type="button" id="player-close-button" class="player-close-button" aria-label="Chiudi player">
-            <span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>
+            <span translate="no" class="material-symbols-rounded" aria-hidden="true">keyboard_arrow_down</span>
           </button>
         </div>
         <div id="player-artwork" class="player-artwork">
@@ -360,14 +366,6 @@
                 />
               </div>
             </div>
-          </div>
-          <details class="detail-copy detail-copy-trigger" id="detail-copy-box">
-            <summary id="detail-copy-title" aria-label="Trascrizione" aria-controls="detail-copy-panel" title="Trascrizione">
-              <span translate="no" class="detail-copy-summary-icon material-symbols-rounded" aria-hidden="true">article</span>
-            </summary>
-          </details>
-          <div id="detail-copy-panel" class="detail-copy-content detail-copy-artwork-panel" role="region" aria-labelledby="detail-copy-title" hidden>
-            <p id="detail-description"></p>
           </div>
           <button
             type="button"
@@ -494,6 +492,20 @@
             </div>
           </div>
         </div>
+        <aside id="player-transcript-dock" class="player-transcript-dock" aria-label="Trascrizione">
+          <details class="detail-copy detail-copy-trigger" id="detail-copy-box">
+            <summary id="detail-copy-title" aria-label="Trascrizione" aria-controls="detail-copy-panel" title="Trascrizione">
+              <span class="player-transcript-summary-main">
+                <span translate="no" class="detail-copy-summary-icon material-symbols-rounded" aria-hidden="true">article</span>
+                <span id="detail-copy-label" class="player-transcript-label">Trascrizione</span>
+              </span>
+              <span translate="no" class="player-transcript-chevron material-symbols-rounded" aria-hidden="true">expand_more</span>
+            </summary>
+            <div id="detail-copy-panel" class="detail-copy-content player-transcript-panel" role="region" aria-labelledby="detail-copy-title" hidden>
+              <p id="detail-description"></p>
+            </div>
+          </details>
+        </aside>
       </article>
     </section>
 
@@ -502,6 +514,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260825-audio-chain-clean"></script>
+    <script src="app.js?v=20260825-spotify-player"></script>
   </body>
 </html>

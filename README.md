@@ -20,7 +20,8 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocità ciclica x1/x1.5/x2, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
 - Alla fine di una traccia il percorso passa alla tappa successiva e ne avvia automaticamente l'audio; l'ultima tappa resta nello stato concluso e la modalità repeat continua a riprodurre la traccia corrente.
 - Nei controlli volume di mini-player e full player, il click sull'icona silenzia subito l'audio e accompagna la barra verso zero con una breve transizione Material; un secondo click ripristina l'ultimo volume udibile. Lo stato resta sincronizzato anche cambiando traccia e la transizione è disattivata con `prefers-reduced-motion`.
-- Nel full player il controllo della trascrizione è nell'angolo superiore destro della foto; il pannello si apre con un breve fade/scale originato dal pulsante, resta separato dalla mascotte e usa uno scroll interno quando il testo supera l'altezza disponibile.
+- Nel full player numero tappa e condivisione sono in alto a sinistra; il controllo in alto a destra chiude la vista con una transizione verso il basso.
+- La trascrizione è in un dock inferiore espandibile, resta separata da foto e mascotte e usa uno scroll interno quando il testo supera l'altezza disponibile.
 - I seek di 10 secondi mostrano un riscontro numerico temporaneo vicino alla timeline; la geolocalizzazione comunica ricerca, successo ed errore direttamente sul pulsante; l'apertura dal mini-player coordina artwork e titolo con il full player quando il browser supporta View Transitions e usa un fallback CSS negli altri browser.
 - Tutti questi feedback diventano immediati e privi di movimento con `prefers-reduced-motion: reduce`.
 - Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
@@ -71,15 +72,26 @@ Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare p
 - Il cambio lingua conserva posizione e stato di riproduzione della traccia attiva.
 - Pulsanti, tooltip e nomi accessibili dei controlli di mappa, tutorial, mini-player, full player e condivisione usano lo stesso dizionario localizzato nelle sette lingue; francese, spagnolo, portoghese e tedesco mantengono i propri diacritici e il russo usa il cirillico.
 
-## Matrice E2E prevista: localizzazione
+## Suite E2E Playwright
 
-Quando verrà introdotta la suite E2E, un test parametrico dovrà aprire il sito con `lang=it`, `en`, `de`, `fr`, `es`, `pt` e `ru` e verificare:
+La suite usa Chrome gia installato sul Mac, un solo worker e avvia automaticamente un server statico locale dedicato. Non scarica un browser Playwright aggiuntivo.
+
+```bash
+npm install
+npm run test:e2e
+npm run test:e2e:desktop
+npm run test:e2e:mobile
+```
+
+I test coprono:
 
 - il valore corretto di `html[lang]` e l'assenza di fallback italiani nelle lingue non italiane;
 - le etichette di Aiuto, geolocalizzazione, indicazioni, fullscreen mappa, play/pausa, seek, repeat, velocità, apertura/chiusura full player e condivisione;
 - i controlli del tutorial avanti, indietro, chiusura e fine;
 - la conservazione dei diacritici con parole sentinella come `También`, `Atrás`, `Sélecteur`, `Zurück`, `Também` e `Áudio`;
-- l'uso del cirillico per i controlli e i messaggi russi.
+- l'uso del cirillico per i controlli e i messaggi russi;
+- marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, mute, trascrizione, condivisione e chiusura del full player;
+- contenimento nella viewport desktop/mobile e comportamento con `prefers-reduced-motion`.
 
 ## Link diretti a tappe e lingue
 

@@ -279,7 +279,9 @@ const detailStatus = document.getElementById("detail-status");
 const detailDuration = document.getElementById("detail-duration");
 const detailCopyBox = document.getElementById("detail-copy-box");
 const detailCopyTitle = document.getElementById("detail-copy-title");
+const detailCopyLabel = document.getElementById("detail-copy-label");
 const detailCopyPanel = document.getElementById("detail-copy-panel");
+const playerTranscriptDock = document.getElementById("player-transcript-dock");
 const detailDescription = document.getElementById("detail-description");
 const audioWrapper = document.getElementById("audio-wrapper");
 const playerArtwork = document.getElementById("player-artwork");
@@ -357,6 +359,9 @@ const miniPlayerVolume = document.getElementById("mini-player-volume");
 const playerOverlay = document.getElementById("player-overlay");
 const playerBackdrop = document.getElementById("player-backdrop");
 const playerCloseButton = document.getElementById("player-close-button");
+const playerShareButton = document.getElementById("player-share-button");
+const playerShareIcon = playerShareButton?.querySelector(".player-share-icon");
+const playerShareStatus = document.getElementById("player-share-status");
 const playerPrevButton = document.getElementById("player-prev-button");
 const playerPlayButton = document.getElementById("player-play-button");
 const playerNextButton = document.getElementById("player-next-button");
@@ -417,6 +422,8 @@ let seekFeedbackTimer = null;
 let seekFeedbackHideTimer = null;
 let geolocationFeedbackTimer = null;
 let playerOpenTransitionTimer = null;
+let playerCloseTransitionTimer = null;
+let playerShareFeedbackTimer = null;
 
 const markersByStop = new Map();
 const buttonsByStop = new Map();
@@ -581,6 +588,8 @@ const uiStrings = {
     playerSpeed: "Velocità di riproduzione",
     playerExpand: "Apri player a schermo intero",
     playerClose: "Chiudi player",
+    playerShare: "Condividi questa tappa",
+    shareCopied: "Link copiato",
     playerVolume: "Volume del player",
     playerMute: "Disattiva audio",
     playerUnmute: "Riattiva audio",
@@ -656,6 +665,8 @@ const uiStrings = {
     playerSpeed: "Playback speed",
     playerExpand: "Open full-screen player",
     playerClose: "Close player",
+    playerShare: "Share this stop",
+    shareCopied: "Link copied",
     playerVolume: "Player volume",
     playerMute: "Mute audio",
     playerUnmute: "Unmute audio",
@@ -731,6 +742,8 @@ const uiStrings = {
     playerSpeed: "Wiedergabegeschwindigkeit",
     playerExpand: "Player im Vollbild öffnen",
     playerClose: "Player schließen",
+    playerShare: "Diese Etappe teilen",
+    shareCopied: "Link kopiert",
     playerVolume: "Player-Lautstärke",
     playerMute: "Audio stummschalten",
     playerUnmute: "Audio einschalten",
@@ -806,6 +819,8 @@ const uiStrings = {
     playerSpeed: "Vitesse de lecture",
     playerExpand: "Ouvrir le lecteur en plein écran",
     playerClose: "Fermer le lecteur",
+    playerShare: "Partager cette étape",
+    shareCopied: "Lien copié",
     playerVolume: "Volume du lecteur",
     playerMute: "Couper le son",
     playerUnmute: "Réactiver le son",
@@ -881,6 +896,8 @@ const uiStrings = {
     playerSpeed: "Velocidad de reproducción",
     playerExpand: "Abrir reproductor a pantalla completa",
     playerClose: "Cerrar reproductor",
+    playerShare: "Compartir esta etapa",
+    shareCopied: "Enlace copiado",
     playerVolume: "Volumen del reproductor",
     playerMute: "Silenciar audio",
     playerUnmute: "Reactivar audio",
@@ -956,6 +973,8 @@ const uiStrings = {
     playerSpeed: "Velocidade de reprodução",
     playerExpand: "Abrir leitor em ecrã inteiro",
     playerClose: "Fechar leitor",
+    playerShare: "Partilhar esta etapa",
+    shareCopied: "Ligação copiada",
     playerVolume: "Volume do leitor",
     playerMute: "Silenciar áudio",
     playerUnmute: "Reativar áudio",
@@ -1031,6 +1050,8 @@ const uiStrings = {
     playerSpeed: "Скорость воспроизведения",
     playerExpand: "Открыть проигрыватель на весь экран",
     playerClose: "Закрыть проигрыватель",
+    playerShare: "Поделиться этой остановкой",
+    shareCopied: "Ссылка скопирована",
     playerVolume: "Громкость проигрывателя",
     playerMute: "Выключить звук",
     playerUnmute: "Включить звук",
@@ -3523,12 +3544,12 @@ function closeGuide() {
 
   const shouldCloseGuidePlayer = guideOpenedPlayerOverlay && overlayOpen;
   guideOpenedPlayerOverlay = false;
-  if (shouldCloseGuidePlayer) {
-    closePlayerOverlay();
-  }
   guideLayer.classList.add("is-hidden");
   document.body.classList.remove("guide-open");
   clearGuideHighlight();
+  if (shouldCloseGuidePlayer) {
+    closePlayerOverlay();
+  }
   scrollPageToTop();
 }
 
@@ -4042,6 +4063,8 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
     closeGuide();
   }
   window.clearTimeout(playerOpenTransitionTimer);
+  window.clearTimeout(playerCloseTransitionTimer);
+  playerCloseTransitionTimer = null;
   playerOverlay.classList.remove("is-opening-from-mini");
   if (options.animateFromMini === true && !reducedMotionQuery.matches) {
     playerOverlay.classList.add("is-opening-from-mini");
@@ -4120,17 +4143,30 @@ function closePlayerOverlay() {
   }
   overlayOpen = false;
   window.clearTimeout(playerOpenTransitionTimer);
+  window.clearTimeout(playerCloseTransitionTimer);
   playerOverlay.classList.remove("is-opening-from-mini");
   clearPlayerSharedTransitionNames();
   closePlayerLanguageMenu();
   playerOverlay.classList.add("is-closing");
-  playerOverlay.classList.add("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "true");
-  setPlayerBackgroundInert(false);
-  document.body.classList.remove("player-open");
   document.removeEventListener("keydown", handlePlayerKeydown);
-  window.setTimeout(() => lastPlayerTrigger?.focus(), 120);
-  syncMiniPlayerReservedSpace();
+
+  const finishClose = () => {
+    playerOverlay.classList.add("is-hidden");
+    playerOverlay.classList.remove("is-closing");
+    setPlayerBackgroundInert(false);
+    document.body.classList.remove("player-open");
+    lastPlayerTrigger?.focus({ preventScroll: true });
+    syncMiniPlayerReservedSpace();
+    playerCloseTransitionTimer = null;
+  };
+
+  if (reducedMotionQuery.matches) {
+    finishClose();
+    return;
+  }
+
+  playerCloseTransitionTimer = window.setTimeout(finishClose, 340);
 }
 
 function updateMiniPlayer(tappa, selectedOption) {
@@ -4277,6 +4313,10 @@ function bindPlayerControls() {
     consumeControlEvent(event);
     closePlayerOverlay();
   });
+  playerShareButton?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    shareCurrentStop();
+  });
   playerLanguageCurrent?.addEventListener("click", (event) => {
     consumeControlEvent(event);
     togglePlayerLanguageMenu();
@@ -4342,6 +4382,72 @@ function bindPlayerControls() {
   });
 }
 
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+function showPlayerShareFeedback() {
+  const strings = getUiStrings(currentLanguage);
+  window.clearTimeout(playerShareFeedbackTimer);
+  if (playerShareStatus) {
+    playerShareStatus.textContent = strings.shareCopied;
+  }
+  if (playerShareIcon) {
+    playerShareIcon.textContent = "check";
+  }
+  playerShareButton?.classList.add("is-shared");
+  playerShareFeedbackTimer = window.setTimeout(() => {
+    if (playerShareIcon) {
+      playerShareIcon.textContent = "share";
+    }
+    playerShareButton?.classList.remove("is-shared");
+    if (playerShareStatus) {
+      playerShareStatus.textContent = "";
+    }
+  }, 1400);
+}
+
+async function shareCurrentStop() {
+  const activeStop = tappe.find((tappa) => tappa.numero === activeStopNumber) || tappe[0];
+  const stopTitle = getStopTitle(activeStop);
+  const shareData = {
+    title: `${activeStop.numero}. ${stopTitle}`,
+    text: `${stopTitle} - ${document.title}`,
+    url: window.location.href,
+  };
+
+  if (typeof navigator.share === "function") {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (error) {
+      if (error?.name === "AbortError") {
+        return;
+      }
+    }
+  }
+
+  try {
+    await copyTextToClipboard(shareData.url);
+    showPlayerShareFeedback();
+  } catch (error) {
+    window.location.href = shareMail?.href || `mailto:?body=${encodeURIComponent(shareData.url)}`;
+  }
+}
+
 function updateShareLinks() {
   const strings = getUiStrings(currentLanguage);
   const pageUrl = window.location.href;
@@ -4372,6 +4478,8 @@ function renderStaticTexts() {
   locateMeButton.title = strings.locateMe;
   detailCopyTitle.setAttribute("aria-label", strings.transcriptTitle);
   detailCopyTitle.title = strings.transcriptTitle;
+  if (detailCopyLabel) detailCopyLabel.textContent = strings.transcriptTitle;
+  playerTranscriptDock?.setAttribute("aria-label", strings.transcriptTitle);
   stopsList.setAttribute("aria-label", strings.routeTitle);
   playerPrevButton.setAttribute("aria-label", strings.playerRewind);
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
@@ -4389,6 +4497,8 @@ function renderStaticTexts() {
   playerBackdrop?.setAttribute("aria-label", strings.playerClose);
   playerCloseButton?.setAttribute("aria-label", strings.playerClose);
   playerCloseButton.title = strings.playerClose;
+  playerShareButton?.setAttribute("aria-label", strings.playerShare);
+  if (playerShareButton) playerShareButton.title = strings.playerShare;
   miniPlayerVolume?.setAttribute("aria-label", strings.playerVolume);
   playerVolume?.setAttribute("aria-label", strings.playerVolume);
   updateVolumeControls();
