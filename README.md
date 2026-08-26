@@ -13,10 +13,11 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
   - mappa dominante a tutta larghezza del contenuto con caption sovrapposta;
   - sezione tappe separata sotto la mappa, in card grid;
   - sezioni editoriali di supporto sotto la mappa;
-  - blocco finale con piattaforme e share affiancati su desktop e impilati su mobile, con link reali per Facebook, LinkedIn, X, WhatsApp e mail.
+  - blocco finale con piattaforme e share affiancati su desktop; su mobile resta soltanto la sezione piattaforme. I link desktop sono reali per Facebook, LinkedIn, X, WhatsApp e mail.
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
 - Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
-- Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player; il player esteso si apre solo dal controllo dedicato del mini-player.
+- Il full player si apre sia dal controllo dedicato sia toccando un'area libera del mini-player; pulsanti, slider e link mantengono invece la propria azione senza aprire la vista estesa.
+- Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player senza aprire il player esteso.
 - Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocità ciclica x1/x1.5/x2, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
 - Alla fine di una traccia il percorso passa alla tappa successiva e ne avvia automaticamente l'audio; l'ultima tappa resta nello stato concluso e la modalità repeat continua a riprodurre la traccia corrente.
 - Nei controlli volume di mini-player e full player, il click sull'icona silenzia subito l'audio e accompagna la barra verso zero con una breve transizione Material; un secondo click ripristina l'ultimo volume udibile. Lo stato resta sincronizzato anche cambiando traccia e la transizione è disattivata con `prefers-reduced-motion`.
@@ -81,6 +82,7 @@ npm install
 npm run test:e2e
 npm run test:e2e:desktop
 npm run test:e2e:mobile
+npm run test:e2e:dist
 ```
 
 I test coprono:
@@ -92,6 +94,24 @@ I test coprono:
 - l'uso del cirillico per i controlli e i messaggi russi;
 - marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, mute, trascrizione, condivisione e chiusura del full player;
 - contenimento nella viewport desktop/mobile e comportamento con `prefers-reduced-motion`.
+
+## Deploy Netlify
+
+Il deploy di produzione usa la configurazione versionata in `netlify.toml`:
+
+- comando di build: `npm run build`;
+- cartella pubblicata: `dist/`;
+- runtime: Node.js 22;
+- branch di produzione atteso nel pannello Netlify: `main`.
+
+La build copia in `dist/` soltanto HTML, JavaScript, CSS, immagini, audio e cue della mascotte. Test, documentazione, `node_modules` e cartelle di lavoro non vengono pubblicati.
+
+Verifica locale dell'artefatto destinato a Netlify:
+
+```bash
+npm run build
+npm run test:e2e:dist
+```
 
 ## Link diretti a tappe e lingue
 

@@ -3028,6 +3028,7 @@ body.is-map-fullscreen .map-explore-stop {
   transition:
     transform var(--tp-motion-expressive) var(--tp-ease-emphasized),
     box-shadow var(--tp-motion-standard) var(--tp-ease-standard);
+  cursor: pointer;
 }
 
 .TPMiniPlayer .mini-player-main {
@@ -4863,6 +4864,10 @@ body.guide-open::before {
 }
 
 @media (max-width: 760px) {
+  .outbound-panels > .share-panel {
+    display: none;
+  }
+
   .header-actions {
     justify-content: center;
   }

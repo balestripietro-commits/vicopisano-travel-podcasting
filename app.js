@@ -4251,6 +4251,17 @@ function bindPlayerControls() {
       openPlayerOverlayFromMini(event.currentTarget);
     });
   }
+  miniPlayer?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (
+      !(target instanceof Element) ||
+      target.closest("button, input, a, select, textarea, label, [role='button']")
+    ) {
+      return;
+    }
+
+    openPlayerOverlayFromMini(miniPlayer);
+  });
   miniPlayerToggle.addEventListener("click", (event) => {
     consumeControlEvent(event);
     reactToTransport(document.querySelector(".mini-player-transport-group"), "play");

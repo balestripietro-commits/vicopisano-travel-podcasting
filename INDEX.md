@@ -13,6 +13,8 @@
 - `package.json` e `package-lock.json`: dipendenza Playwright e comandi della suite E2E.
 - `playwright.config.mjs`: configurazione E2E desktop/mobile con Chrome locale, un worker e server statico dedicato.
 - `tests/e2e/`: test automatici per tutorial, player, mappa, responsive, localizzazione, link e reduced motion.
+- `build-static.mjs`: build Netlify a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
+- `netlify.toml`: configurazione versionata del build `npm run build`, publish directory `dist/` e Node.js 22.
 - `logo_vicopisano.png`: stemma usato nell'intestazione del sito.
 - `mascotte_vicopisano.webp`: immagine mascotte ottimizzata per il runtime.
 - `assets/mascotte-mouth/`: frame mascotte Rhubarb `A-H` + `X` in WebP ottimizzato, usati nella home e nel player per sincronizzare la bocca con l'audio.
@@ -32,6 +34,7 @@
 - `audio/cues/`: cue JSON generati con Rhubarb per sincronizzare la bocca della mascotte sugli audio disponibili.
 - `outputs/`: cartella riservata a deliverable utente.
 - `work/`: cartella di lavoro temporanea.
+- `dist/`: output locale temporaneo del build Netlify, escluso da Git.
 
 ## Design system Phase 1, Phase 2 e Phase 3
 

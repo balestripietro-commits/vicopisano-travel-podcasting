@@ -38,6 +38,19 @@ test("stop list selection provides the same route and directions feedback", asyn
   await expectNoRuntimeErrors(errors);
 });
 
+test("free mini-player areas open the full player without hijacking controls", async ({ page }) => {
+  const errors = collectRuntimeErrors(page);
+  await enterSite(page);
+
+  await page.locator("#mini-player-toggle").click();
+  await expect(page.locator("#player-overlay")).toBeHidden();
+
+  await page.locator("#mini-player-open").click();
+  await expect(page.locator("#player-overlay")).toBeVisible();
+  await expect(page.locator("#player-overlay")).toHaveAttribute("aria-hidden", "false");
+  await expectNoRuntimeErrors(errors);
+});
+
 test("full player controls playback, seek, speed, mute and transcript", async ({ page }, testInfo) => {
   test.setTimeout(60_000);
   const errors = collectRuntimeErrors(page);

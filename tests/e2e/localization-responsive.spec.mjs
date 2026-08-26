@@ -76,3 +76,16 @@ test("external platform and share links are valid", async ({ page }, testInfo) =
   }
   await expectNoRuntimeErrors(errors);
 });
+
+test("social sharing section is hidden only on mobile", async ({ page }, testInfo) => {
+  const errors = collectRuntimeErrors(page);
+  await enterSite(page);
+
+  if (testInfo.project.name === "mobile-chrome") {
+    await expect(page.locator(".share-panel")).toBeHidden();
+  } else {
+    await expect(page.locator(".share-panel")).toBeVisible();
+  }
+  await expect(page.locator(".platforms-panel")).toBeVisible();
+  await expectNoRuntimeErrors(errors);
+});
