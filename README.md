@@ -95,11 +95,13 @@ I test coprono:
 - marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, mute, trascrizione, condivisione e chiusura del full player;
 - contenimento nella viewport desktop/mobile e comportamento con `prefers-reduced-motion`.
 
-### E2E su GitHub Actions
+### E2E e deploy su GitHub Actions
 
 La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni push e pull request verso `main`, oltre a supportare l'avvio manuale. Il runner usa Node.js 22, installa Chromium nel solo ambiente CI e mantiene un worker per stabilità. In caso di errore allega report, screenshot e trace Playwright come artifact per 14 giorni.
 
-Il check pubblicato da GitHub si chiama `Playwright E2E`. La workflow segnala le regressioni, ma diventa bloccante per i merge soltanto dopo aver aggiunto questo check alle regole di protezione di `main` nelle impostazioni GitHub.
+Dopo un push a `main`, e soltanto se build ed E2E passano, la workflow pubblica su Netlify la stessa cartella `dist/` appena testata. Le pull request e gli avvii manuali non eseguono deploy. Il job usa i repository secret `NETLIFY_AUTH_TOKEN` e `NETLIFY_SITE_ID`, che non sono salvati nei sorgenti.
+
+Il check pubblicato da GitHub si chiama `Playwright E2E`. Sul repository privato con GitHub Free il check non puo bloccare i merge, ma una regressione impedisce comunque la pubblicazione Netlify. La versione di produzione precedente resta online finche una nuova esecuzione non termina correttamente.
 
 ## Deploy Netlify
 
@@ -111,6 +113,8 @@ Il deploy di produzione usa la configurazione versionata in `netlify.toml`:
 - branch di produzione atteso nel pannello Netlify: `main`.
 
 La build copia in `dist/` soltanto HTML, JavaScript, CSS, immagini, audio e cue della mascotte. Test, documentazione, `node_modules` e cartelle di lavoro non vengono pubblicati.
+
+I build Git automatici del progetto Netlify devono restare nello stato `Stopped builds`: la produzione viene aggiornata esclusivamente dalla CLI nella workflow GitHub, dopo il superamento degli E2E. Riattivare i build automatici aggirerebbe questo controllo.
 
 Verifica locale dell'artefatto destinato a Netlify:
 

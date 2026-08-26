@@ -42,6 +42,21 @@ jobs:
       - name: Build and run E2E tests
         run: npm run test:e2e:dist
 
+      - name: Deploy tested build to Netlify
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          test -n "$NETLIFY_AUTH_TOKEN"
+          test -n "$NETLIFY_SITE_ID"
+          npx --yes netlify-cli@27.4.0 deploy \
+            --prod \
+            --dir=dist \
+            --site="$NETLIFY_SITE_ID" \
+            --auth="$NETLIFY_AUTH_TOKEN" \
+            --message="GitHub Actions ${GITHUB_SHA}"
+
       - name: Upload Playwright diagnostics
         if: failure()
         uses: actions/upload-artifact@v5
