@@ -95,6 +95,12 @@ I test coprono:
 - marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, mute, trascrizione, condivisione e chiusura del full player;
 - contenimento nella viewport desktop/mobile e comportamento con `prefers-reduced-motion`.
 
+### E2E su GitHub Actions
+
+La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni push e pull request verso `main`, oltre a supportare l'avvio manuale. Il runner usa Node.js 22, installa Chromium nel solo ambiente CI e mantiene un worker per stabilità. In caso di errore allega report, screenshot e trace Playwright come artifact per 14 giorni.
+
+Il check pubblicato da GitHub si chiama `Playwright E2E`. La workflow segnala le regressioni, ma diventa bloccante per i merge soltanto dopo aver aggiunto questo check alle regole di protezione di `main` nelle impostazioni GitHub.
+
 ## Deploy Netlify
 
 Il deploy di produzione usa la configurazione versionata in `netlify.toml`:
