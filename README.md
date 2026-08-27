@@ -82,6 +82,7 @@ npm install
 npm run test:e2e
 npm run test:e2e:desktop
 npm run test:e2e:mobile
+npm run test:e2e:mobile-low
 npm run test:e2e:dist
 E2E_BASE_URL=https://transcendent-meerkat-166cbe.netlify.app npm run test:e2e:smoke
 ```
@@ -95,12 +96,13 @@ I test coprono:
 - l'uso del cirillico per i controlli e i messaggi russi;
 - marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, mute, trascrizione, condivisione e chiusura del full player;
 - contenimento nella viewport desktop/mobile e comportamento con `prefers-reduced-motion`.
+- viewport mobile bassa `375x667`: full player in una schermata, controlli e navigazione visibili, tutorial mini-player senza sovrapposizioni.
 
 ### E2E e deploy su GitHub Actions
 
 La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni push e pull request verso `main`, oltre a supportare l'avvio manuale. Il runner usa Node.js 22, installa Chromium nel solo ambiente CI e mantiene un worker per stabilità. In caso di errore allega report, screenshot e trace Playwright come artifact per 14 giorni.
 
-Dopo un push a `main`, e soltanto se build ed E2E passano, la workflow pubblica su Netlify la stessa cartella `dist/` appena testata. Subito dopo apre il dominio pubblico su desktop e mobile e verifica titolo, mappa, marker, mini-player, errori runtime e overflow orizzontale. Le pull request e gli avvii manuali non eseguono deploy o smoke test remoto. Il job usa i repository secret `NETLIFY_AUTH_TOKEN` e `NETLIFY_SITE_ID`, che non sono salvati nei sorgenti.
+Dopo un push a `main`, e soltanto se build ed E2E passano, la workflow pubblica su Netlify la stessa cartella `dist/` appena testata. Subito dopo apre il dominio pubblico su desktop, mobile standard e mobile basso `375x667` e verifica titolo, mappa, marker, mini-player, errori runtime e overflow orizzontale. Le pull request e gli avvii manuali non eseguono deploy o smoke test remoto. Il job usa i repository secret `NETLIFY_AUTH_TOKEN` e `NETLIFY_SITE_ID`, che non sono salvati nei sorgenti.
 
 Il check pubblicato da GitHub si chiama `Playwright E2E`. Sul repository privato con GitHub Free il check non puo bloccare i merge, ma una regressione impedisce comunque la pubblicazione Netlify. La versione di produzione precedente resta online finche una nuova esecuzione non termina correttamente.
 
