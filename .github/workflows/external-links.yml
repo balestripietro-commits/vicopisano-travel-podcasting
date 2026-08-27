@@ -1,0 +1,61 @@
+name: External links check
+
+on:
+  schedule:
+    - cron: "17 8 * * 1"
+      timezone: "Europe/Madrid"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: external-links-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check external links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI: "true"
+      E2E_BASE_URL: https://transcendent-meerkat-166cbe.netlify.app
+      PLAYWRIGHT_BROWSER_CHANNEL: chromium
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check public external links
+        run: npm run test:external-links
+
+      - name: Publish check summary
+        if: always()
+        run: |
+          if [ -f work/external-links/report.md ]; then
+            cat work/external-links/report.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf '%s\n' '## External links check' '' 'No report was generated.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload link report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: external-links-report-${{ github.run_attempt }}
+          path: work/external-links
+          if-no-files-found: warn
+          retention-days: 14

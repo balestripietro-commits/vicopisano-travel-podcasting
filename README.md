@@ -108,6 +108,20 @@ La pipeline usa `netlify-cli` `27.4.0` come dipendenza di sviluppo esatta, regis
 
 Il check pubblicato da GitHub si chiama `Playwright E2E`. Sul repository privato con GitHub Free il check non puo bloccare i merge, ma una regressione impedisce comunque la pubblicazione Netlify. La versione di produzione precedente resta online finche una nuova esecuzione non termina correttamente.
 
+### Controllo settimanale dei link esterni
+
+La workflow `.github/workflows/external-links.yml` controlla il dominio Netlify pubblico ogni lunedi alle 08:17 nel fuso `Europe/Madrid` e puo essere avviata manualmente dalla sezione Actions di GitHub. Non parte sui push, non esegue deploy e usa soltanto il test dedicato `tests/e2e/external-links.spec.mjs`, escluso dalla suite E2E ordinaria.
+
+Il controllo verifica izi.TRAVEL, Loquis, Spotify, Facebook, X, LinkedIn, WhatsApp e il link email realmente renderizzati dal sito. Le risposte HTTP `200-399` sono valide; `401`, `403` e `429` diventano avvisi per evitare falsi allarmi su servizi protetti o limitati; `404`, `410`, errori `5xx`, DNS, TLS e timeout fanno fallire il job. Per le condivisioni vengono verificati anche dominio e parametri, mentre il link `mailto:` viene validato senza richieste di rete.
+
+Esecuzione locale contro la produzione:
+
+```bash
+npm run test:external-links
+```
+
+Ogni esecuzione pubblica un riepilogo nella pagina della GitHub Action e conserva per 14 giorni un artifact `external-links-report-*` con report Markdown, JSON e diagnostica Playwright. In caso di errore il job prova una seconda volta le condizioni di rete transitorie prima di segnalare il guasto.
+
 ## Deploy Netlify
 
 Il deploy di produzione usa la configurazione versionata in `netlify.toml`:
