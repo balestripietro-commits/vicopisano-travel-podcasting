@@ -10,7 +10,7 @@ export const languageNames = {
   ru: "Русский",
 };
 
-export function collectRuntimeErrors(page) {
+export function collectRuntimeErrors(page, { responseOrigin } = {}) {
   const errors = [];
 
   page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
@@ -21,7 +21,8 @@ export function collectRuntimeErrors(page) {
   });
   page.on("response", (response) => {
     const url = response.url();
-    if (response.status() >= 400 && !url.endsWith("/favicon.ico")) {
+    const tracksResponse = !responseOrigin || new URL(url).origin === responseOrigin;
+    if (tracksResponse && response.status() >= 400 && !url.endsWith("/favicon.ico")) {
       errors.push(`resource ${response.status()}: ${url}`);
     }
   });

@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const port = Number(process.env.E2E_PORT || 4173);
-const baseURL = `http://127.0.0.1:${port}`;
+const remoteBaseURL = process.env.E2E_BASE_URL?.replace(/\/$/, "");
+const baseURL = remoteBaseURL || `http://127.0.0.1:${port}`;
 const staticRoot = process.env.E2E_STATIC_ROOT || ".";
 
 export default defineConfig({
@@ -30,14 +31,16 @@ export default defineConfig({
       args: ["--autoplay-policy=no-user-gesture-required"],
     },
   },
-  webServer: {
-    command: `python3 -m http.server ${port} --bind 127.0.0.1 --directory ${JSON.stringify(staticRoot)}`,
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 15_000,
-    stdout: "ignore",
-    stderr: "ignore",
-  },
+  webServer: remoteBaseURL
+    ? undefined
+    : {
+        command: `python3 -m http.server ${port} --bind 127.0.0.1 --directory ${JSON.stringify(staticRoot)}`,
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+        timeout: 15_000,
+        stdout: "ignore",
+        stderr: "ignore",
+      },
   projects: [
     {
       name: "desktop-chrome",
