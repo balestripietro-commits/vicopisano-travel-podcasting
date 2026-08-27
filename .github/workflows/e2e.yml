@@ -3,8 +3,12 @@ name: E2E
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "**/*.md"
   pull_request:
     branches: [main]
+    paths-ignore:
+      - "**/*.md"
   workflow_dispatch:
 
 permissions:
@@ -50,7 +54,7 @@ jobs:
         run: |
           test -n "$NETLIFY_AUTH_TOKEN"
           test -n "$NETLIFY_SITE_ID"
-          npx --yes netlify-cli@27.4.0 deploy \
+          npx --no-install netlify deploy \
             --prod \
             --dir=dist \
             --site="$NETLIFY_SITE_ID" \

@@ -10,10 +10,10 @@
 - `style.css`: stile full-page editoriale con hero ampio, mappa dominante, sezione tappe in card grid, mini-player fisso, player esteso con dock trascrizione e motion system leggero della mascotte.
 - `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio, condivisione tappa, geolocalizzazione, guida contestuale e stati motion della mascotte.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
-- `package.json` e `package-lock.json`: dipendenza Playwright e comandi della suite E2E.
+- `package.json` e `package-lock.json`: dipendenze versionate Playwright e Netlify CLI, comandi della suite E2E e deploy riproducibile.
 - `playwright.config.mjs`: configurazione E2E desktop, mobile standard e mobile basso `375x667` con Chrome locale, un worker e server statico dedicato.
 - `tests/e2e/`: test automatici per tutorial, player, mappa, responsive, localizzazione, link, reduced motion, viewport mobile bassa e smoke test del dominio pubblico.
-- `.github/workflows/e2e.yml`: workflow GitHub Actions che esegue la suite sull'artefatto `dist/` per push e pull request verso `main`; dopo un push pubblica su Netlify la stessa build soltanto se gli E2E passano e verifica il deploy con uno smoke test desktop/mobile.
+- `.github/workflows/e2e.yml`: workflow GitHub Actions che ignora modifiche esclusivamente Markdown, esegue la suite sull'artefatto `dist/` per gli altri push e pull request verso `main`, pubblica su Netlify soltanto dopo E2E verdi e verifica il deploy con uno smoke test desktop/mobile.
 - `build-static.mjs`: build Netlify a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
 - `netlify.toml`: configurazione versionata del build `npm run build`, publish directory `dist/` e Node.js 22.
 - `logo_vicopisano.png`: stemma usato nell'intestazione del sito.
