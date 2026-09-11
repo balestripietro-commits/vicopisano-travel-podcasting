@@ -72,8 +72,20 @@ test("full player controls playback, seek, speed, mute and transcript", async ({
   });
   await page.locator("#player-prev-button").click();
   await expect.poll(() => page.locator("audio").evaluate((audio) => audio.currentTime)).toBeLessThan(21);
+  await expect(page.locator("#player-prev-seek-feedback")).toHaveText("−10s");
+  await expect(page.locator("#player-prev-seek-feedback")).toBeVisible();
   await page.locator("#player-next-button").click();
   await expect.poll(() => page.locator("audio").evaluate((audio) => audio.currentTime)).toBeGreaterThan(29);
+  await expect(page.locator("#player-next-seek-feedback")).toHaveText("+10s");
+  await expect(page.locator("#player-next-seek-feedback")).toBeVisible();
+
+  const [titleBox, seekFeedbackBox] = await Promise.all([
+    page.locator("#detail-title").boundingBox(),
+    page.locator("#player-next-seek-feedback").boundingBox(),
+  ]);
+  expect(titleBox).not.toBeNull();
+  expect(seekFeedbackBox).not.toBeNull();
+  expect(seekFeedbackBox.y).toBeGreaterThan(titleBox.y + titleBox.height);
 
   await page.locator("#player-speed-button").click();
   await expect(page.locator("#player-speed-button")).toHaveText("x1.5");

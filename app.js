@@ -354,6 +354,8 @@ const miniPlayerProgressBar = document.getElementById("mini-player-progress-bar"
 const miniPlayerCurrentTime = document.getElementById("mini-player-current-time");
 const miniPlayerDurationTotal = document.getElementById("mini-player-duration-total");
 const miniPlayerSeekFeedback = document.getElementById("mini-player-seek-feedback");
+const miniPlayerPrevSeekFeedback = document.getElementById("mini-player-prev-seek-feedback");
+const miniPlayerNextSeekFeedback = document.getElementById("mini-player-next-seek-feedback");
 const miniPlayerMute = document.getElementById("mini-player-mute");
 const miniPlayerVolume = document.getElementById("mini-player-volume");
 const playerOverlay = document.getElementById("player-overlay");
@@ -370,6 +372,8 @@ const playerSpeedLabel = document.getElementById("player-speed-label");
 const playerCurrentTime = document.getElementById("player-current-time");
 const playerDurationTotal = document.getElementById("player-duration-total");
 const playerSeekFeedback = document.getElementById("player-seek-feedback");
+const playerPrevSeekFeedback = document.getElementById("player-prev-seek-feedback");
+const playerNextSeekFeedback = document.getElementById("player-next-seek-feedback");
 const playerProgressInput = document.getElementById("player-progress-input");
 const playerMute = document.getElementById("player-mute");
 const playerVolume = document.getElementById("player-volume");
@@ -2678,22 +2682,37 @@ function seekCurrentAudio(offset) {
 }
 
 function showSeekFeedback(offset) {
-  const target = overlayOpen ? playerSeekFeedback : miniPlayerSeekFeedback;
-  const inactiveTarget = overlayOpen ? miniPlayerSeekFeedback : playerSeekFeedback;
-  if (!target) {
+  const statusTarget = overlayOpen ? playerSeekFeedback : miniPlayerSeekFeedback;
+  const target = overlayOpen
+    ? offset > 0
+      ? playerNextSeekFeedback
+      : playerPrevSeekFeedback
+    : offset > 0
+      ? miniPlayerNextSeekFeedback
+      : miniPlayerPrevSeekFeedback;
+  const visualFeedback = [
+    miniPlayerPrevSeekFeedback,
+    miniPlayerNextSeekFeedback,
+    playerPrevSeekFeedback,
+    playerNextSeekFeedback,
+  ];
+
+  if (!target || !statusTarget) {
     return;
   }
 
   window.clearTimeout(seekFeedbackTimer);
   window.clearTimeout(seekFeedbackHideTimer);
-  [target, inactiveTarget].forEach((feedback) => {
+  visualFeedback.forEach((feedback) => {
     feedback?.classList.remove("is-visible");
     if (feedback && feedback !== target) {
       feedback.hidden = true;
     }
   });
 
-  target.textContent = `${offset > 0 ? "+" : "−"}${Math.abs(offset)}s`;
+  const message = `${offset > 0 ? "+" : "−"}${Math.abs(offset)}s`;
+  statusTarget.textContent = message;
+  target.textContent = message;
   target.hidden = false;
 
   if (reducedMotionQuery.matches) {
@@ -2707,6 +2726,7 @@ function showSeekFeedback(offset) {
     target.classList.remove("is-visible");
     seekFeedbackHideTimer = window.setTimeout(() => {
       target.hidden = true;
+      statusTarget.textContent = "";
     }, reducedMotionQuery.matches ? 0 : 150);
   }, reducedMotionQuery.matches ? 500 : 720);
 }

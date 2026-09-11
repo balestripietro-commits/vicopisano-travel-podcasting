@@ -23,7 +23,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Nei controlli volume di mini-player e full player, il click sull'icona silenzia subito l'audio e accompagna la barra verso zero con una breve transizione Material; un secondo click ripristina l'ultimo volume udibile. Lo stato resta sincronizzato anche cambiando traccia e la transizione è disattivata con `prefers-reduced-motion`.
 - Nel full player numero tappa e condivisione sono in alto a sinistra; il controllo in alto a destra chiude la vista con una transizione verso il basso.
 - La trascrizione è in un dock inferiore espandibile, resta separata da foto e mascotte e usa uno scroll interno quando il testo supera l'altezza disponibile.
-- I seek di 10 secondi mostrano un riscontro numerico temporaneo vicino alla timeline; la geolocalizzazione comunica ricerca, successo ed errore direttamente sul pulsante; l'apertura dal mini-player coordina artwork e titolo con il full player quando il browser supporta View Transitions e usa un fallback CSS negli altri browser.
+- I seek di 10 secondi mostrano un riscontro numerico temporaneo sopra il controllo usato, senza coprire il titolo; la geolocalizzazione comunica ricerca, successo ed errore direttamente sul pulsante; l'apertura dal mini-player coordina artwork e titolo con il full player quando il browser supporta View Transitions e usa un fallback CSS negli altri browser.
 - Tutti questi feedback diventano immediati e privi di movimento con `prefers-reduced-motion: reduce`.
 - Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
 - Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.

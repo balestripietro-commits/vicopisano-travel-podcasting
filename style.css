@@ -5975,11 +5975,6 @@ body.guide-open::before {
   transform: translateY(0) scale(1);
 }
 
-.mini-player-timeline,
-.player-timeline {
-  position: relative;
-}
-
 .seek-feedback {
   position: absolute;
   left: 50%;
@@ -6012,8 +6007,15 @@ body.guide-open::before {
   transform: translate(-50%, 0) scale(1);
 }
 
-.mini-player-seek-feedback {
-  left: 62%;
+.player-control-button,
+.mini-player-control {
+  position: relative;
+  overflow: visible;
+}
+
+.seek-feedback--control {
+  white-space: nowrap;
+  transform: translate(-50%, 6px) scale(0.9);
 }
 
 #locate-me-button {

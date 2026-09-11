@@ -248,6 +248,7 @@
               aria-label="Indietro di 10 secondi"
             >
               <span translate="no" class="material-symbols-rounded" aria-hidden="true">replay_10</span>
+              <span id="mini-player-prev-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
             </button>
             <button type="button" id="mini-player-toggle" class="mini-player-toggle tp-audio-control tp-audio-control--primary" aria-label="Play">
               <span translate="no" class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
@@ -259,6 +260,7 @@
               aria-label="Avanti di 10 secondi"
             >
               <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
+              <span id="mini-player-next-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
             </button>
           </div>
           <button
@@ -274,7 +276,7 @@
         <div class="mini-player-timeline">
           <output
             id="mini-player-seek-feedback"
-            class="seek-feedback mini-player-seek-feedback"
+            class="seek-feedback-status sr-only"
             role="status"
             aria-live="polite"
             aria-atomic="true"
@@ -388,7 +390,7 @@
           <div class="player-timeline">
             <output
               id="player-seek-feedback"
-              class="seek-feedback player-seek-feedback"
+              class="seek-feedback-status sr-only"
               role="status"
               aria-live="polite"
               aria-atomic="true"
@@ -444,12 +446,14 @@
               <div class="player-transport-group">
                 <button type="button" id="player-prev-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Indietro di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">replay_10</span>
+                  <span id="player-prev-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
                 </button>
                 <button type="button" id="player-play-button" class="player-control-button tp-audio-control tp-audio-control--primary is-primary">
                   <span translate="no" class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
                 </button>
                 <button type="button" id="player-next-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Avanti di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
+                  <span id="player-next-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
                 </button>
               </div>
               <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control" aria-label="Velocità di riproduzione: x1" title="Velocità di riproduzione: x1">
