@@ -14,7 +14,8 @@
 - `playwright.config.mjs`: configurazione E2E desktop, mobile standard e mobile basso `375x667` con Chrome locale, un worker e server statico dedicato; esclude il controllo remoto settimanale dalla suite ordinaria.
 - `playwright.external-links.config.mjs`: configurazione Playwright isolata per il monitoraggio dei link sul dominio Netlify pubblico.
 - `tests/e2e/`: test automatici per tutorial, player, mappa, responsive, localizzazione, reduced motion, viewport mobile bassa, smoke test e controllo remoto delle piattaforme/condivisioni.
-- `.github/workflows/e2e.yml`: workflow GitHub Actions che ignora modifiche esclusivamente Markdown, esegue la suite sull'artefatto `dist/` per gli altri push e pull request verso `main`, pubblica su Netlify soltanto dopo E2E verdi e verifica il deploy con uno smoke test desktop/mobile.
+- `.github/workflows/e2e.yml`: workflow GitHub Actions che ignora modifiche esclusivamente Markdown ed esegue la suite sull'artefatto `dist/` per gli altri push e pull request verso `main`; non pubblica mai automaticamente.
+- `.github/workflows/deploy.yml`: workflow GitHub Actions manuale e confermato che ricostruisce, esegue gli E2E, pubblica su Netlify e verifica il dominio pubblico solo quando viene richiesta una pubblicazione di produzione.
 - `.github/workflows/external-links.yml`: controllo settimanale e manuale del sito pubblico per link di piattaforme, condivisioni e email, con riepilogo GitHub e artifact diagnostico conservato per 14 giorni.
 - `build-static.mjs`: build Netlify a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
 - `netlify.toml`: configurazione versionata del build `npm run build`, publish directory `dist/` e Node.js 22.

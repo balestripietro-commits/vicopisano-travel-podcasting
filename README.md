@@ -100,9 +100,9 @@ I test coprono:
 
 ### E2E e deploy su GitHub Actions
 
-La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni push e pull request verso `main`, oltre a supportare l'avvio manuale. Se un commit modifica esclusivamente file Markdown (`**/*.md`), test e deploy non partono. Il runner usa Node.js 22, installa Chromium nel solo ambiente CI e mantiene un worker per stabilità. In caso di errore allega report, screenshot e trace Playwright come artifact per 14 giorni.
+La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni push e pull request verso `main`, oltre a supportare l'avvio manuale. Se un commit modifica esclusivamente file Markdown (`**/*.md`), i test non partono. Il runner usa Node.js 22, installa Chromium nel solo ambiente CI e mantiene un worker per stabilità. In caso di errore allega report, screenshot e trace Playwright come artifact per 14 giorni. Non esegue mai un deploy Netlify.
 
-Dopo un push a `main`, e soltanto se build ed E2E passano, la workflow pubblica su Netlify la stessa cartella `dist/` appena testata. Subito dopo apre il dominio pubblico su desktop, mobile standard e mobile basso `375x667` e verifica titolo, mappa, marker, mini-player, errori runtime e overflow orizzontale. Le pull request e gli avvii manuali non eseguono deploy o smoke test remoto. Il job usa i repository secret `NETLIFY_AUTH_TOKEN` e `NETLIFY_SITE_ID`, che non sono salvati nei sorgenti.
+La pubblicazione è intenzionalmente separata nella workflow `.github/workflows/deploy.yml`: si avvia manualmente dalla pagina Actions di GitHub, selezionando il branch `main` e confermando `Confirm deployment of main to the public Netlify site`. Prima di pubblicare, ricostruisce `dist/`, esegue gli E2E e, solo se sono verdi, pubblica su Netlify. Subito dopo apre il dominio pubblico su desktop, mobile standard e mobile basso `375x667` e verifica titolo, mappa, marker, mini-player, errori runtime e overflow orizzontale. Il job usa i repository secret `NETLIFY_AUTH_TOKEN` e `NETLIFY_SITE_ID`, che non sono salvati nei sorgenti.
 
 La pipeline usa `netlify-cli` `27.4.0` come dipendenza di sviluppo esatta, registrata nel `package-lock.json`. Il deploy richiama il binario gia installato da `npm ci`, senza scaricare dinamicamente una versione della CLI durante lo step Netlify.
 
@@ -133,7 +133,7 @@ Il deploy di produzione usa la configurazione versionata in `netlify.toml`:
 
 La build copia in `dist/` soltanto HTML, JavaScript, CSS, immagini, audio e cue della mascotte. Test, documentazione, `node_modules` e cartelle di lavoro non vengono pubblicati.
 
-I build Git automatici del progetto Netlify devono restare nello stato `Stopped builds`: la produzione viene aggiornata esclusivamente dalla CLI nella workflow GitHub, dopo il superamento degli E2E. Riattivare i build automatici aggirerebbe questo controllo.
+I build Git automatici del progetto Netlify devono restare nello stato `Stopped builds`: la produzione viene aggiornata esclusivamente dalla workflow GitHub manuale, dopo il superamento degli E2E. Riattivare i build automatici aggirerebbe questo controllo.
 
 Verifica locale dell'artefatto destinato a Netlify:
 
