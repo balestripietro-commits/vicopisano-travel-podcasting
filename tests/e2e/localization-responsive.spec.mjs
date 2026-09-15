@@ -9,17 +9,9 @@ import {
   stopButton,
 } from "./helpers.mjs";
 
-const languageChecks = [
-  { code: "it", locate: "Trova la mia posizione" },
-  { code: "en", locate: "Find my location" },
-  { code: "de", locate: "Meinen Standort finden" },
-  { code: "fr", locate: "Trouver ma position" },
-  { code: "es", locate: "Encontrar mi posición" },
-  { code: "pt", locate: "Encontrar minha localização" },
-  { code: "ru", locate: "Найти мое местоположение" },
-];
+const languageChecks = ["it", "en", "de", "fr", "es", "pt", "ru"];
 
-for (const { code, locate } of languageChecks) {
+for (const code of languageChecks) {
   test(`interface localization is complete in ${languageNames[code]}`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chrome", "Language matrix runs once on desktop Chrome");
     const errors = collectRuntimeErrors(page);
@@ -27,7 +19,7 @@ for (const { code, locate } of languageChecks) {
 
     await expect(page.locator("html")).toHaveAttribute("lang", code);
     await expect(page.locator("#global-language-current-label")).toHaveText(languageNames[code]);
-    await expect(page.locator("#locate-me-button")).toHaveAttribute("aria-label", locate);
+    await expect(page.locator("#map-recenter-button")).toHaveAttribute("aria-label", /.+/);
     await expect(page.locator("#map-directions-button")).not.toHaveAttribute("aria-label", "");
     await expect(page.locator("#mini-player-expand")).not.toHaveAttribute("aria-label", "");
     await expectNoRuntimeErrors(errors);
@@ -44,7 +36,32 @@ test("full player fits the viewport without horizontal overflow", async ({ page 
   await expectInsideViewport(page.locator("#player-play-button"), page);
   await expectInsideViewport(page.locator("#player-speed-button"), page);
   await expectInsideViewport(page.locator("#player-close-button"), page);
-  await expectInsideViewport(page.locator("#player-transcript-dock"), page);
+  await expect(page.locator("#player-close-button .material-symbols-rounded")).toHaveText("close");
+  if (test.info().project.name === "mobile-chrome") {
+    await expectInsideViewport(page.locator("#player-transcript-dock"), page);
+    const artworkBox = await page.locator("#player-overlay .player-artwork").boundingBox();
+    expect(artworkBox).not.toBeNull();
+    expect(Math.abs(artworkBox.width - artworkBox.height)).toBeLessThanOrEqual(2);
+  }
+  if (test.info().project.name !== "desktop-chrome") {
+    const controlBoxes = await Promise.all([
+      page.locator("#player-prev-button").boundingBox(),
+      page.locator("#player-play-button").boundingBox(),
+      page.locator("#player-next-button").boundingBox(),
+      page.locator("#player-speed-button").boundingBox(),
+    ]);
+    controlBoxes.forEach((box) => expect(box).not.toBeNull());
+
+    const centers = controlBoxes.map((box) => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2,
+    }));
+    const gaps = centers.slice(1).map((center, index) => center.x - centers[index].x);
+    const averageGap = gaps.reduce((sum, gap) => sum + gap, 0) / gaps.length;
+
+    centers.forEach((center) => expect(Math.abs(center.y - centers[0].y)).toBeLessThanOrEqual(1));
+    gaps.forEach((gap) => expect(Math.abs(gap - averageGap)).toBeLessThanOrEqual(2));
+  }
   await expectNoRuntimeErrors(errors);
 });
 

@@ -15,25 +15,27 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
   - sezioni editoriali di supporto sotto la mappa;
   - blocco finale con piattaforme e share affiancati su desktop; su mobile resta soltanto la sezione piattaforme. I link desktop sono reali per Facebook, LinkedIn, X, WhatsApp e mail.
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva.
-- Mini-player fisso in basso in stile audio-bar: artwork, metadati, precedente/play-successiva, repeat, timeline e volume.
-- Il full player si apre sia dal controllo dedicato sia toccando un'area libera del mini-player; pulsanti, slider e link mantengono invece la propria azione senza aprire la vista estesa.
+- Mini-player fisso in basso in stile audio-bar: precedente/play-successiva, pulsante velocità ciclico x1/x1,5/x2, timeline Material orizzontale con tempi ai lati, barra allungata e pallino seek trascinabile. Su desktop la timeline occupa tutta la colonna libera tra i comandi e il pulsante di espansione. L'audio è sempre al volume pieno del browser e segue i controlli di sistema di computer, cuffie o telefono. Nella mappa estesa desktop viene nascosto: tutti i controlli restano nel pannello contestuale a destra, mentre la mappa usa l'intera altezza disponibile. La trascrizione resta disponibile nel full player mobile.
+- Su mobile, il full player si apre toccando un'area libera del mini-player; su desktop la stessa azione apre la mappa estesa con il pannello contestuale. Pulsanti, slider e link mantengono invece la propria azione senza cambiare vista.
 - Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player senza aprire il player esteso.
-- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocità ciclica x1/x1.5/x2, barra seek trascinabile, volume desktop, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso.
-- Alla fine di una traccia il percorso passa alla tappa successiva e ne avvia automaticamente l'audio; l'ultima tappa resta nello stato concluso e la modalità repeat continua a riprodurre la traccia corrente.
-- Nei controlli volume di mini-player e full player, il click sull'icona silenzia subito l'audio e accompagna la barra verso zero con una breve transizione Material; un secondo click ripristina l'ultimo volume udibile. Lo stato resta sincronizzato anche cambiando traccia e la transizione è disattivata con `prefers-reduced-motion`.
+- Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocità ciclica x1/x1,5/x2, barra seek trascinabile, trascrizione cliccabile e navigazione precedente/successiva coerente con la posizione nel percorso. Su mobile i quattro controlli audio sono su una griglia con centri e spaziatura orizzontale identici.
+- Alla fine di una traccia il percorso passa alla tappa successiva e ne avvia automaticamente l'audio; l'ultima tappa resta nello stato concluso.
 - Nel full player numero tappa e condivisione sono in alto a sinistra; il controllo in alto a destra chiude la vista con una transizione verso il basso.
 - La trascrizione è in un dock inferiore espandibile, resta separata da foto e mascotte e usa uno scroll interno quando il testo supera l'altezza disponibile.
-- I seek di 10 secondi mostrano un riscontro numerico temporaneo sopra il controllo usato, senza coprire il titolo; la geolocalizzazione comunica ricerca, successo ed errore direttamente sul pulsante; l'apertura dal mini-player coordina artwork e titolo con il full player quando il browser supporta View Transitions e usa un fallback CSS negli altri browser.
+- Lo scroll della trascrizione usa una traccia discreta con cursore giallo arrotondato, sincronizzato alla posizione di lettura e senza dipendere dalla scrollbar nativa del browser.
+- Dal pannello della trascrizione, il pulsante con icona libro attiva la modalità lettura: il testo occupa quasi tutta la vista, mentre foto e mascotte si riducono temporaneamente. In Explore desktop il pannello destro diventa una superficie di lettura e la mappa resta libera fino al bordo inferiore.
+- I seek di 10 secondi mostrano un riscontro numerico temporaneo sopra il controllo usato, senza coprire il titolo; l'apertura dal mini-player coordina artwork e titolo con il full player quando il browser supporta View Transitions e usa un fallback CSS negli altri browser.
 - Tutti questi feedback diventano immediati e privi di movimento con `prefers-reduced-motion: reduce`.
 - Il player esteso usa una superficie full-screen verde scuro senza livelli sottostanti visibili; i nomi delle tappe restano in italiano in tutte le lingue dell'interfaccia.
-- Geolocalizzazione utente tramite pulsante dedicato sopra la mappa.
+- Il pulsante di espansione del mini-player apre direttamente la mappa estesa; il click sull'area libera del mini-player continua ad aprire il player a pagina intera.
+- Su mobile, il controllo mappa con icona posizione ricentra tutte le tappe del percorso; su desktop resta nascosto in ogni vista.
 - Traduzione globale del sito nelle 7 lingue supportate quando cambia la lingua attiva.
 
 ## File del progetto
 
 - `index.html`: struttura della pagina.
 - `style.css`: layout e stile.
-- `app.js`: dati delle tappe, mappa, lista interattiva, mini-player, overlay audio con seek custom, traduzioni, geolocalizzazione e associazione immagini per tappa.
+- `app.js`: dati delle tappe, mappa, lista interattiva, mini-player, overlay audio con seek custom, traduzioni e associazione immagini per tappa.
 - `audio/`: cartella degli MP3.
 - Per la Tappa 1 sono attive piu lingue selezionabili direttamente nell'interfaccia.
 - Le tappe 1-4 hanno una foto dedicata mostrata nel mini-player e nel player esteso; le tappe senza foto usano ancora il placeholder bianco.
@@ -59,8 +61,6 @@ Per prova da smartphone sulla stessa rete locale puoi usare anche:
 http://<IP-del-computer>:8000
 ```
 
-Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare poi il sito in HTTPS.
-
 
 
 ## Primo accesso, lingua e aiuto
@@ -68,10 +68,10 @@ Nota: per geolocalizzazione affidabile su smartphone è preferibile pubblicare p
 - A ogni apertura il sito mostra una schermata pulita di scelta lingua prima di entrare nell'esperienza.
 - La lingua iniziale viene scelta da URL se presente, poi dalla lingua salvata nel browser, poi dalla lingua di sistema; se non e supportata, il fallback e inglese.
 - Dopo la scelta lingua parte la guida contestuale tradotta nella lingua attiva.
-- Il tasto `Aiuto` nell'header riapre la guida contestuale, che spiega mappa, indicazioni Google Maps, lista tappe, mini-player e vista completa del player.
+- Il tasto `Aiuto` nell'header riapre la guida contestuale. Su desktop illustra mappa, indicazioni Google Maps, lista tappe, mini-player, il pulsante di apertura e la vista Explore effettivamente aperta; su mobile conclude con la vista completa del player.
 - La lingua resta modificabile dal selettore compatto in alto.
 - Il cambio lingua conserva posizione e stato di riproduzione della traccia attiva.
-- Pulsanti, tooltip e nomi accessibili dei controlli di mappa, tutorial, mini-player, full player e condivisione usano lo stesso dizionario localizzato nelle sette lingue; francese, spagnolo, portoghese e tedesco mantengono i propri diacritici e il russo usa il cirillico.
+- Pulsanti, tooltip e nomi accessibili dei controlli di mappa, tutorial, mini-player, full player e condivisione usano lo stesso dizionario localizzato nelle sette lingue; francese, spagnolo, portoghese e tedesco mantengono i propri diacritici e il russo usa il cirillico. Durante il tutorial, l'interfaccia esterna è resa inerte e il layer guida intercetta i tocchi: restano attivi solo chiudi, indietro e avanti. Il layer guida resta sempre sopra mappa e player, così il fumetto e il cursore di chiusura sono visibili anche nella vista Explore. Il fumetto si dispone accanto o sopra/sotto al controllo evidenziato senza coprirlo e, quando e' laterale, la punta si allinea al centro del controllo. Nello step Indicazioni desktop il fumetto privilegia il lato destro del pulsante pedonale e punta dal proprio lato sinistro. Nello step Explore desktop, la mappa e' il bersaglio: il suo perimetro usa l'evidenziazione gialla del tutorial e il fumetto e' centrato sul suo bordo inferiore. Fumetto e punta condividono sempre la stessa superficie bianca opaca e lo stesso bordo, senza dipendere dal colore dello sfondo. A ogni cambio step, il fumetto precedente svanisce in 220 ms, il nuovo layout viene calcolato a opacita' zero e il fumetto rientra nella sola posizione finale con una dissolvenza e scala da `0,955` a `1` in 420 ms, senza passaggi intermedi o scroll animato. Su desktop il passaggio della lista e' ancorato sopra il titolo `Tappe del percorso`, lasciando libere tutte le card; il passaggio successivo punta dall'alto al pulsante di apertura nel mini-player: il cursore arriva in 2 s, resta fermo 2 s, simula un click di 1,05 s e avvia Explore a 5,05 s. La mappa si espande o si richiude in 850 ms; all'apertura il pannello destro entra dopo 200 ms con dissolvenza e spostamento di 24 px per 650 ms, alla chiusura esce verso destra negli stessi 650 ms. Il fumetto Explore appare soltanto al termine. Il tutorial resta aperto e prosegue nel pannello Explore/full player. Alla fine, lo stesso gesto lento e senza ripple punta alla X e la vista torna alla home. Con movimento ridotto le dimostrazioni restano statiche e rapide. Su mobile il passaggio Indicazioni usa una variante piu' compatta.
 
 ## Suite E2E Playwright
 
@@ -90,11 +90,11 @@ E2E_BASE_URL=https://transcendent-meerkat-166cbe.netlify.app npm run test:e2e:sm
 I test coprono:
 
 - il valore corretto di `html[lang]` e l'assenza di fallback italiani nelle lingue non italiane;
-- le etichette di Aiuto, geolocalizzazione, indicazioni, fullscreen mappa, play/pausa, seek, repeat, velocità, apertura/chiusura full player e condivisione;
+- le etichette di Aiuto, ricentratura della mappa, indicazioni, fullscreen mappa, play/pausa, seek, velocità, apertura/chiusura full player e condivisione;
 - i controlli del tutorial avanti, indietro, chiusura e fine;
 - la conservazione dei diacritici con parole sentinella come `También`, `Atrás`, `Sélecteur`, `Zurück`, `Também` e `Áudio`;
 - l'uso del cirillico per i controlli e i messaggi russi;
-- marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, mute, trascrizione, condivisione e chiusura del full player;
+- marker e lista tappe, avvio audio, navigazione precedente/successiva, autoplay, seek, velocita, trascrizione, condivisione e chiusura del full player;
 - contenimento nella viewport desktop/mobile e comportamento con `prefers-reduced-motion`.
 - viewport mobile bassa `375x667`: full player in una schermata, controlli e navigazione visibili, tutorial mini-player senza sovrapposizioni.
 
@@ -157,13 +157,20 @@ Il sito supporta parametri URL condivisibili:
 - I frame richiesti da Rhubarb sono presenti: `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H` e `X` per la bocca a riposo.
 - La mascotte usa wrapper separati per motion, breathing e mouth frame: Rhubarb continua a cambiare solo lo sprite della bocca, mentre `style.css` e `app.js` gestiscono micro-movimenti deterministici.
 - Il motion system resta sobrio: breathing quasi impercettibile, micro-sway idle occasionale, reazioni leggere a play/pausa/fine traccia, transizione foto/mascotte e micro transizione al cambio tappa.
-- Click desktop e tap mobile sulla mascotte della home riusano la stessa reazione, senza animazioni al semplice hover.
+- Click desktop, tastiera e tap mobile sulla mascotte della home attivano un salto di conferma con lieve inclinazione e micro-rimbalzo all'atterraggio, senza animazioni al semplice hover.
 - Con `prefers-reduced-motion: reduce` il sito riduce drasticamente breathing, idle, reazioni e transizioni, mantenendo la funzionalita e la sincronizzazione Rhubarb.
 - Rhubarb e installato localmente in `/Users/pietrobalestri/.local/bin/rhubarb`.
 - I cue di sincronizzazione sono salvati in `audio/cues/` e vengono caricati automaticamente quando parte un audio.
-- La logica del sito associa ogni file `audio/nome_file.mp3` al cue `audio/cues/nome_file.json`.
+- La logica del sito associa ogni file `audio/nome_file.mp3` al cue `audio/cues/nome_file.json`, lo precarica quando si seleziona la traccia e applica un anticipo visivo di 80 ms alla bocca; l'audio resta invariato e pausa, seek e salti mantengono l'allineamento.
 - Al momento sono stati generati i cue per la Tappa 1 in tutte le lingue disponibili.
 - Le tappe senza audio attivo non animano la mascotte: quando aggiungeremo nuovi MP3, andra generato anche il relativo JSON Rhubarb.
+
+### Trascrizione sincronizzata
+
+- Le trascrizioni editoriali con timestamp vivono in `audio/transcripts/` e non sostituiscono i cue Rhubarb della mascotte.
+- `01_torre_quattro_porte_it.json` e' una bozza ottenuta sull'MP3 definitivo `audio/01_torre_quattro_porte.mp3` (231,549 secondi): il testo e' editoriale, mentre i tempi sono stati generati automaticamente e richiedono un controllo all'ascolto prima della pubblicazione.
+- Per la sola Tappa 1 italiana, la mappa mostra la frase corrente in una fascia semitrasparente durante l'ascolto. La fascia usa `audio.currentTime`, quindi resta sincronizzata con pausa, seek e salti di 10 secondi; in pausa svanisce dopo circa 2,6 secondi. Da tablet/desktop usa una riga singola compatta; su mobile può andare su più righe per conservare leggibilità. Le altre tappe e lingue non mostrano sottotitoli finché non avranno il proprio file con timestamp approvati.
+- Per una pubblicazione: usare l'MP3 definitivo, generare gli intervalli parola/frase, correggere nomi propri e punteggiatura dal testo approvato, riascoltare i confini di frase e infine sostituire l'audio del sito se la sua durata differisce dal master allineato.
 
 Workflow per una nuova tappa o una nuova lingua:
 
@@ -225,8 +232,8 @@ audioDisponibile: true
 
 ## Come sostituire le descrizioni provvisorie con trascrizioni complete
 
-- In `app.js`, aggiorna il campo `descrizione` della tappa.
-- Lo stesso testo viene mostrato nel pannello dettagli come testo descrittivo o trascrizione provvisoria.
+- In `app.js`, aggiorna il campo `trascrizione` della variante audio della lingua corretta.
+- Per la Tappa 1 italiana il testo editoriale completo e' nel campo `trascrizione` della variante `IT`; gli intervalli di sincronizzazione sono in `audio/transcripts/01_torre_quattro_porte_it.json`.
 
 ## Nota sul prototipo attuale
 
@@ -255,7 +262,7 @@ design-system.css -> theme-vicopisano.css -> style.css
 Nella Fase 2 sono migrati in modo additivo:
 
 - selettore lingua a `TPChip`;
-- Help, geolocalizzazione e fullscreen a `TPIconButton` con Material Symbols Rounded;
+- Help, ricentratura mappa e fullscreen a `TPIconButton` con Material Symbols Rounded;
 - card tappe a `TPStopCard`, con stato selected molto evidente tramite bordo, barra laterale, superficie e ring;
 - attributi semantici `aria-selected` sui chip lingua e `aria-current` sulle tappe.
 
@@ -264,7 +271,7 @@ La Fase 3 aggiorna esclusivamente l'esperienza audio:
 - `TPMiniPlayer`: player flottante mobile con artwork, progress essenziale e Play/Pause dominante.
 - `TPPlayerSheet`: bottom sheet immersivo mobile e split layout desktop con foto della tappa come artwork predefinito.
 - Un solo `<audio>` attivo controlla mini-player, sheet, seek e Media Session quando disponibile.
-- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, velocità ciclica x1/x1.5/x2 nel solo full player, volume desktop, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva. Il repeat resta disponibile nel mini-player.
+- Seek Material 3 con target touch da 44px, `-10 / Play-Pause / +10` con icone Material Symbols Rounded, selettore diretto x1/x1,5/x2 nel mini-player e velocità ciclica nel full player, trascrizione collassata e CTA compatte per la tappa precedente e/o successiva. Il volume resta in carico ai controlli di sistema del dispositivo.
 - Il selettore lingua del player mostra solo le tracce disponibili: bottom sheet compatto sotto 860px e popover ancorato al controllo su desktop. Il player sheet gestisce focus, Escape, background inerte e ritorno del focus all'apertura.
 - Sotto 860px il selettore lingua della home mostra solo la lingua corrente e apre le opzioni al tap; nel player la foto resta artwork predefinito e la mascotte si apre solo tramite lo switch manuale.
 - Stati loading, buffering, errore, audio non disponibile e ascolto concluso senza autoplay della tappa seguente.
@@ -275,12 +282,12 @@ Marker Leaflet, hero, contenuti, coordinate, immagini, audio sorgenti e mappa re
 
 La Fase 4 aggiorna esclusivamente mappa e composizione:
 
-- Home mobile in ordine intro compatta, mappa protagonista e tappe; desktop con split view sticky tra mappa e lista.
+- Home mobile in ordine intro compatta, mappa protagonista e tappe; desktop con split view sticky tra mappa e lista, con la mappa che usa tutta l'altezza libera della viewport tra il margine superiore e il mini-player fisso.
 - `TPMapMarker` mantiene il viola Travel Podcasting per gli identificatori e usa il verde Vicopisano per la route; card e marker condividono lo stato selected.
-- La selezione da card centra la mappa senza popup automatico; il tap su marker seleziona e avvia la traccia nel mini-player senza aprire il full player.
+- La selezione da card centra la mappa senza popup automatico; il tap su marker seleziona e avvia la traccia nel mini-player senza aprire il full player. Su mobile, il controllo con icona posizione riporta in ogni momento la vista sull'intero percorso e sulle sette tappe: quando la vista contiene già tutte le tappe mantiene il suo aspetto standard; quando il percorso non è più interamente visibile dopo una selezione, uno zoom o un trascinamento, passa a un richiamo giallo discreto, ridotto a un alone statico con `prefers-reduced-motion`. Lo zoom minimo mantiene un solo livello di contesto oltre al percorso e il trascinamento resta delimitato alle immediate vicinanze dell'itinerario, evitando di allontanarsi fino all'area geografica estesa. Su desktop il controllo è nascosto sia nella vista normale sia in Explore; le tappe selezionate mantengono comunque la mappa centrata automaticamente.
 - Dalla Tappa 2 in poi, la selezione evidenzia in giallo il tratto reale percorso dalla tappa precedente; l'intero itinerario resta visibile in verde e la Tappa 1 non mostra un segmento precedente.
 - Il marker selezionato resta sopra gli altri marker sovrapposti; la selezione da marker o dalla lista delle tappe richiama il pulsante Google Maps con un doppio halo giallo, sostituito da un richiamo statico quando è attivo `prefers-reduced-motion`.
-- La fullscreen diventa Explore mode con controlli Material, mini-player disponibile e una card contestuale compatta per la tappa selezionata.
+- La fullscreen diventa Explore mode con controlli Material e una card contestuale compatta per la tappa selezionata. Su desktop, l'apertura della mappa estesa nasconde il mini-player inferiore: timeline completa gialla e trascinabile, controlli di ascolto nel pannello destro, insieme a foto quadrata, titolo e navigazione precedente/successiva con miniature. La mascotte animata si sposta nell'angolo basso sinistro della mappa; la centratura riserva un piccolo margine a sinistra per lasciarla libera. Il controllo di ricentratura resta nascosto su desktop, mentre le indicazioni restano nell'angolo alto destro; il pulsante di espansione/riduzione della mappa viene nascosto perché il pulsante X del pannello chiude già Explore mode. La mappa usa l'intera altezza libera fino al bordo inferiore; il dock della trascrizione non e' presente in questa modalità. La condivisione della tappa resta disponibile nel full player mobile. Il pulsante X del pannello chiude interamente Explore mode e riporta la home alla mappa normale. In questa sola modalità desktop, la vista del percorso è anche lo zoom minimo e il trascinamento è limitato a un margine vicino alle tappe. Su mobile il full player sostituisce Explore mode, evitando sovrapposizioni e preservando spazio per i controlli.
 
 Per vedere il playground quando il server locale e attivo:
 

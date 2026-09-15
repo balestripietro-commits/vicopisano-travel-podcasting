@@ -48,7 +48,7 @@ export async function enterSite(page, { language = "it", guide = false, stop = 1
 }
 
 export async function openFullPlayer(page) {
-  await page.locator("#mini-player-expand").click();
+  await page.locator("#mini-player-open").click();
   await expect(page.locator("#player-overlay")).toBeVisible();
   await expect(page.locator("#player-overlay")).toHaveAttribute("aria-hidden", "false");
   await expect
