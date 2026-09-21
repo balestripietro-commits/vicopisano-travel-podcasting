@@ -24,15 +24,22 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   await expectNoRuntimeErrors(errors);
 });
 
-test("hero mascot acknowledges a click with its dedicated jump", async ({ page }) => {
+test("hero mascot acknowledges mouse and touch activation with its dedicated jump", async ({ page }, testInfo) => {
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
   const mascot = page.locator(".mascot-motion-shell--hero");
   await expect(mascot).toHaveAttribute("role", "button");
   await watchClass(page, ".mascot-motion-shell--hero", "is-hero-tap-reaction");
-  await mascot.click();
+  if (testInfo.project.name === "mobile-chrome") {
+    const box = await mascot.boundingBox();
+    expect(box).not.toBeNull();
+    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+  } else {
+    await mascot.click();
+  }
   await expectClassObserved(page, "is-hero-tap-reaction");
+  await expect(mascot).toHaveCSS("animation-name", "mascot-hero-tap-reaction");
   await expectNoRuntimeErrors(errors);
 });
 
@@ -76,6 +83,24 @@ test("desktop mini-player dedicates the remaining row to the seek timeline", asy
   expect(timelineBox.x).toBeGreaterThanOrEqual(controlsBox.x + controlsBox.width + 12);
   expect(timelineBox.x + timelineBox.width).toBeLessThanOrEqual(expandBox.x - 12);
   expect(seekBox.width).toBeGreaterThanOrEqual(330);
+  await expectNoRuntimeErrors(errors);
+});
+
+test("desktop home keeps the stop photo square while prioritizing the map", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "The square home preview is desktop-only.");
+  const errors = collectRuntimeErrors(page);
+  await enterSite(page);
+
+  const [mapBox, previewBox, imageBox] = await Promise.all([
+    page.locator(".map-stage").boundingBox(),
+    page.locator("#stop-preview").boundingBox(),
+    page.locator("#stop-preview-image").boundingBox(),
+  ]);
+  expect(mapBox).not.toBeNull();
+  expect(previewBox).not.toBeNull();
+  expect(imageBox).not.toBeNull();
+  expect(Math.abs(imageBox.width - imageBox.height)).toBeLessThanOrEqual(1);
+  expect(mapBox.width).toBeGreaterThan(previewBox.width);
   await expectNoRuntimeErrors(errors);
 });
 
@@ -154,6 +179,11 @@ test("Italian master audio keeps the map subtitle synchronized and fades it afte
   await expect(caption).toContainText("Torre delle Quattro Porte");
   if (testInfo.project.name === "desktop-chrome") {
     await expect(caption).toHaveCSS("white-space", "nowrap");
+    await page.locator("#map-fullscreen-button").click();
+    await expect(page.locator("body")).toHaveClass(/is-map-player-panel/);
+    await page.locator("audio").evaluate((audio) => audio.dispatchEvent(new Event("timeupdate")));
+    await expect(caption).toHaveCSS("white-space", "pre-line");
+    await expect(caption).toHaveText(/\n/);
   }
 
   await page.locator("audio").evaluate((audio) => audio.pause());
@@ -163,15 +193,24 @@ test("Italian master audio keeps the map subtitle synchronized and fades it afte
   await expectNoRuntimeErrors(errors);
 });
 
-test("recenter control is available and recenters the full route", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === "desktop-chrome", "Desktop does not show the recenter control.");
+test("map location control recenters the route on desktop and locates the user on mobile", async ({ page }, testInfo) => {
   const errors = collectRuntimeErrors(page);
+  if (testInfo.project.name !== "desktop-chrome") {
+    await page.context().grantPermissions(["geolocation"]);
+    await page.context().setGeolocation({ latitude: 43.6995, longitude: 10.5865, accuracy: 12 });
+  }
   await enterSite(page);
 
-  await expect(page.locator("#locate-me-button")).toHaveCount(0);
   await expect(page.locator("#map-recenter-button")).toHaveAttribute("aria-label", /.+/);
   await expect(page.locator("#map-recenter-button .material-symbols-rounded")).toHaveText("my_location");
   await page.locator("#map-recenter-button").click();
+  if (testInfo.project.name !== "desktop-chrome") {
+    await expect(page.locator(".map-user-location-marker")).toBeVisible();
+    await expect(page.locator("#map-load-status")).toContainText("Posizione trovata");
+    await expectNoRuntimeErrors(errors);
+    return;
+  }
+
   await expect(page.locator("#map-recenter-button")).not.toHaveClass(/is-recenter-cued/);
   await expect(page.locator("#map-recenter-button")).toHaveClass(/is-route-centered/);
   await expect(page.locator("#map-recenter-button")).toHaveAttribute("data-route-off-center", "false");
@@ -247,32 +286,46 @@ test("free mini-player areas open the desktop map experience or mobile full play
   await expectNoRuntimeErrors(errors);
 });
 
-test("mini-player expansion opens the expanded map instead of the full player", async ({ page }) => {
+test("mini-player expansion opens Explore on desktop and the full player on mobile", async ({ page }, testInfo) => {
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
   await page.locator("#mini-player-expand").click();
-  await expect(page.locator("body")).toHaveClass(/is-map-fullscreen/);
-  await expect(page.locator(".map-stage-frame")).toHaveClass(/is-expanded/);
-
-  if (await page.locator("#player-overlay").isVisible()) {
-    await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
+  if (testInfo.project.name === "desktop-chrome") {
+    await expect(page.locator("body")).toHaveClass(/is-map-fullscreen/);
+    await expect(page.locator(".map-stage-frame")).toHaveClass(/is-expanded/);
+    if (await page.locator("#player-overlay").isVisible()) {
+      await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
+    }
+  } else {
+    await expect(page.locator("#player-overlay")).toBeVisible();
+    await expect(page.locator("#player-overlay")).toHaveAttribute("aria-hidden", "false");
+    await expect(page.locator("body")).not.toHaveClass(/is-map-fullscreen/);
+    await expect(page.locator("#mini-player-expand")).toHaveAttribute(
+      "aria-label",
+      "Apri player a schermo intero",
+    );
   }
 
   await expectNoRuntimeErrors(errors);
 });
 
-test("opening the full player exits the expanded map on mobile", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === "desktop-chrome", "Desktop uses the side player panel.");
+test("mobile removes map fullscreen and anchors the live transcript at the map bottom", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === "desktop-chrome", "The mobile map layout is phone-only.");
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
-  await page.locator("#map-fullscreen-button").click();
-  await expect(page.locator("body")).toHaveClass(/is-map-fullscreen/);
+  await expect(page.locator("#map-fullscreen-button")).toBeHidden();
+  await stopButton(page, 1).click();
+  await expectAudioPlaying(page);
+  const [mapBox, captionBox] = await Promise.all([
+    page.locator("#map").boundingBox(),
+    page.locator("#map-live-caption").boundingBox(),
+  ]);
+  expect(mapBox).not.toBeNull();
+  expect(captionBox).not.toBeNull();
+  expect(captionBox.bottom).toBeLessThanOrEqual(mapBox.bottom - 12);
 
-  await openFullPlayer(page);
-  await expect(page.locator("body")).not.toHaveClass(/is-map-fullscreen/);
-  await expect(page.locator(".map-stage-frame")).not.toHaveClass(/is-expanded/);
   await expectNoRuntimeErrors(errors);
 });
 
@@ -293,6 +346,10 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
   await expect(page.locator("#player-share-button")).toBeHidden();
   await expect(page.locator("#player-overlay .player-timeline")).toBeVisible();
   await expect(page.locator("#player-overlay .player-command-row")).toBeVisible();
+  await expect(page.locator("#map-live-caption")).toHaveCSS("white-space", "pre-line");
+  await expect
+    .poll(() => page.locator("#map-live-caption").evaluate((element) => getComputedStyle(element).webkitLineClamp))
+    .toBe("2");
   await expect(page.locator("#mini-player-progress-input")).toBeHidden();
   await expect(page.locator(".mini-player-controls")).toBeHidden();
   await expect(page.locator("#player-next-preview-image")).toBeVisible();
@@ -354,7 +411,7 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
   await expectNoRuntimeErrors(errors);
 });
 
-test("full player controls playback, seek, speed and transcript", async ({ page }, testInfo) => {
+test("full player controls playback, seek, speed and live transcript", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === "desktop-chrome", "Desktop keeps controls in the map experience.");
   test.setTimeout(60_000);
   const errors = collectRuntimeErrors(page);
@@ -376,20 +433,11 @@ test("full player controls playback, seek, speed and transcript", async ({ page 
   });
   await page.locator("#player-prev-button").click();
   await expect.poll(() => page.locator("audio").evaluate((audio) => audio.currentTime)).toBeLessThan(21);
-  await expect(page.locator("#player-prev-seek-feedback")).toHaveText("−10s");
-  await expect(page.locator("#player-prev-seek-feedback")).toBeVisible();
+  await expect(page.locator("#player-seek-feedback")).toHaveText("−10s");
   await page.locator("#player-next-button").click();
   await expect.poll(() => page.locator("audio").evaluate((audio) => audio.currentTime)).toBeGreaterThan(29);
-  await expect(page.locator("#player-next-seek-feedback")).toHaveText("+10s");
-  await expect(page.locator("#player-next-seek-feedback")).toBeVisible();
-
-  const [titleBox, seekFeedbackBox] = await Promise.all([
-    page.locator("#detail-title").boundingBox(),
-    page.locator("#player-next-seek-feedback").boundingBox(),
-  ]);
-  expect(titleBox).not.toBeNull();
-  expect(seekFeedbackBox).not.toBeNull();
-  expect(seekFeedbackBox.y).toBeGreaterThan(titleBox.y + titleBox.height);
+  await expect(page.locator("#player-seek-feedback")).toHaveText("+10s");
+  await expect(page.locator(".seek-feedback")).toHaveCount(0);
 
   await page.locator("#player-speed-button").click();
   await expect(page.locator("#player-speed-button")).toHaveText("x1,5");
@@ -411,23 +459,9 @@ test("full player controls playback, seek, speed and transcript", async ({ page 
   }
 
   await expect(page.locator("#player-transcript-dock")).toBeVisible();
-  await page.locator("#detail-copy-title").click();
-  await expect(page.locator("#detail-copy-panel")).toBeVisible();
-  const transcriptNeedsScroll = await page
-    .locator("#detail-copy-panel")
-    .evaluate((panel) => panel.scrollHeight > panel.clientHeight + 1);
-  if (transcriptNeedsScroll) {
-    await expect(page.locator("#transcript-scroll-indicator")).toBeVisible();
-    await expect(page.locator("#transcript-scroll-thumb")).toHaveCSS("background-color", "rgb(244, 216, 90)");
-  }
-  await page.locator("#transcript-reading-mode-button").click();
-  await expect(page.locator("#player-overlay")).toHaveClass(/is-reading-transcript/);
-  await expect(page.locator("#transcript-reading-mode-button")).toHaveAttribute("aria-pressed", "true");
-  await page.locator("#transcript-reading-mode-button").click();
-  await expect(page.locator("#player-overlay")).not.toHaveClass(/is-reading-transcript/);
-  await expect(page.locator("#transcript-reading-mode-button")).toHaveAttribute("aria-pressed", "false");
-  await page.locator("#detail-copy-title").click();
-  await expect(page.locator("#detail-copy-panel")).toBeHidden();
+  await expect(page.locator("#detail-copy-title")).toBeHidden();
+  await expect(page.locator("#player-mobile-live-transcript")).toBeVisible();
+  await expect(page.locator("#player-mobile-live-transcript-text")).not.toHaveText("");
 
   await watchClass(page, "#player-overlay", "is-closing");
   await page.locator("#player-close-button").click();

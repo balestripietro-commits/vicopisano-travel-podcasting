@@ -12,6 +12,20 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
   await stopButton(page, 6).click();
+
+  const [miniTitle, miniTimeline, miniControls, miniArtwork, stopPreviewImage] = await Promise.all([
+    page.locator("#mini-player-title").boundingBox(),
+    page.locator(".TPMiniPlayer .mini-player-timeline").boundingBox(),
+    page.locator(".TPMiniPlayer .mini-player-controls").boundingBox(),
+    page.locator("#mini-player-artwork").boundingBox(),
+    page.locator("#stop-preview-image").boundingBox(),
+  ]);
+  [miniTitle, miniTimeline, miniControls, miniArtwork, stopPreviewImage].forEach((box) => expect(box).not.toBeNull());
+  expect(miniTimeline.y).toBeGreaterThan(miniTitle.y + miniTitle.height - 1);
+  expect(miniTimeline.y + miniTimeline.height).toBeLessThanOrEqual(miniControls.y + 1);
+  expect(Math.abs(miniArtwork.width - miniArtwork.height)).toBeLessThanOrEqual(1);
+  expect(Math.abs(stopPreviewImage.width - stopPreviewImage.height)).toBeLessThanOrEqual(1);
+
   await openFullPlayer(page);
 
   await expect
@@ -26,7 +40,7 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
     "#player-speed-button",
     "#player-previous-preview",
     "#player-next-preview",
-    "#player-transcript-dock",
+    "#player-mobile-live-transcript",
   ];
 
   for (const selector of controls) {
@@ -34,6 +48,14 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
     await expect(control).toBeVisible();
     await expectInsideViewport(control, page);
   }
+
+  const [fullArtwork, nextPreviewImage] = await Promise.all([
+    page.locator("#detail-artwork-image").boundingBox(),
+    page.locator("#player-next-preview-image").boundingBox(),
+  ]);
+  [fullArtwork, nextPreviewImage].forEach((box) => expect(box).not.toBeNull());
+  expect(Math.abs(fullArtwork.width - fullArtwork.height)).toBeLessThanOrEqual(1);
+  expect(Math.abs(nextPreviewImage.width - nextPreviewImage.height)).toBeLessThanOrEqual(1);
 
   const controlBoxes = await Promise.all([
     page.locator("#player-prev-button").boundingBox(),

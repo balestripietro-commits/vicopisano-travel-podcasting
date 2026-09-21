@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "status": "ready-for-review",
+  "language": "it",
+  "stop": 6,
+  "audio": {
+    "source": "audio/06_parrocchia_santa_maria_san_giovanni.mp3",
+    "duration": 225.933
+  },
+  "alignment": {
+    "engine": "faster-whisper small",
+    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "reviewRequired": true,
+    "visibleTextRule": "only script sentences matched to spoken audio are included"
+  },
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.2,
+      "text": "Eccoci davanti alla Pieve di Santa Maria."
+    },
+    {
+      "start": 2.64,
+      "end": 4.1,
+      "text": "Devo ammettere una cosa."
+    },
+    {
+      "start": 5.08,
+      "end": 10.64,
+      "text": "Quando lavoravo alle fortificazioni di Vicopisano, questa chiesa era già qui da secoli."
+    },
+    {
+      "start": 11.26,
+      "end": 20.86,
+      "text": "Ma allora ero occupato a studiare le mura, le pendenze del colle, gli accessi al borgo e tutto ciò che avrebbe potuto renderlo più sicuro."
+    },
+    {
+      "start": 21.64,
+      "end": 25.2,
+      "text": "Non credo di averle dedicato l’attenzione che meritava."
+    },
+    {
+      "start": 26.0,
+      "end": 28.52,
+      "text": "Oggi, finalmente, posso rimediare."
+    },
+    {
+      "start": 29.14,
+      "end": 33.72,
+      "text": "La Pieve, nelle forme che vedete, risale al XII secolo."
+    },
+    {
+      "start": 34.3,
+      "end": 37.1,
+      "text": "Ma la sua storia è ancora più antica."
+    },
+    {
+      "start": 37.74,
+      "end": 46.3,
+      "text": "Compare per la prima volta in un documento del 934 e, da ciò che vi si legge, sembra che esistesse già da qualche tempo."
+    },
+    {
+      "start": 47.1,
+      "end": 53.2,
+      "text": "È la più antica e la principale fra le chiese che sorgevano nelle immediate vicinanze di Vicopisano."
+    },
+    {
+      "start": 54.54,
+      "end": 59.18,
+      "text": "Ed è anche l’unica a essere stata costruita all’esterno delle mura."
+    },
+    {
+      "start": 60.52,
+      "end": 62.12,
+      "text": "Una scelta interessante."
+    },
+    {
+      "start": 62.12,
+      "end": 71.9,
+      "text": "E ora che la osservo con attenzione, per la prima volta senza avere un sistema difensivo da progettare, noto un particolare ancora più significativo."
+    },
+    {
+      "start": 72.82,
+      "end": 78.82,
+      "text": "Normalmente le chiese medievali venivano orientate con l’ingresso rivolto verso occidente."
+    },
+    {
+      "start": 79.4,
+      "end": 87.98,
+      "text": "Questa Pieve, invece, guarda verso una delle antiche porte del castello: Porta Maccioni, divenuta in seguito Porta della Rocca."
+    },
+    {
+      "start": 88.68,
+      "end": 92.36,
+      "text": "La facciata, quindi, non segue semplicemente una regola."
+    },
+    {
+      "start": 93.08,
+      "end": 98.84,
+      "text": "Si rivolge direttamente verso il borgo e verso le persone che entravano e uscivano dalle sue mura."
+    },
+    {
+      "start": 101.38,
+      "end": 108.04,
+      "text": "La muratura è ancora una volta in verrucano, ma qui la pietra non forma una torre o una cortina difensiva."
+    },
+    {
+      "start": 108.88,
+      "end": 112.54,
+      "text": "È organizzata secondo le proporzioni del Romanico pisano."
+    },
+    {
+      "start": 113.32,
+      "end": 115.52,
+      "text": "Tre portali nella parte inferiore."
+    },
+    {
+      "start": 116.26,
+      "end": 118.46,
+      "text": "Semicolonne e archetti pensili."
+    },
+    {
+      "start": 119.08,
+      "end": 121.3,
+      "text": "Una bifora al centro della parte superiore."
+    },
+    {
+      "start": 121.84,
+      "end": 123.24,
+      "text": "Niente è lasciato al caso."
+    },
+    {
+      "start": 123.94,
+      "end": 126.88,
+      "text": "Se trovate la Pieve aperta, vi consiglio di entrare."
+    },
+    {
+      "start": 127.62,
+      "end": 135.84,
+      "text": "Le tre navate sono divise da dodici colonne di granito e alcuni dei capitelli e delle colonne provengono da edifici di epoca romana."
+    },
+    {
+      "start": 136.32,
+      "end": 139.6,
+      "text": "Pietre più antiche, riutilizzate in una costruzione nuova."
+    },
+    {
+      "start": 140.16,
+      "end": 144.22,
+      "text": "Una scelta che, come avrete ormai capito, approvo pienamente."
+    },
+    {
+      "start": 145.1,
+      "end": 148.32,
+      "text": "Ma all’interno non troverete soltanto architettura."
+    },
+    {
+      "start": 149.06,
+      "end": 156.24,
+      "text": "Raggiungete l’abside, nella parte più profonda della chiesa, e cercate un grande gruppo di statue scolpite nel legno."
+    },
+    {
+      "start": 156.86,
+      "end": 160.32,
+      "text": "È la Deposizione, realizzata nei primi decenni del Duecento."
+    },
+    {
+      "start": 161.64,
+      "end": 171.36,
+      "text": "Raffigura il momento in cui il corpo di Cristo viene tolto dalla croce, circondato dalla Madonna, da San Giovanni, da Giuseppe d’Arimatea e da Nicodemo."
+    },
+    {
+      "start": 171.86,
+      "end": 178.92,
+      "text": "È uno dei pochi gruppi lignei di questo genere arrivati fino a noi conservando quasi tutte le figure originarie."
+    },
+    {
+      "start": 179.68,
+      "end": 182.36,
+      "text": "Osservate soprattutto il corpo di Cristo."
+    },
+    {
+      "start": 182.94,
+      "end": 191.8,
+      "text": "Non appare rigido e immobile: si incurva mentre viene deposto dalla croce, con una libertà che si allontana dai modelli più consueti dell’epoca."
+    },
+    {
+      "start": 192.92,
+      "end": 202.98,
+      "text": "Sono contento di essermi finalmente soffermato su questa Pieve e di aver scoperto ciò che, durante il mio lavoro a Vicopisano, avevo trascurato."
+    },
+    {
+      "start": 203.72,
+      "end": 207.98,
+      "text": "Ora capisco che una città non vive soltanto di ciò che la difende."
+    },
+    {
+      "start": 208.48,
+      "end": 215.14,
+      "text": "Vive anche dei luoghi nei quali le persone si riconoscono, si riuniscono e conservano la propria memoria."
+    },
+    {
+      "start": 215.74,
+      "end": 220.5,
+      "text": "E, a proposito della vita della comunità, adesso torniamo verso il centro."
+    },
+    {
+      "start": 221.34,
+      "end": 224.84,
+      "text": "La nostra ultima tappa sarà davanti al Palazzo Comunale."
+    }
+  ]
+}

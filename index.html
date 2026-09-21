@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260915-right-panel" />
+    <link rel="stylesheet" href="style.css?v=20260921-map-caption" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -52,7 +52,14 @@
           </div>
       </div>
       <div id="guide-action-demo" class="guide-action-demo" aria-hidden="true">
-        <span translate="no" class="guide-action-demo-cursor material-symbols-rounded">arrow_selector_tool</span>
+        <span translate="no" class="guide-action-demo-cursor material-symbols-rounded">touch_app</span>
+      </div>
+      <div id="guide-exit-confirm" class="guide-exit-confirm" role="alertdialog" aria-modal="true" aria-labelledby="guide-exit-confirm-title" hidden>
+        <h2 id="guide-exit-confirm-title"></h2>
+        <div class="guide-exit-confirm-actions">
+          <button type="button" id="guide-exit-confirm-cancel" class="guide-button guide-button-secondary"></button>
+          <button type="button" id="guide-exit-confirm-accept" class="guide-button guide-button-primary"></button>
+        </div>
       </div>
     </div>
 
@@ -82,13 +89,13 @@
       </header>
         <section class="intro-panel" aria-labelledby="landing-title">
           <div class="intro-hero-row">
-            <div class="intro-visual" aria-hidden="true">
+            <div class="intro-visual">
               <div class="mascot-motion-shell mascot-motion-shell--hero" data-mascot-motion="hero">
                 <div class="mascot-breathing-shell">
                   <img
                     id="hero-mascot"
                     class="intro-portrait"
-                    src="assets/mascotte-mouth/mascotte_X.webp?v=20260816"
+                    src="assets/mascotte-mouth/mascotte_B.webp?v=20260921-mascot-hd"
                     alt=""
                   />
                 </div>
@@ -96,14 +103,12 @@
             </div>
             <div class="intro-copy">
               <p class="eyebrow" id="eyebrow-text">Comune di Vicopisano</p>
-              <h1 id="landing-title">Buon dì!</h1>
+              <h1 id="landing-title">Buondì!</h1>
               <div class="intro-quote-block" id="intro-quote-block">
                 <p class="intro intro-lead intro-quote-title" id="intro-lead-text">Sono Filippo Brunelleschi.</p>
                 <p class="intro intro-quote" id="intro-text">
-                  Un tempo ho osservato queste mura per immaginare difese, passaggi e punti di vista.
-                  Ora ti accompagno tra le storie del borgo, tappa dopo tappa. Seguimi tra torri,
-                  camminamenti e scorci del borgo: ogni tappa apre una voce, una storia, un
-                  frammento di Vicopisano.
+                  Vieni con me alla scoperta di Vicopisano: tra torri, camminamenti e storie nascoste,
+                  ti accompagnerò tappa dopo tappa.
                 </p>
               </div>
             </div>
@@ -132,7 +137,7 @@
                   title="Apri indicazioni"
                   hidden
                 >
-                  <span translate="no" class="map-action-icon material-symbols-rounded" aria-hidden="true">directions_walk</span>
+                  <span translate="no" class="map-action-icon directions-icon material-symbols-rounded" aria-hidden="true">location_on</span>
                 </a>
               </div>
               <div class="map-explore-mascot" aria-hidden="true">
@@ -141,7 +146,7 @@
                     <img
                       id="map-explore-mascot-image"
                       class="map-explore-mascot-image"
-                      src="assets/mascotte-mouth/mascotte_X.webp?v=20260816"
+                      src="assets/mascotte-mouth/mascotte_B.webp?v=20260921-mascot-hd"
                       alt=""
                     />
                   </div>
@@ -244,7 +249,7 @@
         <img
           id="mini-player-artwork"
           class="mini-player-artwork"
-          src="mascotte_vicopisano.webp?v=20260816"
+          src="mascotte_vicopisano.webp?v=20260921-mascot-hd"
           alt="Artwork della traccia"
         />
         <span class="mini-player-text">
@@ -258,12 +263,20 @@
           <div class="mini-player-transport-group">
             <button
               type="button"
+              id="mini-player-previous-track"
+              class="mini-player-control mini-player-track-control tp-audio-control tp-audio-control--secondary"
+              aria-label="Traccia precedente"
+              title="Traccia precedente"
+            >
+              <span translate="no" class="material-symbols-rounded" aria-hidden="true">skip_previous</span>
+            </button>
+            <button
+              type="button"
               id="mini-player-prev"
               class="mini-player-control tp-audio-control tp-audio-control--secondary"
               aria-label="Indietro di 10 secondi"
             >
               <span translate="no" class="material-symbols-rounded" aria-hidden="true">replay_10</span>
-              <span id="mini-player-prev-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
             </button>
             <button type="button" id="mini-player-toggle" class="mini-player-toggle tp-audio-control tp-audio-control--primary" aria-label="Play">
               <span translate="no" class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
@@ -275,7 +288,15 @@
               aria-label="Avanti di 10 secondi"
             >
               <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
-              <span id="mini-player-next-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
+            </button>
+            <button
+              type="button"
+              id="mini-player-next-track"
+              class="mini-player-control mini-player-track-control tp-audio-control tp-audio-control--secondary"
+              aria-label="Traccia successiva"
+              title="Traccia successiva"
+            >
+              <span translate="no" class="material-symbols-rounded" aria-hidden="true">skip_next</span>
             </button>
           </div>
           <button type="button" id="mini-player-speed-button" class="mini-player-control mini-player-speed-button tp-audio-control tp-audio-control--secondary" aria-label="Velocità di riproduzione: x1" title="Velocità di riproduzione: x1">
@@ -346,7 +367,7 @@
             <img
               id="detail-artwork-image"
               class="detail-artwork-image player-artwork-layer is-photo-layer"
-              src="mascotte_vicopisano.webp?v=20260816"
+              src="mascotte_vicopisano.webp?v=20260921-mascot-hd"
               alt="Immagine della traccia"
             />
             <div
@@ -357,7 +378,7 @@
                 <img
                   id="detail-mascot-image"
                   class="detail-mascot-image"
-                  src="assets/mascotte-mouth/mascotte_X.webp?v=20260816"
+                  src="assets/mascotte-mouth/mascotte_B.webp?v=20260921-mascot-hd"
                   alt="Mascotte animata di Brunelleschi"
                 />
               </div>
@@ -418,16 +439,26 @@
               <div class="player-transport-group">
                 <button type="button" id="player-prev-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Indietro di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">replay_10</span>
-                  <span id="player-prev-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
                 </button>
                 <button type="button" id="player-play-button" class="player-control-button tp-audio-control tp-audio-control--primary is-primary">
                   <span translate="no" class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
                 </button>
                 <button type="button" id="player-next-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Avanti di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
-                  <span id="player-next-seek-feedback" class="seek-feedback seek-feedback--control" aria-hidden="true" hidden></span>
                 </button>
               </div>
+              <a
+                id="player-directions-button"
+                class="player-control-button player-directions-button tp-audio-control tp-audio-control--secondary"
+                href="#"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Apri indicazioni"
+                title="Apri indicazioni"
+                hidden
+              >
+                  <span translate="no" class="directions-icon material-symbols-rounded" aria-hidden="true">location_on</span>
+              </a>
               <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control" aria-label="Velocità di riproduzione: x1" title="Velocità di riproduzione: x1">
                 <span id="player-speed-label" class="player-speed-label">x1</span>
               </button>
@@ -469,6 +500,9 @@
           </div>
         </div>
         <aside id="player-transcript-dock" class="player-transcript-dock" aria-label="Trascrizione">
+          <div id="player-mobile-live-transcript" class="player-mobile-live-transcript" role="region" aria-label="Trascrizione" hidden>
+            <div id="player-mobile-live-transcript-scroll" class="player-mobile-live-transcript-scroll" aria-live="polite"></div>
+          </div>
           <details class="detail-copy detail-copy-trigger" id="detail-copy-box">
             <summary id="detail-copy-title" aria-label="Trascrizione" aria-controls="detail-copy-panel" title="Trascrizione">
               <span class="player-transcript-summary-main">
@@ -496,6 +530,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260915-tappa1-master"></script>
+    <script src="app.js?v=20260921-mascot-hd"></script>
   </body>
 </html>

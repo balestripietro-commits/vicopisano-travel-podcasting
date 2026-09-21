@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "status": "ready-for-review",
+  "language": "it",
+  "stop": 5,
+  "audio": {
+    "source": "audio/05_torri_gemelle.mp3",
+    "duration": 179.67
+  },
+  "alignment": {
+    "engine": "faster-whisper small",
+    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "reviewRequired": true,
+    "visibleTextRule": "only script sentences matched to spoken audio are included"
+  },
+  "segments": [
+    {
+      "start": 1.26,
+      "end": 2.34,
+      "text": "Le Torri Gemelle."
+    },
+    {
+      "start": 3.02,
+      "end": 5.64,
+      "text": "Il nome suggerisce che siano identiche."
+    },
+    {
+      "start": 6.24,
+      "end": 15.0,
+      "text": "Ma, se permettete il parere di un architetto, quando si osserva un edificio antico la parola “identico” va usata con molta prudenza."
+    },
+    {
+      "start": 15.58,
+      "end": 18.38,
+      "text": "Queste torri risalgono al XII secolo."
+    },
+    {
+      "start": 18.66,
+      "end": 27.72,
+      "text": "Sono quindi più antiche della mia Rocca e, all’inizio del Trecento, facevano parte della precedente fortificazione pisana di Vicopisano."
+    },
+    {
+      "start": 27.72,
+      "end": 37.46,
+      "text": "Quando Firenze conquistò il borgo sottraendolo alla Repubblica di Pisa, nel 1406, quella vecchia Rocca venne smantellata."
+    },
+    {
+      "start": 38.18,
+      "end": 42.68,
+      "text": "Al suo posto sarebbe poi sorto il sistema difensivo che vi ho appena mostrato."
+    },
+    {
+      "start": 43.62,
+      "end": 46.3,
+      "text": "Le Torri Gemelle, però, rimasero in piedi."
+    },
+    {
+      "start": 47.04,
+      "end": 53.92,
+      "text": "E così oggi possiamo osservare, a poca distanza, due momenti diversi della storia di Vicopisano."
+    },
+    {
+      "start": 54.7,
+      "end": 58.02,
+      "text": "La fortezza fiorentina che progettai dopo la conquista."
+    },
+    {
+      "start": 58.76,
+      "end": 62.52,
+      "text": "E ciò che rimane della precedente fortificazione pisana."
+    },
+    {
+      "start": 63.34,
+      "end": 65.2,
+      "text": "Adesso guardate i materiali."
+    },
+    {
+      "start": 65.86,
+      "end": 72.58,
+      "text": "Nella parte inferiore delle torri trovate ancora il verrucano, la pietra che abbiamo già incontrato lungo il percorso."
+    },
+    {
+      "start": 73.22,
+      "end": 76.46,
+      "text": "Più in alto, invece, la muratura prosegue in mattoni."
+    },
+    {
+      "start": 77.16,
+      "end": 89.0,
+      "text": "Questo cambiamento ci racconta che entrambe furono modificate e sopraelevate nel corso del tempo, probabilmente anche per riparare i danni provocati dai numerosi assedi subiti dal borgo."
+    },
+    {
+      "start": 89.94,
+      "end": 95.34,
+      "text": "Ma le due torri non hanno attraversato quegli eventi esattamente nello stesso modo."
+    },
+    {
+      "start": 96.52,
+      "end": 102.14,
+      "text": "In quella occidentale la parte più antica in pietra raggiunge circa diciannove metri."
+    },
+    {
+      "start": 102.88,
+      "end": 106.1,
+      "text": "Nella torre orientale, invece, arriva soltanto a otto."
+    },
+    {
+      "start": 107.2,
+      "end": 112.3,
+      "text": "Una delle due, evidentemente, ebbe bisogno di essere ricostruita molto più dell’altra."
+    },
+    {
+      "start": 115.74,
+      "end": 117.56,
+      "text": "Ma con cicatrici differenti."
+    },
+    {
+      "start": 117.56,
+      "end": 125.02,
+      "text": "La torre orientale conserva anche i resti della Porta del Mercato, uno degli antichi accessi al castello."
+    },
+    {
+      "start": 125.92,
+      "end": 132.12,
+      "text": "Se osservate attentamente, potete riconoscere un piccolo ingresso collocato in alto rispetto al terreno."
+    },
+    {
+      "start": 133.18,
+      "end": 138.64,
+      "text": "Non è una porta costruita per essere raggiunta passeggiando comodamente dalla strada."
+    },
+    {
+      "start": 139.46,
+      "end": 146.5,
+      "text": "In origine si accedeva alla torre attraverso strutture di legno che potevano essere rimosse in caso di pericolo."
+    },
+    {
+      "start": 147.72,
+      "end": 154.66,
+      "text": "Oggi il Palazzo Comunale nasconde in parte il profilo delle Torri Gemelle, soprattutto quello della torre occidentale."
+    },
+    {
+      "start": 155.28,
+      "end": 160.88,
+      "text": "È per questo che, viste da qui, non appaiono immediatamente come una coppia."
+    },
+    {
+      "start": 161.48,
+      "end": 166.3,
+      "text": "Ma adesso sapete che, dietro il Palazzo, la seconda torre è ancora lì."
+    },
+    {
+      "start": 168.3,
+      "end": 171.8,
+      "text": "La prossima tappa ci porterà davanti alla Pieve di Santa Maria."
+    },
+    {
+      "start": 172.3,
+      "end": 177.02,
+      "text": "E, per una volta, lasceremo da parte torri, mura e assedi."
+    },
+    {
+      "start": 177.56,
+      "end": 179.26,
+      "text": "Credo che ce lo siamo meritato."
+    }
+  ]
+}

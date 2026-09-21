@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "status": "ready-for-review",
+  "language": "it",
+  "stop": 4,
+  "audio": {
+    "source": "audio/04_rocca_brunelleschi.mp3",
+    "duration": 211.095
+  },
+  "alignment": {
+    "engine": "faster-whisper small",
+    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "reviewRequired": true,
+    "visibleTextRule": "only script sentences matched to spoken audio are included"
+  },
+  "segments": [
+    {
+      "start": 2.54,
+      "end": 10.72,
+      "text": "Quando mi affidarono il progetto, sulla sommità del colle si trovava già una torre del XII secolo: la Torre di Santa Maria."
+    },
+    {
+      "start": 11.46,
+      "end": 14.42,
+      "text": "Avrei potuto demolirla e ricominciare da capo."
+    },
+    {
+      "start": 15.06,
+      "end": 20.04,
+      "text": "Ma un buon architetto deve anche saper riconoscere ciò che può essere riutilizzato."
+    },
+    {
+      "start": 20.84,
+      "end": 29.74,
+      "text": "Così la incorporai nella nuova fortificazione e la trasformai nel mastio: il cuore più protetto della Rocca."
+    },
+    {
+      "start": 30.74,
+      "end": 34.14,
+      "text": "I lavori cominciarono nel 1435."
+    },
+    {
+      "start": 35.1,
+      "end": 43.66,
+      "text": "Il principio su cui lavorai era semplice: una fortezza non doveva affidare la propria sicurezza a una sola linea di difesa."
+    },
+    {
+      "start": 44.42,
+      "end": 48.5,
+      "text": "Se il nemico superava il primo ingresso, incontrava il cortile."
+    },
+    {
+      "start": 49.22,
+      "end": 55.62,
+      "text": "Se conquistava il cortile, i difensori potevano rendere inutilizzabile la scala verso il cammino di ronda."
+    },
+    {
+      "start": 55.62,
+      "end": 65.0,
+      "text": "E se riusciva ad avanzare ancora, il ponte levatoio del mastio poteva essere sollevato, isolando completamente la torre."
+    },
+    {
+      "start": 65.64,
+      "end": 67.68,
+      "text": "Una fortezza dentro la fortezza."
+    },
+    {
+      "start": 68.44,
+      "end": 76.24,
+      "text": "Il mastio possedeva persino una propria cisterna e poteva conservare viveri sufficienti a prolungare la resistenza."
+    },
+    {
+      "start": 77.14,
+      "end": 79.42,
+      "text": "Ogni spazio era collegato agli altri."
+    },
+    {
+      "start": 80.34,
+      "end": 83.66,
+      "text": "Ma, in caso di necessità, poteva separarsene."
+    },
+    {
+      "start": 84.24,
+      "end": 86.98,
+      "text": "Non progettai questa Rocca perché fosse comoda."
+    },
+    {
+      "start": 87.64,
+      "end": 91.18,
+      "text": "La progettai perché fosse difficile da conquistare."
+    },
+    {
+      "start": 92.12,
+      "end": 97.64,
+      "text": "Ho scoperto, però, che oggi è un luogo molto più aperto e frequentato."
+    },
+    {
+      "start": 98.2,
+      "end": 113.5,
+      "text": "Non soltanto dai turisti e dagli appassionati che desiderano conoscere le mie opere — comprensibilmente, permettetemi di aggiungere — ma anche da chi viene qui per assistere a concerti, spettacoli e visite serali."
+    },
+    {
+      "start": 115.06,
+      "end": 121.1,
+      "text": "Persone che salgono fin quassù non per assediare la Rocca, ma per trascorrervi una serata."
+    },
+    {
+      "start": 121.86,
+      "end": 127.02,
+      "text": "Mi hanno detto che nel borgo organizzano persino un festival musicale chiamato Rocca’n’Roll."
+    },
+    {
+      "start": 129.56,
+      "end": 139.54,
+      "text": "Devo riconoscere che una fortezza capace di resistere alle armi e, secoli dopo, anche alla musica moderna, ha certamente dimostrato una buona solidità."
+    },
+    {
+      "start": 139.54,
+      "end": 141.88,
+      "text": "E poi c’è la Festa Medievale."
+    },
+    {
+      "start": 142.74,
+      "end": 152.46,
+      "text": "Ogni anno, nel primo fine settimana di settembre, il borgo torna a riempirsi di torce, bandiere, figuranti, musici, duelli e taverne."
+    },
+    {
+      "start": 153.26,
+      "end": 157.52,
+      "text": "Per qualche sera Vicopisano prova a ricreare l’atmosfera della città medievale."
+    },
+    {
+      "start": 158.42,
+      "end": 162.12,
+      "text": "Sarei davvero curioso di assistere alla prossima edizione."
+    },
+    {
+      "start": 163.16,
+      "end": 166.82,
+      "text": "Potrei controllare quanto sia fedele la ricostruzione."
+    },
+    {
+      "start": 166.82,
+      "end": 170.12,
+      "text": "E magari offrire qualche suggerimento."
+    },
+    {
+      "start": 170.8,
+      "end": 173.34,
+      "text": "Soltanto se richiesto, naturalmente."
+    },
+    {
+      "start": 173.94,
+      "end": 180.82,
+      "text": "Sapere che queste strade tornano ad affollarsi e che la Rocca viene aperta anche di notte mi fa capire una cosa."
+    },
+    {
+      "start": 181.86,
+      "end": 186.54,
+      "text": "Un edificio può continuare a vivere in modi che il suo architetto non aveva previsto."
+    },
+    {
+      "start": 187.46,
+      "end": 191.1,
+      "text": "Io avevo progettato queste mura per tenere le persone fuori."
+    },
+    {
+      "start": 192.02,
+      "end": 196.44,
+      "text": "Oggi, invece, le persone vengono accolte e invitate a entrare."
+    },
+    {
+      "start": 197.18,
+      "end": 199.04,
+      "text": "Una trasformazione notevole."
+    },
+    {
+      "start": 199.74,
+      "end": 203.06,
+      "text": "E, devo essere sincero, non mi dispiace affatto."
+    },
+    {
+      "start": 203.7,
+      "end": 206.26,
+      "text": "Adesso lasciamo la Rocca e continuiamo."
+    },
+    {
+      "start": 206.96,
+      "end": 210.18,
+      "text": "La prossima tappa ci porterà davanti alle Torri Gemelle."
+    }
+  ]
+}

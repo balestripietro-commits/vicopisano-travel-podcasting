@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "status": "ready-for-review",
+  "language": "it",
+  "stop": 2,
+  "audio": {
+    "source": "audio/02_torre_camminamento_soccorso.mp3",
+    "duration": 165.016
+  },
+  "alignment": {
+    "engine": "faster-whisper small",
+    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "reviewRequired": true,
+    "visibleTextRule": "only script sentences matched to spoken audio are included"
+  },
+  "segments": [
+    {
+      "start": 2.04,
+      "end": 5.38,
+      "text": "Quella che vedete davanti a voi è la Torre del Soccorso."
+    },
+    {
+      "start": 5.38,
+      "end": 10.82,
+      "text": "E il muro che sale lungo il colle fino alla Rocca è il Camminamento del Soccorso."
+    },
+    {
+      "start": 11.16,
+      "end": 12.74,
+      "text": "Ecco qualcosa di mio."
+    },
+    {
+      "start": 13.48,
+      "end": 18.24,
+      "text": "La torre, il camminamento e la Rocca formano un unico sistema difensivo."
+    },
+    {
+      "start": 18.8,
+      "end": 20.86,
+      "text": "Una macchina costruita in pietra."
+    },
+    {
+      "start": 21.86,
+      "end": 25.84,
+      "text": "Il nome, Soccorso, spiega già quale fosse la sua funzione."
+    },
+    {
+      "start": 26.44,
+      "end": 29.28,
+      "text": "Immaginate che Vicopisano sia sotto attacco."
+    },
+    {
+      "start": 30.2,
+      "end": 36.16,
+      "text": "Il nemico entra nel borgo, occupa le strade e costringe i soldati a rifugiarsi nella Rocca."
+    },
+    {
+      "start": 36.96,
+      "end": 41.24,
+      "text": "Una situazione piuttosto spiacevole, soprattutto per chi si trova dentro."
+    },
+    {
+      "start": 42.26,
+      "end": 45.26,
+      "text": "A quel punto, però, rimaneva ancora questa via."
+    },
+    {
+      "start": 46.16,
+      "end": 56.5,
+      "text": "Dalla parte inferiore della torre, uomini, viveri e rifornimenti potevano entrare dall’esterno, raggiungere il muraglione e risalire fino alla Rocca."
+    },
+    {
+      "start": 56.98,
+      "end": 60.56,
+      "text": "Il tutto senza attraversare le strade controllate dal nemico."
+    },
+    {
+      "start": 61.08,
+      "end": 64.82,
+      "text": "Ecco perché questo non è semplicemente un muro."
+    },
+    {
+      "start": 65.62,
+      "end": 73.02,
+      "text": "È un percorso protetto, progettato per funzionare proprio quando tutte le altre vie non erano più sicure."
+    },
+    {
+      "start": 81.96,
+      "end": 89.3,
+      "text": "Quando arrivai a Vicopisano mi posi una domanda:"
+    },
+    {
+      "start": 89.3,
+      "end": 91.58,
+      "text": "che cosa poteva andare storto?"
+    },
+    {
+      "start": 92.38,
+      "end": 97.14,
+      "text": "Un assedio, l’ingresso dei nemici nel borgo oppure l’isolamento della Rocca."
+    },
+    {
+      "start": 98.32,
+      "end": 102.66,
+      "text": "E in ciascuno di questi casi, che cosa avrebbero potuto fare i difensori?"
+    },
+    {
+      "start": 103.46,
+      "end": 107.08,
+      "text": "Il Camminamento del Soccorso nacque anche da queste domande."
+    },
+    {
+      "start": 107.76,
+      "end": 116.88,
+      "text": "Doveva funzionare persino nell’eventualità che il borgo si ribellasse e la guarnigione fiorentina fosse costretta a ritirarsi nella Rocca."
+    },
+    {
+      "start": 117.86,
+      "end": 128.14,
+      "text": "Firenze aveva conquistato Vicopisano da poco e la fiducia, in un territorio appena occupato, non era esattamente il materiale più abbondante."
+    },
+    {
+      "start": 128.14,
+      "end": 134.76,
+      "text": "E io, devo ammetterlo, non sono mai stato un grande esperto né di fiducia né di politica."
+    },
+    {
+      "start": 135.12,
+      "end": 137.94,
+      "text": "Per questo preferii affidarmi alla pietra."
+    },
+    {
+      "start": 139.22,
+      "end": 143.36,
+      "text": "Oggi potete percorrere il camminamento con una certa tranquillità."
+    },
+    {
+      "start": 143.92,
+      "end": 151.82,
+      "text": "Senza armature, senza rifornimenti sulle spalle e, soprattutto, senza nessuno che tenti di conquistare il borgo."
+    },
+    {
+      "start": 158.08,
+      "end": 161.28,
+      "text": "Adesso continuiamo verso il centro del borgo."
+    },
+    {
+      "start": 161.96,
+      "end": 164.54,
+      "text": "La prossima tappa sarà al Palazzo Pretorio."
+    }
+  ]
+}

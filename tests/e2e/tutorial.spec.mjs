@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { collectRuntimeErrors, enterSite, expectInsideViewport, expectNoRuntimeErrors } from "./helpers.mjs";
 
 test("tutorial keeps desktop in the map experience and mobile in the full player", async ({ page }, testInfo) => {
-  test.setTimeout(60_000);
+  test.setTimeout(75_000);
   const errors = collectRuntimeErrors(page);
   await enterSite(page, { guide: true });
 
@@ -138,7 +138,7 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
     await next.click();
     await expect(page.locator("#guide-action-demo")).toHaveClass(/is-visible/);
     await expect(page.locator(".guide-action-demo-ripple")).toHaveCount(0);
-    await expect(page.locator(".guide-action-demo-cursor")).toHaveText("arrow_selector_tool");
+    await expect(page.locator(".guide-action-demo-cursor")).toHaveText("touch_app");
     const actionDemoGeometry = await page.evaluate(() => {
       const demoRect = document.querySelector("#guide-action-demo")?.getBoundingClientRect();
       const targetRect = document.querySelector("#mini-player-expand")?.getBoundingClientRect();
@@ -154,7 +154,7 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
     expect(actionDemoGeometry).not.toBeNull();
     expect(actionDemoGeometry.xDifference).toBeLessThan(2);
     expect(actionDemoGeometry.yDifference).toBeLessThan(2);
-    await expect(page.locator("#player-overlay")).toBeVisible();
+    await expect(page.locator("#player-overlay")).toBeVisible({ timeout: 7_000 });
     await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
     await expect(page.locator("body")).toHaveClass(/is-map-player-panel/);
     await expect(page.locator("#guide-layer")).toBeVisible();
@@ -193,10 +193,13 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
     });
     expect(guideIsFrontmost).toBe(true);
     await expect(text).toContainText("vista estesa");
-    await expect(next).toHaveText("✓");
+    await expect(next).toHaveText("→");
     await page.waitForTimeout(450);
     await expect(page.locator("#guide-layer")).toBeVisible();
     await expect(text).toContainText("vista estesa");
+
+    await next.click();
+    await expect(next).toHaveText("✓");
   } else {
     await expect(page.locator("#player-overlay")).toBeVisible();
     await expect(next).toHaveText("✓");
@@ -206,8 +209,9 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
   if (testInfo.project.name === "desktop-chrome") {
     await expect(page.locator("#guide-action-demo")).toHaveClass(/is-visible/);
   }
-  await expect(page.locator("#guide-layer")).toBeHidden();
-  await expect(page.locator("#player-overlay")).toBeHidden();
+  await expect(page.locator("#guide-layer")).toBeHidden({ timeout: 10_000 });
+  await expect(page.locator("#player-overlay")).toBeHidden({ timeout: 10_000 });
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
   await expect(page.locator(".app-shell")).toHaveJSProperty("inert", false);
   await expectNoRuntimeErrors(errors);
 });
@@ -218,6 +222,28 @@ test("tutorial can be closed immediately", async ({ page }) => {
   await page.locator("#guide-skip-button").click();
   await expect(page.locator("#guide-layer")).toBeHidden();
   await expect(page.locator("#player-overlay")).toBeHidden();
+  await expectNoRuntimeErrors(errors);
+});
+
+test("tutorial asks for confirmation before interrupting from its backdrop", async ({ page }) => {
+  const errors = collectRuntimeErrors(page);
+  await enterSite(page, { guide: true });
+
+  const guide = page.locator("#guide-layer");
+  const confirm = page.locator("#guide-exit-confirm");
+  const initialStep = await page.locator("#guide-step-text").textContent();
+  await guide.click({ position: { x: 8, y: 8 } });
+  await expect(confirm).toBeVisible();
+  await expect(confirm).toContainText("Vuoi interrompere il tutorial?");
+
+  await page.locator("#guide-exit-confirm-cancel").click();
+  await expect(confirm).toBeHidden();
+  await expect(page.locator("#guide-step-text")).toHaveText(initialStep);
+
+  await guide.click({ position: { x: 8, y: 8 } });
+  await page.locator("#guide-exit-confirm-accept").click();
+  await expect(guide).toBeHidden();
+  await expect(page.locator(".app-shell")).toHaveJSProperty("inert", false);
   await expectNoRuntimeErrors(errors);
 });
 

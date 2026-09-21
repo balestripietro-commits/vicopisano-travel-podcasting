@@ -5,47 +5,229 @@
   "stop": 1,
   "audio": {
     "source": "audio/01_torre_quattro_porte.mp3",
-    "duration": 231.549
+    "duration": 228.911
   },
   "alignment": {
     "engine": "faster-whisper small",
-    "method": "automatic speech timestamps matched to editorial text",
-    "reviewRequired": true
+    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "reviewRequired": true,
+    "visibleTextRule": "only script sentences matched to spoken audio are included"
   },
   "segments": [
-    { "start": 0.00, "end": 6.66, "text": "Dopo quasi seicento anni, sono finalmente tornato a Vicopisano. E devo ammettere che ritrovarla" },
-    { "start": 6.66, "end": 16.70, "text": "così… tranquilla mi fa un certo effetto. Quando arrivai qui, nel 1435, Firenze mi aveva" },
-    { "start": 16.70, "end": 22.30, "text": "affidato un incarico tutt’altro che modesto: trasformare un castello conquistato da poco" },
-    { "start": 22.30, "end": 30.44, "text": "in una fortezza capace di resistere a un nuovo assedio. Mura, torri, camminamenti, ponti levatoi…" },
-    { "start": 30.98, "end": 38.26, "text": "C’era parecchio da fare. Oggi, invece, vedo strade curate, persone che passeggiano e porte che" },
-    { "start": 38.26, "end": 45.16, "text": "rimangono tranquillamente aperte. Direi che, da questo punto di vista, le cose sono decisamente" },
-    { "start": 45.16, "end": 53.32, "text": "migliorate. Ma non mi sono ancora presentato. Io sono Filippo Brunelleschi. Beh, forse mi" },
-    { "start": 53.32, "end": 59.60, "text": "conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze. Ma qui a Vicopisano" },
-    { "start": 59.60, "end": 67.06, "text": "vorrei mostrarvi un’altra parte del mio lavoro. Quella forse meno conosciuta, ma non per questo" },
-    { "start": 67.06, "end": 73.90, "text": "meno ingegnosa. Prima, però, fermiamoci davanti a questa torre. Oggi è chiamata" },
-    { "start": 73.90, "end": 81.50, "text": "Torre delle Quattro Porte. E non occorre essere architetti, o geni del Rinascimento, per capire" },
-    { "start": 81.50, "end": 88.08, "text": "da dove venga il nome: su ciascuno dei suoi quattro lati si apre un passaggio. Quattro" },
-    { "start": 88.08, "end": 95.90, "text": "archi. Quattro direzioni. Una soluzione piuttosto insolita. La costruzione era contemporaneamente" },
-    { "start": 95.90, "end": 101.28, "text": "una torre di guardia, una porta d’ingresso al castello e un punto di passaggio lungo" },
-    { "start": 101.28, "end": 107.62, "text": "le mura. Sul lato settentrionale sono ancora visibili i grandi cardini in pietra sui quali" },
-    { "start": 107.62, "end": 115.38, "text": "ruotavano le antiche porte. Sono trascorsi secoli, eppure sono ancora lì. Questo, credetemi," },
-    { "start": 115.64, "end": 122.38, "text": "è sempre un buon segno. Ma prima che mi attribuiate anche questa torre, è meglio precisare" },
-    { "start": 122.38, "end": 128.80, "text": "una cosa. Non l’ho costruita io. Era qui molto prima del mio arrivo. Le opere" },
-    { "start": 128.80, "end": 135.30, "text": "di cui vantarmi, del resto, non mi mancano. Le parti più antiche della torre risalgono alla" },
-    { "start": 135.30, "end": 143.28, "text": "fine del XII secolo. Nel tempo venne danneggiata, riparata e modificata più volte," },
-    { "start": 143.70, "end": 149.72, "text": "tanto che nella muratura si possono riconoscere diverse fasi costruttive. Guardatela con" },
-    { "start": 149.72, "end": 155.26, "text": "attenzione. Nella parte inferiore domina il verrucano, la pietra che incontreremo" },
-    { "start": 155.26, "end": 162.34, "text": "spesso durante il nostro percorso. Più in alto compare invece il laterizio. Non sono soltanto" },
-    { "start": 162.34, "end": 169.38, "text": "materiali diversi. Sono momenti diversi della vita della torre. Ed ecco il primo consiglio" },
-    { "start": 169.38, "end": 176.24, "text": "che posso darvi, da esperto architetto, seppur un po’ datato. Quando osservate un edificio" },
-    { "start": 176.24, "end": 181.88, "text": "antico, non domandatevi soltanto quando sia stato costruito. Una costruzione non" },
-    { "start": 181.88, "end": 189.44, "text": "attraversa secoli di storia rimanendo perfettamente identica. E, a quanto vedo, nemmeno Vicopisano" },
-    { "start": 189.44, "end": 194.62, "text": "lo ha fatto. Per questo sono tornato. Voglio scoprire che cosa resta della città che" },
-    { "start": 194.62, "end": 200.78, "text": "conobbi, osservare come è cambiata e mostrarvi le ragioni nascoste dietro alcune delle sue" },
-    { "start": 200.78, "end": 208.54, "text": "costruzioni. I materiali. I percorsi. E, naturalmente, le difese. Da qui possiamo" },
-    { "start": 208.54, "end": 214.84, "text": "cominciare. Attraversate la torre ed entrate nel borgo. Alla prossima tappa incontreremo" },
-    { "start": 214.84, "end": 220.96, "text": "la Torre e il Camminamento del Soccorso. Quella sì, appartiene al sistema che progettai per" },
-    { "start": 220.96, "end": 228.56, "text": "Vicopisano. E dopo quasi seicento anni è ancora perfettamente riconoscibile. Permettetemi" },
-    { "start": 228.56, "end": 231.55, "text": "di considerarla una piccola soddisfazione." }
+    {
+      "start": 0.0,
+      "end": 3.4,
+      "text": "Dopo quasi seicento anni, sono finalmente tornato a Vicopisano."
+    },
+    {
+      "start": 4.08,
+      "end": 9.52,
+      "text": "E devo ammettere che ritrovarla così tranquilla mi fa un certo effetto."
+    },
+    {
+      "start": 10.18,
+      "end": 24.36,
+      "text": "Quando arrivai qui, nel 1435, Firenze mi aveva affidato un incarico tutt’altro che modesto: trasformare un castello conquistato da poco in una fortezza capace di resistere a un nuovo assedio."
+    },
+    {
+      "start": 24.98,
+      "end": 28.28,
+      "text": "Mura, torri, camminamenti, ponti levatoi…"
+    },
+    {
+      "start": 29.6,
+      "end": 30.66,
+      "text": "C’era parecchio da fare."
+    },
+    {
+      "start": 31.76,
+      "end": 38.78,
+      "text": "Oggi, invece, vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte."
+    },
+    {
+      "start": 39.26,
+      "end": 43.82,
+      "text": "Direi che, da questo punto di vista, le cose sono decisamente migliorate."
+    },
+    {
+      "start": 44.42,
+      "end": 46.92,
+      "text": "Ma non mi sono ancora presentato."
+    },
+    {
+      "start": 46.92,
+      "end": 50.6,
+      "text": "Io sono Filippo Brunelleschi."
+    },
+    {
+      "start": 51.22,
+      "end": 56.2,
+      "text": "Beh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze."
+    },
+    {
+      "start": 56.74,
+      "end": 60.96,
+      "text": "Ma qui a Vicopisano vorrei mostrarvi un’altra parte del mio lavoro."
+    },
+    {
+      "start": 61.56,
+      "end": 66.36,
+      "text": "Quella forse meno conosciuta, ma non per questo meno ingegnosa."
+    },
+    {
+      "start": 67.06,
+      "end": 69.78,
+      "text": "Prima, però, fermiamoci davanti a questa torre."
+    },
+    {
+      "start": 70.52,
+      "end": 73.38,
+      "text": "Oggi è chiamata Torre delle Quattro Porte."
+    },
+    {
+      "start": 73.5,
+      "end": 83.48,
+      "text": "E non occorre essere architetti, o geni del Rinascimento per capire da dove venga il nome: su ciascuno dei suoi quattro lati si apre un passaggio."
+    },
+    {
+      "start": 86.98,
+      "end": 89.32,
+      "text": "Una soluzione piuttosto insolita."
+    },
+    {
+      "start": 89.82,
+      "end": 98.9,
+      "text": "La costruzione era contemporaneamente una torre di guardia, una porta d’ingresso al castello e un punto di passaggio lungo le mura."
+    },
+    {
+      "start": 98.9,
+      "end": 106.82,
+      "text": "Sul lato settentrionale sono ancora visibili i grandi cardini in pietra sui quali ruotavano le antiche porte."
+    },
+    {
+      "start": 107.36,
+      "end": 110.48,
+      "text": "Sono trascorsi secoli, eppure sono ancora lì."
+    },
+    {
+      "start": 111.44,
+      "end": 114.26,
+      "text": "Questo, credetemi, è sempre un buon segno."
+    },
+    {
+      "start": 114.92,
+      "end": 119.44,
+      "text": "Ma prima che mi attribuiate anche questa torre, è meglio precisare una cosa."
+    },
+    {
+      "start": 120.16,
+      "end": 121.8,
+      "text": "Non l’ho costruita io."
+    },
+    {
+      "start": 122.62,
+      "end": 125.06,
+      "text": "Era qui molto prima del mio arrivo."
+    },
+    {
+      "start": 125.74,
+      "end": 129.18,
+      "text": "Le opere di cui vantarmi, del resto, non mi mancano."
+    },
+    {
+      "start": 130.02,
+      "end": 134.84,
+      "text": "Le parti più antiche della torre risalgono alla fine del XII secolo."
+    },
+    {
+      "start": 135.54,
+      "end": 145.58,
+      "text": "Nel tempo venne danneggiata, riparata e modificata più volte, tanto che nella muratura si possono riconoscere diverse fasi costruttive."
+    },
+    {
+      "start": 146.38,
+      "end": 147.94,
+      "text": "Guardatela con attenzione."
+    },
+    {
+      "start": 148.5,
+      "end": 154.44,
+      "text": "Nella parte inferiore domina il verrucano, la pietra che incontreremo spesso durante il nostro percorso."
+    },
+    {
+      "start": 154.92,
+      "end": 157.32,
+      "text": "Più in alto compare invece il laterizio."
+    },
+    {
+      "start": 158.0,
+      "end": 160.42,
+      "text": "Non sono soltanto materiali diversi."
+    },
+    {
+      "start": 161.02,
+      "end": 163.54,
+      "text": "Sono momenti diversi della vita della torre."
+    },
+    {
+      "start": 164.22,
+      "end": 169.08,
+      "text": "Ed ecco il primo consiglio che posso darvi da esperto architetto seppur un po’ datato."
+    },
+    {
+      "start": 169.86,
+      "end": 175.86,
+      "text": "Quando osservate un edificio antico, non domandatevi soltanto quando sia stato costruito."
+    },
+    {
+      "start": 176.58,
+      "end": 182.24,
+      "text": "Una costruzione non attraversa secoli di storia rimanendo perfettamente identica."
+    },
+    {
+      "start": 182.86,
+      "end": 184.72,
+      "text": "E, a quanto vedo, nemmeno Vicopisano lo ha fatto."
+    },
+    {
+      "start": 186.78,
+      "end": 188.18,
+      "text": "Per questo sono tornato."
+    },
+    {
+      "start": 188.96,
+      "end": 198.94,
+      "text": "Voglio scoprire che cosa resta della città che conobbi, osservare come è cambiata e mostrarvi le ragioni nascoste dietro alcune delle sue costruzioni."
+    },
+    {
+      "start": 199.62,
+      "end": 203.88,
+      "text": "I materiali, i percorsi, e naturalmente, le difese."
+    },
+    {
+      "start": 204.56,
+      "end": 206.38,
+      "text": "Da qui possiamo cominciare."
+    },
+    {
+      "start": 207.14,
+      "end": 209.48,
+      "text": "Attraversate la torre ed entrate nel borgo."
+    },
+    {
+      "start": 210.3,
+      "end": 214.8,
+      "text": "Alla prossima tappa incontreremo la Torre e il Camminamento del Soccorso."
+    },
+    {
+      "start": 215.58,
+      "end": 218.6,
+      "text": "Quella sì, appartiene al sistema che progettai per Vicopisano."
+    },
+    {
+      "start": 220.0,
+      "end": 228.3,
+      "text": "E dopo quasi seicento anni è ancora perfettamente riconoscibile, permettetemi di considerarla una piccola soddisfazione."
+    }
   ]
 }
