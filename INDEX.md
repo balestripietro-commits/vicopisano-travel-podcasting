@@ -7,27 +7,45 @@
 ## Contenuto
 
 - `index.html`: pagina principale del prototipo statico.
-- Il pulsante Google Maps usa un pin `location_on` nel controllo desktop della mappa e l'icona `map` nel full player.
-- Il player esteso ripropone lo stesso pulsante Google Maps tra `+10` e `x1`, con destinazione sincronizzata alla tappa attiva.
-- Il pulsante Google Maps usa sempre il simbolo `location_on`, senza l'icona a mappa con riga orizzontale, sia nella mappa normale sia nel full player su desktop e mobile; il localizzatore è leggermente ingrandito.
-- Nel full player desktop i controlli `-10`, play, `+10`, Google Maps e `x1` restano sulla stessa riga; su iPhone SE il riquadro della foto mantiene dimensioni quadrate compatte e centrate.
+- Il pulsante Google Maps usa un pin `location_on` nel controllo della mappa; nel full player non viene mostrato.
+- Nel full player desktop i controlli audio e `x1` restano nella zona destra senza una colonna riservata alle indicazioni; il pannello contestuale è dimensionato per restare interamente visibile senza scroll interno e `x1` resta dentro il bordo anche nelle larghezze più strette.
+- Su desktop la mascotte non viene più sovrapposta alla foto della tappa e non compare come elemento decorativo sulla mappa Explore; resta disponibile solo nei contesti in cui deve parlare, come mobile e intermezzo.
+- Il pulsante Google Maps usa sempre il simbolo `location_on`, senza l'icona a mappa con riga orizzontale, nella mappa normale su desktop e mobile; il localizzatore è leggermente ingrandito. Il pulsante di ricentratura `my_location` resta disponibile anche nella mappa estesa desktop.
 - Il cambio tappa usa una durata condivisa per card, marker e tratto attivo del percorso, con easing lineare verso lo stato finale per evitare lo scatto di rientro.
+- Quando si seleziona un marker, la mappa calcola il primo livello di zoom che permette di centrare davvero la tappa dentro i limiti disponibili; poi esegue un solo `flyTo`, evitando la correzione finale imposta dai limiti dell'inquadratura.
+- Quando si tocca un marker per la prima volta, la mappa inquadra il tratto di percorso che porta alla tappa; un secondo tap consecutivo sullo stesso marker centra invece il numero, sempre con una singola animazione fluida.
 - Il pulsante dedicato alla traccia precedente rispetta il comportamento audio standard: primo clic oltre l'inizio = ritorno a `00:00`, secondo clic ravvicinato o clic già a zero = tappa precedente; il comando tappa successiva passa sempre direttamente alla tappa seguente senza attivare l'avanzamento automatico di fine traccia. Il rewind `-10` resta separato.
 - Quando il mini-player mobile cambia davvero tappa con precedente/successiva, la pagina torna alla mappa e centra la nuova tappa; il semplice ritorno a `00:00` non sposta la mappa.
 - La guida italiana indica esplicitamente la lista con il testo: `Puoi scegliere una tappa anche da questa lista.`
 - La guida italiana separa la frase sul player dopo `basso` con un punto per migliorarne la leggibilità.
 - Nella prima schermata solo l'italiano avvia il sito; le altre lingue mostrano un avviso nella lingua selezionata perché non sono ancora disponibili.
+- Anche il selettore lingua globale dell'intestazione mantiene bloccate le lingue non ancora disponibili e mostra lo stesso avviso localizzato in un dialogo bianco opaco, sopra tutorial e menu, con chiusura accessibile.
 - La guida italiana descrive l'apertura della mappa estesa senza il prefisso `Su desktop`.
 - Nel tutorial desktop il fumetto della vista estesa è l'ultimo: il passo successivo mostra il cursore che clicca la `X`, chiude la vista e riporta alla home.
+- I livelli tutorial usano un overlay semitrasparente con blur leggero; fumetti, onboarding e conferme restano superfici bianche opache e completamente nitide su desktop e mobile.
 - Le animazioni del cursore tutorial sono state velocizzate del 15%, inclusi arrivo, clic e tempi di completamento JavaScript.
 - Nel player mobile i cinque comandi audio e indicazioni restano sempre sulla stessa riga.
 - Il mini-player include anche i comandi dedicati per traccia precedente e traccia successiva, separati dal riavvolgimento/avanzamento di 10 secondi.
 - Dopo la chiusura del full player desktop, la vista torna con la mappa allineata in alto, come nella composizione principale desiderata.
 - Su mobile, se la posizione già rilevata dell'utente è fuori dall'inquadratura, il pulsante di localizzazione riporta prima alla vista del percorso come su desktop; la geolocalizzazione viene richiesta solo quando non esiste ancora una posizione disponibile.
 - L'anteprima della tappa successiva mantiene uno spazio più leggibile tra fotografia e testo, anche nella vista mappa/player.
-- Su mobile il blocco finale del player mostra soltanto il segmento di trascrizione attualmente pronunciato, sincronizzato al tempo dell'audio e senza icona blu.
+- Su mobile il blocco finale del player mostra soltanto il segmento di trascrizione attualmente pronunciato, sincronizzato al tempo dell'audio e senza icona blu; durante le pause tra due segmenti resta vuoto e non anticipa la frase successiva.
+- Nel full player mobile i quattro comandi audio usano colonne fluide centrate: anche su iPhone SE il pulsante `x1` resta completamente dentro il bordo e le distanze tra i controlli rimangono uniformi.
+- Nel full player mobile è disponibile anche il pulsante `Mappa`, nascosto su desktop: chiudendolo si torna alla mappa e il focus viene riportato al controllo della mappa.
+- Su mobile il pulsante `fullscreen` della mappa apre una modalità mappa estesa separata dal full player: la mappa occupa lo schermo, il mini-player resta fisso in basso e il pulsante diventa `fullscreen_exit` in alto per chiudere la modalità.
+- I pulsanti Play/Pausa usano un contenitore a griglia centrato, così il glifo `pause` non risulta spostato rispetto al centro del pulsante su mobile.
 - La trascrizione mobile compare durante il play e, dopo una pausa, scompare con ritardo e animazione come il caption desktop.
 - Il frame base della mascotte è `B`; durante il play il lip-sync continua a usare i cue `A–H` e `X` disponibili.
+- Tra una tappa e la successiva, solo dopo la fine naturale dell'audio, parte `audio/transition_between_stops.mp3`: mostra il logo nel mini-player, la mascotte parlante su fondo verde nel full player, blocca i comandi e poi seleziona la tappa successiva in pausa. La navigazione manuale non attiva l'intermezzo.
+- L'intermezzo resta non skippabile e non velocizzabile, ma mantiene sempre il comando pausa disponibile e rende disabilitato lo slider, così l'ascolto può essere interrotto senza alterare il flusso.
+- L'accessibilità include skip link al contenuto, focus visibile uniforme, stato live della tappa selezionata, descrizione temporale dello slider, mappa esposta come regione e avvisi per i link che aprono una nuova scheda.
+- La suite E2E include `@axe-core/playwright` per verificare onboarding e full player su desktop/mobile; i controlli ARIA della mappa restano coperti dagli E2E mentre la superficie Leaflet dinamica viene esclusa dalla scansione Axe.
+- La scansione Axe include anche `color-contrast`; il check è passato su desktop e mobile, dopo aver scurito il verde del pulsante WhatsApp per portare il testo bianco sopra il rapporto WCAG minimo. Sono coperti inoltre zoom equivalenti al 200–400% senza overflow orizzontale e il flusso tastiera di onboarding, tutorial, cambio tappa, player, slider e chiusura con focus di ritorno.
+- Il comando dedicato è `npm run test:e2e:a11y`.
+- Il dialog onboarding espone anche `aria-describedby` per l'istruzione; i chip lingua usano `aria-pressed` come pulsanti e riservano `aria-selected` ai container con ruolo `option`, evitando annunci incoerenti in VoiceOver.
+- Quando l'onboarding è aperto, home e mini-player diventano `inert`: VoiceOver resta confinato al box di scelta lingua fino alla selezione.
+- I tempi grafici del mini-player/full player sono `aria-hidden` e lo slider non aggiorna più `aria-valuetext` durante la riproduzione, evitando che VoiceOver annunci `00:00` a ogni secondo.
+- Mini-player e full player non sono più contenitori `aria-live`: VoiceOver non duplica l'annuncio quando cambia lo stato Play/Pausa; restano attive solo le live region dedicate a feedback, trascrizione e selezione tappa.
 - Su mobile la mappa mantiene come zoom minimo l'inquadratura stretta necessaria a contenere il percorso, evitando di allargarsi eccessivamente sull'area geografica circostante.
 - `style.css`: stile full-page editoriale con hero ampio, mappa dominante, sezione tappe in card grid, mini-player fisso, player esteso con dock trascrizione, controlli mobile su griglia a spaziatura uniforme e motion system leggero della mascotte.
 - `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio mobile, condivisione tappa, guida contestuale adattiva ancorata ai titoli o controlli evidenziati, incluso il pulsante di apertura mappa estesa, e protetta da riposizionamenti ritardati degli step precedenti, e stati motion della mascotte.
@@ -57,6 +75,7 @@
 - `audio/05_torri_gemelle.mp3`: nuova traccia italiana Tappa 5 (179,670 secondi).
 - `audio/06_parrocchia_santa_maria_san_giovanni.mp3`: nuova traccia italiana Tappa 6 (225,933 secondi).
 - `audio/07_comune_info_point_vicopisano.mp3`: nuova traccia italiana Tappa 7 (270,524 secondi).
+- `audio/transition_between_stops.mp3`: intermezzo automatico non skippabile tra le tappe (8,803 secondi).
 - `audio/01_torre_quattro_porte_en.mp3`: audio Tappa 1 in inglese.
 - `audio/01_torre_quattro_porte_de.mp3`: audio Tappa 1 in tedesco.
 - `audio/01_torre_quattro_porte_fr.mp3`: audio Tappa 1 in francese.
@@ -64,6 +83,7 @@
 - `audio/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
 - `audio/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
 - `audio/cues/`: cue JSON generati con Rhubarb per sincronizzare la bocca della mascotte; ora sono presenti e verificati per tutte le sette tracce italiane nuove, oltre alle varianti straniere della Tappa 1.
+- `audio/cues/transition_between_stops.json`: cue Rhubarb per la mascotte durante l'intermezzo.
 - `audio/transcripts/`: sette trascrizioni italiane sincronizzate alle nuove tracce; il testo deriva dal copione DOCX e sono inclusi solo i segmenti del copione riconosciuti nel parlato. Gli intervalli automatici restano da verificare all'ascolto.
 - `outputs/`: cartella riservata a deliverable utente.
 - `work/`: cartella di lavoro temporanea.
@@ -76,7 +96,7 @@
 - Refinement full player: la condivisione della tappa resta nella topbar mobile, mentre su desktop è nascosta; la chiusura usa il controllo X e la trascrizione vive in un dock inferiore espandibile e scrollabile.
 - Refinement corrente: il player esteso usa un solo layer full-screen verde scuro, senza selettore lingua interno; i nomi delle tappe restano in italiano anche quando cambia la lingua dell'interfaccia.
 - Refinement mobile: il selettore lingua home e compatto sotto 860px; il player mantiene i quattro controlli su una riga e la foto resta artwork predefinito fino allo switch manuale della mascotte.
-- Fase 4 mappa: `TPMapMarker` e `TPMapControl` sono implementati nel runtime Leaflet esistente; la route usa il verde Vicopisano, marker/card condividono lo stato selected e la fullscreen fornisce Explore mode: su desktop la mappa occupa tutta l'altezza libera a sinistra, ricentratura e indicazioni restano nell'angolo alto destro e la mascotte animata compare in basso a sinistra senza coprire il percorso. Il controllo di espansione/riduzione viene nascosto in Explore perché il pulsante X del pannello chiude la vista. Nel pannello destro restano immagine quadrata, nome della tappa, timeline, comandi audio e navigazione. La trascrizione resta nel player mobile.
+- Fase 4 mappa: `TPMapMarker` e `TPMapControl` sono implementati nel runtime Leaflet esistente; la route usa il verde Vicopisano, marker/card condividono lo stato selected e la fullscreen fornisce Explore mode: su desktop la mappa occupa tutta l'altezza libera a sinistra e la mascotte animata compare in basso a sinistra senza coprire il percorso. Il controllo di espansione/riduzione e le indicazioni vengono nascosti in Explore perché il pulsante X del pannello chiude la vista e il pannello destro deve restare interamente leggibile senza scroll. Nel pannello destro restano immagine quadrata, nome della tappa, timeline, comandi audio e navigazione. La trascrizione resta nel player mobile.
 - `design-system.css` - token CSS core `--tp-*`, primitive UI, `TPChip`, `TPIconButton`, `TPStopCard`, Typography Lab e token di confronto identificatore tappa.
 - `theme-vicopisano.css` - tema Vicopisano con palette verde, blu stemma, oro, superfici crema, alias legacy controllati e token per identificatore Vicopisano vs viola Travel Podcasting.
 - `design-system.html` - pagina playground statica con componenti Fase 2, Typography Lab Georgia/Fraunces/Cormorant Garamond e confronto identificatore tappa.

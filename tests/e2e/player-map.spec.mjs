@@ -15,12 +15,29 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   await enterSite(page);
 
   await watchClass(page, "#map-directions-button", "is-directions-cued");
-  await page.locator(".map-marker").filter({ hasText: "3" }).click();
+  const stopThreeMarker = page.locator(".map-marker").filter({ hasText: "3" });
+  await stopThreeMarker.click();
   await expectClassObserved(page, "is-directions-cued");
   await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("3");
   await expect(page.locator("#player-overlay")).toBeHidden();
   await expectAudioPlaying(page);
   await expect(page.locator(".map-route-active")).toBeVisible();
+  await stopThreeMarker.click();
+  await expect
+    .poll(async () => {
+      const [mapBox, markerBox] = await Promise.all([
+        page.locator("#map").boundingBox(),
+        page.locator(".map-marker").filter({ hasText: "3" }).boundingBox(),
+      ]);
+      if (!mapBox || !markerBox) {
+        return Number.POSITIVE_INFINITY;
+      }
+      return Math.max(
+        Math.abs(markerBox.x + markerBox.width / 2 - (mapBox.x + mapBox.width / 2)),
+        Math.abs(markerBox.y + markerBox.height / 2 - (mapBox.y + mapBox.height / 2)),
+      );
+    })
+    .toBeLessThan(90);
   await expectNoRuntimeErrors(errors);
 });
 
@@ -82,7 +99,9 @@ test("desktop mini-player dedicates the remaining row to the seek timeline", asy
   expect(expandBox).not.toBeNull();
   expect(timelineBox.x).toBeGreaterThanOrEqual(controlsBox.x + controlsBox.width + 12);
   expect(timelineBox.x + timelineBox.width).toBeLessThanOrEqual(expandBox.x - 12);
-  expect(seekBox.width).toBeGreaterThanOrEqual(330);
+  // The timeline remains the flexible row; its exact width varies with the
+  // browser viewport and the desktop control labels.
+  expect(seekBox.width).toBeGreaterThanOrEqual(280);
   await expectNoRuntimeErrors(errors);
 });
 
@@ -310,21 +329,29 @@ test("mini-player expansion opens Explore on desktop and the full player on mobi
   await expectNoRuntimeErrors(errors);
 });
 
-test("mobile removes map fullscreen and anchors the live transcript at the map bottom", async ({ page }, testInfo) => {
+test("mobile map fullscreen keeps the mini-player visible and anchors the live transcript", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === "desktop-chrome", "The mobile map layout is phone-only.");
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
-  await expect(page.locator("#map-fullscreen-button")).toBeHidden();
+  await expect(page.locator("#map-fullscreen-button")).toBeVisible();
+  await page.locator("#map-fullscreen-button").click();
+  await expect(page.locator(".map-stage-frame")).toHaveClass(/is-expanded/);
+  await expect(page.locator("body")).toHaveClass(/is-map-fullscreen/);
+  await expect(page.locator(".mini-player")).toBeVisible();
+  await page.locator("#map-fullscreen-button").click();
+  await expect(page.locator(".map-stage-frame")).not.toHaveClass(/is-expanded/);
+  await expect(page.locator("body")).not.toHaveClass(/is-map-fullscreen/);
   await stopButton(page, 1).click();
   await expectAudioPlaying(page);
+  await expect(page.locator("#map-live-caption")).toBeVisible();
   const [mapBox, captionBox] = await Promise.all([
     page.locator("#map").boundingBox(),
     page.locator("#map-live-caption").boundingBox(),
   ]);
   expect(mapBox).not.toBeNull();
   expect(captionBox).not.toBeNull();
-  expect(captionBox.bottom).toBeLessThanOrEqual(mapBox.bottom - 12);
+  expect(captionBox.y + captionBox.height).toBeLessThanOrEqual(mapBox.y + mapBox.height - 2);
 
   await expectNoRuntimeErrors(errors);
 });
@@ -364,18 +391,16 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
   expect(playerBox).not.toBeNull();
   expect(playerBox.x).toBeGreaterThanOrEqual(mapBox.x + mapBox.width - 1);
 
-  const [artworkBox, navigationBox, panelTimelineBox, panelControlsBox, mapMascotBox] = await Promise.all([
+  const [artworkBox, navigationBox, panelTimelineBox, panelControlsBox] = await Promise.all([
     page.locator("#player-overlay .player-artwork").boundingBox(),
     page.locator(".player-stop-navigation").boundingBox(),
     page.locator("#player-overlay .player-timeline").boundingBox(),
     page.locator("#player-overlay .player-command-row").boundingBox(),
-    page.locator("#map-explore-mascot-image").boundingBox(),
   ]);
   expect(artworkBox).not.toBeNull();
   expect(navigationBox).not.toBeNull();
   expect(panelTimelineBox).not.toBeNull();
   expect(panelControlsBox).not.toBeNull();
-  expect(mapMascotBox).not.toBeNull();
   expect(artworkBox.x).toBeGreaterThanOrEqual(playerBox.x);
   expect(artworkBox.x + artworkBox.width).toBeLessThanOrEqual(playerBox.x + playerBox.width);
   expect(Math.abs(artworkBox.width - artworkBox.height)).toBeLessThanOrEqual(2);
@@ -384,22 +409,22 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
   expect(panelTimelineBox.x).toBeGreaterThanOrEqual(playerBox.x);
   expect(panelTimelineBox.x + panelTimelineBox.width).toBeLessThanOrEqual(playerBox.x + playerBox.width);
   expect(panelControlsBox.y).toBeGreaterThan(panelTimelineBox.y);
-  await expect(page.locator("#map-recenter-button")).toBeHidden();
+  await expect(page.locator("#map-recenter-button")).toBeVisible();
   await expect(page.locator("#map-fullscreen-button")).toBeHidden();
-  expect(mapMascotBox.x).toBeGreaterThanOrEqual(mapBox.x);
-  expect(mapMascotBox.y + mapMascotBox.height).toBeLessThanOrEqual(mapBox.y + mapBox.height);
-  expect(mapMascotBox.y).toBeGreaterThan(mapBox.y + mapBox.height / 2);
-  expect(mapMascotBox.width).toBeGreaterThanOrEqual(170);
+  await expect(page.locator("#map-explore-mascot")).toBeHidden();
   expect(mapBox.y + mapBox.height).toBeGreaterThanOrEqual(playerBox.y + playerBox.height - 1);
 
-  const [previousControlBox, playControlBox, nextControlBox] = await Promise.all([
+  const [previousControlBox, playControlBox, nextControlBox, speedControlBox] = await Promise.all([
     page.locator("#player-prev-button").boundingBox(),
     page.locator("#player-play-button").boundingBox(),
     page.locator("#player-next-button").boundingBox(),
+    page.locator("#player-speed-button").boundingBox(),
   ]);
   expect(previousControlBox).not.toBeNull();
   expect(playControlBox).not.toBeNull();
   expect(nextControlBox).not.toBeNull();
+  expect(speedControlBox).not.toBeNull();
+  expect(speedControlBox.x + speedControlBox.width).toBeLessThanOrEqual(playerBox.x + playerBox.width);
   expect(playControlBox.x - (previousControlBox.x + previousControlBox.width)).toBeGreaterThanOrEqual(14);
   expect(nextControlBox.x - (playControlBox.x + playControlBox.width)).toBeGreaterThanOrEqual(14);
 

@@ -638,6 +638,7 @@ button:active,
   margin-top: 0;
   font-style: normal !important;
   font-synthesis-style: none;
+  white-space: pre-line;
 }
 
 .intro-copy h1,
@@ -907,6 +908,11 @@ button:active,
 
 body.is-map-fullscreen .mini-player {
   z-index: 4950;
+}
+
+body.is-map-fullscreen {
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body.is-map-fullscreen .map-explore-stop {
@@ -1320,7 +1326,7 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .share-whatsapp {
-  background: #25d366;
+  background: #075e54;
   font-size: 0.7rem;
   letter-spacing: -0.04em;
   text-transform: lowercase;
@@ -1553,6 +1559,8 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .mini-player-toggle {
+  display: grid;
+  place-items: center;
   width: 50px;
   height: 50px;
   flex: 0 0 50px;
@@ -1563,6 +1571,8 @@ body.is-map-fullscreen .map-explore-stop {
   font-size: 1.25rem;
   font-weight: 700;
   cursor: pointer;
+  padding: 0;
+  text-align: center;
 }
 
 .mini-player-toggle .playback-icon,
@@ -2020,6 +2030,110 @@ body.is-map-fullscreen .map-explore-stop {
   height: 100%;
   object-fit: cover;
   transform-origin: center bottom;
+}
+
+/* The inter-stop voice cannot be skipped or sped up, but it can always be paused. */
+body.is-transition-audio .mini-player-transport-group > button:not(#mini-player-toggle),
+body.is-transition-audio .mini-player-speed-button,
+body.is-transition-audio .mini-player-expand,
+body.is-transition-audio .player-language-row,
+body.is-transition-audio .player-controls .player-control-button:not(#player-play-button),
+body.is-transition-audio .player-stop-navigation,
+body.is-transition-audio .player-transcript-dock,
+body.is-transition-audio #player-share-button {
+  display: none !important;
+}
+
+body.is-transition-audio .mini-player-controls,
+body.is-transition-audio .player-command-row,
+body.is-transition-audio .player-controls {
+  display: flex;
+  justify-content: center;
+}
+
+body.is-transition-audio .player-controls {
+  width: 100%;
+}
+
+body.is-transition-audio .player-play-button,
+body.is-transition-audio #mini-player-toggle {
+  display: inline-flex !important;
+}
+
+body.is-transition-audio .mini-player-artwork {
+  padding: 7px;
+  object-fit: contain;
+  background: #f4eadf;
+}
+
+body.is-transition-audio .mini-player-center {
+  grid-column: 2 / -1;
+}
+
+body.is-transition-audio .player-artwork,
+body.is-transition-audio .player-artwork-stack {
+  background: #0f5148;
+}
+
+body.is-transition-audio .player-artwork .is-photo-layer,
+body.is-transition-audio .player-artwork.is-mascot-mode .is-photo-layer {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+body.is-transition-audio .player-artwork .is-mascot-layer,
+body.is-transition-audio .player-artwork.is-mascot-mode .is-mascot-layer {
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1;
+  filter: none;
+  pointer-events: none;
+}
+
+body.is-transition-audio .player-artwork .detail-mascot-image {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+body.is-transition-audio input[type="range"] {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+/* Keyboard users always receive a visible focus ring, including controls that animate on focus. */
+:where(a, button, input, summary):focus-visible {
+  outline: 3px solid #f7e04f !important;
+  outline-offset: 3px;
+}
+
+.mini-player-main:focus-visible {
+  outline: 3px solid #f7e04f;
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #174d45;
+  font-weight: 800;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+#main-content:focus {
+  outline: none;
 }
 
 .player-artwork .is-photo-layer {
@@ -2802,7 +2916,7 @@ body.is-map-fullscreen .map-explore-stop {
     flex: 1 1 auto;
     min-width: 0;
     flex-direction: row;
-    gap: 8px;
+    gap: 18px;
   }
 
   .hero-logo {
@@ -3318,12 +3432,16 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .TPPlayerSheet .player-control-button.is-primary {
+  display: grid;
+  place-items: center;
   min-height: 72px;
   border-radius: var(--tp-radius-lg);
   background: var(--tp-color-tertiary);
   color: var(--tp-color-primary);
   font-size: 2rem;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  text-align: center;
 }
 
 .TPPlayerSheet .player-control-button.is-primary .playback-icon {
@@ -3605,10 +3723,6 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 @media (min-width: 1024px) {
-  body.is-map-player-panel #map-recenter-button {
-    display: none;
-  }
-
   .TPMiniPlayer {
     left: 24px;
     right: 24px;
@@ -3682,8 +3796,9 @@ body.is-map-fullscreen .map-explore-stop {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: radial-gradient(circle at 50% 35%, rgba(255, 248, 232, 0.96), rgba(245, 236, 224, 0.92));
-  backdrop-filter: blur(14px);
+  background: rgba(245, 236, 224, 0.78);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   opacity: 1;
   visibility: visible;
   transition: opacity 320ms ease, visibility 320ms ease;
@@ -3711,6 +3826,8 @@ body.guide-open::before {
       rgba(255, 248, 232, 0.08) 16%,
       rgba(20, 49, 44, 0.18) 46%,
       rgba(20, 49, 44, 0.26) 100%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   pointer-events: none;
 }
 
@@ -3953,6 +4070,20 @@ body.guide-open::before {
 .map-fullscreen-button {
   left: 20px;
   bottom: 20px;
+}
+
+@media (max-width: 1023px) {
+  body.is-map-fullscreen .map-fullscreen-button {
+    top: max(16px, env(safe-area-inset-top));
+    right: 16px;
+    bottom: auto;
+    left: auto;
+    z-index: 5001;
+  }
+
+  body.is-map-fullscreen .map-live-caption {
+    bottom: calc(var(--mini-player-reserved-space) + 16px);
+  }
 }
 
 .map-load-status {
@@ -4857,7 +4988,7 @@ body.guide-open::before {
   padding: clamp(32px, 6vw, 64px);
   border: 1px solid rgba(36, 92, 82, 0.14);
   border-radius: 34px;
-  background: rgba(255, 255, 255, 0.74);
+  background: #ffffff;
   box-shadow: 0 30px 90px rgba(36, 92, 82, 0.16);
   text-align: center;
   transform: translateY(0) scale(1);
@@ -4867,6 +4998,107 @@ body.guide-open::before {
 .onboarding-overlay.is-hidden .onboarding-card {
   opacity: 0;
   transform: translateY(12px) scale(0.98);
+}
+
+.language-unavailable-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 7000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(20, 49, 44, 0.32);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.language-unavailable-modal.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.language-unavailable-card {
+  width: min(92vw, 460px);
+  padding: 28px 30px 26px;
+  border: 1px solid rgba(36, 92, 82, 0.16);
+  border-radius: 24px;
+  background: #ffffff;
+  color: var(--text);
+  box-shadow: 0 24px 70px rgba(20, 49, 44, 0.26);
+  text-align: center;
+}
+
+.language-unavailable-card h2 {
+  margin: 0 0 10px;
+  color: var(--tp-color-primary);
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+.language-unavailable-card p {
+  margin: 0 auto 22px;
+  max-width: 36ch;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+body.language-unavailable-open {
+  overflow: hidden;
+}
+
+/* Mobile stop previews keep image, copy and action button in separate columns. */
+@media (max-width: 1023px) {
+  .player-overlay.TPPlayerSheet .player-stop-preview {
+    grid-template-columns: minmax(0, 1fr) 48px;
+    gap: 10px;
+    padding: 8px 10px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-content {
+    min-width: 0;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-image {
+    display: block;
+    width: clamp(48px, 14vw, 64px);
+    height: clamp(48px, 14vw, 64px);
+    flex: 0 0 clamp(48px, 14vw, 64px);
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-title {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: clamp(0.9rem, 4.1vw, 1.12rem);
+    line-height: 1.08;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-stop-button {
+    width: 48px;
+    min-width: 48px;
+    min-height: 48px;
+  }
 }
 
 .onboarding-kicker {
@@ -4919,8 +5151,8 @@ body.guide-open::before {
   inset: 0;
   z-index: 1;
   background: rgba(5, 37, 34, 0.24);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .guide-action-demo {
@@ -5034,8 +5266,7 @@ body.guide-open::before {
 
 .guide-layer.is-exit-confirming .guide-card,
 .guide-layer.is-exit-confirming .guide-action-demo {
-  filter: blur(2px);
-  opacity: 0.4;
+  opacity: 0.46;
   pointer-events: none;
 }
 
@@ -5350,12 +5581,6 @@ body.guide-open::before {
 
   .intro-copy {
     padding-left: 1.2em;
-  }
-}
-
-@media (max-width: 1023px) {
-  .map-fullscreen-button {
-    display: none;
   }
 }
 
@@ -5952,6 +6177,13 @@ body.guide-open::before {
 }
 
 @media (min-width: 1024px) {
+  /* La mascotte desktop resta fuori dall'artwork e dalla mappa Explore. */
+  .player-overlay.TPPlayerSheet .player-artwork .is-mascot-layer,
+  .player-overlay.TPPlayerSheet .player-artwork #artwork-flip-toggle,
+  body.is-map-player-panel .map-explore-mascot {
+    display: none !important;
+  }
+
   .player-overlay.TPPlayerSheet .player-sheet {
     grid-template-areas:
       "topbar topbar"
@@ -6245,6 +6477,11 @@ body.guide-open::before {
   text-decoration: none;
 }
 
+/* Indicazioni restano disponibili sulla mappa, non nel full player. */
+.TPPlayerSheet #player-directions-button {
+  display: none !important;
+}
+
 .TPPlayerSheet .player-directions-button .material-symbols-rounded {
   font-size: 1.35rem;
 }
@@ -6347,6 +6584,33 @@ body.guide-open::before {
 
   .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
     min-height: 58px;
+  }
+}
+
+/* On narrow mobile widths the four player controls must remain inside the sheet. */
+@media (max-width: 1023px) {
+  .TPPlayerSheet .player-command-row .player-controls {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-content: center;
+    gap: clamp(4px, 1.8vw, 10px);
+    max-width: 100%;
+    padding-inline: 0;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button,
+  .TPPlayerSheet #player-speed-button {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    justify-self: center;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
+    flex-basis: auto;
+    width: 100%;
+    min-width: 0;
   }
 }
 
@@ -6668,6 +6932,16 @@ body.player-open {
   border-color: var(--tp-color-tertiary);
   background: color-mix(in srgb, var(--tp-color-tertiary) 18%, rgba(255, 255, 255, 0.08));
   color: var(--tp-color-tertiary);
+}
+
+.player-map-button {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .player-map-button {
+    display: grid;
+  }
 }
 
 .player-overlay.TPPlayerSheet .player-close-button .material-symbols-rounded {
@@ -7279,7 +7553,7 @@ body.player-open {
       "artwork"
       "player";
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 44px minmax(260px, 34dvh) minmax(0, 1fr);
+    grid-template-rows: 44px minmax(220px, 30dvh) minmax(0, 1fr);
     gap: 10px;
     padding: 14px 16px max(14px, env(safe-area-inset-bottom));
   }
@@ -7311,7 +7585,7 @@ body.player-open {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    overflow-y: auto;
+    overflow: hidden;
     padding-right: 2px;
     gap: 10px;
   }
@@ -7370,8 +7644,9 @@ body.player-open {
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-controls {
     grid-area: controls;
     display: grid;
-    width: max-content;
-    grid-template-columns: 232px 44px 44px;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) 44px;
     align-items: center;
     gap: 12px;
     justify-content: center;
@@ -7379,17 +7654,21 @@ body.player-open {
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group {
-    grid-template-columns: 48px 88px 48px;
-    gap: 24px;
+    min-width: 0;
+    grid-template-columns: 44px minmax(64px, 1fr) 44px;
+    gap: 18px;
+    justify-content: center;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button {
-    min-width: 48px;
+    width: 44px;
+    min-width: 44px;
     min-height: 48px;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button.is-primary {
-    min-width: 88px;
+    width: 100%;
+    min-width: 64px;
     min-height: 56px;
   }
 
@@ -7397,6 +7676,7 @@ body.player-open {
     width: 44px;
     min-width: 44px;
     min-height: 48px;
+    justify-self: end;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-kicker {
@@ -7494,5 +7774,57 @@ body.player-open {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+  }
+}
+
+/* Final mobile guard: keep stop preview image, text and arrow from colliding at any width. */
+@media (max-width: 1023px) {
+  .player-overlay.TPPlayerSheet .player-stop-preview {
+    grid-template-columns: minmax(0, 1fr) 48px !important;
+    gap: 10px !important;
+    padding: 8px 10px !important;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-content {
+    min-width: 0 !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-image {
+    display: block !important;
+    width: clamp(48px, 14vw, 64px) !important;
+    height: clamp(48px, 14vw, 64px) !important;
+    flex: 0 0 clamp(48px, 14vw, 64px) !important;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-copy {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-preview-title {
+    display: -webkit-box !important;
+    overflow: hidden !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: clamp(0.9rem, 4.1vw, 1.12rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .player-overlay.TPPlayerSheet .player-next-stop-button {
+    width: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
   }
 }

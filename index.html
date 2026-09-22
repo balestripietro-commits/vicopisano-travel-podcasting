@@ -16,12 +16,13 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260921-map-caption" />
+    <link rel="stylesheet" href="style.css?v=20260922-tutorial-clarity" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
       <div id="announcement-track" class="announcement-track"></div>
     </div>
+    <a class="skip-link" href="#main-content">Vai al contenuto principale</a>
 
     <div
       id="onboarding-overlay"
@@ -29,6 +30,7 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="onboarding-title"
+      aria-describedby="onboarding-hint"
     >
       <div class="onboarding-card translated-content">
         <p class="onboarding-kicker">Travel podcasting</p>
@@ -63,6 +65,22 @@
       </div>
     </div>
 
+    <div
+      id="language-unavailable-modal"
+      class="language-unavailable-modal is-hidden"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="language-unavailable-title"
+      aria-describedby="language-unavailable-message"
+      hidden
+    >
+      <div class="language-unavailable-card">
+        <h2 id="language-unavailable-title">Lingua non disponibile</h2>
+        <p id="language-unavailable-message"></p>
+        <button type="button" id="language-unavailable-close" class="guide-button guide-button-primary">Chiudi</button>
+      </div>
+    </div>
+
     <div class="app-shell">
       <header class="site-header">
         <div class="brand-lockup">
@@ -87,6 +105,7 @@
           </div>
         </div>
       </header>
+      <main id="main-content" tabindex="-1">
         <section class="intro-panel" aria-labelledby="landing-title">
           <div class="intro-hero-row">
             <div class="intro-visual">
@@ -107,7 +126,8 @@
               <div class="intro-quote-block" id="intro-quote-block">
                 <p class="intro intro-lead intro-quote-title" id="intro-lead-text">Sono Filippo Brunelleschi.</p>
                 <p class="intro intro-quote" id="intro-text">
-                  Vieni con me alla scoperta di Vicopisano: tra torri, camminamenti e storie nascoste,
+                  Vieni con me alla scoperta di Vicopisano:
+                  tra torri, camminamenti e storie nascoste,
                   ti accompagnerò tappa dopo tappa.
                 </p>
               </div>
@@ -160,7 +180,7 @@
               >
                 <span translate="no" class="map-fullscreen-icon material-symbols-rounded" aria-hidden="true">fullscreen</span>
               </button>
-              <div id="map" class="map" role="application" aria-label="Mappa delle tappe"></div>
+              <div id="map" class="map" role="region" aria-label="Mappa interattiva delle tappe"></div>
               <p id="map-live-caption" class="map-live-caption" aria-hidden="true" hidden></p>
               <p id="map-load-status" class="map-load-status" aria-live="polite"></p>
               <div id="map-explore-stop" class="map-explore-stop" aria-live="polite" hidden>
@@ -179,7 +199,7 @@
               <div class="stop-preview-heading">
                 <span id="stop-preview-number" class="stop-preview-number"></span>
                 <div>
-                  <h3 id="stop-preview-title" class="stop-preview-title"></h3>
+                  <h2 id="stop-preview-title" class="stop-preview-title"></h2>
                 </div>
               </div>
             </div>
@@ -193,6 +213,7 @@
                 <p id="stops-subtitle" hidden></p>
               </div>
             </div>
+            <p id="stop-selection-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
             <ul id="stops-list" class="stops-list" aria-label="Elenco delle tappe"></ul>
           </section>
         </div>
@@ -208,6 +229,7 @@
               href="https://izi.travel/it/e5c2-vicopisano-travel-podcasting/it"
               target="_blank"
               rel="noreferrer"
+              aria-label="izi.TRAVEL (si apre in una nuova scheda)"
             >
               <span class="platform-logo-text"><span class="brand-izi">izi</span><span class="brand-travel">.TRAVEL</span></span>
             </a>
@@ -216,6 +238,7 @@
               href="https://www.loquis.com/"
               target="_blank"
               rel="noreferrer"
+              aria-label="Loquis (si apre in una nuova scheda)"
             >
               <span class="platform-logo-text">Loquis</span>
             </a>
@@ -224,6 +247,7 @@
               href="https://open.spotify.com/"
               target="_blank"
               rel="noreferrer"
+              aria-label="Spotify (si apre in una nuova scheda)"
             >
               <span class="platform-logo-text">Spotify</span>
             </a>
@@ -244,8 +268,14 @@
       </main>
     </div>
 
-    <div id="mini-player" class="mini-player TPMiniPlayer tp-mini-player is-hidden" aria-live="polite">
-      <div id="mini-player-open" class="mini-player-main">
+    <div id="mini-player" class="mini-player TPMiniPlayer tp-mini-player is-hidden">
+      <div
+        id="mini-player-open"
+        class="mini-player-main"
+        role="button"
+        tabindex="0"
+        aria-label="Apri player a schermo intero"
+      >
         <img
           id="mini-player-artwork"
           class="mini-player-artwork"
@@ -313,7 +343,7 @@
             aria-atomic="true"
             hidden
           ></output>
-          <span id="mini-player-current-time" class="mini-player-time">00:00</span>
+          <span id="mini-player-current-time" class="mini-player-time" aria-hidden="true">00:00</span>
           <span class="mini-player-progress">
             <span id="mini-player-progress-bar" class="mini-player-progress-bar"></span>
           </span>
@@ -327,7 +357,7 @@
             value="0"
             aria-label="Posizione della traccia"
           />
-          <span id="mini-player-duration-total" class="mini-player-time">--:--</span>
+          <span id="mini-player-duration-total" class="mini-player-time" aria-hidden="true">--:--</span>
         </div>
       </div>
 
@@ -349,12 +379,15 @@
         class="player-backdrop"
         aria-label="Chiudi player"
       ></button>
-      <article class="player-sheet" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="detail-title" tabindex="-1">
+      <article class="player-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1">
         <div class="player-topbar">
           <div class="player-topbar-leading">
             <p id="detail-number" class="player-kicker"></p>
             <button type="button" id="player-share-button" class="player-topbar-button player-share-button" aria-label="Condividi questa tappa" title="Condividi questa tappa">
               <span translate="no" class="player-share-icon material-symbols-rounded" aria-hidden="true">share</span>
+            </button>
+            <button type="button" id="player-map-button" class="player-topbar-button player-map-button" aria-label="Apri la mappa a tutto schermo" title="Apri la mappa a tutto schermo">
+              <span translate="no" class="material-symbols-rounded" aria-hidden="true">map</span>
             </button>
             <span id="player-share-status" class="sr-only" role="status" aria-live="polite"></span>
           </div>
@@ -411,7 +444,7 @@
               aria-atomic="true"
               hidden
             ></output>
-            <span id="player-current-time" class="player-time">00:00</span>
+            <span id="player-current-time" class="player-time" aria-hidden="true">00:00</span>
             <input
               id="player-progress-input"
               class="player-progress-input"
@@ -422,7 +455,7 @@
               value="0"
               aria-label="Posizione della traccia"
             />
-            <span id="player-duration-total" class="player-time">00:00</span>
+            <span id="player-duration-total" class="player-time" aria-hidden="true">00:00</span>
           </div>
           <div class="player-command-row">
             <div class="player-language-row">
@@ -440,7 +473,7 @@
                 <button type="button" id="player-prev-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Indietro di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">replay_10</span>
                 </button>
-                <button type="button" id="player-play-button" class="player-control-button tp-audio-control tp-audio-control--primary is-primary">
+                <button type="button" id="player-play-button" class="player-control-button tp-audio-control tp-audio-control--primary is-primary" aria-label="Riproduci audio">
                   <span translate="no" class="playback-icon material-symbols-rounded" aria-hidden="true">play_arrow</span>
                 </button>
                 <button type="button" id="player-next-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Avanti di 10 secondi">
@@ -530,6 +563,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260921-mascot-hd"></script>
+    <script src="app.js?v=20260922-transition-audio"></script>
   </body>
 </html>
