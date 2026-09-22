@@ -9,7 +9,9 @@ import {
   stopButton,
 } from "./helpers.mjs";
 
-const languageChecks = ["it", "en", "de", "fr", "es", "pt", "ru"];
+// Only Italian is currently available. The other language buttons intentionally
+// open the unavailable-language modal and are covered by accessibility tests.
+const languageChecks = ["it"];
 
 for (const code of languageChecks) {
   test(`interface localization is complete in ${languageNames[code]}`, async ({ page }, testInfo) => {
