@@ -5316,7 +5316,7 @@ body.language-unavailable-open {
 
 .onboarding-kicker {
   margin: 0 0 10px;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--muted) 78%, var(--text));
   font-size: 0.92rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -5332,7 +5332,7 @@ body.language-unavailable-open {
 
 .onboarding-hint {
   margin: 18px auto 28px;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--muted) 78%, var(--text));
   font-size: clamp(1rem, 2.3vw, 1.25rem);
 }
 
@@ -6481,6 +6481,14 @@ body.language-unavailable-open {
   text-overflow: clip;
   text-wrap: nowrap;
   white-space: nowrap;
+}
+
+.player-overlay.TPPlayerSheet .player-side,
+.player-overlay.TPPlayerSheet .player-meta,
+.player-overlay.TPPlayerSheet .player-stop-navigation,
+.player-overlay.TPPlayerSheet .player-stop-preview,
+.player-overlay.TPPlayerSheet .player-next-preview-content {
+  min-width: 0;
 }
 
 .player-overlay.TPPlayerSheet .player-title-text {

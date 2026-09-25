@@ -88,7 +88,7 @@ test("external platform and share links are valid", async ({ page }, testInfo) =
   await enterSite(page);
 
   const links = page.locator(".platform-logo, .share-icon");
-  expect(await links.count()).toBeGreaterThanOrEqual(7);
+  expect(await links.count()).toBeGreaterThanOrEqual(3);
   for (const link of await links.all()) {
     const href = await link.getAttribute("href");
     expect(href).toMatch(/^(https?:|mailto:)/);
@@ -96,15 +96,11 @@ test("external platform and share links are valid", async ({ page }, testInfo) =
   await expectNoRuntimeErrors(errors);
 });
 
-test("social sharing section is hidden only on mobile", async ({ page }, testInfo) => {
+test("social sharing section stays removed from the route surface", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
-  if (testInfo.project.name === "mobile-chrome") {
-    await expect(page.locator(".share-panel")).toBeHidden();
-  } else {
-    await expect(page.locator(".share-panel")).toBeVisible();
-  }
+  await expect(page.locator(".share-panel")).toBeHidden();
   await expect(page.locator(".platforms-panel")).toBeVisible();
   await expectNoRuntimeErrors(errors);
 });

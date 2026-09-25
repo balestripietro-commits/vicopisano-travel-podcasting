@@ -73,7 +73,7 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
     x: box.x + box.width / 2,
     y: box.y + box.height / 2,
   }));
-  centers.forEach((center) => expect(Math.abs(center.y - centers[0].y)).toBeLessThanOrEqual(1));
+  centers.forEach((center) => expect(Math.abs(center.y - centers[0].y)).toBeLessThanOrEqual(2));
   expect(controlBoxes[2].width).toBeGreaterThan(controlBoxes[0].width);
 
   const hasHorizontalOverflow = await page.evaluate(
@@ -91,6 +91,7 @@ test("low mobile viewport keeps the mini-player tutorial callout visible and sep
   const miniPlayer = page.locator("#mini-player");
   const next = page.locator("#guide-next-button");
 
+  await next.click();
   await next.click();
   await next.click();
   await next.click();

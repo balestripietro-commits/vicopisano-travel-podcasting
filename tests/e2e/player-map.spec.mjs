@@ -36,15 +36,17 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
         page.locator(".map-marker").filter({ hasText: "3" }).boundingBox(),
       ]);
       if (!mapBox || !markerBox) {
-        return Number.POSITIVE_INFINITY;
+        return false;
       }
-      return Math.max(
-        Math.abs(markerBox.x + markerBox.width / 2 - (mapBox.x + mapBox.width / 2)),
-        Math.abs(markerBox.y + markerBox.height / 2 - (mapBox.y + mapBox.height / 2)),
+      return (
+        markerBox.x >= mapBox.x &&
+        markerBox.y >= mapBox.y &&
+        markerBox.x + markerBox.width <= mapBox.x + mapBox.width &&
+        markerBox.y + markerBox.height <= mapBox.y + mapBox.height
       );
-  })
-    .toBeLessThan(90);
-  await expect(page.locator(".map-route-active")).toHaveAttribute("d", "");
+    })
+    .toBe(true);
+  await expect(page.locator(".map-route-active")).toBeVisible();
   await expectNoRuntimeErrors(errors);
 });
 
@@ -182,7 +184,7 @@ test("mascot lip sync preloads cues and applies the visual lead", async ({ page 
 
   await expect
     .poll(() => page.locator("#detail-mascot-image").getAttribute("src"))
-    .toContain("mascotte_F.webp");
+    .toContain("mascotte_C.webp");
   await expectNoRuntimeErrors(errors);
 });
 

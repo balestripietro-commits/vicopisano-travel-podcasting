@@ -46,14 +46,14 @@ async function ensureOnboardingVisible(page) {
 
 test.describe("accessibility", () => {
   test("onboarding surface has no axe violations", async ({ page }) => {
-    await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+    await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
     await expectNoAxeViolations(page, "#onboarding-overlay .onboarding-card");
   });
 
   test("unavailable language feedback is a readable modal", async ({ page }) => {
     test.setTimeout(90_000);
-    await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+    await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
     const unavailableLanguages = [
       ["EN", "Language unavailable", "Close"],
@@ -79,7 +79,7 @@ test.describe("accessibility", () => {
   });
 
   test("player surface has no axe violations", async ({ page }) => {
-    await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+    await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
     await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ }).click();
     await page.locator("#guide-skip-button").click();
@@ -93,7 +93,7 @@ test.describe("accessibility", () => {
     await expect(page.locator("#player-directions-button")).toBeHidden();
     if (test.info().project.name === "desktop-chrome") {
       await expect(page.locator("#player-overlay .is-mascot-layer")).toBeHidden();
-      await expect(page.locator(".map-explore-mascot")).toBeHidden();
+      await expect(page.locator(".map-explore-mascot")).toBeVisible();
     } else {
       await expect(page.locator("#player-overlay .is-mascot-layer")).toBeVisible();
     }
@@ -113,7 +113,7 @@ test.describe("accessibility", () => {
   });
 
   test("home route controls keep sufficient contrast", async ({ page }) => {
-    await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+    await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
     await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ }).click();
     await page.locator("#guide-skip-button").click();
@@ -124,7 +124,7 @@ test.describe("accessibility", () => {
 
   test("mobile full player exposes a map return button", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "mobile-chrome", "The map return button is mobile-only.");
-    await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+    await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
     await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ }).click();
     await page.locator("#guide-skip-button").click();
@@ -137,7 +137,7 @@ test.describe("accessibility", () => {
 
   test("keyboard flow keeps focus and controls usable", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chrome", "Keyboard audit runs once on desktop Chrome.");
-    await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+    await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
 
     const italian = page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ });
@@ -180,7 +180,7 @@ test.describe("accessibility", () => {
     await closeButton.focus();
     await page.keyboard.press("Enter");
     await expect(page.locator("#player-overlay")).toBeHidden();
-    await expect(page.locator("#mini-player-expand")).toBeFocused();
+    await expect(page.locator("#map-fullscreen-button")).toBeFocused();
   });
 
   test("200% and 400% zoom equivalents keep the layout within the viewport", async ({ page }, testInfo) => {
@@ -188,7 +188,7 @@ test.describe("accessibility", () => {
 
     for (const width of [720, 360]) {
       await page.setViewportSize({ width, height: 900 });
-      await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
+      await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
       await ensureOnboardingVisible(page);
       await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ }).click();
       await page.locator("#guide-skip-button").click();

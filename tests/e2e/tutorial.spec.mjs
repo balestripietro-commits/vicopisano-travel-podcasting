@@ -248,6 +248,9 @@ test("tutorial blocks pointer, keyboard and assistive access to background contr
   await page.mouse.click(stopBox.x + stopBox.width / 2, stopBox.y + stopBox.height / 2);
   await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("1");
 
+  await expect(page.locator("#guide-exit-confirm")).toBeVisible();
+  await page.locator("#guide-exit-confirm-cancel").click();
+  await expect(page.locator("#guide-exit-confirm")).toBeHidden();
   await page.locator("#guide-skip-button").click();
   await expect(page.locator(".app-shell")).toHaveJSProperty("inert", false);
   await expect(page.locator("#mini-player")).toHaveJSProperty("inert", false);

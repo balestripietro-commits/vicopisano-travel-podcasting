@@ -4529,7 +4529,12 @@ function startTransitionAudio(nextStop) {
   }
 
   const previousAudio = getActiveAudio();
-  if (!previousAudio || previousAudio.paused === false || !previousAudio.ended) {
+  // `ended` is not guaranteed to be reflected on the element yet when the
+  // ended event is delivered (and synthetic ended events used by integrations
+  // do not set the readonly property at all). The lifecycle guard in
+  // handleAudioEnded already proves that this is the live track, so do not
+  // gate the transition on a second, timing-sensitive ended check.
+  if (!previousAudio || previousAudio.paused === false) {
     return;
   }
 
