@@ -21,8 +21,8 @@ for (const code of languageChecks) {
 
     await expect(page.locator("html")).toHaveAttribute("lang", code);
     await expect(page.locator("#global-language-current-label")).toHaveText(languageNames[code]);
-    await expect(page.locator("#map-recenter-button")).toHaveAttribute("aria-label", /.+/);
-    await expect(page.locator("#map-directions-button")).not.toHaveAttribute("aria-label", "");
+    await expect(page.locator("#map-recenter-button")).toBeHidden();
+    await expect(page.locator("#map-directions-button")).toBeHidden();
     await expect(page.locator("#mini-player-expand")).not.toHaveAttribute("aria-label", "");
     await expectNoRuntimeErrors(errors);
   });
@@ -88,7 +88,7 @@ test("external platform and share links are valid", async ({ page }, testInfo) =
   await enterSite(page);
 
   const links = page.locator(".platform-logo, .share-icon");
-  expect(await links.count()).toBeGreaterThanOrEqual(8);
+  expect(await links.count()).toBeGreaterThanOrEqual(7);
   for (const link of await links.all()) {
     const href = await link.getAttribute("href");
     expect(href).toMatch(/^(https?:|mailto:)/);

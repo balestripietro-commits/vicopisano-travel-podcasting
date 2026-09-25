@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260922-tutorial-clarity" />
+    <link rel="stylesheet" href="style.css?v=20260924-transcript-overlay" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -77,7 +77,10 @@
       <div class="language-unavailable-card">
         <h2 id="language-unavailable-title">Lingua non disponibile</h2>
         <p id="language-unavailable-message"></p>
-        <button type="button" id="language-unavailable-close" class="guide-button guide-button-primary">Chiudi</button>
+        <button type="button" id="language-unavailable-close" class="guide-button guide-button-primary language-unavailable-close">
+          <span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>
+          <span id="language-unavailable-close-label">Chiudi</span>
+        </button>
       </div>
     </div>
 
@@ -138,14 +141,16 @@
         <div class="route-experience">
           <section class="map-stage" aria-label="Mappa interattiva del percorso">
             <div class="map-stage-frame">
-              <div class="map-floating-controls">
+              <div class="map-floating-controls" role="group" aria-label="Controlli mappa">
                 <button
                   type="button"
                   id="map-recenter-button"
                   class="map-action-button tp-icon-button tp-map-control"
                   aria-label="Centra tutte le tappe"
+                  aria-pressed="false"
                 >
                   <span translate="no" class="map-action-icon material-symbols-rounded" aria-hidden="true">my_location</span>
+                  <span class="map-control-tooltip" aria-hidden="true">Centra tutte le tappe</span>
                 </button>
                 <a
                   id="map-directions-button"
@@ -154,10 +159,10 @@
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Apri indicazioni"
-                  title="Apri indicazioni"
                   hidden
                 >
                   <span translate="no" class="map-action-icon directions-icon material-symbols-rounded" aria-hidden="true">location_on</span>
+                  <span class="map-control-tooltip" aria-hidden="true">Apri indicazioni</span>
                 </a>
               </div>
               <div class="map-explore-mascot" aria-hidden="true">
@@ -254,16 +259,6 @@
           </div>
           </footer>
 
-          <section class="share-panel" aria-labelledby="share-title">
-            <h2 id="share-title" class="share-title">Share with your friends</h2>
-            <div class="share-icons" aria-label="Condivisione social">
-              <a id="share-facebook" class="share-icon share-facebook" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su Facebook"><span aria-hidden="true">f</span></a>
-              <a id="share-x" class="share-icon share-x" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su X"><span aria-hidden="true">X</span></a>
-              <a id="share-linkedin" class="share-icon share-linkedin" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su LinkedIn"><span aria-hidden="true">in</span></a>
-              <a id="share-whatsapp" class="share-icon share-whatsapp" href="#" target="_blank" rel="noreferrer" aria-label="Condividi su WhatsApp"><span aria-hidden="true">wa</span></a>
-              <a id="share-mail" class="share-icon share-mail" href="#" aria-label="Condividi via email"><span aria-hidden="true">✉</span></a>
-            </div>
-          </section>
         </div>
       </main>
     </div>
@@ -470,6 +465,9 @@
             </div>
             <div class="player-controls" aria-label="Controlli player">
               <div class="player-transport-group">
+                <button type="button" id="player-previous-track" class="player-control-button player-track-control tp-audio-control tp-audio-control--secondary" aria-label="Tappa precedente" title="Tappa precedente">
+                  <span translate="no" class="material-symbols-rounded" aria-hidden="true">skip_previous</span>
+                </button>
                 <button type="button" id="player-prev-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Indietro di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">replay_10</span>
                 </button>
@@ -478,6 +476,9 @@
                 </button>
                 <button type="button" id="player-next-button" class="player-control-button tp-audio-control tp-audio-control--secondary" aria-label="Avanti di 10 secondi">
                   <span translate="no" class="material-symbols-rounded" aria-hidden="true">forward_10</span>
+                </button>
+                <button type="button" id="player-next-track" class="player-control-button player-track-control tp-audio-control tp-audio-control--secondary" aria-label="Tappa successiva" title="Tappa successiva">
+                  <span translate="no" class="material-symbols-rounded" aria-hidden="true">skip_next</span>
                 </button>
               </div>
               <a
@@ -563,6 +564,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260922-transition-audio"></script>
+    <script src="app.js?v=20260925-audio-session-fix-4"></script>
   </body>
 </html>

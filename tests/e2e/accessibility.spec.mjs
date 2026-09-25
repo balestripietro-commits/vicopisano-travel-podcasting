@@ -52,14 +52,30 @@ test.describe("accessibility", () => {
   });
 
   test("unavailable language feedback is a readable modal", async ({ page }) => {
+    test.setTimeout(90_000);
     await page.goto("/?tappa=1&lang=it", { waitUntil: "networkidle" });
     await ensureOnboardingVisible(page);
-    await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^EN\s/ }).click();
-    await expect(page.locator("#language-unavailable-modal")).toBeVisible();
-    await expect(page.locator("#language-unavailable-message")).toContainText("not available");
-    await expectNoAxeViolations(page, "#language-unavailable-modal .language-unavailable-card");
-    await page.locator("#language-unavailable-close").click();
-    await expect(page.locator("#language-unavailable-modal")).toBeHidden();
+    const unavailableLanguages = [
+      ["EN", "Language unavailable", "Close"],
+      ["DE", "Sprache nicht verfügbar", "Schließen"],
+      ["FR", "Langue indisponible", "Fermer"],
+      ["ES", "Idioma no disponible", "Cerrar"],
+      ["PT", "Idioma indisponível", "Fechar"],
+      ["RU", "Язык недоступен", "Закрыть"],
+    ];
+    let axeChecked = false;
+    for (const [code, title, closeLabel] of unavailableLanguages) {
+      await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: new RegExp(`^${code}\\s`) }).click();
+      await expect(page.locator("#language-unavailable-modal")).toBeVisible();
+      await expect(page.locator("#language-unavailable-title")).toHaveText(title);
+      await expect(page.locator("#language-unavailable-close-label")).toHaveText(closeLabel);
+      if (!axeChecked) {
+        await expectNoAxeViolations(page, "#language-unavailable-modal .language-unavailable-card");
+        axeChecked = true;
+      }
+      await page.locator("#language-unavailable-close").click();
+      await expect(page.locator("#language-unavailable-modal")).toBeHidden();
+    }
   });
 
   test("player surface has no axe violations", async ({ page }) => {
@@ -77,7 +93,7 @@ test.describe("accessibility", () => {
     await expect(page.locator("#player-directions-button")).toBeHidden();
     if (test.info().project.name === "desktop-chrome") {
       await expect(page.locator("#player-overlay .is-mascot-layer")).toBeHidden();
-      await expect(page.locator("#map-explore-mascot")).toBeHidden();
+      await expect(page.locator(".map-explore-mascot")).toBeHidden();
     } else {
       await expect(page.locator("#player-overlay .is-mascot-layer")).toBeVisible();
     }
@@ -164,7 +180,7 @@ test.describe("accessibility", () => {
     await closeButton.focus();
     await page.keyboard.press("Enter");
     await expect(page.locator("#player-overlay")).toBeHidden();
-    await expect(page.locator("#map-fullscreen-button")).toBeFocused();
+    await expect(page.locator("#mini-player-expand")).toBeFocused();
   });
 
   test("200% and 400% zoom equivalents keep the layout within the viewport", async ({ page }, testInfo) => {

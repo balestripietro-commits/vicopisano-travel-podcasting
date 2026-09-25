@@ -20,68 +20,56 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
   await expect(guide).toHaveClass(/is-pointing-/);
   await expect(guide).not.toHaveClass(/is-repositioning/);
   await expectInsideViewport(guide, page);
-  const guideOverlapsDirections = await page.evaluate(() => {
-    const guideRect = document.querySelector("#guide-card")?.getBoundingClientRect();
-    const directionsRect = document.querySelector("#map-directions-button")?.getBoundingClientRect();
-    if (!guideRect || !directionsRect) {
-      return true;
-    }
-    return !(
-      guideRect.right <= directionsRect.left ||
-      guideRect.left >= directionsRect.right ||
-      guideRect.bottom <= directionsRect.top ||
-      guideRect.top >= directionsRect.bottom
-    );
-  });
-  expect(guideOverlapsDirections).toBe(false);
-  if (testInfo.project.name === "desktop-chrome") {
-    const directionsPointerGeometry = await page.evaluate(() => {
-      const guide = document.querySelector("#guide-card");
-      const guideRect = guide?.getBoundingClientRect();
+  if (testInfo.project.name !== "desktop-chrome") {
+    await expect(text).toContainText("ricentra");
+    await expect(page.locator("#map-recenter-button")).toHaveClass(/is-guide-highlighted/);
+    await expect(page.locator(".map-floating-controls")).toHaveCSS("z-index", "4250");
+
+    await next.click();
+    await expect(text).toContainText("Google Maps");
+    const guideOverlapsDirections = await page.evaluate(() => {
+      const guideRect = document.querySelector("#guide-card")?.getBoundingClientRect();
       const directionsRect = document.querySelector("#map-directions-button")?.getBoundingClientRect();
-      if (!guide || !guideRect || !directionsRect) {
-        return null;
+      if (!guideRect || !directionsRect) {
+        return true;
       }
-      return {
-        isRightOfTarget: guideRect.left >= directionsRect.right + 8,
-        pointsFromLeft: guide.classList.contains("is-pointing-left"),
-        pointerY: Number.parseFloat(getComputedStyle(guide).getPropertyValue("--guide-pointer-y")),
-        targetY: directionsRect.top + directionsRect.height / 2 - guideRect.top,
-      };
+      return !(
+        guideRect.right <= directionsRect.left ||
+        guideRect.left >= directionsRect.right ||
+        guideRect.bottom <= directionsRect.top ||
+        guideRect.top >= directionsRect.bottom
+      );
     });
-    expect(directionsPointerGeometry).not.toBeNull();
-    expect(directionsPointerGeometry.isRightOfTarget).toBe(true);
-    expect(directionsPointerGeometry.pointsFromLeft).toBe(true);
-    expect(Math.abs(directionsPointerGeometry.pointerY - directionsPointerGeometry.targetY)).toBeLessThanOrEqual(1);
+    expect(guideOverlapsDirections).toBe(false);
+
+    const directionsText = await text.textContent();
+    await previous.click();
+    await expect(text).toContainText("ricentra");
+    await next.click();
+    await expect(text).toHaveText(directionsText);
+    await next.click();
   }
 
-  const secondText = await text.textContent();
-  await previous.click();
-  await expect(text).toHaveText(firstText);
-  await next.click();
-  await expect(text).toHaveText(secondText);
-
-  await next.click();
   await expect(guide).not.toHaveClass(/is-repositioning/);
   await expect(guide).not.toHaveClass(/is-arriving/);
   const stopsGuideGeometry = await page.evaluate(() => {
     const guide = document.querySelector("#guide-card");
     const guideRect = guide?.getBoundingClientRect();
-    const titleRect = document.querySelector("#stops-title")?.getBoundingClientRect();
-    if (!guide || !guideRect || !titleRect) {
+    const panelRect = document.querySelector(".stops-panel")?.getBoundingClientRect();
+    if (!guide || !guideRect || !panelRect) {
       return null;
     }
 
     return {
       overlaps: !(
-        guideRect.right <= titleRect.left ||
-        guideRect.left >= titleRect.right ||
-        guideRect.bottom <= titleRect.top ||
-        guideRect.top >= titleRect.bottom
+        guideRect.right <= panelRect.left ||
+        guideRect.left >= panelRect.right ||
+        guideRect.bottom <= panelRect.top ||
+        guideRect.top >= panelRect.bottom
       ),
-      isAbove: guideRect.bottom <= titleRect.top - 8,
+      isAbove: guideRect.bottom <= panelRect.top - 8,
       pointerX: Number.parseFloat(getComputedStyle(guide).getPropertyValue("--guide-pointer-x")),
-      targetX: titleRect.left + titleRect.width / 2 - guideRect.left,
+      targetX: panelRect.left + panelRect.width / 2 - guideRect.left,
     };
   });
   expect(stopsGuideGeometry).not.toBeNull();
@@ -110,11 +98,11 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
   await expect(guide).not.toHaveClass(/is-repositioning/);
   await expectInsideViewport(guide, page);
   await next.click();
-  await expect(text).toContainText("mappa estesa");
-  await expect(guide).not.toHaveClass(/is-repositioning/);
-  await expectInsideViewport(guide, page);
 
   if (testInfo.project.name === "desktop-chrome") {
+    await expect(text).toContainText("mappa estesa");
+    await expect(guide).not.toHaveClass(/is-repositioning/);
+    await expectInsideViewport(guide, page);
     await expect(guide).toHaveClass(/is-pointing-down/);
     const exploreGuideGeometry = await page.evaluate(() => {
       const guideRect = document.querySelector("#guide-card")?.getBoundingClientRect();
@@ -193,15 +181,13 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
     });
     expect(guideIsFrontmost).toBe(true);
     await expect(text).toContainText("vista estesa");
-    await expect(next).toHaveText("→");
+    await expect(next).toHaveText("✓");
     await page.waitForTimeout(450);
     await expect(page.locator("#guide-layer")).toBeVisible();
     await expect(text).toContainText("vista estesa");
-
-    await next.click();
-    await expect(next).toHaveText("✓");
   } else {
     await expect(page.locator("#player-overlay")).toBeVisible();
+    await expect(text).toContainText("vista completa del player");
     await expect(next).toHaveText("✓");
   }
 
@@ -235,6 +221,7 @@ test("tutorial asks for confirmation before interrupting from its backdrop", asy
   await guide.click({ position: { x: 8, y: 8 } });
   await expect(confirm).toBeVisible();
   await expect(confirm).toContainText("Vuoi interrompere il tutorial?");
+  await expect(confirm).toHaveCSS("background-color", "rgb(255, 255, 255)");
 
   await page.locator("#guide-exit-confirm-cancel").click();
   await expect(confirm).toBeHidden();

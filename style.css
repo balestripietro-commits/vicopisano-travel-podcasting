@@ -756,6 +756,40 @@ button:active,
   transform: translateY(-1px);
 }
 
+.map-action-button:active,
+.map-action-button[aria-pressed="true"] {
+  background: var(--tp-color-primary-dark, #0d554b);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.34),
+    0 8px 16px rgba(36, 92, 82, 0.2);
+}
+
+.map-control-tooltip {
+  display: none;
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  width: max-content;
+  max-width: min(260px, 52vw);
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #173f39;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(4, 35, 31, 0.2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  pointer-events: none;
+  transform: translateY(-50%);
+  white-space: normal;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .map-action-button:hover .map-control-tooltip {
+    display: block;
+  }
+}
+
 .map-status {
   margin: 0;
   padding: 0;
@@ -803,6 +837,7 @@ button:active,
   bottom: 24px;
   left: 96px;
   z-index: 1300;
+  box-sizing: border-box;
   width: min(760px, calc(100% - 120px));
   margin: 0 auto;
   padding: 12px 18px;
@@ -816,6 +851,12 @@ button:active,
   font-weight: 650;
   line-height: 1.45;
   text-align: center;
+  white-space: normal;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   pointer-events: none;
   opacity: 0;
   transform: translateY(10px);
@@ -837,7 +878,6 @@ button:active,
   .map-live-caption {
     font-size: clamp(1rem, 1.15vw, 1.18rem);
     line-height: 1.35;
-    white-space: nowrap;
   }
 }
 
@@ -857,14 +897,29 @@ button:active,
   z-index: 1400;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: center;
   gap: 8px;
-  max-width: min(280px, calc(100% - 48px));
+  width: 60px;
+  max-width: 60px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 20px;
+  background: rgba(7, 54, 48, 0.86);
+  box-shadow: 0 8px 20px rgba(4, 35, 31, 0.22);
+  backdrop-filter: blur(10px);
   pointer-events: none;
 }
 
 .map-floating-controls > * {
   pointer-events: auto;
+}
+
+.map-floating-controls > .map-action-button {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  box-shadow: none;
 }
 
 .stops-list {
@@ -1257,9 +1312,7 @@ body.is-map-fullscreen .map-explore-stop {
 
 @media (min-width: 861px) {
   .outbound-panels {
-    grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.72fr);
-    align-items: stretch;
-    gap: 24px;
+    display: block;
   }
 
   .outbound-panels > .platforms-panel {
@@ -1275,8 +1328,8 @@ body.is-map-fullscreen .map-explore-stop {
   }
 
   .outbound-panels > .platforms-panel .platforms-logos {
-    width: min(100%, 620px);
-    justify-self: end;
+    width: 100%;
+    justify-self: stretch;
   }
 }
 
@@ -1298,11 +1351,22 @@ body.is-map-fullscreen .map-explore-stop {
   font-family: var(--tp-font-ui);
   font-size: 0.9rem;
   font-weight: 700;
+  overflow: hidden;
+  padding: 0;
+  background: #ffffff;
   box-shadow: 0 4px 8px rgba(36, 92, 82, 0.08);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
     filter 180ms ease;
+}
+
+.share-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .share-icon:hover,
@@ -1314,22 +1378,32 @@ body.is-map-fullscreen .map-explore-stop {
 }
 
 .share-facebook {
-  background: #2276e3;
+  background: #ffffff;
 }
 
 .share-x {
-  background: #000000;
+  background: #ffffff;
+}
+
+.share-x img {
+  width: 78%;
+  height: 78%;
+  filter: none;
 }
 
 .share-linkedin {
-  background: #156fca;
+  background: #ffffff;
 }
 
 .share-whatsapp {
-  background: #075e54;
-  font-size: 0.7rem;
-  letter-spacing: -0.04em;
-  text-transform: lowercase;
+  background: #ffffff;
+}
+
+.share-whatsapp img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .share-mail {
@@ -3831,6 +3905,12 @@ body.guide-open::before {
   pointer-events: none;
 }
 
+/* The desktop map step explains the map itself: keep the whole map surface
+   above the tutorial veil so its cartography and markers remain readable. */
+.map-stage-frame.is-guide-highlighted {
+  z-index: 4250 !important;
+}
+
 /* Phase 4: map-led route composition. */
 .route-experience {
   display: grid;
@@ -4063,13 +4143,18 @@ body.guide-open::before {
 }
 
 .map-floating-controls {
-  top: 20px;
-  right: 20px;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
 }
 
 .map-fullscreen-button {
   left: 20px;
   bottom: 20px;
+}
+
+/* Full map mode is opened from the player flow; keep the map itself free of this extra control. */
+.map-fullscreen-button {
+  display: none;
 }
 
 @media (max-width: 1023px) {
@@ -4101,7 +4186,9 @@ body.guide-open::before {
   transition:
     transform var(--tp-motion-standard) var(--tp-ease-standard),
     box-shadow var(--tp-motion-standard) var(--tp-ease-standard),
-    background var(--tp-motion-standard) var(--tp-ease-standard);
+    background var(--tp-motion-standard) var(--tp-ease-standard),
+    opacity var(--tp-motion-standard) var(--tp-ease-standard),
+    filter var(--tp-motion-standard) var(--tp-ease-standard);
 }
 
 .leaflet-overlay-pane .map-route-active {
@@ -4130,9 +4217,18 @@ body.guide-open::before {
 .map-marker.tp-map-marker:hover,
 .map-marker.tp-map-marker:focus-visible {
   transform: scale(1);
+  opacity: 1;
+  filter: saturate(1);
+}
+
+.map-marker.tp-map-marker:not(.is-selected) {
+  opacity: 0.72;
+  filter: saturate(0.78);
 }
 
 .map-marker.tp-map-marker.is-selected {
+  opacity: 1;
+  filter: saturate(1.12);
   transform: scale(1.16);
   background: linear-gradient(180deg, var(--tp-legacy-stop-purple) 0%, var(--tp-legacy-stop-purple-strong) 100%);
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--tp-color-secondary) 76%, transparent), 0 12px 24px rgba(50, 35, 110, 0.46);
@@ -4143,6 +4239,30 @@ body.guide-open::before {
   transition:
     box-shadow var(--tp-motion-standard) var(--tp-ease-standard),
     background var(--tp-motion-standard) var(--tp-ease-standard);
+}
+
+.leaflet-tooltip.map-selection-label {
+  max-width: min(300px, 62vw);
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+  background: #173f39;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(4, 35, 31, 0.28);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+  opacity: 1;
+  transition: opacity 260ms var(--tp-ease-decelerate);
+  white-space: normal;
+}
+
+.leaflet-tooltip.map-selection-label.is-fading {
+  opacity: 0;
+}
+
+.leaflet-tooltip.map-selection-label::before {
+  border-top-color: #173f39;
 }
 
 @keyframes tp-map-marker-select {
@@ -4295,8 +4415,8 @@ body.guide-open::before {
   }
 
   .map-floating-controls {
-    top: 16px;
-    right: 16px;
+    top: max(16px, env(safe-area-inset-top));
+    right: max(16px, env(safe-area-inset-right));
   }
 
   .map-fullscreen-button {
@@ -4574,6 +4694,12 @@ body.guide-open::before {
 .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
   min-width: 128px;
   min-height: 72px;
+}
+
+/* Track navigation is available in the compact mobile player controls.
+   Desktop keeps the dedicated preview cards as its navigation surface. */
+.TPPlayerSheet .player-track-control {
+  display: none;
 }
 
 .TPPlayerSheet .player-transport-group.is-stop-navigation {
@@ -4935,8 +5061,12 @@ body.guide-open::before {
     width: min(100%, 300px);
     min-width: 0;
     justify-self: center;
-    grid-template-columns: 44px minmax(96px, 1fr) 44px;
+    grid-template-columns: 44px 44px minmax(96px, 1fr) 44px 44px;
     gap: 4px;
+  }
+
+  .TPPlayerSheet .player-track-control {
+    display: inline-flex;
   }
 
   .TPPlayerSheet .player-transport-group .player-control-button {
@@ -4965,8 +5095,8 @@ body.guide-open::before {
   .TPPlayerSheet .player-artwork .is-mascot-layer,
   .TPPlayerSheet .player-artwork.is-mascot-mode .is-mascot-layer {
     inset: auto auto -4% -4%;
-    width: 40%;
-    height: 58%;
+    width: 44%;
+    height: 62%;
     opacity: 1;
     pointer-events: auto;
     transform: none;
@@ -5045,12 +5175,45 @@ body.guide-open::before {
   line-height: 1.55;
 }
 
+.language-unavailable-close {
+  width: auto;
+  min-width: 132px;
+  min-height: 52px;
+  height: 52px;
+  gap: 8px;
+  padding: 0 20px;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 20px rgba(36, 92, 82, 0.18);
+}
+
+.language-unavailable-close .material-symbols-rounded {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.language-unavailable-close:hover {
+  box-shadow: 0 10px 24px rgba(36, 92, 82, 0.26);
+  transform: translateY(-1px);
+}
+
+.language-unavailable-close:focus-visible {
+  outline: 3px solid var(--tp-color-accent);
+  outline-offset: 4px;
+}
+
 body.language-unavailable-open {
   overflow: hidden;
 }
 
 /* Mobile stop previews keep image, copy and action button in separate columns. */
 @media (max-width: 1023px) {
+  /* Keep the mobile map unobstructed. The synchronized transcript remains
+     available in the full player mobile surface. */
+  .map-live-caption {
+    display: none !important;
+  }
+
   .player-overlay.TPPlayerSheet .player-stop-preview {
     grid-template-columns: minmax(0, 1fr) 48px;
     gap: 10px;
@@ -5099,6 +5262,56 @@ body.language-unavailable-open {
     min-width: 48px;
     min-height: 48px;
   }
+
+  /* The live transcript is intentionally layered over the navigation cards:
+     it remains readable while the audio advances and does not get buried by
+     the next/previous stop actions. */
+  .player-overlay.TPPlayerSheet .player-transcript-dock {
+    position: relative;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .player-overlay.TPPlayerSheet .player-mobile-live-transcript {
+    position: relative;
+    z-index: 51;
+  }
+}
+
+/* Audio hierarchy: identify the stop first, then the timeline, then the primary action. */
+.TPMiniPlayer .mini-player-main strong {
+  font-size: 1.06rem;
+  font-weight: 800;
+}
+
+.TPMiniPlayer .mini-player-control,
+.TPMiniPlayer .mini-player-speed-button {
+  opacity: 0.72;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.TPMiniPlayer .mini-player-toggle {
+  border: 2px solid color-mix(in srgb, var(--tp-color-tertiary) 78%, #ffffff);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+}
+
+.TPMiniPlayer .mini-player-timeline {
+  gap: 10px;
+}
+
+.TPPlayerSheet .player-control-button:not(.is-primary) {
+  opacity: 0.72;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 1.28rem;
+}
+
+.TPPlayerSheet .player-control-button.is-primary {
+  border: 2px solid color-mix(in srgb, var(--tp-color-tertiary) 84%, #ffffff);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24), 0 0 0 3px rgba(235, 199, 99, 0.12);
+}
+
+.TPPlayerSheet .player-timeline {
+  margin-top: 4px;
 }
 
 .onboarding-kicker {
@@ -5275,6 +5488,8 @@ body.language-unavailable-open {
 }
 
 .guide-exit-confirm {
+  --guide-card-surface: #ffffff;
+  --guide-card-outline: #e4d4a6;
   position: fixed;
   z-index: 3;
   top: 50%;
@@ -5283,7 +5498,7 @@ body.language-unavailable-open {
   padding: 24px;
   border: 1px solid var(--guide-card-outline);
   border-radius: 22px;
-  background: var(--guide-card-surface);
+  background: #ffffff;
   box-shadow: 0 24px 64px rgba(5, 37, 34, 0.3);
   color: var(--accent);
   transform: translate(-50%, -50%);
@@ -5468,6 +5683,21 @@ body.language-unavailable-open {
     0 0 0 10px rgba(255, 255, 255, 0.5),
     0 22px 58px rgba(36, 92, 82, 0.24) !important;
   isolation: isolate;
+}
+
+/* A highlighted map control lives inside a stacked control group: lift the group above the tutorial veil. */
+.map-floating-controls:has(.is-guide-highlighted) {
+  z-index: 4250 !important;
+}
+
+/* The full player is the subject of its tutorial step: keep the whole surface readable above the veil. */
+.player-overlay:has(.player-sheet.is-guide-highlighted) {
+  z-index: 4250 !important;
+}
+
+.player-overlay:has(.player-sheet.is-guide-highlighted) .player-backdrop {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .mini-player.is-guide-highlighted {
@@ -6177,10 +6407,9 @@ body.language-unavailable-open {
 }
 
 @media (min-width: 1024px) {
-  /* La mascotte desktop resta fuori dall'artwork e dalla mappa Explore. */
+  /* La mascotte desktop resta fuori dall'artwork; nella mappa Explore vive sulla mappa. */
   .player-overlay.TPPlayerSheet .player-artwork .is-mascot-layer,
-  .player-overlay.TPPlayerSheet .player-artwork #artwork-flip-toggle,
-  body.is-map-player-panel .map-explore-mascot {
+  .player-overlay.TPPlayerSheet .player-artwork #artwork-flip-toggle {
     display: none !important;
   }
 
@@ -6224,7 +6453,7 @@ body.language-unavailable-open {
   }
 
   .player-overlay.TPPlayerSheet .player-transport-group {
-    grid-template-columns: 42px minmax(92px, 1fr) 42px;
+    grid-template-columns: 42px 42px minmax(92px, 1fr) 42px 42px;
   }
 
   .player-overlay.TPPlayerSheet .player-transport-group .player-control-button {
@@ -6297,18 +6526,21 @@ body.language-unavailable-open {
   .player-overlay.TPPlayerSheet .player-stop-preview {
     width: 100%;
     min-width: 0;
-    min-height: 50px;
-    grid-template-columns: minmax(0, 1fr) 40px;
-    gap: 6px;
-    padding: 6px 8px;
+    min-height: 64px;
+    grid-template-columns: minmax(0, 1fr) 48px;
+    gap: 8px;
+    padding: 8px 10px;
   }
 
   .player-overlay.TPPlayerSheet .player-next-preview-image {
-    display: none;
+    display: block;
+    width: clamp(48px, 14vw, 64px);
+    height: clamp(48px, 14vw, 64px);
+    flex: 0 0 clamp(48px, 14vw, 64px);
   }
 
   .player-overlay.TPPlayerSheet .player-next-preview-content {
-    gap: 0;
+    gap: 8px;
   }
 
   .player-overlay.TPPlayerSheet .player-next-preview-copy {
@@ -6320,14 +6552,14 @@ body.language-unavailable-open {
   }
 
   .player-overlay.TPPlayerSheet .player-next-preview-title {
-    font-size: 0.86rem;
-    line-height: 1.04;
+    font-size: 0.92rem;
+    line-height: 1.08;
   }
 
   .player-overlay.TPPlayerSheet .player-next-stop-button {
-    width: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    width: 48px;
+    min-width: 48px;
+    min-height: 48px;
   }
 }
 
@@ -6587,12 +6819,20 @@ body.language-unavailable-open {
   }
 }
 
-/* On narrow mobile widths the four player controls must remain inside the sheet. */
+/* All mobile full-player actions share one row, like the mini-player: track
+   navigation, -10, play, +10 and speed stay together so the transcript keeps
+   its vertical space. */
 @media (max-width: 1023px) {
   .TPPlayerSheet .player-command-row .player-controls {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      minmax(72px, 1.5fr)
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      minmax(0, 1fr);
     justify-content: center;
     gap: clamp(4px, 1.8vw, 10px);
     max-width: 100%;
@@ -6611,7 +6851,36 @@ body.language-unavailable-open {
     flex-basis: auto;
     width: 100%;
     min-width: 0;
+    min-height: 64px;
   }
+
+  .TPPlayerSheet #player-speed-button {
+    min-height: 56px;
+  }
+
+  /* Match the mini-player hierarchy: secondary actions are quiet glyphs,
+     while Play remains the only filled/emphasized control. */
+  .TPPlayerSheet .player-transport-group .player-control-button:not(.is-primary),
+  .TPPlayerSheet #player-speed-button {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1.08rem;
+    opacity: 0.88;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button:not(.is-primary):hover,
+  .TPPlayerSheet .player-transport-group .player-control-button:not(.is-primary):focus-visible,
+  .TPPlayerSheet #player-speed-button:hover,
+  .TPPlayerSheet #player-speed-button:focus-visible {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.98);
+    box-shadow: none;
+    transform: none;
+  }
+
 }
 
 /* Transcript control lives on the artwork and keeps clear of the mascot. */
@@ -7187,7 +7456,10 @@ body.player-open {
 
   .player-mobile-live-transcript.is-visible {
     opacity: 1;
-    pointer-events: auto;
+    /* The transcript is a live reading surface, not a control: let the
+       navigation card underneath remain tappable even when the transcript
+       is layered above it visually. */
+    pointer-events: none;
     transform: translateY(0);
   }
 
@@ -7226,8 +7498,85 @@ body.player-open {
     transform: translateX(2px);
   }
 
+  /* Mobile transcript comparison modes, selected per stop for review. */
+  .player-mobile-live-transcript-scroll[data-mode="cascade"],
+  .player-mobile-live-transcript-scroll[data-mode="timeline"],
+  .player-mobile-live-transcript-scroll[data-mode="card"],
+  .player-mobile-live-transcript-scroll[data-mode="timeline-card"] {
+    gap: 2px;
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="cascade"] .player-mobile-transcript-segment:not(.is-active),
+  .player-mobile-live-transcript-scroll[data-mode="timeline"] .player-mobile-transcript-segment:not(.is-active),
+  .player-mobile-live-transcript-scroll[data-mode="timeline-card"] .player-mobile-transcript-segment:not(.is-active) {
+    opacity: 0.56;
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="cascade"] .player-mobile-transcript-segment.is-active,
+  .player-mobile-live-transcript-scroll[data-mode="card"] .player-mobile-transcript-segment.is-active,
+  .player-mobile-live-transcript-scroll[data-mode="timeline-card"] .player-mobile-transcript-segment.is-active {
+    padding: 7px 10px;
+    border-radius: 12px;
+    background: rgba(241, 202, 103, 0.18);
+    color: #fff;
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="card"] .player-mobile-transcript-segment.is-active {
+    font-size: 0.96rem;
+    line-height: 1.3;
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="timeline"] .player-mobile-transcript-segment,
+  .player-mobile-live-transcript-scroll[data-mode="timeline-card"] .player-mobile-transcript-segment {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 8px;
+  }
+
+  .player-mobile-transcript-marker {
+    width: 8px;
+    height: 8px;
+    margin-top: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.42);
+    border-radius: 50%;
+  }
+
+  .player-mobile-transcript-segment.is-active .player-mobile-transcript-marker {
+    border-color: var(--tp-color-tertiary);
+    background: var(--tp-color-tertiary);
+    box-shadow: 0 0 0 3px rgba(241, 202, 103, 0.18);
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="scroll"],
+  .player-mobile-live-transcript-scroll[data-mode="full"] {
+    max-height: 142px;
+    gap: 6px;
+    padding-right: 4px;
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="scroll"] .player-mobile-transcript-segment,
+  .player-mobile-live-transcript-scroll[data-mode="full"] .player-mobile-transcript-segment {
+    padding: 3px 0;
+    opacity: 0.54;
+  }
+
+  .player-mobile-live-transcript-scroll[data-mode="scroll"] .player-mobile-transcript-segment.is-active,
+  .player-mobile-live-transcript-scroll[data-mode="full"] .player-mobile-transcript-segment.is-active {
+    opacity: 1;
+    color: #fff;
+  }
+
   .player-mobile-live-transcript.is-updating .player-mobile-transcript-segment.is-active {
     animation: player-mobile-transcript-update 260ms var(--tp-ease-emphasized) both;
+  }
+
+  /* Style 4: the active sentence rises into focus while the surrounding
+     sentences stay visible, instead of blinking in as a standalone card. */
+  .player-mobile-live-transcript.is-updating
+    .player-mobile-live-transcript-scroll[data-mode="scroll"]
+    .player-mobile-transcript-segment.is-active {
+    animation: player-mobile-transcript-scroll-in 420ms var(--tp-ease-emphasized) both;
   }
 
   .player-transcript-dock .detail-copy summary {
@@ -7251,6 +7600,23 @@ body.player-open {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes player-mobile-transcript-scroll-in {
+  from {
+    opacity: 0.18;
+    transform: translateY(18px) scale(0.985);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.005);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -7323,6 +7689,37 @@ body.player-open {
 
   .player-mobile-transcript-segment {
     font-size: 0.78rem;
+  }
+}
+
+/* The live transcript follows the stop-navigation block.
+   JS measures the cards after wrapping; on the first stop the single real card
+   keeps the same vertical rhythm as the two-card states without adding a fake card. */
+@media (max-width: 1023px) {
+  .TPPlayerSheet:not(.is-reading-transcript) .player-transcript-dock {
+    position: absolute;
+    top: var(--mobile-transcript-top, auto);
+    right: var(--mobile-transcript-right, clamp(14px, 6vw, 26px));
+    bottom: auto;
+    left: var(--mobile-transcript-left, clamp(14px, 6vw, 26px));
+    z-index: 50;
+    width: auto;
+    height: var(--mobile-transcript-height, auto);
+    align-self: auto;
+    pointer-events: none;
+  }
+
+  .TPPlayerSheet:not(.is-reading-transcript) .player-mobile-live-transcript {
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .TPPlayerSheet:not(.is-reading-transcript) .player-mobile-live-transcript-scroll {
+    height: 100%;
+    min-height: 0;
+    max-height: none;
   }
 }
 
@@ -7492,12 +7889,18 @@ body.player-open {
 
 /* Desktop Explore mode keeps map and player visible as complementary work surfaces. */
 @media (min-width: 1024px) {
+  /* Desktop keeps the map visually clean; mobile keeps only the compact location actions. */
   .map-floating-controls {
+    display: none;
     top: auto;
     right: auto;
     bottom: 84px;
     left: 20px;
     align-items: start;
+  }
+
+  .map-fullscreen-button {
+    display: none;
   }
 
   .map-load-status {
@@ -7761,7 +8164,7 @@ body.player-open {
     filter: drop-shadow(0 10px 14px rgba(5, 37, 34, 0.24));
   }
 
-  body.is-map-player-panel .map-live-caption {
+body.is-map-player-panel .map-live-caption {
     right: auto;
     bottom: 24px;
     left: max(220px, calc(50% - 360px));
@@ -7775,6 +8178,12 @@ body.player-open {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
+}
+
+/* The Explore line-clamp display must never override the semantic hidden state. */
+.map-live-caption[hidden],
+body.is-map-player-panel .map-live-caption[hidden] {
+  display: none !important;
 }
 
 /* Final mobile guard: keep stop preview image, text and arrow from colliding at any width. */

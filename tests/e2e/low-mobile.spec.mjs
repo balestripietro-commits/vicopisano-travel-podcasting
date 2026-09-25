@@ -36,7 +36,9 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
     "#player-close-button",
     "#detail-title",
     "#player-progress-input",
+    "#player-previous-track",
     "#player-play-button",
+    "#player-next-track",
     "#player-speed-button",
     "#player-previous-preview",
     "#player-next-preview",
@@ -58,9 +60,11 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
   expect(Math.abs(nextPreviewImage.width - nextPreviewImage.height)).toBeLessThanOrEqual(1);
 
   const controlBoxes = await Promise.all([
+    page.locator("#player-previous-track").boundingBox(),
     page.locator("#player-prev-button").boundingBox(),
     page.locator("#player-play-button").boundingBox(),
     page.locator("#player-next-button").boundingBox(),
+    page.locator("#player-next-track").boundingBox(),
     page.locator("#player-speed-button").boundingBox(),
   ]);
   controlBoxes.forEach((box) => expect(box).not.toBeNull());
@@ -69,11 +73,8 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
     x: box.x + box.width / 2,
     y: box.y + box.height / 2,
   }));
-  const gaps = centers.slice(1).map((center, index) => center.x - centers[index].x);
-  const averageGap = gaps.reduce((sum, gap) => sum + gap, 0) / gaps.length;
-
   centers.forEach((center) => expect(Math.abs(center.y - centers[0].y)).toBeLessThanOrEqual(1));
-  gaps.forEach((gap) => expect(Math.abs(gap - averageGap)).toBeLessThanOrEqual(2));
+  expect(controlBoxes[2].width).toBeGreaterThan(controlBoxes[0].width);
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
