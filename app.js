@@ -2955,13 +2955,20 @@ function closeDesktopExploreWithTransition({ returnToGuideHome = false } = {}) {
       scrollPageToTopAfterGuideExploreClose();
     } else {
       mapStageFrame.scrollIntoView({ behavior: "smooth", block: "start" });
-      mapFullscreenButton?.focus({ preventScroll: true });
+      focusMapReturnTarget();
     }
     syncMiniPlayerReservedSpace();
     playerCloseTransitionTimer = null;
   }, guideExploreTransitionTimings.map);
 
   return true;
+}
+
+function focusMapReturnTarget() {
+  const target = [mapFullscreenButton, miniPlayerOpen, miniPlayerExpand].find(
+    (element) => element && !element.hidden && element.getClientRects().length > 0,
+  );
+  target?.focus({ preventScroll: true });
 }
 
 function setMapFullscreen(isExpanded, { guideExploreOrigin = null } = {}) {
@@ -6086,6 +6093,13 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
       return;
     }
 
+    // Do not steal focus from a control the user reached during the opening
+    // transition. This is especially important for keyboard activation of
+    // Play/Pausa immediately after opening the full player.
+    if (playerSheet?.contains(document.activeElement)) {
+      return;
+    }
+
     const focusTarget = playerCloseButton || playerSheet;
     focusTarget?.focus({ preventScroll: true });
     if (document.activeElement !== focusTarget) {
@@ -6180,14 +6194,14 @@ function closePlayerOverlay({ returnToGuideHome = false, returnToMap = false } =
           behavior: reducedMotionQuery.matches ? "auto" : "smooth",
           block: "start",
         });
-        mapFullscreenButton?.focus({ preventScroll: true });
+        focusMapReturnTarget();
       }, 80);
     } else if (returnToMap) {
       mapStageFrame?.scrollIntoView({
         behavior: reducedMotionQuery.matches ? "auto" : "smooth",
         block: "start",
       });
-      mapFullscreenButton?.focus({ preventScroll: true });
+      focusMapReturnTarget();
     } else {
       lastPlayerTrigger?.focus({ preventScroll: true });
     }

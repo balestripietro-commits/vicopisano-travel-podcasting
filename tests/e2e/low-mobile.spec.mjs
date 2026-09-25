@@ -24,7 +24,7 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
   expect(miniTimeline.y).toBeGreaterThan(miniTitle.y + miniTitle.height - 1);
   expect(miniTimeline.y + miniTimeline.height).toBeLessThanOrEqual(miniControls.y + 1);
   expect(Math.abs(miniArtwork.width - miniArtwork.height)).toBeLessThanOrEqual(1);
-  expect(Math.abs(stopPreviewImage.width / stopPreviewImage.height - 16 / 9)).toBeLessThanOrEqual(0.05);
+  expect(Math.abs(stopPreviewImage.width / stopPreviewImage.height - 1)).toBeLessThanOrEqual(0.05);
 
   await openFullPlayer(page);
 

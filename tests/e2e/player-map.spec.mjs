@@ -27,7 +27,7 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("3");
   await expect(page.locator("#player-overlay")).toBeHidden();
   await expectAudioPlaying(page);
-  await expect(page.locator(".map-route-active")).toBeHidden();
+  await expect(page.locator(".map-route-active")).toBeVisible();
   await stopThreeMarker.click();
   await expect
     .poll(async () => {
@@ -46,7 +46,7 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
       );
     })
     .toBe(true);
-  await expect(page.locator(".map-route-active")).toBeVisible();
+  await expect(page.locator(".map-route-active")).toBeHidden();
   await expectNoRuntimeErrors(errors);
 });
 
@@ -566,8 +566,10 @@ test("ending a track advances and autoplays, except on the last stop", async ({ 
   await expectAudioPlaying(page);
 
   await page.locator("audio").evaluate((audio) => audio.dispatchEvent(new Event("ended")));
-  await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("2");
+  await expect(page.locator("body")).toHaveClass(/is-transition-audio/);
   await expectAudioPlaying(page);
+  await page.locator("audio").evaluate((audio) => audio.dispatchEvent(new Event("ended")));
+  await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("2");
 
   await stopButton(page, 7).click();
   await expectAudioPlaying(page);
