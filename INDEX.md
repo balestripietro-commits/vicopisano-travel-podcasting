@@ -37,6 +37,7 @@
 - Il player segue una gerarchia visiva chiara: artwork e titolo in evidenza, timeline subito sotto, Play/Pausa come azione primaria e `-10`, `+10`, `x1` con peso visivo ridotto.
 - Il player mantiene una sola sessione audio attiva: dopo un cambio tappa gli eventi degli audio rimossi vengono ignorati, mentre Play, timeline e `-10`/`+10` si riallineano sempre all'elemento audio visibile. Il seek della timeline è applicato già durante il trascinamento e le richieste Play precedenti vengono annullate per evitare reset intermittenti a `00:00`.
 - La fine naturale della traccia viene gestita anche quando il browser ha già marcato l'audio come `ended`: il passaggio automatico alla tappa successiva non viene perso per una condizione di stato arrivata in anticipo.
+- Una pausa esplicita invalida le richieste Play ancora in risoluzione, così un evento `playing` tardivo non riavvia l'audio dopo il comando dell'utente; al termine del pannello desktop il focus torna al pulsante mini-player visibile.
 - Nel full player mobile i sei comandi condividono una sola riga, come nel mini-player: tappa precedente, `-10`, Play, `+10`, tappa successiva e velocità; così la trascrizione mantiene spazio verticale.
 - Nel full player mobile la trascrizione viene sollevata sopra la card della prossima tappa, che resta disponibile sotto il box ma non compete con il testo sincronizzato.
 - I comandi secondari del full player mobile seguono lo stile del mini-player: icone leggere senza contenitori circolari, con Play come unica azione piena e dominante.

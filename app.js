@@ -3004,7 +3004,7 @@ function setMapFullscreen(isExpanded, { guideExploreOrigin = null } = {}) {
         if (keepGuideOpen) {
           guideOpenedPlayerOverlay = true;
         }
-        openPlayerOverlay(mapFullscreenButton, { keepGuideOpen });
+        openPlayerOverlay(miniPlayerOpen || mapFullscreenButton, { keepGuideOpen });
         animateGuidedExploreTransition(guideExploreOrigin);
       }
     }, 0);
@@ -4534,7 +4534,7 @@ function startTransitionAudio(nextStop) {
   // do not set the readonly property at all). The lifecycle guard in
   // handleAudioEnded already proves that this is the live track, so do not
   // gate the transition on a second, timing-sensitive ended check.
-  if (!previousAudio || previousAudio.paused === false) {
+  if (!previousAudio) {
     return;
   }
 
@@ -6252,6 +6252,10 @@ function toggleMiniPlayerPlayback() {
     return;
   }
 
+  // Invalidate a play request that may still be resolving before pausing the
+  // live element. This prevents a late `playing` event from resurrecting the
+  // track after an explicit user pause.
+  audioPlayRequestToken += 1;
   audio.pause();
 }
 

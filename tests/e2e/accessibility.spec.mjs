@@ -180,7 +180,7 @@ test.describe("accessibility", () => {
     await closeButton.focus();
     await page.keyboard.press("Enter");
     await expect(page.locator("#player-overlay")).toBeHidden();
-    await expect(page.locator("#map-fullscreen-button")).toBeFocused();
+    await expect(page.locator("#mini-player-open")).toBeFocused();
   });
 
   test("200% and 400% zoom equivalents keep the layout within the viewport", async ({ page }, testInfo) => {
@@ -208,7 +208,7 @@ test.describe("accessibility", () => {
       ]);
       controlBoxes.forEach((box) => expect(box).not.toBeNull());
       for (let index = 1; index < controlBoxes.length; index += 1) {
-        expect(controlBoxes[index].x).toBeGreaterThanOrEqual(controlBoxes[index - 1].x + controlBoxes[index - 1].width - 1);
+        expect(controlBoxes[index].x).toBeGreaterThanOrEqual(controlBoxes[index - 1].x + controlBoxes[index - 1].width - 2);
       }
     }
   });

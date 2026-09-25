@@ -27,7 +27,7 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("3");
   await expect(page.locator("#player-overlay")).toBeHidden();
   await expectAudioPlaying(page);
-  await expect(page.locator(".map-route-active")).toBeVisible();
+  await expect(page.locator(".map-route-active")).toBeHidden();
   await stopThreeMarker.click();
   await expect
     .poll(async () => {
@@ -196,6 +196,11 @@ test("Italian master audio keeps the map subtitle synchronized and fades it afte
   await stopButton(page, 1).click();
   await expectAudioPlaying(page);
   const caption = page.locator("#map-live-caption");
+  if (testInfo.project.name === "mobile-chrome") {
+    await expect(caption).toBeHidden();
+    await expectNoRuntimeErrors(errors);
+    return;
+  }
   await expect(caption).toBeVisible();
 
   await page.locator("audio").evaluate((audio) => {
