@@ -39,6 +39,7 @@
 - La fine naturale della traccia viene gestita anche quando il browser ha già marcato l'audio come `ended`: il passaggio automatico alla tappa successiva non viene perso per una condizione di stato arrivata in anticipo.
 - Una pausa esplicita invalida le richieste Play ancora in risoluzione, così un evento `playing` tardivo non riavvia l'audio dopo il comando dell'utente; al termine del pannello desktop il focus torna al pulsante mini-player visibile.
 - L'apertura del full player non ruba il focus a un controllo già raggiunto da tastiera durante la transizione; la chiusura di Explore sceglie invece il primo trigger visibile.
+- La camera del doppio tap normalizza i preset e i centri Leaflet prima della proiezione, evitando coordinate `undefined` quando il centro è già stato spostato nell'area visibile.
 - Nel full player mobile i sei comandi condividono una sola riga, come nel mini-player: tappa precedente, `-10`, Play, `+10`, tappa successiva e velocità; così la trascrizione mantiene spazio verticale.
 - Nel full player mobile la trascrizione viene sollevata sopra la card della prossima tappa, che resta disponibile sotto il box ma non compete con il testo sincronizzato.
 - I comandi secondari del full player mobile seguono lo stile del mini-player: icone leggere senza contenitori circolari, con Play come unica azione piena e dominante.

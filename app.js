@@ -2281,7 +2281,10 @@ function canCenterMapCameraAt(center, zoom) {
   const mapSize = map.getSize();
   const northWest = map.project(maxBounds.getNorthWest(), zoom);
   const southEast = map.project(maxBounds.getSouthEast(), zoom);
-  const requested = map.project(L.latLng(center[0], center[1]), zoom);
+  // `center` can be either the preset array or the L.LatLng returned after
+  // shifting the camera into the visible map area. Normalize both shapes
+  // before asking Leaflet to project them.
+  const requested = map.project(L.latLng(center), zoom);
   const halfWidth = mapSize.x / 2;
   const halfHeight = mapSize.y / 2;
 

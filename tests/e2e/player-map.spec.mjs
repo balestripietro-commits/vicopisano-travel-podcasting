@@ -56,6 +56,7 @@ test("hero mascot acknowledges mouse and touch activation with its dedicated jum
 
   const mascot = page.locator(".mascot-motion-shell--hero");
   await expect(mascot).toHaveAttribute("role", "button");
+  await mascot.scrollIntoViewIfNeeded();
   await watchClass(page, ".mascot-motion-shell--hero", "is-hero-tap-reaction");
   if (testInfo.project.name === "mobile-chrome") {
     const box = await mascot.boundingBox();
