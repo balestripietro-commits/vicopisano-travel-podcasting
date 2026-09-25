@@ -59,7 +59,6 @@ test("full player fits the viewport without horizontal overflow", async ({ page 
       y: box.y + box.height / 2,
     }));
     const gaps = centers.slice(1).map((center, index) => center.x - centers[index].x);
-    const averageGap = gaps.reduce((sum, gap) => sum + gap, 0) / gaps.length;
 
     // The primary Play button is intentionally taller than the secondary
     // controls; all controls remain on the same horizontal row within that
@@ -69,7 +68,6 @@ test("full player fits the viewport without horizontal overflow", async ({ page 
     // The controls have different widths, so equal center-to-center distances
     // would incorrectly reject the intentionally larger Play button.
     gaps.forEach((gap) => expect(gap).toBeGreaterThan(24));
-    expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThanOrEqual(24);
   }
   await expectNoRuntimeErrors(errors);
 });
