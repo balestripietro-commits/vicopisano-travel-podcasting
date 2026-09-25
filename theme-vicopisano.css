@@ -9,7 +9,7 @@
   --tp-color-on-secondary: #ffffff;
   --tp-color-secondary-container: #d8e9f7;
   --tp-color-tertiary: #e8c36d;
-  --tp-color-accent: #f4d85a;
+  --tp-color-accent: var(--tp-color-tertiary);
   --tp-color-surface: #fff7ed;
   --tp-color-surface-dim: #eadfd3;
   --tp-color-surface-bright: #fffdf7;

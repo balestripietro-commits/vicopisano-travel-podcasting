@@ -8,11 +8,11 @@ const rootFiles = [
   "style.css",
   "design-system.css",
   "theme-vicopisano.css",
-  "logo_vicopisano.png",
+  "logo_vicopisano.webp",
   "mascotte_vicopisano.webp",
 ];
 const runtimeDirectories = ["assets", "audio"];
-const stopArtworkPattern = /^tappa_\d+_.+\.(?:jpe?g|png|webp)$/i;
+const stopArtworkPattern = /^tappa_\d+_.+\.webp$/i;
 
 const rootEntries = await readdir(".", { withFileTypes: true });
 const stopArtworkFiles = rootEntries

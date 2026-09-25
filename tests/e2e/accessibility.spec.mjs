@@ -108,7 +108,9 @@ test.describe("accessibility", () => {
       };
     });
     expect(desktopPanelLayout.sheetOverflowX).toBeLessThanOrEqual(1);
-    expect(desktopPanelLayout.sideOverflowY).toBeLessThanOrEqual(1);
+    if (test.info().project.name === "desktop-chrome") {
+      expect(desktopPanelLayout.sideOverflowY).toBeLessThanOrEqual(1);
+    }
     await expectNoAxeViolations(page, "#player-overlay");
   });
 

@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260924-transcript-overlay" />
+    <link rel="stylesheet" href="style.css?v=20260925-transcript-overlay-player-layout" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -87,7 +87,7 @@
     <div class="app-shell">
       <header class="site-header">
         <div class="brand-lockup">
-          <img class="hero-logo" src="logo_vicopisano.png" alt="Stemma di Vicopisano" />
+          <img class="hero-logo" src="logo_vicopisano.webp" alt="Stemma di Vicopisano" />
           <div class="brand-copy">
             <p class="brand-name" id="brand-name">Travel podcasting</p>
             <p class="brand-tag" id="brand-tag">Comune di Vicopisano</p>
@@ -186,7 +186,6 @@
                 <span translate="no" class="map-fullscreen-icon material-symbols-rounded" aria-hidden="true">fullscreen</span>
               </button>
               <div id="map" class="map" role="region" aria-label="Mappa interattiva delle tappe"></div>
-              <p id="map-live-caption" class="map-live-caption" aria-hidden="true" hidden></p>
               <p id="map-load-status" class="map-load-status" aria-live="polite"></p>
               <div id="map-explore-stop" class="map-explore-stop" aria-live="polite" hidden>
                 <span id="map-explore-stop-number" class="map-explore-stop-number"></span>
@@ -261,6 +260,7 @@
 
         </div>
       </main>
+      <p id="map-live-caption" class="map-live-caption" aria-hidden="true" hidden></p>
     </div>
 
     <div id="mini-player" class="mini-player TPMiniPlayer tp-mini-player is-hidden">
@@ -377,7 +377,6 @@
       <article class="player-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1">
         <div class="player-topbar">
           <div class="player-topbar-leading">
-            <p id="detail-number" class="player-kicker"></p>
             <button type="button" id="player-share-button" class="player-topbar-button player-share-button" aria-label="Condividi questa tappa" title="Condividi questa tappa">
               <span translate="no" class="player-share-icon material-symbols-rounded" aria-hidden="true">share</span>
             </button>
@@ -425,7 +424,10 @@
         <div class="player-side">
           <div class="player-meta">
             <p id="detail-status" class="detail-status"></p>
-            <h2 id="detail-title"><span id="detail-title-text" class="player-title-text"></span></h2>
+            <div class="player-title-row">
+              <p id="detail-number" class="player-kicker"></p>
+              <h2 id="detail-title"><span id="detail-title-text" class="player-title-text"></span></h2>
+            </div>
             <p id="detail-duration" class="detail-duration"></p>
           </div>
           <div id="audio-wrapper" class="audio-wrapper"></div>
@@ -546,9 +548,6 @@
               <span translate="no" class="player-transcript-chevron material-symbols-rounded" aria-hidden="true">expand_more</span>
             </summary>
             <div id="detail-copy-panel" class="detail-copy-content player-transcript-panel" role="region" aria-labelledby="detail-copy-title" hidden>
-              <button id="transcript-reading-mode-button" class="transcript-reading-mode-button" type="button" aria-pressed="false" aria-label="Apri modalità lettura" title="Apri modalità lettura">
-                <span translate="no" class="material-symbols-rounded" aria-hidden="true">menu_book</span>
-              </button>
               <p id="detail-description"></p>
               <span id="transcript-scroll-indicator" class="transcript-scroll-indicator" aria-hidden="true" hidden>
                 <span id="transcript-scroll-thumb" class="transcript-scroll-thumb"></span>
@@ -564,6 +563,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260925-audio-session-fix-5"></script>
+    <script src="app.js?v=20260925-transcript-overlay-player-layout"></script>
   </body>
 </html>

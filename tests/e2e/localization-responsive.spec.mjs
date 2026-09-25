@@ -3,10 +3,12 @@ import {
   collectRuntimeErrors,
   enterSite,
   expectInsideViewport,
+  expectClassObserved,
   expectNoRuntimeErrors,
   languageNames,
   openFullPlayer,
   stopButton,
+  watchClass,
 } from "./helpers.mjs";
 
 // Only Italian is currently available. The other language buttons intentionally
@@ -76,9 +78,10 @@ test("reduced motion keeps route feedback functional without animation", async (
   const errors = collectRuntimeErrors(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await enterSite(page);
+  await watchClass(page, "#map-directions-button", "is-directions-cued");
   await stopButton(page, 4).click();
 
-  await expect(page.locator("#map-directions-button")).toHaveClass(/is-directions-cued/);
+  await expectClassObserved(page, "is-directions-cued");
   await expect(page.locator(".map-route-active")).toBeVisible();
   const animationDuration = await page.locator("#map-directions-button").evaluate(
     (element) => getComputedStyle(element).animationDuration,

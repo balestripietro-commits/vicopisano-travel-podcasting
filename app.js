@@ -367,7 +367,6 @@ const playerMobileLiveTranscript = document.getElementById("player-mobile-live-t
 const playerMobileLiveTranscriptScroll = document.getElementById("player-mobile-live-transcript-scroll");
 const transcriptScrollIndicator = document.getElementById("transcript-scroll-indicator");
 const transcriptScrollThumb = document.getElementById("transcript-scroll-thumb");
-const transcriptReadingModeButton = document.getElementById("transcript-reading-mode-button");
 const detailDescription = document.getElementById("detail-description");
 const audioWrapper = document.getElementById("audio-wrapper");
 const playerArtwork = document.getElementById("player-artwork");
@@ -496,7 +495,7 @@ const playerSheet = document.querySelector(".player-sheet");
 
 const PLAYBACK_RATES = [1, 1.25, 1.5];
 const TRANSITION_AUDIO_PATH = "audio/transition_between_stops.mp3";
-const TRANSITION_ARTWORK_PATH = "logo_vicopisano.png";
+const TRANSITION_ARTWORK_PATH = "logo_vicopisano.webp";
 const TRANSITION_MOUTH_CUES_PATH = "audio/cues/transition_between_stops.json";
 // A subtle visual lead keeps lip movement aligned with the audible phoneme.
 const MASCOT_LIP_SYNC_LEAD_SECONDS = 0.08;
@@ -526,7 +525,6 @@ let tileErrorCount = 0;
 let lastPlayerTrigger = null;
 let playerTitleOverflowFrame = null;
 let detailCopyAnimationTimer = null;
-let transcriptReadingMode = false;
 let seekFeedbackTimer = null;
 let mapCaptionHideTimer = null;
 let mapCaptionLoadToken = 0;
@@ -644,13 +642,13 @@ const WHITE_ARTWORK =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><rect width="1200" height="1200" fill="#ffffff"/><rect x="24" y="24" width="1152" height="1152" rx="48" fill="none" stroke="#edf0f2" stroke-width="18"/></svg>'
   );
 const STOP_ARTWORKS = {
-  1: "tappa_1_torre_delle_quattro_porte.jpg",
-  2: "tappa_2_torre_e_camminamento_del_soccorso.jpg",
+  1: "tappa_1_torre_delle_quattro_porte.webp",
+  2: "tappa_2_torre_e_camminamento_del_soccorso.webp",
   3: "tappa_3_palazzo_pretorio.webp",
-  4: "tappa_4_rocca_del_brunelleschi.jpeg",
-  5: "tappa_5_torri_gemelle.jpg",
-  6: "tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.jpg",
-  7: "tappa_7_palazzo_comunale.jpg",
+  4: "tappa_4_rocca_del_brunelleschi.webp",
+  5: "tappa_5_torri_gemelle.webp",
+  6: "tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.webp",
+  7: "tappa_7_palazzo_comunale.webp",
 };
 
 const stopTitles = {
@@ -736,6 +734,7 @@ const uiStrings = {
     locateMe: "Trova la mia posizione",
     locatingMe: "Sto cercando la tua posizione...",
     locationFound: "Posizione trovata sulla mappa.",
+    locationOutsideRoute: "Sei fuori dall'area del percorso. Ti mostro le tappe di Vicopisano.",
     geolocationUnsupported: "Geolocalizzazione non supportata da questo browser.",
     geolocationDenied: "Permesso posizione negato.",
     geolocationUnavailable: "Posizione non disponibile.",
@@ -752,8 +751,6 @@ const uiStrings = {
     languageSelectorTitle: "Lingua disponibile per la Tappa 1",
     descriptiveText: "Testo descrittivo",
     transcriptTitle: "Trascrizione",
-    transcriptReadingModeOpen: "Apri modalità lettura",
-    transcriptReadingModeClose: "Chiudi modalità lettura",
     playerPrevious: "Torna alla tappa precedente",
     playerPlay: "Riproduci audio",
     playerPause: "Metti in pausa audio",
@@ -815,6 +812,7 @@ const uiStrings = {
     locateMe: "Find my location",
     locatingMe: "Looking for your location...",
     locationFound: "Location found on the map.",
+    locationOutsideRoute: "You are outside the route area. Here are the stops in Vicopisano.",
     geolocationUnsupported: "Geolocation is not supported by this browser.",
     geolocationDenied: "Location permission denied.",
     geolocationUnavailable: "Location unavailable.",
@@ -831,8 +829,6 @@ const uiStrings = {
     languageSelectorTitle: "Language available for Stop 1",
     descriptiveText: "Descriptive text",
     transcriptTitle: "Transcript",
-    transcriptReadingModeOpen: "Open reading mode",
-    transcriptReadingModeClose: "Close reading mode",
     playerPrevious: "Go to previous stop",
     playerPlay: "Play audio",
     playerPause: "Pause audio",
@@ -894,6 +890,7 @@ const uiStrings = {
     locateMe: "Meinen Standort finden",
     locatingMe: "Standort wird gesucht...",
     locationFound: "Standort auf der Karte gefunden.",
+    locationOutsideRoute: "Du bist außerhalb des Routenbereichs. Ich zeige dir die Stationen in Vicopisano.",
     geolocationUnsupported: "Geolokalisierung wird von diesem Browser nicht unterstützt.",
     geolocationDenied: "Standortfreigabe verweigert.",
     geolocationUnavailable: "Standort nicht verfügbar.",
@@ -910,8 +907,6 @@ const uiStrings = {
     languageSelectorTitle: "Verfügbare Sprache für Station 1",
     descriptiveText: "Beschreibungstext",
     transcriptTitle: "Transkription",
-    transcriptReadingModeOpen: "Lesemodus öffnen",
-    transcriptReadingModeClose: "Lesemodus schließen",
     playerPrevious: "Zur vorherigen Station",
     playerPlay: "Audio abspielen",
     playerPause: "Audio pausieren",
@@ -973,6 +968,7 @@ const uiStrings = {
     locateMe: "Trouver ma position",
     locatingMe: "Recherche de votre position...",
     locationFound: "Position trouvée sur la carte.",
+    locationOutsideRoute: "Vous êtes hors de la zone du parcours. Voici les étapes de Vicopisano.",
     geolocationUnsupported: "La géolocalisation n’est pas prise en charge par ce navigateur.",
     geolocationDenied: "Autorisation de localisation refusée.",
     geolocationUnavailable: "Position non disponible.",
@@ -989,8 +985,6 @@ const uiStrings = {
     languageSelectorTitle: "Langue disponible pour l’étape 1",
     descriptiveText: "Texte descriptif",
     transcriptTitle: "Transcription",
-    transcriptReadingModeOpen: "Ouvrir le mode lecture",
-    transcriptReadingModeClose: "Fermer le mode lecture",
     playerPrevious: "Revenir à l’étape précédente",
     playerPlay: "Lire l’audio",
     playerPause: "Mettre l’audio en pause",
@@ -1052,6 +1046,7 @@ const uiStrings = {
     locateMe: "Encontrar mi posición",
     locatingMe: "Buscando tu posición...",
     locationFound: "Posición encontrada en el mapa.",
+    locationOutsideRoute: "Estás fuera de la zona del recorrido. Te muestro las paradas de Vicopisano.",
     geolocationUnsupported: "La geolocalización no es compatible con este navegador.",
     geolocationDenied: "Permiso de ubicación denegado.",
     geolocationUnavailable: "Posición no disponible.",
@@ -1068,8 +1063,6 @@ const uiStrings = {
     languageSelectorTitle: "Idioma disponible para la Etapa 1",
     descriptiveText: "Texto descriptivo",
     transcriptTitle: "Transcripción",
-    transcriptReadingModeOpen: "Abrir el modo lectura",
-    transcriptReadingModeClose: "Cerrar el modo lectura",
     playerPrevious: "Volver a la etapa anterior",
     playerPlay: "Reproducir audio",
     playerPause: "Pausar audio",
@@ -1131,6 +1124,7 @@ const uiStrings = {
     locateMe: "Encontrar minha localização",
     locatingMe: "Buscando sua localização...",
     locationFound: "Localização encontrada no mapa.",
+    locationOutsideRoute: "Você está fora da área do percurso. Veja as paradas de Vicopisano.",
     geolocationUnsupported: "Geolocalização não suportada por este navegador.",
     geolocationDenied: "Permissão de localização negada.",
     geolocationUnavailable: "Localização indisponível.",
@@ -1147,8 +1141,6 @@ const uiStrings = {
     languageSelectorTitle: "Idioma disponível para a Etapa 1",
     descriptiveText: "Texto descritivo",
     transcriptTitle: "Transcrição",
-    transcriptReadingModeOpen: "Abrir modo de leitura",
-    transcriptReadingModeClose: "Fechar modo de leitura",
     playerPrevious: "Voltar para a etapa anterior",
     playerPlay: "Reproduzir áudio",
     playerPause: "Pausar áudio",
@@ -1210,6 +1202,7 @@ const uiStrings = {
     locateMe: "Найти мое местоположение",
     locatingMe: "Поиск вашего местоположения...",
     locationFound: "Местоположение найдено на карте.",
+    locationOutsideRoute: "Вы находитесь за пределами маршрута. Показываю остановки в Викопизано.",
     geolocationUnsupported: "Этот браузер не поддерживает геолокацию.",
     geolocationDenied: "Доступ к местоположению запрещен.",
     geolocationUnavailable: "Местоположение недоступно.",
@@ -1226,8 +1219,6 @@ const uiStrings = {
     languageSelectorTitle: "Доступный язык для остановки 1",
     descriptiveText: "Описание",
     transcriptTitle: "Расшифровка",
-    transcriptReadingModeOpen: "Открыть режим чтения",
-    transcriptReadingModeClose: "Закрыть режим чтения",
     playerPrevious: "Вернуться к предыдущей остановке",
     playerPlay: "Воспроизвести аудио",
     playerPause: "Приостановить аудио",
@@ -1347,7 +1338,7 @@ const onboardingUiStrings = {
     guideDirections: "Da qui apri Google Maps con le indicazioni a piedi verso la tappa selezionata.",
     guideStops: "Puoi scegliere una tappa anche da questa lista.",
     guidePlayer: "Il player resta sempre disponibile in basso.",
-    guideExplore: "Usa questo pulsante per aprire la mappa estesa: audio, tappe e trascrizione restano affiancati.",
+    guideExplore: "Usa questo pulsante per aprire la mappa estesa, con i controlli audio e le tappe a fianco.",
     guideExploreView: "Questa è la vista estesa: la mappa occupa tutto lo spazio e il player resta nel pannello a destra.",
     guideCloseExplore: "Per tornare alla home, chiudi la vista estesa da qui.",
     guideFullPlayer: "Questa è la vista completa del player: controlli l'audio, segui la trascrizione e passi alle tappe vicine.",
@@ -1371,7 +1362,7 @@ const onboardingUiStrings = {
     guideDirections: "This button opens Google Maps with walking directions to the selected stop.",
     guideStops: "You can also choose a stop from the list: the site centers the map and prepares the audio.",
     guidePlayer: "The player stays available at the bottom during your visit.",
-    guideExplore: "On desktop, use this button to open the expanded map: audio, stops and transcript stay side by side.",
+    guideExplore: "On desktop, use this button to open the expanded map, with audio controls and stops alongside it.",
     guideExploreView: "This is the expanded view: the map uses the available space while the player stays in the right panel.",
     guideCloseExplore: "Use this button to close the expanded view and return home.",
     guideFullPlayer: "This is the full player view: control the audio, follow the transcript and move between nearby stops.",
@@ -1395,7 +1386,7 @@ const onboardingUiStrings = {
     guideDirections: "Diese Taste öffnet Google Maps mit Fußweg-Hinweisen zur ausgewählten Station.",
     guideStops: "Du kannst eine Station auch aus der Liste wählen: Die Karte wird zentriert und das Audio vorbereitet.",
     guidePlayer: "Der Player bleibt während des Besuchs unten verfügbar.",
-    guideExplore: "Nutze auf dem Desktop diese Taste für die erweiterte Karte: Audio, Stationen und Transkription bleiben nebeneinander sichtbar.",
+    guideExplore: "Öffne auf dem Desktop mit dieser Taste die erweiterte Karte mit Audiosteuerung und Stationen daneben.",
     guideExploreView: "Dies ist die erweiterte Ansicht: Die Karte nutzt den freien Raum, während der Player rechts bleibt.",
     guideCloseExplore: "Mit dieser Taste schließt du die erweiterte Ansicht und kehrst zur Startseite zurück.",
     guideFullPlayer: "Das ist die Vollansicht des Players: Steuere das Audio, folge der Transkription und wechsle zu nahen Stationen.",
@@ -1419,7 +1410,7 @@ const onboardingUiStrings = {
     guideDirections: "Ce bouton ouvre Google Maps avec l’itinéraire à pied vers l’étape sélectionnée.",
     guideStops: "Vous pouvez aussi choisir une étape dans la liste : le site centre la carte et prépare l’audio.",
     guidePlayer: "Le lecteur reste disponible en bas pendant la visite.",
-    guideExplore: "Sur ordinateur, utilisez ce bouton pour ouvrir la carte étendue : audio, étapes et transcription restent côte à côte.",
+    guideExplore: "Sur ordinateur, ce bouton ouvre la carte étendue avec les commandes audio et les étapes à côté.",
     guideExploreView: "Voici la vue étendue : la carte utilise l’espace disponible et le lecteur reste dans le panneau de droite.",
     guideCloseExplore: "Utilisez ce bouton pour fermer la vue étendue et revenir à l’accueil.",
     guideFullPlayer: "Voici la vue complète du lecteur : contrôlez l’audio, suivez la transcription et passez aux étapes voisines.",
@@ -1443,7 +1434,7 @@ const onboardingUiStrings = {
     guideDirections: "Este botón abre Google Maps con indicaciones a pie hacia la parada seleccionada.",
     guideStops: "También puedes elegir una parada desde la lista: el sitio centra el mapa y prepara el audio.",
     guidePlayer: "El reproductor permanece disponible abajo durante la visita.",
-    guideExplore: "En ordenador usa este botón para abrir el mapa ampliado: audio, paradas y transcripción se mantienen lado a lado.",
+    guideExplore: "En ordenador, este botón abre el mapa ampliado con los controles de audio y las paradas al lado.",
     guideExploreView: "Esta es la vista ampliada: el mapa ocupa el espacio disponible y el reproductor permanece en el panel derecho.",
     guideCloseExplore: "Usa este botón para cerrar la vista ampliada y volver al inicio.",
     guideFullPlayer: "Esta es la vista completa del reproductor: controla el audio, sigue la transcripción y pasa a las paradas cercanas.",
@@ -1467,7 +1458,7 @@ const onboardingUiStrings = {
     guideDirections: "Este botão abre o Google Maps com indicações a pé até à paragem selecionada.",
     guideStops: "Também podes escolher uma paragem na lista: o site centra o mapa e prepara o áudio.",
     guidePlayer: "O leitor fica disponível em baixo durante a visita.",
-    guideExplore: "No computador, usa este botão para abrir o mapa ampliado: áudio, paragens e transcrição ficam lado a lado.",
+    guideExplore: "No computador, este botão abre o mapa ampliado com os controlos de áudio e as etapas ao lado.",
     guideExploreView: "Esta é a vista ampliada: o mapa ocupa o espaço disponível e o leitor fica no painel à direita.",
     guideCloseExplore: "Usa este botão para fechar a vista ampliada e voltar ao início.",
     guideFullPlayer: "Esta é a vista completa do leitor: controla o áudio, acompanha a transcrição e passa para as paragens próximas.",
@@ -1491,7 +1482,7 @@ const onboardingUiStrings = {
     guideDirections: "Эта кнопка открывает Google Maps с пешим маршрутом до выбранной остановки.",
     guideStops: "Остановку также можно выбрать в списке: сайт отцентрирует карту и подготовит аудио.",
     guidePlayer: "Проигрыватель остается доступным внизу во время прогулки.",
-    guideExplore: "На компьютере используйте эту кнопку для расширенной карты: аудио, остановки и расшифровка остаются рядом.",
+    guideExplore: "На компьютере эта кнопка открывает карту с элементами управления аудио и остановками рядом.",
     guideExploreView: "Это расширенный вид: карта занимает свободное пространство, а проигрыватель остается в правой панели.",
     guideCloseExplore: "Нажмите эту кнопку, чтобы закрыть расширенный вид и вернуться на главную.",
     guideFullPlayer: "Это полный вид проигрывателя: управляйте аудио, следите за расшифровкой и переходите к соседним остановкам.",
@@ -2084,9 +2075,7 @@ function syncMobileTranscriptSheetLayout() {
   }
 
   const isMobile = window.matchMedia("(max-width: 1023px)").matches;
-  const isReadingTranscript = playerOverlay?.classList.contains("is-reading-transcript");
-
-  if (!isMobile || isReadingTranscript || playerOverlay?.classList.contains("is-map-panel")) {
+  if (!isMobile || playerOverlay?.classList.contains("is-map-panel")) {
     playerSheet.style.removeProperty("--mobile-transcript-left");
     playerSheet.style.removeProperty("--mobile-transcript-right");
     playerSheet.style.removeProperty("--mobile-transcript-top");
@@ -2497,6 +2486,34 @@ function showMapLocationFeedback(message) {
   }, 2_600);
 }
 
+function focusUserLocationOnMap(location) {
+  const isOutsideMappedArea = standardMapMaxBounds?.isValid?.()
+    ? !standardMapMaxBounds.contains(location)
+    : false;
+  if (isMobileMapViewport() && isOutsideMappedArea) {
+    restoreStandardMapBounds();
+    enforceRouteMinimumZoom();
+    recenterMapToRoute();
+    return false;
+  }
+
+  // A point inside the mapped area can be off screen after a zoom or pan.
+  // Center it before reporting that the location is visible on the map.
+  if (!isMobileMapViewport()) {
+    map.setMaxBounds(null);
+    map.setMinZoom(DEFAULT_MAP_MIN_ZOOM);
+  }
+  const zoom = Math.max(map.getZoom(), 17);
+  const center = isMobileMapViewport()
+    ? clampMapCameraCenter([location.lat, location.lng], zoom)
+    : location;
+  map.flyTo(center, zoom, {
+    animate: !reducedMotionQuery.matches,
+    duration: reducedMotionQuery.matches ? 0 : 0.75,
+  });
+  return true;
+}
+
 function showUserLocationOnMap(position) {
   const { latitude, longitude, accuracy } = position.coords;
   const location = L.latLng(latitude, longitude);
@@ -2524,31 +2541,12 @@ function showUserLocationOnMap(position) {
     }),
   ]).addTo(map);
 
-  // On mobile the route is the primary context. If the GPS point is outside
-  // the current map viewport (or outside the route context altogether), do
-  // not pull the visitor away from the itinerary: restore the complete route
-  // view instead. The location marker remains available for the next tap.
-  const isOutsideRouteContext = routeBounds?.isValid?.()
-    ? !routeBounds.pad(0.24).contains(location)
-    : false;
-  const isOutsideCurrentView = isUserLocationOutsideMapView();
-  if (isMobileMapViewport() && (isOutsideRouteContext || isOutsideCurrentView)) {
-    restoreStandardMapBounds();
-    enforceRouteMinimumZoom();
-    recenterMapToRoute();
-    return;
-  }
+  return focusUserLocationOnMap(location);
+}
 
-  // Desktop keeps the explicit GPS-centered behavior. Mobile only gets here
-  // when the point is already in the useful route view.
-  if (!isMobileMapViewport()) {
-    map.setMaxBounds(null);
-    map.setMinZoom(DEFAULT_MAP_MIN_ZOOM);
-  }
-  map.flyTo(location, Math.max(map.getZoom(), 17), {
-    animate: !reducedMotionQuery.matches,
-    duration: reducedMotionQuery.matches ? 0 : 0.75,
-  });
+function showUserLocationOutcome(isWithinMappedArea) {
+  const strings = getUiStrings(currentLanguage);
+  showMapLocationFeedback(isWithinMappedArea ? strings.locationFound : strings.locationOutsideRoute);
 }
 
 function locateMapUser() {
@@ -2574,8 +2572,7 @@ function locateMapUser() {
     (position) => {
       isLocatingMapUser = false;
       mapRecenterButton?.removeAttribute("aria-busy");
-      showUserLocationOnMap(position);
-      showMapLocationFeedback(strings.locationFound);
+      showUserLocationOutcome(showUserLocationOnMap(position));
     },
     (error) => {
       isLocatingMapUser = false;
@@ -2698,8 +2695,7 @@ function bindMapRecenterButton() {
     consumeControlEvent(event);
     if (isMobileMapViewport()) {
       if (isUserLocationOutsideMapView()) {
-        // Keep the close-up chosen by the visitor: mobile recentering must never zoom out.
-        recenterMapToRoute({ preserveZoom: true });
+        showUserLocationOutcome(focusUserLocationOnMap(userLocationPoint));
         return;
       }
       locateMapUser();
@@ -3228,6 +3224,7 @@ function createMascotMotionController() {
     "is-end-reaction",
     "is-speaking-emphasis",
     "is-stop-transition",
+    "is-hero-tap-reaction",
   ];
   let idleTimer = null;
   let emphasisTimer = null;
@@ -3367,7 +3364,9 @@ function createMascotMotionController() {
     },
     heroTapReaction() {
       const heroShell = heroMascot?.closest(".mascot-motion-shell--hero");
-      if (heroShell) {
+      // Let the current jump finish instead of restarting it from the takeoff
+      // frame on every rapid click/tap.
+      if (heroShell && !heroShell.classList.contains("is-hero-tap-reaction")) {
         runClass("is-hero-tap-reaction", 720, [heroShell]);
       }
     },
@@ -3473,10 +3472,6 @@ function syncDetailCopyPanel() {
   const isOpen = Boolean(detailCopyBox?.open);
   window.clearTimeout(detailCopyAnimationTimer);
 
-  if (!isOpen && transcriptReadingMode) {
-    setTranscriptReadingMode(false);
-  }
-
   if (detailCopyPanel && isOpen) {
     detailCopyPanel.hidden = false;
     detailCopyPanel.classList.remove("is-visible");
@@ -3496,35 +3491,6 @@ function syncDetailCopyPanel() {
     }
   }
   playerArtwork?.classList.toggle("is-transcript-open", isOpen);
-}
-
-function updateTranscriptReadingModeButton() {
-  if (!transcriptReadingModeButton) {
-    return;
-  }
-
-  const strings = getUiStrings(currentLanguage);
-  const label = transcriptReadingMode
-    ? strings.transcriptReadingModeClose
-    : strings.transcriptReadingModeOpen;
-  transcriptReadingModeButton.setAttribute("aria-pressed", String(transcriptReadingMode));
-  transcriptReadingModeButton.setAttribute("aria-label", label);
-  transcriptReadingModeButton.title = label;
-  const icon = transcriptReadingModeButton.querySelector(".material-symbols-rounded");
-  if (icon) {
-    icon.textContent = transcriptReadingMode ? "close_full" : "menu_book";
-  }
-}
-
-function setTranscriptReadingMode(isEnabled) {
-  const shouldEnable = Boolean(isEnabled && overlayOpen && detailCopyBox?.open);
-  transcriptReadingMode = shouldEnable;
-  playerOverlay?.classList.toggle("is-reading-transcript", shouldEnable);
-  updateTranscriptReadingModeButton();
-
-  if (shouldEnable) {
-    window.requestAnimationFrame(syncTranscriptScrollIndicator);
-  }
 }
 
 function syncTranscriptScrollIndicator() {
@@ -3753,6 +3719,8 @@ function formatPlayerTime(seconds) {
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 }
 
+const playbackIconTransitions = new WeakMap();
+
 function setPlaybackButtonIcon(button, icon, isPlaying = false) {
   if (!button) {
     return;
@@ -3766,19 +3734,39 @@ function setPlaybackButtonIcon(button, icon, isPlaying = false) {
     return;
   }
 
+  const pendingTransition = playbackIconTransitions.get(button);
+  if (pendingTransition?.icon === icon && pendingTransition.isPlaying === isPlaying) {
+    return;
+  }
+
+  if (pendingTransition) {
+    window.clearTimeout(pendingTransition.timer);
+    playbackIconTransitions.delete(button);
+  }
+
   if (iconEl.textContent === icon) {
     button.classList.toggle("is-playing", isPlaying);
+    button.classList.remove("is-morphing");
     return;
   }
 
   button.classList.add("is-morphing");
-  window.setTimeout(() => {
+  const transition = { icon, isPlaying, timer: null };
+  transition.timer = window.setTimeout(() => {
+    if (playbackIconTransitions.get(button) !== transition) {
+      return;
+    }
+
     iconEl.textContent = icon;
     button.classList.toggle("is-playing", isPlaying);
     requestAnimationFrame(() => {
-      button.classList.remove("is-morphing");
+      if (playbackIconTransitions.get(button) === transition) {
+        button.classList.remove("is-morphing");
+        playbackIconTransitions.delete(button);
+      }
     });
-  }, 110);
+  }, 70);
+  playbackIconTransitions.set(button, transition);
 }
 
 function updateMediaSession(tappa, selectedOption) {
@@ -4920,6 +4908,7 @@ function clearGuideHighlight() {
   document.querySelectorAll(".is-guide-highlighted").forEach((element) => {
     element.classList.remove("is-guide-highlighted");
   });
+  document.body.classList.remove("guide-map-control-focus");
   document.documentElement.style.removeProperty("--guide-spotlight-x");
   document.documentElement.style.removeProperty("--guide-spotlight-y");
 }
@@ -5455,6 +5444,10 @@ function renderGuideStep() {
   const guideTarget = step?.target || (step?.opensFullPlayer ? getFullPlayerGuideTarget() : document.body);
   const strings = getUiStrings(currentLanguage);
   clearGuideHighlight();
+  document.body.classList.toggle(
+    "guide-map-control-focus",
+    guideTarget === mapRecenterButton || guideTarget === mapDirectionsButton,
+  );
   window.cancelAnimationFrame(guidePositionFrame);
   window.clearTimeout(guidePositionTimer);
   window.clearTimeout(guideArrivalTimer);
@@ -6054,6 +6047,15 @@ function handlePlayerKeydown(event) {
 }
 
 function openPlayerOverlay(trigger = document.activeElement, options = {}) {
+  const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+  if (isDesktop && !isMapFullscreenActive()) {
+    if (activeStopNumber === null && tappe[0]) {
+      focusStop(tappe[0], { skipFly: true, autoplay: false, openOverlay: false });
+    }
+    setMapFullscreen(true);
+    return;
+  }
+
   if (!options.keepGuideOpen) {
     closeGuide();
   }
@@ -6113,6 +6115,33 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   syncMiniPlayerReservedSpace();
 }
 
+function syncPlayerViewportMode() {
+  if (!overlayOpen || !playerOverlay || !mapStageFrame) {
+    return;
+  }
+
+  const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+  const isExplorePanel = playerOverlay.classList.contains("is-map-panel");
+  if (isDesktop && !isExplorePanel) {
+    mapStageFrame.classList.add("is-expanded");
+    document.body.classList.add("is-map-fullscreen", "is-map-player-panel");
+    playerOverlay.classList.add("is-map-panel");
+    playerSheet?.setAttribute("aria-modal", "false");
+    setPlayerBackgroundInert(false);
+    updateMapFullscreenButton();
+    updateMapExploreStop();
+    window.setTimeout(() => map.invalidateSize(), 80);
+  } else if (!isDesktop && isExplorePanel) {
+    mapStageFrame.classList.remove("is-expanded");
+    document.body.classList.remove("is-map-fullscreen", "is-map-player-panel");
+    playerOverlay.classList.remove("is-map-panel");
+    playerSheet?.setAttribute("aria-modal", "true");
+    setPlayerBackgroundInert(true);
+    updateMapFullscreenButton();
+    window.setTimeout(() => map.invalidateSize(), 80);
+  }
+}
+
 function clearPlayerSharedTransitionNames() {
   [miniPlayerArtwork, miniPlayerTitle, detailArtworkImage, detailTitle].forEach((element) => {
     if (element) {
@@ -6161,7 +6190,6 @@ function closePlayerOverlay({ returnToGuideHome = false, returnToMap = false } =
     return;
   }
   overlayOpen = false;
-  setTranscriptReadingMode(false);
   window.clearTimeout(playerOpenTransitionTimer);
   window.clearTimeout(playerCloseTransitionTimer);
   playerOverlay.classList.remove("is-opening-from-mini");
@@ -6283,11 +6311,6 @@ function bindPlayerControls() {
 
   detailCopyPanel?.addEventListener("scroll", syncTranscriptScrollIndicator, { passive: true });
   window.addEventListener("resize", syncTranscriptScrollIndicator);
-  transcriptReadingModeButton?.addEventListener("click", (event) => {
-    consumeControlEvent(event);
-    setTranscriptReadingMode(!transcriptReadingMode);
-  });
-
   syncMascotTapSemantics();
   mascotTapQuery.addEventListener("change", syncMascotTapSemantics);
 
@@ -6306,14 +6329,6 @@ function bindPlayerControls() {
 
   getMascotMotionShells().forEach((shell) => {
     shell.addEventListener("click", (event) => {
-      triggerMascotTapReaction(shell, event);
-    });
-    shell.addEventListener("pointerup", (event) => {
-      if (event.pointerType !== "touch" && event.pointerType !== "pen") {
-        return;
-      }
-
-      event.preventDefault();
       triggerMascotTapReaction(shell, event);
     });
     shell.addEventListener("keydown", (event) => {
@@ -6384,7 +6399,6 @@ function bindPlayerControls() {
   });
   miniPlayerToggle.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    reactToTransport(document.querySelector(".mini-player-transport-group"), "play");
     toggleMiniPlayerPlayback();
   });
   miniPlayerPreviousTrack?.addEventListener("click", (event) => {
@@ -6432,7 +6446,6 @@ function bindPlayerControls() {
   });
   playerPlayButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    reactToTransport(document.querySelector(".player-transport-group"), "play");
     toggleMiniPlayerPlayback();
   });
   playerNextButton.addEventListener("click", (event) => {
@@ -6486,6 +6499,7 @@ function bindPlayerControls() {
     }
   });
   window.addEventListener("resize", () => {
+    syncPlayerViewportMode();
     if (playerLanguageSelector?.classList.contains("is-open")) {
       syncPlayerLanguageMenuSurface();
     }
@@ -6653,7 +6667,6 @@ function renderStaticTexts() {
   if (detailCopyLabel) detailCopyLabel.textContent = strings.transcriptTitle;
   playerTranscriptDock?.setAttribute("aria-label", strings.transcriptTitle);
   playerMobileLiveTranscript?.setAttribute("aria-label", strings.transcriptTitle);
-  updateTranscriptReadingModeButton();
   stopsList.setAttribute("aria-label", strings.routeTitle);
   playerPrevButton.setAttribute("aria-label", strings.playerRewind);
   playerPlayButton.setAttribute("aria-label", strings.playerPlay);
@@ -6749,9 +6762,9 @@ function focusStop(tappa, options = {}) {
   activeStopNumber = tappa.numero;
   setStoredValue(LAST_STOP_STORAGE_KEY, String(tappa.numero));
   updateActiveListItem(tappa.numero);
-  const shouldShowSelectedRoute = options.fromMarker !== true || options.markerFocusMode === "route";
+  const shouldShowSelectedRoute = options.showRoute !== false;
   updateActiveRouteSegment(tappa.numero, {
-    animate: options.animateRoute === true && shouldShowSelectedRoute,
+    animate: options.animateRoute === true && options.markerFocusMode !== "stop",
     show: shouldShowSelectedRoute,
   });
 
@@ -6938,12 +6951,14 @@ function renderMap() {
   });
 
   const routeLayer = L.polyline(displayRouteCoordinates.map(([longitude, latitude]) => [latitude, longitude]), {
+    className: "map-route-base",
     color: "#216f62",
     weight: 5,
     opacity: 0.8,
     lineCap: "round",
     lineJoin: "round",
     smoothFactor: 2,
+    interactive: false,
   }).addTo(map);
 
   activeRouteLayer = L.polyline([], {

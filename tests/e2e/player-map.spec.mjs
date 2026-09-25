@@ -46,7 +46,7 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
       );
     })
     .toBe(true);
-  await expect(page.locator(".map-route-active")).toBeHidden();
+  await expect(page.locator(".map-route-active")).toBeVisible();
   await expectNoRuntimeErrors(errors);
 });
 
@@ -97,16 +97,19 @@ test("desktop mini-player dedicates the remaining row to the seek timeline", asy
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
-  const [controlsBox, timelineBox, seekBox, expandBox] = await Promise.all([
+  const [controlsBox, timelineBox, seekBox, expandBox, playBox] = await Promise.all([
     page.locator(".mini-player-controls").boundingBox(),
     page.locator(".mini-player-timeline").boundingBox(),
     page.locator("#mini-player-progress-input").boundingBox(),
     page.locator("#mini-player-expand").boundingBox(),
+    page.locator("#mini-player-toggle").boundingBox(),
   ]);
   expect(controlsBox).not.toBeNull();
   expect(timelineBox).not.toBeNull();
   expect(seekBox).not.toBeNull();
   expect(expandBox).not.toBeNull();
+  expect(playBox).not.toBeNull();
+  expect(Math.abs((playBox.y + playBox.height / 2) - (controlsBox.y + controlsBox.height / 2))).toBeLessThanOrEqual(1);
   expect(timelineBox.x).toBeGreaterThanOrEqual(controlsBox.x + controlsBox.width + 12);
   expect(timelineBox.x + timelineBox.width).toBeLessThanOrEqual(expandBox.x - 12);
   // The timeline remains the flexible row; its exact width varies with the
@@ -266,6 +269,7 @@ test("map location control recenters the route on desktop and locates the user o
   });
   await page.locator("#map-recenter-button").click();
   if (testInfo.project.name !== "desktop-chrome") {
+    await expect(page.locator("#map-load-status")).toHaveText("Posizione trovata sulla mappa.");
     await expect(page.locator(".map-user-location-marker")).toBeVisible();
     // The location toast is intentionally transient; the persistent marker is
     // the stable assertion for a completed mobile geolocation request.
@@ -298,8 +302,15 @@ test("mobile GPS outside the route restores the complete route view", async ({ p
   await enterSite(page);
 
   await page.locator("#map-recenter-button").click();
+  await expect(page.locator("#map-load-status")).toHaveText(
+    "Sei fuori dall'area del percorso. Ti mostro le tappe di Vicopisano.",
+  );
   await expect(page.locator(".map-user-location-marker")).toHaveCount(1);
   await expect(page.locator("#map-recenter-button")).toHaveAttribute("data-route-centered", "true");
+  await page.locator("#map-recenter-button").click();
+  await expect(page.locator("#map-load-status")).toHaveText(
+    "Sei fuori dall'area del percorso. Ti mostro le tappe di Vicopisano.",
+  );
   await expectNoRuntimeErrors(errors);
 });
 
@@ -407,9 +418,10 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
 
   await expect(page.locator("body")).toHaveClass(/is-map-player-panel/);
   await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
+  await expect(page.locator("#transcript-reading-mode-button")).toHaveCount(0);
   await expect(page.locator(".mini-player")).toBeHidden();
   await expect(page.locator("#mini-player-expand")).toBeHidden();
-  await expect(page.locator("#detail-number")).toBeHidden();
+  await expect(page.locator("#detail-number")).toBeVisible();
   await expect(page.locator("#player-share-button")).toBeHidden();
   await expect(page.locator("#player-overlay .player-timeline")).toBeVisible();
   await expect(page.locator("#player-overlay .player-command-row")).toBeVisible();
@@ -473,6 +485,26 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
   await expect(page.locator("body")).not.toHaveClass(/is-map-fullscreen/);
   await expect(page.locator("body")).not.toHaveClass(/is-map-player-panel/);
   await expect(page.locator(".map-stage-frame")).not.toHaveClass(/is-expanded/);
+  await expectNoRuntimeErrors(errors);
+});
+
+test("an open player follows the desktop Explore and mobile full-player layouts on resize", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Viewport transition is exercised from desktop.");
+  const errors = collectRuntimeErrors(page);
+  await enterSite(page);
+  await page.locator("#mini-player-expand").click();
+  await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
+
+  await page.setViewportSize({ width: 900, height: 900 });
+  await expect(page.locator("#player-overlay")).toBeVisible();
+  await expect(page.locator("#player-overlay")).not.toHaveClass(/is-map-panel/);
+  await expect(page.locator("body")).not.toHaveClass(/is-map-player-panel/);
+  await expect(page.locator("#player-overlay .player-sheet")).toHaveAttribute("aria-modal", "true");
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
+  await expect(page.locator("body")).toHaveClass(/is-map-player-panel/);
+  await expect(page.locator("#player-overlay .player-sheet")).toHaveAttribute("aria-modal", "false");
   await expectNoRuntimeErrors(errors);
 });
 
