@@ -37,7 +37,7 @@ export default defineConfig({
   webServer: remoteBaseURL
     ? undefined
     : {
-        command: `python3 -m http.server ${port} --bind 127.0.0.1 --directory ${JSON.stringify(staticRoot)}`,
+        command: `E2E_STATIC_ROOT=${JSON.stringify(staticRoot)} node dev-server.mjs ${port}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 15_000,

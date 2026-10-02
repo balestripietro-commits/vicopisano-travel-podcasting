@@ -21,7 +21,7 @@
   --tp-color-surface-container-high: #efe4d8;
   --tp-color-surface-container-highest: #e5d8ca;
   --tp-color-on-surface: #173f39;
-  --tp-color-on-surface-variant: #5f7f78;
+  --tp-color-on-surface-variant: #49685f;
   --tp-color-outline: #9db6af;
   --tp-color-outline-variant: #d5e2de;
   --tp-color-success: #1b7a52;
@@ -69,8 +69,8 @@
   --tp-touch-primary: 56px;
   --tp-touch-expressive: 64px;
 
-  --tp-legacy-stop-purple: #8f63e8;
-  --tp-legacy-stop-purple-strong: #7d4fe0;
+  --tp-legacy-stop-purple: #7d4fe0;
+  --tp-legacy-stop-purple-strong: #7143d2;
   --tp-legacy-stop-purple-glow: rgba(143, 99, 232, 0.28);
   --tp-stop-identifier-vicopisano: var(--tp-color-secondary);
   --tp-stop-identifier-vicopisano-glow: rgba(44, 109, 163, 0.24);

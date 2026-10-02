@@ -195,31 +195,26 @@ Permettetemi di considerarla una piccola soddisfazione.`,
 const mapCameraPresets = {
   1: {
     firstTap: { center: [43.700429, 10.5863858], zoom: 17.2 },
-    secondTap: { center: [43.700429, 10.5863858], zoom: 18 },
   },
   2: {
-    firstTap: { center: [43.700154, 10.586878], zoom: 17.2 },
-    secondTap: { center: [43.6998788, 10.5873698], zoom: 18 },
+    firstTap: { center: [43.700899, 10.586717], zoom: 17.2 },
   },
   3: {
-    firstTap: { center: [43.699542, 10.587076], zoom: 17.2 },
-    secondTap: { center: [43.6992056, 10.5867826], zoom: 18 },
+    firstTap: { center: [43.700116, 10.587639], zoom: 17.2 },
   },
   4: {
-    firstTap: { center: [43.699346, 10.586581], zoom: 17.2 },
-    secondTap: { center: [43.6994864, 10.5863793], zoom: 18 },
+    firstTap: { center: [43.699109, 10.587265], zoom: 17.2 },
   },
   5: {
-    firstTap: { center: [43.699706, 10.585315], zoom: 17.2 },
-    secondTap: { center: [43.6999256, 10.5842514], zoom: 18 },
+    // The old center was east of Torri Gemelle and could send its marker off
+    // screen in the standard map. Keep this stop anchored to its real point.
+    firstTap: { center: [43.6999256, 10.5842514], zoom: 17.2 },
   },
   6: {
-    firstTap: { center: [43.700064, 10.583822], zoom: 17.2 },
-    secondTap: { center: [43.7002026, 10.5833924], zoom: 18 },
+    firstTap: { center: [43.699894, 10.584224], zoom: 17.2 },
   },
   7: {
-    firstTap: { center: [43.700028, 10.583903], zoom: 17.2 },
-    secondTap: { center: [43.6998526, 10.5844138], zoom: 18 },
+    firstTap: { center: [43.700164, 10.583501], zoom: 17.2 },
   },
 };
 
@@ -322,35 +317,21 @@ const map = L.map("map", {
 });
 const DEFAULT_MAP_MIN_ZOOM = map.getMinZoom();
 
-const baseTileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+// The official tile service requires an identifiable web origin; file:// pages
+// cannot provide a valid HTTP Referer, so do not request tiles from them.
+const mapNeedsLocalServer = window.location.protocol === "file:";
+const mapAttributionControl = L.control.attribution({
+  position: "bottomright",
+  prefix: false,
+}).addTo(map);
+
+const baseTileLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
+  attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap</a>',
 });
-baseTileLayer.addTo(map);
-
-const openStreetMapInfoControl = L.control({ position: "bottomright" });
-
-openStreetMapInfoControl.onAdd = () => {
-  const container = L.DomUtil.create("div", "osm-info-control");
-  container.innerHTML = `
-    <details class="osm-info-details">
-      <summary class="osm-info-summary" aria-label="Informazioni su OpenStreetMap">i</summary>
-      <div class="osm-info-panel">
-        <p class="osm-info-copy">
-          Mappa basata su
-          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
-            OpenStreetMap contributors
-          </a>
-        </p>
-      </div>
-    </details>
-  `;
-
-  L.DomEvent.disableClickPropagation(container);
-  L.DomEvent.disableScrollPropagation(container);
-  return container;
-};
-
-openStreetMapInfoControl.addTo(map);
+if (!mapNeedsLocalServer) {
+  baseTileLayer.addTo(map);
+}
 
 const stopsList = document.getElementById("stops-list");
 const detailNumber = document.getElementById("detail-number");
@@ -384,6 +365,8 @@ const stopsPanel = document.querySelector(".stops-panel");
 const stopsSubtitle = document.getElementById("stops-subtitle");
 const stopSelectionStatus = document.getElementById("stop-selection-status");
 const platformsEyebrow = document.getElementById("platforms-eyebrow");
+const platformsPanel = document.querySelector(".platforms-panel");
+const platformLinkStatus = document.getElementById("platform-link-status");
 const shareTitle = document.getElementById("share-title");
 const shareFacebook = document.getElementById("share-facebook");
 const shareX = document.getElementById("share-x");
@@ -422,14 +405,12 @@ const languageUnavailableModal = document.getElementById("language-unavailable-m
 const languageUnavailableTitle = document.getElementById("language-unavailable-title");
 const languageUnavailableMessage = document.getElementById("language-unavailable-message");
 const languageUnavailableClose = document.getElementById("language-unavailable-close");
-const languageUnavailableCloseLabel = document.getElementById("language-unavailable-close-label");
 const guideLayer = document.getElementById("guide-layer");
 const guideCard = document.getElementById("guide-card");
 const guideStepText = document.getElementById("guide-step-text");
 const guideSkipButton = document.getElementById("guide-skip-button");
 const guidePrevButton = document.getElementById("guide-prev-button");
 const guideNextButton = document.getElementById("guide-next-button");
-const guideActionDemo = document.getElementById("guide-action-demo");
 const guideExitConfirm = document.getElementById("guide-exit-confirm");
 const guideExitConfirmTitle = document.getElementById("guide-exit-confirm-title");
 const guideExitConfirmCancel = document.getElementById("guide-exit-confirm-cancel");
@@ -450,6 +431,7 @@ const miniPlayerSpeedButton = document.getElementById("mini-player-speed-button"
 const miniPlayerSpeedLabel = document.getElementById("mini-player-speed-label");
 const miniPlayerExpand = document.getElementById("mini-player-expand");
 const miniPlayerTitle = document.getElementById("mini-player-title");
+const miniPlayerTitleTrack = miniPlayerTitle?.querySelector(".mini-player-title-track");
 const miniPlayerSubtitle = document.getElementById("mini-player-subtitle");
 const miniPlayerArtwork = document.getElementById("mini-player-artwork");
 const miniPlayerProgressBar = document.getElementById("mini-player-progress-bar");
@@ -460,10 +442,19 @@ const miniPlayerSeekFeedback = document.getElementById("mini-player-seek-feedbac
 const playerOverlay = document.getElementById("player-overlay");
 const playerBackdrop = document.getElementById("player-backdrop");
 const playerCloseButton = document.getElementById("player-close-button");
-const playerShareButton = document.getElementById("player-share-button");
 const playerMapButton = document.getElementById("player-map-button");
-const playerShareIcon = playerShareButton?.querySelector(".player-share-icon");
-const playerShareStatus = document.getElementById("player-share-status");
+const playerMapButtonIcon = playerMapButton?.querySelector(".material-symbols-rounded");
+const playerListenHelpButton = document.getElementById("player-listen-help-button");
+const playerMapHelpButton = document.getElementById("player-map-help-button");
+const playerRecenterButton = document.getElementById("player-recenter-button");
+const playerMapDirectionsButton = document.getElementById("player-map-directions-button");
+const playerContextGuide = document.getElementById("player-context-guide");
+const playerContextGuideCard = document.getElementById("player-context-guide-card");
+const playerContextGuideProgress = document.getElementById("player-context-guide-progress");
+const playerContextGuideText = document.getElementById("player-context-guide-text");
+const playerContextGuideClose = document.getElementById("player-context-guide-close");
+const playerContextGuidePrev = document.getElementById("player-context-guide-prev");
+const playerContextGuideNext = document.getElementById("player-context-guide-next");
 const playerPrevButton = document.getElementById("player-prev-button");
 const playerPlayButton = document.getElementById("player-play-button");
 const playerNextButton = document.getElementById("player-next-button");
@@ -497,6 +488,20 @@ const PLAYBACK_RATES = [1, 1.25, 1.5];
 const TRANSITION_AUDIO_PATH = "audio/transition_between_stops.mp3";
 const TRANSITION_ARTWORK_PATH = "logo_vicopisano.webp";
 const TRANSITION_MOUTH_CUES_PATH = "audio/cues/transition_between_stops.json";
+const TRANSITION_TRANSCRIPT = {
+  segments: [
+    {
+      start: 0,
+      end: 5,
+      text: "Questa traccia fa parte dell'itinerario audio realizzato dal Comune di Vicopisano.",
+    },
+    {
+      start: 5.5,
+      end: 8.8,
+      text: "Quando siete pronti, raggiungete la prossima tappa.",
+    },
+  ],
+};
 // A subtle visual lead keeps lip movement aligned with the audible phoneme.
 const MASCOT_LIP_SYNC_LEAD_SECONDS = 0.08;
 
@@ -514,8 +519,10 @@ let currentPlaybackRate = PLAYBACK_RATES[0];
 let audioHasEnded = false;
 let isSeekingFromOverlay = false;
 let isSeekingFromMiniPlayer = false;
+let pendingAudioSeek = null;
 let detailArtworkMode = "photo";
 let lastPrevInteractionAt = 0;
+const PREVIOUS_TRACK_DOUBLE_TAP_WINDOW_MS = 650;
 let miniPlayerResizeObserver = null;
 let mobileTranscriptLayoutResizeObserver = null;
 let currentMapStatusKey = "";
@@ -527,6 +534,9 @@ let playerTitleOverflowFrame = null;
 let detailCopyAnimationTimer = null;
 let seekFeedbackTimer = null;
 let mapCaptionHideTimer = null;
+const TRANSCRIPT_PAUSE_FADE_DELAY_MS = 2_600;
+const TRANSCRIPT_FADE_DURATION_MS = 280;
+let mapCaptionPausedAt = null;
 let mapCaptionLoadToken = 0;
 let mapLocationFeedbackTimer = null;
 let userLocationLayer = null;
@@ -534,11 +544,15 @@ let userLocationPoint = null;
 let isLocatingMapUser = false;
 let activeMapTranscript = null;
 let activeMapCaptionText = "";
+const audioStartedPlayback = new WeakSet();
 let mobileTranscriptHideTimer = null;
+let mobileTranscriptPausedAt = null;
 let mobileTranscriptModeKey = "";
 let mobileTranscriptSegmentIndex = -1;
 let mobileTranscriptLastSegment = null;
+let mobileTranscriptSource = null;
 const mapTranscriptCache = new Map();
+const mapCaptionPageCache = new WeakMap();
 
 const MAP_TRANSCRIPT_SOURCES = [
   {
@@ -586,7 +600,7 @@ const MAP_TRANSCRIPT_SOURCES = [
 ];
 let playerOpenTransitionTimer = null;
 let playerCloseTransitionTimer = null;
-let playerShareFeedbackTimer = null;
+let mapFullscreenLayoutTimer = null;
 let languageUnavailableReturnFocus = null;
 
 const markersByStop = new Map();
@@ -598,7 +612,6 @@ let activeRouteLayer = null;
 let routeBounds = null;
 let standardMapMaxBounds = null;
 let desktopExploreMaxBounds = null;
-let lastMarkerTapStopNumber = null;
 let mapSelectionTooltip = null;
 let mapSelectionTooltipFadeTimer = null;
 let mapSelectionTooltipCloseTimer = null;
@@ -729,7 +742,10 @@ const uiStrings = {
     routeTitle: "Tappe del percorso",
     stopLabel: "Tappa",
     routeSubtitle: "7 punti di ascolto lungo il borgo.",
-    platformsEyebrow: "Scopri Vicopisano anche su:",
+    platformsEyebrow: "Presto anche su:",
+    platformLinkPending: (name) => `Il collegamento a ${name} non è ancora disponibile. Riprova più avanti.`,
+    platformLinkError: (name) => `Impossibile aprire ${name}: il collegamento non è valido. Riprova più avanti.`,
+    platformLinkOffline: (name) => `Impossibile aprire ${name}: non sei connesso a Internet.`,
     shareTitle: "Condividi con i tuoi amici",
     locateMe: "Trova la mia posizione",
     locatingMe: "Sto cercando la tua posizione...",
@@ -765,6 +781,8 @@ const uiStrings = {
     playerProgress: "Posizione della traccia",
     mapOpenFullscreen: "Apri la mappa a tutto schermo",
     mapCloseFullscreen: "Chiudi la mappa a tutto schermo",
+    playerSwitchToMap: "Mostra mappa e player",
+    playerSwitchToListen: "Apri Full player audio",
     mapRecenter: "Centra tutte le tappe",
     languageSelector: "Selettore lingua",
     currentLanguage: (language) => `Lingua corrente: ${language}`,
@@ -807,7 +825,10 @@ const uiStrings = {
     routeTitle: "Route Stops",
     stopLabel: "Stop",
     routeSubtitle: "7 listening points in the village.",
-    platformsEyebrow: "You can also find Travel Podcasting Vicopisano on:",
+    platformsEyebrow: "Coming soon on:",
+    platformLinkPending: (name) => `The link to ${name} is not available yet. Please try again later.`,
+    platformLinkError: (name) => `Unable to open ${name}: the link is invalid. Please try again later.`,
+    platformLinkOffline: (name) => `Unable to open ${name}: you are offline.`,
     shareTitle: "Share with your friends",
     locateMe: "Find my location",
     locatingMe: "Looking for your location...",
@@ -843,6 +864,8 @@ const uiStrings = {
     playerProgress: "Track position",
     mapOpenFullscreen: "Open map in full screen",
     mapCloseFullscreen: "Close full-screen map",
+    playerSwitchToMap: "Show map and player",
+    playerSwitchToListen: "Open full audio player",
     mapRecenter: "Center all stops",
     languageSelector: "Language selector",
     currentLanguage: (language) => `Current language: ${language}`,
@@ -885,7 +908,10 @@ const uiStrings = {
     routeTitle: "Stationen der Route",
     stopLabel: "Station",
     routeSubtitle: "7 Hörstationen im Ort.",
-    platformsEyebrow: "Du findest Travel Podcasting Vicopisano auch auf:",
+    platformsEyebrow: "Bald auch auf:",
+    platformLinkPending: (name) => `Der Link zu ${name} ist noch nicht verfügbar. Bitte versuche es später erneut.`,
+    platformLinkError: (name) => `${name} kann nicht geöffnet werden: Der Link ist ungültig. Bitte versuche es später erneut.`,
+    platformLinkOffline: (name) => `${name} kann nicht geöffnet werden: Du bist offline.`,
     shareTitle: "Teile es mit deinen Freunden",
     locateMe: "Meinen Standort finden",
     locatingMe: "Standort wird gesucht...",
@@ -921,6 +947,8 @@ const uiStrings = {
     playerProgress: "Wiedergabeposition",
     mapOpenFullscreen: "Karte im Vollbild öffnen",
     mapCloseFullscreen: "Vollbildkarte schließen",
+    playerSwitchToMap: "Karte und Player anzeigen",
+    playerSwitchToListen: "Audio-Player im Vollbild öffnen",
     mapRecenter: "Alle Stationen zentrieren",
     languageSelector: "Sprachauswahl",
     currentLanguage: (language) => `Aktuelle Sprache: ${language}`,
@@ -963,7 +991,10 @@ const uiStrings = {
     routeTitle: "Étapes du parcours",
     stopLabel: "Étape",
     routeSubtitle: "7 points d’écoute dans le bourg.",
-    platformsEyebrow: 'Retrouvez "Travel Podcasting Vicopisano" aussi sur :',
+    platformsEyebrow: "Bientôt aussi sur :",
+    platformLinkPending: (name) => `Le lien vers ${name} n’est pas encore disponible. Réessayez plus tard.`,
+    platformLinkError: (name) => `Impossible d’ouvrir ${name} : le lien est invalide. Réessayez plus tard.`,
+    platformLinkOffline: (name) => `Impossible d’ouvrir ${name} : vous êtes hors ligne.`,
     shareTitle: "Partagez avec vos amis",
     locateMe: "Trouver ma position",
     locatingMe: "Recherche de votre position...",
@@ -999,6 +1030,8 @@ const uiStrings = {
     playerProgress: "Position de lecture",
     mapOpenFullscreen: "Ouvrir la carte en plein écran",
     mapCloseFullscreen: "Fermer la carte en plein écran",
+    playerSwitchToMap: "Afficher la carte et le lecteur",
+    playerSwitchToListen: "Ouvrir le lecteur audio plein écran",
     mapRecenter: "Centrer toutes les étapes",
     languageSelector: "Sélecteur de langue",
     currentLanguage: (language) => `Langue actuelle : ${language}`,
@@ -1041,7 +1074,10 @@ const uiStrings = {
     routeTitle: "Etapas del recorrido",
     stopLabel: "Etapa",
     routeSubtitle: "7 puntos de escucha en el pueblo.",
-    platformsEyebrow: "También encuentras Travel Podcasting Vicopisano en:",
+    platformsEyebrow: "Próximamente también en:",
+    platformLinkPending: (name) => `El enlace a ${name} aún no está disponible. Inténtalo más tarde.`,
+    platformLinkError: (name) => `No se puede abrir ${name}: el enlace no es válido. Inténtalo más tarde.`,
+    platformLinkOffline: (name) => `No se puede abrir ${name}: no tienes conexión a Internet.`,
     shareTitle: "Compártelo con tus amigos",
     locateMe: "Encontrar mi posición",
     locatingMe: "Buscando tu posición...",
@@ -1077,6 +1113,8 @@ const uiStrings = {
     playerProgress: "Posición de reproducción",
     mapOpenFullscreen: "Abrir el mapa a pantalla completa",
     mapCloseFullscreen: "Cerrar el mapa a pantalla completa",
+    playerSwitchToMap: "Mostrar mapa y reproductor",
+    playerSwitchToListen: "Abrir reproductor de audio completo",
     mapRecenter: "Centrar todas las paradas",
     languageSelector: "Selector de idioma",
     currentLanguage: (language) => `Idioma actual: ${language}`,
@@ -1119,7 +1157,10 @@ const uiStrings = {
     routeTitle: "Etapas do percurso",
     stopLabel: "Etapa",
     routeSubtitle: "7 pontos de escuta na vila.",
-    platformsEyebrow: "Também encontras Travel Podcasting Vicopisano em:",
+    platformsEyebrow: "Em breve também em:",
+    platformLinkPending: (name) => `O link para ${name} ainda não está disponível. Tenta novamente mais tarde.`,
+    platformLinkError: (name) => `Não é possível abrir ${name}: o link é inválido. Tenta novamente mais tarde.`,
+    platformLinkOffline: (name) => `Não é possível abrir ${name}: estás offline.`,
     shareTitle: "Partilha com os teus amigos",
     locateMe: "Encontrar minha localização",
     locatingMe: "Buscando sua localização...",
@@ -1155,6 +1196,8 @@ const uiStrings = {
     playerProgress: "Posição de reprodução",
     mapOpenFullscreen: "Abrir o mapa em ecrã inteiro",
     mapCloseFullscreen: "Fechar o mapa em ecrã inteiro",
+    playerSwitchToMap: "Mostrar mapa e leitor",
+    playerSwitchToListen: "Abrir leitor de áudio em ecrã completo",
     mapRecenter: "Centrar todas as paragens",
     languageSelector: "Seletor de idioma",
     currentLanguage: (language) => `Idioma atual: ${language}`,
@@ -1197,7 +1240,10 @@ const uiStrings = {
     routeTitle: "Остановки маршрута",
     stopLabel: "Остановка",
     routeSubtitle: "7 точек прослушивания в поселке.",
-    platformsEyebrow: "Travel Podcasting Vicopisano также доступен на:",
+    platformsEyebrow: "Скоро также на:",
+    platformLinkPending: (name) => `Ссылка на ${name} пока недоступна. Повторите попытку позже.`,
+    platformLinkError: (name) => `Не удалось открыть ${name}: ссылка недействительна. Повторите попытку позже.`,
+    platformLinkOffline: (name) => `Не удалось открыть ${name}: нет подключения к Интернету.`,
     shareTitle: "Поделиться с друзьями",
     locateMe: "Найти мое местоположение",
     locatingMe: "Поиск вашего местоположения...",
@@ -1233,6 +1279,8 @@ const uiStrings = {
     playerProgress: "Позиция воспроизведения",
     mapOpenFullscreen: "Открыть карту на весь экран",
     mapCloseFullscreen: "Закрыть полноэкранную карту",
+    playerSwitchToMap: "Показать карту и плеер",
+    playerSwitchToListen: "Открыть аудиоплеер на весь экран",
     mapRecenter: "Показать все остановки",
     languageSelector: "Выбор языка",
     currentLanguage: (language) => `Текущий язык: ${language}`,
@@ -1270,6 +1318,7 @@ const statusMessages = {
   IT: {
     offlineStatus: "Sei offline o la connessione è instabile.",
     mapLoadError: "La mappa non si sta caricando bene. Riprova tra un attimo.",
+    mapLocalServerRequired: "Per vedere la mappa, apri il sito da http://localhost:8000 dopo aver avviato npm run dev; non aprire index.html come file.",
     audioLoading: "Caricamento audio...",
     audioBuffering: "Buffering audio...",
     audioLoadError: "L'audio non è disponibile in questo momento. Riprova tra poco.",
@@ -1277,6 +1326,7 @@ const statusMessages = {
   EN: {
     offlineStatus: "You are offline or the connection is unstable.",
     mapLoadError: "The map is not loading correctly. Please try again in a moment.",
+    mapLocalServerRequired: "To see the map, run npm run dev and open http://localhost:8000 instead of opening index.html as a file.",
     audioLoading: "Loading audio...",
     audioBuffering: "Buffering audio...",
     audioLoadError: "Audio is not available right now. Please try again shortly.",
@@ -1284,6 +1334,7 @@ const statusMessages = {
   DE: {
     offlineStatus: "Sie sind offline oder die Verbindung ist instabil.",
     mapLoadError: "Die Karte wird nicht richtig geladen. Bitte versuchen Sie es gleich erneut.",
+    mapLocalServerRequired: "Für die Karte starten Sie npm run dev und öffnen http://localhost:8000, nicht index.html als Datei.",
     audioLoading: "Audio wird geladen...",
     audioBuffering: "Audio wird gepuffert...",
     audioLoadError: "Das Audio ist im Moment nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
@@ -1291,6 +1342,7 @@ const statusMessages = {
   FR: {
     offlineStatus: "Vous êtes hors ligne ou la connexion est instable.",
     mapLoadError: "La carte ne se charge pas correctement. Réessayez dans un instant.",
+    mapLocalServerRequired: "Pour voir la carte, lancez npm run dev et ouvrez http://localhost:8000, pas le fichier index.html.",
     audioLoading: "Chargement de l'audio...",
     audioBuffering: "Mise en mémoire tampon...",
     audioLoadError: "L’audio n’est pas disponible pour le moment. Réessayez dans un instant.",
@@ -1298,6 +1350,7 @@ const statusMessages = {
   ES: {
     offlineStatus: "Estás sin conexión o la red es inestable.",
     mapLoadError: "El mapa no se está cargando correctamente. Vuelve a intentarlo en un momento.",
+    mapLocalServerRequired: "Para ver el mapa, ejecuta npm run dev y abre http://localhost:8000, no el archivo index.html.",
     audioLoading: "Cargando audio...",
     audioBuffering: "Cargando el audio...",
     audioLoadError: "El audio no está disponible en este momento. Vuelve a intentarlo dentro de poco.",
@@ -1305,6 +1358,7 @@ const statusMessages = {
   PT: {
     offlineStatus: "Estás offline ou a ligação está instável.",
     mapLoadError: "O mapa não está a carregar corretamente. Tenta novamente dentro de instantes.",
+    mapLocalServerRequired: "Para ver o mapa, executa npm run dev e abre http://localhost:8000, não o ficheiro index.html.",
     audioLoading: "A carregar áudio...",
     audioBuffering: "A preparar o áudio...",
     audioLoadError: "O áudio não está disponível neste momento. Tenta novamente daqui a pouco.",
@@ -1312,6 +1366,7 @@ const statusMessages = {
   RU: {
     offlineStatus: "Вы не в сети или соединение нестабильно.",
     mapLoadError: "Карта загружается с ошибкой. Повторите попытку через несколько секунд.",
+    mapLocalServerRequired: "Чтобы увидеть карту, запустите npm run dev и откройте http://localhost:8000 вместо файла index.html.",
     audioLoading: "Загрузка аудио...",
     audioBuffering: "Буферизация аудио...",
     audioLoadError: "Аудио сейчас недоступно. Повторите попытку немного позже.",
@@ -1333,15 +1388,19 @@ const onboardingUiStrings = {
     guideExitConfirm: "Vuoi interrompere il tutorial?",
     guideExitContinue: "Continua",
     guideExitAccept: "Interrompi",
-    guideMap: "Tocca un numero sulla mappa per aprire una tappa e ascoltare il racconto.",
-    guideLocation: "Questo pulsante ricentra la mappa sulle tappe e ti aiuta a ritrovare il percorso.",
-    guideDirections: "Da qui apri Google Maps con le indicazioni a piedi verso la tappa selezionata.",
-    guideStops: "Puoi scegliere una tappa anche da questa lista.",
-    guidePlayer: "Il player resta sempre disponibile in basso.",
-    guideExplore: "Usa questo pulsante per aprire la mappa estesa, con i controlli audio e le tappe a fianco.",
-    guideExploreView: "Questa è la vista estesa: la mappa occupa tutto lo spazio e il player resta nel pannello a destra.",
-    guideCloseExplore: "Per tornare alla home, chiudi la vista estesa da qui.",
-    guideFullPlayer: "Questa è la vista completa del player: controlli l'audio, segui la trascrizione e passi alle tappe vicine.",
+    guideMap: "Al termine della guida, potrai toccare un numero sulla mappa per aprire la tappa e ascoltarne il racconto.",
+    guideLocation: "Questo pulsante ti permetterà di ricentrare la mappa sulle tappe e ritrovare il percorso.",
+    guideDirections: "Da qui potrai aprire Google Maps e ottenere le indicazioni a piedi verso la tappa selezionata.",
+    guideStops: "Potrai scegliere una tappa anche da questa lista.",
+    guidePlayer: "Il player resterà sempre disponibile in basso.",
+    guideExplore: "Da questo pulsante potrai aprire la mappa estesa, con i controlli audio e le tappe a fianco.",
+    guideExploreView: "Questa sarà la vista estesa: la mappa occuperà tutto lo spazio e il player resterà nel pannello a destra.",
+    guideCloseExplore: "Da qui potrai chiudere la vista estesa e tornare alla home.",
+    guideFullPlayer: "Questa è la vista Mappa + player: potrai seguire il percorso, ascoltare l'audio e leggere la didascalia sincronizzata.",
+    guidePlayerMapToggle: "Con questo tasto potrai aprire Full player audio, senza chiudere il percorso.",
+    guideListeningView: "Questa è la vista Full player audio: qui troverai foto, comandi e trascrizione completa sincronizzata.",
+    guideReturnToMap: "Con questo tasto potrai tornare a Mappa + player, mantenendo la stessa tappa.",
+    guideClosePlayer: "Con la X chiuderai il full player e tornerai alla home.",
   },
   EN: {
     onboardingTitle: "Choose your language to start the route",
@@ -1366,6 +1425,10 @@ const onboardingUiStrings = {
     guideExploreView: "This is the expanded view: the map uses the available space while the player stays in the right panel.",
     guideCloseExplore: "Use this button to close the expanded view and return home.",
     guideFullPlayer: "This is the full player view: control the audio, follow the transcript and move between nearby stops.",
+    guidePlayerMapToggle: "Use this button to open the full audio player without closing the route.",
+    guideListeningView: "This is the full audio player: find the photo, controls and complete synchronized transcript here.",
+    guideReturnToMap: "Use this button to return to Map + player at the same stop.",
+    guideClosePlayer: "Use X to close the full player and return home.",
   },
   DE: {
     onboardingTitle: "Wähle deine Sprache, um die Route zu starten",
@@ -1390,6 +1453,10 @@ const onboardingUiStrings = {
     guideExploreView: "Dies ist die erweiterte Ansicht: Die Karte nutzt den freien Raum, während der Player rechts bleibt.",
     guideCloseExplore: "Mit dieser Taste schließt du die erweiterte Ansicht und kehrst zur Startseite zurück.",
     guideFullPlayer: "Das ist die Vollansicht des Players: Steuere das Audio, folge der Transkription und wechsle zu nahen Stationen.",
+    guidePlayerMapToggle: "Mit dieser Taste öffnest du den Audio-Player im Vollbild, ohne die Route zu schließen.",
+    guideListeningView: "Das ist der Audio-Player im Vollbild mit Foto, Bedienelementen und vollständigem synchronisiertem Transkript.",
+    guideReturnToMap: "Mit dieser Taste kehrst du zur Karte mit Player bei derselben Station zurück.",
+    guideClosePlayer: "Mit X schließt du den Player und kehrst zur Startseite zurück.",
   },
   FR: {
     onboardingTitle: "Choisissez la langue pour commencer le parcours",
@@ -1414,6 +1481,10 @@ const onboardingUiStrings = {
     guideExploreView: "Voici la vue étendue : la carte utilise l’espace disponible et le lecteur reste dans le panneau de droite.",
     guideCloseExplore: "Utilisez ce bouton pour fermer la vue étendue et revenir à l’accueil.",
     guideFullPlayer: "Voici la vue complète du lecteur : contrôlez l’audio, suivez la transcription et passez aux étapes voisines.",
+    guidePlayerMapToggle: "Utilisez ce bouton pour ouvrir le lecteur audio plein écran sans fermer le parcours.",
+    guideListeningView: "Voici le lecteur audio plein écran : photo, commandes et transcription complète synchronisée.",
+    guideReturnToMap: "Utilisez ce bouton pour revenir à la carte avec lecteur, à la même étape.",
+    guideClosePlayer: "Avec X, fermez le lecteur et revenez à l’accueil.",
   },
   ES: {
     onboardingTitle: "Elige el idioma para iniciar el recorrido",
@@ -1438,6 +1509,10 @@ const onboardingUiStrings = {
     guideExploreView: "Esta es la vista ampliada: el mapa ocupa el espacio disponible y el reproductor permanece en el panel derecho.",
     guideCloseExplore: "Usa este botón para cerrar la vista ampliada y volver al inicio.",
     guideFullPlayer: "Esta es la vista completa del reproductor: controla el audio, sigue la transcripción y pasa a las paradas cercanas.",
+    guidePlayerMapToggle: "Usa este botón para abrir el reproductor de audio completo sin cerrar la ruta.",
+    guideListeningView: "Este es el reproductor de audio completo: foto, controles y transcripción completa sincronizada.",
+    guideReturnToMap: "Usa este botón para volver a Mapa + reproductor en la misma parada.",
+    guideClosePlayer: "Con la X cerrarás el reproductor y volverás al inicio.",
   },
   PT: {
     onboardingTitle: "Escolhe o idioma para iniciar o percurso",
@@ -1462,6 +1537,10 @@ const onboardingUiStrings = {
     guideExploreView: "Esta é a vista ampliada: o mapa ocupa o espaço disponível e o leitor fica no painel à direita.",
     guideCloseExplore: "Usa este botão para fechar a vista ampliada e voltar ao início.",
     guideFullPlayer: "Esta é a vista completa do leitor: controla o áudio, acompanha a transcrição e passa para as paragens próximas.",
+    guidePlayerMapToggle: "Usa este botão para abrir o leitor de áudio em ecrã completo sem fechar o percurso.",
+    guideListeningView: "Este é o leitor de áudio em ecrã completo: fotografia, controlos e transcrição completa sincronizada.",
+    guideReturnToMap: "Usa este botão para voltar a Mapa + leitor na mesma paragem.",
+    guideClosePlayer: "Com o X, fechas o leitor e voltas ao início.",
   },
   RU: {
     onboardingTitle: "Выберите язык, чтобы начать маршрут",
@@ -1486,6 +1565,10 @@ const onboardingUiStrings = {
     guideExploreView: "Это расширенный вид: карта занимает свободное пространство, а проигрыватель остается в правой панели.",
     guideCloseExplore: "Нажмите эту кнопку, чтобы закрыть расширенный вид и вернуться на главную.",
     guideFullPlayer: "Это полный вид проигрывателя: управляйте аудио, следите за расшифровкой и переходите к соседним остановкам.",
+    guidePlayerMapToggle: "Эта кнопка открывает аудиоплеер на весь экран, не закрывая маршрут.",
+    guideListeningView: "Это аудиоплеер на весь экран: фото, управление и полная синхронная расшифровка.",
+    guideReturnToMap: "Эта кнопка возвращает к карте и плееру на той же остановке.",
+    guideClosePlayer: "Нажмите X, чтобы закрыть плеер и вернуться на главную.",
   },
 };
 
@@ -1609,7 +1692,6 @@ function setCurrentLanguage(languageCode, options = {}) {
   renderOnboardingTexts();
   renderOnboardingLanguageSelector();
   renderStopsList();
-  refreshMarkerPopups();
 
   // Keep an already open help guide aligned with the newly selected UI language.
   if (guideLayer && !guideLayer.classList.contains("is-hidden")) {
@@ -1773,40 +1855,6 @@ function scrollPageToTop() {
   routeScrollAnimationFrame = window.requestAnimationFrame(step);
 }
 
-function scrollPageToTopAfterGuideExploreClose() {
-  if (reducedMotionQuery.matches || window.scrollY < 2) {
-    window.scrollTo({ top: 0, behavior: "auto" });
-    return;
-  }
-
-  if (routeScrollAnimationFrame !== null) {
-    window.cancelAnimationFrame(routeScrollAnimationFrame);
-  }
-
-  // Cancel the map's recenter scroll before the single, continuous homeward motion.
-  window.scrollTo({ top: window.scrollY, behavior: "auto" });
-  const startTop = window.scrollY;
-  const duration = 1_100;
-  const startTime = performance.now();
-
-  const step = (now) => {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const easedProgress = progress < 0.5
-      ? 4 * progress * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-    window.scrollTo({ top: startTop * (1 - easedProgress), behavior: "auto" });
-
-    if (progress < 1) {
-      routeScrollAnimationFrame = window.requestAnimationFrame(step);
-      return;
-    }
-
-    routeScrollAnimationFrame = null;
-  };
-
-  routeScrollAnimationFrame = window.requestAnimationFrame(step);
-}
-
 function animateTranslatedContent() {
   const textTargets = [
     eyebrowText,
@@ -1906,6 +1954,22 @@ function showMapSelectionLabel(tappa, marker) {
 
   const strings = getUiStrings(currentLanguage);
   const label = `${strings.stopLabel || "Tappa"} ${tappa.numero} · ${getStopTitle(tappa)}`;
+  const content = document.createElement("span");
+  content.className = "map-selection-label-content";
+  const image = document.createElement("img");
+  image.className = "map-selection-label-image";
+  image.src = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
+  if (isMobileMapViewport()) {
+    image.alt = getStopTitle(tappa);
+    content.append(image);
+  } else {
+    image.alt = "";
+    image.setAttribute("aria-hidden", "true");
+    const title = document.createElement("span");
+    title.className = "map-selection-label-title";
+    title.textContent = label;
+    content.append(image, title);
+  }
   mapSelectionTooltip = L.tooltip({
     className: "map-selection-label",
     direction: "top",
@@ -1914,7 +1978,7 @@ function showMapSelectionLabel(tappa, marker) {
     interactive: false,
   })
     .setLatLng(marker.getLatLng())
-    .setContent(label)
+    .setContent(content)
     .addTo(map);
 
   window.requestAnimationFrame(() => {
@@ -1923,11 +1987,11 @@ function showMapSelectionLabel(tappa, marker) {
 
   mapSelectionTooltipFadeTimer = window.setTimeout(() => {
     mapSelectionTooltip?.getElement()?.classList.add("is-fading");
-  }, 1100);
+  }, 3700);
   mapSelectionTooltipCloseTimer = window.setTimeout(() => {
     mapSelectionTooltip?.remove();
     mapSelectionTooltip = null;
-  }, 1400);
+  }, 4000);
 }
 
 function getStatusMessage(statusKey) {
@@ -2030,6 +2094,24 @@ function stopControlPropagation(event) {
   event.stopPropagation();
 }
 
+function syncMobileMapCaptionReservedSpace() {
+  const root = document.documentElement;
+  const isVisible = Boolean(
+    mapLiveCaption &&
+    isMobileMapViewport() &&
+    !overlayOpen &&
+    !document.body.classList.contains("player-open") &&
+    !mapLiveCaption.hidden &&
+    mapLiveCaption.classList.contains("is-visible"),
+  );
+  const captionHeight = isVisible ? Math.ceil(mapLiveCaption.getBoundingClientRect().height) : 0;
+  const nextValue = `${captionHeight ? captionHeight + 16 : 0}px`;
+
+  if (root.style.getPropertyValue("--mobile-map-caption-reserved-space").trim() !== nextValue) {
+    root.style.setProperty("--mobile-map-caption-reserved-space", nextValue);
+  }
+}
+
 function syncMiniPlayerReservedSpace() {
   const root = document.documentElement;
   const safeBuffer = 24;
@@ -2039,17 +2121,20 @@ function syncMiniPlayerReservedSpace() {
     window.matchMedia("(min-width: 1024px)").matches
   ) {
     root.style.setProperty("--mini-player-reserved-space", "0px");
+    syncMobileMapCaptionReservedSpace();
     return;
   }
 
   if (!miniPlayer || miniPlayer.classList.contains("is-hidden")) {
     root.style.setProperty("--mini-player-reserved-space", `${118 + safeBuffer}px`);
+    syncMobileMapCaptionReservedSpace();
     return;
   }
 
   const measuredHeight = Math.ceil(miniPlayer.getBoundingClientRect().height);
   const reservedSpace = Math.max(118, measuredHeight + safeBuffer);
   root.style.setProperty("--mini-player-reserved-space", `${reservedSpace}px`);
+  syncMobileMapCaptionReservedSpace();
 }
 
 function bindMiniPlayerLayoutSync() {
@@ -2067,6 +2152,8 @@ function bindMiniPlayerLayoutSync() {
 
   window.addEventListener("resize", syncMiniPlayerReservedSpace);
   window.addEventListener("orientationchange", syncMiniPlayerReservedSpace);
+  window.addEventListener("resize", () => window.requestAnimationFrame(syncMapLiveCaption));
+  document.fonts?.ready.then(syncMapLiveCaption);
 }
 
 function syncMobileTranscriptSheetLayout() {
@@ -2158,12 +2245,23 @@ function syncMobileTranscriptSheetLayout() {
   playerSheet.style.setProperty("--mobile-transcript-max-height", `${Math.round(fallbackHeight)}px`);
 }
 
+function syncMobileMapDockHeight() {
+  if (!isMobileMapPlayerMode() || !playerSheet) return;
+  const height = playerSheet.offsetHeight;
+  if (height > 0) {
+    document.documentElement.style.setProperty("--mobile-map-player-dock-height", `${height}px`);
+  }
+}
+
 function bindMobileTranscriptLayoutSync() {
   syncMobileTranscriptSheetLayout();
 
   if (typeof ResizeObserver === "function" && !mobileTranscriptLayoutResizeObserver) {
     mobileTranscriptLayoutResizeObserver = new ResizeObserver(() => {
-      window.requestAnimationFrame(syncMobileTranscriptSheetLayout);
+      window.requestAnimationFrame(() => {
+        syncMobileTranscriptSheetLayout();
+        syncMobileMapDockHeight();
+      });
     });
     [playerSheet, playerSide, playerStopNavigation]
       .filter(Boolean)
@@ -2171,6 +2269,7 @@ function bindMobileTranscriptLayoutSync() {
   }
 
   window.addEventListener("resize", syncMobileTranscriptSheetLayout);
+  window.addEventListener("resize", syncMobileMapDockHeight);
   window.addEventListener("orientationchange", syncMobileTranscriptSheetLayout);
 }
 
@@ -2301,7 +2400,9 @@ function getMapVisibleAreaOffset() {
   let visibleRight = mapRect.right;
   let visibleBottom = mapRect.bottom;
   let visibleLeft = mapRect.left;
-  const blockers = [miniPlayer, mapExploreStop, mapLiveCaption, playerOverlay];
+  const blockers = isMobileMapPlayerMode()
+    ? [playerSheet, mapLiveCaption, mapExploreMascotImage?.closest(".map-explore-mascot")]
+    : [miniPlayer, mapExploreStop, mapLiveCaption, playerOverlay];
 
   blockers.forEach((blocker) => {
     if (!blocker || blocker.hidden || blocker.classList.contains("is-hidden")) {
@@ -2348,7 +2449,11 @@ function shiftMapCameraCenterIntoVisibleArea(center, zoom) {
 
 function getFeasibleCameraZoom(center, requestedZoom) {
   const maxZoom = Math.min(map.getMaxZoom?.() || 22, 22);
-  for (let zoom = requestedZoom; zoom <= maxZoom; zoom += 0.25) {
+  // Leaflet snaps flyTo's zoom to this step. Computing the target center at
+  // an unsnapped zoom can move a marker far outside the viewport after flyTo.
+  const zoomStep = map.options.zoomSnap > 0 ? map.options.zoomSnap : 0.25;
+  const firstZoom = Math.ceil((requestedZoom - 1e-8) / zoomStep) * zoomStep;
+  for (let zoom = firstZoom; zoom <= maxZoom; zoom += zoomStep) {
     if (canCenterMapCameraAt(center, zoom)) {
       return Number(zoom.toFixed(2));
     }
@@ -2362,14 +2467,49 @@ function getStopCameraTarget(tappa, presetName) {
     return null;
   }
 
-  const requestedZoom = Math.max(preset.zoom, map.getZoom());
+  // A stop always returns to its authored framing, even after the visitor
+  // zoomed in elsewhere. Reusing the current zoom could crop the route.
+  const requestedZoom = preset.zoom;
   const visibleCenter = shiftMapCameraCenterIntoVisibleArea(preset.center, requestedZoom);
   const targetZoom = getFeasibleCameraZoom(visibleCenter, requestedZoom);
   const adjustedCenter = shiftMapCameraCenterIntoVisibleArea(preset.center, targetZoom);
-  return {
+  const target = {
     center: clampMapCameraCenter([adjustedCenter.lat, adjustedCenter.lng], targetZoom),
     zoom: targetZoom,
   };
+
+  if (isStopVisibleAtCameraTarget(tappa, target)) {
+    return target;
+  }
+
+  // A contextual preset must never leave its selected marker outside the
+  // unobstructed map. Keep the authored zoom where possible, but fall back to
+  // the same stop-centered framing used by the other selection paths.
+  const stopCenter = [tappa.latitudine, tappa.longitudine];
+  const shiftedStop = shiftMapCameraCenterIntoVisibleArea(stopCenter, targetZoom);
+  const safeZoom = getFeasibleCameraZoom(shiftedStop, targetZoom);
+  const safeCenter = shiftMapCameraCenterIntoVisibleArea(stopCenter, safeZoom);
+  return {
+    center: clampMapCameraCenter([safeCenter.lat, safeCenter.lng], safeZoom),
+    zoom: safeZoom,
+  };
+}
+
+function isStopVisibleAtCameraTarget(tappa, target) {
+  const size = map.getSize();
+  const offset = getMapVisibleAreaOffset();
+  const centerPoint = map.project(target.center, target.zoom);
+  const markerPoint = map.project(L.latLng(tappa.latitudine, tappa.longitudine), target.zoom)
+    .subtract(centerPoint)
+    .add(size.divideBy(2));
+  const margin = 36;
+  const visibleLeft = Math.max(0, 2 * offset.x) + margin;
+  const visibleRight = Math.min(size.x, size.x + 2 * offset.x) - margin;
+  const visibleTop = Math.max(0, 2 * offset.y) + margin;
+  const visibleBottom = Math.min(size.y, size.y + 2 * offset.y) - margin;
+
+  return markerPoint.x >= visibleLeft && markerPoint.x <= visibleRight &&
+    markerPoint.y >= visibleTop && markerPoint.y <= visibleBottom;
 }
 
 function isMapAtCameraPreset(target) {
@@ -2445,6 +2585,220 @@ function isMobileMapViewport() {
   return window.matchMedia("(max-width: 1023px)").matches;
 }
 
+function isMobileMapPlayerMode() {
+  return Boolean(playerOverlay?.classList.contains("is-mobile-map-player"));
+}
+
+function updatePlayerMapButtonPresentation() {
+  if (!playerMapButton) return;
+  const strings = getUiStrings(currentLanguage);
+  const isMapMode = isMobileMapPlayerMode();
+  const label = isMapMode ? strings.playerSwitchToListen : strings.playerSwitchToMap;
+  if (playerMapButtonIcon) {
+    playerMapButtonIcon.textContent = isMapMode ? "headphones" : "map";
+  }
+  playerMapButton.setAttribute("aria-label", label);
+  playerMapButton.title = label;
+}
+
+let contextGuideMode = null;
+let contextGuideStepIndex = 0;
+let contextGuideTrigger = null;
+let contextGuideInertStates = [];
+
+const playerContextGuideCopy = {
+  IT: {
+    map: ["Trascina la mappa con un dito e usa due dita per ingrandire o ridurre. I numeri aprono le tappe; in basso leggerai la didascalia dell'audio.", "Questo tasto trova la tua posizione sulla mappa, se autorizzi il browser.", "Questo tasto apre le indicazioni a piedi in Google Maps.", "Questo tasto passa a Full player audio.", "La X chiude il full player e torna alla pagina. Chiudere questa guida non la premerà."],
+    listen: ["Questa è la vista Full player audio: qui ascolti la tappa e leggi la trascrizione completa. Se il titolo è lungo, scorre una volta per mostrarsi per intero.", "Questo tasto torna a Mappa + player, senza interrompere l'ascolto.", "La X chiude il full player e torna alla pagina. Chiudere questa guida non la premerà."],
+    mapHelp: "Guida Mappa e player", listenHelp: "Guida Full player audio", close: "Chiudi guida", previous: "Indietro", next: "Avanti", finish: "Termina guida",
+  },
+  EN: {
+    map: ["Drag the map with one finger and pinch with two fingers to zoom. The numbers open stops; audio captions appear below.", "This button finds your position on the map if you allow location access.", "This button opens walking directions in Google Maps.", "This button switches to the full audio player.", "The X closes the full player and returns to the page. Closing this guide will not press it."],
+    listen: ["This is the full audio player: listen to the stop and read the complete transcript. A long title scrolls once so you can read it all.", "This button returns to map and player without interrupting audio.", "The X closes the full player and returns to the page. Closing this guide will not press it."],
+    mapHelp: "Map and player guide", listenHelp: "Full audio player guide", close: "Close guide", previous: "Back", next: "Next", finish: "Finish guide",
+  },
+  DE: {
+    map: ["Ziehe die Karte mit einem Finger und zoome mit zwei Fingern. Die Zahlen öffnen die Stationen; unten erscheint der Audiotext.", "Diese Taste zeigt deinen Standort auf der Karte, wenn du den Zugriff erlaubst.", "Diese Taste öffnet die Fußwegbeschreibung in Google Maps.", "Diese Taste wechselt zum Audio-Player im Vollbild.", "Das X schließt den Vollbild-Player und führt zur Seite zurück. Beim Schließen dieser Anleitung wird es nicht betätigt."],
+    listen: ["Das ist der Audio-Player im Vollbild: Hier hörst du die Station und liest das vollständige Transkript. Ein langer Titel läuft einmal durch.", "Diese Taste führt zur Karte mit Player zurück, ohne die Wiedergabe zu unterbrechen.", "Das X schließt den Vollbild-Player und führt zur Seite zurück. Beim Schließen dieser Anleitung wird es nicht betätigt."],
+    mapHelp: "Anleitung für Karte und Player", listenHelp: "Anleitung für den Audio-Player im Vollbild", close: "Anleitung schließen", previous: "Zurück", next: "Weiter", finish: "Anleitung beenden",
+  },
+  FR: {
+    map: ["Faites glisser la carte avec un doigt et pincez avec deux doigts pour zoomer. Les numéros ouvrent les étapes ; les sous-titres audio apparaissent en bas.", "Ce bouton affiche votre position sur la carte si vous autorisez la localisation.", "Ce bouton ouvre l'itinéraire à pied dans Google Maps.", "Ce bouton ouvre le lecteur audio plein écran.", "La croix ferme le lecteur plein écran et revient à la page. Fermer ce guide ne l'activera pas."],
+    listen: ["Voici le lecteur audio plein écran : écoutez l'étape et lisez la transcription complète. Un titre long défile une fois pour être lu en entier.", "Ce bouton revient à la carte avec lecteur sans interrompre l'écoute.", "La croix ferme le lecteur plein écran et revient à la page. Fermer ce guide ne l'activera pas."],
+    mapHelp: "Guide carte et lecteur", listenHelp: "Guide du lecteur audio plein écran", close: "Fermer le guide", previous: "Retour", next: "Suivant", finish: "Terminer le guide",
+  },
+  ES: {
+    map: ["Arrastra el mapa con un dedo y pellizca con dos dedos para ampliar o reducir. Los números abren las paradas; abajo aparecen los subtítulos del audio.", "Este botón muestra tu ubicación en el mapa si autorizas el acceso.", "Este botón abre las indicaciones a pie en Google Maps.", "Este botón abre el reproductor de audio completo.", "La X cierra el reproductor completo y vuelve a la página. Cerrar esta guía no la pulsará."],
+    listen: ["Este es el reproductor de audio completo: escucha la parada y lee la transcripción íntegra. Un título largo se desplaza una vez para verlo entero.", "Este botón vuelve al mapa y reproductor sin interrumpir el audio.", "La X cierra el reproductor completo y vuelve a la página. Cerrar esta guía no la pulsará."],
+    mapHelp: "Guía del mapa y reproductor", listenHelp: "Guía del reproductor de audio completo", close: "Cerrar guía", previous: "Atrás", next: "Siguiente", finish: "Terminar guía",
+  },
+  PT: {
+    map: ["Arraste o mapa com um dedo e aproxime ou afaste com dois dedos. Os números abrem as paragens; as legendas do áudio aparecem em baixo.", "Este botão mostra a sua localização no mapa, se autorizar o acesso.", "Este botão abre as indicações a pé no Google Maps.", "Este botão abre o leitor de áudio em ecrã completo.", "O X fecha o leitor em ecrã completo e regressa à página. Fechar este guia não o acionará."],
+    listen: ["Este é o leitor de áudio em ecrã completo: ouça a paragem e leia a transcrição integral. Um título longo desloca-se uma vez para ser lido na íntegra.", "Este botão volta ao mapa e leitor sem interromper o áudio.", "O X fecha o leitor em ecrã completo e regressa à página. Fechar este guia não o acionará."],
+    mapHelp: "Guia do mapa e leitor", listenHelp: "Guia do leitor de áudio em ecrã completo", close: "Fechar guia", previous: "Voltar", next: "Seguinte", finish: "Terminar guia",
+  },
+  RU: {
+    map: ["Перемещайте карту одним пальцем, а двумя пальцами изменяйте масштаб. Номера открывают остановки; внизу появляются субтитры к аудио.", "Эта кнопка показывает ваше местоположение на карте, если вы разрешите доступ.", "Эта кнопка открывает пешеходный маршрут в Google Картах.", "Эта кнопка открывает аудиоплеер на весь экран.", "Кнопка X закрывает полноэкранный плеер и возвращает на страницу. Закрытие инструкции не нажмёт её."],
+    listen: ["Это аудиоплеер на весь экран: слушайте остановку и читайте полную расшифровку. Длинный заголовок прокрутится один раз, чтобы показать его целиком.", "Эта кнопка возвращает к карте и плееру, не прерывая звук.", "Кнопка X закрывает полноэкранный плеер и возвращает на страницу. Закрытие инструкции не нажмёт её."],
+    mapHelp: "Инструкция по карте и плееру", listenHelp: "Инструкция для аудиоплеера на весь экран", close: "Закрыть инструкцию", previous: "Назад", next: "Далее", finish: "Завершить инструкцию",
+  },
+};
+
+function updatePlayerContextGuideLabels() {
+  const copy = playerContextGuideCopy[currentLanguage] || playerContextGuideCopy.IT;
+  [[playerMapHelpButton, copy.mapHelp], [playerListenHelpButton, copy.listenHelp], [playerContextGuideClose, copy.close], [playerContextGuidePrev, copy.previous]].forEach(([button, label]) => {
+    if (!button) return;
+    button.setAttribute("aria-label", label);
+    button.title = label;
+  });
+  if (playerContextGuideNext) playerContextGuideNext.setAttribute("aria-label", copy.next);
+}
+
+function getPlayerContextGuideSteps(mode) {
+  const copy = playerContextGuideCopy[currentLanguage] || playerContextGuideCopy.IT;
+  if (mode === "map") {
+    return [
+      { text: copy.map[0] },
+      { text: copy.map[1], target: playerRecenterButton },
+      { text: copy.map[2], target: playerMapDirectionsButton },
+      { text: copy.map[3], target: playerMapButton },
+      { text: copy.map[4], target: playerCloseButton },
+    ];
+  }
+  return [
+    { text: copy.listen[0] },
+    { text: copy.listen[1], target: playerMapButton },
+    { text: copy.listen[2], target: playerCloseButton },
+  ];
+}
+
+function positionPlayerContextGuideSpotlight() {
+  if (!contextGuideMode || !playerContextGuide) return;
+  if (contextGuideMode === "map") {
+    const dockTop = playerOverlay?.querySelector(".player-sheet")?.getBoundingClientRect().top || window.innerHeight;
+    playerContextGuideCard.style.setProperty("--context-guide-card-max-height", `${Math.max(100, dockTop - 92)}px`);
+  } else {
+    playerContextGuideCard.style.removeProperty("--context-guide-card-max-height");
+  }
+  const step = getPlayerContextGuideSteps(contextGuideMode)[contextGuideStepIndex];
+  const rect = step?.target?.getBoundingClientRect();
+  const hasTarget = Boolean(rect && rect.width && rect.height && !step.target.hidden);
+  playerContextGuide.classList.toggle("has-target", hasTarget);
+  if (!hasTarget) return;
+  playerContextGuide.style.setProperty("--context-guide-x", `${rect.left + rect.width / 2}px`);
+  playerContextGuide.style.setProperty("--context-guide-y", `${rect.top + rect.height / 2}px`);
+  playerContextGuide.style.setProperty("--context-guide-radius", `${Math.ceil(Math.max(rect.width, rect.height) / 2 + 8)}px`);
+  playerContextGuide.style.setProperty("--context-guide-target-left", `${rect.left}px`);
+  playerContextGuide.style.setProperty("--context-guide-target-top", `${rect.top}px`);
+  playerContextGuide.style.setProperty("--context-guide-target-width", `${rect.width}px`);
+  playerContextGuide.style.setProperty("--context-guide-target-height", `${rect.height}px`);
+}
+
+function renderPlayerContextGuideStep() {
+  if (!contextGuideMode || !playerContextGuide) return;
+  const steps = getPlayerContextGuideSteps(contextGuideMode);
+  const step = steps[contextGuideStepIndex];
+  const copy = playerContextGuideCopy[currentLanguage] || playerContextGuideCopy.IT;
+  playerContextGuideProgress.textContent = `${contextGuideStepIndex + 1}/${steps.length}`;
+  playerContextGuideText.textContent = step.text;
+  playerContextGuidePrev.disabled = contextGuideStepIndex === 0;
+  const isLast = contextGuideStepIndex === steps.length - 1;
+  playerContextGuideNext.querySelector(".material-symbols-rounded").textContent = isLast ? "check" : "arrow_forward";
+  playerContextGuideNext.classList.toggle("is-finish", isLast);
+  playerContextGuideNext.setAttribute("aria-label", isLast ? copy.finish : copy.next);
+  positionPlayerContextGuideSpotlight();
+  playerContextGuideNext.focus({ preventScroll: true });
+}
+
+function closePlayerContextGuide({ restoreFocus = true } = {}) {
+  if (!contextGuideMode || !playerContextGuide) return;
+  contextGuideMode = null;
+  playerContextGuide.classList.add("is-hidden");
+  playerContextGuide.classList.remove("has-target", "is-map-guide", "is-listen-guide");
+  playerContextGuideCard.style.removeProperty("--context-guide-card-max-height");
+  playerContextGuide.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("context-guide-open");
+  contextGuideInertStates.forEach(([element, wasInert]) => { element.inert = wasInert; });
+  contextGuideInertStates = [];
+  if (restoreFocus && contextGuideTrigger?.isConnected) contextGuideTrigger.focus({ preventScroll: true });
+  contextGuideTrigger = null;
+}
+
+function openPlayerContextGuide(mode, trigger) {
+  if (!overlayOpen || !isMobileMapViewport() ||
+      (mode === "map") !== isMobileMapPlayerMode() ||
+      !playerContextGuide) return;
+  closePlayerContextGuide({ restoreFocus: false });
+  contextGuideMode = mode;
+  contextGuideStepIndex = 0;
+  contextGuideTrigger = trigger;
+  contextGuideInertStates = [appShell, miniPlayer, playerOverlay]
+    .filter(Boolean)
+    .map((element) => [element, element.inert]);
+  contextGuideInertStates.forEach(([element]) => { element.inert = true; });
+  updatePlayerContextGuideLabels();
+  playerContextGuide.classList.remove("is-hidden");
+  playerContextGuide.classList.toggle("is-map-guide", mode === "map");
+  playerContextGuide.classList.toggle("is-listen-guide", mode === "listen");
+  playerContextGuide.setAttribute("aria-hidden", "false");
+  document.body.classList.add("context-guide-open");
+  renderPlayerContextGuideStep();
+}
+
+function handlePlayerContextGuideKeydown(event) {
+  if (!contextGuideMode || !playerContextGuide) return;
+  if (event.key === "Escape") {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    closePlayerContextGuide();
+    return;
+  }
+  if (event.key !== "Tab") return;
+  const controls = [playerContextGuideClose, playerContextGuidePrev, playerContextGuideNext]
+    .filter((button) => button && !button.disabled);
+  const first = controls[0];
+  const last = controls[controls.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+function setMobileMapPlayerMode(isEnabled) {
+  const enabled = Boolean(isEnabled) && isMobileMapViewport();
+  playerOverlay?.classList.toggle("is-mobile-map-player", enabled);
+  document.body.classList.toggle("is-mobile-map-player-mode", enabled);
+  if (enabled) {
+    setMapFullscreen(true);
+    if (routeBounds?.isValid()) {
+      map.setMaxBounds(routeBounds.pad(3));
+    }
+  } else if (isMapFullscreenActive() && !playerOverlay?.classList.contains("is-map-panel")) {
+    setMapFullscreen(false);
+    restoreStandardMapBounds();
+  }
+  playerSheet?.setAttribute("aria-modal", String(!enabled && !playerOverlay?.classList.contains("is-map-panel")));
+  setPlayerBackgroundInert(!enabled && !playerOverlay?.classList.contains("is-map-panel"));
+  updatePlayerMapButtonPresentation();
+  syncMapLiveCaption();
+  schedulePlayerTitleOverflow();
+  if (enabled) window.requestAnimationFrame(syncMobileMapDockHeight);
+  if (!enabled && overlayOpen && isMobileMapViewport()) {
+    // The cue may already be selected while the transcript is hidden in map
+    // mode. Re-measure its scrollport after the listening layout is visible,
+    // then reveal that same cue instead of waiting for the next one.
+    window.requestAnimationFrame(() => {
+      if (!overlayOpen || isMobileMapPlayerMode()) return;
+      syncMobileTranscriptSheetLayout();
+      syncMapLiveCaption();
+      scrollActiveMobileTranscript({ immediate: true });
+    });
+  }
+}
+
 function updateMiniPlayerExpandPresentation() {
   if (!miniPlayerExpand) {
     return;
@@ -2466,6 +2820,10 @@ function updateMapRecenterButtonPresentation() {
   mapRecenterButton.setAttribute("aria-label", label);
   mapRecenterButton.dataset.tooltip = label;
   mapRecenterButton.querySelector(".map-control-tooltip")?.replaceChildren(document.createTextNode(label));
+  if (playerRecenterButton) {
+    playerRecenterButton.setAttribute("aria-label", label);
+    playerRecenterButton.title = label;
+  }
 }
 
 function showMapLocationFeedback(message) {
@@ -2598,9 +2956,11 @@ function getRouteMinimumZoom(padding = isMapFullscreenActive() ? [52, 52] : [40,
   }
 
   const routeFitZoom = map.getBoundsZoom(routeBounds, false, L.point(...padding));
-  // On mobile keep the route at the tightest fitting zoom so the map cannot
-  // be pulled back to an overly broad geographic view.
-  const contextZoomOffset = isMobileMapViewport() ? 0 : -1;
+  // The mobile map player needs one extra zoom-out step for route exploration;
+  // the home map keeps its tighter framing.
+  const contextZoomOffset = isMobileMapViewport()
+    ? (isMobileMapPlayerMode() ? -1 : 0)
+    : -1;
   return Math.max(DEFAULT_MAP_MIN_ZOOM, Math.floor(routeFitZoom) + contextZoomOffset);
 }
 
@@ -2691,7 +3051,7 @@ function bindMapRecenterButton() {
 
   L.DomEvent.disableClickPropagation(mapRecenterButton);
   L.DomEvent.disableScrollPropagation(mapRecenterButton);
-  mapRecenterButton.addEventListener("click", (event) => {
+  const handleRecenter = (event) => {
     consumeControlEvent(event);
     if (isMobileMapViewport()) {
       if (isUserLocationOutsideMapView()) {
@@ -2702,7 +3062,9 @@ function bindMapRecenterButton() {
       return;
     }
     recenterMapToRoute();
-  });
+  };
+  mapRecenterButton.addEventListener("click", handleRecenter);
+  playerRecenterButton?.addEventListener("click", handleRecenter);
   window.addEventListener("resize", updateMapRecenterButtonPresentation);
 }
 
@@ -2761,6 +3123,7 @@ function updateMapDirectionsButton(tappa = activeStopNumber ? tappe.find((item) 
   }
 
   mapDirectionsButton.hidden = !tappa;
+  if (playerMapDirectionsButton) playerMapDirectionsButton.hidden = !tappa;
   if (playerDirectionsButton) {
     playerDirectionsButton.hidden = true;
   }
@@ -2775,6 +3138,11 @@ function updateMapDirectionsButton(tappa = activeStopNumber ? tappe.find((item) 
   mapDirectionsButton.href = directionsUrl;
   const tooltip = `${label}: ${title}`;
   mapDirectionsButton.setAttribute("aria-label", tooltip);
+  if (playerMapDirectionsButton) {
+    playerMapDirectionsButton.href = directionsUrl;
+    playerMapDirectionsButton.setAttribute("aria-label", tooltip);
+    playerMapDirectionsButton.title = tooltip;
+  }
   mapDirectionsButton.dataset.tooltip = tooltip;
   mapDirectionsButton.querySelector(".map-control-tooltip")?.replaceChildren(document.createTextNode(tooltip));
 }
@@ -2897,9 +3265,23 @@ function closeDesktopExploreWithTransition({ returnToGuideHome = false } = {}) {
     return false;
   }
 
+  if (returnToGuideHome) {
+    if (routeScrollAnimationFrame !== null) {
+      window.cancelAnimationFrame(routeScrollAnimationFrame);
+      routeScrollAnimationFrame = null;
+    }
+    // Explore covers the page: settle its scroll before the FLIP measurement,
+    // so the map returns directly to the final home position in one motion.
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
   const originRect = mapStageFrame.getBoundingClientRect();
   setMapFullscreen(false);
   document.body.classList.remove("is-map-player-panel");
+  syncMascotTapSemantics();
+  // Delay Leaflet's resize until the map and player have completed the same
+  // closing motion; otherwise its intermediate layout redraw causes a jump.
+  window.clearTimeout(mapFullscreenLayoutTimer);
+  mapFullscreenLayoutTimer = null;
 
   window.requestAnimationFrame(() => {
     const destinationRect = mapStageFrame.getBoundingClientRect();
@@ -2926,13 +3308,16 @@ function closeDesktopExploreWithTransition({ returnToGuideHome = false } = {}) {
     );
     mapAnimation.finished.finally(() => mapAnimation.cancel());
 
-    const panelExitRatio = guideExploreTransitionTimings.panel /
-      guideExploreTransitionTimings.map;
+    const panelExitRatio = returnToGuideHome
+      ? 1
+      : guideExploreTransitionTimings.panel / guideExploreTransitionTimings.map;
     const panelAnimation = playerOverlay.animate(
       [
         { opacity: 1, transform: "translateX(0)", offset: 0 },
         { opacity: 0, transform: "translateX(24px)", offset: panelExitRatio },
-        { opacity: 0, transform: "translateX(24px)", offset: 1 },
+        ...(panelExitRatio < 1
+          ? [{ opacity: 0, transform: "translateX(24px)", offset: 1 }]
+          : []),
       ],
       {
         duration: guideExploreTransitionTimings.map,
@@ -2942,16 +3327,18 @@ function closeDesktopExploreWithTransition({ returnToGuideHome = false } = {}) {
     panelAnimation.finished.finally(() => panelAnimation.cancel());
   });
 
-  window.setTimeout(() => {
+  playerCloseTransitionTimer = window.setTimeout(() => {
     playerOverlay.classList.add("is-hidden");
     playerOverlay.classList.remove("is-map-panel");
     playerOverlay.setAttribute("aria-hidden", "true");
     playerSheet?.setAttribute("aria-modal", "true");
     setPlayerBackgroundInert(false);
     document.body.classList.remove("player-open");
+    setDesktopExploreMapConstraints(false);
     map.invalidateSize();
     if (returnToGuideHome) {
-      scrollPageToTopAfterGuideExploreClose();
+      finishGuideClose();
+      focusMapReturnTarget();
     } else {
       mapStageFrame.scrollIntoView({ behavior: "smooth", block: "start" });
       focusMapReturnTarget();
@@ -2987,7 +3374,9 @@ function setMapFullscreen(isExpanded, { guideExploreOrigin = null } = {}) {
   document.body.classList.toggle("is-map-fullscreen", isMapFullscreenActive());
   updateMapFullscreenButton();
   updateMapExploreStop();
-  window.setTimeout(() => {
+  window.clearTimeout(mapFullscreenLayoutTimer);
+  mapFullscreenLayoutTimer = window.setTimeout(() => {
+    mapFullscreenLayoutTimer = null;
     map.invalidateSize();
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
     if (isDesktop) {
@@ -3120,7 +3509,6 @@ function showLanguageUnavailable(languageCode, returnFocus = null) {
   languageUnavailableReturnFocus = returnFocus || document.activeElement;
   languageUnavailableTitle.textContent = strings.languageUnavailableTitle;
   languageUnavailableMessage.textContent = strings.languageUnavailable;
-  languageUnavailableCloseLabel.textContent = strings.languageUnavailableClose;
   languageUnavailableClose.setAttribute("aria-label", strings.languageUnavailableClose);
   languageUnavailableModal.hidden = false;
   languageUnavailableModal.classList.remove("is-hidden");
@@ -3145,6 +3533,7 @@ function bindLanguageUnavailableModal() {
   languageUnavailableModal?.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       event.preventDefault();
+      event.stopPropagation();
       closeLanguageUnavailable();
       return;
     }
@@ -3197,6 +3586,9 @@ function getMascotBreathingShells() {
 }
 
 function supportsMascotDirectInteraction(shell) {
+  if (shell.classList.contains("map-explore-mascot-motion")) {
+    return document.body.classList.contains("is-map-player-panel");
+  }
   return mascotTapQuery.matches || shell.classList.contains("mascot-motion-shell--hero");
 }
 
@@ -3368,6 +3760,12 @@ function createMascotMotionController() {
       // frame on every rapid click/tap.
       if (heroShell && !heroShell.classList.contains("is-hero-tap-reaction")) {
         runClass("is-hero-tap-reaction", 720, [heroShell]);
+      }
+    },
+    mapTapReaction() {
+      const mapShell = mapExploreMascotImage?.closest(".map-explore-mascot-motion");
+      if (mapShell && !mapShell.classList.contains("is-hero-tap-reaction")) {
+        runClass("is-hero-tap-reaction", 720, [mapShell]);
       }
     },
     end() {
@@ -3679,6 +4077,8 @@ function getActiveAudio() {
 function setTransitionAudioMode(isActive) {
   isTransitionAudioActive = Boolean(isActive);
   document.body.classList.toggle("is-transition-audio", isTransitionAudioActive);
+  miniPlayerTitle?.classList.toggle("is-transition-title", isTransitionAudioActive);
+  playerArtwork?.classList.toggle("is-transition-artwork", isTransitionAudioActive);
   if (!isTransitionAudioActive) {
     pendingTransitionStop = null;
   }
@@ -3693,8 +4093,12 @@ function updateTransitionArtwork() {
 
   miniPlayerArtwork.src = TRANSITION_ARTWORK_PATH;
   miniPlayerArtwork.alt = "Logo del Comune di Vicopisano";
+  miniPlayerTitleTrack.textContent = "In cammino verso la prossima tappa";
+  miniPlayerTitle.title = miniPlayerTitleTrack.textContent;
+  miniPlayerTitle.setAttribute("aria-label", miniPlayerTitleTrack.textContent);
+  updateMiniPlayerTitleOverflow();
   detailArtworkImage.src = TRANSITION_ARTWORK_PATH;
-  detailArtworkImage.alt = "Logo del Comune di Vicopisano";
+  detailArtworkImage.alt = "Stemma di Vicopisano";
   detailMascotImage.src = MASCOT_FRAME_PATHS[currentMascotFrame] || MASCOT_REST_FRAME;
   detailMascotImage.alt = "Mascotte animata di Brunelleschi";
   detailNumber.textContent = "";
@@ -3702,9 +4106,9 @@ function updateTransitionArtwork() {
   detailTitle.title = detailTitleText.textContent;
   detailDuration.textContent = "";
   detailDuration.hidden = true;
-  detailDescription.textContent = "";
-  playerTranscriptDock.hidden = true;
-  setDetailArtworkMode("mascot");
+  detailDescription.textContent = TRANSITION_TRANSCRIPT.segments.map(({ text }) => text).join(" ");
+  playerTranscriptDock.hidden = false;
+  setDetailArtworkMode("photo");
   schedulePlayerTitleOverflow();
 }
 
@@ -3805,16 +4209,50 @@ function updateMediaSession(tappa, selectedOption) {
 
 function seekCurrentAudio(offset) {
   const audio = getActiveAudio();
-  if (isTransitionAudioActive || !audio || !Number.isFinite(audio.duration)) {
+  if (isTransitionAudioActive || !audio) {
     return;
   }
 
-  audio.currentTime = Math.max(
-    0,
-    Math.min(audio.duration, audio.currentTime + offset),
-  );
+  const baseTime = pendingAudioSeek?.audio === audio
+    ? pendingAudioSeek.time
+    : audio.currentTime;
+  if (!seekAudioToTime(audio, baseTime + offset)) return;
+  isSeekingFromOverlay = false;
+  isSeekingFromMiniPlayer = false;
   updateMiniPlayerPlayback();
   showSeekFeedback(offset);
+}
+
+function getAudioSeekDuration(audio) {
+  if (Number.isFinite(audio?.duration) && audio.duration > 0) return audio.duration;
+  const seekable = audio?.seekable;
+  if (seekable?.length) {
+    const end = seekable.end(seekable.length - 1);
+    if (Number.isFinite(end) && end > 0) return end;
+  }
+  return null;
+}
+
+function seekAudioToTime(audio, requestedTime) {
+  if (!isLiveAudio(audio) || !Number.isFinite(requestedTime)) return false;
+  const duration = getAudioSeekDuration(audio);
+  const time = Math.max(0, duration === null ? requestedTime : Math.min(duration, requestedTime));
+  if (audio.readyState === HTMLMediaElement.HAVE_NOTHING) {
+    pendingAudioSeek = { audio, time };
+    if (audio.networkState === HTMLMediaElement.NETWORK_EMPTY) audio.load();
+    return true;
+  }
+  pendingAudioSeek = null;
+  audio.currentTime = time;
+  return true;
+}
+
+function applyPendingAudioSeek(audio) {
+  if (pendingAudioSeek?.audio !== audio) return;
+  const requestedTime = pendingAudioSeek.time;
+  pendingAudioSeek = null;
+  seekAudioToTime(audio, requestedTime);
+  updateMiniPlayerPlayback();
 }
 
 function showSeekFeedback(offset) {
@@ -3912,28 +4350,20 @@ function updateNextStopPreview(tappa) {
   }
 
   const currentIndex = tappe.findIndex((item) => item.numero === tappa.numero);
-  const isLastStop = currentIndex === tappe.length - 1;
-  const shouldLoopToFirstOnMobile = isLastStop && isMobileMapViewport();
-  const nextStop = currentIndex >= 0
-    ? (shouldLoopToFirstOnMobile ? tappe[0] : tappe[currentIndex + 1])
-    : null;
+  const nextStop = currentIndex >= 0 ? tappe[currentIndex + 1] : null;
   playerNextPreview.hidden = !nextStop;
   playerNextPreview.classList.toggle("is-completion-prominent", Boolean(nextStop && audioHasEnded));
 
   if (nextStop) {
     const strings = getUiStrings(currentLanguage);
-    playerNextPreviewLabel.textContent = shouldLoopToFirstOnMobile
-      ? (strings.firstStopPreview || "Torna alla prima tappa")
-      : (strings.nextStopPreview || "Prossima tappa");
+    playerNextPreviewLabel.textContent = strings.nextStopPreview || "Prossima tappa";
     playerNextPreviewTitle.textContent = `${nextStop.numero}. ${getStopTitle(nextStop)}`;
     playerNextPreviewImage.src = STOP_ARTWORKS[nextStop.numero] || WHITE_ARTWORK;
     playerNextPreviewImage.alt = `Immagine ${getStopTitle(nextStop)}`;
-    const nextActionLabel = shouldLoopToFirstOnMobile
-      ? (strings.openFirstStop || "Torna alla prima tappa")
-      : (strings.openNextStop || "Apri prossima tappa");
+    const nextActionLabel = strings.openNextStop || "Apri prossima tappa";
     const nextActionIcon = playerNextStopButton?.querySelector(".material-symbols-rounded");
     if (nextActionIcon) {
-      nextActionIcon.textContent = shouldLoopToFirstOnMobile ? "first_page" : "arrow_forward";
+      nextActionIcon.textContent = "arrow_forward";
     }
     playerNextStopButton?.setAttribute("aria-label", nextActionLabel);
     playerNextStopButton.title = nextActionLabel;
@@ -3977,13 +4407,14 @@ function resetPlayerTitleOverflow() {
   detailTitle.classList.remove("is-overflowing");
   detailTitle.style.removeProperty("--player-title-travel");
   detailTitle.style.removeProperty("--player-title-duration");
+  detailTitle.removeAttribute("tabindex");
 }
 
 function updatePlayerTitleOverflow() {
   playerTitleOverflowFrame = null;
   resetPlayerTitleOverflow();
 
-  if (!overlayOpen || !detailTitle || !detailTitleText) {
+  if (isTransitionAudioActive || !overlayOpen || !detailTitle || !detailTitleText) {
     return;
   }
 
@@ -3996,6 +4427,9 @@ function updatePlayerTitleOverflow() {
   detailTitle.style.setProperty("--player-title-travel", `${overflowDistance}px`);
   detailTitle.style.setProperty("--player-title-duration", `${duration}s`);
   detailTitle.classList.add("is-overflowing");
+  if (reducedMotionQuery.matches) {
+    detailTitle.tabIndex = 0;
+  }
 }
 
 function schedulePlayerTitleOverflow() {
@@ -4013,6 +4447,8 @@ function updateMiniPlayerPlayback() {
   updatePlaybackRateControl();
   playerNextPreview?.classList.toggle("is-completion-prominent", audioHasEnded);
   if (!audio) {
+    miniPlayerProgressInput.disabled = true;
+    playerProgressInput.disabled = true;
     syncMapLiveCaption();
     setPlaybackButtonIcon(miniPlayerToggle, "play_arrow", false);
     miniPlayerToggle.setAttribute("aria-label", strings.playerPlay);
@@ -4045,25 +4481,32 @@ function updateMiniPlayerPlayback() {
   );
   updateMiniPlayerExpandPresentation();
 
+  const seekDuration = getAudioSeekDuration(audio);
+  miniPlayerProgressInput.disabled = seekDuration === null || isTransitionAudioActive;
+  playerProgressInput.disabled = seekDuration === null || isTransitionAudioActive;
   const progress =
-    audio.duration && Number.isFinite(audio.duration)
-      ? (audio.currentTime / audio.duration) * 100
+    seekDuration !== null
+      ? (audio.currentTime / seekDuration) * 100
       : 0;
   miniPlayerProgressBar.style.width = `${Math.max(0, Math.min(progress, 100))}%`;
   miniPlayerCurrentTime.textContent = formatPlayerTime(audio.currentTime);
-  miniPlayerDurationTotal.textContent = Number.isFinite(audio.duration)
-    ? formatPlayerTime(audio.duration)
+  miniPlayerDurationTotal.textContent = seekDuration !== null
+    ? formatPlayerTime(seekDuration)
     : "--:--";
   playerCurrentTime.textContent = formatPlayerTime(audio.currentTime);
-  playerDurationTotal.textContent = formatPlayerTime(audio.duration);
+  playerDurationTotal.textContent = seekDuration !== null ? formatPlayerTime(seekDuration) : "--:--";
   if (!isSeekingFromOverlay) {
     playerProgressInput.value = `${Math.max(0, Math.min(progress, 100))}`;
   }
   if (!isSeekingFromMiniPlayer) {
     miniPlayerProgressInput.value = `${Math.max(0, Math.min(progress, 100))}`;
   }
-  playerProgressInput.style.setProperty("--seek-progress", `${Math.max(0, Math.min(progress, 100))}%`);
-  miniPlayerProgressInput.style.setProperty("--seek-progress", `${Math.max(0, Math.min(progress, 100))}%`);
+  playerProgressInput.style.setProperty("--seek-progress", isSeekingFromOverlay
+    ? `${playerProgressInput.value}%`
+    : `${Math.max(0, Math.min(progress, 100))}%`);
+  miniPlayerProgressInput.style.setProperty("--seek-progress", isSeekingFromMiniPlayer
+    ? `${miniPlayerProgressInput.value}%`
+    : `${Math.max(0, Math.min(progress, 100))}%`);
 
   if ("mediaSession" in navigator) {
     navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
@@ -4111,42 +4554,85 @@ function hideMapLiveCaption() {
   window.clearTimeout(mapCaptionHideTimer);
   mapCaptionHideTimer = window.setTimeout(() => {
     mapLiveCaption.hidden = true;
-  }, 280);
+    syncMobileMapCaptionReservedSpace();
+  }, TRANSCRIPT_FADE_DURATION_MS);
 }
 
-function getBalancedExploreCaptionText(text) {
-  if (!document.body.classList.contains("is-map-player-panel") || !mapLiveCaption) {
-    return text;
+function scheduleMapCaptionPauseFade(remainingMs) {
+  if (remainingMs <= 0) {
+    if (mapLiveCaption.classList.contains("is-visible")) {
+      hideMapLiveCaption();
+    }
+    return false;
   }
 
-  const words = text.trim().split(/\s+/).filter(Boolean);
-  if (words.length < 4) {
-    return text;
-  }
+  window.clearTimeout(mapCaptionHideTimer);
+  mapCaptionHideTimer = window.setTimeout(hideMapLiveCaption, remainingMs);
+  return true;
+}
 
+function getTimedMapCaptionText(segment, time) {
+  // A transcript cue can be much longer than two lines. Divide it into
+  // viewport-sized pages instead of hiding the remaining words with ellipsis.
+  const wasHidden = mapLiveCaption.hidden;
+  mapLiveCaption.hidden = false;
   const styles = window.getComputedStyle(mapLiveCaption);
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-  if (!context) {
-    return text;
+  const contentWidth = mapLiveCaption.clientWidth -
+    parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight) -
+    parseFloat(styles.borderLeftWidth) - parseFloat(styles.borderRightWidth);
+  const font = `${styles.fontStyle} ${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
+  const key = `${Math.floor(contentWidth)}:${font}`;
+  let cached = mapCaptionPageCache.get(segment);
+
+  if (!cached || cached.key !== key) {
+    const words = segment.text.trim().split(/\s+/).filter(Boolean);
+    const context = document.createElement("canvas").getContext("2d");
+    const pages = [];
+    if (!context || !Number.isFinite(contentWidth) || contentWidth < 80) {
+      pages.push(segment.text);
+    } else {
+      context.font = font;
+      const lineWidth = contentWidth * 0.94;
+      let lines = [];
+      let line = "";
+      for (const word of words) {
+        const candidate = line ? `${line} ${word}` : word;
+        if (!line || context.measureText(candidate).width <= lineWidth) {
+          line = candidate;
+          continue;
+        }
+        lines.push(line);
+        if (lines.length === 2) {
+          pages.push(lines.join("\n"));
+          lines = [];
+        }
+        line = word;
+      }
+      if (line) {
+        lines.push(line);
+      }
+      if (lines.length) {
+        pages.push(lines.join("\n"));
+      }
+    }
+    cached = { key, pages: pages.length ? pages : [segment.text] };
+    mapCaptionPageCache.set(segment, cached);
   }
 
-  context.font = `${styles.fontStyle} ${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
-  const totalWidth = context.measureText(words.join(" ")).width;
-  let leftWidth = 0;
-  let bestSplitIndex = 1;
-  let bestDifference = Number.POSITIVE_INFINITY;
+  mapLiveCaption.hidden = wasHidden;
 
-  for (let index = 1; index < words.length; index += 1) {
-    leftWidth += context.measureText(`${index === 1 ? "" : " "}${words[index - 1]}`).width;
-    const difference = Math.abs(totalWidth / 2 - leftWidth);
-    if (difference < bestDifference) {
-      bestDifference = difference;
-      bestSplitIndex = index;
+  const totalCharacters = cached.pages.reduce((sum, page) => sum + page.length, 0);
+  const duration = Math.max(0.001, segment.end - segment.start);
+  const elapsed = Math.max(0, Math.min(duration - 0.001, time - segment.start));
+  const characterPosition = totalCharacters * elapsed / duration;
+  let consumed = 0;
+  for (const page of cached.pages) {
+    consumed += page.length;
+    if (characterPosition < consumed) {
+      return page;
     }
   }
-
-  return `${words.slice(0, bestSplitIndex).join(" ")}\n${words.slice(bestSplitIndex).join(" ")}`;
+  return cached.pages.at(-1);
 }
 
 function getMobileTranscriptMode() {
@@ -4169,6 +4655,28 @@ function renderMobilePlayerTranscript() {
   playerMobileLiveTranscriptScroll.dataset.activeIndex = "-1";
   mobileTranscriptModeKey = "reference";
   mobileTranscriptSegmentIndex = -1;
+  mobileTranscriptSource = null;
+}
+
+function scrollActiveMobileTranscript({ immediate = false } = {}) {
+  if (!overlayOpen || isMobileMapPlayerMode() || !playerMobileLiveTranscriptScroll?.clientHeight) {
+    return;
+  }
+  const activeParagraph = playerMobileLiveTranscriptScroll.querySelector(
+    ".player-mobile-transcript-segment.is-active",
+  );
+  if (!activeParagraph) return;
+
+  const targetTop = Math.max(
+    0,
+    activeParagraph.offsetTop -
+      playerMobileLiveTranscriptScroll.clientHeight / 2 +
+      activeParagraph.offsetHeight / 2,
+  );
+  playerMobileLiveTranscriptScroll.scrollTo({
+    top: targetTop,
+    behavior: immediate || reducedMotionQuery.matches ? "instant" : "smooth",
+  });
 }
 
 function renderTimedMobileTranscript(segments, activeIndex, mode) {
@@ -4204,20 +4712,10 @@ function renderTimedMobileTranscript(segments, activeIndex, mode) {
   playerMobileLiveTranscriptScroll.dataset.activeIndex = String(activeIndex);
   mobileTranscriptModeKey = mode;
   mobileTranscriptSegmentIndex = activeIndex;
+  mobileTranscriptSource = activeMapTranscript;
 
   if (mode === "scroll" || mode === "full") {
-    const activeParagraph = playerMobileLiveTranscriptScroll.querySelector(
-      `[data-segment-index="${activeIndex}"]`,
-    );
-    if (activeParagraph) {
-      const targetTop = Math.max(
-        0,
-        activeParagraph.offsetTop -
-          playerMobileLiveTranscriptScroll.clientHeight / 2 +
-          activeParagraph.offsetHeight / 2,
-      );
-      playerMobileLiveTranscriptScroll.scrollTo({ top: targetTop, behavior: "smooth" });
-    }
+    scrollActiveMobileTranscript();
   }
 }
 
@@ -4228,14 +4726,23 @@ function syncMobilePlayerTranscript(segment = null, isPlaying = false) {
 
   window.requestAnimationFrame(syncMobileTranscriptSheetLayout);
 
+  if (!isPlaying && playerMobileLiveTranscript.classList.contains("is-hiding")) {
+    return;
+  }
+
   window.clearTimeout(mobileTranscriptHideTimer);
+  if (isPlaying) {
+    mobileTranscriptPausedAt = null;
+  } else if (mobileTranscriptPausedAt === null) {
+    mobileTranscriptPausedAt = performance.now();
+  }
   const hasTimedTranscript = Boolean(activeMapTranscript?.segments);
   if (segment) {
     mobileTranscriptLastSegment = segment;
   }
 
   const displaySegment = hasTimedTranscript
-    ? segment || (isPlaying ? mobileTranscriptLastSegment || activeMapTranscript.segments[0] : null)
+    ? segment || mobileTranscriptLastSegment || (isPlaying ? activeMapTranscript.segments[0] : null)
     : null;
 
   if (hasTimedTranscript && !displaySegment) {
@@ -4250,14 +4757,23 @@ function syncMobilePlayerTranscript(segment = null, isPlaying = false) {
     playerMobileLiveTranscript.classList.remove("is-hiding");
     window.requestAnimationFrame(() => playerMobileLiveTranscript.classList.add("is-visible"));
   } else {
-    mobileTranscriptHideTimer = window.setTimeout(() => {
+    const remainingMs = Math.max(0, TRANSCRIPT_PAUSE_FADE_DELAY_MS - (performance.now() - mobileTranscriptPausedAt));
+    const fadeTranscript = () => {
+      if (!playerMobileLiveTranscript.classList.contains("is-visible")) {
+        return;
+      }
       playerMobileLiveTranscript.classList.remove("is-visible");
       playerMobileLiveTranscript.classList.add("is-hiding");
       mobileTranscriptHideTimer = window.setTimeout(() => {
         playerMobileLiveTranscript.hidden = true;
         playerMobileLiveTranscript.classList.remove("is-hiding");
-      }, 280);
-    }, 2_600);
+      }, TRANSCRIPT_FADE_DURATION_MS);
+    };
+    if (remainingMs > 0) {
+      mobileTranscriptHideTimer = window.setTimeout(fadeTranscript, remainingMs);
+    } else {
+      fadeTranscript();
+    }
   }
 
   const nextText = hasTimedTranscript
@@ -4266,7 +4782,9 @@ function syncMobilePlayerTranscript(segment = null, isPlaying = false) {
   const mode = getMobileTranscriptMode();
   const activeIndex = hasTimedTranscript ? activeMapTranscript.segments.indexOf(displaySegment) : -1;
   const shouldRenderTimedTranscript = hasTimedTranscript && activeIndex >= 0;
-  const hasChanged = mode !== mobileTranscriptModeKey || activeIndex !== mobileTranscriptSegmentIndex;
+  const hasChanged = mode !== mobileTranscriptModeKey
+    || activeIndex !== mobileTranscriptSegmentIndex
+    || (shouldRenderTimedTranscript && mobileTranscriptSource !== activeMapTranscript);
 
   if (shouldRenderTimedTranscript && hasChanged) {
     renderTimedMobileTranscript(activeMapTranscript.segments, activeIndex, mode);
@@ -4288,10 +4806,22 @@ function syncMobilePlayerTranscript(segment = null, isPlaying = false) {
 
 function syncMapLiveCaption() {
   const audio = getActiveAudio();
-  const isPlaying = Boolean(audio && !audio.paused && !audio.ended);
+  // A newly selected track can already have a cue at 00:00. Do not treat it
+  // as a paused track until the browser has actually started playback.
+  const hasStartedPlayback = Boolean(audio && audioStartedPlayback.has(audio));
+  const isPlaying = Boolean(hasStartedPlayback && !audio.paused && !audio.ended);
   const segment = activeMapTranscript?.segments
     ? getTranscriptSegmentAtTime(activeMapTranscript.segments, audio?.currentTime || 0)
     : null;
+  const keepsMobileCaption = isMobileMapViewport() && (!overlayOpen || isMobileMapPlayerMode());
+  if (isPlaying) {
+    mapCaptionPausedAt = null;
+  } else if (hasStartedPlayback && mapCaptionPausedAt === null) {
+    mapCaptionPausedAt = performance.now();
+  }
+  const pauseFadeRemainingMs = mapCaptionPausedAt === null
+    ? 0
+    : Math.max(0, TRANSCRIPT_PAUSE_FADE_DELAY_MS - (performance.now() - mapCaptionPausedAt));
 
   syncMobilePlayerTranscript(segment, isPlaying);
 
@@ -4299,15 +4829,45 @@ function syncMapLiveCaption() {
     return;
   }
 
-  if (!segment || !segment.text) {
-    window.clearTimeout(mapCaptionHideTimer);
+  if (!hasStartedPlayback) {
     hideMapLiveCaption();
+    syncMobileMapCaptionReservedSpace();
     return;
   }
 
-  const renderedCaptionText = getBalancedExploreCaptionText(segment.text);
+  if (isMobileMapViewport() && overlayOpen && !isMobileMapPlayerMode()) {
+    hideMapLiveCaption();
+    syncMobileMapCaptionReservedSpace();
+    return;
+  }
+
+  if (!segment || !segment.text) {
+    if (activeMapCaptionText && ((isPlaying && keepsMobileCaption) || (!isPlaying && scheduleMapCaptionPauseFade(pauseFadeRemainingMs)))) {
+      if (isPlaying) {
+        window.clearTimeout(mapCaptionHideTimer);
+      }
+      mapLiveCaption.hidden = false;
+      window.requestAnimationFrame(() => mapLiveCaption.classList.add("is-visible"));
+      syncMobileMapCaptionReservedSpace();
+      return;
+    }
+    if (mapLiveCaption.classList.contains("is-visible")) {
+      hideMapLiveCaption();
+    }
+    return;
+  }
+
+  const renderedCaptionText = getTimedMapCaptionText(segment, audio?.currentTime || 0);
   if (activeMapCaptionText !== segment.text || mapLiveCaption.textContent !== renderedCaptionText) {
+    const isNewCaption = activeMapCaptionText !== segment.text;
     activeMapCaptionText = segment.text;
+    if (isNewCaption && keepsMobileCaption && mapLiveCaption.classList.contains("is-visible")) {
+      mapLiveCaption.classList.remove("is-visible");
+      window.requestAnimationFrame(() => {
+        mapLiveCaption.classList.add("is-visible");
+        syncMobileMapCaptionReservedSpace();
+      });
+    }
     mapLiveCaption.textContent = renderedCaptionText;
   }
 
@@ -4315,11 +4875,17 @@ function syncMapLiveCaption() {
     window.clearTimeout(mapCaptionHideTimer);
     mapLiveCaption.hidden = false;
     window.requestAnimationFrame(() => mapLiveCaption.classList.add("is-visible"));
+    syncMobileMapCaptionReservedSpace();
     return;
   }
 
-  window.clearTimeout(mapCaptionHideTimer);
-  mapCaptionHideTimer = window.setTimeout(hideMapLiveCaption, 2600);
+  if (scheduleMapCaptionPauseFade(pauseFadeRemainingMs)) {
+    mapLiveCaption.hidden = false;
+    window.requestAnimationFrame(() => mapLiveCaption.classList.add("is-visible"));
+    syncMobileMapCaptionReservedSpace();
+    return;
+  }
+
 }
 
 function loadMapTranscript(tappa, selectedOption) {
@@ -4327,6 +4893,8 @@ function loadMapTranscript(tappa, selectedOption) {
   const token = ++mapCaptionLoadToken;
   activeMapTranscript = null;
   activeMapCaptionText = "";
+  mapCaptionPausedAt = null;
+  mobileTranscriptPausedAt = null;
   mobileTranscriptLastSegment = null;
   window.clearTimeout(mapCaptionHideTimer);
   hideMapLiveCaption();
@@ -4378,7 +4946,12 @@ function bindAudioLifecycle(audio) {
   };
 
   audio.addEventListener("play", startAudioAndMascot);
-  audio.addEventListener("playing", startAudioAndMascot);
+  audio.addEventListener("playing", () => {
+    if (isLiveAudio(audio)) {
+      audioStartedPlayback.add(audio);
+    }
+    startAudioAndMascot();
+  });
   audio.addEventListener("seeked", () => {
     if (!isLiveAudio(audio)) {
       return;
@@ -4415,6 +4988,7 @@ function bindAudioLifecycle(audio) {
     if (!isLiveAudio(audio)) {
       return;
     }
+    applyPendingAudioSeek(audio);
     setAudioFeedbackByKey("");
     updateMiniPlayerPlayback();
   });
@@ -4536,7 +5110,6 @@ function startTransitionAudio(nextStop) {
     return;
   }
 
-  const strings = getUiStrings(currentLanguage);
   const transitionAudio = document.createElement("audio");
   transitionAudio.controls = false;
   transitionAudio.preload = "auto";
@@ -4548,7 +5121,7 @@ function startTransitionAudio(nextStop) {
   transitionAudio.playbackRate = 1;
   transitionAudio.volume = 1;
   transitionAudio.muted = false;
-  transitionAudio.setAttribute("aria-label", strings.audioAvailable || "Audio disponibile");
+  transitionAudio.setAttribute("aria-label", "In cammino verso la prossima tappa");
 
   pendingTransitionStop = nextStop;
   setTransitionAudioMode(true);
@@ -4560,9 +5133,27 @@ function startTransitionAudio(nextStop) {
   audioWrapper.replaceChildren(transitionAudio);
   currentAudio = transitionAudio;
   currentSelectedOption = null;
-  activeMapTranscript = null;
+  // Ignore any stop transcript fetch that was still resolving as the previous
+  // audio ended, so its late response cannot replace the transition captions.
+  mapCaptionLoadToken += 1;
+  activeMapTranscript = TRANSITION_TRANSCRIPT;
   activeMapCaptionText = "";
   mobileTranscriptLastSegment = null;
+  mobileTranscriptModeKey = "";
+  mobileTranscriptSegmentIndex = -1;
+  mobileTranscriptSource = null;
+  mapCaptionPausedAt = null;
+  mobileTranscriptPausedAt = null;
+  window.clearTimeout(mobileTranscriptHideTimer);
+  if (playerMobileLiveTranscript) {
+    playerMobileLiveTranscript.hidden = true;
+    playerMobileLiveTranscript.classList.remove("is-visible", "is-updating", "is-hiding");
+  }
+  if (playerMobileLiveTranscriptScroll) {
+    playerMobileLiveTranscriptScroll.replaceChildren();
+    playerMobileLiveTranscriptScroll.dataset.activeIndex = "-1";
+    playerMobileLiveTranscriptScroll.scrollTop = 0;
+  }
   window.clearTimeout(mapCaptionHideTimer);
   hideMapLiveCaption();
   updateTransitionArtwork();
@@ -4711,14 +5302,20 @@ function getDetailCopy(tappa, selectedOption) {
 function renderGlobalLanguageSelector() {
   const strings = getUiStrings(currentLanguage);
   buildLanguageChips(globalLanguageChips, {
-    onSelect: (languageCode) => {
+    onSelect: (languageCode, chip) => {
+      if (languageCode !== "IT") {
+        showLanguageUnavailable(languageCode, chip);
+        replayAnimationClass(chip, "is-pulsing", 460);
+        return;
+      }
+
       if (languageCode === currentLanguage) {
         closeGlobalLanguageMenu();
         return;
       }
 
       setCurrentLanguage(languageCode);
-      startGuide();
+      closeGlobalLanguageMenu();
     },
   });
   if (globalLanguageCurrentLabel) {
@@ -4756,6 +5353,7 @@ function bindGlobalLanguageSelector() {
 
   document.addEventListener("pointerdown", (event) => {
     if (
+      languageUnavailableModal?.hidden !== false &&
       globalLanguageSelector?.classList.contains("is-open") &&
       !globalLanguageSelector.contains(event.target)
     ) {
@@ -4909,8 +5507,33 @@ function clearGuideHighlight() {
     element.classList.remove("is-guide-highlighted");
   });
   document.body.classList.remove("guide-map-control-focus");
+  document.body.classList.remove("guide-map-intro-focus");
+  document.body.classList.remove("guide-mini-player-expand-focus");
   document.documentElement.style.removeProperty("--guide-spotlight-x");
   document.documentElement.style.removeProperty("--guide-spotlight-y");
+  stopsPanel?.style.removeProperty("--guide-stops-visible-height");
+}
+
+function syncStopsGuideHighlight() {
+  if (!stopsPanel?.classList.contains("is-guide-highlighted") || !miniPlayer) {
+    return;
+  }
+
+  const panelRect = stopsPanel.getBoundingClientRect();
+  const playerRect = miniPlayer.getBoundingClientRect();
+  let playerZoneTop = playerRect.top;
+
+  // The live caption belongs to the audio area even while it is fading out.
+  // Its hidden attribute is set only after the exit transition completes.
+  if (mapLiveCaption && !mapLiveCaption.hidden) {
+    const captionRect = mapLiveCaption.getBoundingClientRect();
+    if (captionRect.height > 0) {
+      playerZoneTop = Math.min(playerZoneTop, captionRect.top);
+    }
+  }
+
+  const visibleHeight = Math.max(0, Math.min(panelRect.height, playerZoneTop - panelRect.top - 16));
+  stopsPanel.style.setProperty("--guide-stops-visible-height", `${visibleHeight}px`);
 }
 
 function setGuideBackgroundInert(isInert) {
@@ -4931,9 +5554,6 @@ function setGuideBackgroundInert(isInert) {
 
 let activeGuideStepIndex = 0;
 let guideOpenedPlayerOverlay = false;
-let guideActionDemoTimer = null;
-let guideActionDemoCompletionTimer = null;
-let isGuideActionDemoRunning = false;
 let guidePositionFrame = null;
 let guidePositionTimer = null;
 let guideArrivalTimer = null;
@@ -4944,15 +5564,10 @@ const guideCardMotionTimings = {
   exit: 220,
   enter: 420,
 };
-const guideActionDemoTimings = {
-  reducedMotion: { click: 85, complete: 187 },
-  standard: { click: 1_275, complete: 2_295 },
-  explore: { click: 1_275, complete: 2_295 },
-};
 const guideExploreTransitionTimings = {
-  map: 850,
-  panelDelay: 200,
-  panel: 650,
+  map: 595,
+  panelDelay: 140,
+  panel: 455,
 };
 const guidePointerClasses = [
   "is-pointing-left",
@@ -4963,24 +5578,6 @@ const guidePointerClasses = [
 
 function clearGuidePointer() {
   guideCard?.classList.remove(...guidePointerClasses);
-}
-
-function clearGuideActionDemo() {
-  window.clearTimeout(guideActionDemoTimer);
-  window.clearTimeout(guideActionDemoCompletionTimer);
-  guideActionDemoTimer = null;
-  guideActionDemoCompletionTimer = null;
-  isGuideActionDemoRunning = false;
-  guideActionDemo?.classList.remove("is-visible", "is-arriving", "is-clicking", "is-static");
-  guideActionDemo?.classList.remove("is-explore-demo");
-  guideActionDemo?.style.removeProperty("--guide-action-demo-x");
-  guideActionDemo?.style.removeProperty("--guide-action-demo-y");
-  guideNextButton?.removeAttribute("disabled");
-  if (guidePrevButton) {
-    const isFirstGuideStep = activeGuideStepIndex === 0;
-    guidePrevButton.disabled = isFirstGuideStep;
-    guidePrevButton.classList.toggle("is-disabled", isFirstGuideStep);
-  }
 }
 
 function isGuideExitConfirmationOpen() {
@@ -5000,7 +5597,8 @@ function closeGuideExitConfirmation({ restoreFocus = true } = {}) {
 }
 
 function openGuideExitConfirmation() {
-  if (!guideLayer || guideLayer.classList.contains("is-hidden") || isGuideExitConfirmationOpen()) {
+  if (!guideLayer || guideLayer.classList.contains("is-hidden") ||
+      guideLayer.classList.contains("is-closing-explore") || isGuideExitConfirmationOpen()) {
     return;
   }
 
@@ -5011,53 +5609,6 @@ function openGuideExitConfirmation() {
   guideExitConfirm.hidden = false;
   guideLayer.classList.add("is-exit-confirming");
   guideExitConfirmCancel.focus({ preventScroll: true });
-}
-
-function playGuideActionDemo(target, onComplete, { variant = "standard" } = {}) {
-  if (isGuideActionDemoRunning) {
-    return;
-  }
-
-  if (!guideActionDemo || !target) {
-    onComplete?.();
-    return;
-  }
-
-  const targetRect = target.getBoundingClientRect();
-  if (!targetRect.width || !targetRect.height) {
-    onComplete?.();
-    return;
-  }
-
-  const reducedMotion = reducedMotionQuery.matches;
-  const targetX = targetRect.left + targetRect.width / 2;
-  const targetY = targetRect.top + targetRect.height / 2;
-  isGuideActionDemoRunning = true;
-  guideNextButton?.setAttribute("disabled", "");
-  guidePrevButton?.setAttribute("disabled", "");
-  guideActionDemo.style.setProperty("--guide-action-demo-x", `${targetX}px`);
-  guideActionDemo.style.setProperty("--guide-action-demo-y", `${targetY}px`);
-  guideActionDemo.classList.remove("is-arriving", "is-clicking", "is-static");
-  guideActionDemo.classList.toggle("is-explore-demo", variant === "explore");
-  guideActionDemo.classList.add("is-visible");
-
-  if (reducedMotion) {
-    guideActionDemo.classList.add("is-static");
-  } else {
-    window.requestAnimationFrame(() => guideActionDemo.classList.add("is-arriving"));
-  }
-
-  const timings = reducedMotion
-    ? guideActionDemoTimings.reducedMotion
-    : guideActionDemoTimings[variant] || guideActionDemoTimings.standard;
-  guideActionDemoTimer = window.setTimeout(() => {
-    guideActionDemo?.classList.add("is-clicking");
-  }, timings.click);
-
-  guideActionDemoCompletionTimer = window.setTimeout(() => {
-    clearGuideActionDemo();
-    onComplete?.();
-  }, timings.complete);
 }
 
 function getStopsGuideTarget() {
@@ -5087,14 +5638,14 @@ function getGuideSteps() {
       target: miniPlayerExpand || miniPlayer,
       text: strings.guideExplore,
       placement: "miniPlayerExpand",
-      guideActionDemo: "expand",
+      guideTransitionAction: "expand",
     });
     steps.push({
       target: mapStageFrame,
       text: strings.guideExploreView,
       opensFullPlayer: true,
       placement: "exploreMapBottom",
-      guideActionDemo: "close",
+      guideTransitionAction: "close",
     });
     return steps;
   }
@@ -5104,8 +5655,42 @@ function getGuideSteps() {
     highlightTarget: playerSheet,
     text: strings.guideFullPlayer,
     opensFullPlayer: true,
+    playerMode: "map",
     highlight: false,
     floatingPlacement: "fullPlayerTop",
+  });
+  steps.push({
+    target: playerMapButton,
+    highlightTarget: playerMapButton,
+    text: strings.guidePlayerMapToggle,
+    opensFullPlayer: true,
+    playerMode: "map",
+    floatingPlacement: "fullPlayerTop",
+  });
+  steps.push({
+    target: playerSheet,
+    highlightTarget: playerSheet,
+    text: strings.guideListeningView,
+    opensFullPlayer: true,
+    playerMode: "listen",
+    floatingPlacement: "fullPlayerBottom",
+  });
+  steps.push({
+    target: playerMapButton,
+    highlightTarget: playerMapButton,
+    text: strings.guideReturnToMap,
+    opensFullPlayer: true,
+    playerMode: "listen",
+    floatingPlacement: "fullPlayerBottom",
+  });
+  steps.push({
+    target: playerCloseButton,
+    highlightTarget: playerCloseButton,
+    text: strings.guideClosePlayer,
+    opensFullPlayer: true,
+    playerMode: "map",
+    floatingPlacement: "fullPlayerTop",
+    guideTransitionAction: "closePlayer",
   });
   return steps;
 }
@@ -5202,7 +5787,7 @@ function scrollGuideTargetIntoView(target) {
   }
 }
 
-function positionFullPlayerGuideCard() {
+function positionFullPlayerGuideCard(step = null) {
   if (!guideCard) {
     return;
   }
@@ -5223,7 +5808,9 @@ function positionFullPlayerGuideCard() {
     ? safeLeft + (availableWidth - cardWidth) / 2
     : safeLeft + Math.max(0, (availableWidth - cardWidth) * 0.58);
   const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
-  const preferredTop = Math.max(16, sheetRect.top + 16);
+  const preferredTop = step?.floatingPlacement === "fullPlayerBottom"
+    ? window.innerHeight - cardHeight - 16
+    : isMobileMapViewport() ? 16 : Math.max(16, sheetRect.top + 16);
   const top = Math.max(16, Math.min(window.innerHeight - cardHeight - 16, preferredTop));
 
   guideCard.style.setProperty("--guide-floating-left", `${left}px`);
@@ -5239,10 +5826,10 @@ function positionGuideCard(target, step = null) {
 
   guideCard.classList.remove("is-mobile-directions-guide");
   guideCard.classList.remove("is-above-guide-target");
-  const isFloatingFullPlayerStep = step?.floatingPlacement === "fullPlayerTop";
+  const isFloatingFullPlayerStep = ["fullPlayerTop", "fullPlayerBottom"].includes(step?.floatingPlacement);
   guideCard.classList.toggle("is-floating-guide-card", isFloatingFullPlayerStep);
   if (isFloatingFullPlayerStep) {
-    positionFullPlayerGuideCard();
+    positionFullPlayerGuideCard(step);
     return;
   }
 
@@ -5314,6 +5901,7 @@ function positionGuideCard(target, step = null) {
 
   if (isStopsTitleGuideTarget) {
     const gap = 16;
+    syncStopsGuideHighlight();
     const top = Math.max(16, rect.top - cardHeight - gap);
     const preferredLeft = rect.left + rect.width / 2 - cardWidth / 2;
     const left = Math.max(16, Math.min(window.innerWidth - cardWidth - 16, preferredLeft));
@@ -5441,12 +6029,24 @@ function renderGuideStep() {
     guideOpenedPlayerOverlay = true;
     openPlayerOverlay(miniPlayer || helpButton || document.activeElement, { keepGuideOpen: true });
   }
+  if (step?.playerMode && isMobileMapViewport() && overlayOpen &&
+      isMobileMapPlayerMode() !== (step.playerMode === "map")) {
+    setMobileMapPlayerMode(step.playerMode === "map");
+  }
   const guideTarget = step?.target || (step?.opensFullPlayer ? getFullPlayerGuideTarget() : document.body);
   const strings = getUiStrings(currentLanguage);
   clearGuideHighlight();
   document.body.classList.toggle(
     "guide-map-control-focus",
     guideTarget === mapRecenterButton || guideTarget === mapDirectionsButton,
+  );
+  document.body.classList.toggle(
+    "guide-map-intro-focus",
+    activeGuideStepIndex === 0 && guideTarget === mapStageFrame,
+  );
+  document.body.classList.toggle(
+    "guide-mini-player-expand-focus",
+    guideTarget === miniPlayerExpand,
   );
   window.cancelAnimationFrame(guidePositionFrame);
   window.clearTimeout(guidePositionTimer);
@@ -5483,6 +6083,7 @@ function renderGuideStep() {
   document.body.classList.add("guide-open");
   setGuideBackgroundInert(true);
   scrollGuideTargetIntoView(guideTarget);
+  syncStopsGuideHighlight();
   const renderedStepIndex = activeGuideStepIndex;
   const positionCurrentGuideStep = () => {
     if (
@@ -5512,12 +6113,21 @@ function renderGuideStep() {
   }, reducedMotionQuery.matches ? 0 : positionDelay);
 }
 
+function finishGuideClose() {
+  guideLayer?.classList.add("is-hidden");
+  guideLayer?.classList.remove("is-closing-explore");
+  guideCard?.classList.remove("is-repositioning");
+  isGuideExploreTransitionRunning = false;
+  document.body.classList.remove("guide-open");
+  setGuideBackgroundInert(false);
+  clearGuideHighlight();
+}
+
 function closeGuide({ scrollAfterExploreClose = false } = {}) {
-  if (!guideLayer) {
+  if (!guideLayer || guideLayer.classList.contains("is-closing-explore")) {
     return;
   }
 
-  clearGuideActionDemo();
   closeGuideExitConfirmation({ restoreFocus: false });
   window.cancelAnimationFrame(guidePositionFrame);
   window.clearTimeout(guidePositionTimer);
@@ -5530,13 +6140,20 @@ function closeGuide({ scrollAfterExploreClose = false } = {}) {
   isGuideExploreTransitionRunning = false;
   guideStepEntersImmediately = false;
   guideCard?.classList.remove("is-arriving");
-  guideCard?.classList.remove("is-repositioning");
   const shouldCloseGuidePlayer = guideOpenedPlayerOverlay && overlayOpen;
   guideOpenedPlayerOverlay = false;
-  guideLayer.classList.add("is-hidden");
-  document.body.classList.remove("guide-open");
-  setGuideBackgroundInert(false);
-  clearGuideHighlight();
+  const hasAnimatedExploreReturn = scrollAfterExploreClose && shouldCloseGuidePlayer &&
+    playerOverlay?.classList.contains("is-map-panel") &&
+    window.matchMedia("(min-width: 1024px)").matches && !reducedMotionQuery.matches;
+  if (hasAnimatedExploreReturn) {
+    isGuideExploreTransitionRunning = true;
+    guideCard?.classList.add("is-repositioning");
+    guideLayer.classList.add("is-closing-explore");
+    closePlayerOverlay({ returnToGuideHome: true });
+    return;
+  }
+
+  finishGuideClose();
   if (shouldCloseGuidePlayer) {
     closePlayerOverlay({ returnToGuideHome: scrollAfterExploreClose });
     if (scrollAfterExploreClose) {
@@ -5564,6 +6181,19 @@ function startGuide() {
 }
 
 function bindHelpControls() {
+  if (stopsPanel && miniPlayer) {
+    const guideResizeObserver = new ResizeObserver(syncStopsGuideHighlight);
+    [stopsPanel, miniPlayer, mapLiveCaption].filter(Boolean).forEach((element) => {
+      guideResizeObserver.observe(element);
+    });
+    if (mapLiveCaption) {
+      new MutationObserver(syncStopsGuideHighlight).observe(mapLiveCaption, {
+        attributes: true,
+        attributeFilter: ["class", "hidden"],
+      });
+    }
+    window.addEventListener("scroll", syncStopsGuideHighlight, { passive: true });
+  }
   helpButton?.addEventListener("click", startGuide);
   guideSkipButton?.addEventListener("click", closeGuide);
   guideLayer?.addEventListener("click", (event) => {
@@ -5579,7 +6209,7 @@ function bindHelpControls() {
     closeGuide();
   });
   guidePrevButton?.addEventListener("click", () => {
-    if (isGuideActionDemoRunning || isGuideExploreTransitionRunning) {
+    if (isGuideExploreTransitionRunning) {
       return;
     }
     if (activeGuideStepIndex <= 0) {
@@ -5587,7 +6217,7 @@ function bindHelpControls() {
     }
 
     const steps = getGuideSteps();
-    if (steps[activeGuideStepIndex]?.opensFullPlayer && guideOpenedPlayerOverlay && overlayOpen) {
+    if (!steps[activeGuideStepIndex - 1]?.opensFullPlayer && guideOpenedPlayerOverlay && overlayOpen) {
       closePlayerOverlay();
       guideOpenedPlayerOverlay = false;
     }
@@ -5597,14 +6227,16 @@ function bindHelpControls() {
   guideNextButton?.addEventListener("click", () => {
     const steps = getGuideSteps();
     const currentStep = steps[activeGuideStepIndex];
-    if (isGuideActionDemoRunning || isGuideExploreTransitionRunning) {
+    if (isGuideExploreTransitionRunning) {
       return;
     }
     if (activeGuideStepIndex >= steps.length - 1) {
-      if (currentStep?.guideActionDemo === "close") {
-        playGuideActionDemo(playerCloseButton, () => {
-          closeGuide({ scrollAfterExploreClose: true });
-        });
+      if (currentStep?.guideTransitionAction === "close") {
+        closeGuide({ scrollAfterExploreClose: true });
+      } else if (currentStep?.guideTransitionAction === "closePlayer") {
+        // Finish the mobile tour through the same X action used by visitors.
+        playerCloseButton?.click();
+        closeGuide();
       } else {
         closeGuide();
         scrollPageToTop();
@@ -5612,20 +6244,18 @@ function bindHelpControls() {
       return;
     }
 
-    if (currentStep?.guideActionDemo === "expand") {
-      playGuideActionDemo(miniPlayerExpand || miniPlayer, () => {
-        const guideExploreOrigin = mapStageFrame?.getBoundingClientRect();
-        isGuideExploreTransitionRunning = true;
-        guideCard?.classList.add("is-repositioning");
-        setMapFullscreen(true, { guideExploreOrigin });
-        guideExploreTransitionTimer = window.setTimeout(() => {
-          guideExploreTransitionTimer = null;
-          isGuideExploreTransitionRunning = false;
-          guideStepEntersImmediately = true;
-          activeGuideStepIndex += 1;
-          renderGuideStepAfterExploreLayout();
-        }, guideExploreTransitionTimings.map);
-      }, { variant: "explore" });
+    if (currentStep?.guideTransitionAction === "expand") {
+      const guideExploreOrigin = mapStageFrame?.getBoundingClientRect();
+      isGuideExploreTransitionRunning = true;
+      guideCard?.classList.add("is-repositioning");
+      setMapFullscreen(true, { guideExploreOrigin });
+      guideExploreTransitionTimer = window.setTimeout(() => {
+        guideExploreTransitionTimer = null;
+        isGuideExploreTransitionRunning = false;
+        guideStepEntersImmediately = true;
+        activeGuideStepIndex += 1;
+        renderGuideStepAfterExploreLayout();
+      }, guideExploreTransitionTimings.map);
       return;
     }
 
@@ -5792,18 +6422,12 @@ function renderDetailCopy(tappa) {
   syncDetailCopyPanel();
 }
 
-function popupHtml(tappa) {
-  return `
-    <div class="popup-content">
-      <h3 class="popup-title">${tappa.numero}. ${getStopTitle(tappa)}</h3>
-      ${hasMeaningfulDuration(tappa.durata) ? `<p class="popup-meta">${tappa.durata}</p>` : ""}
-    </div>
-  `;
-}
-
 function renderAudioContent(tappa) {
   audioSessionToken += 1;
   audioPlayRequestToken += 1;
+  pendingAudioSeek = null;
+  isSeekingFromOverlay = false;
+  isSeekingFromMiniPlayer = false;
   audioWrapper.innerHTML = "";
   setAudioFeedbackByKey("");
   const selectedOption = getSelectedAudioOption(tappa);
@@ -5866,7 +6490,11 @@ function focusStopByOffset(offset, options = {}) {
     manuallyNavigatedFromAudio = audio;
   }
 
-  const nextIndex = (currentIndex + offset + tappe.length) % tappe.length;
+  const nextIndex = currentIndex + offset;
+  if (nextIndex < 0 || nextIndex >= tappe.length) {
+    return;
+  }
+
   focusStop(tappe[nextIndex], {
     autoplay: true,
     openOverlay: overlayOpen,
@@ -5878,7 +6506,10 @@ function handlePreviousAction(options = {}) {
   const now = Date.now();
   const audio = audioWrapper.querySelector("audio");
 
-  if (lastPrevInteractionAt && now - lastPrevInteractionAt < 450) {
+  if (
+    lastPrevInteractionAt &&
+    now - lastPrevInteractionAt <= PREVIOUS_TRACK_DOUBLE_TAP_WINDOW_MS
+  ) {
     lastPrevInteractionAt = 0;
     focusStopByOffset(-1, { manual: true, scrollRouteIntoView: options.scrollRouteIntoView === true });
     return;
@@ -5886,13 +6517,10 @@ function handlePreviousAction(options = {}) {
 
   lastPrevInteractionAt = now;
 
-  if (audio && audio.currentTime > 0.25) {
+  if (audio) {
     audio.currentTime = 0;
     updateMiniPlayerPlayback();
-    return;
   }
-
-  focusStopByOffset(-1, { manual: true, scrollRouteIntoView: options.scrollRouteIntoView === true });
 }
 
 function formatPlaybackRate(rate) {
@@ -6024,7 +6652,12 @@ function handlePlayerKeydown(event) {
     return;
   }
 
-  if (!overlayOpen || event.key !== "Tab" || playerOverlay?.classList.contains("is-map-panel")) {
+  if (
+    !overlayOpen ||
+    event.key !== "Tab" ||
+    playerOverlay?.classList.contains("is-map-panel") ||
+    isMobileMapPlayerMode()
+  ) {
     return;
   }
 
@@ -6059,12 +6692,15 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   if (!options.keepGuideOpen) {
     closeGuide();
   }
+  const opensInMobileMapMode = isMobileMapViewport();
+  if (opensInMobileMapMode) {
+    setMobileMapPlayerMode(true);
+  }
   const opensAsMapPanel =
     isMapFullscreenActive() && window.matchMedia("(min-width: 1024px)").matches;
 
-  // On desktop Explore mode keeps the map open beside a non-modal player panel.
-  // On mobile the player replaces the expanded map to preserve usable space.
-  if (isMapFullscreenActive() && !opensAsMapPanel) {
+  // Desktop Explore and the mobile map-player view keep the expanded map visible.
+  if (isMapFullscreenActive() && !opensAsMapPanel && !opensInMobileMapMode) {
     setMapFullscreen(false);
   }
   window.clearTimeout(playerOpenTransitionTimer);
@@ -6081,13 +6717,17 @@ function openPlayerOverlay(trigger = document.activeElement, options = {}) {
   overlayOpen = true;
   playerOverlay.classList.toggle("is-map-panel", opensAsMapPanel);
   document.body.classList.toggle("is-map-player-panel", opensAsMapPanel);
-  playerSheet?.setAttribute("aria-modal", String(!opensAsMapPanel));
+  playerSheet?.setAttribute("aria-modal", String(!opensAsMapPanel && !opensInMobileMapMode));
   playerOverlay.classList.remove("is-closing");
   playerOverlay.classList.remove("is-hidden");
   playerOverlay.setAttribute("aria-hidden", "false");
   // Explore mode is a non-modal layout: map and mini-player remain interactive.
-  setPlayerBackgroundInert(!opensAsMapPanel);
+  setPlayerBackgroundInert(!opensAsMapPanel && !opensInMobileMapMode);
+  updatePlayerMapButtonPresentation();
   document.body.classList.add("player-open");
+  // Explore changes the caption's available width; repaginate even when audio is paused.
+  window.requestAnimationFrame(syncMapLiveCaption);
+  syncMascotTapSemantics();
   if (opensAsMapPanel) {
     window.setTimeout(() => map.invalidateSize(), 80);
   }
@@ -6122,6 +6762,19 @@ function syncPlayerViewportMode() {
 
   const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
   const isExplorePanel = playerOverlay.classList.contains("is-map-panel");
+  const isMobileMapMode = isMobileMapPlayerMode();
+  if (isDesktop && isMobileMapMode) {
+    playerOverlay.classList.remove("is-mobile-map-player");
+    document.body.classList.remove("is-mobile-map-player-mode");
+    playerOverlay.classList.add("is-map-panel");
+    document.body.classList.add("is-map-player-panel", "is-map-fullscreen");
+    playerSheet?.setAttribute("aria-modal", "false");
+    setPlayerBackgroundInert(false);
+    updatePlayerMapButtonPresentation();
+    syncMascotTapSemantics();
+    window.setTimeout(() => map.invalidateSize(), 80);
+    return;
+  }
   if (isDesktop && !isExplorePanel) {
     mapStageFrame.classList.add("is-expanded");
     document.body.classList.add("is-map-fullscreen", "is-map-player-panel");
@@ -6130,14 +6783,14 @@ function syncPlayerViewportMode() {
     setPlayerBackgroundInert(false);
     updateMapFullscreenButton();
     updateMapExploreStop();
+    syncMascotTapSemantics();
     window.setTimeout(() => map.invalidateSize(), 80);
   } else if (!isDesktop && isExplorePanel) {
-    mapStageFrame.classList.remove("is-expanded");
-    document.body.classList.remove("is-map-fullscreen", "is-map-player-panel");
     playerOverlay.classList.remove("is-map-panel");
-    playerSheet?.setAttribute("aria-modal", "true");
-    setPlayerBackgroundInert(true);
+    document.body.classList.remove("is-map-player-panel");
+    setMobileMapPlayerMode(true);
     updateMapFullscreenButton();
+    syncMascotTapSemantics();
     window.setTimeout(() => map.invalidateSize(), 80);
   }
 }
@@ -6189,6 +6842,7 @@ function closePlayerOverlay({ returnToGuideHome = false, returnToMap = false } =
   if (!overlayOpen) {
     return;
   }
+  closePlayerContextGuide({ restoreFocus: false });
   overlayOpen = false;
   window.clearTimeout(playerOpenTransitionTimer);
   window.clearTimeout(playerCloseTransitionTimer);
@@ -6198,6 +6852,7 @@ function closePlayerOverlay({ returnToGuideHome = false, returnToMap = false } =
     wasMapPanel &&
     window.matchMedia("(min-width: 1024px)").matches &&
     !reducedMotionQuery.matches;
+  const wasMobileMapMode = isMobileMapPlayerMode();
   clearPlayerSharedTransitionNames();
   closePlayerLanguageMenu();
   playerOverlay.setAttribute("aria-hidden", "true");
@@ -6213,20 +6868,34 @@ function closePlayerOverlay({ returnToGuideHome = false, returnToMap = false } =
     playerOverlay.classList.add("is-hidden");
     playerOverlay.classList.remove("is-closing");
     playerOverlay.classList.remove("is-map-panel");
+    playerOverlay.classList.remove("is-mobile-map-player");
     document.body.classList.remove("is-map-player-panel");
+    document.body.classList.remove("is-mobile-map-player-mode");
     playerSheet?.setAttribute("aria-modal", "true");
+    syncMascotTapSemantics();
     setPlayerBackgroundInert(false);
     document.body.classList.remove("player-open");
+    syncMapLiveCaption();
+    if (wasMobileMapMode) {
+      setMapFullscreen(false);
+      restoreStandardMapBounds();
+    }
     if (wasMapPanel) {
       setMapFullscreen(false);
-      window.setTimeout(() => {
+      if (returnToGuideHome) {
+        window.scrollTo({ top: 0, behavior: "auto" });
         map.invalidateSize();
-        mapStageFrame?.scrollIntoView({
-          behavior: reducedMotionQuery.matches ? "auto" : "smooth",
-          block: "start",
-        });
         focusMapReturnTarget();
-      }, 80);
+      } else {
+        window.setTimeout(() => {
+          map.invalidateSize();
+          mapStageFrame?.scrollIntoView({
+            behavior: reducedMotionQuery.matches ? "auto" : "smooth",
+            block: "start",
+          });
+          focusMapReturnTarget();
+        }, 80);
+      }
     } else if (returnToMap) {
       mapStageFrame?.scrollIntoView({
         behavior: reducedMotionQuery.matches ? "auto" : "smooth",
@@ -6252,7 +6921,11 @@ function updateMiniPlayer(tappa, selectedOption) {
   setTransitionAudioMode(false);
   playerTranscriptDock.hidden = false;
   miniPlayer.classList.remove("is-hidden");
-  miniPlayerTitle.textContent = getStopTitle(tappa);
+  const stopTitle = getStopTitle(tappa);
+  miniPlayerTitleTrack.textContent = stopTitle;
+  miniPlayerTitle.title = stopTitle;
+  miniPlayerTitle.setAttribute("aria-label", stopTitle);
+  updateMiniPlayerTitleOverflow();
   miniPlayerSubtitle.textContent = "";
   const artworkSrc = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
   miniPlayerArtwork.src = artworkSrc;
@@ -6267,6 +6940,32 @@ function updateMiniPlayer(tappa, selectedOption) {
 
   updateMiniPlayerPlayback();
   requestAnimationFrame(syncMiniPlayerReservedSpace);
+}
+
+function updateMiniPlayerTitleOverflow() {
+  if (!miniPlayerTitle || !miniPlayerTitleTrack) return;
+  if (isTransitionAudioActive) {
+    miniPlayerTitle.classList.remove("has-overflow");
+    miniPlayerTitle.style.removeProperty("--mini-title-distance");
+    miniPlayerTitle.style.removeProperty("--mini-title-duration");
+    return;
+  }
+  const overflow = Math.ceil(miniPlayerTitleTrack.getBoundingClientRect().width - miniPlayerTitle.getBoundingClientRect().width);
+  const isOverflowing = miniPlayerTitle.clientWidth > 0 && overflow > 2;
+  miniPlayerTitle.classList.toggle("has-overflow", isOverflowing);
+  if (isOverflowing) {
+    miniPlayerTitle.style.setProperty("--mini-title-distance", `${overflow}px`);
+    miniPlayerTitle.style.setProperty("--mini-title-duration", `${Math.max(12, 6 + overflow / 11)}s`);
+  } else {
+    miniPlayerTitle.style.removeProperty("--mini-title-distance");
+    miniPlayerTitle.style.removeProperty("--mini-title-duration");
+  }
+}
+
+if (miniPlayerTitle && miniPlayerTitleTrack && "ResizeObserver" in window) {
+  const miniPlayerTitleResizeObserver = new ResizeObserver(updateMiniPlayerTitleOverflow);
+  miniPlayerTitleResizeObserver.observe(miniPlayerTitle);
+  miniPlayerTitleResizeObserver.observe(miniPlayerTitleTrack);
 }
 
 function toggleMiniPlayerPlayback() {
@@ -6322,6 +7021,8 @@ function bindPlayerControls() {
     event?.stopPropagation();
     if (shell.classList.contains("mascot-motion-shell--hero")) {
       mascotMotionController?.heroTapReaction();
+    } else if (shell.classList.contains("map-explore-mascot-motion")) {
+      mascotMotionController?.mapTapReaction();
     } else {
       mascotMotionController?.tapReaction();
     }
@@ -6403,7 +7104,7 @@ function bindPlayerControls() {
   });
   miniPlayerPreviousTrack?.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    focusStopByOffset(-1, { manual: true, scrollRouteIntoView: isMobileMapViewport() });
+    handlePreviousAction({ scrollRouteIntoView: isMobileMapViewport() });
   });
   miniPlayerNextTrack?.addEventListener("click", (event) => {
     consumeControlEvent(event);
@@ -6442,7 +7143,7 @@ function bindPlayerControls() {
   });
   playerPreviousTrack?.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    focusStopByOffset(-1, { manual: true });
+    handlePreviousAction();
   });
   playerPlayButton.addEventListener("click", (event) => {
     consumeControlEvent(event);
@@ -6479,12 +7180,31 @@ function bindPlayerControls() {
       return;
     }
 
-    closePlayerOverlay({ returnToMap: true });
+    setMobileMapPlayerMode(!isMobileMapPlayerMode());
   });
-  playerShareButton?.addEventListener("click", (event) => {
+  playerMapHelpButton?.addEventListener("click", (event) => {
     consumeControlEvent(event);
-    shareCurrentStop();
+    openPlayerContextGuide("map", playerMapHelpButton);
   });
+  playerListenHelpButton?.addEventListener("click", (event) => {
+    consumeControlEvent(event);
+    openPlayerContextGuide("listen", playerListenHelpButton);
+  });
+  playerContextGuideClose?.addEventListener("click", () => closePlayerContextGuide());
+  playerContextGuidePrev?.addEventListener("click", () => {
+    contextGuideStepIndex = Math.max(0, contextGuideStepIndex - 1);
+    renderPlayerContextGuideStep();
+  });
+  playerContextGuideNext?.addEventListener("click", () => {
+    const stepCount = getPlayerContextGuideSteps(contextGuideMode).length;
+    if (contextGuideStepIndex >= stepCount - 1) {
+      closePlayerContextGuide();
+      return;
+    }
+    contextGuideStepIndex += 1;
+    renderPlayerContextGuideStep();
+  });
+  document.addEventListener("keydown", handlePlayerContextGuideKeydown, true);
   playerLanguageCurrent?.addEventListener("click", (event) => {
     consumeControlEvent(event);
     togglePlayerLanguageMenu();
@@ -6500,6 +7220,8 @@ function bindPlayerControls() {
   });
   window.addEventListener("resize", () => {
     syncPlayerViewportMode();
+    if (contextGuideMode && !isMobileMapViewport()) closePlayerContextGuide({ restoreFocus: false });
+    else positionPlayerContextGuideSpotlight();
     if (playerLanguageSelector?.classList.contains("is-open")) {
       syncPlayerLanguageMenuSurface();
     }
@@ -6523,18 +7245,37 @@ function bindPlayerControls() {
 
   const seekFromProgressControl = (control) => {
     const audio = getActiveAudio();
-    if (!audio || !Number.isFinite(audio.duration)) {
+    const duration = getAudioSeekDuration(audio);
+    if (!audio || duration === null || isTransitionAudioActive) {
       return null;
     }
 
-    const nextTime = (Number(control.value) / 100) * audio.duration;
-    audio.currentTime = Math.max(0, Math.min(audio.duration, nextTime));
-    return audio;
+    const nextTime = (Number(control.value) / 100) * duration;
+    return seekAudioToTime(audio, nextTime) ? audio : null;
   };
+
+  const finishProgressSeek = (control) => {
+    if (control === playerProgressInput) {
+      if (!isSeekingFromOverlay) return;
+      seekFromProgressControl(control);
+      isSeekingFromOverlay = false;
+    } else {
+      if (!isSeekingFromMiniPlayer) return;
+      seekFromProgressControl(control);
+      isSeekingFromMiniPlayer = false;
+    }
+    updateMiniPlayerPlayback();
+  };
+
+  [playerProgressInput, miniPlayerProgressInput].forEach((control) => {
+    ["pointerup", "pointercancel", "blur"].forEach((eventName) => {
+      control.addEventListener(eventName, () => finishProgressSeek(control));
+    });
+  });
 
   playerProgressInput.addEventListener("input", () => {
     const audio = getActiveAudio();
-    if (!audio || !Number.isFinite(audio.duration)) {
+    if (getAudioSeekDuration(audio) === null) {
       return;
     }
     isSeekingFromOverlay = true;
@@ -6543,16 +7284,11 @@ function bindPlayerControls() {
     playerProgressInput.style.setProperty("--seek-progress", `${playerProgressInput.value}%`);
   });
   playerProgressInput.addEventListener("change", () => {
-    if (!seekFromProgressControl(playerProgressInput)) {
-      isSeekingFromOverlay = false;
-      return;
-    }
-    isSeekingFromOverlay = false;
-    updateMiniPlayerPlayback();
+    finishProgressSeek(playerProgressInput);
   });
   miniPlayerProgressInput.addEventListener("input", () => {
     const audio = getActiveAudio();
-    if (!audio || !Number.isFinite(audio.duration)) {
+    if (getAudioSeekDuration(audio) === null) {
       return;
     }
     isSeekingFromMiniPlayer = true;
@@ -6561,79 +7297,8 @@ function bindPlayerControls() {
     miniPlayerProgressInput.style.setProperty("--seek-progress", `${miniPlayerProgressInput.value}%`);
   });
   miniPlayerProgressInput.addEventListener("change", () => {
-    if (!seekFromProgressControl(miniPlayerProgressInput)) {
-      isSeekingFromMiniPlayer = false;
-      return;
-    }
-    isSeekingFromMiniPlayer = false;
-    updateMiniPlayerPlayback();
+    finishProgressSeek(miniPlayerProgressInput);
   });
-}
-
-async function copyTextToClipboard(text) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = "0";
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  textarea.remove();
-}
-
-function showPlayerShareFeedback() {
-  const strings = getUiStrings(currentLanguage);
-  window.clearTimeout(playerShareFeedbackTimer);
-  if (playerShareStatus) {
-    playerShareStatus.textContent = strings.shareCopied;
-  }
-  if (playerShareIcon) {
-    playerShareIcon.textContent = "check";
-  }
-  playerShareButton?.classList.add("is-shared");
-  playerShareFeedbackTimer = window.setTimeout(() => {
-    if (playerShareIcon) {
-      playerShareIcon.textContent = "share";
-    }
-    playerShareButton?.classList.remove("is-shared");
-    if (playerShareStatus) {
-      playerShareStatus.textContent = "";
-    }
-  }, 1400);
-}
-
-async function shareCurrentStop() {
-  const activeStop = tappe.find((tappa) => tappa.numero === activeStopNumber) || tappe[0];
-  const stopTitle = getStopTitle(activeStop);
-  const shareData = {
-    title: `${activeStop.numero}. ${stopTitle}`,
-    text: `${stopTitle} - ${document.title}`,
-    url: window.location.href,
-  };
-
-  if (typeof navigator.share === "function") {
-    try {
-      await navigator.share(shareData);
-      return;
-    } catch (error) {
-      if (error?.name === "AbortError") {
-        return;
-      }
-    }
-  }
-
-  try {
-    await copyTextToClipboard(shareData.url);
-    showPlayerShareFeedback();
-  } catch (error) {
-    window.location.href = shareMail?.href || `mailto:?body=${encodeURIComponent(shareData.url)}`;
-  }
 }
 
 function updateShareLinks() {
@@ -6648,6 +7313,50 @@ function updateShareLinks() {
   if (shareX) shareX.href = `https://x.com/intent/post?url=${encodedUrl}&text=${encodedText}`;
   if (shareLinkedin) shareLinkedin.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
   if (shareWhatsapp) shareWhatsapp.href = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+}
+
+function bindPlatformLinks() {
+  platformsPanel?.addEventListener("click", (event) => {
+    const control = event.target.closest(".platform-logo");
+    if (!control || !platformsPanel.contains(control)) return;
+
+    const name = control.dataset.platformName || control.textContent.trim();
+    const strings = getUiStrings(currentLanguage);
+    const rawUrl = control.getAttribute("href") || control.dataset.platformUrl;
+    const showError = (message) => {
+      event.preventDefault();
+      platformLinkStatus.textContent = message;
+    };
+
+    if (!rawUrl) {
+      showError(strings.platformLinkPending(name));
+      return;
+    }
+
+    let destination;
+    try {
+      destination = new URL(rawUrl);
+      if (destination.protocol !== "https:") throw new TypeError("Expected an HTTPS URL");
+    } catch {
+      showError(strings.platformLinkError(name));
+      return;
+    }
+
+    if (!navigator.onLine) {
+      showError(strings.platformLinkOffline(name));
+      return;
+    }
+
+    platformLinkStatus.textContent = "";
+    if (control instanceof HTMLButtonElement) {
+      // A destination can be configured later without changing the button's layout.
+      const link = document.createElement("a");
+      link.href = destination.href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.click();
+    }
+  });
 }
 
 function renderStaticTexts() {
@@ -6688,10 +7397,7 @@ function renderStaticTexts() {
   playerBackdrop?.setAttribute("aria-label", strings.playerClose);
   playerCloseButton?.setAttribute("aria-label", strings.playerClose);
   playerCloseButton.title = strings.playerClose;
-  playerShareButton?.setAttribute("aria-label", strings.playerShare);
-  if (playerShareButton) playerShareButton.title = strings.playerShare;
-  playerMapButton?.setAttribute("aria-label", strings.mapOpenFullscreen);
-  if (playerMapButton) playerMapButton.title = strings.mapOpenFullscreen;
+  updatePlayerMapButtonPresentation();
   playerProgressInput?.setAttribute("aria-label", strings.playerProgress);
   miniPlayerProgressInput?.setAttribute("aria-label", strings.playerProgress);
   shareFacebook?.setAttribute("aria-label", strings.shareFacebook);
@@ -6731,20 +7437,7 @@ function renderStaticTexts() {
   }
 }
 
-function refreshMarkerPopups() {
-  tappe.forEach((tappa) => {
-    const marker = markersByStop.get(tappa.numero);
-    if (marker) {
-      marker.setPopupContent(popupHtml(tappa));
-    }
-  });
-}
-
 function focusStop(tappa, options = {}) {
-  if (options.fromMarker !== true) {
-    lastMarkerTapStopNumber = null;
-  }
-
   const marker = markersByStop.get(tappa.numero);
   const audioOptions = getAudioOptions(tappa).filter((option) => option.audioDisponibile);
   const selectedOption = getSelectedAudioOption(tappa);
@@ -6759,12 +7452,16 @@ function focusStop(tappa, options = {}) {
   const previousWasPlaying = previousAudio ? !previousAudio.paused : false;
   const isChangingStop = activeStopNumber !== null && activeStopNumber !== tappa.numero;
 
+  if (isChangingStop) {
+    lastPrevInteractionAt = 0;
+  }
+
   activeStopNumber = tappa.numero;
   setStoredValue(LAST_STOP_STORAGE_KEY, String(tappa.numero));
   updateActiveListItem(tappa.numero);
   const shouldShowSelectedRoute = options.showRoute !== false;
   updateActiveRouteSegment(tappa.numero, {
-    animate: options.animateRoute === true && options.markerFocusMode !== "stop",
+    animate: options.animateRoute === true,
     show: shouldShowSelectedRoute,
   });
 
@@ -6825,7 +7522,9 @@ function focusStop(tappa, options = {}) {
     playCurrentRenderedAudio();
   }
 
-  if (shouldOpenOverlay) {
+  // Navigating stops inside an open player must not reopen it: on mobile,
+  // Opening the overlay selects map mode and would discard Full player audio.
+  if (shouldOpenOverlay && !overlayOpen) {
     openPlayerOverlay();
   }
 
@@ -6980,29 +7679,18 @@ function renderMap() {
       icon: createMarkerIcon(tappa.numero),
       title: `${tappa.numero}. ${getStopTitle(tappa)}`,
     })
-      .addTo(map)
-      .bindPopup(popupHtml(tappa));
+      .addTo(map);
 
     marker.on("click", () => {
-      const isRepeatedMarkerTap = lastMarkerTapStopNumber === tappa.numero;
-      lastMarkerTapStopNumber = tappa.numero;
       showMapSelectionLabel(tappa, marker);
       focusStop(tappa, {
         autoplay: true,
         animateRoute: true,
-        markerFocusMode: isRepeatedMarkerTap ? "stop" : "route",
-        focusRoute: !isRepeatedMarkerTap,
-        cameraPreset: isRepeatedMarkerTap ? "secondTap" : "firstTap",
-        fromMarker: true,
+        focusRoute: true,
+        cameraPreset: "firstTap",
         openOverlay: false,
       });
       cueMapDirectionsButton();
-    });
-
-    marker.on("popupopen", () => {
-      if (activeStopNumber !== tappa.numero) {
-        focusStop(tappa, { skipFly: true });
-      }
     });
 
     markersByStop.set(tappa.numero, marker);
@@ -7039,11 +7727,14 @@ renderMap();
 renderStaticTexts();
 renderGlobalLanguageSelector();
 bindGlobalLanguageSelector();
+bindPlatformLinks();
 renderOnboardingTexts();
 renderOnboardingLanguageSelector();
 bindOnboardingAccessibility();
 bindLanguageUnavailableModal();
-bindMapLoadFeedback(baseTileLayer);
+if (!mapNeedsLocalServer) {
+  bindMapLoadFeedback(baseTileLayer);
+}
 bindMapRecenterButton();
 bindMapRecenterCue();
 bindMapFullscreenButton();
@@ -7054,6 +7745,8 @@ bindHelpControls();
 focusStop(initialUrlState.stop || tappe[0], { skipFly: true, replaceUrl: true });
 showOnboardingIfNeeded();
 
-if (!navigator.onLine) {
+if (mapNeedsLocalServer) {
+  setMapLoadStatusByKey("mapLocalServerRequired");
+} else if (!navigator.onLine) {
   setMapLoadStatusByKey("offlineStatus");
 }

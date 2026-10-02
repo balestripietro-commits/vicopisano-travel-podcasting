@@ -53,7 +53,12 @@ export async function openFullPlayer(page) {
   await expect(page.locator("#player-overlay")).toHaveAttribute("aria-hidden", "false");
   await expect
     .poll(() =>
-      page.locator(".player-sheet").evaluate((element) => Math.abs(element.getBoundingClientRect().top) < 1),
+      page.locator(".player-sheet").evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return element.closest(".is-mobile-map-player")
+          ? Math.abs(rect.bottom - window.innerHeight) < 1
+          : Math.abs(rect.top) < 1;
+      }),
     )
     .toBe(true);
 }

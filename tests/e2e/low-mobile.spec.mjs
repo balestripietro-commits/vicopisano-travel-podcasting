@@ -9,6 +9,7 @@ import {
 } from "./helpers.mjs";
 
 test("low mobile viewport keeps the full player controls and stop navigation on screen", async ({ page }) => {
+  test.setTimeout(90_000);
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
   await stopButton(page, 6).click();
@@ -27,6 +28,8 @@ test("low mobile viewport keeps the full player controls and stop navigation on 
   expect(Math.abs(stopPreviewImage.width / stopPreviewImage.height - 1)).toBeLessThanOrEqual(0.08);
 
   await openFullPlayer(page);
+  await page.locator("#player-map-button").click();
+  await expect(page.locator("#player-overlay")).not.toHaveClass(/is-mobile-map-player/);
 
   await expect
     .poll(() => page.locator("#player-overlay").evaluate((element) => element.scrollHeight <= element.clientHeight + 1))

@@ -9,35 +9,6 @@ const linksToCheck = [
   { name: "izi.TRAVEL", selector: ".logo-izi", hostname: "izi.travel", kind: "platform" },
   { name: "Loquis", selector: ".logo-loquis", hostname: "www.loquis.com", kind: "platform" },
   { name: "Spotify", selector: ".logo-spotify", hostname: "open.spotify.com", kind: "platform" },
-  {
-    name: "Facebook",
-    selector: "#share-facebook",
-    hostname: "www.facebook.com",
-    kind: "share",
-    requiredParameter: "u",
-  },
-  {
-    name: "X",
-    selector: "#share-x",
-    hostname: "x.com",
-    kind: "share",
-    requiredParameter: "url",
-  },
-  {
-    name: "LinkedIn",
-    selector: "#share-linkedin",
-    hostname: "www.linkedin.com",
-    kind: "share",
-    requiredParameter: "url",
-  },
-  {
-    name: "WhatsApp",
-    selector: "#share-whatsapp",
-    hostname: "wa.me",
-    kind: "share",
-    requiredParameter: "text",
-  },
-  { name: "Email", selector: "#share-mail", protocol: "mailto:", kind: "email" },
 ];
 
 function classifyStatus(status) {
@@ -125,7 +96,7 @@ function buildMarkdownReport(report) {
     `Data: ${report.checkedAt}`,
     `Sito: ${report.baseURL}`,
     "",
-    `Risultato: ${report.summary.pass} PASS, ${report.summary.warn} WARN, ${report.summary.fail} FAIL`,
+    `Risultato: ${report.summary.pass} PASS, ${report.summary.warn} WARN, ${report.summary.pending} PENDING, ${report.summary.fail} FAIL`,
     "",
     "| Esito | Destinazione | HTTP | Dettaglio |",
     "| --- | --- | ---: | --- |",
@@ -140,14 +111,23 @@ function buildMarkdownReport(report) {
   return `${lines.join("\n")}\n`;
 }
 
-test("public platform and sharing links remain valid", async ({ page, request }, testInfo) => {
+test("public platform links remain valid", async ({ page, request }, testInfo) => {
   const baseURL = process.env.E2E_BASE_URL || "https://transcendent-meerkat-166cbe.netlify.app";
   const siteOrigin = new URL(baseURL).origin;
 
   await enterSite(page);
 
   const results = await Promise.all(linksToCheck.map(async (definition) => {
-    const href = await page.locator(definition.selector).getAttribute("href");
+    const control = page.locator(definition.selector);
+    const href = (await control.getAttribute("href")) || (await control.getAttribute("data-platform-url"));
+    if (!href) {
+      return {
+        name: definition.name,
+        href: null,
+        outcome: "PENDING",
+        detail: "Collegamento intenzionalmente non pubblicato",
+      };
+    }
     const structureError = validateStructure(definition, href, siteOrigin);
 
     if (structureError) {
@@ -177,6 +157,7 @@ test("public platform and sharing links remain valid", async ({ page, request },
     summary: {
       pass: results.filter(({ outcome }) => outcome === "PASS").length,
       warn: results.filter(({ outcome }) => outcome === "WARN").length,
+      pending: results.filter(({ outcome }) => outcome === "PENDING").length,
       fail: results.filter(({ outcome }) => outcome === "FAIL").length,
     },
     links: results,

@@ -1,9 +1,45 @@
 import { expect, test } from "@playwright/test";
 import { collectRuntimeErrors, enterSite, expectInsideViewport, expectNoRuntimeErrors } from "./helpers.mjs";
 
+test("initial transcript stays hidden through onboarding and tutorial until audio plays", async ({ page }) => {
+  await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#onboarding-overlay")).toBeVisible();
+  await page.evaluate(() => {
+    const caption = document.querySelector("#map-live-caption");
+    const onboarding = document.querySelector("#onboarding-overlay");
+    window.__initialCaptionFlashed = false;
+    const check = () => {
+      if (!caption.hidden && caption.classList.contains("is-visible") &&
+          onboarding.classList.contains("is-hidden")) {
+        window.__initialCaptionFlashed = true;
+      }
+    };
+    new MutationObserver(check).observe(caption, { attributes: true, attributeFilter: ["class", "hidden"] });
+    new MutationObserver(check).observe(onboarding, { attributes: true, attributeFilter: ["class"] });
+  });
+
+  await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ }).click();
+  await expect(page.locator("#guide-layer")).toBeVisible();
+  await page.waitForTimeout(3_000);
+  expect(await page.evaluate(() => window.__initialCaptionFlashed)).toBe(false);
+  await expect(page.locator("#map-live-caption")).toBeHidden();
+  await expect.poll(() => page.locator("audio").evaluate((audio) => audio.paused)).toBe(true);
+
+  await page.locator("#guide-skip-button").click();
+  await page.locator("#mini-player-toggle").click();
+  await expect.poll(() => page.locator("audio").evaluate((audio) => !audio.paused)).toBe(true);
+  await expect(page.locator("#map-live-caption")).toBeVisible({ timeout: 8_000 });
+  await page.locator("#mini-player-toggle").click();
+  await expect(page.locator("#map-live-caption")).toBeVisible();
+  await expect(page.locator("#map-live-caption")).toBeHidden({ timeout: 4_500 });
+});
+
 test("tutorial keeps desktop in the map experience and mobile in the full player", async ({ page }, testInfo) => {
   test.setTimeout(75_000);
   const errors = collectRuntimeErrors(page);
+  if (testInfo.project.name !== "desktop-chrome") {
+    await page.setViewportSize({ width: 375, height: 667 });
+  }
   await enterSite(page, { guide: true });
 
   const guide = page.locator("#guide-card");
@@ -75,6 +111,41 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
   expect(stopsGuideGeometry).not.toBeNull();
   expect(stopsGuideGeometry.overlaps).toBe(false);
   expect(Math.abs(stopsGuideGeometry.pointerX - stopsGuideGeometry.targetX)).toBeLessThanOrEqual(1);
+  const stopsHighlightCutoff = await page.evaluate(() => {
+    const panel = document.querySelector(".stops-panel");
+    const player = document.querySelector("#mini-player");
+    const caption = document.querySelector("#map-live-caption");
+    if (!panel || !player) return null;
+    return {
+      panelTop: panel.getBoundingClientRect().top,
+      playerTop: player.getBoundingClientRect().top,
+      captionTop: caption && !caption.hidden ? caption.getBoundingClientRect().top : null,
+      visibleHeight: Number.parseFloat(panel.style.getPropertyValue("--guide-stops-visible-height")),
+    };
+  });
+  expect(stopsHighlightCutoff).not.toBeNull();
+  expect(stopsHighlightCutoff.panelTop + stopsHighlightCutoff.visibleHeight).toBeLessThanOrEqual(stopsHighlightCutoff.playerTop - 8);
+  if (stopsHighlightCutoff.captionTop !== null) {
+    expect(stopsHighlightCutoff.panelTop + stopsHighlightCutoff.visibleHeight).toBeLessThanOrEqual(stopsHighlightCutoff.captionTop - 8);
+  }
+  const captionWasHidden = await page.locator("#map-live-caption").evaluate((caption) => caption.hidden);
+  await page.locator("#map-live-caption").evaluate((caption) => {
+    caption.hidden = false;
+    caption.classList.add("is-visible");
+  });
+  await expect.poll(() => page.evaluate(() => {
+    const panel = document.querySelector(".stops-panel");
+    const caption = document.querySelector("#map-live-caption");
+    const cutoff = panel.getBoundingClientRect().top +
+      Number.parseFloat(panel.style.getPropertyValue("--guide-stops-visible-height"));
+    return cutoff <= caption.getBoundingClientRect().top - 8;
+  })).toBe(true);
+  if (captionWasHidden) {
+    await page.locator("#map-live-caption").evaluate((caption) => {
+      caption.classList.remove("is-visible");
+      caption.hidden = true;
+    });
+  }
   if (testInfo.project.name === "desktop-chrome") {
     expect(stopsGuideGeometry.isAbove).toBe(true);
   }
@@ -94,7 +165,7 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
   expect(Math.abs(stopsGuidePosition.top - settledStopsGuidePosition.top)).toBeLessThanOrEqual(1);
 
   await next.click();
-  await expect(text).toContainText("player resta");
+  await expect(text).toContainText("player resterà");
   await expect(guide).not.toHaveClass(/is-repositioning/);
   await expectInsideViewport(guide, page);
   await next.click();
@@ -124,24 +195,7 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
     await expect(next).toHaveText("→");
 
     await next.click();
-    await expect(page.locator("#guide-action-demo")).toHaveClass(/is-visible/);
-    await expect(page.locator(".guide-action-demo-ripple")).toHaveCount(0);
-    await expect(page.locator(".guide-action-demo-cursor")).toHaveText("touch_app");
-    const actionDemoGeometry = await page.evaluate(() => {
-      const demoRect = document.querySelector("#guide-action-demo")?.getBoundingClientRect();
-      const targetRect = document.querySelector("#mini-player-expand")?.getBoundingClientRect();
-      if (!demoRect || !targetRect) {
-        return null;
-      }
-
-      return {
-        xDifference: Math.abs(demoRect.left - (targetRect.left + targetRect.width / 2)),
-        yDifference: Math.abs(demoRect.top - (targetRect.top + targetRect.height / 2)),
-      };
-    });
-    expect(actionDemoGeometry).not.toBeNull();
-    expect(actionDemoGeometry.xDifference).toBeLessThan(2);
-    expect(actionDemoGeometry.yDifference).toBeLessThan(2);
+    await expect(page.locator("#guide-action-demo")).toHaveCount(0);
     await expect(page.locator("#player-overlay")).toBeVisible({ timeout: 7_000 });
     await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
     await expect(page.locator("body")).toHaveClass(/is-map-player-panel/);
@@ -187,17 +241,94 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
     await expect(text).toContainText("vista estesa");
   } else {
     await expect(page.locator("#player-overlay")).toBeVisible();
-    await expect(text).toContainText("vista completa del player");
+    await expect(text).toContainText("Mappa + player");
+    await expect(page.locator("#player-overlay")).toHaveClass(/is-mobile-map-player/);
+    await expect(next).toHaveText("→");
+    await next.click();
+    await expect(text).toContainText("Full player audio");
+    await expect(page.locator("#player-map-button")).toHaveClass(/is-guide-highlighted/);
+    await expect(next).toHaveText("→");
+
+    await next.click();
+    await expect(text).toContainText("vista Full player audio");
+    await expect(page.locator("#player-overlay")).not.toHaveClass(/is-mobile-map-player/);
+    await expect(page.locator("#player-map-button .material-symbols-rounded")).toHaveText("map");
+    await expect(page.locator(".player-sheet")).toHaveClass(/is-guide-highlighted/);
+    await expect(guide).not.toHaveClass(/is-repositioning/);
+    await expectInsideViewport(guide, page);
+    const listeningArtworkIsClear = await page.evaluate(() => {
+      const card = document.querySelector("#guide-card")?.getBoundingClientRect();
+      const artwork = document.querySelector("#player-artwork")?.getBoundingClientRect();
+      return card && artwork && card.top >= artwork.bottom;
+    });
+    expect(listeningArtworkIsClear).toBe(true);
+    await previous.click();
+    await expect(page.locator("#player-overlay")).toHaveClass(/is-mobile-map-player/);
+    await expect(page.locator("#player-map-button")).toHaveClass(/is-guide-highlighted/);
+    await next.click();
+    await expect(text).toContainText("vista Full player audio");
+    await expect(page.locator("#player-overlay")).not.toHaveClass(/is-mobile-map-player/);
+
+    await next.click();
+    await expect(text).toContainText("tornare a Mappa + player");
+    await expect(page.locator("#player-map-button")).toHaveClass(/is-guide-highlighted/);
+    await expect(page.locator("#player-overlay")).not.toHaveClass(/is-mobile-map-player/);
+    await expect(guide).not.toHaveClass(/is-repositioning/);
+    const returnButtonIsClear = await page.evaluate(() => {
+      const card = document.querySelector("#guide-card")?.getBoundingClientRect();
+      const button = document.querySelector("#player-map-button")?.getBoundingClientRect();
+      return card && button && (
+        card.bottom <= button.top || card.top >= button.bottom ||
+        card.right <= button.left || card.left >= button.right
+      );
+    });
+    expect(returnButtonIsClear).toBe(true);
+    await previous.click();
+    await expect(text).toContainText("vista Full player audio");
+    await expect(page.locator("#player-overlay")).not.toHaveClass(/is-mobile-map-player/);
+    await next.click();
+    await expect(text).toContainText("tornare a Mappa + player");
+    await next.click();
+    await expect(text).toContainText("Con la X");
+    await expect(page.locator("#player-overlay")).toHaveClass(/is-mobile-map-player/);
+    await expect(page.locator("#player-close-button")).toHaveClass(/is-guide-highlighted/);
     await expect(next).toHaveText("✓");
   }
 
-  await next.click();
   if (testInfo.project.name === "desktop-chrome") {
-    await expect(page.locator("#guide-action-demo")).toHaveClass(/is-visible/);
+    await page.evaluate(() => {
+      window.__guideClosingStates = [];
+      const layer = document.querySelector("#guide-layer");
+      const capture = () => ({
+        guideVisible: !layer.classList.contains("is-hidden"),
+        closingExplore: layer.classList.contains("is-closing-explore"),
+        bubbleOpacity: Number(getComputedStyle(document.querySelector("#guide-card")).opacity),
+        veilActive: document.body.classList.contains("guide-open"),
+        mapHighlighted: document.querySelector(".map-stage-frame").classList.contains("is-guide-highlighted"),
+        scrollY: window.scrollY,
+      });
+      const observer = new MutationObserver(() => {
+        if (!layer.classList.contains("is-closing-explore")) return;
+        observer.disconnect();
+        window.__guideClosingStates.push(capture());
+        window.setTimeout(() => window.__guideClosingStates.push(capture()), 180);
+      });
+      observer.observe(layer, { attributes: true, attributeFilter: ["class"] });
+    });
   }
+  await next.click();
   await expect(page.locator("#guide-layer")).toBeHidden({ timeout: 10_000 });
   await expect(page.locator("#player-overlay")).toBeHidden({ timeout: 10_000 });
+  if (testInfo.project.name === "desktop-chrome") {
+    const [start, during] = await page.evaluate(() => window.__guideClosingStates);
+    expect(start.guideVisible && start.closingExplore && start.veilActive && start.mapHighlighted).toBe(true);
+    expect(during.guideVisible && during.closingExplore && during.veilActive && during.mapHighlighted).toBe(true);
+    expect(during.bubbleOpacity).toBeLessThan(0.5);
+    expect(during.scrollY).toBe(0);
+  }
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page.locator(".map-stage-frame")).not.toHaveClass(/is-guide-highlighted/);
+  await expect(page.locator("body")).not.toHaveClass(/guide-open/);
   await expect(page.locator(".app-shell")).toHaveJSProperty("inert", false);
   await expectNoRuntimeErrors(errors);
 });
@@ -208,6 +339,21 @@ test("tutorial can be closed immediately", async ({ page }) => {
   await page.locator("#guide-skip-button").click();
   await expect(page.locator("#guide-layer")).toBeHidden();
   await expect(page.locator("#player-overlay")).toBeHidden();
+  await expectNoRuntimeErrors(errors);
+});
+
+test("desktop Explore closes normally with X after the tutorial", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chrome", "Explore is desktop-only.");
+  const errors = collectRuntimeErrors(page);
+  await enterSite(page);
+
+  await page.locator("#mini-player-expand").click();
+  await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
+  await page.locator("#player-close-button").click();
+  await expect(page.locator("#player-overlay")).toBeHidden();
+  await expect(page.locator(".map-stage-frame")).not.toHaveClass(/is-expanded/);
+  await expect(page.locator("body")).not.toHaveClass(/is-map-player-panel|guide-open/);
+  await expect(page.locator("#guide-layer")).toBeHidden();
   await expectNoRuntimeErrors(errors);
 });
 

@@ -31,9 +31,13 @@ for (const code of languageChecks) {
 }
 
 test("full player fits the viewport without horizontal overflow", async ({ page }) => {
+  test.setTimeout(90_000);
   const errors = collectRuntimeErrors(page);
   await enterSite(page, { stop: 6 });
   await openFullPlayer(page);
+  if (test.info().project.name === "mobile-chrome") {
+    await page.locator("#player-map-button").click();
+  }
 
   await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).overflowX)).toBe("hidden");
   await expect.poll(() => page.locator("#player-overlay").evaluate((element) => element.scrollHeight <= element.clientHeight + 1)).toBe(true);
@@ -90,17 +94,27 @@ test("reduced motion keeps route feedback functional without animation", async (
   await expectNoRuntimeErrors(errors);
 });
 
-test("external platform and share links are valid", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-chrome", "Link matrix runs once on desktop Chrome");
+test("unavailable platform badges explain missing and invalid destinations", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await enterSite(page);
 
-  const links = page.locator(".platform-logo, .share-icon");
-  expect(await links.count()).toBeGreaterThanOrEqual(3);
-  for (const link of await links.all()) {
-    const href = await link.getAttribute("href");
-    expect(href).toMatch(/^(https?:|mailto:)/);
+  const badges = page.locator(".platform-logo");
+  await expect(badges).toHaveCount(3);
+  const originalUrl = page.url();
+  for (const [index, name] of ["izi.TRAVEL", "Loquis", "Spotify"].entries()) {
+    const badge = badges.nth(index);
+    await expect(badge).toHaveJSProperty("tagName", "BUTTON");
+    await expect(badge).not.toHaveAttribute("href");
+    await badge.click();
+    await expect(page.locator("#platform-link-status")).toContainText(`${name} non è ancora disponibile`);
   }
+  expect(page.url()).toBe(originalUrl);
+
+  const izi = page.locator(".logo-izi");
+  await izi.evaluate((element) => { element.dataset.platformUrl = "javascript:alert(1)"; });
+  await izi.click();
+  await expect(page.locator("#platform-link-status")).toContainText("il collegamento non è valido");
+
   await expectNoRuntimeErrors(errors);
 });
 

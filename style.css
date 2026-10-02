@@ -19,6 +19,7 @@
   --radius-sm: var(--tp-radius-sm, 12px);
   --max-width: 100%;
   --mini-player-reserved-space: 118px;
+  --mobile-map-caption-reserved-space: 0px;
   --tp-motion-instant: 100ms;
   --tp-motion-fast: 180ms;
   --tp-motion-standard: 280ms;
@@ -28,6 +29,9 @@
   --tp-ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
   --tp-ease-decelerate: cubic-bezier(0, 0, 0, 1);
   --tp-ease-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --tp-player-control-touch: var(--tp-touch-min, 44px);
+  --tp-player-secondary-ink: rgba(255, 255, 255, 0.72);
+  --tp-player-secondary-hover-ink: #fff;
 }
 
 .material-symbols-rounded {
@@ -127,7 +131,7 @@ button:active,
 .app-shell {
   width: min(100%, var(--max-width));
   margin: 0 auto;
-  padding: 18px 16px calc(var(--mini-player-reserved-space) + 24px + env(safe-area-inset-bottom, 0px));
+  padding: 18px 16px calc(var(--mini-player-reserved-space) + var(--mobile-map-caption-reserved-space, 0px) + 24px + env(safe-area-inset-bottom, 0px));
 }
 
 .announcement-strip {
@@ -443,7 +447,8 @@ button:active,
   animation: mascot-stop-transition 420ms var(--tp-ease-standard) both;
 }
 
-.mascot-motion-shell--hero.is-hero-tap-reaction {
+.mascot-motion-shell--hero.is-hero-tap-reaction,
+.map-explore-mascot-motion.is-hero-tap-reaction {
   animation: mascot-hero-tap-reaction 720ms var(--tp-ease-emphasized) both;
 }
 
@@ -854,12 +859,9 @@ button:active,
   font-weight: 650;
   line-height: 1.45;
   text-align: center;
-  white-space: normal;
-  overflow: hidden;
+  white-space: pre-line;
   overflow-wrap: anywhere;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  display: block;
   pointer-events: none;
   opacity: 0;
   transform: translateY(10px);
@@ -880,20 +882,21 @@ button:active,
 @media (min-width: 1024px) {
   body:not(.is-map-fullscreen):not(.is-map-player-panel) .map-live-caption {
     position: fixed;
-    right: auto;
-    bottom: calc(var(--mini-player-reserved-space) - 8px + env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    width: min(760px, calc(100vw - 48px));
+    right: 24px;
+    bottom: calc(var(--mini-player-reserved-space) + 8px + env(safe-area-inset-bottom, 0px));
+    left: 24px;
+    width: auto;
+    max-width: none;
     margin: 0;
-    padding: 8px 18px;
+    padding: 10px 22px;
     border-radius: 999px;
-    font-size: 0.96rem;
+    font-size: 1.35rem;
     line-height: 1.3;
-    transform: translate(-50%, 10px);
+    transform: translateY(10px);
   }
 
   body:not(.is-map-fullscreen):not(.is-map-player-panel) .map-live-caption.is-visible {
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 }
 
@@ -1011,6 +1014,9 @@ body.is-map-fullscreen .map-explore-stop {
 
 .map-stage-frame .leaflet-control-container {
   position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1200;
   pointer-events: none;
 }
@@ -1253,7 +1259,7 @@ body.is-map-fullscreen .map-explore-stop {
   width: 42px;
   height: 42px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #7f62db 0%, #9a6bec 100%);
+  background: linear-gradient(180deg, var(--tp-legacy-stop-purple) 0%, var(--tp-legacy-stop-purple-strong) 100%);
   color: #fff;
   font-weight: 700;
   font-family: var(--tp-font-ui);
@@ -1304,7 +1310,7 @@ body.is-map-fullscreen .map-explore-stop {
 
 .platforms-panel,
 .share-panel {
-  scroll-margin-bottom: calc(var(--mini-player-reserved-space) + 28px);
+  scroll-margin-bottom: calc(var(--mini-player-reserved-space) + var(--mobile-map-caption-reserved-space, 0px) + 28px);
 }
 
 .share-panel {
@@ -1440,6 +1446,7 @@ body.is-map-fullscreen .map-explore-stop {
   display: flex;
   align-items: center;
   gap: 12px;
+  font: inherit;
   min-height: 58px;
   padding: 10px 14px;
   border-radius: var(--radius-md);
@@ -1447,6 +1454,7 @@ body.is-map-fullscreen .map-explore-stop {
   border: 1px solid var(--line);
   text-decoration: none;
   color: var(--text);
+  cursor: pointer;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
@@ -1458,6 +1466,25 @@ body.is-map-fullscreen .map-explore-stop {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(23, 54, 84, 0.08);
   outline: none;
+}
+
+.platform-link-status {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  color: var(--tp-color-on-surface-variant);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.platform-link-status:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .platforms-panel {
@@ -1597,6 +1624,47 @@ body.is-map-fullscreen .map-explore-stop {
   display: block;
   font-size: 1.02rem;
   margin-bottom: 4px;
+}
+
+.mini-player-text strong#mini-player-title {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.mini-player-title-track {
+  display: block;
+  width: max-content;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.mini-player-text strong#mini-player-title.has-overflow .mini-player-title-track {
+  animation: mini-player-title-scroll var(--mini-title-duration, 20s) linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes mini-player-title-scroll {
+  0%, 12% { transform: translateX(0); }
+  58%, 68% { transform: translateX(calc(-1 * var(--mini-title-distance, 0px))); }
+  100% { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-player-text strong#mini-player-title {
+    overflow-x: auto;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+
+  .mini-player-text strong#mini-player-title::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mini-player-text strong#mini-player-title.has-overflow .mini-player-title-track {
+    animation: none;
+  }
 }
 
 .mini-player-subtitle {
@@ -1743,6 +1811,7 @@ body.is-map-fullscreen .map-explore-stop {
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
+  touch-action: none;
   background: transparent;
 }
 
@@ -2132,13 +2201,36 @@ body.is-map-fullscreen .map-explore-stop {
 /* The inter-stop voice cannot be skipped or sped up, but it can always be paused. */
 body.is-transition-audio .mini-player-transport-group > button:not(#mini-player-toggle),
 body.is-transition-audio .mini-player-speed-button,
-body.is-transition-audio .mini-player-expand,
 body.is-transition-audio .player-language-row,
 body.is-transition-audio .player-controls .player-control-button:not(#player-play-button),
-body.is-transition-audio .player-stop-navigation,
-body.is-transition-audio .player-transcript-dock,
-body.is-transition-audio #player-share-button {
+body.is-transition-audio .player-stop-navigation {
   display: none !important;
+}
+
+body.is-transition-audio .player-overlay.TPPlayerSheet #player-recenter-button,
+body.is-transition-audio .player-overlay.TPPlayerSheet #player-map-directions-button,
+body.is-transition-audio .player-overlay.TPPlayerSheet #player-map-help-button,
+body.is-transition-audio .player-overlay.TPPlayerSheet #player-listen-help-button {
+  display: none !important;
+}
+
+body.is-transition-audio .player-overlay.TPPlayerSheet .player-command-row {
+  display: block;
+  width: 100%;
+}
+
+body.is-transition-audio .player-overlay.TPPlayerSheet .player-artwork-support {
+  display: none !important;
+}
+
+body.is-transition-audio .player-overlay.TPPlayerSheet .player-controls {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+body.is-transition-audio .player-overlay.TPPlayerSheet .player-transport-group {
+  display: contents;
 }
 
 body.is-transition-audio .mini-player-controls,
@@ -2165,6 +2257,64 @@ body.is-transition-audio .mini-player-artwork {
 
 body.is-transition-audio .mini-player-center {
   grid-column: 2 / -1;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+}
+
+body.is-transition-audio .mini-player-controls,
+body.is-transition-audio .mini-player-transport-group {
+  grid-column: 1;
+  width: 100%;
+  justify-content: center;
+}
+
+body.is-transition-audio .mini-player-toggle {
+  position: relative;
+  display: grid !important;
+  place-items: center;
+  margin-inline: auto;
+  padding: 0;
+  line-height: 1;
+}
+
+body.is-transition-audio .mini-player-toggle .playback-icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  width: auto;
+  height: auto;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
+  transform-origin: center;
+}
+
+body.is-transition-audio .player-play-button .playback-icon {
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
+  transform-origin: center;
+}
+
+body.is-transition-audio #mini-player-title.is-transition-title {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+body.is-transition-audio #mini-player-title.is-transition-title .mini-player-title-track {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  animation: none !important;
+  transform: none !important;
 }
 
 body.is-transition-audio .player-artwork,
@@ -2176,6 +2326,19 @@ body.is-transition-audio .player-artwork .is-photo-layer,
 body.is-transition-audio .player-artwork.is-mascot-mode .is-photo-layer {
   opacity: 0 !important;
   pointer-events: none;
+}
+
+body.is-transition-audio .player-artwork.is-transition-artwork .is-photo-layer {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  object-fit: contain;
+  padding: 10%;
+}
+
+body.is-transition-audio .player-artwork.is-transition-artwork .is-mascot-layer {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 body.is-transition-audio .player-artwork .is-mascot-layer,
@@ -2196,6 +2359,22 @@ body.is-transition-audio .player-artwork .detail-mascot-image {
 body.is-transition-audio input[type="range"] {
   cursor: not-allowed;
   opacity: 0.72;
+}
+
+body.is-transition-audio .TPPlayerSheet .player-meta h2 {
+  min-width: 0;
+  overflow: visible;
+  white-space: normal;
+}
+
+body.is-transition-audio .TPPlayerSheet .player-meta h2 .player-title-text {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  animation: none !important;
+  transform: none !important;
 }
 
 /* Keyboard users always receive a visible focus ring, including controls that animate on focus. */
@@ -2737,7 +2916,7 @@ body.is-transition-audio input[type="range"] {
   width: 100%;
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(180deg, #7f62db 0%, #9a6bec 100%);
+  background: linear-gradient(180deg, var(--tp-legacy-stop-purple) 0%, var(--tp-legacy-stop-purple-strong) 100%);
   border: 2px solid rgba(255, 255, 255, 0.7);
   box-shadow: 0 8px 18px rgba(127, 98, 219, 0.28);
 }
@@ -2799,67 +2978,104 @@ body.is-transition-audio input[type="range"] {
   color: var(--text);
 }
 
-.osm-info-control {
-  margin: 0 12px 12px 0;
+@media (max-width: 1023px) {
+  .map-stage-frame .leaflet-control-zoom {
+    display: none !important;
+  }
 }
 
-.osm-info-details {
-  position: relative;
-}
-
-.osm-info-summary {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(36, 92, 82, 0.16);
-  box-shadow: 0 6px 18px rgba(36, 92, 82, 0.08);
-  color: rgba(36, 92, 82, 0.78);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-
-.osm-info-summary::-webkit-details-marker {
-  display: none;
-}
-
-.osm-info-panel {
-  position: absolute;
-  right: 0;
-  bottom: 44px;
-  min-width: 220px;
-  padding: 10px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(36, 92, 82, 0.12);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 12px 24px rgba(36, 92, 82, 0.1);
-}
-
-.osm-info-copy {
+.map-stage-frame .leaflet-control-attribution {
+  max-width: calc(100vw - 16px);
   margin: 0;
-  color: rgba(36, 92, 82, 0.78);
+  padding: 2px 6px;
+  border: 1px solid rgba(36, 92, 82, 0.2);
+  border-radius: 0 0 0 7px;
+  background: #fff;
+  color: #245c52;
   font-family: var(--tp-font-ui);
-  font-size: 0.78rem;
-  line-height: 1.45;
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(5, 37, 34, 0.12);
 }
 
-.osm-info-copy a {
-  color: inherit;
+@media (min-width: 1024px) {
+  .map-stage-frame {
+    --map-frame-attribution-surface: var(--tp-color-surface-container-low);
+    background: var(--map-frame-attribution-surface);
+  }
+
+  .map-stage-frame .leaflet-bottom.leaflet-right {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .map-stage-frame .leaflet-control-attribution {
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    background: var(--map-frame-attribution-surface);
+    box-shadow: 0 -2px 8px rgba(5, 37, 34, 0.08);
+  }
+}
+
+@media (max-width: 1023px) {
+  .map-stage-frame .leaflet-control-attribution {
+    padding: 1px 5px;
+    font-size: 0.625rem;
+  }
+
+  .map-stage-frame:not(.is-expanded) {
+    --map-frame-attribution-surface: var(--tp-color-surface-container-low);
+    background: var(--map-frame-attribution-surface);
+  }
+
+  .map-stage-frame:not(.is-expanded) .leaflet-bottom.leaflet-right {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .map-stage-frame:not(.is-expanded) .leaflet-control-attribution {
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    background: var(--map-frame-attribution-surface);
+    box-shadow: 0 -2px 8px rgba(5, 37, 34, 0.08);
+  }
+
+  .map-stage-frame.is-expanded .leaflet-bottom.leaflet-right {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    transform: none;
+  }
+
+  .map-stage-frame.is-expanded .leaflet-control-attribution {
+    padding: 0 4px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+.map-stage-frame .leaflet-control-attribution a {
+  color: #245c52;
   font-weight: 700;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-.osm-info-copy a:hover,
-.osm-info-copy a:focus-visible {
-  text-decoration: underline;
+@media (max-width: 1023px) {
+  .map-stage-frame.is-expanded .leaflet-control-attribution a {
+    color: rgba(16, 58, 51, 0.82);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  }
+}
+
+.map-stage-frame .leaflet-control-attribution a:focus-visible {
+  outline: 2px solid #2c6da3;
+  outline-offset: 2px;
 }
 
 @keyframes language-chip-pulse {
@@ -2943,7 +3159,7 @@ body.is-transition-audio input[type="range"] {
 
 @media (min-width: 740px) {
   .app-shell {
-    padding: 24px 24px calc(var(--mini-player-reserved-space) + 24px + env(safe-area-inset-bottom, 0px));
+    padding: 24px 24px calc(var(--mini-player-reserved-space) + var(--mobile-map-caption-reserved-space, 0px) + 24px + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -3235,10 +3451,6 @@ body.is-transition-audio input[type="range"] {
     font-size: 0.9rem;
   }
 
-  .osm-info-control {
-    margin: 0 12px calc(var(--mini-player-reserved-space) + env(safe-area-inset-bottom, 0px)) 0;
-  }
-
   .map-stage-caption {
     position: static;
     width: auto;
@@ -3410,8 +3622,8 @@ body.is-transition-audio input[type="range"] {
 .TPMiniPlayer .mini-player-control,
 .TPMiniPlayer .mini-player-toggle,
 .TPMiniPlayer .mini-player-expand {
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--tp-player-control-touch);
+  min-height: var(--tp-player-control-touch);
 }
 
 .TPMiniPlayer .mini-player-toggle {
@@ -3639,6 +3851,7 @@ body.is-transition-audio input[type="range"] {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   cursor: pointer;
+  touch-action: none;
   transition: transform var(--tp-motion-standard) var(--tp-ease-emphasized), background var(--tp-motion-standard) var(--tp-ease-standard);
 }
 
@@ -3946,13 +4159,18 @@ body.guide-open::before {
       rgba(255, 248, 232, 0.08) 16%,
       rgba(20, 49, 44, 0.18) 46%,
       rgba(20, 49, 44, 0.26) 100%);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   pointer-events: none;
 }
 
-/* On map-control steps, leave a sharp aperture around the actual highlighted
-   button while the rest of the page stays dimmed and blurred. */
+body.guide-open .player-backdrop {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Keep the spotlight aperture around map controls while dimming (not blurring)
+   the rest of the page. */
 body.guide-open.guide-map-control-focus::before {
   -webkit-mask-image: radial-gradient(
     circle at var(--guide-spotlight-x, 50%) var(--guide-spotlight-y, 45%),
@@ -3966,10 +4184,35 @@ body.guide-open.guide-map-control-focus::before {
   );
 }
 
+/* On the desktop Explore step, leave a larger bright aperture around the
+   mini-player expand control while the rest of the page stays dimmed. */
+body.guide-open.guide-mini-player-expand-focus::before {
+  -webkit-mask-image: radial-gradient(
+    circle at var(--guide-spotlight-x, 50%) var(--guide-spotlight-y, 45%),
+    transparent 0 56px,
+    #000 72px
+  );
+  mask-image: radial-gradient(
+    circle at var(--guide-spotlight-x, 50%) var(--guide-spotlight-y, 45%),
+    transparent 0 56px,
+    #000 72px
+  );
+}
+
 /* The map-introduction step explains the map itself on both desktop and
    mobile, so keep its whole cartographic surface above the tutorial veil. */
-.map-stage-frame.is-guide-highlighted {
+body.guide-open.guide-map-intro-focus .map-stage-frame.is-guide-highlighted {
+  position: relative;
   z-index: 4250 !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+body.guide-open.guide-map-intro-focus .map-stage-frame.is-guide-highlighted .leaflet-container,
+body.guide-open.guide-map-intro-focus .map-stage-frame.is-guide-highlighted .leaflet-pane,
+body.guide-open.guide-map-intro-focus .map-stage-frame.is-guide-highlighted .leaflet-control-container {
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 /* Phase 4: map-led route composition. */
@@ -4049,7 +4292,7 @@ body.guide-open.guide-map-control-focus::before {
   height: 42px;
   place-items: center;
   border-radius: var(--tp-radius-full);
-  background: linear-gradient(155deg, var(--tp-color-tertiary), var(--tp-legacy-stop-purple-strong));
+  background: linear-gradient(155deg, var(--tp-legacy-stop-purple), var(--tp-legacy-stop-purple-strong));
   color: var(--tp-color-on-primary);
   font: 800 0.95rem/1 var(--tp-font-ui);
   font-variant-numeric: tabular-nums;
@@ -4194,7 +4437,8 @@ body.guide-open.guide-map-control-focus::before {
 .map-stage-frame.is-expanded {
   overflow: hidden;
   padding: 12px;
-  background: var(--tp-color-surface-dim);
+  --map-frame-attribution-surface: var(--tp-color-surface-container-low);
+  background: var(--map-frame-attribution-surface);
   box-shadow: var(--tp-elevation-4);
 }
 
@@ -4289,8 +4533,8 @@ body.guide-open.guide-map-control-focus::before {
 }
 
 .map-marker.tp-map-marker:not(.is-selected) {
-  opacity: 0.72;
-  filter: saturate(0.78);
+  opacity: 1;
+  filter: none;
 }
 
 .map-marker.tp-map-marker.is-selected {
@@ -4309,6 +4553,8 @@ body.guide-open.guide-map-control-focus::before {
 }
 
 .leaflet-tooltip.map-selection-label {
+  display: flex;
+  align-items: center;
   max-width: min(300px, 62vw);
   padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -4324,12 +4570,67 @@ body.guide-open.guide-map-control-focus::before {
   white-space: normal;
 }
 
+.map-selection-label-content {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.map-selection-label-image {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.map-selection-label-title {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .leaflet-tooltip.map-selection-label.is-fading {
   opacity: 0;
 }
 
 .leaflet-tooltip.map-selection-label::before {
   border-top-color: #173f39;
+}
+
+@media (min-width: 1024px) {
+  .leaflet-tooltip.map-selection-label {
+    width: max-content;
+    min-width: min(340px, 34vw);
+    max-width: min(760px, 64vw);
+  }
+
+  .map-selection-label-content {
+    width: 100%;
+  }
+
+  .map-selection-label-title {
+    display: block;
+    flex: 0 1 auto;
+    overflow: visible;
+    white-space: nowrap;
+    -webkit-line-clamp: unset;
+  }
+}
+
+@media (max-width: 1023px) {
+  .leaflet-tooltip.map-selection-label {
+    padding: 6px;
+  }
+
+  .map-selection-label-image {
+    flex-basis: 64px;
+    width: 64px;
+    height: 64px;
+  }
 }
 
 @keyframes tp-map-marker-select {
@@ -4739,6 +5040,9 @@ body.guide-open.guide-map-control-focus::before {
   width: min(100%, 640px);
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+  /* The mobile .language-chips scroller clips the pill-shaped focus halo. */
+  overflow: visible;
+  padding: 0;
 }
 
 #onboarding-language-chips .onboarding-language-option {
@@ -4748,6 +5052,7 @@ body.guide-open.guide-map-control-focus::before {
   height: auto;
   justify-content: flex-start;
   padding: 10px 14px;
+  border-radius: var(--tp-radius-full);
   font: 700 0.96rem/1.2 var(--tp-font-ui);
 }
 
@@ -4774,12 +5079,6 @@ body.guide-open.guide-map-control-focus::before {
 .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
   min-width: 128px;
   min-height: 72px;
-}
-
-/* Track navigation is available in the compact mobile player controls.
-   Desktop keeps the dedicated preview cards as its navigation surface. */
-.TPPlayerSheet .player-track-control {
-  display: none;
 }
 
 .TPPlayerSheet .player-transport-group.is-stop-navigation {
@@ -4823,14 +5122,13 @@ body.guide-open.guide-map-control-focus::before {
   display: none !important;
 }
 
-.TPMiniPlayer .mini-player-speed-button {
-  width: 52px;
-  min-width: 52px;
-  min-height: 44px;
-  padding: 0;
+.TPMiniPlayer .mini-player-speed-button,
+.TPPlayerSheet .player-speed-button {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: var(--tp-player-control-touch);
   border-radius: var(--tp-radius-full);
   font-family: var(--tp-font-ui);
   font-size: 0.84rem;
@@ -4839,19 +5137,19 @@ body.guide-open.guide-map-control-focus::before {
   letter-spacing: 0;
 }
 
-.TPMiniPlayer .mini-player-speed-label {
+.TPMiniPlayer .mini-player-speed-button {
+  width: 52px;
+  min-width: 52px;
+  padding: 0;
+}
+
+.TPMiniPlayer .mini-player-speed-label,
+.TPPlayerSheet .player-speed-label {
   min-width: 0;
   max-width: 100%;
   white-space: nowrap;
   font-size: 0.76rem;
   line-height: 1;
-}
-
-.TPMiniPlayer .mini-player-speed-button.is-active {
-  border-color: color-mix(in srgb, var(--tp-color-tertiary) 88%, #fff);
-  background: var(--tp-color-tertiary);
-  color: var(--tp-color-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tp-color-tertiary) 20%, transparent);
 }
 
 .TPPlayerSheet .player-stop-preview {
@@ -5258,15 +5556,13 @@ body.guide-open.guide-map-control-focus::before {
   line-height: 1.55;
 }
 
-.language-unavailable-close {
-  width: auto;
-  min-width: 132px;
+.guide-button.language-unavailable-close {
+  width: 52px;
+  min-width: 52px;
   min-height: 52px;
   height: 52px;
-  gap: 8px;
-  padding: 0 20px;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
+  padding: 0;
+  border-radius: 50%;
   box-shadow: 0 8px 20px rgba(36, 92, 82, 0.18);
 }
 
@@ -5291,12 +5587,6 @@ body.language-unavailable-open {
 
 /* Mobile stop previews keep image, copy and action button in separate columns. */
 @media (max-width: 1023px) {
-  /* Keep the mobile map unobstructed. The synchronized transcript remains
-     available in the full player mobile surface. */
-  .map-live-caption {
-    display: none !important;
-  }
-
   .player-overlay.TPPlayerSheet .player-stop-preview {
     grid-template-columns: minmax(0, 1fr) 48px;
     gap: 10px;
@@ -5446,95 +5736,8 @@ body.language-unavailable-open {
   inset: 0;
   z-index: 1;
   background: rgba(5, 37, 34, 0.24);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-.guide-action-demo {
-  position: fixed;
-  z-index: 6050;
-  left: var(--guide-action-demo-x, 50vw);
-  top: var(--guide-action-demo-y, 50vh);
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.guide-action-demo.is-visible {
-  opacity: 1;
-}
-
-.guide-action-demo-cursor {
-  position: absolute;
-  left: -22px;
-  top: -22px;
-  z-index: 1;
-  display: grid;
-  width: 44px;
-  height: 44px;
-  place-items: center;
-  color: #ffffff;
-  font-size: 40px;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(3, 29, 25, 0.32));
-  opacity: 0;
-  transform: translate(-68px, 84px) scale(0.88);
-}
-
-.guide-action-demo.is-arriving .guide-action-demo-cursor {
-  animation: guide-action-cursor-arrive 850ms var(--tp-ease-emphasized) forwards;
-}
-
-.guide-action-demo.is-explore-demo.is-arriving .guide-action-demo-cursor {
-  animation-duration: 850ms;
-}
-
-.guide-action-demo.is-clicking .guide-action-demo-cursor {
-  animation: guide-action-cursor-click 1.02s var(--tp-ease-emphasized) forwards;
-}
-
-.guide-action-demo.is-explore-demo.is-clicking .guide-action-demo-cursor {
-  animation-duration: 1.02s;
-}
-
-.guide-action-demo.is-static .guide-action-demo-cursor {
-  opacity: 1;
-  transform: none;
-}
-
-@keyframes guide-action-cursor-arrive {
-  0% {
-    opacity: 0;
-    transform: translate(-68px, 84px) scale(0.88);
-  }
-
-  76% {
-    opacity: 1;
-    transform: translate(2px, -2px) scale(1.015);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-}
-
-@keyframes guide-action-cursor-click {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-
-  46% {
-    opacity: 1;
-    transform: translate(1px, 2px) scale(0.86);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .guide-card {
@@ -5559,14 +5762,9 @@ body.language-unavailable-open {
     transform 220ms cubic-bezier(0.55, 0, 1, 0.45);
 }
 
-.guide-layer.is-exit-confirming .guide-card,
-.guide-layer.is-exit-confirming .guide-action-demo {
+.guide-layer.is-exit-confirming .guide-card {
   opacity: 0.46;
   pointer-events: none;
-}
-
-.guide-layer.is-exit-confirming .guide-action-demo {
-  z-index: 2;
 }
 
 .guide-exit-confirm {
@@ -5737,7 +5935,8 @@ body.language-unavailable-open {
   color: #fff;
 }
 
-#guide-next-button.guide-button-primary::after {
+#guide-next-button.guide-button-primary::after,
+#player-context-guide-next.guide-button-primary:not(.is-finish)::after {
   content: "";
   position: absolute;
   inset: -7px;
@@ -5774,6 +5973,10 @@ body.language-unavailable-open {
 
 /* The full player is the subject of its tutorial step: keep the whole surface readable above the veil. */
 .player-overlay:has(.player-sheet.is-guide-highlighted) {
+  z-index: 4250 !important;
+}
+
+.player-overlay:has(.player-map-button.is-guide-highlighted, .player-close-button.is-guide-highlighted) {
   z-index: 4250 !important;
 }
 
@@ -6016,28 +6219,32 @@ body.language-unavailable-open {
 #onboarding-language-chips .onboarding-language-option {
   transition:
     transform var(--tp-motion-fast) var(--tp-ease-emphasized),
-    border-radius var(--tp-motion-standard) var(--tp-ease-emphasized),
     background var(--tp-motion-standard) var(--tp-ease-standard),
     box-shadow var(--tp-motion-standard) var(--tp-ease-standard);
 }
 
 #onboarding-language-chips .onboarding-language-option:active {
   transform: scale(0.97);
-  border-radius: var(--tp-radius-lg) var(--tp-radius-lg) var(--tp-radius-md) var(--tp-radius-md);
 }
 
 #onboarding-language-chips .onboarding-language-option.is-active {
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--tp-color-tertiary) 22%, transparent), var(--tp-elevation-2);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .guide-action-demo-cursor,
-  .guide-action-demo.is-arriving .guide-action-demo-cursor,
-  .guide-action-demo.is-clicking .guide-action-demo-cursor {
-    animation: none;
-  }
+#onboarding-language-chips .onboarding-language-option:focus-visible {
+  border-radius: 999px;
+  outline: none !important;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px var(--tp-color-accent),
+    0 0 0 9px color-mix(in srgb, var(--tp-color-tertiary) 36%, transparent),
+    var(--tp-elevation-2);
+}
 
-  #guide-next-button.guide-button-primary::after {
+@media (prefers-reduced-motion: reduce) {
+  #guide-next-button.guide-button-primary::after,
+  #player-context-guide-next.guide-button-primary:not(.is-finish)::after {
     animation: none;
     opacity: 0.42;
     transform: none;
@@ -6291,6 +6498,231 @@ body.language-unavailable-open {
   transition: none !important;
 }
 
+/* Mobile full player: keep the expanded map interactive and dock compact audio controls below it. */
+@media (max-width: 1023px) {
+  body.is-mobile-map-player-mode .mini-player {
+    display: none !important;
+  }
+
+  body.is-mobile-map-player-mode .map-explore-mascot {
+    display: block;
+    position: absolute;
+    z-index: 1300;
+    top: auto;
+    right: auto;
+    bottom: calc(var(--mobile-map-player-dock-height, 230px) + 12px);
+    left: max(12px, env(safe-area-inset-left));
+    width: clamp(104px, 30vw, 114px);
+    pointer-events: none;
+  }
+
+  body.is-mobile-map-player-mode .map-explore-mascot-motion,
+  body.is-mobile-map-player-mode .map-explore-mascot .mascot-breathing-shell,
+  body.is-mobile-map-player-mode .map-explore-mascot-image {
+    display: block;
+    width: 100%;
+  }
+
+  body.is-mobile-map-player-mode .map-explore-mascot-image {
+    height: auto;
+    transform-origin: center bottom;
+    filter: drop-shadow(0 8px 12px rgba(5, 37, 34, 0.28));
+  }
+
+  body.is-mobile-map-player-mode .map-stage-frame.is-expanded {
+    z-index: 1990;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body.is-mobile-map-player-mode .map-stage-frame.is-expanded .map {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player {
+    z-index: 2000;
+    background: transparent;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-backdrop {
+    display: none;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-sheet {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 1;
+    display: grid;
+    grid-template-areas:
+      "topbar"
+      "player";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 44px auto;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: 56dvh;
+    padding: 8px 16px max(12px, env(safe-area-inset-bottom));
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 0;
+    border-radius: 24px 24px 0 0;
+    background: #092f2c;
+    box-shadow: 0 -14px 36px rgba(5, 29, 27, 0.32);
+    pointer-events: auto;
+    white-space: normal;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-topbar {
+    grid-area: topbar;
+    min-height: 44px;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-artwork,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-transcript-dock,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-stop-navigation,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-side > .audio-wrapper,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-side > .audio-feedback,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-side > .player-help-box,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-language-row {
+    display: none !important;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-side {
+    grid-area: player;
+    display: grid;
+    grid-template-rows: auto 34px 72px;
+    align-content: start;
+    gap: 6px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-meta {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 30px;
+    gap: 8px;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-meta .detail-status,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-meta .detail-duration {
+    display: none;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-title-row {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-kicker {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.84rem;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-meta h2 {
+    overflow: hidden;
+    margin: 0;
+    font-size: clamp(1rem, 4.7vw, 1.3rem);
+    line-height: 1.12;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-timeline {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-command-row,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-transport-group {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-command-row {
+    display: block;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px;
+    align-items: center;
+    justify-content: stretch;
+    gap: 6px;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-transport-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(32px, 1fr)) minmax(72px, 1.8fr) repeat(2, minmax(32px, 1fr));
+    align-items: center;
+    justify-self: stretch;
+    gap: 4px;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-speed-button {
+    grid-column: 2;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-directions-button[hidden] {
+    display: none !important;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-transport-group .player-control-button {
+    flex: 0 1 44px;
+    width: 44px;
+    min-width: 0;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-transport-group .player-control-button.is-primary {
+    flex: 0 0 64px;
+    width: 64px;
+    height: 52px;
+    min-height: 52px;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-speed-button {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-sheet {
+    touch-action: auto;
+  }
+
+  .player-overlay.TPPlayerSheet:has(.player-map-button.is-guide-highlighted) {
+    z-index: 4250;
+  }
+}
+
 .player-overlay.TPPlayerSheet.is-hidden .player-sheet,
 .player-overlay.TPPlayerSheet.is-hidden .player-artwork,
 .player-overlay.TPPlayerSheet.is-hidden .player-side,
@@ -6305,10 +6737,6 @@ body.language-unavailable-open {
 }
 
 @media (min-width: 1024px) {
-  .player-overlay.TPPlayerSheet .player-share-button {
-    display: none;
-  }
-
   .player-overlay.TPPlayerSheet .player-sheet {
     grid-template-areas:
       "topbar topbar"
@@ -6661,16 +7089,25 @@ body.language-unavailable-open {
 
 @media (prefers-reduced-motion: reduce) {
   .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing {
-    overflow: visible;
-    text-wrap: balance;
-    white-space: normal;
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    touch-action: pan-x;
+    scrollbar-width: thin;
   }
 
   .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing .player-title-text {
-    min-width: 0;
-    white-space: normal;
+    min-width: max-content;
+    white-space: nowrap;
     animation: none;
     transform: none;
+  }
+
+  .player-overlay.TPPlayerSheet .player-meta h2.is-overflowing:focus-visible {
+    outline: 3px solid var(--tp-color-tertiary);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
@@ -6758,35 +7195,9 @@ body.language-unavailable-open {
 }
 
 .TPPlayerSheet .player-speed-button {
-  box-sizing: border-box;
   width: 56px;
   min-width: 56px;
-  min-height: 44px;
   padding: 0 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--tp-radius-full);
-  font-family: var(--tp-font-ui);
-  font-size: 0.84rem;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0;
-}
-
-.TPPlayerSheet .player-speed-label {
-  min-width: 0;
-  max-width: 100%;
-  white-space: nowrap;
-  font-size: 0.76rem;
-  line-height: 1;
-}
-
-.TPPlayerSheet .player-speed-button.is-active {
-  border-color: color-mix(in srgb, var(--tp-color-tertiary) 88%, #fff);
-  background: var(--tp-color-tertiary);
-  color: var(--tp-color-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tp-color-tertiary) 20%, transparent);
 }
 
 .TPPlayerSheet .player-directions-button {
@@ -6967,7 +7378,7 @@ body.language-unavailable-open {
     border-radius: 0;
     background: transparent;
     box-shadow: none;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--tp-player-secondary-ink);
     font-size: 1.08rem;
     opacity: 0.88;
   }
@@ -6977,8 +7388,38 @@ body.language-unavailable-open {
   .TPPlayerSheet #player-speed-button:hover,
   .TPPlayerSheet #player-speed-button:focus-visible {
     background: transparent;
-    color: rgba(255, 255, 255, 0.98);
+    color: var(--tp-player-secondary-hover-ink);
     box-shadow: none;
+    transform: none;
+  }
+
+  /* Keep every mobile full-player secondary action in the same quiet
+     Material style as the mini-player, including the map-player dock. */
+  .TPPlayerSheet #player-prev-button,
+  .TPPlayerSheet #player-next-button,
+  .TPPlayerSheet #player-previous-track,
+  .TPPlayerSheet #player-next-track {
+    border: 0;
+    border-radius: var(--tp-radius-full);
+    background: transparent;
+    color: var(--tp-player-secondary-ink);
+    box-shadow: none;
+    opacity: 0.88;
+  }
+
+  .TPPlayerSheet #player-prev-button:hover,
+  .TPPlayerSheet #player-next-button:hover,
+  .TPPlayerSheet #player-previous-track:hover,
+  .TPPlayerSheet #player-next-track:hover,
+  .TPPlayerSheet #player-prev-button:focus-visible,
+  .TPPlayerSheet #player-next-button:focus-visible,
+  .TPPlayerSheet #player-previous-track:focus-visible,
+  .TPPlayerSheet #player-next-track:focus-visible {
+    border-color: transparent;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--tp-player-secondary-hover-ink);
+    box-shadow: none;
+    opacity: 1;
     transform: none;
   }
 
@@ -6988,6 +7429,104 @@ body.language-unavailable-open {
   .TPPlayerSheet #player-speed-label {
     font-size: 0.66rem;
   }
+}
+
+/* Desktop Explore uses the same transport actions and Material control family
+   as the mobile full player, sized for the narrower side panel. */
+@media (min-width: 1024px) {
+  .TPPlayerSheet .player-command-row .player-controls {
+    box-sizing: border-box;
+    display: flex;
+    min-width: 0;
+    gap: 4px;
+  }
+
+  .TPPlayerSheet .player-transport-group {
+    display: grid;
+    flex: 0 1 244px;
+    width: min(100%, 244px);
+    min-width: 0;
+    grid-template-columns: 40px 40px minmax(64px, 1fr) 40px 40px;
+    gap: 4px;
+  }
+
+  .TPPlayerSheet .player-track-control {
+    display: inline-flex;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button {
+    box-sizing: border-box;
+    width: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: var(--tp-radius-full);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.68);
+    box-shadow: none;
+    font-size: 1rem;
+    opacity: 1;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button .material-symbols-rounded {
+    font-size: 1.16rem;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary {
+    width: 100%;
+    min-width: 64px;
+    min-height: 56px;
+    border: 2px solid color-mix(in srgb, var(--tp-color-tertiary) 84%, #ffffff);
+    border-radius: var(--tp-radius-lg);
+    background: var(--tp-color-tertiary);
+    color: var(--tp-color-primary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(235, 199, 99, 0.1);
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button.is-primary .playback-icon {
+    font-size: 1.75rem;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-control-button:not(.is-primary):hover,
+  .TPPlayerSheet .player-transport-group .player-control-button:not(.is-primary):focus-visible {
+    border-color: rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+  }
+
+  .TPPlayerSheet .player-transport-group .player-track-control:not(:hover):not(:focus-visible) {
+    border-color: transparent;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .TPPlayerSheet .player-command-row #player-speed-button {
+    box-sizing: border-box;
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    min-height: 40px;
+    margin-left: 2px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--tp-radius-full);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.68);
+    box-shadow: none;
+    font-size: 0.76rem;
+  }
+
+  .TPPlayerSheet .player-command-row #player-speed-button:hover,
+  .TPPlayerSheet .player-command-row #player-speed-button:focus-visible {
+    border-color: rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+  }
+
 }
 
 /* Transcript control lives on the artwork and keeps clear of the mascot. */
@@ -7328,12 +7867,6 @@ body.player-open {
   transform: scale(0.94);
 }
 
-.player-share-button.is-shared {
-  border-color: var(--tp-color-tertiary);
-  background: color-mix(in srgb, var(--tp-color-tertiary) 18%, rgba(255, 255, 255, 0.08));
-  color: var(--tp-color-tertiary);
-}
-
 .player-map-button {
   display: none;
 }
@@ -7358,6 +7891,10 @@ body.player-open {
 
 .player-mobile-live-transcript {
   display: none;
+}
+
+.player-mobile-live-transcript[hidden] {
+  display: none !important;
 }
 
 .player-transcript-dock .detail-copy {
@@ -7580,8 +8117,8 @@ body.player-open {
   .player-mobile-transcript-segment {
     margin: 0;
     padding: 4px 0;
-    color: rgba(255, 255, 255, 0.48);
-    font: 500 0.84rem / 1.28 var(--tp-font-ui);
+    color: rgba(255, 255, 255, 0.84);
+    font: 500 0.94rem / 1.3 var(--tp-font-ui);
     transition:
       color 180ms var(--tp-ease-standard),
       opacity 180ms var(--tp-ease-standard),
@@ -7605,7 +8142,7 @@ body.player-open {
   .player-mobile-live-transcript-scroll[data-mode="cascade"] .player-mobile-transcript-segment:not(.is-active),
   .player-mobile-live-transcript-scroll[data-mode="timeline"] .player-mobile-transcript-segment:not(.is-active),
   .player-mobile-live-transcript-scroll[data-mode="timeline-card"] .player-mobile-transcript-segment:not(.is-active) {
-    opacity: 0.56;
+    opacity: 1;
   }
 
   .player-mobile-live-transcript-scroll[data-mode="cascade"] .player-mobile-transcript-segment.is-active,
@@ -7654,7 +8191,7 @@ body.player-open {
   .player-mobile-live-transcript-scroll[data-mode="scroll"] .player-mobile-transcript-segment,
   .player-mobile-live-transcript-scroll[data-mode="full"] .player-mobile-transcript-segment {
     padding: 3px 0;
-    opacity: 0.54;
+    opacity: 1;
   }
 
   .player-mobile-live-transcript-scroll[data-mode="scroll"] .player-mobile-transcript-segment.is-active,
@@ -7759,7 +8296,7 @@ body.player-open {
   }
 
   .player-mobile-transcript-segment {
-    font-size: 0.78rem;
+    font-size: 0.875rem;
   }
 }
 
@@ -7919,7 +8456,7 @@ body.player-open {
   }
 
   body.is-map-player-panel {
-    --tp-explore-panel-width: clamp(340px, 24vw, 420px);
+    --tp-explore-panel-width: clamp(360px, 26vw, 440px);
   }
 
   body.is-map-player-panel .map-stage-frame.is-expanded {
@@ -7967,8 +8504,8 @@ body.player-open {
       "artwork"
       "player";
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 44px minmax(220px, 30dvh) minmax(0, 1fr);
-    gap: 10px;
+    grid-template-rows: 44px minmax(220px, min(34dvh, 360px)) minmax(0, 1fr);
+    gap: 12px;
     padding: 14px 16px max(14px, env(safe-area-inset-bottom));
   }
 
@@ -8061,7 +8598,7 @@ body.player-open {
     margin: 0;
     grid-template-areas: "controls";
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 56px;
+    grid-template-rows: 64px;
     gap: 0;
   }
 
@@ -8074,39 +8611,93 @@ body.player-open {
     display: grid;
     width: 100%;
     min-width: 0;
-    grid-template-columns: minmax(0, 1fr) 56px;
+    grid-template-columns: minmax(0, 1fr) 44px;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
     justify-content: center;
     margin: 0 auto;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group {
     min-width: 0;
-    grid-template-columns: 44px minmax(64px, 1fr) 44px;
-    gap: 18px;
+    width: 100%;
+    grid-template-columns: 44px 44px minmax(88px, 1fr) 44px 44px;
+    gap: 4px;
     justify-content: center;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button {
+    box-sizing: border-box;
     width: 44px;
     min-width: 44px;
-    min-height: 48px;
+    height: 44px;
+    min-height: 44px;
+    align-self: center;
+    padding: 0;
+    border: 0;
+    border-radius: var(--tp-radius-full);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-track-control {
+    display: inline-flex;
+  }
+
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button .material-symbols-rounded {
+    font-size: 1.35rem;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button.is-primary {
     width: 100%;
-    min-width: 64px;
-    min-height: 56px;
+    min-width: 88px;
+    height: 64px;
+    min-height: 64px;
+    align-self: center;
+    border: 2px solid color-mix(in srgb, var(--tp-color-tertiary) 84%, #ffffff);
+    border-radius: var(--tp-radius-lg);
+    background: var(--tp-color-tertiary);
+    color: var(--tp-color-primary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(235, 199, 99, 0.1);
+  }
+
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button.is-primary .playback-icon {
+    font-size: 2rem;
+  }
+
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button:not(.is-primary):hover,
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group .player-control-button:not(.is-primary):focus-visible {
+    border-color: transparent;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--tp-player-secondary-hover-ink);
+    opacity: 1;
+  }
+
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group.is-stop-navigation {
+    width: max-content;
+    grid-template-columns: repeat(2, 44px);
+  }
+
+  .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-transport-group.is-stop-navigation .player-track-control {
+    display: none;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-speed-button {
     box-sizing: border-box;
-    width: 56px;
-    min-width: 56px;
-    min-height: 48px;
-    padding-inline: 4px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
     justify-self: end;
+    border: 0;
+    border-radius: var(--tp-radius-full);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+    box-shadow: none;
   }
 
   .player-overlay.TPPlayerSheet.is-map-panel .player-stop-navigation {
@@ -8151,10 +8742,17 @@ body.player-open {
     display: block;
     position: absolute;
     z-index: 1300;
-    bottom: 18px;
+    bottom: 148px;
     left: 18px;
-    width: clamp(128px, 12vw, 192px);
-    pointer-events: none;
+    width: clamp(152px, 13.5vw, 216px);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  body.is-map-player-panel .map-explore-mascot-motion:focus-visible {
+    outline: 3px solid var(--tp-color-tertiary);
+    outline-offset: 4px;
+    border-radius: var(--tp-radius-lg);
   }
 
   body.is-map-player-panel .map-explore-mascot-motion,
@@ -8170,20 +8768,20 @@ body.player-open {
     filter: drop-shadow(0 10px 14px rgba(5, 37, 34, 0.24));
   }
 
-body.is-map-player-panel .map-live-caption {
+  body.is-map-player-panel .map-live-caption {
     position: fixed;
-    right: auto;
-    bottom: 24px;
-    left: max(220px, calc(50% - 360px));
-    width: min(720px, calc(100% - 244px));
-    padding: 16px 22px;
-    font-size: clamp(1.08rem, 1.3vw, 1.28rem);
-    line-height: 1.32;
+    z-index: 4950;
+    right: calc(var(--tp-explore-panel-width) + 24px);
+    bottom: 64px;
+    left: 24px;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 10px 22px;
+    border-radius: var(--tp-radius-full);
+    font-size: 1.35rem;
+    line-height: 1.3;
     white-space: pre-line;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 }
 
@@ -8245,5 +8843,480 @@ body.is-map-player-panel .map-live-caption[hidden] {
     max-height: 48px !important;
     flex-basis: 48px !important;
     min-height: 48px !important;
+  }
+}
+
+/* Mobile live captions sit above the mini-player without covering map controls. */
+@media (max-width: 1023px) {
+  .map-live-caption {
+    position: fixed;
+    right: 12px;
+    bottom: calc(var(--mini-player-reserved-space) + 8px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    z-index: 940;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #174e47, #0b3531);
+    box-shadow: 0 8px 22px rgba(3, 25, 23, 0.2);
+    font-size: clamp(0.8rem, 3.7vw, 0.94rem);
+    line-height: 1.28;
+    text-align: left;
+  }
+
+  body.player-open .map-live-caption {
+    display: none !important;
+  }
+
+  /* In Mappa + player the same two-line, timed caption used by the home
+     sits beside the mascot and above the measured audio dock. */
+  body.is-mobile-map-player-mode .map-live-caption:not([hidden]) {
+    display: block !important;
+    z-index: 1995;
+    left: calc(max(12px, env(safe-area-inset-left)) + clamp(104px, 30vw, 114px) + 8px);
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(var(--mobile-map-player-dock-height, 230px) + 12px);
+    max-width: none;
+    padding: 8px 10px;
+    font-size: clamp(0.8rem, 3.7vw, 0.94rem);
+    line-height: 1.28;
+  }
+}
+
+/* The sticky map-stage forms its own stacking context; lift it with the guide
+   highlight so the map frame remains visually clear above the dimming veil. */
+body.guide-open.guide-map-intro-focus .route-experience > .map-stage:has(> .map-stage-frame.is-guide-highlighted) {
+  z-index: 4250 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-live-caption {
+    transition: none !important;
+  }
+}
+
+/* The stops section stays highlighted during the guide, but its raised layer
+   must end before the fixed audio player. */
+.stops-panel.is-guide-highlighted {
+  clip-path: inset(0 0 max(0px, calc(100% - var(--guide-stops-visible-height, 0px))) 0);
+}
+
+/* A click must not leave the browser's rectangular focus outline around a
+   pill. Keyboard focus remains visible through the rounded shadow below. */
+#onboarding-language-chips .onboarding-language-option:focus {
+  border-radius: var(--tp-radius-full);
+  outline: none !important;
+}
+
+/* Keep the six audio actions in the same order as the mobile mini-player.
+   Speed follows next-track; Play may sit slightly left of the row center. */
+@media (max-width: 1023px) {
+  .player-overlay.TPPlayerSheet .player-command-row .player-controls,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-controls {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(44px, 1fr)) minmax(64px, 1.4fr) repeat(3, minmax(44px, 1fr));
+    align-items: center;
+    gap: clamp(2px, 0.8vw, 6px);
+  }
+
+  .player-overlay.TPPlayerSheet .player-transport-group,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-transport-group {
+    display: contents;
+  }
+
+  .player-overlay.TPPlayerSheet #player-previous-track { grid-column: 1; }
+  .player-overlay.TPPlayerSheet #player-prev-button { grid-column: 2; }
+  .player-overlay.TPPlayerSheet #player-play-button { grid-column: 3; }
+  .player-overlay.TPPlayerSheet #player-next-button { grid-column: 4; }
+  .player-overlay.TPPlayerSheet #player-next-track { grid-column: 5; }
+  .player-overlay.TPPlayerSheet #player-speed-button { grid-column: 6; }
+
+  .player-overlay.TPPlayerSheet .player-command-row .player-control-button,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-control-button {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    justify-self: center;
+  }
+
+  /* Skip-track buttons are flex items, unlike the centered seek buttons.
+     Center their glyphs inside the equal-width touch targets too. */
+  .player-overlay.TPPlayerSheet .player-track-control {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .player-overlay.TPPlayerSheet .player-command-row .player-controls,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-controls {
+    width: calc(100% + 20px);
+    max-width: none;
+    margin-inline: -10px;
+  }
+}
+
+/* Contextual full-player help: only the requested control is cut out of the veil. */
+.player-topbar-trailing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-listen-help-button,
+.player-map-action,
+.player-overlay.TPPlayerSheet .player-map-help-button {
+  display: none;
+}
+
+.player-context-guide.is-hidden {
+  display: none;
+}
+
+.player-context-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.player-context-guide-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 29, 27, 0.65);
+  pointer-events: auto;
+}
+
+.player-context-guide.has-target .player-context-guide-veil {
+  background: transparent;
+}
+
+.player-context-guide.has-target .player-context-guide-veil::before {
+  content: "";
+  position: fixed;
+  left: var(--context-guide-target-left);
+  top: var(--context-guide-target-top);
+  width: var(--context-guide-target-width);
+  height: var(--context-guide-target-height);
+  border-radius: 999px;
+  box-shadow: 0 0 0 200vmax rgba(4, 29, 27, 0.65);
+  pointer-events: none;
+}
+
+.player-context-guide.has-target::after {
+  content: "";
+  position: fixed;
+  left: var(--context-guide-target-left);
+  top: var(--context-guide-target-top);
+  width: var(--context-guide-target-width);
+  height: var(--context-guide-target-height);
+  box-sizing: border-box;
+  border: 3px solid var(--tp-color-tertiary);
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.82);
+  pointer-events: none;
+}
+
+.player-context-guide-card {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  top: max(76px, calc(env(safe-area-inset-top, 0px) + 72px));
+  left: 50%;
+  width: min(420px, calc(100vw - 32px));
+  max-height: min(42dvh, 290px, var(--context-guide-card-max-height, 290px));
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--tp-color-tertiary) 55%, #fff);
+  border-radius: 24px;
+  background: #fffdf8;
+  color: #245c52;
+  box-shadow: 0 18px 48px rgba(3, 24, 22, 0.3);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.player-context-guide-progress {
+  margin: 0 0 6px;
+  color: #4d6d66;
+  font: 700 0.85rem / 1.2 var(--tp-font-ui);
+}
+
+.player-context-guide-text {
+  margin: 0 0 14px;
+  min-height: 0;
+  overflow-y: auto;
+  font: 700 clamp(1rem, 4vw, 1.15rem) / 1.35 var(--tp-font-editorial);
+}
+
+.player-context-guide-actions {
+  display: flex;
+  flex: none;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 1023px) {
+  .player-overlay.TPPlayerSheet:not(.is-mobile-map-player) .player-listen-help-button {
+    display: grid;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-map-action {
+    display: grid;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-map-action[hidden] {
+    display: none;
+  }
+
+  .player-overlay.TPPlayerSheet.is-mobile-map-player .player-map-help-button {
+    display: grid;
+    width: 44px;
+    height: 44px;
+  }
+
+  body.is-mobile-map-player-mode .map-floating-controls {
+    display: none;
+  }
+
+  .player-overlay.TPPlayerSheet .player-topbar-leading {
+    gap: clamp(2px, 1.2vw, 8px);
+  }
+
+  .player-overlay.TPPlayerSheet .player-topbar {
+    gap: 8px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .TPMiniPlayer {
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* Help keeps the home button's light, high-contrast treatment in both mobile players. */
+.player-overlay.TPPlayerSheet .player-map-help-button,
+.player-overlay.TPPlayerSheet .player-listen-help-button {
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--accent);
+  box-shadow: 0 14px 30px rgba(36, 92, 82, 0.08);
+}
+
+.player-overlay.TPPlayerSheet .player-map-help-button .material-symbols-rounded,
+.player-overlay.TPPlayerSheet .player-listen-help-button .material-symbols-rounded {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.player-overlay.TPPlayerSheet .player-map-help-button:hover,
+.player-overlay.TPPlayerSheet .player-map-help-button:focus-visible,
+.player-overlay.TPPlayerSheet .player-listen-help-button:hover,
+.player-overlay.TPPlayerSheet .player-listen-help-button:focus-visible {
+  border-color: rgba(36, 92, 82, 0.42);
+  background: #fff;
+  color: var(--accent);
+  box-shadow: 0 18px 36px rgba(36, 92, 82, 0.14);
+}
+
+/* The rate is selected through its text alone; the hit area stays unchanged. */
+.TPMiniPlayer #mini-player-speed-button.is-active,
+.player-overlay.TPPlayerSheet #player-speed-button.is-active {
+  border-color: transparent;
+  background: transparent;
+  color: var(--tp-color-tertiary);
+  opacity: 1;
+  box-shadow: none;
+}
+
+.TPMiniPlayer #mini-player-speed-button:focus-visible,
+.player-overlay.TPPlayerSheet #player-speed-button:focus-visible {
+  outline-color: var(--tp-color-secondary) !important;
+}
+
+/* Accessibility audit: keep the mini-player controls inside a 320px viewport. */
+.TPMiniPlayer .mini-player-track-control {
+  width: 44px;
+  min-width: 44px;
+}
+
+@media (max-width: 390px) {
+  .TPMiniPlayer .mini-player-controls,
+  .TPMiniPlayer .mini-player-transport-group {
+    gap: 8px;
+  }
+
+  .TPMiniPlayer .mini-player-transport-group .mini-player-control,
+  .TPMiniPlayer #mini-player-speed-button {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .TPMiniPlayer .mini-player-transport-group .mini-player-toggle {
+    flex: 0 0 56px;
+    width: 56px;
+    min-width: 56px;
+  }
+}
+
+@media (max-width: 340px) {
+  .TPMiniPlayer {
+    padding-inline: 8px;
+  }
+
+  .TPMiniPlayer .mini-player-controls {
+    width: 100%;
+    justify-self: stretch;
+    gap: 3px;
+  }
+
+  .TPMiniPlayer .mini-player-transport-group {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 3px;
+  }
+
+  .TPMiniPlayer .mini-player-transport-group .mini-player-control,
+  .TPMiniPlayer .mini-player-transport-group .mini-player-toggle,
+  .TPMiniPlayer #mini-player-speed-button {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .TPMiniPlayer .mini-player-progress-input {
+    height: 44px;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header .help-button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    flex-basis: 44px;
+  }
+
+  .site-header .global-language-current {
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .map-stage-frame .leaflet-control-zoom a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
+}
+
+.map-stage-frame .leaflet-control-attribution a {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  body.is-transition-audio .TPMiniPlayer {
+    grid-template-columns: max-content 64px minmax(260px, 1fr) auto;
+    grid-template-rows: minmax(58px, auto);
+    align-items: center;
+  }
+
+  body.is-transition-audio .player-overlay.TPPlayerSheet.is-map-panel .player-command-row .player-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.is-transition-audio .player-overlay.TPPlayerSheet.is-map-panel #player-play-button {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  body.is-transition-audio .TPMiniPlayer .mini-player-center {
+    display: contents;
+  }
+
+  body.is-transition-audio .TPMiniPlayer .mini-player-controls {
+    grid-column: 2;
+    grid-row: 1;
+    width: 64px;
+    justify-content: center;
+  }
+
+  body.is-transition-audio .TPMiniPlayer .mini-player-timeline {
+    grid-column: 3;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  body.is-transition-audio #mini-player-title.is-transition-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body.is-transition-audio #mini-player-title.is-transition-title .mini-player-title-track {
+    max-width: 100%;
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1023px) {
+  body.is-transition-audio .TPMiniPlayer .mini-player-controls {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+
+  body.is-transition-audio .TPMiniPlayer .mini-player-transport-group {
+    display: flex;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  body.is-transition-audio .TPMiniPlayer .mini-player-toggle {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: 64px;
+    border-radius: var(--tp-radius-lg);
+  }
+
+  body.is-transition-audio .player-overlay.TPPlayerSheet .player-command-row .player-controls {
+    display: flex;
+    width: 100%;
+    margin-top: 12px;
+    justify-content: center;
+  }
+
+  body.is-transition-audio .player-overlay.TPPlayerSheet #player-play-button {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+    min-height: 64px;
+    border-radius: var(--tp-radius-lg);
   }
 }

@@ -14,9 +14,9 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0&family=Roboto+Flex:opsz,wght@8..144,400..800&display=swap"
     />
-    <link rel="stylesheet" href="design-system.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="theme-vicopisano.css?v=20260814-phase2" />
-    <link rel="stylesheet" href="style.css?v=20260925-transcript-overlay-player-layout" />
+    <link rel="stylesheet" href="design-system.css?v=20261001-a11y-audit" />
+    <link rel="stylesheet" href="theme-vicopisano.css?v=20261001-a11y-audit" />
+    <link rel="stylesheet" href="style.css?v=20261001-osm-credit-compact" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
@@ -53,9 +53,6 @@
             <button type="button" id="guide-next-button" class="guide-button guide-button-primary" aria-label="Avanti"><span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
           </div>
       </div>
-      <div id="guide-action-demo" class="guide-action-demo" aria-hidden="true">
-        <span translate="no" class="guide-action-demo-cursor material-symbols-rounded">touch_app</span>
-      </div>
       <div id="guide-exit-confirm" class="guide-exit-confirm" role="alertdialog" aria-modal="true" aria-labelledby="guide-exit-confirm-title" hidden>
         <h2 id="guide-exit-confirm-title"></h2>
         <div class="guide-exit-confirm-actions">
@@ -79,7 +76,6 @@
         <p id="language-unavailable-message"></p>
         <button type="button" id="language-unavailable-close" class="guide-button guide-button-primary language-unavailable-close">
           <span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>
-          <span id="language-unavailable-close-label">Chiudi</span>
         </button>
       </div>
     </div>
@@ -165,7 +161,7 @@
                   <span class="map-control-tooltip" aria-hidden="true">Apri indicazioni</span>
                 </a>
               </div>
-              <div class="map-explore-mascot" aria-hidden="true">
+              <div class="map-explore-mascot">
                 <div class="mascot-motion-shell map-explore-mascot-motion" data-mascot-motion="map-explore">
                   <div class="mascot-breathing-shell">
                     <img
@@ -225,37 +221,32 @@
         <div class="outbound-panels">
           <footer class="platforms-panel" aria-labelledby="platforms-eyebrow">
           <p class="platforms-eyebrow platforms-eyebrow-strong" id="platforms-eyebrow">
-            Scopri Vicopisano anche su:
+            Presto anche su:
           </p>
-          <div class="platforms-logos" aria-label="Piattaforme esterne">
-            <a
+          <div class="platforms-logos" aria-label="Piattaforme in arrivo">
+            <button
+              type="button"
               class="platform-logo logo-izi"
-              href="https://izi.travel/it/e5c2-vicopisano-travel-podcasting/it"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="izi.TRAVEL (si apre in una nuova scheda)"
+              data-platform-name="izi.TRAVEL"
             >
               <span class="platform-logo-text"><span class="brand-izi">izi</span><span class="brand-travel">.TRAVEL</span></span>
-            </a>
-            <a
+            </button>
+            <button
+              type="button"
               class="platform-logo logo-loquis"
-              href="https://www.loquis.com/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Loquis (si apre in una nuova scheda)"
+              data-platform-name="Loquis"
             >
               <span class="platform-logo-text">Loquis</span>
-            </a>
-            <a
+            </button>
+            <button
+              type="button"
               class="platform-logo logo-spotify"
-              href="https://open.spotify.com/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Spotify (si apre in una nuova scheda)"
+              data-platform-name="Spotify"
             >
               <span class="platform-logo-text">Spotify</span>
-            </a>
+            </button>
           </div>
+          <p id="platform-link-status" class="platform-link-status" role="status" aria-live="polite"></p>
           </footer>
 
         </div>
@@ -278,7 +269,7 @@
           alt="Artwork della traccia"
         />
         <span class="mini-player-text">
-          <strong id="mini-player-title"></strong>
+          <strong id="mini-player-title"><span class="mini-player-title-track"></span></strong>
           <span id="mini-player-subtitle"></span>
         </span>
       </div>
@@ -377,17 +368,23 @@
       <article class="player-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1">
         <div class="player-topbar">
           <div class="player-topbar-leading">
-            <button type="button" id="player-share-button" class="player-topbar-button player-share-button" aria-label="Condividi questa tappa" title="Condividi questa tappa">
-              <span translate="no" class="player-share-icon material-symbols-rounded" aria-hidden="true">share</span>
-            </button>
-            <button type="button" id="player-map-button" class="player-topbar-button player-map-button" aria-label="Apri la mappa a tutto schermo" title="Apri la mappa a tutto schermo">
+            <button type="button" id="player-map-button" class="player-topbar-button player-map-button" aria-label="Mostra mappa e player" title="Mostra mappa e player">
               <span translate="no" class="material-symbols-rounded" aria-hidden="true">map</span>
             </button>
-            <span id="player-share-status" class="sr-only" role="status" aria-live="polite"></span>
+            <button type="button" id="player-listen-help-button" class="player-topbar-button player-listen-help-button" aria-label="Guida Full player audio" title="Guida Full player audio" aria-haspopup="dialog"><span translate="no" class="material-symbols-rounded" aria-hidden="true">help</span></button>
+            <button type="button" id="player-recenter-button" class="player-topbar-button player-map-action" aria-label="Trova la mia posizione" title="Trova la mia posizione">
+              <span translate="no" class="material-symbols-rounded" aria-hidden="true">my_location</span>
+            </button>
+            <a id="player-map-directions-button" class="player-topbar-button player-map-action" href="#" target="_blank" rel="noopener noreferrer" aria-label="Apri indicazioni su Google Maps" title="Apri indicazioni su Google Maps">
+              <span translate="no" class="material-symbols-rounded" aria-hidden="true">location_on</span>
+            </a>
           </div>
-          <button type="button" id="player-close-button" class="player-close-button" aria-label="Chiudi player">
-            <span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>
-          </button>
+          <div class="player-topbar-trailing">
+            <button type="button" id="player-map-help-button" class="player-topbar-button player-map-help-button" aria-label="Guida Mappa e player" title="Guida Mappa e player" aria-haspopup="dialog"><span translate="no" class="material-symbols-rounded" aria-hidden="true">help</span></button>
+            <button type="button" id="player-close-button" class="player-close-button" aria-label="Chiudi player">
+              <span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>
+            </button>
+          </div>
         </div>
         <div id="player-artwork" class="player-artwork">
           <div class="player-artwork-stack" aria-live="off">
@@ -495,17 +492,9 @@
               >
                   <span translate="no" class="directions-icon material-symbols-rounded" aria-hidden="true">location_on</span>
               </a>
-              <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control" aria-label="Velocità di riproduzione: x1" title="Velocità di riproduzione: x1">
+              <button type="button" id="player-speed-button" class="player-control-button player-speed-button tp-audio-control tp-audio-control--secondary" aria-label="Velocità di riproduzione: x1" title="Velocità di riproduzione: x1">
                 <span id="player-speed-label" class="player-speed-label">x1</span>
               </button>
-            </div>
-          </div>
-          <div id="player-help-box" class="player-help-box is-hidden" aria-live="polite">
-            <p id="player-help-text" class="player-help-text"></p>
-            <div class="player-help-actions">
-              <button id="player-help-close-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Chiudi"><span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span></button>
-              <button id="player-help-prev-button" class="player-help-action player-help-action-secondary" type="button" aria-label="Indietro"><span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_back</span></button>
-              <button id="player-help-next-button" class="player-help-action player-help-action-primary" type="button" aria-label="Avanti"><span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
             </div>
           </div>
           <div class="player-stop-navigation" aria-label="Navigazione tra tappe">
@@ -558,11 +547,24 @@
       </article>
     </section>
 
+    <div id="player-context-guide" class="player-context-guide is-hidden" role="dialog" aria-modal="true" aria-labelledby="player-context-guide-text" aria-describedby="player-context-guide-progress" aria-hidden="true">
+      <div class="player-context-guide-veil" aria-hidden="true"></div>
+      <div id="player-context-guide-card" class="player-context-guide-card" tabindex="-1">
+        <p id="player-context-guide-progress" class="player-context-guide-progress"></p>
+        <p id="player-context-guide-text" class="player-context-guide-text"></p>
+        <div class="player-context-guide-actions">
+          <button id="player-context-guide-close" class="guide-button guide-button-secondary" type="button" aria-label="Chiudi guida">×</button>
+          <button id="player-context-guide-prev" class="guide-button guide-button-secondary" type="button" aria-label="Indietro">←</button>
+          <button id="player-context-guide-next" class="guide-button guide-button-primary" type="button" aria-label="Avanti"><span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
+        </div>
+      </div>
+    </div>
+
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20260925-transcript-overlay-player-layout"></script>
+    <script src="app.js?v=20261001-osm-mobile-home-bottom"></script>
   </body>
 </html>
