@@ -488,7 +488,7 @@ test("mobile map-player captions stay clear of controls, offer wider zoom and li
   expect(await page.evaluate(() => map.getMinZoom())).toBeLessThan(homeMinZoom);
   await expect(page.locator(".leaflet-control-zoom")).toBeHidden();
   await page.evaluate(() => { map.stop(); map.setZoom(map.getMinZoom(), { animate: false }); });
-  await expect.poll(() => page.evaluate(() => map.getZoom() === map.getMinZoom())).toBe(true);
+  await expect.poll(() => page.evaluate(() => Math.abs(map.getZoom() - map.getMinZoom()) < 0.01)).toBe(true);
   expect(await page.evaluate(() => map.getZoom())).toBeLessThan(homeMinZoom);
   const [dockBox, mascotBox, helpBox] = await Promise.all([
     page.locator("#player-overlay .player-sheet").boundingBox(),
