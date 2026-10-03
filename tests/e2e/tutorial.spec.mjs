@@ -311,7 +311,8 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
         if (!layer.classList.contains("is-closing-explore")) return;
         observer.disconnect();
         window.__guideClosingStates.push(capture());
-        window.setTimeout(() => window.__guideClosingStates.push(capture()), 180);
+        // Match the 220 ms opacity transition before checking the in-between state.
+        window.setTimeout(() => window.__guideClosingStates.push(capture()), 260);
       });
       observer.observe(layer, { attributes: true, attributeFilter: ["class"] });
     });

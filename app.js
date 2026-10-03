@@ -2486,8 +2486,28 @@ function getStopCameraTarget(tappa, presetName) {
   // unobstructed map. Keep the authored zoom where possible, but fall back to
   // the same stop-centered framing used by the other selection paths.
   const stopCenter = [tappa.latitudine, tappa.longitudine];
-  const shiftedStop = shiftMapCameraCenterIntoVisibleArea(stopCenter, targetZoom);
-  const safeZoom = getFeasibleCameraZoom(shiftedStop, targetZoom);
+  const maxZoom = Math.min(map.getMaxZoom?.() || 22, 22);
+  const zoomStep = map.options.zoomSnap > 0 ? map.options.zoomSnap : 0.25;
+  const firstZoom = Math.ceil((targetZoom - 1e-8) / zoomStep) * zoomStep;
+
+  // Recompute the offset center at each candidate zoom. The available-area
+  // shift changes in map pixels as zoom changes, and clamping a shifted center
+  // afterward can otherwise push an edge stop (especially stop 1 on mobile)
+  // back underneath the top edge of the map.
+  for (let zoom = firstZoom; zoom <= maxZoom; zoom += zoomStep) {
+    const shiftedStop = shiftMapCameraCenterIntoVisibleArea(stopCenter, zoom);
+    if (!canCenterMapCameraAt(shiftedStop, zoom)) {
+      continue;
+    }
+
+    const center = clampMapCameraCenter([shiftedStop.lat, shiftedStop.lng], zoom);
+    const fallback = { center, zoom: Number(zoom.toFixed(2)) };
+    if (isStopVisibleAtCameraTarget(tappa, fallback)) {
+      return fallback;
+    }
+  }
+
+  const safeZoom = maxZoom;
   const safeCenter = shiftMapCameraCenterIntoVisibleArea(stopCenter, safeZoom);
   return {
     center: clampMapCameraCenter([safeCenter.lat, safeCenter.lng], safeZoom),

@@ -165,7 +165,7 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   }
   const stopThreeMarker = page.locator(".map-marker").filter({ hasText: "3" });
   await stopThreeMarker.click();
-  await expect(page.locator(".map-selection-label-image")).toHaveAttribute("src", /tappa_3_palazzo_pretorio\.webp/);
+  await expect(page.locator("#detail-number")).toHaveText("3");
   if (directionsAreVisible) {
     await expectClassObserved(page, "is-directions-cued");
   }
@@ -208,18 +208,17 @@ test("map selection bubble shows only the stop photo on mobile", async ({ page }
   await enterSite(page);
 
   const selectAndReadBubble = async (number) => {
-    await page.evaluate((stop) => markersByStop.get(stop).fire("click"), number);
-    const expectedArtwork = new RegExp(`tappa_${number}_`);
-    await expect(page.locator(".map-selection-label-image")).toHaveAttribute("src", expectedArtwork);
-    return page.evaluate(() => {
-      const bubble = document.querySelector(".map-selection-label");
+    return page.evaluate((stop) => {
+      markersByStop.get(stop).fire("click");
+      const bubble = [...document.querySelectorAll(".map-selection-label")].at(-1);
+      const image = bubble?.querySelector(".map-selection-label-image");
       return {
         text: bubble?.textContent?.trim(),
         titleCount: bubble?.querySelectorAll(".map-selection-label-title").length,
-        imageSrc: bubble?.querySelector("img")?.getAttribute("src"),
-        imageAlt: bubble?.querySelector("img")?.getAttribute("alt"),
+        imageSrc: image?.getAttribute("src"),
+        imageAlt: image?.getAttribute("alt"),
       };
-    });
+    }, number);
   };
 
   const homeBubble = await selectAndReadBubble(1);
@@ -249,10 +248,21 @@ test("every map marker keeps its selected stop visible in the home map", async (
     await page.setViewportSize({ width: 375, height: 667 });
   }
   await enterSite(page);
+  await page.evaluate(() => new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      map.invalidateSize({ pan: false, animate: false });
+      requestAnimationFrame(resolve);
+    });
+  }));
 
   for (const stop of [1, 2, 3, 4, 5, 6, 7]) {
+    const moveEnd = page.evaluate(() => new Promise((resolve) => {
+      map.once("moveend", resolve);
+      window.setTimeout(resolve, 1_200);
+    }));
     await page.evaluate((number) => markersByStop.get(number).fire("click"), stop);
     await expect(page.locator("#detail-number")).toHaveText(String(stop));
+    await moveEnd;
     const marker = page.locator(".map-marker").filter({ hasText: String(stop) });
     await expect.poll(async () => {
       const [mapBox, markerBox] = await Promise.all([
