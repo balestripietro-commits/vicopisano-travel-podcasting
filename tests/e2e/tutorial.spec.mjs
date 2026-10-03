@@ -311,8 +311,13 @@ test("tutorial keeps desktop in the map experience and mobile in the full player
         if (!layer.classList.contains("is-closing-explore")) return;
         observer.disconnect();
         window.__guideClosingStates.push(capture());
-        // Match the 220 ms opacity transition before checking the in-between state.
-        window.setTimeout(() => window.__guideClosingStates.push(capture()), 260);
+        const card = document.querySelector("#guide-card");
+        const captureFadeEnd = (event) => {
+          if (event.propertyName !== "opacity") return;
+          card.removeEventListener("transitionend", captureFadeEnd);
+          window.__guideClosingStates.push(capture());
+        };
+        card.addEventListener("transitionend", captureFadeEnd);
       });
       observer.observe(layer, { attributes: true, attributeFilter: ["class"] });
     });

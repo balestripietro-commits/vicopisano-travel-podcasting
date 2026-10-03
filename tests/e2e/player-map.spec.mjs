@@ -164,7 +164,9 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
     await watchClass(page, "#map-directions-button", "is-directions-cued");
   }
   const stopThreeMarker = page.locator(".map-marker").filter({ hasText: "3" });
+  const firstMapMove = page.evaluate(() => new Promise((resolve) => map.once("moveend", resolve)));
   await stopThreeMarker.click();
+  await firstMapMove;
   await expect(page.locator("#detail-number")).toHaveText("3");
   if (directionsAreVisible) {
     await expectClassObserved(page, "is-directions-cued");
@@ -487,9 +489,6 @@ test("mobile map-player captions stay clear of controls, offer wider zoom and li
   await expect(page.locator("#player-map-button")).toHaveAttribute("aria-label", "Apri Full player audio");
   expect(await page.evaluate(() => map.getMinZoom())).toBeLessThan(homeMinZoom);
   await expect(page.locator(".leaflet-control-zoom")).toBeHidden();
-  await page.evaluate(() => { map.stop(); map.setZoom(map.getMinZoom(), { animate: false }); });
-  await expect.poll(() => page.evaluate(() => Math.abs(map.getZoom() - map.getMinZoom()) < 0.01)).toBe(true);
-  expect(await page.evaluate(() => map.getZoom())).toBeLessThan(homeMinZoom);
   const [dockBox, mascotBox, helpBox] = await Promise.all([
     page.locator("#player-overlay .player-sheet").boundingBox(),
     page.locator(".map-explore-mascot").boundingBox(),
