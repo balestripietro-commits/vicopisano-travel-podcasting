@@ -179,9 +179,15 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
     window.__e2eMapCameraSample = { ...current, stableSince: previous.stableSince };
     return performance.now() - previous.stableSince >= 300 && !map._animatingZoom;
   }, { timeout: 10_000 });
-  await stopThreeMarker.click();
+  const waitForStopThreeCameraTarget = () => expect.poll(() => page.evaluate(() => {
+    const target = getStopCameraTarget(tappe[2], "firstTap");
+    return map.getCenter().distanceTo(target.center) < 20 &&
+      Math.abs(map.getZoom() - target.zoom) < 0.05;
+  }), { timeout: 10_000 }).toBe(true);
   await waitForMapCameraToSettle();
+  await stopThreeMarker.click();
   await expect(page.locator("#detail-number")).toHaveText("3");
+  await waitForStopThreeCameraTarget();
   if (directionsAreVisible) {
     await expectClassObserved(page, "is-directions-cued");
   }
@@ -189,16 +195,8 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   await expect(page.locator("#player-overlay")).toBeHidden();
   await expectAudioPlaying(page);
   await expect(page.locator(".map-route-active")).toBeVisible();
-  const firstMarkerPosition = await stopThreeMarker.boundingBox();
   await stopThreeMarker.click();
-  await waitForMapCameraToSettle();
-  const repeatedMarkerPosition = await stopThreeMarker.boundingBox();
-  expect(firstMarkerPosition).not.toBeNull();
-  expect(repeatedMarkerPosition).not.toBeNull();
-  // Leaflet can settle on fractional CSS pixels across consecutive pans.
-  // Allow a small rendering tolerance while still catching meaningful drift.
-  expect(Math.abs(firstMarkerPosition.x - repeatedMarkerPosition.x)).toBeLessThan(6);
-  expect(Math.abs(firstMarkerPosition.y - repeatedMarkerPosition.y)).toBeLessThan(6);
+  await waitForStopThreeCameraTarget();
   await expect
     .poll(async () => {
       const [mapBox, markerBox] = await Promise.all([
