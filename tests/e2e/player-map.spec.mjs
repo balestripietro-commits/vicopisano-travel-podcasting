@@ -164,9 +164,23 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
     await watchClass(page, "#map-directions-button", "is-directions-cued");
   }
   const stopThreeMarker = page.locator(".map-marker").filter({ hasText: "3" });
-  const firstMapMove = page.evaluate(() => new Promise((resolve) => map.once("moveend", resolve)));
+  const waitForMapCameraToSettle = () => page.waitForFunction(() => {
+    const center = map.getCenter();
+    const current = { lat: center.lat, lng: center.lng, zoom: map.getZoom() };
+    const previous = window.__e2eMapCameraSample;
+    const stable = previous &&
+      Math.abs(previous.lat - current.lat) < 0.000001 &&
+      Math.abs(previous.lng - current.lng) < 0.000001 &&
+      Math.abs(previous.zoom - current.zoom) < 0.001;
+    if (!stable) {
+      window.__e2eMapCameraSample = { ...current, stableSince: performance.now() };
+      return false;
+    }
+    window.__e2eMapCameraSample = { ...current, stableSince: previous.stableSince };
+    return performance.now() - previous.stableSince >= 300 && !map._animatingZoom;
+  }, { timeout: 10_000 });
   await stopThreeMarker.click();
-  await firstMapMove;
+  await waitForMapCameraToSettle();
   await expect(page.locator("#detail-number")).toHaveText("3");
   if (directionsAreVisible) {
     await expectClassObserved(page, "is-directions-cued");
@@ -175,10 +189,9 @@ test("marker selects a stop, starts audio and keeps the full player closed", asy
   await expect(page.locator("#player-overlay")).toBeHidden();
   await expectAudioPlaying(page);
   await expect(page.locator(".map-route-active")).toBeVisible();
-  await page.waitForTimeout(700);
   const firstMarkerPosition = await stopThreeMarker.boundingBox();
   await stopThreeMarker.click();
-  await page.waitForTimeout(700);
+  await waitForMapCameraToSettle();
   const repeatedMarkerPosition = await stopThreeMarker.boundingBox();
   expect(firstMarkerPosition).not.toBeNull();
   expect(repeatedMarkerPosition).not.toBeNull();
