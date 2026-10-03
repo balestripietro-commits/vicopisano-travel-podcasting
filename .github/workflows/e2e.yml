@@ -48,6 +48,7 @@ jobs:
 
       - name: Upload Playwright diagnostics
         if: failure()
+        continue-on-error: true
         uses: actions/upload-artifact@v6
         with:
           name: playwright-diagnostics-${{ github.run_attempt }}
