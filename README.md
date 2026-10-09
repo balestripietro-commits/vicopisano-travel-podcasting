@@ -4,9 +4,10 @@ Progetto locale master: `/Users/pietrobalestri/LocalDev/Travel podcasting/github
 
 Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStreetMap per 7 tappe nel borgo di Vicopisano.
 
-## Processo riusabile per i prossimi Comuni
+## Documentazione di processo
 
-- `PLAYBOOK_SITI_COMUNALI.md` è il riferimento per distinguere regole di prodotto e adattamenti locali, registrare decisioni con le relative ragioni e tenere collegati fonti, copy, master audio, trascrizioni e cue Rhubarb. Include l’audit del design system Vicopisano e le questioni da chiudere prima di applicarlo a Calci.
+- Il playbook comune e la checklist di apertura sono nella macro-repository privata `LocalDev`, sotto `Travel podcasting/github-sites/Playbook-Siti-Comunali/`. La cartella locale è sorella di questo clone e non appartiene alla repository Vicopisano.
+- `PLAYBOOK_SITI_COMUNALI.md` in questa repo contiene l’audit e il registro specifico di Vicopisano. Non copiarlo come template per un altro Comune.
 - Il repository locale resta la fonte di esecuzione e il master dei documenti; eventuali file Drive vanno registrati con percorso/link e versione precisi. Il copione italiano di riferimento è il DOCX [Travel Podcasting Vicopisano — itinerario in sette tappe con bibliografia](https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit), aggiornato l’8 ottobre 2026. La Tappa 1 è stata aggiornata e collegata al nuovo WAV; il confronto e l’aggiornamento delle tappe 2–7 restano pianificati per il 10 ottobre 2026.
 
 ## Architettura attuale dell'interfaccia

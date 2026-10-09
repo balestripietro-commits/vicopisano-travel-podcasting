@@ -3,7 +3,8 @@
 
 ## Processo riusabile fra Comuni
 
-- `PLAYBOOK_SITI_COMUNALI.md`: playbook master per replicare i siti comunali, distinguere regole Travel Podcasting e adattamenti locali, registrare fonti/copy, versioni audio, trascrizioni, cue Rhubarb, decisioni e questioni aperte. Include l’audit Vicopisano e l’avvio di Calci senza trattare contenuti non verificati come approvati.
+- Playbook centrale nella macro-repository privata `LocalDev`: [standard](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/PLAYBOOK_SITI_COMUNALI.md) e [checklist di apertura](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/CHECKLIST_APERTURA_COMUNE.md). Questi file sono fuori da questa repository annidata.
+- `PLAYBOOK_SITI_COMUNALI.md`: audit e registro specifico di Vicopisano; non è più la fonte delle procedure generali.
 - `DESIGN_SYSTEM.md`: principi, token e componenti del prodotto; audit runtime aggiornato il 9 ottobre 2026 e limiti della separazione fra core e tema annotati nel playbook.
 
 ## Root locale master del progetto
