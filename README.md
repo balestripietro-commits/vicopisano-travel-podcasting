@@ -4,6 +4,11 @@ Progetto locale master: `/Users/pietrobalestri/LocalDev/Travel podcasting/github
 
 Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStreetMap per 7 tappe nel borgo di Vicopisano.
 
+## Processo riusabile per i prossimi Comuni
+
+- `PLAYBOOK_SITI_COMUNALI.md` è il riferimento per distinguere regole di prodotto e adattamenti locali, registrare decisioni con le relative ragioni e tenere collegati fonti, copy, master audio, trascrizioni e cue Rhubarb. Include l’audit del design system Vicopisano e le questioni da chiudere prima di applicarlo a Calci.
+- Il repository locale resta la fonte di esecuzione e il master dei documenti; eventuali file Drive vanno registrati con percorso/link e versione precisi. Il copione italiano di riferimento è il DOCX [Travel Podcasting Vicopisano — itinerario in sette tappe con bibliografia](https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit), aggiornato l’8 ottobre 2026. La Tappa 1 è stata aggiornata e collegata al nuovo WAV; il confronto e l’aggiornamento delle tappe 2–7 restano pianificati per il 10 ottobre 2026.
+
 ## Architettura attuale dell'interfaccia
 
 - Landing full-page ispirata a directory editoriali/mappe immersive:
@@ -46,7 +51,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Nella schermata estesa restano sempre disponibili play/pausa, +/-10 secondi, velocità ciclica x1/x1,25/x1,5, barra seek trascinabile e navigazione precedente/successiva coerente con la posizione nel percorso. Il pulsante Google Maps resta nella mappa normale e, su mobile, anche nella barra del full player Mappa + player; non viene duplicato nel pannello Explore desktop. La didascalia sincronizzata è una chip nella home desktop e anche sulla mappa Explore, in uno spazio dedicato sotto la mascotte; su mobile la trascrizione resta nel player. Nel pannello Explore i sei comandi condividono l'allineamento del mini-player desktop: tasti secondari leggibili, aree da almeno 44 px e Play/Pausa dominante. In entrambe le viste mobile del full player, i quattro comandi secondari di trasporto (tappa precedente/successiva e seek) restano leggeri senza contenitori visibili; la velocità occupa un pulsante separato nella riga dei comandi e Play resta l'unico comando pieno della riga di trasporto.
 - Nelle due viste del full player mobile, anche i glifi tappa precedente/successiva sono centrati dentro le proprie aree touch: la griglia, i simboli e i tasti ±10 sono speculari rispetto a Play, verificati a 375 e 320 px.
 - Alla fine di una traccia il percorso passa alla tappa successiva e ne avvia automaticamente l'audio; l'ultima tappa resta nello stato concluso.
-- Alla fine naturale di una tappa parte `transition_between_stops.mp3` come segmento conclusivo della sessione della tappa corrente, non skippabile e non velocizzabile. Durante il segmento mini-player e full player mostrano il titolo `In cammino verso la prossima tappa` e lo stemma di Vicopisano; il titolo si adatta allo spazio senza scorrimento automatico. L'accesso al full player resta disponibile e i controlli Play/Pausa sono centrati nel proprio spazio e nel relativo cerchio. Seek, velocità e navigazione sono disabilitati. Quando termina, la tappa successiva viene selezionata e resta in pausa; i comandi manuali non attivano l'intermezzo.
+- Alla fine naturale di una tappa parte `transition_between_stops.mp3` come segmento conclusivo della sessione della tappa corrente, non skippabile e non velocizzabile. Durante il segmento mini-player e full player mostrano il titolo `In cammino verso la prossima tappa` e lo stemma di Vicopisano; il titolo si adatta allo spazio senza scorrimento automatico. Nel Full player audio mobile, poiché l'intermezzo nasconde le anteprime delle tappe, la trascrizione resta sotto i comandi audio. L'accesso al full player resta disponibile e i controlli Play/Pausa sono centrati nel proprio spazio e nel relativo cerchio. Seek, velocità e navigazione sono disabilitati. Quando termina, la tappa successiva viene selezionata e resta in pausa; i comandi manuali non attivano l'intermezzo.
 - Nel full player il numero della tappa è mostrato in un badge circolare semplice accanto al titolo. Nessuna vista contiene più pulsanti Condividi; la X resta a destra.
 - Non esiste una modalità desktop separata dedicata alla lettura della trascrizione: la home e Explore sono le sole viste desktop, e in Explore il dock non viene mostrato. Nel full player mobile la trascrizione sincronizzata appare in una fascia; senza cue temporali mostra il testo descrittivo della tappa.
 - Lo scroll della trascrizione usa una traccia discreta con cursore giallo arrotondato, sincronizzato alla posizione di lettura e senza dipendere dalla scrollbar nativa del browser.
@@ -81,7 +86,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - `index.html`: struttura della pagina.
 - `style.css`: layout e stile.
 - `app.js`: dati delle tappe, mappa, lista interattiva, mini-player, overlay audio con seek custom, traduzioni e associazione immagini per tappa.
-- `audio/`: cartella degli MP3.
+- `audio/<lingua>/`: MP3 runtime separati per codice lingua ISO (`it`, `en`, `de`, `es`, `fr`, `pt`, `ru`); intermezzo e tappe italiane vivono in `audio/it/`.
 - Per ora il contenuto è fruibile in italiano; gli altri codici lingua mostrati nei selettori aprono un avviso di non disponibilità senza cambiare la lingua del percorso.
 - Le immagini delle tappe, quando presenti, sono mostrate nel mini-player, nelle anteprime e nel player esteso.
 
@@ -116,13 +121,16 @@ Per provarlo da smartphone, avvia il server con `HOST=0.0.0.0 npm run dev` su un
 
 ## Primo accesso, lingua e aiuto
 
-- A ogni apertura il sito mostra una schermata pulita di scelta lingua prima di entrare nell'esperienza.
+- Per l’evento del 9 ottobre 2026 il gate email è attivo solo tra le 18:00 incluse e le 21:00 escluse, secondo l’orario `Europe/Rome` (CEST). La finestra è codificata con offset esplicito in `app.js`, quindi vale in modo identico per i visitatori indipendentemente dal fuso del loro dispositivo e si disattiva automaticamente dopo le 21:00 o in un’altra data; se è già aperto allo scoccare delle 21:00, il gate si chiude e prosegue con lingua e guida. Fuori dalla finestra il primo accesso passa alla scelta della lingua e poi alla guida, senza chiedere né inviare email. Durante la finestra, il modulo statico Netlify Forms `email-demo-gate` viene inviato solo sul sito pubblicato; su `localhost` il gate è un’anteprima senza invio. Se il browser ha completato il gate, lingua e onboarding vengono ricordati in `localStorage`; l’indirizzo email non viene salvato nel browser. Netlify Forms deve essere attivo durante l’evento. Il modulo pubblico informa che l’indirizzo serve per aprire la demo e inviare il link e la scheda progetto del 12 ottobre; prima della pubblicazione va aggiunta/verificata l’informativa privacy dell’organizzazione. L’invio automatico di quella email di follow-up non è configurato: le submission sono consultabili nel pannello Netlify.
+- `assets/qr-demo-travel-podcasting.png` contiene il QR per `https://transcendent-meerkat-166cbe.netlify.app/`; è incluso nella copia ricorsiva di `assets/` in `dist/`.
+
+- La schermata di scelta lingua viene mostrata solo al primo accesso dopo il completamento del gate email; negli accessi successivi resta attiva la lingua scelta in precedenza, modificabile dal selettore in alto.
 - Nella schermata iniziale è attivo solo l'italiano; se si seleziona un'altra lingua, il sito mostra un avviso localizzato e resta nella schermata di scelta.
 - La stessa limitazione vale per il selettore lingua globale nell'intestazione: solo l'italiano cambia lingua, le altre opzioni mostrano un avviso localizzato.
 - La lingua iniziale viene scelta da URL se presente, poi dalla lingua salvata nel browser, poi dalla lingua di sistema; se non e supportata, il fallback e inglese.
 - Dopo la scelta lingua parte la guida contestuale tradotta nella lingua attiva.
 - Il tasto `Aiuto` nell'header riapre la guida contestuale. Su desktop illustra mappa, indicazioni Google Maps, lista tappe, mini-player e la vista Explore con mappa estesa e pannello player; su mobile mostra Mappa + player, indica il tasto con cuffie per aprire Full player audio, apre davvero la vista senza mappa, indica il tasto per tornare alla mappa e chiude il full player con la X nell'ultimo step. Tornando indietro fra questi step viene ripristinata la vista corretta senza perdere la tappa.
-- I due `?` del full player mobile aprono guide indipendenti da quella iniziale, senza cambiare vista, tappa, posizione o audio. Mappa + player: cinque passi numerati 1/5–5/5 (gesti sulla mappa e didascalia senza spotlight, geolocalizzazione, Google Maps, cambio schermata, X). Full player audio: tre passi 1/3–3/3 (trascrizione completa e titolo senza spotlight, ritorno alla mappa, X). Un solo controllo alla volta è evidenziato, senza essere azionato; fumetto e velo non coprono il controllo né il player. I `?` riusano l'icona della home e la freccia verde Avanti riusa la stessa animazione della guida iniziale; con `prefers-reduced-motion` l'alone non si anima. Indietro, Avanti, Chiudi ed Esc ripristinano la schermata di partenza. I titoli lunghi di Full player audio scorrono una sola volta con pausa, tornando poi all'inizio; la misura viene aggiornata al cambio di tappa, dimensione o modalità.
+- I due `?` del full player mobile aprono guide indipendenti da quella iniziale, senza cambiare vista, tappa, posizione o audio. Mappa + player: cinque passi numerati 1/5–5/5 (gesti sulla mappa e didascalia senza spotlight, geolocalizzazione, Google Maps, cambio schermata, X). Full player audio: tre passi 1/3–3/3 (trascrizione completa e titolo senza spotlight, ritorno alla mappa, X). Un solo controllo alla volta è evidenziato, senza essere azionato; fumetto e velo non coprono il controllo né il player. Toccando fuori dal fumetto si apre la stessa conferma `Continua` / `Interrompi` del tutorial iniziale: Continua riprende lo stesso passo; Interrompi chiude la guida contestuale e mantiene vista, tappa e audio. La X chiude direttamente la guida. I `?` riusano l'icona della home e la freccia verde Avanti riusa la stessa animazione della guida iniziale; con `prefers-reduced-motion` l'alone non si anima. Indietro, Avanti, Chiudi ed Esc ripristinano la schermata di partenza. I titoli lunghi di Full player audio scorrono una sola volta con pausa, tornando poi all'inizio; la misura viene aggiornata al cambio di tappa, dimensione o modalità.
 - Nel tutorial desktop il fumetto sulla vista estesa è l'ultimo: con Avanti la vista si chiude direttamente, senza animazione del cursore, e il tutorial termina in home.
 - L'apertura della mappa estesa parte direttamente con Avanti, senza manina simulata; restano le transizioni effettive della mappa e del pannello. La chiusura usa una sequenza coordinata senza doppio movimento.
 - La lingua resta modificabile dal selettore compatto in alto.
@@ -133,7 +141,7 @@ Per provarlo da smartphone, avvia il server con `HOST=0.0.0.0 npm run dev` su un
 
 ## Suite E2E Playwright
 
-La suite include `@axe-core/playwright` in `tests/e2e/accessibility.spec.mjs`: controlla onboarding e full player su desktop e mobile con regole WCAG strutturali per nomi accessibili, ARIA, titoli, immagini, link e landmark. La superficie Leaflet dinamica viene esclusa dalla scansione Axe, mentre i suoi controlli accessibili restano verificati dal DOM e dagli E2E della mappa. I test della mappa verificano la miniatura della label, la stabilità dell'inquadratura ai tap ripetuti, la visibilità dei marker sopra il dock e gli stati visivi percorso/marker.
+La suite include `tests/e2e/access-flow.spec.mjs`, che verifica il primo accesso email → lingua, la persistenza al rientro, il mancato salvataggio dell'indirizzo e la finestra temporale del gate (17:59, 18:00, 20:59, 21:00 e giorno successivo, ora italiana). `@axe-core/playwright` in `tests/e2e/accessibility.spec.mjs` controlla onboarding e full player su desktop e mobile con regole WCAG strutturali per nomi accessibili, ARIA, titoli, immagini, link e landmark. La superficie Leaflet dinamica viene esclusa dalla scansione Axe, mentre i suoi controlli accessibili restano verificati dal DOM e dagli E2E della mappa. I test della mappa verificano la miniatura della label, la stabilità dell'inquadratura ai tap ripetuti, la visibilità dei marker sopra il dock e gli stati visivi percorso/marker.
 
 La stessa suite controlla anche il contrasto colore con la regola Axe `color-contrast`, inclusi tappa e velocità selezionate, il layout a viewport equivalenti a zoom 200–400% e il percorso tastiera completo: onboarding, tutorial, selezione tappa, apertura/chiusura player, play/pausa, slider e focus di ritorno. A 320 px verifica che i contorni di focus di mappa, player e guida restino visibili; a 320 e 375 px, con movimento ridotto, controlla che il titolo lungo del Full player audio rimanga contenuto e raggiungibile per intero. Verifica inoltre che su desktop il player si apra sempre come pannello Explore e che il pulsante della modalità di lettura non sia presente. Il contrasto del pulsante WhatsApp è stato corretto usando un verde più scuro per il testo bianco. Il blocco principale del mini-player è un controllo tastiera con `Enter` e `Spazio`, non più un contenitore non interattivo.
 
@@ -244,45 +252,48 @@ Il sito supporta parametri URL condivisibili:
 - Con `prefers-reduced-motion: reduce` il sito riduce drasticamente breathing, idle, reazioni e transizioni, mantenendo la funzionalita e la sincronizzazione Rhubarb.
 - Rhubarb e installato localmente in `/Users/pietrobalestri/.local/bin/rhubarb`.
 - I cue di sincronizzazione sono salvati in `audio/cues/` e vengono caricati automaticamente quando parte un audio.
-- La logica del sito associa ogni file `audio/nome_file.mp3` al cue `audio/cues/nome_file.json`, lo precarica quando si seleziona la traccia e applica un anticipo visivo di 80 ms alla bocca; l'audio resta invariato e pausa, seek e salti mantengono l'allineamento.
-- I cue italiani sono stati rigenerati con Rhubarb sulle sette nuove tracce (`01`–`07`) usando il recognizer `phonetic`; ogni JSON copre l'intera durata del relativo MP3 e usa solo i valori bocca `A-H` e `X`.
+- La logica del sito associa ogni file `audio/<lingua>/nome_file.mp3` al cue `audio/cues/nome_file.json`, lo precarica quando si seleziona la traccia e applica un anticipo visivo di 80 ms alla bocca; l'audio resta invariato e pausa, seek e salti mantengono l'allineamento.
+- I cue italiani delle tappe 2–7 restano quelli già presenti. Il cue della Tappa 1 è stato rigenerato con Rhubarb `phonetic` direttamente sul WAV ricevuto il 9 ottobre; ogni JSON copre l'intera durata del relativo audio e usa solo i valori bocca `A-H` e `X`.
 - Le varianti straniere disponibili restano coperte dai cue esistenti della Tappa 1. Le tappe senza audio attivo non animano la mascotte: quando aggiungeremo nuovi MP3, andra generato anche il relativo JSON Rhubarb.
 
 ### Trascrizione sincronizzata
 
 - Le trascrizioni editoriali con timestamp vivono in `audio/transcripts/` e non sostituiscono i cue Rhubarb della mascotte.
-- I file `*_it.json` in `audio/transcripts/` sono sincronizzati alle nuove tracce italiane: il testo deriva dal copione DOCX e sono inclusi solo i segmenti del copione riconosciuti nel parlato. I timestamp sono automatici e richiedono un controllo all'ascolto prima della pubblicazione definitiva.
+- La trascrizione della Tappa 1 è stata rigenerata in locale con Whisper `large-v3-turbo` dal nuovo WAV; confronta il copione approvato dell’8 ottobre e la trascrizione precedente. È fedele al parlato, normalizza ortografia e toponimo Vicopisano e mantiene `reviewRequired: true` finché non viene fatta la verifica d’ascolto. Le trascrizioni delle tappe 2–7 non sono state rielaborate e i loro contenuti restano invariati.
 - Per le sette tappe italiane, il sottotitolo usa `audio.currentTime`, quindi resta sincronizzato con pausa, seek e salti di 10 secondi. I cue troppo lunghi per la larghezza disponibile vengono paginati a parole in porzioni di due righe, ripartite all'interno della durata del cue; il dimensionamento si ricalcola al cambio viewport o font. Nelle viste con chip mantiene l'ultima porzione per 2,6 secondi dopo la pausa, poi sfuma in circa 280 ms; alla ripresa torna subito visibile. Su desktop nella vista normale è una chip sopra al mini-player; in Explore la stessa chip viene resa sopra il livello della mappa, sotto la mascotte e fuori dal pannello destro. Su mobile appare sopra al mini-player nella home e accanto alla mascotte sopra il dock in Mappa + player; Full player audio usa invece la fascia della trascrizione completa. I brevi vuoti tra i cue non anticipano la frase successiva.
 - Anche la traccia transitoria tra tappe ha due segmenti sincronizzati in `app.js`: la didascalia appare nei normali punti live su mappa e il testo completo è disponibile nel dock del Full player audio. Al cambio sorgente il pannello mobile viene azzerato e ridisegnato anche se il nuovo audio riparte dallo stesso indice di frase, evitando residui della trascrizione precedente. Durante l'intermezzo, in entrambe le viste mobile sono nascosti i pulsanti guida; in Mappa + player spariscono anche geolocalizzazione e Google Maps. Il Play occupa tutta la larghezza della timeline nella home mobile e tutta quella dei controlli in Mappa + player sia mobile sia desktop; nel player mobile a schermo intero resta un margine verticale percepibile tra timeline e Play. Nel mini-player desktop il titolo si dimensiona sul contenuto e Play mantiene lo stesso spazio vuoto tra titolo e timeline, senza aumentare l'altezza del dock. I controlli ricompaiono al termine della traccia. I cue Rhubarb restano separati e continuano a controllare solo la mascotte.
-- Per una pubblicazione: usare l'MP3 definitivo, generare gli intervalli parola/frase, correggere nomi propri e punteggiatura dal testo approvato, riascoltare i confini di frase e infine sostituire l'audio del sito se la sua durata differisce dal master allineato.
+- Per una pubblicazione: eseguire localmente Whisper `large-v3-turbo` sulla traccia nella sua lingua; confrontare la trascrizione con il copione approvato e la versione precedente perché il testo può essere cambiato; mantenere il parlato effettivo come riferimento dei sottotitoli e segnare differenze, nomi propri e tagli; verificare testo e timestamp all’ascolto. Generare i cue Rhubarb direttamente dal WAV ricevuto. Usare l’MP3 esportato dalla stessa versione per il sito e controllare la corrispondenza di durata e contenuto prima della sostituzione.
 
 Workflow per una nuova tappa o una nuova lingua:
 
-1. Copia l'MP3 definitivo dentro `audio/`.
-2. Converti temporaneamente l'MP3 in WAV con `ffmpeg`.
-3. Esegui Rhubarb sul WAV.
-4. Salva il JSON in `audio/cues/` con lo stesso nome base dell'MP3.
-5. Verifica che in `app.js` la tappa punti al file audio corretto e abbia `audioDisponibile: true`.
+1. Registra copione approvato, lingua, versione, autore della traccia e link/percorso dei sorgenti.
+2. Ricevi WAV e progetto audio; conserva il WAV come input per trascrizione e Rhubarb. Per Travel Podcasting il riferimento è **Iacopo Piccaluga** (con la I iniziale).
+3. Esegui localmente Whisper `large-v3-turbo` nella lingua parlata, poi confronta il testo riconosciuto con il copione attuale e quello precedente; risolvi differenze tramite ascolto e approvazione, senza allineare artificialmente i sottotitoli a parole non pronunciate.
+4. Esegui Rhubarb sul WAV ricevuto e salva il JSON in `audio/cues/` con lo stesso nome base dell’MP3 runtime.
+5. Esporta o ricevi l’MP3 della stessa versione e mettilo in `audio/`; verifica durata, contenuto e collegamento al WAV.
+6. Salva la trascrizione sincronizzata in `audio/transcripts/` e verifica che in `app.js` la tappa punti al file audio corretto e abbia `audioDisponibile: true`.
+
+Per la revisione italiana del 9 ottobre 2026, gli originali WAV e i progetti `.band` di Iacopo sono indicizzati nel playbook alla cartella Drive `Delivering/Vicopisano/Audio def per demo/Italiano/`; Drive è la sorgente dei materiali consegnati, mentre elaborazione e file pubblicati restano nella root locale del progetto. Il runtime della Tappa 1 usa un MP3 ricavato una sola volta dal WAV, a 192 kbps stereo e 44,1 kHz. Le tappe 2–7 restano invariate in attesa della revisione prevista il 10 ottobre.
 
 ## Dove mettere i file audio
 
-- Inserisci gli MP3 dentro la cartella `audio/`.
+- Inserisci gli MP3 nella sottocartella della lingua: `audio/it/`, `audio/en/`, `audio/de/`, `audio/es/`, `audio/fr/`, `audio/pt/` o `audio/ru/`.
 - Il file della prima tappa deve chiamarsi:
-  - `audio/01_torre_quattro_porte.mp3` per l'italiano
-  - `audio/01_torre_quattro_porte_en.mp3` per l'inglese
-  - `audio/01_torre_quattro_porte_de.mp3` per il tedesco
-  - `audio/01_torre_quattro_porte_fr.mp3` per il francese
-  - `audio/01_torre_quattro_porte_es.mp3` per lo spagnolo
-  - `audio/01_torre_quattro_porte_pt.mp3` per il portoghese
-  - `audio/01_torre_quattro_porte_ru.mp3` per il russo
+  - `audio/it/01_torre_quattro_porte.mp3` per l'italiano
+  - `audio/en/01_torre_quattro_porte_en.mp3` per l'inglese
+  - `audio/de/01_torre_quattro_porte_de.mp3` per il tedesco
+  - `audio/fr/01_torre_quattro_porte_fr.mp3` per il francese
+  - `audio/es/01_torre_quattro_porte_es.mp3` per lo spagnolo
+  - `audio/pt/01_torre_quattro_porte_pt.mp3` per il portoghese
+  - `audio/ru/01_torre_quattro_porte_ru.mp3` per il russo
 
 - Le altre tappe sono gia predisposte con questi nomi:
-  - `audio/02_torre_camminamento_soccorso.mp3`
-  - `audio/03_palazzo_pretorio.mp3`
-  - `audio/04_rocca_brunelleschi.mp3`
-  - `audio/05_torri_gemelle.mp3`
-  - `audio/06_parrocchia_santa_maria_san_giovanni.mp3`
-  - `audio/07_comune_info_point_vicopisano.mp3`
+  - `audio/it/02_torre_camminamento_soccorso.mp3`
+  - `audio/it/03_palazzo_pretorio.mp3`
+  - `audio/it/04_rocca_brunelleschi.mp3`
+  - `audio/it/05_torri_gemelle.mp3`
+  - `audio/it/06_parrocchia_santa_maria_san_giovanni.mp3`
+  - `audio/it/07_comune_info_point_vicopisano.mp3`
 
 ## Come aggiungere o modificare una tappa
 

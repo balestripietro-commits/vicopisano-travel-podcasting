@@ -4,7 +4,7 @@
   "language": "it",
   "stop": 4,
   "audio": {
-    "source": "audio/04_rocca_brunelleschi.mp3",
+    "source": "audio/it/04_rocca_brunelleschi.mp3",
     "duration": 211.095
   },
   "alignment": {

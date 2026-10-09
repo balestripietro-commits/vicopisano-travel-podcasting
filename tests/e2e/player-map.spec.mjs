@@ -7,6 +7,7 @@ import {
   expectNoRuntimeErrors,
   openFullPlayer,
   stopButton,
+  completeEmailGateForTest,
   watchClass,
 } from "./helpers.mjs";
 
@@ -25,6 +26,7 @@ test("map uses canonical OSM tiles and keeps attribution visible above the playe
   });
 
   await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
+  await completeEmailGateForTest(page);
   // This test checks the map credit, not the onboarding hit targets. Use the
   // app's own handlers without waiting for lengthy animations on CI devices.
   await page.locator("#onboarding-language-chips .onboarding-language-option").first().evaluate((button) => button.click());
@@ -145,7 +147,7 @@ test("map uses canonical OSM tiles and keeps attribution visible above the playe
 
 test("narration supports byte-range responses for precise seeking", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "The HTTP response is shared by every viewport.");
-  const response = await request.get("/audio/01_torre_quattro_porte.mp3", {
+  const response = await request.get("/audio/it/01_torre_quattro_porte.mp3", {
     headers: { Range: "bytes=1000-1999" },
   });
   expect(response.status()).toBe(206);

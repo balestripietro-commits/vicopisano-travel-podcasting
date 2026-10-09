@@ -4,14 +4,14 @@ const tappe = [
     titolo: "Torre delle Quattro Porte",
     latitudine: 43.700429,
     longitudine: 10.5863858,
-    fileAudio: "audio/01_torre_quattro_porte.mp3",
+    fileAudio: "audio/it/01_torre_quattro_porte.mp3",
     audioDisponibile: true,
     audioVarianti: [
       {
         codice: "IT",
         lingua: "Italiano",
         bandiera: "🇮🇹",
-        fileAudio: "audio/01_torre_quattro_porte.mp3",
+        fileAudio: "audio/it/01_torre_quattro_porte.mp3",
         audioDisponibile: true,
         trascrizione: `Dopo quasi seicento anni, sono finalmente tornato a Vicopisano.
 E devo ammettere che ritrovarla così… tranquilla mi fa un certo effetto.
@@ -65,7 +65,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
         codice: "EN",
         lingua: "Inglese",
         bandiera: "🇬🇧",
-        fileAudio: "audio/01_torre_quattro_porte_en.mp3",
+        fileAudio: "audio/en/01_torre_quattro_porte_en.mp3",
         audioDisponibile: true,
         trascrizione:
           "Stop here. Before entering Vicopisano, look at this tower. I am Filippo Brunelleschi. Perhaps you know me for Florence, for the dome of Santa Maria del Fiore, for art and for proportions. But here, in Vicopisano, I will not ask you to look up at the sky. I will ask you to look at a gate.",
@@ -74,7 +74,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
         codice: "DE",
         lingua: "Tedesco",
         bandiera: "🇩🇪",
-        fileAudio: "audio/01_torre_quattro_porte_de.mp3",
+        fileAudio: "audio/de/01_torre_quattro_porte_de.mp3",
         audioDisponibile: true,
         trascrizione:
           "Bleiben Sie hier stehen. Bevor Sie Vicopisano betreten, betrachten Sie diesen Turm. Ich bin Filippo Brunelleschi. Vielleicht kennen Sie mich wegen Florenz, wegen der Kuppel von Santa Maria del Fiore, wegen der Kunst und der Proportionen. Aber hier, in Vicopisano, werde ich Sie nicht bitten, zum Himmel hinaufzuschauen. Ich werde Sie bitten, ein Tor zu betrachten.",
@@ -83,7 +83,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
         codice: "FR",
         lingua: "Francese",
         bandiera: "🇫🇷",
-        fileAudio: "audio/01_torre_quattro_porte_fr.mp3",
+        fileAudio: "audio/fr/01_torre_quattro_porte_fr.mp3",
         audioDisponibile: true,
         trascrizione:
           "Arrêtez-vous ici. Avant d’entrer dans Vicopisano, regardez cette tour. Je suis Filippo Brunelleschi. Peut-être me connaissez-vous pour Florence, pour le dôme de Santa Maria del Fiore, pour l’art et pour les proportions. Mais ici, à Vicopisano, je ne vous demanderai pas de regarder vers le ciel. Je vous demanderai de regarder une porte.",
@@ -92,7 +92,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
         codice: "ES",
         lingua: "Spagnolo",
         bandiera: "🇪🇸",
-        fileAudio: "audio/01_torre_quattro_porte_es.mp3",
+        fileAudio: "audio/es/01_torre_quattro_porte_es.mp3",
         audioDisponibile: true,
         trascrizione:
           "Deténganse aquí. Antes de entrar en Vicopisano, observen esta torre. Soy Filippo Brunelleschi. Tal vez me conozcan por Florencia, por la cúpula de Santa Maria del Fiore, por el arte y por las proporciones. Pero aquí, en Vicopisano, no les pediré que miren hacia el cielo. Les pediré que miren una puerta.",
@@ -101,7 +101,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
         codice: "PT",
         lingua: "Portoghese",
         bandiera: "🇵🇹",
-        fileAudio: "audio/01_torre_quattro_porte_pt.mp3",
+        fileAudio: "audio/pt/01_torre_quattro_porte_pt.mp3",
         audioDisponibile: true,
         trascrizione:
           "Parem aqui. Antes de entrar em Vicopisano, observem esta torre. Eu sou Filippo Brunelleschi. Talvez me conheçam por Florença, pela cúpula de Santa Maria del Fiore, pela arte e pelas proporções. Mas aqui, em Vicopisano, não vou pedir que olhem para o céu. Vou pedir que olhem para uma porta.",
@@ -110,7 +110,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
         codice: "RU",
         lingua: "Russo",
         bandiera: "🇷🇺",
-        fileAudio: "audio/01_torre_quattro_porte_ru.mp3",
+        fileAudio: "audio/ru/01_torre_quattro_porte_ru.mp3",
         audioDisponibile: true,
         trascrizione:
           "Остановитесь здесь. Перед тем как войти в Викописано, посмотрите на эту башню. Я — Филиппо Брунеллески. Возможно, вы знаете меня по Флоренции, по куполу Санта-Мария-дель-Фьоре, по искусству и пропорциям. Но здесь, в Викописано, я не попрошу вас смотреть в небо. Я попрошу вас посмотреть на ворота.",
@@ -125,7 +125,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     titolo: "Torre e Camminamento del Soccorso",
     latitudine: 43.6998788,
     longitudine: 10.5873698,
-    fileAudio: "audio/02_torre_camminamento_soccorso.mp3",
+    fileAudio: "audio/it/02_torre_camminamento_soccorso.mp3",
     audioDisponibile: true,
     durata: "",
     descrizione:
@@ -136,7 +136,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     titolo: "Palazzo Pretorio",
     latitudine: 43.6992056,
     longitudine: 10.5867826,
-    fileAudio: "audio/03_palazzo_pretorio.mp3",
+    fileAudio: "audio/it/03_palazzo_pretorio.mp3",
     audioDisponibile: true,
     durata: "",
     descrizione:
@@ -147,7 +147,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     titolo: "Rocca del Brunelleschi",
     latitudine: 43.6994864,
     longitudine: 10.5863793,
-    fileAudio: "audio/04_rocca_brunelleschi.mp3",
+    fileAudio: "audio/it/04_rocca_brunelleschi.mp3",
     audioDisponibile: true,
     durata: "",
     descrizione:
@@ -158,7 +158,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     titolo: "Torri Gemelle",
     latitudine: 43.6999256,
     longitudine: 10.5842514,
-    fileAudio: "audio/05_torri_gemelle.mp3",
+    fileAudio: "audio/it/05_torri_gemelle.mp3",
     audioDisponibile: true,
     durata: "",
     descrizione:
@@ -169,7 +169,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     titolo: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
     latitudine: 43.7002026,
     longitudine: 10.5833924,
-    fileAudio: "audio/06_parrocchia_santa_maria_san_giovanni.mp3",
+    fileAudio: "audio/it/06_parrocchia_santa_maria_san_giovanni.mp3",
     audioDisponibile: true,
     durata: "",
     descrizione:
@@ -180,7 +180,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     titolo: "Palazzo Comunale Vicopisano",
     latitudine: 43.6998526,
     longitudine: 10.5844138,
-    fileAudio: "audio/07_comune_info_point_vicopisano.mp3",
+    fileAudio: "audio/it/07_comune_info_point_vicopisano.mp3",
     audioDisponibile: true,
     durata: "",
     descrizione:
@@ -398,6 +398,17 @@ const globalLanguageCurrent = document.getElementById("global-language-current")
 const globalLanguageCurrentLabel = document.getElementById("global-language-current-label");
 const helpButton = document.getElementById("help-button");
 const onboardingOverlay = document.getElementById("onboarding-overlay");
+const emailGateOverlay = document.getElementById("email-gate-overlay");
+const emailGateForm = document.getElementById("email-gate-form");
+const emailGateAddress = document.getElementById("email-gate-address");
+const emailGateSubmit = document.getElementById("email-gate-submit");
+const emailGateStatus = document.getElementById("email-gate-status");
+const emailGatePurpose = emailGateForm?.querySelector(".email-gate-purpose");
+const isLocalEmailGatePreview = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+
+if (isLocalEmailGatePreview && emailGatePurpose) {
+  emailGatePurpose.textContent = "Anteprima locale: l’indirizzo non viene registrato. Sul sito pubblico l’invio passa da Netlify.";
+}
 const onboardingTitle = document.getElementById("onboarding-title");
 const onboardingHint = document.getElementById("onboarding-hint");
 const onboardingLanguageChips = document.getElementById("onboarding-language-chips");
@@ -455,6 +466,11 @@ const playerContextGuideText = document.getElementById("player-context-guide-tex
 const playerContextGuideClose = document.getElementById("player-context-guide-close");
 const playerContextGuidePrev = document.getElementById("player-context-guide-prev");
 const playerContextGuideNext = document.getElementById("player-context-guide-next");
+const playerContextGuideVeil = playerContextGuide?.querySelector(".player-context-guide-veil");
+const playerContextGuideExitConfirm = document.getElementById("player-context-guide-exit-confirm");
+const playerContextGuideExitConfirmTitle = document.getElementById("player-context-guide-exit-confirm-title");
+const playerContextGuideExitConfirmContinue = document.getElementById("player-context-guide-exit-confirm-continue");
+const playerContextGuideExitConfirmStop = document.getElementById("player-context-guide-exit-confirm-stop");
 const playerPrevButton = document.getElementById("player-prev-button");
 const playerPlayButton = document.getElementById("player-play-button");
 const playerNextButton = document.getElementById("player-next-button");
@@ -485,7 +501,7 @@ const appShell = document.querySelector(".app-shell");
 const playerSheet = document.querySelector(".player-sheet");
 
 const PLAYBACK_RATES = [1, 1.25, 1.5];
-const TRANSITION_AUDIO_PATH = "audio/transition_between_stops.mp3";
+const TRANSITION_AUDIO_PATH = "audio/it/transition_between_stops.mp3";
 const TRANSITION_ARTWORK_PATH = "logo_vicopisano.webp";
 const TRANSITION_MOUTH_CUES_PATH = "audio/cues/transition_between_stops.json";
 const TRANSITION_TRANSCRIPT = {
@@ -558,43 +574,43 @@ const MAP_TRANSCRIPT_SOURCES = [
   {
     stop: 1,
     language: "IT",
-    audio: "audio/01_torre_quattro_porte.mp3",
+    audio: "audio/it/01_torre_quattro_porte.mp3",
     source: "audio/transcripts/01_torre_quattro_porte_it.json",
   },
   {
     stop: 2,
     language: "IT",
-    audio: "audio/02_torre_camminamento_soccorso.mp3",
+    audio: "audio/it/02_torre_camminamento_soccorso.mp3",
     source: "audio/transcripts/02_torre_camminamento_soccorso_it.json",
   },
   {
     stop: 3,
     language: "IT",
-    audio: "audio/03_palazzo_pretorio.mp3",
+    audio: "audio/it/03_palazzo_pretorio.mp3",
     source: "audio/transcripts/03_palazzo_pretorio_it.json",
   },
   {
     stop: 4,
     language: "IT",
-    audio: "audio/04_rocca_brunelleschi.mp3",
+    audio: "audio/it/04_rocca_brunelleschi.mp3",
     source: "audio/transcripts/04_rocca_brunelleschi_it.json",
   },
   {
     stop: 5,
     language: "IT",
-    audio: "audio/05_torri_gemelle.mp3",
+    audio: "audio/it/05_torri_gemelle.mp3",
     source: "audio/transcripts/05_torri_gemelle_it.json",
   },
   {
     stop: 6,
     language: "IT",
-    audio: "audio/06_parrocchia_santa_maria_san_giovanni.mp3",
+    audio: "audio/it/06_parrocchia_santa_maria_san_giovanni.mp3",
     source: "audio/transcripts/06_parrocchia_santa_maria_san_giovanni_it.json",
   },
   {
     stop: 7,
     language: "IT",
-    audio: "audio/07_comune_info_point_vicopisano.mp3",
+    audio: "audio/it/07_comune_info_point_vicopisano.mp3",
     source: "audio/transcripts/07_comune_info_point_vicopisano_it.json",
   },
 ];
@@ -2624,6 +2640,7 @@ function updatePlayerMapButtonPresentation() {
 let contextGuideMode = null;
 let contextGuideStepIndex = 0;
 let contextGuideTrigger = null;
+let contextGuideConfirmationTrigger = null;
 let contextGuideInertStates = [];
 
 const playerContextGuideCopy = {
@@ -2730,8 +2747,34 @@ function renderPlayerContextGuideStep() {
   playerContextGuideNext.focus({ preventScroll: true });
 }
 
+function isPlayerContextGuideExitConfirmationOpen() {
+  return Boolean(playerContextGuideExitConfirm && !playerContextGuideExitConfirm.hidden);
+}
+
+function openPlayerContextGuideExitConfirmation() {
+  if (!contextGuideMode || !playerContextGuideExitConfirm || isPlayerContextGuideExitConfirmationOpen()) return;
+  const strings = getUiStrings(currentLanguage);
+  playerContextGuideExitConfirmTitle.textContent = strings.guideExitConfirm;
+  playerContextGuideExitConfirmContinue.textContent = strings.guideExitContinue;
+  playerContextGuideExitConfirmStop.textContent = strings.guideExitAccept;
+  contextGuideConfirmationTrigger = document.activeElement;
+  playerContextGuideExitConfirm.hidden = false;
+  playerContextGuide.classList.add("is-exit-confirming");
+  playerContextGuideExitConfirmContinue.focus({ preventScroll: true });
+}
+
+function closePlayerContextGuideExitConfirmation({ restoreFocus = true } = {}) {
+  if (!isPlayerContextGuideExitConfirmationOpen()) return;
+  playerContextGuideExitConfirm.hidden = true;
+  playerContextGuide.classList.remove("is-exit-confirming");
+  const focusTarget = contextGuideConfirmationTrigger;
+  contextGuideConfirmationTrigger = null;
+  if (restoreFocus && focusTarget?.isConnected) focusTarget.focus({ preventScroll: true });
+}
+
 function closePlayerContextGuide({ restoreFocus = true } = {}) {
   if (!contextGuideMode || !playerContextGuide) return;
+  closePlayerContextGuideExitConfirmation({ restoreFocus: false });
   contextGuideMode = null;
   playerContextGuide.classList.add("is-hidden");
   playerContextGuide.classList.remove("has-target", "is-map-guide", "is-listen-guide");
@@ -2770,14 +2813,17 @@ function handlePlayerContextGuideKeydown(event) {
   if (event.key === "Escape") {
     event.preventDefault();
     event.stopImmediatePropagation();
-    closePlayerContextGuide();
+    if (isPlayerContextGuideExitConfirmationOpen()) closePlayerContextGuideExitConfirmation();
+    else closePlayerContextGuide();
     return;
   }
   if (event.key !== "Tab") return;
-  const controls = [playerContextGuideClose, playerContextGuidePrev, playerContextGuideNext]
-    .filter((button) => button && !button.disabled);
-  const first = controls[0];
-  const last = controls[controls.length - 1];
+  const controls = isPlayerContextGuideExitConfirmationOpen()
+    ? [playerContextGuideExitConfirmContinue, playerContextGuideExitConfirmStop]
+    : [playerContextGuideClose, playerContextGuidePrev, playerContextGuideNext];
+  const focusableControls = controls.filter((button) => button && !button.disabled);
+  const first = focusableControls[0];
+  const last = focusableControls[focusableControls.length - 1];
   if (event.shiftKey && document.activeElement === first) {
     event.preventDefault();
     last.focus();
@@ -5436,6 +5482,7 @@ function renderOnboardingLanguageSelector() {
       }
 
       setCurrentLanguage(languageCode);
+      setStoredValue(onboardingCompleteStorageKey, "true");
       replayAnimationClass(chip, "is-pulsing", 460);
       closeOnboarding({ startGuide: true });
     },
@@ -5443,7 +5490,7 @@ function renderOnboardingLanguageSelector() {
 }
 
 function shouldShowOnboarding() {
-  return true;
+  return getStoredValue(onboardingCompleteStorageKey) !== "true";
 }
 
 function getVisibleFocusableElements(container) {
@@ -5485,6 +5532,120 @@ function bindOnboardingAccessibility() {
     } else if (!event.shiftKey && document.activeElement === last) {
       event.preventDefault();
       first.focus();
+    }
+  });
+}
+
+const emailGateStorageKey = "tp-email-demo-gate-completed";
+const emailGateLegacySessionKey = "tp-email-demo-gate-submitted";
+const onboardingCompleteStorageKey = "vicopisano-onboarding-completed";
+const emailGateEventStartsAt = Date.parse("2026-10-09T18:00:00+02:00");
+const emailGateEventEndsAt = Date.parse("2026-10-09T21:00:00+02:00");
+let emailGateExpiryTimer = null;
+
+function isEmailGateEventActive(now = Date.now()) {
+  return now >= emailGateEventStartsAt && now < emailGateEventEndsAt;
+}
+
+function hasEmailGateCompletion() {
+  if (getStoredValue(emailGateStorageKey) === "true") {
+    return true;
+  }
+
+  try {
+    if (window.sessionStorage.getItem(emailGateLegacySessionKey) === "true") {
+      // Migrate the old per-tab unlock to a durable completion flag. The email itself is never stored.
+      setStoredValue(emailGateStorageKey, "true");
+      return true;
+    }
+  } catch {
+    // Storage can be unavailable in private browsing or strict contexts.
+  }
+
+  return false;
+}
+
+function rememberEmailGateCompletion() {
+  setStoredValue(emailGateStorageKey, "true");
+  try {
+    window.sessionStorage.setItem(emailGateLegacySessionKey, "true");
+  } catch {
+    // Keep the successful gate usable when session storage is unavailable.
+  }
+}
+
+function bypassEmailGate() {
+  if (emailGateExpiryTimer !== null) {
+    window.clearTimeout(emailGateExpiryTimer);
+    emailGateExpiryTimer = null;
+  }
+  emailGateForm?.reset();
+  emailGateOverlay?.classList.add("is-hidden");
+  document.body.classList.remove("email-gate-open");
+  setGuideBackgroundInert(false);
+  showOnboardingIfNeeded();
+}
+
+function showEmailGateIfNeeded() {
+  if (!emailGateOverlay || !emailGateForm || !isEmailGateEventActive() || hasEmailGateCompletion()) {
+    showOnboardingIfNeeded();
+    return;
+  }
+
+  emailGateOverlay.classList.remove("is-hidden");
+  document.body.classList.add("email-gate-open");
+  setGuideBackgroundInert(true);
+  window.requestAnimationFrame(() => emailGateAddress?.focus({ preventScroll: true }));
+  emailGateExpiryTimer = window.setTimeout(() => {
+    if (!hasEmailGateCompletion()) bypassEmailGate();
+  }, Math.max(0, emailGateEventEndsAt - Date.now()));
+
+  emailGateOverlay.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab") return;
+    const focusable = getVisibleFocusableElements(emailGateOverlay);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  emailGateForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    emailGateStatus.textContent = "";
+    if (!emailGateForm.reportValidity()) return;
+
+    if (!isEmailGateEventActive()) {
+      bypassEmailGate();
+      return;
+    }
+
+    emailGateSubmit.disabled = true;
+    emailGateSubmit.textContent = "Apro la demo…";
+    emailGateStatus.textContent = "Invio in corso…";
+
+    try {
+      if (!isLocalEmailGatePreview) {
+        const response = await fetch(window.location.pathname || "/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(new FormData(emailGateForm)).toString(),
+        });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+      }
+
+      emailGateForm.reset();
+      rememberEmailGateCompletion();
+      bypassEmailGate();
+    } catch {
+      emailGateStatus.textContent = "Non siamo riusciti a registrare l’email. Riprova: la demo si apre solo dopo l’invio riuscito.";
+      emailGateSubmit.disabled = false;
+      emailGateSubmit.textContent = "Riprova";
     }
   });
 }
@@ -7210,6 +7371,13 @@ function bindPlayerControls() {
     consumeControlEvent(event);
     openPlayerContextGuide("listen", playerListenHelpButton);
   });
+  playerContextGuideVeil?.addEventListener("click", openPlayerContextGuideExitConfirmation);
+  playerContextGuideExitConfirmContinue?.addEventListener("click", () => {
+    closePlayerContextGuideExitConfirmation();
+  });
+  playerContextGuideExitConfirmStop?.addEventListener("click", () => {
+    closePlayerContextGuide();
+  });
   playerContextGuideClose?.addEventListener("click", () => closePlayerContextGuide());
   playerContextGuidePrev?.addEventListener("click", () => {
     contextGuideStepIndex = Math.max(0, contextGuideStepIndex - 1);
@@ -7763,7 +7931,7 @@ bindMiniPlayerLayoutSync();
 bindMobileTranscriptLayoutSync();
 bindHelpControls();
 focusStop(initialUrlState.stop || tappe[0], { skipFly: true, replaceUrl: true });
-showOnboardingIfNeeded();
+showEmailGateIfNeeded();
 
 if (mapNeedsLocalServer) {
   setMapLoadStatusByKey("mapLocalServerRequired");

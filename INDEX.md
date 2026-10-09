@@ -1,11 +1,19 @@
 # INDEX
 
 
+## Processo riusabile fra Comuni
+
+- `PLAYBOOK_SITI_COMUNALI.md`: playbook master per replicare i siti comunali, distinguere regole Travel Podcasting e adattamenti locali, registrare fonti/copy, versioni audio, trascrizioni, cue Rhubarb, decisioni e questioni aperte. Include l’audit Vicopisano e l’avvio di Calci senza trattare contenuti non verificati come approvati.
+- `DESIGN_SYSTEM.md`: principi, token e componenti del prodotto; audit runtime aggiornato il 9 ottobre 2026 e limiti della separazione fra core e tema annotati nel playbook.
+
 ## Root locale master del progetto
 
 - `/Users/pietrobalestri/LocalDev/Travel podcasting/github-sites/Vicopisano`
 ## Contenuto
 
+- Il gate email dell’evento del 9 ottobre 2026 è attivo soltanto tra le 18:00 e le 21:00 ora italiana (`Europe/Rome`, intervallo con fine esclusa); se resta aperto allo scadere, si chiude automaticamente. Fuori da quella finestra il primo accesso salta il gate e prosegue con lingua e guida; durante l’evento il sito pubblicato invia il form a Netlify, mentre localhost simula il flusso senza trasmettere email. La data e l’intervallo sono definiti in `app.js`; `tests/e2e/access-flow.spec.mjs` verifica inizio, fine e date fuori finestra. Il browser conserva solo i completamenti e la lingua, mai l’indirizzo email. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.
+
+- Il blocco introduttivo apre con un marcatore dorato prima di “Buondì!” e chiude con un marcatore della stessa misura accanto all’ultima parola della presentazione; la chiusura segue il testo anche quando va a capo su mobile.
 - Le tessere della mappa usano l'URL canonico `tile.openstreetmap.org` e mostrano sempre l'etichetta cliccabile `© OpenStreetMap`: centrata sul bordo inferiore e nel colore della cornice nella home desktop/mobile e in Explore desktop; nel full player Mappa + player mobile resta in alto a sinistra come sola scritta semitrasparente, senza targhetta, per non sovrapporsi a mascotte e dock. Il link porta al copyright senza coprire zoom o didascalia. Aprendo `index.html` come `file://`, le tessere non vengono richieste e appare un invito ad avviare il server locale.
 - La cornice della mappa home e quella di Explore desktop condividono la stessa superficie `--tp-color-surface-container-low`; l'etichetta OpenStreetMap usa la medesima superficie in entrambe.
 - Su desktop il player ha un solo stato esteso: Explore, con mappa a sinistra e pannello player a destra. Le aperture dirette vengono reindirizzate a questa vista; la modalità separata di sola lettura è stata rimossa. Su mobile il full player apre per default Mappa + player, con mappa interattiva sopra, mascotte in basso a sinistra appena sopra il dock audio e dock dello stesso verde scuro uniforme (`#092f2c`) della vista Full player audio; il dock segue l'altezza del contenuto anche sui telefoni alti. La didascalia sincronizzata a due righe resta accanto alla mascotte e sopra il dock, senza coprirli. Il toggle con cuffie passa a Full player audio e alla trascrizione completa senza chiudere il percorso.
@@ -67,7 +75,7 @@
 - Nel passaggio dedicato al full player, l'intera superficie del player viene sollevata sopra il velo: foto, titolo e comandi restano nitidi e leggibili mentre il resto della pagina mantiene l'effetto di sfondo.
 - La guida apre la mappa estesa direttamente dalla freccia Avanti, senza animare il cursore; restano le transizioni reali della mappa e del pannello Explore.
 - Nel player mobile le cinque azioni di trasporto restano sulla stessa riga; nel full player la velocità resta accessibile nella riga dei comandi, mentre in Mappa + player le indicazioni Google Maps sono nella barra del dock.
-- Due guide contestuali sono disponibili solo nei full player mobile, senza riavviare il tutorial iniziale: Mappa + player ha 5 passi (gesti e didascalia, posizione, Google Maps, cambio schermata, X); Full player audio ne ha 3 (trascrizione completa/titolo, ritorno alla mappa, X). Ogni passo isola al massimo un controllo senza azionarlo; chiusura e navigazione preservano tappa, audio e modalità. Entrambi i pulsanti `?` riusano il simbolo Material della home e la freccia Avanti riusa l'animazione della guida iniziale, disattivata con movimento ridotto.
+- Due guide contestuali sono disponibili solo nei full player mobile, senza riavviare il tutorial iniziale: Mappa + player ha 5 passi (gesti e didascalia, posizione, Google Maps, cambio schermata, X); Full player audio ne ha 3 (trascrizione completa/titolo, ritorno alla mappa, X). Ogni passo isola al massimo un controllo senza azionarlo; chiusura e navigazione preservano tappa, audio e modalità. Toccando fuori dal fumetto si apre la conferma `Continua` / `Interrompi`, come nel tutorial iniziale; `Continua` riprende lo stesso passo e `Interrompi` chiude solo la guida contestuale. Entrambi i pulsanti `?` riusano il simbolo Material della home e la freccia Avanti riusa l'animazione della guida iniziale, disattivata con movimento ridotto.
 - Mini-player e full player includono skip tappa, seek `-10/+10`, Play/Pausa e velocità; il full player desktop mostra ora anche gli skip tappa con controlli Material compatti, mantenendo la timeline sopra i comandi e le anteprime delle tappe.
 - Dopo la chiusura del pannello Explore desktop, la home torna con la mappa allineata in alto, come nella composizione principale desiderata.
 - Alla fine dell'ultimo step del tutorial desktop, il fumetto svanisce mentre velo ed evidenziazione restano attivi durante l'unico rientro animato di pannello e mappa; lo scroll si assesta in cima sotto Explore prima della misura della destinazione, senza il successivo movimento da 1,1 secondi. Velo ed evidenziazione vengono rimossi al termine del rientro.
@@ -84,7 +92,7 @@
 - Su desktop il sottotitolo sincronizzato occupa quasi tutta la larghezza utile: nella home segue i margini laterali di 24 px del mini-player, mentre in Explore segue la larghezza della mappa senza invadere il pannello destro. Il carattere è circa il 30% più grande; i segmenti lunghi sono impaginati in porzioni di massimo due righe, senza sbordare.
 - Su mobile la didascalia sincronizzata appare sopra al mini-player nella home e accanto alla mascotte, sopra al dock, in Mappa + player. Non appare prima dell'avvio effettivo dell'audio; la home riserva spazio alla pagina durante lo scroll. In Full player audio resta la trascrizione completa nella fascia dedicata, senza duplicare la chip.
 - Il frame base della mascotte è `B`; durante il play il lip-sync continua a usare i cue `A–H` e `X` disponibili.
-- Tra una tappa e la successiva, solo dopo la fine naturale dell'audio, parte `audio/transition_between_stops.mp3` come segmento conclusivo della sessione della tappa corrente: mini-player e full player mostrano entrambi `In cammino verso la prossima tappa` e lo stemma di Vicopisano; il titolo resta leggibile senza scorrimento automatico. L'accesso al full player e Play/Pausa restano disponibili e centrati; seek, velocità e navigazione sono disabilitati. Al termine viene selezionata in pausa la tappa successiva. La navigazione manuale non attiva l'intermezzo.
+- Tra una tappa e la successiva, solo dopo la fine naturale dell'audio, parte `audio/it/transition_between_stops.mp3` come segmento conclusivo della sessione della tappa corrente: mini-player e full player mostrano entrambi `In cammino verso la prossima tappa` e lo stemma di Vicopisano; il titolo resta leggibile senza scorrimento automatico. Nel Full player audio mobile, quando l'intermezzo nasconde le anteprime delle tappe, la trascrizione resta sotto i comandi audio invece di finire in cima al player. L'accesso al full player e Play/Pausa restano disponibili e centrati; seek, velocità e navigazione sono disabilitati. Al termine viene selezionata in pausa la tappa successiva. La navigazione manuale non attiva l'intermezzo.
 - L'intermezzo resta non skippabile e non velocizzabile, ma mantiene sempre il comando pausa disponibile e rende disabilitato lo slider, così l'ascolto può essere interrotto senza alterare il flusso.
 - L'accessibilità include skip link al contenuto, focus visibile uniforme, stato live della tappa selezionata, descrizione temporale dello slider, mappa esposta come regione e avvisi per i link che aprono una nuova scheda.
 - La suite E2E include `@axe-core/playwright` per verificare onboarding e full player su desktop/mobile; i controlli ARIA della mappa restano coperti dagli E2E mentre la superficie Leaflet dinamica viene esclusa dalla scansione Axe.
@@ -119,23 +127,26 @@
 - `tappa_4_rocca_del_brunelleschi.webp`: foto WebP associata alla Tappa 4; il JPEG originale è conservato localmente.
 - `tappa_5_torri_gemelle.webp`, `tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.webp` e `tappa_7_palazzo_comunale.webp`: foto WebP delle tappe 5–7; i JPEG originali sono conservati localmente.
 - `audio/.gitkeep`: placeholder della cartella audio.
-- `audio/01_torre_quattro_porte.mp3`: nuova traccia italiana Tappa 1 (228,911 secondi).
-- `audio/02_torre_camminamento_soccorso.mp3`: nuova traccia italiana Tappa 2 (165,016 secondi).
-- `audio/03_palazzo_pretorio.mp3`: nuova traccia italiana Tappa 3 (251,220 secondi).
-- `audio/04_rocca_brunelleschi.mp3`: nuova traccia italiana Tappa 4 (211,096 secondi).
-- `audio/05_torri_gemelle.mp3`: nuova traccia italiana Tappa 5 (179,670 secondi).
-- `audio/06_parrocchia_santa_maria_san_giovanni.mp3`: nuova traccia italiana Tappa 6 (225,933 secondi).
-- `audio/07_comune_info_point_vicopisano.mp3`: nuova traccia italiana Tappa 7 (270,524 secondi).
-- `audio/transition_between_stops.mp3`: intermezzo automatico non skippabile tra le tappe (8,803 secondi).
-- `audio/01_torre_quattro_porte_en.mp3`: audio Tappa 1 in inglese.
-- `audio/01_torre_quattro_porte_de.mp3`: audio Tappa 1 in tedesco.
-- `audio/01_torre_quattro_porte_fr.mp3`: audio Tappa 1 in francese.
-- `audio/01_torre_quattro_porte_es.mp3`: audio Tappa 1 in spagnolo.
-- `audio/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
-- `audio/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
-- `audio/cues/`: cue JSON generati con Rhubarb per sincronizzare la bocca della mascotte; ora sono presenti e verificati per tutte le sette tracce italiane nuove, oltre alle varianti straniere della Tappa 1.
+- `audio/it/01_torre_quattro_porte.mp3`: WAV di Iacopo ricodificato una volta in MP3 a 192 kbps, stereo, 44,1 kHz (228,853 secondi); transcript e cue aggiornati il 9 ottobre 2026.
+- `audio/it/02_torre_camminamento_soccorso.mp3`: nuova traccia italiana Tappa 2 (165,016 secondi).
+- `audio/it/03_palazzo_pretorio.mp3`: nuova traccia italiana Tappa 3 (251,220 secondi).
+- `audio/it/04_rocca_brunelleschi.mp3`: nuova traccia italiana Tappa 4 (211,096 secondi).
+- `audio/it/05_torri_gemelle.mp3`: nuova traccia italiana Tappa 5 (179,670 secondi).
+- `audio/it/06_parrocchia_santa_maria_san_giovanni.mp3`: nuova traccia italiana Tappa 6 (225,933 secondi).
+- `audio/it/07_comune_info_point_vicopisano.mp3`: nuova traccia italiana Tappa 7 (270,524 secondi).
+- `audio/it/transition_between_stops.mp3`: intermezzo automatico non skippabile tra le tappe (8,803 secondi).
+- `audio/en/01_torre_quattro_porte_en.mp3`: audio Tappa 1 in inglese.
+- `audio/de/01_torre_quattro_porte_de.mp3`: audio Tappa 1 in tedesco.
+- `audio/fr/01_torre_quattro_porte_fr.mp3`: audio Tappa 1 in francese.
+- `audio/es/01_torre_quattro_porte_es.mp3`: audio Tappa 1 in spagnolo.
+- `audio/pt/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
+- `audio/ru/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
+- `audio/<lingua>/`: MP3 runtime organizzati per lingua ISO (`it`, `en`, `de`, `es`, `fr`, `pt`, `ru`).
+- `audio/cues/`: cue JSON Rhubarb per sincronizzare la bocca della mascotte. Il cue della Tappa 1 è stato rigenerato dal nuovo WAV il 9 ottobre; i cue delle tappe 2–7 e delle lingue straniere restano invariati.
 - `audio/cues/transition_between_stops.json`: cue Rhubarb per la mascotte durante l'intermezzo.
-- `audio/transcripts/`: sette trascrizioni italiane sincronizzate alle nuove tracce; il testo deriva dal copione DOCX e sono inclusi solo i segmenti del copione riconosciuti nel parlato. Gli intervalli automatici restano da verificare all'ascolto. La traccia transitoria tra tappe usa segmenti temporizzati definiti in `app.js`.
+- `audio/transcripts/`: sette trascrizioni italiane. Quella della Tappa 1 è stata rigenerata localmente da WAV con Whisper `large-v3-turbo` e confrontata con il copione approvato dell’8 ottobre e con la trascrizione precedente; resta richiesta una verifica d’ascolto. Le trascrizioni delle tappe 2–7 restano invariate. La traccia transitoria usa segmenti temporizzati in `app.js`.
+- Nuova consegna audio italiana del 9 ottobre 2026: sette WAV e sette progetti Logic `.band` di Iacopo Piccaluga sono nella cartella Drive `Delivering/Vicopisano/Audio def per demo/Italiano/`, indicizzata nel playbook. La Tappa 1 è stata aggiornata da WAV a MP3 runtime e cue/trascrizione sono allineati; tappe 2–7 restano invariate e sono da rivedere il 10 ottobre 2026. Drive conserva gli input; il runtime e la documentazione operativa restano nella root locale.
+- `audio/REVISIONE_TAPPA1_2026-10-09.md`: provenienza, confronto copione/trascrizioni, impostazioni di export e verifiche della revisione della Tappa 1.
 - `outputs/`: cartella riservata a deliverable utente.
 - `work/`: cartella di lavoro temporanea.
 - `dist/`: output locale temporaneo del build Netlify, escluso da Git.

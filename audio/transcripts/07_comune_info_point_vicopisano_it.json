@@ -4,7 +4,7 @@
   "language": "it",
   "stop": 7,
   "audio": {
-    "source": "audio/07_comune_info_point_vicopisano.mp3",
+    "source": "audio/it/07_comune_info_point_vicopisano.mp3",
     "duration": 270.524
   },
   "alignment": {

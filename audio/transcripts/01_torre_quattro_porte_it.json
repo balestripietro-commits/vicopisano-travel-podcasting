@@ -4,230 +4,250 @@
   "language": "it",
   "stop": 1,
   "audio": {
-    "source": "audio/01_torre_quattro_porte.mp3",
-    "duration": 228.911
+    "source": "audio/it/01_torre_quattro_porte.mp3",
+    "masterWav": "https://drive.google.com/file/d/1DASllkSK6Nje4F_CGdmXQOyvHB1O-1Qs/view",
+    "duration": 228.853
+  },
+  "editorialScript": {
+    "source": "https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit",
+    "version": "copione definitivo aggiornato 2026-10-08"
   },
   "alignment": {
-    "engine": "faster-whisper small",
-    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "engine": "OpenAI Whisper large-v3-turbo",
+    "method": "Trascrizione italiana dal WAV con timestamp a livello di parola; verificata rispetto al copione approvato e alla trascrizione precedente",
     "reviewRequired": true,
-    "visibleTextRule": "only script sentences matched to spoken audio are included"
+    "visibleTextRule": "Seguire il parlato effettivo; normalizzare solo ortografia, apostrofi e toponimi ufficiali."
   },
+  "normalizations": [
+    "600 → seicento",
+    "Vico Pisano → Vicopisano",
+    "apostrofi normalizzati secondo il copione"
+  ],
   "segments": [
     {
       "start": 0.0,
-      "end": 3.4,
-      "text": "Dopo quasi seicento anni, sono finalmente tornato a Vicopisano."
+      "end": 7.34,
+      "text": "Dopo quasi seicento anni sono finalmente tornato a Vicopisano e devo ammettere che ritrovarla così"
     },
     {
-      "start": 4.08,
+      "start": 7.34,
       "end": 9.52,
-      "text": "E devo ammettere che ritrovarla così tranquilla mi fa un certo effetto."
+      "text": "Tranquilla mi fa un certo effetto."
     },
     {
-      "start": 10.18,
-      "end": 24.36,
-      "text": "Quando arrivai qui, nel 1435, Firenze mi aveva affidato un incarico tutt’altro che modesto: trasformare un castello conquistato da poco in una fortezza capace di resistere a un nuovo assedio."
+      "start": 9.98,
+      "end": 13.54,
+      "text": "Quando arrivai qui, nel 1435,"
     },
     {
-      "start": 24.98,
-      "end": 28.28,
-      "text": "Mura, torri, camminamenti, ponti levatoi…"
+      "start": 14.3,
+      "end": 20.48,
+      "text": "Firenze mi aveva affidato un incarico tutt’altro che modesto, trasformare un castello conquistato da poco"
     },
     {
-      "start": 29.6,
-      "end": 30.66,
+      "start": 20.48,
+      "end": 24.32,
+      "text": "In una fortezza capace di resistere a un nuovo assedio."
+    },
+    {
+      "start": 25.22,
+      "end": 28.72,
+      "text": "Mura, torri, camminamenti, ponti levatoi..."
+    },
+    {
+      "start": 28.72,
+      "end": 30.64,
       "text": "C’era parecchio da fare."
     },
     {
-      "start": 31.76,
-      "end": 38.78,
-      "text": "Oggi, invece, vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte."
+      "start": 31.36,
+      "end": 38.74,
+      "text": "Oggi invece vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte."
     },
     {
-      "start": 39.26,
-      "end": 43.82,
+      "start": 39.1,
+      "end": 43.78,
       "text": "Direi che, da questo punto di vista, le cose sono decisamente migliorate."
     },
     {
-      "start": 44.42,
-      "end": 46.92,
+      "start": 43.98,
+      "end": 46.88,
       "text": "Ma non mi sono ancora presentato."
     },
     {
-      "start": 46.92,
-      "end": 50.6,
+      "start": 46.88,
+      "end": 50.56,
       "text": "Io sono Filippo Brunelleschi."
     },
     {
-      "start": 51.22,
-      "end": 56.2,
-      "text": "Beh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze."
+      "start": 50.92,
+      "end": 57.86,
+      "text": "Beh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze, ma qui a Vicopisano"
     },
     {
-      "start": 56.74,
-      "end": 60.96,
-      "text": "Ma qui a Vicopisano vorrei mostrarvi un’altra parte del mio lavoro."
+      "start": 57.86,
+      "end": 65.64,
+      "text": "Vorrei mostrarvi un’altra parte del mio lavoro, quella forse meno conosciuta, ma non per questo meno"
     },
     {
-      "start": 61.56,
-      "end": 66.36,
-      "text": "Quella forse meno conosciuta, ma non per questo meno ingegnosa."
+      "start": 65.64,
+      "end": 66.34,
+      "text": "Ingegnosa."
     },
     {
-      "start": 67.06,
-      "end": 69.78,
-      "text": "Prima, però, fermiamoci davanti a questa torre."
+      "start": 66.34,
+      "end": 74.66,
+      "text": "Prima però fermiamoci davanti a questa torre oggi è chiamata torre delle quattro porte e non occorre"
     },
     {
-      "start": 70.52,
-      "end": 73.38,
-      "text": "Oggi è chiamata Torre delle Quattro Porte."
+      "start": 74.66,
+      "end": 81.82,
+      "text": "Essere architetti o geni del rinascimento per capire da dove venga il nome su ciascuno dei suoi quattro"
     },
     {
-      "start": 73.5,
-      "end": 83.48,
-      "text": "E non occorre essere architetti, o geni del Rinascimento per capire da dove venga il nome: su ciascuno dei suoi quattro lati si apre un passaggio."
+      "start": 81.82,
+      "end": 90.62,
+      "text": "Lati si apre un passaggio quattro archi quattro direzioni una soluzione piuttosto insolita la costruzione"
     },
     {
-      "start": 86.98,
-      "end": 89.32,
-      "text": "Una soluzione piuttosto insolita."
+      "start": 90.62,
+      "end": 98.02,
+      "text": "Era contemporaneamente una torre di guardia una porta d’ingresso al castello e un punto di passaggio"
     },
     {
-      "start": 89.82,
-      "end": 98.9,
-      "text": "La costruzione era contemporaneamente una torre di guardia, una porta d’ingresso al castello e un punto di passaggio lungo le mura."
+      "start": 98.02,
+      "end": 98.88,
+      "text": "Lungo le mura."
     },
     {
-      "start": 98.9,
+      "start": 99.52,
+      "end": 106.44,
+      "text": "Sul lato settentrionale sono ancora visibili i grandi cardini in pietra sui quali ruotavano le antiche"
+    },
+    {
+      "start": 106.44,
       "end": 106.82,
-      "text": "Sul lato settentrionale sono ancora visibili i grandi cardini in pietra sui quali ruotavano le antiche porte."
+      "text": "Porte."
     },
     {
-      "start": 107.36,
-      "end": 110.48,
-      "text": "Sono trascorsi secoli, eppure sono ancora lì."
+      "start": 107.18,
+      "end": 110.46,
+      "text": "Sono trascorsi secoli eppure sono ancora lì."
     },
     {
-      "start": 111.44,
-      "end": 114.26,
-      "text": "Questo, credetemi, è sempre un buon segno."
+      "start": 111.36,
+      "end": 118.3,
+      "text": "Questo, credetemi, è sempre un buon segno, ma prima che mi attribuiate anche questa torre è meglio"
     },
     {
-      "start": 114.92,
+      "start": 118.3,
       "end": 119.44,
-      "text": "Ma prima che mi attribuiate anche questa torre, è meglio precisare una cosa."
+      "text": "Precisare una cosa."
     },
     {
-      "start": 120.16,
+      "start": 119.76,
       "end": 121.8,
       "text": "Non l’ho costruita io."
     },
     {
-      "start": 122.62,
-      "end": 125.06,
-      "text": "Era qui molto prima del mio arrivo."
-    },
-    {
-      "start": 125.74,
+      "start": 122.36,
       "end": 129.18,
-      "text": "Le opere di cui vantarmi, del resto, non mi mancano."
+      "text": "Era qui molto prima del mio arrivo, Le opere di cui vantarmi del resto non mi mancano."
     },
     {
-      "start": 130.02,
-      "end": 134.84,
+      "start": 129.38,
+      "end": 134.8,
       "text": "Le parti più antiche della torre risalgono alla fine del XII secolo."
     },
     {
-      "start": 135.54,
-      "end": 145.58,
-      "text": "Nel tempo venne danneggiata, riparata e modificata più volte, tanto che nella muratura si possono riconoscere diverse fasi costruttive."
+      "start": 135.08,
+      "end": 143.24,
+      "text": "Nel tempo venne danneggiata, riparata e modificata più volte, tanto che nella muratura si possono"
     },
     {
-      "start": 146.38,
-      "end": 147.94,
+      "start": 143.24,
+      "end": 145.58,
+      "text": "Riconoscere diverse fasi costruttive."
+    },
+    {
+      "start": 146.3,
+      "end": 147.98,
       "text": "Guardatela con attenzione."
     },
     {
-      "start": 148.5,
-      "end": 154.44,
+      "start": 148.3,
+      "end": 154.4,
       "text": "Nella parte inferiore domina il verrucano, la pietra che incontreremo spesso durante il nostro percorso."
     },
     {
-      "start": 154.92,
-      "end": 157.32,
+      "start": 154.4,
+      "end": 157.3,
       "text": "Più in alto compare invece il laterizio."
     },
     {
-      "start": 158.0,
-      "end": 160.42,
-      "text": "Non sono soltanto materiali diversi."
-    },
-    {
-      "start": 161.02,
+      "start": 157.48,
       "end": 163.54,
-      "text": "Sono momenti diversi della vita della torre."
+      "text": "Non sono soltanto materiali diversi, sono momenti diversi della vita della torre."
     },
     {
-      "start": 164.22,
+      "start": 163.64,
       "end": 169.08,
-      "text": "Ed ecco il primo consiglio che posso darvi da esperto architetto seppur un po’ datato."
+      "text": "Ed ecco il primo consiglio che posso darvi da esperto architetto seppur un po’datato."
     },
     {
-      "start": 169.86,
+      "start": 169.5,
       "end": 175.86,
-      "text": "Quando osservate un edificio antico, non domandatevi soltanto quando sia stato costruito."
+      "text": "Quando osservate un edificio antico non domandatevi soltanto quando sia stato costruito."
     },
     {
-      "start": 176.58,
-      "end": 182.24,
-      "text": "Una costruzione non attraversa secoli di storia rimanendo perfettamente identica."
+      "start": 176.34,
+      "end": 184.68,
+      "text": "Una costruzione non attraversa secoli di storia rimanendo perfettamente identica e a quanto vedo nemmeno"
     },
     {
-      "start": 182.86,
-      "end": 184.72,
-      "text": "E, a quanto vedo, nemmeno Vicopisano lo ha fatto."
+      "start": 184.68,
+      "end": 186.0,
+      "text": "Vicopisano lo ha fatto."
     },
     {
-      "start": 186.78,
+      "start": 186.4,
       "end": 188.18,
       "text": "Per questo sono tornato."
     },
     {
-      "start": 188.96,
-      "end": 198.94,
-      "text": "Voglio scoprire che cosa resta della città che conobbi, osservare come è cambiata e mostrarvi le ragioni nascoste dietro alcune delle sue costruzioni."
+      "start": 188.5,
+      "end": 196.1,
+      "text": "Voglio scoprire che cosa resta della città che conobbi, osservare come è cambiata e mostrarvi le ragioni"
     },
     {
-      "start": 199.62,
+      "start": 196.1,
       "end": 203.88,
-      "text": "I materiali, i percorsi, e naturalmente, le difese."
+      "text": "Nascoste dietro alcune delle sue costruzioni, i materiali, i percorsi e naturalmente le difese."
     },
     {
-      "start": 204.56,
-      "end": 206.38,
+      "start": 204.32,
+      "end": 206.36,
       "text": "Da qui possiamo cominciare."
     },
     {
-      "start": 207.14,
-      "end": 209.48,
+      "start": 207.18,
+      "end": 209.44,
       "text": "Attraversate la torre ed entrate nel borgo."
     },
     {
-      "start": 210.3,
-      "end": 214.8,
-      "text": "Alla prossima tappa incontreremo la Torre e il Camminamento del Soccorso."
+      "start": 209.86,
+      "end": 214.76,
+      "text": "Alla prossima tappa incontreremo la torre e il camminamento del soccorso."
     },
     {
-      "start": 215.58,
-      "end": 218.6,
-      "text": "Quella sì, appartiene al sistema che progettai per Vicopisano."
+      "start": 215.2,
+      "end": 222.88,
+      "text": "Quella sì appartiene al sistema che progettai per Vicopisano e dopo quasi seicento anni è ancora"
     },
     {
-      "start": 220.0,
+      "start": 222.88,
       "end": 228.3,
-      "text": "E dopo quasi seicento anni è ancora perfettamente riconoscibile, permettetemi di considerarla una piccola soddisfazione."
+      "text": "Perfettamente riconoscibile, permettetemi di considerarla una piccola soddisfazione."
     }
   ]
 }

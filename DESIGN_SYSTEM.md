@@ -1,6 +1,6 @@
 # Travel Podcasting Design System - Phases 1-5
 
-Status: active runtime migration. `design-system.css` and `theme-vicopisano.css` are loaded before `style.css` in production. The live page uses the core tokens and the component classes introduced through Phases 1-5; `style.css` remains the scoped integration layer for Leaflet, layout and legacy selectors.
+Status: active runtime foundation; implementation audit recorded 2026-10-09 in `PLAYBOOK_SITI_COMUNALI.md`. `design-system.css` and `theme-vicopisano.css` are loaded before `style.css` in production. The live page uses the core tokens and component classes introduced through Phases 1-5; `style.css` remains the integration layer for Leaflet, layout and legacy selectors. The separation is not yet clean: the core stylesheet still carries Vicopisano-like fallback colors and `--vico-*` aliases.
 
 ## 01 Vision
 Travel Podcasting is a mobile-first cultural audio guide system for places, routes, museums, villages, and local territories. The interface must feel editorial, civic, warm, and reliable while staying practical for visitors walking outdoors with one hand on a phone.

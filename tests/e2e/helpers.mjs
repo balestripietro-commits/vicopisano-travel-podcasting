@@ -30,8 +30,32 @@ export function collectRuntimeErrors(page, { responseOrigin } = {}) {
   return errors;
 }
 
+export async function completeEmailGateForTest(page) {
+  const emailGate = page.locator("#email-gate-overlay");
+  if (await emailGate.isVisible()) {
+    const { hostname, origin } = new URL(page.url());
+    if (!["localhost", "127.0.0.1", "::1"].includes(hostname)) {
+      // Keep deployed smoke runs read-only: exercise the success path without
+      // sending a test address to Netlify Forms.
+      await page.route("**/*", async (route) => {
+        const request = route.request();
+        if (request.method() === "POST" && new URL(request.url()).origin === origin) {
+          await route.fulfill({ status: 200, body: "Accepted by E2E mock" });
+          return;
+        }
+        await route.continue();
+      });
+    }
+
+    await page.locator("#email-gate-address").fill("anteprima@example.com");
+    await page.locator("#email-gate-submit").click();
+    await expect(emailGate).toBeHidden();
+  }
+}
+
 export async function enterSite(page, { language = "it", guide = false, stop = 1 } = {}) {
   await page.goto(`/?tappa=${stop}&lang=${language}`, { waitUntil: "domcontentloaded" });
+  await completeEmailGateForTest(page);
   await expect(page.locator("#onboarding-overlay")).toBeVisible();
   await page
     .locator("#onboarding-language-chips .onboarding-language-option")

@@ -4,7 +4,7 @@
   "language": "it",
   "stop": 5,
   "audio": {
-    "source": "audio/05_torri_gemelle.mp3",
+    "source": "audio/it/05_torri_gemelle.mp3",
     "duration": 179.67
   },
   "alignment": {

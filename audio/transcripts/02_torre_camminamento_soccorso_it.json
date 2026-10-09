@@ -4,7 +4,7 @@
   "language": "it",
   "stop": 2,
   "audio": {
-    "source": "audio/02_torre_camminamento_soccorso.mp3",
+    "source": "audio/it/02_torre_camminamento_soccorso.mp3",
     "duration": 165.016
   },
   "alignment": {

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { enterSite, openFullPlayer } from "./helpers.mjs";
+import { completeEmailGateForTest, enterSite, openFullPlayer } from "./helpers.mjs";
 
 function formatViolations(violations) {
   return violations
@@ -35,6 +35,7 @@ async function expectNoAxeViolations(page, selector, rules = [
 }
 
 async function ensureOnboardingVisible(page) {
+  await completeEmailGateForTest(page);
   const overlay = page.locator("#onboarding-overlay");
   await page.locator("#onboarding-language-chips .onboarding-language-option").first().waitFor();
   // The production app normally opens this on first load. Make the fixture
@@ -123,6 +124,10 @@ test.describe("accessibility", () => {
     await ensureOnboardingVisible(page);
     const italian = page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ });
     await italian.focus();
+    // The email submit is a pointer action; move focus with the keyboard so
+    // this assertion checks the keyboard-visible ring rather than pointer focus.
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
     await expect(page.locator("#onboarding-language-chips")).toHaveCSS("overflow-x", "visible");
     await expect(italian).toHaveCSS("border-radius", "999px");
     await expect(italian).toHaveCSS("outline-style", "none");

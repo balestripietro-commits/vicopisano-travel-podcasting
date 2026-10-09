@@ -4,7 +4,7 @@
   "language": "it",
   "stop": 3,
   "audio": {
-    "source": "audio/03_palazzo_pretorio.mp3",
+    "source": "audio/it/03_palazzo_pretorio.mp3",
     "duration": 251.22
   },
   "alignment": {

@@ -4,7 +4,7 @@
   "language": "it",
   "stop": 6,
   "audio": {
-    "source": "audio/06_parrocchia_santa_maria_san_giovanni.mp3",
+    "source": "audio/it/06_parrocchia_santa_maria_san_giovanni.mp3",
     "duration": 225.933
   },
   "alignment": {

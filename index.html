@@ -16,13 +16,58 @@
     />
     <link rel="stylesheet" href="design-system.css?v=20261001-a11y-audit" />
     <link rel="stylesheet" href="theme-vicopisano.css?v=20261001-a11y-audit" />
-    <link rel="stylesheet" href="style.css?v=20261001-osm-credit-compact" />
+    <link rel="stylesheet" href="style.css?v=20261007-context-guide-transcript" />
   </head>
   <body class="tp-theme-vicopisano">
     <div class="announcement-strip" aria-hidden="true">
       <div id="announcement-track" class="announcement-track"></div>
     </div>
     <a class="skip-link" href="#main-content">Vai al contenuto principale</a>
+
+    <div
+      id="email-gate-overlay"
+      class="email-gate-overlay is-hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="email-gate-title"
+      aria-describedby="email-gate-description"
+    >
+      <div class="onboarding-card email-gate-card">
+        <p class="onboarding-kicker">Travel podcasting</p>
+        <h2 id="email-gate-title">Apri la demo in italiano</h2>
+        <p id="email-gate-description" class="onboarding-hint">
+          Lascia la tua email per entrare subito. Lunedì 12 ottobre ti invieremo il link e una breve scheda del progetto.
+        </p>
+        <form
+          id="email-gate-form"
+          name="email-demo-gate"
+          method="POST"
+          action="/"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          novalidate
+        >
+          <input type="hidden" name="form-name" value="email-demo-gate" />
+          <p class="email-gate-honeypot" aria-hidden="true">
+            <label>Lascia vuoto questo campo <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+          <label class="email-gate-label" for="email-gate-address">La tua email</label>
+          <input
+            id="email-gate-address"
+            class="email-gate-input"
+            type="email"
+            name="email"
+            autocomplete="email"
+            inputmode="email"
+            placeholder="nome@esempio.it"
+            required
+          />
+          <p class="email-gate-purpose">La useremo per inviarti questi materiali sul progetto.</p>
+          <button id="email-gate-submit" class="email-gate-submit" type="submit">Accedi alla demo</button>
+          <p id="email-gate-status" class="email-gate-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
 
     <div
       id="onboarding-overlay"
@@ -558,6 +603,13 @@
           <button id="player-context-guide-next" class="guide-button guide-button-primary" type="button" aria-label="Avanti"><span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
         </div>
       </div>
+      <div id="player-context-guide-exit-confirm" class="guide-exit-confirm player-context-guide-exit-confirm" role="alertdialog" aria-modal="true" aria-labelledby="player-context-guide-exit-confirm-title" hidden>
+        <h2 id="player-context-guide-exit-confirm-title"></h2>
+        <div class="guide-exit-confirm-actions">
+          <button type="button" id="player-context-guide-exit-confirm-continue" class="guide-button guide-button-secondary"></button>
+          <button type="button" id="player-context-guide-exit-confirm-stop" class="guide-button guide-button-primary"></button>
+        </div>
+      </div>
     </div>
 
     <script
@@ -565,6 +617,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="app.js?v=20261001-osm-mobile-home-bottom"></script>
+    <script src="app.js?v=20261009-event-email-window"></script>
   </body>
 </html>
