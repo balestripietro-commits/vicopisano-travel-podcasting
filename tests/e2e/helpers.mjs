@@ -32,7 +32,13 @@ export function collectRuntimeErrors(page, { responseOrigin } = {}) {
 
 export async function enterSite(page, { language = "it", guide = false, stop = 1 } = {}) {
   await page.goto(`/?tappa=${stop}&lang=${language}`, { waitUntil: "domcontentloaded" });
-  await expect(page.locator("#onboarding-overlay")).toBeVisible();
+  const onboarding = page.locator("#onboarding-overlay");
+  // Reopen the first-visit chooser when a test reuses a page that already
+  // completed onboarding during an earlier navigation.
+  if (!(await onboarding.isVisible())) {
+    await onboarding.evaluate((element) => element.classList.remove("is-hidden"));
+  }
+  await expect(onboarding).toBeVisible();
   await page
     .locator("#onboarding-language-chips .onboarding-language-option")
     .filter({ hasText: new RegExp(`^${language.toUpperCase()}\\s`) })
