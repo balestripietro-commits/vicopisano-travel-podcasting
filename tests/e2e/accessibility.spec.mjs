@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { completeEmailGateForTest, enterSite, openFullPlayer } from "./helpers.mjs";
+import { enterSite, openFullPlayer } from "./helpers.mjs";
 
 function formatViolations(violations) {
   return violations
@@ -35,7 +35,6 @@ async function expectNoAxeViolations(page, selector, rules = [
 }
 
 async function ensureOnboardingVisible(page) {
-  await completeEmailGateForTest(page);
   const overlay = page.locator("#onboarding-overlay");
   await page.locator("#onboarding-language-chips .onboarding-language-option").first().waitFor();
   // The production app normally opens this on first load. Make the fixture

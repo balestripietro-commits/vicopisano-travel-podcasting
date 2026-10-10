@@ -1,10 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { collectRuntimeErrors, completeEmailGateForTest, enterSite, expectInsideViewport, expectNoRuntimeErrors } from "./helpers.mjs";
+import { collectRuntimeErrors, enterSite, expectInsideViewport, expectNoRuntimeErrors } from "./helpers.mjs";
 
 test("initial transcript stays hidden through onboarding and tutorial until audio plays", async ({ page }) => {
   test.setTimeout(90_000);
   await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
-  await completeEmailGateForTest(page);
   await expect(page.locator("#onboarding-overlay")).toBeVisible();
   await page.evaluate(() => {
     const caption = document.querySelector("#map-live-caption");

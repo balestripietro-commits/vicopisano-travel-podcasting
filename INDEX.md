@@ -6,13 +6,14 @@
 - Playbook centrale nella macro-repository privata `LocalDev`: [standard](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/PLAYBOOK_SITI_COMUNALI.md) e [checklist di apertura](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/CHECKLIST_APERTURA_COMUNE.md). Questi file sono fuori da questa repository annidata.
 - `PLAYBOOK_SITI_COMUNALI.md`: audit e registro specifico di Vicopisano; non è più la fonte delle procedure generali.
 - `DESIGN_SYSTEM.md`: principi, token e componenti del prodotto; audit runtime aggiornato il 9 ottobre 2026 e limiti della separazione fra core e tema annotati nel playbook.
+- Revisione audio italiana del 10 ottobre 2026: i sette MP3 runtime, cue Rhubarb e trascrizioni Whisper sono aggiornati dai WAV consegnati; confronto col copione approvato dell’8 ottobre e differenze da ascoltare in `audio/REVISIONE_TRACCE_2026-10-10.md`. Lingue straniere e intermezzo restano invariati.
 
 ## Root locale master del progetto
 
 - `/Users/pietrobalestri/LocalDev/Travel podcasting/github-sites/Vicopisano`
 ## Contenuto
 
-- Il gate email dell’evento del 9 ottobre 2026 è attivo soltanto tra le 18:00 e le 21:00 ora italiana (`Europe/Rome`, intervallo con fine esclusa); se resta aperto allo scadere, si chiude automaticamente. Fuori da quella finestra il primo accesso salta il gate e prosegue con lingua e guida; durante l’evento il sito pubblicato invia il form a Netlify, mentre localhost simula il flusso senza trasmettere email. La data e l’intervallo sono definiti in `app.js`; `tests/e2e/access-flow.spec.mjs` verifica inizio, fine e date fuori finestra. Il browser conserva solo i completamenti e la lingua, mai l’indirizzo email. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.
+- L’ingresso non richiede l’email. Al primo accesso viene chiesta la lingua, salvata per gli accessi successivi; `tests/e2e/access-flow.spec.mjs` verifica il flusso e l’assenza del modulo email. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.
 
 - Il blocco introduttivo apre con un marcatore dorato prima di “Buondì!” e chiude con un marcatore della stessa misura accanto all’ultima parola della presentazione; la chiusura segue il testo anche quando va a capo su mobile.
 - Le tessere della mappa usano l'URL canonico `tile.openstreetmap.org` e mostrano sempre l'etichetta cliccabile `© OpenStreetMap`: centrata sul bordo inferiore e nel colore della cornice nella home desktop/mobile e in Explore desktop; nel full player Mappa + player mobile resta in alto a sinistra come sola scritta semitrasparente, senza targhetta, per non sovrapporsi a mascotte e dock. Il link porta al copyright senza coprire zoom o didascalia. Aprendo `index.html` come `file://`, le tessere non vengono richieste e appare un invito ad avviare il server locale.

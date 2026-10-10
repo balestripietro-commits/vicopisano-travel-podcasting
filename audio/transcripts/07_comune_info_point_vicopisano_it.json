@@ -5,238 +5,237 @@
   "stop": 7,
   "audio": {
     "source": "audio/it/07_comune_info_point_vicopisano.mp3",
-    "duration": 270.524
+    "masterWav": "https://drive.google.com/file/d/1j81hnrCKaqSuttcUZiZeIFN7aXghbKFY/view",
+    "duration": 270.463
+  },
+  "editorialScript": {
+    "source": "https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit",
+    "version": "copione definitivo aggiornato 2026-10-08"
   },
   "alignment": {
-    "engine": "faster-whisper small",
-    "method": "editorial DOCX script matched to spoken audio word timestamps",
+    "engine": "Faster-Whisper large-v3-turbo (CTranslate2, int8, locale)",
+    "method": "Trascrizione dal WAV master in italiano, con timestamp parola per parola; confronto con copione approvato dell’8 ottobre e trascrizione precedente.",
     "reviewRequired": true,
-    "visibleTextRule": "only script sentences matched to spoken audio are included"
+    "visibleTextRule": "Seguire il parlato effettivo; normalizzare solo ortografia, numeri e toponimi ufficiali; non inserire parole non riconosciute senza verifica d’ascolto."
   },
+  "normalizations": [
+    "600 → seicento",
+    "800 → ottocento"
+  ],
   "segments": [
     {
       "start": 0.0,
-      "end": 1.38,
-      "text": "Eccoci arrivati alla fine."
+      "end": 0.8,
+      "text": "Ci siamo quasi."
     },
     {
-      "start": 2.24,
-      "end": 4.76,
-      "text": "Davanti a noi c’è il Palazzo Comunale."
+      "start": 1.48,
+      "end": 6.76,
+      "text": "Prima di salutarci però c'è ancora un ultimo edificio che merita la vostra attenzione."
     },
     {
-      "start": 5.82,
-      "end": 10.92,
-      "text": "Lo avevamo già incontrato poco fa, quando cercavamo di distinguere le Torri Gemelle."
+      "start": 8.32,
+      "end": 10.88,
+      "text": "Davanti a noi c'è il palazzo comunale."
     },
     {
-      "start": 11.6,
-      "end": 14.28,
-      "text": "Adesso, però, osserviamo il Palazzo."
+      "start": 11.68,
+      "end": 17.02,
+      "text": "Lo avevamo già incontrato poco fa, quando cercavamo di distinguere le torri gemelle."
     },
     {
-      "start": 14.9,
-      "end": 17.96,
+      "start": 17.76,
+      "end": 20.36,
+      "text": "Adesso però osserviamo il palazzo."
+    },
+    {
+      "start": 20.6,
+      "end": 24.04,
       "text": "A prima vista potreste considerarlo un unico edificio."
     },
     {
-      "start": 18.5,
-      "end": 24.76,
+      "start": 24.76,
+      "end": 30.84,
       "text": "Naturalmente, dopo il percorso che abbiamo fatto, sapete che non dovreste fidarvi troppo delle prime impressioni."
     },
     {
-      "start": 24.76,
-      "end": 34.84,
-      "text": "La struttura che vedete si è formata in momenti diversi, riunendo edifici medievali e interventi realizzati fra il Seicento e l’Ottocento."
+      "start": 31.32,
+      "end": 41.22,
+      "text": "La struttura che vedete si è formata in momenti diversi, riunendo edifici medievali e interventi realizzati fra il seicento  e lottocento'."
     },
     {
-      "start": 36.32,
-      "end": 41.44,
-      "text": "Dalla seconda metà del Seicento questi spazi ospitarono la Cancelleria."
+      "start": 41.94,
+      "end": 47.54,
+      "text": "Dalla seconda metà del seicento  questi spazi ospitarono la cancelleria."
     },
     {
-      "start": 42.22,
-      "end": 50.3,
-      "text": "Il cancelliere custodiva i documenti e gli statuti, si occupava dei registri e di numerosi aspetti dell’amministrazione locale."
+      "start": 48.0,
+      "end": 56.4,
+      "text": "Il cancelliere custodiva i documenti e gli statuti, si occupava dei registri e di numerosi aspetti dell'amministrazione locale."
     },
     {
-      "start": 50.3,
-      "end": 55.56,
-      "text": "In precedenza, le riunioni degli ufficiali si tenevano nel Palazzo Pretorio."
+      "start": 56.94,
+      "end": 61.68,
+      "text": "In precedenza, le riunioni degli ufficiali si tenevano nel palazzo pretorio."
     },
     {
-      "start": 56.3,
-      "end": 61.86,
+      "start": 62.24,
+      "end": 67.98,
       "text": "Dopo il 1661, invece, cominciarono a svolgersi nella casa del cancelliere."
     },
     {
-      "start": 62.5,
-      "end": 65.54,
+      "start": 68.18,
+      "end": 71.64,
       "text": "Il governo del territorio stava trovando una nuova sede."
     },
     {
-      "start": 65.54,
-      "end": 69.14,
-      "text": "E anche l’edificio cambiava insieme alle sue funzioni."
+      "start": 71.84,
+      "end": 75.24,
+      "text": "E anche l'edificio cambiava insieme alle sue funzioni."
     },
     {
-      "start": 70.06,
-      "end": 78.92,
-      "text": "Le Torri Gemelle entrarono progressivamente a far parte del complesso, gli ambienti vennero ampliati e la facciata fu resa più regolare."
+      "start": 75.58,
+      "end": 85.08,
+      "text": "Le torri gemelle entrarono progressivamente a far parte del complesso, gli ambienti vennero ampliati e la facciata fu resa più regolare."
     },
     {
-      "start": 79.8,
-      "end": 89.06,
-      "text": "Nel 1782 si decise persino di demolire una parte delle antiche mura e l’arco della porta che sorgevano accanto alla Cancelleria."
+      "start": 85.62,
+      "end": 95.14,
+      "text": "Nel 1782 si decise persino di demolire una parte delle antiche mura e l'arco della porta che sorgevano accanto alla cancelleria."
     },
     {
-      "start": 92.04,
-      "end": 92.78,
-      "text": "Dare più aria all’edificio."
+      "start": 95.88,
+      "end": 97.28,
+      "text": "La motivazione?"
     },
     {
-      "start": 93.92,
-      "end": 103.1,
-      "text": "Dopo tutto quello che vi ho raccontato sull’importanza delle fortificazioni, comprenderete che non è una decisione che avrei preso con particolare leggerezza."
+      "start": 97.98,
+      "end": 99.5,
+      "text": "Dare più aria all'edificio."
     },
     {
-      "start": 103.64,
-      "end": 108.46,
+      "start": 100.04,
+      "end": 109.24,
+      "text": "Dopo tutto quello che vi ho raccontato sull'importanza delle fortificazioni, comprenderete che non è una decisione che avrei preso con particolare leggerezza."
+    },
+    {
+      "start": 109.86,
+      "end": 114.56,
       "text": "Fortunatamente, però, quelle mura non dovevano più proteggere un castello assediato."
     },
     {
-      "start": 109.12,
-      "end": 111.08,
+      "start": 114.7,
+      "end": 117.16,
       "text": "Il paese aveva altre necessità."
     },
     {
-      "start": 112.06,
-      "end": 115.48,
-      "text": "Oggi questo Palazzo è la sede del Comune di Vicopisano."
+      "start": 118.06,
+      "end": 121.6,
+      "text": "Oggi questo palazzo è la sede del comune di Vicopisano."
     },
     {
-      "start": 116.38,
-      "end": 126.44,
-      "text": "Negli ambienti che un tempo ospitavano il cancelliere si continua ad amministrare il territorio, anche se con istituzioni, responsabilità e cittadini molto diversi da quelli che conobbi."
+      "start": 122.2,
+      "end": 133.0,
+      "text": "Negli ambienti che un tempo ospitavano il cancelliere, si continua ad amministrare il territorio, anche se con istituzioni, responsabilità e cittadini molto diversi da quelli che conobbi."
     },
     {
-      "start": 128.58,
-      "end": 136.56,
-      "text": "All’inizio di questo percorso, appena tornato a Vicopisano, pensavo che avrei misurato il borgo osservando ciò che restava delle mie opere."
+      "start": 133.8,
+      "end": 147.78,
+      "text": "Pensavo che avrei misurato il borgo osservando ciò che restava delle mie opere, e le mie opere hanno resistito piuttosto bene, devo ammettere, ma durante il cammino ho incontrato anche ciò che esisteva prima di me."
     },
     {
-      "start": 136.56,
-      "end": 140.26,
-      "text": "E le mie opere hanno resistito piuttosto bene devo ammettere."
+      "start": 148.42,
+      "end": 154.42,
+      "text": "Adesso mi è chiaro che la mia rocca rappresenta soltanto una parte della storia di Vicopisano."
     },
     {
-      "start": 140.26,
-      "end": 145.84,
-      "text": "Ma durante il cammino ho incontrato anche ciò che esisteva prima di me."
+      "start": 154.84,
+      "end": 160.32,
+      "text": "Una parte importante, molto importante, ma non l'unica."
     },
     {
-      "start": 146.44,
-      "end": 152.44,
-      "text": "Adesso mi è chiaro che la mia Rocca rappresenta soltanto una parte della storia di Vicopisano."
-    },
-    {
-      "start": 153.1,
-      "end": 154.88,
-      "text": "Una parte importante."
-    },
-    {
-      "start": 158.94,
-      "end": 165.1,
+      "start": 160.5,
+      "end": 167.1,
       "text": "Un borgo medievale può conservare le proprie mura e diventare soltanto uno scenario da osservare."
     },
     {
-      "start": 165.9,
-      "end": 167.48,
+      "start": 167.46,
+      "end": 169.5,
       "text": "Qui non è accaduto."
     },
     {
-      "start": 168.14,
-      "end": 172.22,
+      "start": 170.08,
+      "end": 174.2,
       "text": "Dentro questi edifici le persone continuano ad abitare e a lavorare."
     },
     {
-      "start": 172.72,
-      "end": 182.22,
-      "text": "Le botteghe, i mercati, le associazioni e i circoli mantengono vivo il paese con mostre, spettacoli, incontri e feste durante tutto l’anno."
+      "start": 174.34,
+      "end": 184.64,
+      "text": "Le botteghe, i mercati, le associazioni e i circoli mantengono vivo il paese con mostre, spettacoli, incontri e feste durante tutto l'anno."
     },
     {
-      "start": 183.34,
-      "end": 188.1,
+      "start": 185.04,
+      "end": 190.12,
       "text": "Forse il modo in cui Vicopisano è stata costruita ha contribuito a tutto questo."
     },
     {
-      "start": 188.7,
-      "end": 189.74,
-      "text": "Le strade raccolte."
+      "start": 190.4,
+      "end": 195.54,
+      "text": "Le strade raccolte, le piazze, gli edifici vicini, gli uni agli altri."
     },
     {
-      "start": 191.2,
-      "end": 193.54,
-      "text": "Gli edifici vicini gli uni agli altri."
+      "start": 195.84,
+      "end": 198.36,
+      "text": "Ma le pietre da sole non bastano."
     },
     {
-      "start": 194.14,
-      "end": 196.36,
-      "text": "Ma le pietre, da sole, non bastano."
-    },
-    {
-      "start": 197.22,
-      "end": 203.82,
+      "start": 198.84,
+      "end": 205.78,
       "text": "Un paese rimane vivo perché qualcuno continua a sceglierlo, ad abitarlo e a prendersene cura."
     },
     {
-      "start": 204.76,
-      "end": 209.0,
+      "start": 205.78,
+      "end": 210.98,
       "text": "Io avevo progettato Vicopisano perché sapesse resistere agli assedi."
     },
     {
-      "start": 209.82,
-      "end": 214.96,
-      "text": "Dopo quasi seicento anni ho scoperto che continua a resistere in un altro modo:"
+      "start": 211.42,
+      "end": 219.0,
+      "text": "Dopo quasi seicento  anni, ho scoperto che continua a resistere in un altro modo, continuando a essere un paese vivo."
     },
     {
-      "start": 215.26,
-      "end": 217.02,
-      "text": "continuando a essere un paese vivo."
-    },
-    {
-      "start": 217.96,
-      "end": 220.74,
+      "start": 220.18,
+      "end": 223.44,
       "text": "E adesso, purtroppo, dobbiamo lasciarci."
     },
     {
-      "start": 221.4,
-      "end": 228.04,
-      "text": "La vostra lezione di architettura — per voi, purtroppo o per fortuna — per oggi è terminata."
+      "start": 223.8,
+      "end": 227.7,
+      "text": "La vostra lezione di architettura per oggi è terminata."
     },
     {
-      "start": 229.1,
-      "end": 241.6,
-      "text": "Se siete ancora curiosi e volete scoprire tutto ciò che Vicopisano può offrire, raggiungete l’Ufficio Turistico, ospitato nella Biblioteca Comunale ai piedi della Torre dell’Orologio."
+      "start": 227.7,
+      "end": 241.86,
+      "text": "Se siete ancora curiosi e volete scoprire tutto ciò che Vicopisano può offrire, raggiungete l'ufficio turistico, ospitato nella biblioteca comunale ai piedi della Torre dell'Orologio."
     },
     {
-      "start": 242.68,
-      "end": 250.24,
-      "text": "Potrete chiedere informazioni sulle visite alla Rocca, al Palazzo Pretorio, al Camminamento del Soccorso e alla Torre dell’Orologio."
+      "start": 242.02,
+      "end": 250.54,
+      "text": "Potrete chiedere informazioni sulle visite alla Rocca, al Palazzo Pretorio, al Camminamento del Soccorso e alla Torre dell'Orologio."
     },
     {
-      "start": 251.52,
-      "end": 257.38,
-      "text": "Oppure scegliere un’escursione sul Monte Pisano o scoprire le feste e gli eventi in programma."
+      "start": 250.88,
+      "end": 257.02,
+      "text": "Oppure scegliere un'escursione sul Monte Pisano o scoprire le feste e gli eventi in programma."
     },
     {
-      "start": 257.76,
-      "end": 262.94,
-      "text": "Io, dopo quasi seicento anni, direi che per oggi ho camminato abbastanza."
+      "start": 257.18,
+      "end": 262.58,
+      "text": "Io, dopo quasi seicento  anni, direi che per oggi ho camminato abbastanza."
     },
     {
-      "start": 263.84,
-      "end": 269.38,
+      "start": 262.9,
+      "end": 269.02,
       "text": "E poi, modestamente, una lezione di architettura così richiede un certo riposo."
     }
   ]

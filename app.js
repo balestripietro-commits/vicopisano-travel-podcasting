@@ -398,17 +398,6 @@ const globalLanguageCurrent = document.getElementById("global-language-current")
 const globalLanguageCurrentLabel = document.getElementById("global-language-current-label");
 const helpButton = document.getElementById("help-button");
 const onboardingOverlay = document.getElementById("onboarding-overlay");
-const emailGateOverlay = document.getElementById("email-gate-overlay");
-const emailGateForm = document.getElementById("email-gate-form");
-const emailGateAddress = document.getElementById("email-gate-address");
-const emailGateSubmit = document.getElementById("email-gate-submit");
-const emailGateStatus = document.getElementById("email-gate-status");
-const emailGatePurpose = emailGateForm?.querySelector(".email-gate-purpose");
-const isLocalEmailGatePreview = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
-
-if (isLocalEmailGatePreview && emailGatePurpose) {
-  emailGatePurpose.textContent = "Anteprima locale: l’indirizzo non viene registrato. Sul sito pubblico l’invio passa da Netlify.";
-}
 const onboardingTitle = document.getElementById("onboarding-title");
 const onboardingHint = document.getElementById("onboarding-hint");
 const onboardingLanguageChips = document.getElementById("onboarding-language-chips");
@@ -5536,120 +5525,7 @@ function bindOnboardingAccessibility() {
   });
 }
 
-const emailGateStorageKey = "tp-email-demo-gate-completed";
-const emailGateLegacySessionKey = "tp-email-demo-gate-submitted";
 const onboardingCompleteStorageKey = "vicopisano-onboarding-completed";
-const emailGateEventStartsAt = Date.parse("2026-10-09T18:00:00+02:00");
-const emailGateEventEndsAt = Date.parse("2026-10-09T21:00:00+02:00");
-let emailGateExpiryTimer = null;
-
-function isEmailGateEventActive(now = Date.now()) {
-  return now >= emailGateEventStartsAt && now < emailGateEventEndsAt;
-}
-
-function hasEmailGateCompletion() {
-  if (getStoredValue(emailGateStorageKey) === "true") {
-    return true;
-  }
-
-  try {
-    if (window.sessionStorage.getItem(emailGateLegacySessionKey) === "true") {
-      // Migrate the old per-tab unlock to a durable completion flag. The email itself is never stored.
-      setStoredValue(emailGateStorageKey, "true");
-      return true;
-    }
-  } catch {
-    // Storage can be unavailable in private browsing or strict contexts.
-  }
-
-  return false;
-}
-
-function rememberEmailGateCompletion() {
-  setStoredValue(emailGateStorageKey, "true");
-  try {
-    window.sessionStorage.setItem(emailGateLegacySessionKey, "true");
-  } catch {
-    // Keep the successful gate usable when session storage is unavailable.
-  }
-}
-
-function bypassEmailGate() {
-  if (emailGateExpiryTimer !== null) {
-    window.clearTimeout(emailGateExpiryTimer);
-    emailGateExpiryTimer = null;
-  }
-  emailGateForm?.reset();
-  emailGateOverlay?.classList.add("is-hidden");
-  document.body.classList.remove("email-gate-open");
-  setGuideBackgroundInert(false);
-  showOnboardingIfNeeded();
-}
-
-function showEmailGateIfNeeded() {
-  if (!emailGateOverlay || !emailGateForm || !isEmailGateEventActive() || hasEmailGateCompletion()) {
-    showOnboardingIfNeeded();
-    return;
-  }
-
-  emailGateOverlay.classList.remove("is-hidden");
-  document.body.classList.add("email-gate-open");
-  setGuideBackgroundInert(true);
-  window.requestAnimationFrame(() => emailGateAddress?.focus({ preventScroll: true }));
-  emailGateExpiryTimer = window.setTimeout(() => {
-    if (!hasEmailGateCompletion()) bypassEmailGate();
-  }, Math.max(0, emailGateEventEndsAt - Date.now()));
-
-  emailGateOverlay.addEventListener("keydown", (event) => {
-    if (event.key !== "Tab") return;
-    const focusable = getVisibleFocusableElements(emailGateOverlay);
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable.at(-1);
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  });
-
-  emailGateForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    emailGateStatus.textContent = "";
-    if (!emailGateForm.reportValidity()) return;
-
-    if (!isEmailGateEventActive()) {
-      bypassEmailGate();
-      return;
-    }
-
-    emailGateSubmit.disabled = true;
-    emailGateSubmit.textContent = "Apro la demo…";
-    emailGateStatus.textContent = "Invio in corso…";
-
-    try {
-      if (!isLocalEmailGatePreview) {
-        const response = await fetch(window.location.pathname || "/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(new FormData(emailGateForm)).toString(),
-        });
-        if (!response.ok) throw new Error("HTTP " + response.status);
-      }
-
-      emailGateForm.reset();
-      rememberEmailGateCompletion();
-      bypassEmailGate();
-    } catch {
-      emailGateStatus.textContent = "Non siamo riusciti a registrare l’email. Riprova: la demo si apre solo dopo l’invio riuscito.";
-      emailGateSubmit.disabled = false;
-      emailGateSubmit.textContent = "Riprova";
-    }
-  });
-}
-
 function showOnboardingIfNeeded() {
   if (!onboardingOverlay || !shouldShowOnboarding()) {
     return;
@@ -7931,7 +7807,7 @@ bindMiniPlayerLayoutSync();
 bindMobileTranscriptLayoutSync();
 bindHelpControls();
 focusStop(initialUrlState.stop || tappe[0], { skipFly: true, replaceUrl: true });
-showEmailGateIfNeeded();
+showOnboardingIfNeeded();
 
 if (mapNeedsLocalServer) {
   setMapLoadStatusByKey("mapLocalServerRequired");
