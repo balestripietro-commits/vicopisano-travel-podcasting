@@ -11,6 +11,7 @@
 ## Root locale master del progetto
 
 - `/Users/pietrobalestri/LocalDev/Travel podcasting/github-sites/Vicopisano`
+- Produzione: [demo pubblica](https://transcendent-meerkat-166cbe.netlify.app/). Deploy verificato il 10 ottobre 2026 dalla GitHub Actions `Deploy production` run #16, commit `8aa0c7b`; E2E, deploy Netlify e smoke test completati con successo.
 ## Contenuto
 
 - L’ingresso non richiede l’email. Al primo accesso viene chiesta la lingua, salvata per gli accessi successivi; `tests/e2e/access-flow.spec.mjs` verifica il flusso e l’assenza del modulo email. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.

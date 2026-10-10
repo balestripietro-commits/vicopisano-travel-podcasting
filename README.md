@@ -8,7 +8,8 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 
 - Il playbook comune e la checklist di apertura sono nella macro-repository privata `LocalDev`, sotto `Travel podcasting/github-sites/Playbook-Siti-Comunali/`. La cartella locale è sorella di questo clone e non appartiene alla repository Vicopisano.
 - `PLAYBOOK_SITI_COMUNALI.md` in questa repo contiene l’audit e il registro specifico di Vicopisano. Non copiarlo come template per un altro Comune.
-- Il repository locale resta la fonte di esecuzione e il master dei documenti; eventuali file Drive vanno registrati con percorso/link e versione precisi. Il copione italiano di riferimento è il DOCX [Travel Podcasting Vicopisano — itinerario in sette tappe con bibliografia](https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit), aggiornato l’8 ottobre 2026. La Tappa 1 è stata aggiornata e collegata al nuovo WAV; il confronto e l’aggiornamento delle tappe 2–7 restano pianificati per il 10 ottobre 2026.
+- Il repository locale resta la fonte di esecuzione e il master dei documenti; eventuali file Drive vanno registrati con percorso/link e versione precisi. Il copione italiano di riferimento è il DOCX [Travel Podcasting Vicopisano — itinerario in sette tappe con bibliografia](https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit), aggiornato l’8 ottobre 2026. Il 10 ottobre 2026 sono state aggiornate le sette tracce italiane con i WAV consegnati, e rigenerate trascrizioni e cue Rhubarb; confronto e revisione d’ascolto sono registrati in `audio/REVISIONE_TRACCE_2026-10-10.md`.
+- Ultima produzione verificata il 10 ottobre 2026 dalla GitHub Actions `Deploy production` run #16, commit `8aa0c7b`: E2E, deploy Netlify e smoke test completati con successo. [Apri la demo pubblica](https://transcendent-meerkat-166cbe.netlify.app/).
 
 ## Architettura attuale dell'interfaccia
 
