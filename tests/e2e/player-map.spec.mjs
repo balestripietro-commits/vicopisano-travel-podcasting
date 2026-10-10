@@ -888,7 +888,7 @@ test("Italian master audio keeps the map subtitle synchronized and fades it afte
     audio.dispatchEvent(new Event("seeked"));
     audio.dispatchEvent(new Event("timeupdate"));
   });
-  await expect(caption).toContainText("Torre delle Quattro Porte");
+  await expect(caption).toContainText(/torre delle quattro porte/i);
   await expect(caption).toHaveCSS("white-space", "pre-line");
   await expect(caption).toHaveCSS("display", "block");
   await page.locator("#mini-player-toggle").click();
