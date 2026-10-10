@@ -36,12 +36,12 @@ async function expectNoAxeViolations(page, selector, rules = [
 
 async function ensureOnboardingVisible(page) {
   const overlay = page.locator("#onboarding-overlay");
-  await page.locator("#onboarding-language-chips .onboarding-language-option").first().waitFor();
   // The production app normally opens this on first load. Make the fixture
   // deterministic when a reused browser profile has already dismissed it.
   if (!(await overlay.isVisible())) {
     await overlay.evaluate((element) => element.classList.remove("is-hidden"));
   }
+  await page.locator("#onboarding-language-chips .onboarding-language-option").first().waitFor();
   await expect(overlay).toBeVisible();
 }
 
