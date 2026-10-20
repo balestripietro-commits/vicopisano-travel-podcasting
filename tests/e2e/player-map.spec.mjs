@@ -270,7 +270,7 @@ test("every map marker keeps its selected stop visible in the home map", async (
     });
   }));
 
-  for (const stop of [1, 2, 3, 4, 5, 6, 7]) {
+  for (const stop of [1, 2, 3, 4, 5, 6, 7, 8]) {
     const moveEnd = page.evaluate(() => new Promise((resolve) => {
       map.once("moveend", resolve);
       window.setTimeout(resolve, 1_200);
@@ -310,7 +310,7 @@ test("every map marker keeps its selected stop visible in the home map", async (
   await expectNoRuntimeErrors(errors);
 });
 
-test("desktop Explore keeps all seven selected markers inside the map", async ({ page }, testInfo) => {
+test("desktop Explore keeps all eight selected markers inside the map", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chrome", "Explore with a side player is desktop-only.");
   test.setTimeout(90_000);
   const errors = collectRuntimeErrors(page);
@@ -318,7 +318,7 @@ test("desktop Explore keeps all seven selected markers inside the map", async ({
   await openFullPlayer(page);
   await expect(page.locator("#player-overlay")).toHaveClass(/is-map-panel/);
 
-  for (const stop of [1, 2, 3, 4, 5, 6, 7]) {
+  for (const stop of [1, 2, 3, 4, 5, 6, 7, 8]) {
     await page.evaluate((number) => markersByStop.get(number).fire("click"), stop);
     await expect(page.locator("#detail-number")).toHaveText(String(stop));
     await expect.poll(() => page.evaluate((number) => {
@@ -422,7 +422,7 @@ test("mobile map-player uses stable stop framing without clipping markers", asyn
   await page.locator("#mini-player-open").click();
   await expect(page.locator("#player-overlay")).toHaveClass(/is-mobile-map-player/);
 
-  for (const stop of [1, 2, 3, 4, 5, 6, 7]) {
+  for (const stop of [1, 2, 3, 4, 5, 6, 7, 8]) {
     await page.evaluate((number) => markersByStop.get(number).fire("click"), stop);
     await expect(page.locator("#detail-number")).toHaveText(String(stop));
     const marker = page.locator(".map-marker").filter({ hasText: String(stop) });
@@ -1270,7 +1270,7 @@ test("map cannot zoom out beyond the local route context", async ({ page }) => {
     await expect(zoomOut).toHaveAttribute("aria-disabled", "true");
   }
 
-  await expect(page.locator(".map-marker")).toHaveCount(7);
+  await expect(page.locator(".map-marker")).toHaveCount(8);
   await expect(page.locator("#map-recenter-button")).toHaveAttribute("data-route-off-center", "false");
   await expectNoRuntimeErrors(errors);
 });
@@ -1832,13 +1832,13 @@ test("previous and next navigation reflects first, intermediate and last stops",
   await expect(page.locator("#detail-number")).toHaveText("1");
 
   await page.locator("#player-close-button").click();
-  await stopButton(page, 7).click();
+  await stopButton(page, 8).click();
   await openFullPlayer(page);
   await page.locator("#player-map-button").click();
   await expect(page.locator("#player-previous-preview")).toBeVisible();
   await expect(page.locator("#player-next-preview")).toBeHidden();
   await page.locator("#player-next-track").click();
-  await expect(page.locator("#detail-number")).toHaveText("7");
+  await expect(page.locator("#detail-number")).toHaveText("8");
   await expectNoRuntimeErrors(errors);
 });
 
@@ -1902,10 +1902,10 @@ test("ending a track advances and autoplays, except on the last stop", async ({ 
   await page.locator("audio").evaluate((audio) => audio.dispatchEvent(new Event("ended")));
   await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("2");
 
-  await stopButton(page, 7).click();
+  await stopButton(page, 8).click();
   await expectAudioPlaying(page);
   await page.locator("audio").evaluate((audio) => audio.dispatchEvent(new Event("ended")));
-  await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("7");
+  await expect(page.locator('.stop-button[aria-current="true"] .stop-index')).toHaveText("8");
   await expectNoRuntimeErrors(errors);
 });
 

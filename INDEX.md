@@ -6,7 +6,7 @@
 - Playbook centrale nella macro-repository privata `LocalDev`: [standard](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/PLAYBOOK_SITI_COMUNALI.md) e [checklist di apertura](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/CHECKLIST_APERTURA_COMUNE.md). Questi file sono fuori da questa repository annidata.
 - `PLAYBOOK_SITI_COMUNALI.md`: audit e registro specifico di Vicopisano; non è più la fonte delle procedure generali.
 - `DESIGN_SYSTEM.md`: principi, token e componenti del prodotto; audit runtime aggiornato il 9 ottobre 2026 e limiti della separazione fra core e tema annotati nel playbook.
-- Revisione audio italiana del 10 ottobre 2026: i sette MP3 runtime, cue Rhubarb e trascrizioni Whisper sono aggiornati dai WAV consegnati; confronto col copione approvato dell’8 ottobre e differenze da ascoltare in `audio/REVISIONE_TRACCE_2026-10-10.md`. Lingue straniere e intermezzo restano invariati.
+- Aggiornamento audio italiano del 19 ottobre 2026: otto MP3 consegnati da Iacopo e sequenza del sito portata a otto tappe. Le trascrizioni usano il copione aggiornato con timing stimato, da verificare all’ascolto; i cue Rhubarb delle nuove voci sono da rigenerare. Lingue straniere e intermezzo restano invariati.
 
 ## Root locale master del progetto
 
@@ -105,9 +105,9 @@
 - Quando l'onboarding è aperto, home e mini-player diventano `inert`: VoiceOver resta confinato al box di scelta lingua fino alla selezione.
 - I tempi grafici del mini-player/full player sono `aria-hidden` e lo slider non aggiorna più `aria-valuetext` durante la riproduzione, evitando che VoiceOver annunci `00:00` a ogni secondo.
 - Mini-player e full player non sono più contenitori `aria-live`: VoiceOver non duplica l'annuncio quando cambia lo stato Play/Pausa; restano attive solo le live region dedicate a feedback, trascrizione e selezione tappa.
-- Su mobile la mappa home mantiene come zoom minimo l'inquadratura stretta del percorso; solo in Mappa + player si può zoomare indietro di un livello in più e trascinare entro limiti più ampi. Le sette tappe tornano al proprio preset di zoom dopo un click, senza ereditare uno zoom manuale troppo stretto; il margine di trascinamento permette di inquadrare anche la tappa 5 più in basso. Tornando a Full player audio o alla home vengono ripristinati i limiti standard.
+- Su mobile la mappa home mantiene come zoom minimo l'inquadratura stretta del percorso; solo in Mappa + player si può zoomare indietro di un livello in più e trascinare entro limiti più ampi. Le otto tappe tornano al proprio preset di zoom dopo un click, senza ereditare uno zoom manuale troppo stretto; il margine di trascinamento permette di inquadrare anche la tappa 5 più in basso. Tornando a Full player audio o alla home vengono ripristinati i limiti standard.
 - `style.css`: stile full-page editoriale con hero ampio, mappa dominante, sezione tappe in card grid, mini-player fisso, pannello player Explore desktop, full player e trascrizione mobile, controlli su griglia a spaziatura uniforme e motion system leggero della mascotte.
-- `app.js`: sorgente unica dei dati delle 7 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio mobile, guida iniziale e due guide contestuali del full player mobile, e stati motion della mascotte.
+- `app.js`: sorgente unica dei dati delle 8 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio mobile, guida iniziale e due guide contestuali del full player mobile, e stati motion della mascotte.
 - `dev-server.mjs`: server statico locale con supporto HTTP Range per gli MP3; serve `npm run dev` e i test E2E, senza entrare nel sito pubblicato.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
 - `package.json` e `package-lock.json`: dipendenze versionate Playwright e Netlify CLI, comandi della suite E2E e deploy riproducibile.
@@ -120,7 +120,7 @@
 - `build-static.mjs`: build Netlify a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
 - `netlify.toml`: configurazione versionata del build `npm run build`, publish directory `dist/` e Node.js 22.
 - `logo_vicopisano.webp`: stemma lossless usato nell'intestazione e nell'intermezzo del player.
-- Le foto runtime delle sette tappe sono WebP; i JPEG originali e il PNG sorgente del logo restano nel master non modificati e non vengono inclusi nel deploy.
+- Le foto runtime disponibili sono WebP; non è stata consegnata una foto dedicata per Torre dell’Orologio e Pieve di Santa Maria, che mostrano il placeholder. I JPEG originali restano nel master e non vengono inclusi nel deploy.
 - `mascotte_vicopisano.webp`: immagine mascotte ottimizzata per il runtime.
 - `assets/mascotte-mouth/`: frame mascotte Rhubarb `A-H` + `X` in WebP 2048×2048 ad alta qualità, usati nella home e nel player per sincronizzare la bocca con l'audio; la versione asset `20260921-mascot-hd` forza il rinnovo della cache mobile.
 - Motion mascotte: wrapper annidati in `index.html`, animazioni CSS in `style.css` e controller deterministico in `app.js` separano movimento, breathing e mouth layer Rhubarb; i cue sono precaricati alla selezione della traccia e usano un anticipo visivo di 80 ms. Il salto della mascotte in home parte una volta per attivazione e non si riavvia finché l'animazione in corso non è terminata.
@@ -128,15 +128,9 @@
 - `tappa_2_torre_e_camminamento_del_soccorso.webp`: foto WebP associata alla Tappa 2; il JPEG originale è conservato localmente.
 - `tappa_3_palazzo_pretorio.webp`: foto WebP associata alla Tappa 3.
 - `tappa_4_rocca_del_brunelleschi.webp`: foto WebP associata alla Tappa 4; il JPEG originale è conservato localmente.
-- `tappa_5_torri_gemelle.webp`, `tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.webp` e `tappa_7_palazzo_comunale.webp`: foto WebP delle tappe 5–7; i JPEG originali sono conservati localmente.
+- tappa_5_torri_gemelle.webp e tappa_7_palazzo_comunale.webp restano associati alle tappe 7 e 8. Non c’è ancora una foto per le tappe 5 e 6.
 - `audio/.gitkeep`: placeholder della cartella audio.
-- `audio/it/01_torre_quattro_porte.mp3`: WAV di Iacopo ricodificato una volta in MP3 a 192 kbps, stereo, 44,1 kHz (228,853 secondi); transcript e cue aggiornati il 9 ottobre 2026.
-- `audio/it/02_torre_camminamento_soccorso.mp3`: nuova traccia italiana Tappa 2 (165,016 secondi).
-- `audio/it/03_palazzo_pretorio.mp3`: nuova traccia italiana Tappa 3 (251,220 secondi).
-- `audio/it/04_rocca_brunelleschi.mp3`: nuova traccia italiana Tappa 4 (211,096 secondi).
-- `audio/it/05_torri_gemelle.mp3`: nuova traccia italiana Tappa 5 (179,670 secondi).
-- `audio/it/06_parrocchia_santa_maria_san_giovanni.mp3`: nuova traccia italiana Tappa 6 (225,933 secondi).
-- `audio/it/07_comune_info_point_vicopisano.mp3`: nuova traccia italiana Tappa 7 (270,524 secondi).
+- audio/it/01_torre_quattro_porte.mp3–08_palazzo_comunale.mp3: otto MP3 consegnati il 19 ottobre 2026. Durate: 292,807; 135,288; 258,638; 179,879; 165,016; 217,025; 191,765; 261,616 secondi.
 - `audio/it/transition_between_stops.mp3`: intermezzo automatico non skippabile tra le tappe (8,803 secondi).
 - `audio/en/01_torre_quattro_porte_en.mp3`: audio Tappa 1 in inglese.
 - `audio/de/01_torre_quattro_porte_de.mp3`: audio Tappa 1 in tedesco.
@@ -145,10 +139,10 @@
 - `audio/pt/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
 - `audio/ru/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
 - `audio/<lingua>/`: MP3 runtime organizzati per lingua ISO (`it`, `en`, `de`, `es`, `fr`, `pt`, `ru`).
-- `audio/cues/`: cue JSON Rhubarb per sincronizzare la bocca della mascotte. Il cue della Tappa 1 è stato rigenerato dal nuovo WAV il 9 ottobre; i cue delle tappe 2–7 e delle lingue straniere restano invariati.
-- `audio/cues/transition_between_stops.json`: cue Rhubarb per la mascotte durante l'intermezzo.
-- `audio/transcripts/`: sette trascrizioni italiane. Quella della Tappa 1 è stata rigenerata localmente da WAV con Whisper `large-v3-turbo` e confrontata con il copione approvato dell’8 ottobre e con la trascrizione precedente; resta richiesta una verifica d’ascolto. Le trascrizioni delle tappe 2–7 restano invariate. La traccia transitoria usa segmenti temporizzati in `app.js`.
-- Nuova consegna audio italiana del 9 ottobre 2026: sette WAV e sette progetti Logic `.band` di Iacopo Piccaluga sono nella cartella Drive `Delivering/Vicopisano/Audio def per demo/Italiano/`, indicizzata nel playbook. La Tappa 1 è stata aggiornata da WAV a MP3 runtime e cue/trascrizione sono allineati; tappe 2–7 restano invariate e sono da rivedere il 10 ottobre 2026. Drive conserva gli input; il runtime e la documentazione operativa restano nella root locale.
+- audio/cues: le nuove tracce italiane hanno cue vuoti per non riutilizzare fonemi della versione precedente; rigenerare Rhubarb dai nuovi master. Le tracce straniere della Tappa 1 e l’intermezzo conservano i cue esistenti.
+- audio/cues/transition_between_stops.json: cue Rhubarb già esistenti per l’intermezzo.
+- audio/transcripts: otto trascrizioni basate sul copione consegnato il 19 ottobre; timestamp stimati in proporzione alla lunghezza delle frasi, da riallineare e verificare all’ascolto prima della pubblicazione. La traccia transitoria usa segmenti in app.js.
+- Consegna audio italiana del 19 ottobre 2026: otto MP3, WAV e progetti .band di Iacopo Piccaluga sono in Delivering/Vicopisano/Audio def/Audio def per demo/Italiano/. Drive conserva i sorgenti; runtime e documentazione restano nella root locale.
 - `audio/REVISIONE_TAPPA1_2026-10-09.md`: provenienza, confronto copione/trascrizioni, impostazioni di export e verifiche della revisione della Tappa 1.
 - `outputs/`: cartella riservata a deliverable utente.
 - `work/`: cartella di lavoro temporanea.

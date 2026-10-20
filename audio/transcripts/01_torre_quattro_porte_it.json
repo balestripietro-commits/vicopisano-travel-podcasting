@@ -1,253 +1,387 @@
 {
   "version": 1,
-  "status": "ready-for-review",
+  "status": "estimated-timing-review-required",
   "language": "it",
   "stop": 1,
   "audio": {
     "source": "audio/it/01_torre_quattro_porte.mp3",
-    "masterWav": "https://drive.google.com/file/d/1DASllkSK6Nje4F_CGdmXQOyvHB1O-1Qs/view",
-    "duration": 228.853
+    "duration": 292.807
   },
   "editorialScript": {
-    "source": "https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit",
-    "version": "copione definitivo aggiornato 2026-10-08"
+    "source": "Drive Delivering/Vicopisano/Copy-Tappe",
+    "version": "copione aggiornato, tracce 2026-10-19"
   },
   "alignment": {
-    "engine": "OpenAI Whisper large-v3-turbo",
-    "method": "Trascrizione italiana dal WAV con timestamp a livello di parola; verificata rispetto al copione approvato e alla trascrizione precedente",
+    "engine": "approved-script timing estimate",
+    "method": "Estimated from approved copy and MP3 duration; phrase timing is proportional to word count.",
     "reviewRequired": true,
-    "visibleTextRule": "Seguire il parlato effettivo; normalizzare solo ortografia, apostrofi e toponimi ufficiali."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
   },
-  "normalizations": [
-    "600 → seicento",
-    "Vico Pisano → Vicopisano",
-    "apostrofi normalizzati secondo il copione"
-  ],
   "segments": [
     {
-      "start": 0.0,
-      "end": 7.34,
-      "text": "Dopo quasi seicento anni sono finalmente tornato a Vicopisano e devo ammettere che ritrovarla così"
+      "start": 0,
+      "end": 3.81,
+      "text": "Dopo quasi seicento anni, sono finalmente tornato a Vicopisano."
     },
     {
-      "start": 7.34,
-      "end": 9.52,
-      "text": "Tranquilla mi fa un certo effetto."
+      "start": 4.05,
+      "end": 9.13,
+      "text": "E devo ammettere che ritrovarla così tranquilla mi fa un certo effetto."
     },
     {
-      "start": 9.98,
-      "end": 13.54,
-      "text": "Quando arrivai qui, nel 1435,"
+      "start": 9.37,
+      "end": 14.88,
+      "text": "Oggi vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte."
     },
     {
-      "start": 14.3,
-      "end": 20.48,
-      "text": "Firenze mi aveva affidato un incarico tutt’altro che modesto, trasformare un castello conquistato da poco"
+      "start": 15.12,
+      "end": 16.39,
+      "text": "Quando arrivai io..."
     },
     {
-      "start": 20.48,
-      "end": 24.32,
-      "text": "In una fortezza capace di resistere a un nuovo assedio."
+      "start": 16.63,
+      "end": 19.17,
+      "text": "la situazione era un po’ diversa."
     },
     {
-      "start": 25.22,
-      "end": 28.72,
-      "text": "Mura, torri, camminamenti, ponti levatoi..."
-    },
-    {
-      "start": 28.72,
-      "end": 30.64,
-      "text": "C’era parecchio da fare."
-    },
-    {
-      "start": 31.36,
-      "end": 38.74,
-      "text": "Oggi invece vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte."
-    },
-    {
-      "start": 39.1,
-      "end": 43.78,
-      "text": "Direi che, da questo punto di vista, le cose sono decisamente migliorate."
-    },
-    {
-      "start": 43.98,
-      "end": 46.88,
+      "start": 19.41,
+      "end": 21.95,
       "text": "Ma non mi sono ancora presentato."
     },
     {
-      "start": 46.88,
-      "end": 50.56,
+      "start": 22.19,
+      "end": 23.89,
       "text": "Io sono Filippo Brunelleschi."
     },
     {
-      "start": 50.92,
-      "end": 57.86,
-      "text": "Beh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze, ma qui a Vicopisano"
+      "start": 24.13,
+      "end": 30.9,
+      "text": "Beh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze."
     },
     {
-      "start": 57.86,
-      "end": 65.64,
-      "text": "Vorrei mostrarvi un’altra parte del mio lavoro, quella forse meno conosciuta, ma non per questo meno"
+      "start": 31.14,
+      "end": 37.5,
+      "text": "Ma quasi seicento anni fa Firenze mi mandò anche qui, con un compito ben preciso:"
     },
     {
-      "start": 65.64,
-      "end": 66.34,
-      "text": "Ingegnosa."
+      "start": 37.74,
+      "end": 40.7,
+      "text": "rendere Vicopisano molto più difficile da conquistare."
     },
     {
-      "start": 66.34,
-      "end": 74.66,
-      "text": "Prima però fermiamoci davanti a questa torre oggi è chiamata torre delle quattro porte e non occorre"
+      "start": 40.94,
+      "end": 46.87,
+      "text": "E allora, prima di mostrarvi quello che feci, vale la pena farsi una domanda."
     },
     {
-      "start": 74.66,
-      "end": 81.82,
-      "text": "Essere architetti o geni del rinascimento per capire da dove venga il nome su ciascuno dei suoi quattro"
+      "start": 47.11,
+      "end": 48.38,
+      "text": "Perché proprio Vicopisano?"
     },
     {
-      "start": 81.82,
-      "end": 90.62,
-      "text": "Lati si apre un passaggio quattro archi quattro direzioni una soluzione piuttosto insolita la costruzione"
+      "start": 48.62,
+      "end": 54.97,
+      "text": "Perché Firenze teneva tanto a controllare e fortificare un borgo che oggi appare così tranquillo?"
     },
     {
-      "start": 90.62,
-      "end": 98.02,
-      "text": "Era contemporaneamente una torre di guardia una porta d’ingresso al castello e un punto di passaggio"
+      "start": 55.21,
+      "end": 57.75,
+      "text": "Per capirlo dobbiamo tornare parecchio indietro."
     },
     {
-      "start": 98.02,
-      "end": 98.88,
-      "text": "Lungo le mura."
+      "start": 57.99,
+      "end": 59.69,
+      "text": "Molto prima di me."
     },
     {
-      "start": 99.52,
-      "end": 106.44,
-      "text": "Sul lato settentrionale sono ancora visibili i grandi cardini in pietra sui quali ruotavano le antiche"
+      "start": 59.93,
+      "end": 69.25,
+      "text": "Questo colle era probabilmente frequentato già in epoca etrusca: nel territorio sono stati ritrovati materiali risalenti almeno al quinto secolo avanti Cristo."
     },
     {
-      "start": 106.44,
-      "end": 106.82,
-      "text": "Porte."
+      "start": 69.49,
+      "end": 75.41,
+      "text": "Ma è nel Medioevo che cominciamo a riconoscere il borgo che sarebbe diventato Vicopisano."
     },
     {
-      "start": 107.18,
-      "end": 110.46,
-      "text": "Sono trascorsi secoli eppure sono ancora lì."
+      "start": 75.65,
+      "end": 78.62,
+      "text": "E all’epoca aveva persino un altro nome."
     },
     {
-      "start": 111.36,
-      "end": 118.3,
-      "text": "Questo, credetemi, è sempre un buon segno, ma prima che mi attribuiate anche questa torre è meglio"
+      "start": 78.86,
+      "end": 82.25,
+      "text": "Nei documenti compare Auseris Sala, divenuto poi Auserissola."
     },
     {
-      "start": 118.3,
-      "end": 119.44,
-      "text": "Precisare una cosa."
+      "start": 82.49,
+      "end": 90.11,
+      "text": "Più in basso, vicino alla Pieve che incontreremo durante il nostro percorso, esisteva invece un insediamento chiamato Vicus."
     },
     {
-      "start": 119.76,
-      "end": 121.8,
+      "start": 90.35,
+      "end": 94.16,
+      "text": "Con il tempo, i due nuclei finirono per unirsi."
+    },
+    {
+      "start": 94.4,
+      "end": 98.21,
+      "text": "E nei documenti compare un nuovo nome: Vicus Auserissola."
+    },
+    {
+      "start": 98.45,
+      "end": 103.54,
+      "text": "Ma c’è soprattutto una cosa che, guardandovi intorno oggi, è difficile immaginare."
+    },
+    {
+      "start": 103.78,
+      "end": 104.2,
+      "text": "L’acqua."
+    },
+    {
+      "start": 104.44,
+      "end": 112.06,
+      "text": "Per secoli questo colle si trovò in una posizione eccezionale, vicino alla confluenza di due importanti corsi d’acqua."
+    },
+    {
+      "start": 112.3,
+      "end": 116.96,
+      "text": "Da una parte l’Arno, che conduceva verso Pisa e il mare."
+    },
+    {
+      "start": 117.2,
+      "end": 124.82,
+      "text": "Dall’altra l’Auser, chiamato anche Serezza, che permetteva di raggiungere il Lago di Bientina e, da lì, la Lucchesia."
+    },
+    {
+      "start": 125.06,
+      "end": 126.34,
+      "text": "Acqua significava collegamenti."
+    },
+    {
+      "start": 126.58,
+      "end": 127.0,
+      "text": "Commerci."
+    },
+    {
+      "start": 127.24,
+      "end": 128.93,
+      "text": "Ma significava anche difesa."
+    },
+    {
+      "start": 129.17,
+      "end": 136.8,
+      "text": "I fiumi contribuivano a proteggere il castello, alimentandone i fossati e rendendo molto più difficile avvicinarsi alle mura."
+    },
+    {
+      "start": 137.04,
+      "end": 141.7,
+      "text": "Insomma, Vicopisano non era semplicemente un piccolo borgo sopra una collina."
+    },
+    {
+      "start": 141.94,
+      "end": 144.48,
+      "text": "Era un punto strategico da controllare."
+    },
+    {
+      "start": 144.72,
+      "end": 147.26,
+      "text": "E Pisa lo sapeva molto bene."
+    },
+    {
+      "start": 147.5,
+      "end": 148.77,
+      "text": "Poi arrivò Firenze."
+    },
+    {
+      "start": 149.01,
+      "end": 153.67,
+      "text": "Nel 1406, dopo mesi di assedio, Vicopisano cadde in mano fiorentina."
+    },
+    {
+      "start": 153.91,
+      "end": 156.87,
+      "text": "Ma conquistare un luogo è una cosa."
+    },
+    {
+      "start": 157.11,
+      "end": 159.23,
+      "text": "Riuscire a mantenerlo è un’altra."
+    },
+    {
+      "start": 159.47,
+      "end": 163.7,
+      "text": "Così, nel 1435, mi affidarono un incarico tutt’altro che modesto:"
+    },
+    {
+      "start": 163.94,
+      "end": 169.45,
+      "text": "trasformare quel castello in una fortezza capace di resistere a un nuovo assedio."
+    },
+    {
+      "start": 169.69,
+      "end": 171.81,
+      "text": "Mura, torri, camminamenti, ponti levatoi..."
+    },
+    {
+      "start": 172.05,
+      "end": 173.74,
+      "text": "C’era parecchio da fare."
+    },
+    {
+      "start": 173.98,
+      "end": 176.52,
+      "text": "Ma di questo parleremo tra poco."
+    },
+    {
+      "start": 176.76,
+      "end": 180.57,
+      "text": "Prima, fermiamoci davanti alla torre che avete di fronte."
+    },
+    {
+      "start": 180.81,
+      "end": 183.78,
+      "text": "Oggi è chiamata Torre delle Quattro Porte."
+    },
+    {
+      "start": 184.02,
+      "end": 188.25,
+      "text": "su ciascuno dei suoi quattro lati si apre un passaggio."
+    },
+    {
+      "start": 188.49,
+      "end": 189.34,
+      "text": "Quattro archi."
+    },
+    {
+      "start": 189.58,
+      "end": 190.43,
+      "text": "Quattro direzioni."
+    },
+    {
+      "start": 190.67,
+      "end": 192.36,
+      "text": "Una soluzione piuttosto insolita."
+    },
+    {
+      "start": 192.6,
+      "end": 201.5,
+      "text": "La costruzione era contemporaneamente una torre di guardia, una porta d’ingresso al castello e un punto di passaggio lungo le mura."
+    },
+    {
+      "start": 201.74,
+      "end": 207.24,
+      "text": "Ma prima che mi attribuiate anche questa torre, è meglio precisare una cosa."
+    },
+    {
+      "start": 207.48,
+      "end": 209.18,
       "text": "Non l’ho costruita io."
     },
     {
-      "start": 122.36,
-      "end": 129.18,
-      "text": "Era qui molto prima del mio arrivo, Le opere di cui vantarmi del resto non mi mancano."
+      "start": 209.42,
+      "end": 212.38,
+      "text": "Era qui molto prima del mio arrivo."
     },
     {
-      "start": 129.38,
-      "end": 134.8,
-      "text": "Le parti più antiche della torre risalgono alla fine del XII secolo."
+      "start": 212.62,
+      "end": 216.86,
+      "text": "Le opere di cui vantarmi, del resto, non mi mancano."
     },
     {
-      "start": 135.08,
-      "end": 143.24,
-      "text": "Nel tempo venne danneggiata, riparata e modificata più volte, tanto che nella muratura si possono"
+      "start": 217.1,
+      "end": 222.18,
+      "text": "Le parti più antiche della torre risalgono alla fine del dodicesimo secolo."
     },
     {
-      "start": 143.24,
-      "end": 145.58,
-      "text": "Riconoscere diverse fasi costruttive."
+      "start": 222.42,
+      "end": 226.23,
+      "text": "Nel tempo venne danneggiata, riparata e modificata più volte."
     },
     {
-      "start": 146.3,
-      "end": 147.98,
-      "text": "Guardatela con attenzione."
+      "start": 226.47,
+      "end": 231.98,
+      "text": "E se la guardate con attenzione, potete ancora leggere queste trasformazioni nella muratura."
     },
     {
-      "start": 148.3,
-      "end": 154.4,
+      "start": 232.22,
+      "end": 238.57,
       "text": "Nella parte inferiore domina il verrucano, la pietra che incontreremo spesso durante il nostro percorso."
     },
     {
-      "start": 154.4,
-      "end": 157.3,
+      "start": 238.81,
+      "end": 241.77,
       "text": "Più in alto compare invece il laterizio."
     },
     {
-      "start": 157.48,
-      "end": 163.54,
-      "text": "Non sono soltanto materiali diversi, sono momenti diversi della vita della torre."
+      "start": 242.01,
+      "end": 244.13,
+      "text": "Non sono soltanto materiali diversi."
     },
     {
-      "start": 163.64,
-      "end": 169.08,
-      "text": "Ed ecco il primo consiglio che posso darvi da esperto architetto seppur un po’datato."
+      "start": 244.37,
+      "end": 247.33,
+      "text": "Sono momenti diversi della vita della torre."
     },
     {
-      "start": 169.5,
-      "end": 175.86,
-      "text": "Quando osservate un edificio antico non domandatevi soltanto quando sia stato costruito."
+      "start": 247.57,
+      "end": 251.39,
+      "text": "E, a quanto vedo, nemmeno Vicopisano lo ha fatto."
     },
     {
-      "start": 176.34,
-      "end": 184.68,
-      "text": "Una costruzione non attraversa secoli di storia rimanendo perfettamente identica e a quanto vedo nemmeno"
-    },
-    {
-      "start": 184.68,
-      "end": 186.0,
-      "text": "Vicopisano lo ha fatto."
-    },
-    {
-      "start": 186.4,
-      "end": 188.18,
+      "start": 251.63,
+      "end": 253.32,
       "text": "Per questo sono tornato."
     },
     {
-      "start": 188.5,
-      "end": 196.1,
-      "text": "Voglio scoprire che cosa resta della città che conobbi, osservare come è cambiata e mostrarvi le ragioni"
+      "start": 253.56,
+      "end": 259.07,
+      "text": "Voglio capire che cosa resta della città che conobbi, osservare come è cambiata..."
     },
     {
-      "start": 196.1,
-      "end": 203.88,
-      "text": "Nascoste dietro alcune delle sue costruzioni, i materiali, i percorsi e naturalmente le difese."
+      "start": 259.31,
+      "end": 263.54,
+      "text": "e mostrarvi le ragioni nascoste dietro alcune delle sue costruzioni."
     },
     {
-      "start": 204.32,
-      "end": 206.36,
+      "start": 263.78,
+      "end": 265.48,
       "text": "Da qui possiamo cominciare."
     },
     {
-      "start": 207.18,
-      "end": 209.44,
+      "start": 265.72,
+      "end": 268.68,
       "text": "Attraversate la torre ed entrate nel borgo."
     },
     {
-      "start": 209.86,
-      "end": 214.76,
-      "text": "Alla prossima tappa incontreremo la torre e il camminamento del soccorso."
+      "start": 268.92,
+      "end": 273.58,
+      "text": "Alla prossima tappa incontreremo la Torre e il Camminamento del Soccorso."
     },
     {
-      "start": 215.2,
-      "end": 222.88,
-      "text": "Quella sì appartiene al sistema che progettai per Vicopisano e dopo quasi seicento anni è ancora"
+      "start": 273.82,
+      "end": 277.63,
+      "text": "Quella sì, appartiene al sistema che progettai per Vicopisano."
     },
     {
-      "start": 222.88,
-      "end": 228.3,
-      "text": "Perfettamente riconoscibile, permettetemi di considerarla una piccola soddisfazione."
+      "start": 277.87,
+      "end": 281.68,
+      "text": "E dopo quasi seicento anni è ancora perfettamente riconoscibile."
+    },
+    {
+      "start": 281.92,
+      "end": 284.46,
+      "text": "Permettetemi di considerarla una piccola soddisfazione."
+    },
+    {
+      "start": 284.7,
+      "end": 289.36,
+      "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
+    },
+    {
+      "start": 289.6,
+      "end": 292.81,
+      "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
   ]
 }

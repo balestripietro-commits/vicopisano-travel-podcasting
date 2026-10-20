@@ -1,202 +1,297 @@
 {
   "version": 1,
-  "status": "ready-for-review",
+  "status": "estimated-timing-review-required",
   "language": "it",
   "stop": 3,
   "audio": {
     "source": "audio/it/03_palazzo_pretorio.mp3",
-    "masterWav": "https://drive.google.com/file/d/1MjW2t8viI1BBIpiXBvpjuosN6Rta2hgX/view",
-    "duration": 224.395
+    "duration": 258.638
   },
   "editorialScript": {
-    "source": "https://docs.google.com/document/d/1oFyFKo8T5tyMboP4RfcmVvIXmr4bYTTG/edit",
-    "version": "copione definitivo aggiornato 2026-10-08"
+    "source": "Drive Delivering/Vicopisano/Copy-Tappe",
+    "version": "copione aggiornato, tracce 2026-10-19"
   },
   "alignment": {
-    "engine": "Faster-Whisper large-v3-turbo (CTranslate2, int8, locale)",
-    "method": "Trascrizione dal WAV master in italiano, con timestamp parola per parola; confronto con copione approvato dell’8 ottobre e trascrizione precedente.",
+    "engine": "approved-script timing estimate",
+    "method": "Estimated from approved copy and MP3 duration; phrase timing is proportional to word count.",
     "reviewRequired": true,
-    "visibleTextRule": "Seguire il parlato effettivo; normalizzare solo ortografia, numeri e toponimi ufficiali; non inserire parole non riconosciute senza verifica d’ascolto."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
   },
-  "normalizations": [
-    "Vico Pisano → Vicopisano",
-    "50 → cinquanta"
-  ],
   "segments": [
     {
-      "start": 0.0,
-      "end": 2.14,
-      "text": "Eccoci davanti al palazzo pretorio."
+      "start": 0,
+      "end": 3.95,
+      "text": "Per un momento, lasciamo da parte le mie fortificazioni."
     },
     {
-      "start": 2.44,
-      "end": 7.64,
-      "text": "Beh, questo edificio non è opera mia, ma non per questo è meno interessante."
+      "start": 4.19,
+      "end": 7.27,
+      "text": "Davanti a voi c’è il Palazzo Pretorio."
     },
     {
-      "start": 8.1,
-      "end": 14.58,
-      "text": "Anzi, la sua parte più antica risale agli anni tra il XII e il XIII secolo."
+      "start": 7.51,
+      "end": 10.58,
+      "text": "No, questo edificio non è opera mia."
     },
     {
-      "start": 15.2,
-      "end": 24.7,
-      "text": "Guardate la facciata, i grandi pilastri, gli archi a sesto acuto e quella pietra giallo-ocra che qui chiamano Verrucano."
+      "start": 10.82,
+      "end": 19.16,
+      "text": "La sua parte più antica risale agli anni tra il dodicesimo e il tredicesimo secolo, prima del mio arrivo."
     },
     {
-      "start": 24.98,
-      "end": 31.7,
-      "text": "Una costruzione non attraversa secoli di storia, rimanendo perfettamente identica, ve l'avevo detto."
+      "start": 19.4,
+      "end": 28.62,
+      "text": "Guardate la facciata: i grandi pilastri, gli archi a sesto acuto e quella pietra giallo-ocra che ormai dovreste cominciare a riconoscere."
     },
     {
-      "start": 32.1,
-      "end": 47.82,
-      "text": "La sua funzione originaria non è del tutto certa, è possibile che fosse legato al potere esercitato su Vicopisano dagli arcivescovi pisani, ma la sua storia diventa più chiara dopo la conquista fiorentina del 1406."
+      "start": 28.86,
+      "end": 29.74,
+      "text": "Il verrucano."
     },
     {
-      "start": 48.16,
-      "end": 54.66,
-      "text": "Pochi anni più tardi, nel 1411, l'edificio venne scelto come sede del vicario."
+      "start": 29.98,
+      "end": 34.37,
+      "text": "Una costruzione non attraversa secoli di storia rimanendo perfettamente identica."
     },
     {
-      "start": 55.36,
-      "end": 57.82,
-      "text": "E forse è meglio spiegare chi fosse."
+      "start": 34.61,
+      "end": 35.93,
+      "text": "Ve l’avevo detto."
     },
     {
-      "start": 58.12,
-      "end": 64.14,
-      "text": "Il vicario non era il sindaco del paese, era il rappresentante del governo fiorentino."
+      "start": 36.17,
+      "end": 39.68,
+      "text": "E questo Palazzo ne è un ottimo esempio."
     },
     {
-      "start": 64.74,
-      "end": 69.3,
-      "text": "Amministrava il territorio ed esercitava la giustizia in nome di Firenze."
+      "start": 39.92,
+      "end": 43.87,
+      "text": "La sua funzione originaria non è del tutto certa."
     },
     {
-      "start": 69.56,
-      "end": 75.6,
-      "text": "Da quel momento il palazzo ospitò i suoi uffici, la sua residenza e anche le carceri."
+      "start": 44.11,
+      "end": 49.82,
+      "text": "È possibile che fosse legato al potere esercitato su Vicopisano dagli arcivescovi pisani."
     },
     {
-      "start": 76.12,
-      "end": 86.12,
-      "text": "Insomma, nello stesso edificio si amministrava il territorio, si esercitava la giustizia e, quando necessario, si chiudeva qualcuno a chiave."
+      "start": 50.06,
+      "end": 56.21,
+      "text": "Ma la sua storia diventa molto più chiara dopo la conquista fiorentina del 1406."
     },
     {
-      "start": 86.38,
-      "end": 91.16,
-      "text": "Una soluzione piuttosto efficiente, forse fin troppo."
+      "start": 56.45,
+      "end": 62.15,
+      "text": "Pochi anni più tardi, nel 1411, l’edificio venne scelto come sede del Vicario."
     },
     {
-      "start": 91.34,
-      "end": 96.2,
-      "text": "Ma adesso smettete per un momento di guardare soltanto la struttura."
+      "start": 62.39,
+      "end": 65.91,
+      "text": "Il Vicario non era il sindaco del paese."
     },
     {
-      "start": 96.82,
-      "end": 100.14,
-      "text": "Osservate gli stemmi applicati sulle pareti."
+      "start": 66.15,
+      "end": 73.61,
+      "text": "Era il rappresentante del governo fiorentino: amministrava il territorio ed esercitava la giustizia in nome di Firenze."
     },
     {
-      "start": 100.6,
-      "end": 107.18,
-      "text": "Nel palazzo se ne conservano quasi cinquanta, realizzati in marmo, pietra serena e maiolica."
+      "start": 73.85,
+      "end": 79.12,
+      "text": "Da quel momento il Palazzo ospitò i suoi uffici, la sua residenza..."
     },
     {
-      "start": 107.78,
-      "end": 118.02,
-      "text": "Alcuni provengono perfino dalle botteghe fiorentine dei della Robbia, celebre famiglia di scultori fiorentini, famosa per le terrecotte invetriate."
+      "start": 79.36,
+      "end": 81.12,
+      "text": "e anche le carceri."
     },
     {
-      "start": 118.26,
-      "end": 125.96,
-      "text": "A partire dal Quattrocento divenne infatti consuetudine applicare sulle pareti lo stemma del vicario."
+      "start": 81.36,
+      "end": 87.94,
+      "text": "Insomma, nello stesso edificio si amministrava il territorio, si esercitava la giustizia e, quando necessario..."
     },
     {
-      "start": 126.16,
-      "end": 130.8,
-      "text": "Un nome, una famiglia, il ricordo del periodo trascorso qui."
+      "start": 88.18,
+      "end": 90.38,
+      "text": "si chiudeva qualcuno a chiave."
     },
     {
-      "start": 131.0,
-      "end": 136.28,
-      "text": "E questi stemmi mi raccontano anche quello che è accaduto dopo il mio tempo."
+      "start": 90.62,
+      "end": 93.69,
+      "text": "Adesso, però, guardate gli stemmi sulle pareti."
     },
     {
-      "start": 136.66,
-      "end": 141.46,
-      "text": "Dopo la Repubblica Fiorentina, arrivarono i medici, poi Lorena."
+      "start": 93.93,
+      "end": 100.96,
+      "text": "Nel Palazzo se ne conservano quasi cinquanta, alcuni provenienti perfino dalle botteghe fiorentine dei Della Robbia."
     },
     {
-      "start": 141.68,
-      "end": 149.62,
-      "text": "Il potere del vicario venne progressivamente ridotto, finché il vicariato fu abolito nel 1848."
+      "start": 101.2,
+      "end": 105.59,
+      "text": "Dal Quattrocento, infatti, ogni Vicario lasciava qui il proprio stemma."
     },
     {
-      "start": 150.3,
-      "end": 153.48,
-      "text": "Quattro secoli di governo riassunti su una parete."
+      "start": 105.83,
+      "end": 106.7,
+      "text": "Un nome."
     },
     {
-      "start": 154.0,
-      "end": 164.6,
-      "text": "Io, arrivando davanti a un edificio, cerco immediatamente di capire come regga, come sia stato costruito e, quali trasformazioni abbia subito."
+      "start": 106.94,
+      "end": 107.82,
+      "text": "Una famiglia."
     },
     {
-      "start": 164.86,
-      "end": 167.38,
-      "text": "È un'abitudine professionale."
+      "start": 108.06,
+      "end": 111.14,
+      "text": "Il ricordo del periodo trascorso a Vicopisano."
     },
     {
-      "start": 167.56,
-      "end": 173.74,
-      "text": "Ma questi stemmi raccontano qualcosa che non si misura con una squadra o con un compasso."
+      "start": 111.38,
+      "end": 115.77,
+      "text": "E questi stemmi, per me, hanno qualcosa di particolarmente interessante."
     },
     {
-      "start": 174.46,
-      "end": 181.94,
-      "text": "Raccontano le persone che hanno governato Vicopisano e il modo in cui questo luogo è cambiato dopo il mio tempo."
+      "start": 116.01,
+      "end": 120.4,
+      "text": "Mi raccontano ciò che è accaduto dopo il mio tempo."
     },
     {
-      "start": 182.22,
-      "end": 187.86,
-      "text": "E, se poteste entrare nelle antiche carceri, trovereste altre tracce ancora."
+      "start": 120.64,
+      "end": 123.71,
+      "text": "Dopo la Repubblica fiorentina arrivarono i Medici."
     },
     {
-      "start": 188.68,
-      "end": 195.16,
-      "text": "Testimonianze del passaggio di persone che, per ragioni ben diverse, hanno abitato queste stanze."
+      "start": 123.95,
+      "end": 125.27,
+      "text": "Poi i Lorena."
     },
     {
-      "start": 195.46,
-      "end": 196.86,
-      "text": "Devo ammetterlo."
+      "start": 125.51,
+      "end": 131.22,
+      "text": "Il potere del Vicario venne progressivamente ridotto, fino all’abolizione del Vicariato nel 1848."
     },
     {
-      "start": 197.16,
-      "end": 206.72,
-      "text": "Sarebbe sciocco tornare a Vicopisano, tediarvi soltanto con le mie opere e non accorgermi di tutto quello che il paese ha vissuto senza di me."
+      "start": 131.46,
+      "end": 133.21,
+      "text": "Quattro secoli di governo..."
     },
     {
-      "start": 207.22,
-      "end": 209.36,
-      "text": "Adesso però continuiamo."
+      "start": 133.45,
+      "end": 135.21,
+      "text": "riassunti su una parete."
     },
     {
-      "start": 209.6,
-      "end": 214.64,
-      "text": "La prossima tappa ci porterà finalmente davanti alla celebre Rocca."
+      "start": 135.45,
+      "end": 139.4,
+      "text": "Ma nel frattempo non cambiava soltanto chi governava Vicopisano."
     },
     {
-      "start": 215.02,
-      "end": 220.86,
-      "text": "Lì potrò tornare a parlarvi di architettura militare con piena cognizione di causa."
+      "start": 139.64,
+      "end": 141.4,
+      "text": "Cambiava perfino il paesaggio."
     },
     {
-      "start": 221.26,
-      "end": 223.72,
-      "text": "Concedetemi ancora un po' di legittimo orgoglio."
+      "start": 141.64,
+      "end": 149.98,
+      "text": "Vi ricordate l’Arno e la Serezza, i due corsi d’acqua di cui vi ho parlato all’inizio del nostro percorso?"
+    },
+    {
+      "start": 150.22,
+      "end": 154.61,
+      "text": "Quando arrivai io, l’Arno scorreva molto più vicino al borgo."
+    },
+    {
+      "start": 154.85,
+      "end": 166.27,
+      "text": "Formava una grande ansa e, insieme alla Serezza, aveva contribuito per secoli a rendere Vicopisano un luogo strategico per i commerci, i collegamenti e la difesa."
+    },
+    {
+      "start": 166.51,
+      "end": 170.02,
+      "text": "Poi, nel Cinquecento, i Medici decisero di intervenire."
+    },
+    {
+      "start": 170.26,
+      "end": 179.92,
+      "text": "A partire dal 1560, il corso dell’Arno venne rettificato e portato più lontano dalle mura, verso il tracciato che segue ancora oggi."
+    },
+    {
+      "start": 180.16,
+      "end": 190.69,
+      "text": "Anche la Serezza venne modificata per raggiungere il nuovo corso del fiume e continuare a far defluire le acque provenienti dal Lago di Bientina."
+    },
+    {
+      "start": 190.93,
+      "end": 192.25,
+      "text": "In poche parole..."
+    },
+    {
+      "start": 192.49,
+      "end": 198.64,
+      "text": "l’acqua che aveva contribuito alla fortuna di Vicopisano non passava più dove passava prima."
+    },
+    {
+      "start": 198.88,
+      "end": 202.39,
+      "text": "E questo cambiò anche il ruolo del borgo."
+    },
+    {
+      "start": 202.63,
+      "end": 204.83,
+      "text": "L’agricoltura acquistò sempre maggiore importanza."
+    },
+    {
+      "start": 205.07,
+      "end": 212.97,
+      "text": "Ma Vicopisano continuò a essere un importante centro amministrativo, sede del Vicario, del tribunale e della cancelleria fiorentina."
+    },
+    {
+      "start": 213.21,
+      "end": 214.09,
+      "text": "Devo ammetterlo:"
+    },
+    {
+      "start": 214.33,
+      "end": 219.16,
+      "text": "per uno come me, abituato a modificare mura, torri e percorsi..."
+    },
+    {
+      "start": 219.4,
+      "end": 226.86,
+      "text": "vedere che qui si è arrivati a modificare il corso di un fiume fa un certo effetto."
+    },
+    {
+      "start": 227.1,
+      "end": 231.49,
+      "text": "Evidentemente la storia non lascia il segno soltanto sugli edifici."
+    },
+    {
+      "start": 231.73,
+      "end": 234.81,
+      "text": "A volte lo lascia sul territorio intero."
+    },
+    {
+      "start": 235.05,
+      "end": 239.88,
+      "text": "Sarebbe sciocco tornare a Vicopisano, tediarvi soltanto con le mie opere..."
+    },
+    {
+      "start": 240.12,
+      "end": 246.26,
+      "text": "e non accorgermi di tutto quello che il paese ha vissuto senza di me."
+    },
+    {
+      "start": 246.5,
+      "end": 250.89,
+      "text": "Adesso, però, possiamo tornare a qualcosa che conosco decisamente meglio."
+    },
+    {
+      "start": 251.13,
+      "end": 255.08,
+      "text": "La prossima tappa ci porterà finalmente davanti alla Rocca."
+    },
+    {
+      "start": 255.32,
+      "end": 258.64,
+      "text": "Concedetemi ancora un po’ di legittimo orgoglio.—"
     }
   ]
 }

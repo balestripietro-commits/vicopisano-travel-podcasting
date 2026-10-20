@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "status": "estimated-timing-review-required",
+  "language": "it",
+  "stop": 5,
+  "audio": {
+    "source": "audio/it/05_torre_orologio.mp3",
+    "duration": 165.016
+  },
+  "editorialScript": {
+    "source": "Drive Delivering/Vicopisano/Copy-Tappe",
+    "version": "copione aggiornato, tracce 2026-10-19"
+  },
+  "alignment": {
+    "engine": "approved-script timing estimate",
+    "method": "Estimated from approved copy and MP3 duration; phrase timing is proportional to word count.",
+    "reviewRequired": true,
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+  },
+  "segments": [
+    {
+      "start": 0,
+      "end": 2.89,
+      "text": "Scendendo dalla Rocca, torniamo dentro il borgo."
+    },
+    {
+      "start": 3.13,
+      "end": 6.85,
+      "text": "E questa volta vi consiglio di alzare lo sguardo."
+    },
+    {
+      "start": 7.09,
+      "end": 9.98,
+      "text": "Davanti a voi c’è la Torre dell’Orologio."
+    },
+    {
+      "start": 10.22,
+      "end": 13.93,
+      "text": "Da lontano è la mia Rocca a dominare Vicopisano."
+    },
+    {
+      "start": 14.17,
+      "end": 21.6,
+      "text": "Ma quando si cammina tra queste strade, soprattutto lungo Via Lante, è difficile non accorgersi di questa torre."
+    },
+    {
+      "start": 21.84,
+      "end": 22.67,
+      "text": "Alta, stretta..."
+    },
+    {
+      "start": 22.91,
+      "end": 24.15,
+      "text": "e decisamente particolare."
+    },
+    {
+      "start": 24.39,
+      "end": 26.45,
+      "text": "E, prima che lo chiediate:"
+    },
+    {
+      "start": 26.69,
+      "end": 29.17,
+      "text": "no, nemmeno questa l’ho costruita io."
+    },
+    {
+      "start": 29.41,
+      "end": 36.43,
+      "text": "La sua struttura originaria risale al dodicesimo-tredicesimo secolo, quindi era già qui ben prima del mio arrivo."
+    },
+    {
+      "start": 36.67,
+      "end": 44.51,
+      "text": "Probabilmente nacque come torre militare, per controllare la strada che conduceva verso l’antico castello, nella zona del Palazzo Pretorio."
+    },
+    {
+      "start": 44.75,
+      "end": 45.99,
+      "text": "Guardatela con attenzione."
+    },
+    {
+      "start": 46.23,
+      "end": 48.71,
+      "text": "È costruita quasi interamente in verrucano."
+    },
+    {
+      "start": 48.95,
+      "end": 54.73,
+      "text": "E lungo le pareti potete ancora vedere una serie di grandi mensole in pietra."
+    },
+    {
+      "start": 54.97,
+      "end": 67.36,
+      "text": "Nel Medioevo sostenevano gli sporti: strutture di legno che si sviluppavano all’esterno della torre e alle quali si accedeva attraverso quei piccoli ingressi ad arco che potete vedere ancora oggi."
+    },
+    {
+      "start": 67.6,
+      "end": 78.33,
+      "text": "In una torre nata con funzione militare, avere spazi aggettanti verso l’esterno permetteva anche di controllare e difendere meglio ciò che accadeva ai piedi delle mura."
+    },
+    {
+      "start": 78.57,
+      "end": 82.29,
+      "text": "Poi, però, la torre smise di servire alla difesa."
+    },
+    {
+      "start": 82.53,
+      "end": 84.18,
+      "text": "E invece di abbatterla..."
+    },
+    {
+      "start": 84.42,
+      "end": 85.24,
+      "text": "la trasformarono."
+    },
+    {
+      "start": 85.48,
+      "end": 89.61,
+      "text": "La sua altezza la rendeva perfetta per un nuovo compito:"
+    },
+    {
+      "start": 89.85,
+      "end": 91.09,
+      "text": "diventare un campanile."
+    },
+    {
+      "start": 91.33,
+      "end": 94.63,
+      "text": "E, qualche secolo più tardi, arrivò anche l’orologio."
+    },
+    {
+      "start": 94.87,
+      "end": 101.89,
+      "text": "La sua presenza è documentata almeno dal Cinquecento, mentre il meccanismo conservato ancora oggi risale al Settecento."
+    },
+    {
+      "start": 102.13,
+      "end": 103.37,
+      "text": "Una torre militare."
+    },
+    {
+      "start": 103.61,
+      "end": 104.85,
+      "text": "Poi un campanile."
+    },
+    {
+      "start": 105.09,
+      "end": 106.33,
+      "text": "Poi un orologio."
+    },
+    {
+      "start": 106.57,
+      "end": 108.22,
+      "text": "Devo ammettere che approvo."
+    },
+    {
+      "start": 108.46,
+      "end": 114.65,
+      "text": "Un buon edificio non deve necessariamente fare per sempre ciò per cui era stato costruito."
+    },
+    {
+      "start": 114.89,
+      "end": 119.02,
+      "text": "Deve riuscire a continuare a servire chi gli vive intorno."
+    },
+    {
+      "start": 119.26,
+      "end": 131.24,
+      "text": "Oggi, dopo un importante restauro, la torre è visitabile ed è possibile salire fino alla cella campanaria, da cui si apre la vista su Vicopisano e sul Monte Pisano."
+    },
+    {
+      "start": 131.48,
+      "end": 136.02,
+      "text": "Ma forse la cosa che mi incuriosisce di più è un’altra."
+    },
+    {
+      "start": 136.26,
+      "end": 139.97,
+      "text": "Una costruzione nata per controllare il passaggio degli uomini..."
+    },
+    {
+      "start": 140.21,
+      "end": 143.93,
+      "text": "oggi serve soprattutto a segnare il passaggio del tempo."
+    },
+    {
+      "start": 144.17,
+      "end": 145.82,
+      "text": "Non male, come trasformazione."
+    },
+    {
+      "start": 146.06,
+      "end": 147.71,
+      "text": "Adesso continuiamo a scendere."
+    },
+    {
+      "start": 147.95,
+      "end": 152.49,
+      "text": "La prossima tappa ci porterà davanti alla Pieve di Santa Maria."
+    },
+    {
+      "start": 152.73,
+      "end": 156.86,
+      "text": "Lì lasceremo, almeno per qualche minuto, torri, mura e fortificazioni"
+    },
+    {
+      "start": 157.1,
+      "end": 161.65,
+      "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
+    },
+    {
+      "start": 161.89,
+      "end": 165.02,
+      "text": "Quando siete pronti, raggiungete la prossima tappa."
+    }
+  ]
+}

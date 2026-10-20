@@ -13,53 +13,7 @@ const tappe = [
         bandiera: "🇮🇹",
         fileAudio: "audio/it/01_torre_quattro_porte.mp3",
         audioDisponibile: true,
-        trascrizione: `Dopo quasi seicento anni, sono finalmente tornato a Vicopisano.
-E devo ammettere che ritrovarla così… tranquilla mi fa un certo effetto.
-Quando arrivai qui, nel 1435, Firenze mi aveva affidato un incarico tutt’altro che modesto: trasformare un castello conquistato da poco in una fortezza capace di resistere a un nuovo assedio.
-Mura, torri, camminamenti, ponti levatoi…
-C’era parecchio da fare.
-Oggi, invece, vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte.
-Direi che, da questo punto di vista, le cose sono decisamente migliorate.
-Ma non mi sono ancora presentato.
-Io sono Filippo Brunelleschi.
-Beh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze.
-Ma qui a Vicopisano vorrei mostrarvi un’altra parte del mio lavoro.
-Quella forse meno conosciuta, ma non per questo meno ingegnosa.
-Prima, però, fermiamoci davanti a questa torre.
-Oggi è chiamata Torre delle Quattro Porte.
-E non occorre essere architetti, o geni del Rinascimento, per capire da dove venga il nome: su ciascuno dei suoi quattro lati si apre un passaggio.
-Quattro archi.
-Quattro direzioni.
-Una soluzione piuttosto insolita.
-La costruzione era contemporaneamente una torre di guardia, una porta d’ingresso al castello e un punto di passaggio lungo le mura.
-Sul lato settentrionale sono ancora visibili i grandi cardini in pietra sui quali ruotavano le antiche porte.
-Sono trascorsi secoli, eppure sono ancora lì.
-Questo, credetemi, è sempre un buon segno.
-Ma prima che mi attribuiate anche questa torre, è meglio precisare una cosa.
-Non l’ho costruita io.
-Era qui molto prima del mio arrivo.
-Le opere di cui vantarmi, del resto, non mi mancano.
-Le parti più antiche della torre risalgono alla fine del XII secolo. Nel tempo venne danneggiata, riparata e modificata più volte, tanto che nella muratura si possono riconoscere diverse fasi costruttive.
-Guardatela con attenzione.
-Nella parte inferiore domina il verrucano, la pietra che incontreremo spesso durante il nostro percorso.
-Più in alto compare invece il laterizio.
-Non sono soltanto materiali diversi.
-Sono momenti diversi della vita della torre.
-Ed ecco il primo consiglio che posso darvi, da esperto architetto, seppur un po’ datato.
-Quando osservate un edificio antico, non domandatevi soltanto quando sia stato costruito.
-Una costruzione non attraversa secoli di storia rimanendo perfettamente identica.
-E, a quanto vedo, nemmeno Vicopisano lo ha fatto.
-Per questo sono tornato.
-Voglio scoprire che cosa resta della città che conobbi, osservare come è cambiata e mostrarvi le ragioni nascoste dietro alcune delle sue costruzioni.
-I materiali.
-I percorsi.
-E, naturalmente, le difese.
-Da qui possiamo cominciare.
-Attraversate la torre ed entrate nel borgo.
-Alla prossima tappa incontreremo la Torre e il Camminamento del Soccorso.
-Quella sì, appartiene al sistema che progettai per Vicopisano.
-E dopo quasi seicento anni è ancora perfettamente riconoscibile.
-Permettetemi di considerarla una piccola soddisfazione.`,
+        trascrizione: "Dopo quasi seicento anni, sono finalmente tornato a Vicopisano.\nE devo ammettere che ritrovarla così tranquilla mi fa un certo effetto.\nOggi vedo strade curate, persone che passeggiano e porte che rimangono tranquillamente aperte.\nQuando arrivai io... la situazione era un po’ diversa.\nMa non mi sono ancora presentato.\nIo sono Filippo Brunelleschi.\nBeh, forse mi conoscete per la cupola di Santa Maria del Fiore, il Duomo di Firenze.\nMa quasi seicento anni fa Firenze mi mandò anche qui, con un compito ben preciso:\nrendere Vicopisano molto più difficile da conquistare.\nE allora, prima di mostrarvi quello che feci, vale la pena farsi una domanda.\nPerché proprio Vicopisano?\nPerché Firenze teneva tanto a controllare e fortificare un borgo che oggi appare così tranquillo?\nPer capirlo dobbiamo tornare parecchio indietro.\nMolto prima di me.\nQuesto colle era probabilmente frequentato già in epoca etrusca: nel territorio sono stati ritrovati materiali risalenti almeno al quinto secolo avanti Cristo.\nMa è nel Medioevo che cominciamo a riconoscere il borgo che sarebbe diventato Vicopisano.\nE all’epoca aveva persino un altro nome.\nNei documenti compare Auseris Sala, divenuto poi Auserissola.\nPiù in basso, vicino alla Pieve che incontreremo durante il nostro percorso, esisteva invece un insediamento chiamato Vicus.\nCon il tempo, i due nuclei finirono per unirsi.\nE nei documenti compare un nuovo nome: Vicus Auserissola.\nMa c’è soprattutto una cosa che, guardandovi intorno oggi, è difficile immaginare.\nL’acqua.\nPer secoli questo colle si trovò in una posizione eccezionale, vicino alla confluenza di due importanti corsi d’acqua.\nDa una parte l’Arno, che conduceva verso Pisa e il mare.\nDall’altra l’Auser, chiamato anche Serezza, che permetteva di raggiungere il Lago di Bientina e, da lì, la Lucchesia.\nAcqua significava collegamenti.\nCommerci.\nMa significava anche difesa.\nI fiumi contribuivano a proteggere il castello, alimentandone i fossati e rendendo molto più difficile avvicinarsi alle mura.\nInsomma, Vicopisano non era semplicemente un piccolo borgo sopra una collina.\nEra un punto strategico da controllare.\nE Pisa lo sapeva molto bene.\nPoi arrivò Firenze.\nNel 1406, dopo mesi di assedio, Vicopisano cadde in mano fiorentina.\nMa conquistare un luogo è una cosa.\nRiuscire a mantenerlo è un’altra.\nCosì, nel 1435, mi affidarono un incarico tutt’altro che modesto:\ntrasformare quel castello in una fortezza capace di resistere a un nuovo assedio.\nMura, torri, camminamenti, ponti levatoi...\nC’era parecchio da fare.\nMa di questo parleremo tra poco.\nPrima, fermiamoci davanti alla torre che avete di fronte.\nOggi è chiamata Torre delle Quattro Porte.\nsu ciascuno dei suoi quattro lati si apre un passaggio.\nQuattro archi.\nQuattro direzioni.\nUna soluzione piuttosto insolita.\nLa costruzione era contemporaneamente una torre di guardia, una porta d’ingresso al castello e un punto di passaggio lungo le mura.\nMa prima che mi attribuiate anche questa torre, è meglio precisare una cosa.\nNon l’ho costruita io.\nEra qui molto prima del mio arrivo.\nLe opere di cui vantarmi, del resto, non mi mancano.\nLe parti più antiche della torre risalgono alla fine del dodicesimo secolo.\nNel tempo venne danneggiata, riparata e modificata più volte.\nE se la guardate con attenzione, potete ancora leggere queste trasformazioni nella muratura.\nNella parte inferiore domina il verrucano, la pietra che incontreremo spesso durante il nostro percorso.\nPiù in alto compare invece il laterizio.\nNon sono soltanto materiali diversi.\nSono momenti diversi della vita della torre.\nE, a quanto vedo, nemmeno Vicopisano lo ha fatto.\nPer questo sono tornato.\nVoglio capire che cosa resta della città che conobbi, osservare come è cambiata...\ne mostrarvi le ragioni nascoste dietro alcune delle sue costruzioni.\nDa qui possiamo cominciare.\nAttraversate la torre ed entrate nel borgo.\nAlla prossima tappa incontreremo la Torre e il Camminamento del Soccorso.\nQuella sì, appartiene al sistema che progettai per Vicopisano.\nE dopo quasi seicento anni è ancora perfettamente riconoscibile.\nPermettetemi di considerarla una piccola soddisfazione.\nQuesta traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano. Quando siete pronti, raggiungete la prossima tappa.",
       },
       {
         codice: "EN",
@@ -118,7 +72,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     ],
     durata: "",
     descrizione:
-      "Punto di ingresso simbolico al borgo e apertura dell'itinerario. La torre introduce il tema del percorso: Vicopisano come luogo accogliente oggi, ma nato per controllare, difendere e sorvegliare.",
+      "Apertura storica dell’itinerario: le origini del borgo, il nome Auserissola, la confluenza di Arno e Auser e la Torre delle Quattro Porte introducono il valore strategico di Vicopisano.",
   },
   {
     numero: 2,
@@ -140,7 +94,7 @@ Permettetemi di considerarla una piccola soddisfazione.`,
     audioDisponibile: true,
     durata: "",
     descrizione:
-      "Luogo del potere civile e amministrativo. Dopo la guerra e la conquista, il controllo del borgo passa anche attraverso istituzioni, giustizia e governo.",
+      "Sede del Vicario e della giustizia fiorentina dopo il 1406. Il racconto segue gli stemmi del Palazzo Pretorio e le trasformazioni dell’Arno e della Serezza.",
   },
   {
     numero: 4,
@@ -154,37 +108,24 @@ Permettetemi di considerarla una piccola soddisfazione.`,
       "Cuore militare dell'itinerario. Qui il racconto si concentra su Brunelleschi, sulla trasformazione del borgo in fortezza e sulla logica della resistenza.",
   },
   {
-    numero: 5,
-    titolo: "Torri Gemelle",
-    latitudine: 43.6999256,
-    longitudine: 10.5842514,
-    fileAudio: "audio/it/05_torri_gemelle.mp3",
-    audioDisponibile: true,
-    durata: "",
-    descrizione:
-      "Tappa dedicata alla presenza diffusa delle torri nel borgo e al ruolo delle strutture verticali come elementi di prestigio, osservazione e difesa.",
+    numero: 5, titolo: "Torre dell’Orologio", latitudine: 43.698767, longitudine: 10.585826,
+    fileAudio: "audio/it/05_torre_orologio.mp3", audioDisponibile: true, durata: "",
+    descrizione: "Torre medievale lungo Via Lante, trasformata da struttura militare in campanile e poi dotata dell’orologio; oggi è visitabile fino alla cella campanaria.",
   },
   {
-    numero: 6,
-    titolo: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    latitudine: 43.7002026,
-    longitudine: 10.5833924,
-    fileAudio: "audio/it/06_parrocchia_santa_maria_san_giovanni.mp3",
-    audioDisponibile: true,
-    durata: "",
-    descrizione:
-      "Tappa di respiro dedicata alla dimensione religiosa e comunitaria di Vicopisano, oltre la sola narrazione militare.",
+    numero: 6, titolo: "Pieve di Santa Maria", latitudine: 43.7002026, longitudine: 10.5833924,
+    fileAudio: "audio/it/06_pieve_santa_maria.mp3", audioDisponibile: true, durata: "",
+    descrizione: "La Pieve romanica, attestata dal 934, racconta la vita religiosa e comunitaria del borgo; custodisce la Deposizione lignea del Duecento e materiali romani reimpiegati.",
   },
   {
-    numero: 7,
-    titolo: "Palazzo Comunale Vicopisano",
-    latitudine: 43.6998526,
-    longitudine: 10.5844138,
-    fileAudio: "audio/it/07_comune_info_point_vicopisano.mp3",
-    audioDisponibile: true,
-    durata: "",
-    descrizione:
-      "Chiusura contemporanea del percorso: dal borgo fortificato al Comune che oggi accoglie, racconta e valorizza la propria storia.",
+    numero: 7, titolo: "Torri Gemelle", latitudine: 43.6999256, longitudine: 10.5842514,
+    fileAudio: "audio/it/07_torri_gemelle.mp3", audioDisponibile: true, durata: "",
+    descrizione: "Due torri del XII secolo, parte della precedente fortificazione pisana; il Palazzo Comunale ne ingloba oggi una parte.",
+  },
+  {
+    numero: 8, titolo: "Palazzo Comunale Vicopisano", latitudine: 43.6998526, longitudine: 10.5844138,
+    fileAudio: "audio/it/08_palazzo_comunale.mp3", audioDisponibile: true, durata: "",
+    descrizione: "Ultima tappa nel cuore del borgo: l’antica Cancelleria è oggi la sede del Comune e resta parte della vita quotidiana di Vicopisano.",
   },
 ];
 
@@ -193,34 +134,20 @@ Permettetemi di considerarla una piccola soddisfazione.`,
 // fixed per stop so each first view can be tuned without depending on Leaflet's
 // bounds correction.
 const mapCameraPresets = {
-  1: {
-    firstTap: { center: [43.700429, 10.5863858], zoom: 17.2 },
-  },
-  2: {
-    firstTap: { center: [43.700899, 10.586717], zoom: 17.2 },
-  },
-  3: {
-    firstTap: { center: [43.700116, 10.587639], zoom: 17.2 },
-  },
-  4: {
-    firstTap: { center: [43.699109, 10.587265], zoom: 17.2 },
-  },
-  5: {
-    // The old center was east of Torri Gemelle and could send its marker off
-    // screen in the standard map. Keep this stop anchored to its real point.
-    firstTap: { center: [43.6999256, 10.5842514], zoom: 17.2 },
-  },
-  6: {
-    firstTap: { center: [43.699894, 10.584224], zoom: 17.2 },
-  },
-  7: {
-    firstTap: { center: [43.700164, 10.583501], zoom: 17.2 },
-  },
+  1: { firstTap: { center: [43.700429, 10.5863858], zoom: 17.2 } },
+  2: { firstTap: { center: [43.700899, 10.586717], zoom: 17.2 } },
+  3: { firstTap: { center: [43.700116, 10.587639], zoom: 17.2 } },
+  4: { firstTap: { center: [43.699109, 10.587265], zoom: 17.2 } },
+  5: { firstTap: { center: [43.698767, 10.585826], zoom: 17.2 } },
+  6: { firstTap: { center: [43.7002026, 10.5833924], zoom: 17.2 } },
+  7: { firstTap: { center: [43.6999256, 10.5842514], zoom: 17.2 } },
+  8: { firstTap: { center: [43.6998526, 10.5844138], zoom: 17.2 } },
+
 };
 
 const stopDescriptions = {
   1: {
-    IT: "Punto di ingresso simbolico al borgo e apertura dell'itinerario. La torre introduce il tema del percorso: Vicopisano come luogo accogliente oggi, ma nato per controllare, difendere e sorvegliare.",
+    IT: "Apertura storica dell’itinerario: le origini del borgo, il nome Auserissola, la confluenza di Arno e Auser e la Torre delle Quattro Porte introducono il valore strategico di Vicopisano.",
     EN: "Symbolic gateway to the village and opening stop of the itinerary. The tower introduces the theme of the route: Vicopisano as a welcoming place today, but originally built to control, defend and watch over the territory.",
     DE: "Symbolischer Zugang zum Ort und Auftakt der Route. Der Turm führt in das zentrale Thema ein: Vicopisano ist heute ein gastfreundlicher Ort, wurde jedoch geschaffen, um zu kontrollieren, zu verteidigen und zu überwachen.",
     FR: "Point d’entrée symbolique du bourg et ouverture de l’itinéraire. La tour introduit le thème du parcours : Vicopisano est aujourd’hui un lieu accueillant, mais il est né pour contrôler, défendre et surveiller.",
@@ -238,7 +165,7 @@ const stopDescriptions = {
     RU: "Остановка посвящена оборонительной системе, связанной с Роккой, и возможности снабжать или поддерживать крепость во время осады.",
   },
   3: {
-    IT: "Luogo del potere civile e amministrativo. Dopo la guerra e la conquista, il controllo del borgo passa anche attraverso istituzioni, giustizia e governo.",
+    IT: "Sede del Vicario e della giustizia fiorentina dopo il 1406. Il racconto segue gli stemmi del Palazzo Pretorio e le trasformazioni dell’Arno e della Serezza.",
     EN: "Place of civil and administrative power. After war and conquest, control of the village also passes through institutions, justice and government.",
     DE: "Ort der zivilen und administrativen Macht. Nach Krieg und Eroberung verläuft die Kontrolle über den Ort auch über Institutionen, Justiz und Regierung.",
     FR: "Lieu du pouvoir civil et administratif. Après la guerre et la conquête, le contrôle du bourg passe aussi par les institutions, la justice et le gouvernement.",
@@ -256,31 +183,40 @@ const stopDescriptions = {
     RU: "Военное сердце маршрута. Здесь повествование сосредоточено на Брунеллески, превращении поселка в крепость и логике сопротивления.",
   },
   5: {
-    IT: "Tappa dedicata alla presenza diffusa delle torri nel borgo e al ruolo delle strutture verticali come elementi di prestigio, osservazione e difesa.",
-    EN: "Stop dedicated to the widespread presence of towers in the village and to the role of vertical structures as symbols of prestige, observation and defense.",
-    DE: "Station über die weit verbreitete Präsenz von Türmen im Ort und über die Rolle vertikaler Bauwerke als Zeichen von Prestige, Beobachtung und Verteidigung.",
-    FR: "Étape consacrée à la présence diffuse des tours dans le bourg et au rôle des structures verticales comme éléments de prestige, d’observation et de défense.",
-    ES: "Etapa dedicada a la presencia extendida de las torres en el pueblo y al papel de las estructuras verticales como elementos de prestigio, observación y defensa.",
-    PT: "Etapa dedicada à presença generalizada das torres na vila e ao papel das estruturas verticais como elementos de prestígio, observação e defesa.",
-    RU: "Остановка посвящена многочисленным башням в поселке и роли вертикальных сооружений как символов престижа, наблюдения и защиты.",
+    IT: "Torre medievale di Via Lante, trasformata da struttura militare in campanile e poi dotata dell’orologio; oggi è visitabile fino alla cella campanaria.",
+    EN: "Medieval tower on Via Lante, transformed from a military structure into a bell tower and later fitted with a clock.",
+    DE: "Mittelalterlicher Turm an der Via Lante, vom Wehrturm zum Glockenturm umgebaut und später mit einer Uhr ausgestattet.",
+    FR: "Tour médiévale de la Via Lante, transformée d’un ouvrage militaire en clocher puis dotée d’une horloge.",
+    ES: "Torre medieval de Via Lante, transformada de estructura militar en campanario y después dotada de reloj.",
+    PT: "Torre medieval da Via Lante, transformada de estrutura militar em campanário e depois equipada com relógio.",
+    RU: "Средневековая башня на Виа-Ланте: военное сооружение стало колокольней, а позднее получило часы.",
   },
   6: {
-    IT: "Tappa di respiro dedicata alla dimensione religiosa e comunitaria di Vicopisano, oltre la sola narrazione militare.",
-    EN: "A breathing-space stop dedicated to the religious and community dimension of Vicopisano, beyond the purely military narrative.",
-    DE: "Eine ruhigere Station über die religiöse und gemeinschaftliche Dimension von Vicopisano, jenseits der rein militärischen Erzählung.",
-    FR: "Étape de respiration consacrée à la dimension religieuse et communautaire de Vicopisano, au-delà du seul récit militaire.",
-    ES: "Etapa de respiro dedicada a la dimensión religiosa y comunitaria de Vicopisano, más allá del relato militar.",
-    PT: "Etapa de respiro dedicada à dimensão religiosa e comunitária de Vicopisano, para além da narrativa militar.",
-    RU: "Спокойная остановка, посвященная религиозной и общественной жизни Vicopisano за пределами военной истории.",
+    IT: "La Pieve romanica, attestata dal 934, racconta la vita religiosa e comunitaria del borgo; custodisce la Deposizione lignea del Duecento.",
+    EN: "The Romanesque church, documented since 934, tells the story of the village’s religious life and preserves a 13th-century wooden Deposition.",
+    DE: "Die seit 934 belegte romanische Kirche erzählt vom religiösen Leben des Ortes und bewahrt eine hölzerne Kreuzabnahme aus dem 13. Jahrhundert.",
+    FR: "Cette église romane, attestée depuis 934, témoigne de la vie du bourg et conserve une Déposition en bois du XIIIe siècle.",
+    ES: "La iglesia románica, documentada desde 934, cuenta la vida del pueblo y conserva un Descendimiento de madera del siglo XIII.",
+    PT: "A igreja românica, documentada desde 934, conta a vida da vila e conserva uma Deposição em madeira do século XIII.",
+    RU: "Романская церковь, известная с 934 года, рассказывает о жизни поселка и хранит деревянную скульптурную группу XIII века.",
   },
   7: {
-    IT: "Chiusura contemporanea del percorso: dal borgo fortificato al Comune che oggi accoglie, racconta e valorizza la propria storia.",
-    EN: "Contemporary conclusion of the route: from the fortified village to the Municipality that today welcomes visitors, tells its story and enhances its heritage.",
-    DE: "Zeitgenössischer Abschluss der Route: vom befestigten Ort zur heutigen Gemeinde, die ihre Geschichte empfängt, erzählt und aufwertet.",
-    FR: "Conclusion contemporaine du parcours : du bourg fortifié à la commune qui accueille aujourd’hui les visiteurs, raconte son histoire et la met en valeur.",
-    ES: "Cierre contemporáneo del recorrido: del pueblo fortificado al Ayuntamiento que hoy acoge, cuenta y pone en valor su historia.",
-    PT: "Encerramento contemporâneo do percurso: da vila fortificada ao Município que hoje acolhe, conta e valoriza a sua história.",
-    RU: "Современное завершение маршрута: от укрепленного поселка к муниципалитету, который сегодня принимает гостей, рассказывает и бережно хранит свою историю.",
+    IT: "Due torri del XII secolo, parte della precedente fortificazione pisana; le differenze nella muratura raccontano le trasformazioni e il Palazzo Comunale ne ingloba una parte.",
+    EN: "Two 12th-century towers from the earlier Pisan fortifications; their masonry records later changes, and the Town Hall now incorporates part of them.",
+    DE: "Zwei Türme aus dem 12. Jahrhundert, Teil der älteren pisanischen Befestigung; ihre Mauern zeigen spätere Veränderungen, Teile sind ins Rathaus integriert.",
+    FR: "Deux tours du XIIe siècle, vestiges des fortifications pisanes ; leurs maçonneries témoignent des transformations et le palais communal en intègre une partie.",
+    ES: "Dos torres del siglo XII, parte de las fortificaciones pisanes; sus muros muestran cambios posteriores y el Ayuntamiento integra parte de ellas.",
+    PT: "Duas torres do século XII, parte das fortificações pisanes; as suas paredes mostram alterações e a Câmara integra parte delas.",
+    RU: "Две башни XII века из прежних пизанских укреплений; кладка отражает перестройки, а часть башен вошла в здание муниципалитета.",
+  },
+  8: {
+    IT: "Ultima tappa nel cuore del borgo: l’antica Cancelleria è oggi la sede del Comune e resta parte della vita quotidiana di Vicopisano.",
+    EN: "The final stop in the village center: the former Chancellery is now the Town Hall and remains part of daily life in Vicopisano.",
+    DE: "Letzte Station im Ortskern: Die ehemalige Kanzlei ist heute das Rathaus und bleibt Teil des Alltags in Vicopisano.",
+    FR: "Dernière étape au cœur du bourg : l’ancienne chancellerie est aujourd’hui le siège communal et reste au cœur de la vie locale.",
+    ES: "Última parada en el centro: la antigua Cancillería es hoy el Ayuntamiento y sigue formando parte de la vida cotidiana.",
+    PT: "Última paragem no centro: a antiga Chancelaria é hoje a sede do Município e continua na vida quotidiana.",
+    RU: "Последняя остановка в центре: бывшая канцелярия стала муниципалитетом и остается частью повседневной жизни.",
   },
 };
 
@@ -300,16 +236,8 @@ const routeGeoJson = {
   ],
 };
 
-// The route doubles back after stop 6, so stop 5 must stay anchored to the outbound branch.
-const ROUTE_STOP_ANCHORS = new Map([
-  [1, 0],
-  [2, 15],
-  [3, 52],
-  [4, 103],
-  [5, 150],
-  [6, 160],
-  [7, 174],
-]);
+// The route visits the Clock Tower, then the Pieve before returning to the civic center.
+const ROUTE_STOP_ANCHORS = new Map([[1,0],[2,15],[3,52],[4,103],[5,120],[6,160],[7,169],[8,174]]);
 
 const map = L.map("map", {
   scrollWheelZoom: true,
@@ -560,48 +488,14 @@ const mapTranscriptCache = new Map();
 const mapCaptionPageCache = new WeakMap();
 
 const MAP_TRANSCRIPT_SOURCES = [
-  {
-    stop: 1,
-    language: "IT",
-    audio: "audio/it/01_torre_quattro_porte.mp3",
-    source: "audio/transcripts/01_torre_quattro_porte_it.json",
-  },
-  {
-    stop: 2,
-    language: "IT",
-    audio: "audio/it/02_torre_camminamento_soccorso.mp3",
-    source: "audio/transcripts/02_torre_camminamento_soccorso_it.json",
-  },
-  {
-    stop: 3,
-    language: "IT",
-    audio: "audio/it/03_palazzo_pretorio.mp3",
-    source: "audio/transcripts/03_palazzo_pretorio_it.json",
-  },
-  {
-    stop: 4,
-    language: "IT",
-    audio: "audio/it/04_rocca_brunelleschi.mp3",
-    source: "audio/transcripts/04_rocca_brunelleschi_it.json",
-  },
-  {
-    stop: 5,
-    language: "IT",
-    audio: "audio/it/05_torri_gemelle.mp3",
-    source: "audio/transcripts/05_torri_gemelle_it.json",
-  },
-  {
-    stop: 6,
-    language: "IT",
-    audio: "audio/it/06_parrocchia_santa_maria_san_giovanni.mp3",
-    source: "audio/transcripts/06_parrocchia_santa_maria_san_giovanni_it.json",
-  },
-  {
-    stop: 7,
-    language: "IT",
-    audio: "audio/it/07_comune_info_point_vicopisano.mp3",
-    source: "audio/transcripts/07_comune_info_point_vicopisano_it.json",
-  },
+  { stop: 1, language: "IT", audio: "audio/it/01_torre_quattro_porte.mp3", source: "audio/transcripts/01_torre_quattro_porte_it.json" },
+  { stop: 2, language: "IT", audio: "audio/it/02_torre_camminamento_soccorso.mp3", source: "audio/transcripts/02_torre_camminamento_soccorso_it.json" },
+  { stop: 3, language: "IT", audio: "audio/it/03_palazzo_pretorio.mp3", source: "audio/transcripts/03_palazzo_pretorio_it.json" },
+  { stop: 4, language: "IT", audio: "audio/it/04_rocca_brunelleschi.mp3", source: "audio/transcripts/04_rocca_brunelleschi_it.json" },
+  { stop: 5, language: "IT", audio: "audio/it/05_torre_orologio.mp3", source: "audio/transcripts/05_torre_orologio_it.json" },
+  { stop: 6, language: "IT", audio: "audio/it/06_pieve_santa_maria.mp3", source: "audio/transcripts/06_pieve_santa_maria_it.json" },
+  { stop: 7, language: "IT", audio: "audio/it/07_torri_gemelle.mp3", source: "audio/transcripts/07_torri_gemelle_it.json" },
+  { stop: 8, language: "IT", audio: "audio/it/08_palazzo_comunale.mp3", source: "audio/transcripts/08_palazzo_comunale_it.json" }
 ];
 let playerOpenTransitionTimer = null;
 let playerCloseTransitionTimer = null;
@@ -664,9 +558,9 @@ const STOP_ARTWORKS = {
   2: "tappa_2_torre_e_camminamento_del_soccorso.webp",
   3: "tappa_3_palazzo_pretorio.webp",
   4: "tappa_4_rocca_del_brunelleschi.webp",
-  5: "tappa_5_torri_gemelle.webp",
-  6: "tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.webp",
-  7: "tappa_7_palazzo_comunale.webp",
+  7: "tappa_5_torri_gemelle.webp",
+  8: "tappa_7_palazzo_comunale.webp",
+
 };
 
 const stopTitles = {
@@ -706,33 +600,10 @@ const stopTitles = {
     PT: "Fortaleza de Brunelleschi",
     RU: "Krepost Brunelleski",
   },
-  5: {
-    IT: "Torri Gemelle",
-    EN: "Twin Towers",
-    DE: "Zwillingstürme",
-    FR: "Tours jumelles",
-    ES: "Torres Gemelas",
-    PT: "Torres Gémeas",
-    RU: "Bashni-bliznetsy",
-  },
-  6: {
-    IT: "Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo",
-    EN: "Parish of Santa Maria Addolorata and Saint John the Apostle",
-    DE: "Pfarrkirche Santa Maria Addolorata und Sankt Johannes Apostel",
-    FR: "Paroisse de Santa Maria Addolorata et Saint Jean Apôtre",
-    ES: "Parroquia de Santa Maria Addolorata y San Juan Apóstol",
-    PT: "Paróquia de Santa Maria Addolorata e São João Apóstolo",
-    RU: "Prikhod Santa Mariya Addolorata i Svyatogo Ioanna Apostola",
-  },
-  7: {
-    IT: "Palazzo Comunale Vicopisano",
-    EN: "Vicopisano Town Hall",
-    DE: "Rathaus von Vicopisano",
-    FR: "Hôtel de ville de Vicopisano",
-    ES: "Ayuntamiento de Vicopisano",
-    PT: "Prefeitura de Vicopisano",
-    RU: "Munitsipalitet Vikopizano",
-  },
+  5: { IT: "Torre dell’Orologio", EN: "Clock Tower", DE: "Uhrturm", FR: "Tour de l’Horloge", ES: "Torre del Reloj", PT: "Torre do Relógio", RU: "Часовая башня" },
+  6: { IT: "Pieve di Santa Maria", EN: "Church of Santa Maria", DE: "Kirche Santa Maria", FR: "Église Santa Maria", ES: "Iglesia de Santa Maria", PT: "Igreja de Santa Maria", RU: "Церковь Санта-Мария" },
+  7: { IT: "Torri Gemelle", EN: "Twin Towers", DE: "Zwillingstürme", FR: "Tours jumelles", ES: "Torres Gemelas", PT: "Torres Gémeas", RU: "Башни-близнецы" },
+  8: { IT: "Palazzo Comunale Vicopisano", EN: "Vicopisano Town Hall", DE: "Rathaus von Vicopisano", FR: "Palais communal de Vicopisano", ES: "Ayuntamiento de Vicopisano", PT: "Câmara Municipal de Vicopisano", RU: "Мэрия Викописано" },
 };
 
 const uiStrings = {
@@ -743,10 +614,10 @@ const uiStrings = {
       "Vieni con me alla scoperta di Vicopisano:\ntra torri, camminamenti e storie nascoste,\nti accompagnerò tappa dopo tappa.",
     instructionsTitle: "Istruzioni",
     instructionsText:
-      "La mappa mostra l’intero percorso, con le tappe da 1 a 7. Puoi selezionare una tappa dalla lista oppure cliccare direttamente sulla mappa: il sito evidenzierà il punto scelto, centrerà la visuale e aprirà i contenuti dedicati.",
+      "La mappa mostra l’intero percorso, con le tappe da 1 a 8. Puoi selezionare una tappa dalla lista oppure cliccare direttamente sulla mappa: il sito evidenzierà il punto scelto, centrerà la visuale e aprirà i contenuti dedicati.",
     routeTitle: "Tappe del percorso",
     stopLabel: "Tappa",
-    routeSubtitle: "7 punti di ascolto lungo il borgo.",
+    routeSubtitle: "8 punti di ascolto lungo il borgo.",
     platformsEyebrow: "Presto anche su:",
     platformLinkPending: (name) => `Il collegamento a ${name} non è ancora disponibile. Riprova più avanti.`,
     platformLinkError: (name) => `Impossibile aprire ${name}: il collegamento non è valido. Riprova più avanti.`,
@@ -826,10 +697,10 @@ const uiStrings = {
       "Once I studied these walls to imagine defenses, passages, and viewpoints. Now I guide you through the village's stories, stop by stop. Follow me through towers, walkways, and glimpses of the borgo: each stop opens a voice, a story, a fragment of Vicopisano.",
     instructionsTitle: "Instructions",
     instructionsText:
-      "The map shows the full route, with stops from 1 to 7. You can select a stop from the list or click directly on the map: the site will highlight the chosen point, center the view, and open the dedicated content.",
+      "The map shows the full route, with stops from 1 to 8. You can select a stop from the list or click directly on the map: the site will highlight the chosen point, center the view, and open the dedicated content.",
     routeTitle: "Route Stops",
     stopLabel: "Stop",
-    routeSubtitle: "7 listening points in the village.",
+    routeSubtitle: "8 listening points in the village.",
     platformsEyebrow: "Coming soon on:",
     platformLinkPending: (name) => `The link to ${name} is not available yet. Please try again later.`,
     platformLinkError: (name) => `Unable to open ${name}: the link is invalid. Please try again later.`,
@@ -909,10 +780,10 @@ const uiStrings = {
       "Einst betrachtete ich diese Mauern, um Verteidigungen, Übergänge und Blickpunkte zu erahnen. Jetzt begleite ich Sie Schritt für Schritt durch die Geschichten des Ortes. Folgen Sie mir durch Türme, Wehrgänge und Ausblicke: Jede Station öffnet eine Stimme, eine Geschichte, ein Stück Vicopisano.",
     instructionsTitle: "Anleitung",
     instructionsText:
-      "Die Karte zeigt die gesamte Route mit den Stationen 1 bis 7. Sie können eine Station aus der Liste wählen oder direkt auf die Karte klicken: Die Website hebt den gewählten Punkt hervor, zentriert die Ansicht und öffnet die zugehörigen Inhalte.",
+      "Die Karte zeigt die gesamte Route mit den Stationen 1 bis 8. Sie können eine Station aus der Liste wählen oder direkt auf die Karte klicken: Die Website hebt den gewählten Punkt hervor, zentriert die Ansicht und öffnet die zugehörigen Inhalte.",
     routeTitle: "Stationen der Route",
     stopLabel: "Station",
-    routeSubtitle: "7 Hörstationen im Ort.",
+    routeSubtitle: "8 Hörstationen im Ort.",
     platformsEyebrow: "Bald auch auf:",
     platformLinkPending: (name) => `Der Link zu ${name} ist noch nicht verfügbar. Bitte versuche es später erneut.`,
     platformLinkError: (name) => `${name} kann nicht geöffnet werden: Der Link ist ungültig. Bitte versuche es später erneut.`,
@@ -995,7 +866,7 @@ const uiStrings = {
       "La carte montre l’itinéraire complet de 1 à 7. Lorsque vous choisissez une étape, le site la met en évidence, centre la carte sur le point correspondant et ouvre les détails.",
     routeTitle: "Étapes du parcours",
     stopLabel: "Étape",
-    routeSubtitle: "7 points d’écoute dans le bourg.",
+    routeSubtitle: "8 points d’écoute dans le bourg.",
     platformsEyebrow: "Bientôt aussi sur :",
     platformLinkPending: (name) => `Le lien vers ${name} n’est pas encore disponible. Réessayez plus tard.`,
     platformLinkError: (name) => `Impossible d’ouvrir ${name} : le lien est invalide. Réessayez plus tard.`,
@@ -1075,10 +946,10 @@ const uiStrings = {
       "Alguna vez observé estas murallas para imaginar defensas, pasajes y puntos de vista. Ahora te acompaño por las historias del pueblo, etapa tras etapa. Sígueme entre torres, pasarelas y rincones del borgo: cada etapa abre una voz, una historia, un fragmento de Vicopisano.",
     instructionsTitle: "Instrucciones",
     instructionsText:
-      "El mapa muestra el recorrido completo del 1 al 7. Cuando eliges una etapa, el sitio la resalta, centra el mapa en el punto correspondiente y abre los detalles.",
+      "El mapa muestra el recorrido completo del 1 al 8. Cuando eliges una etapa, el sitio la resalta, centra el mapa en el punto correspondiente y abre los detalles.",
     routeTitle: "Etapas del recorrido",
     stopLabel: "Etapa",
-    routeSubtitle: "7 puntos de escucha en el pueblo.",
+    routeSubtitle: "8 puntos de escucha en el pueblo.",
     platformsEyebrow: "Próximamente también en:",
     platformLinkPending: (name) => `El enlace a ${name} aún no está disponible. Inténtalo más tarde.`,
     platformLinkError: (name) => `No se puede abrir ${name}: el enlace no es válido. Inténtalo más tarde.`,
@@ -1158,10 +1029,10 @@ const uiStrings = {
       "Em tempos observei estas muralhas para imaginar defesas, passagens e pontos de vista. Agora acompanho-o pelas histórias da vila, etapa após etapa. Siga-me entre torres, passadiços e recantos do borgo: cada etapa abre uma voz, uma história, um fragmento de Vicopisano.",
     instructionsTitle: "Instruções",
     instructionsText:
-      "O mapa mostra o percurso completo de 1 a 7. Quando você escolhe uma etapa, o site a destaca, centraliza o mapa no ponto correspondente e abre os detalhes.",
+      "O mapa mostra o percurso completo de 1 a 8. Quando você escolhe uma etapa, o site a destaca, centraliza o mapa no ponto correspondente e abre os detalhes.",
     routeTitle: "Etapas do percurso",
     stopLabel: "Etapa",
-    routeSubtitle: "7 pontos de escuta na vila.",
+    routeSubtitle: "8 pontos de escuta na vila.",
     platformsEyebrow: "Em breve também em:",
     platformLinkPending: (name) => `O link para ${name} ainda não está disponível. Tenta novamente mais tarde.`,
     platformLinkError: (name) => `Não é possível abrir ${name}: o link é inválido. Tenta novamente mais tarde.`,
@@ -1244,7 +1115,7 @@ const uiStrings = {
       "Карта показывает полный маршрут с остановками от 1 до 7. Выберите остановку в списке или нажмите на маркер: сайт выделит точку, отцентрирует карту и откроет соответствующие материалы.",
     routeTitle: "Остановки маршрута",
     stopLabel: "Остановка",
-    routeSubtitle: "7 точек прослушивания в поселке.",
+    routeSubtitle: "8 точек прослушивания в поселке.",
     platformsEyebrow: "Скоро также на:",
     platformLinkPending: (name) => `Ссылка на ${name} пока недоступна. Повторите попытку позже.`,
     platformLinkError: (name) => `Не удалось открыть ${name}: ссылка недействительна. Повторите попытку позже.`,

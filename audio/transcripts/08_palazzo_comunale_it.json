@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "status": "estimated-timing-review-required",
+  "language": "it",
+  "stop": 8,
+  "audio": {
+    "source": "audio/it/08_palazzo_comunale.mp3",
+    "duration": 261.616
+  },
+  "editorialScript": {
+    "source": "Drive Delivering/Vicopisano/Copy-Tappe",
+    "version": "copione aggiornato, tracce 2026-10-19"
+  },
+  "alignment": {
+    "engine": "approved-script timing estimate",
+    "method": "Estimated from approved copy and MP3 duration; phrase timing is proportional to word count.",
+    "reviewRequired": true,
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+  },
+  "segments": [
+    {
+      "start": 0,
+      "end": 1.22,
+      "text": "Ci siamo quasi."
+    },
+    {
+      "start": 1.46,
+      "end": 10.03,
+      "text": "Prima di salutarci, però, c’è ancora un ultimo edificio che merita la vostra attenzione.Davanti a noi c’è il Palazzo Comunale."
+    },
+    {
+      "start": 10.27,
+      "end": 15.57,
+      "text": "Lo avevamo già incontrato poco fa, quando cercavamo di distinguere le Torri Gemelle."
+    },
+    {
+      "start": 15.81,
+      "end": 17.85,
+      "text": "Adesso, però, osserviamo il Palazzo."
+    },
+    {
+      "start": 18.09,
+      "end": 21.35,
+      "text": "A prima vista potreste considerarlo un unico edificio."
+    },
+    {
+      "start": 21.59,
+      "end": 28.11,
+      "text": "Naturalmente, dopo il percorso che abbiamo fatto, sapete che non dovreste fidarvi troppo delle prime impressioni."
+    },
+    {
+      "start": 28.35,
+      "end": 36.91,
+      "text": "La struttura che vedete si è formata in momenti diversi, riunendo edifici medievali e interventi realizzati fra il Seicento e l’Ottocento."
+    },
+    {
+      "start": 37.15,
+      "end": 41.23,
+      "text": "Dalla seconda metà del Seicento questi spazi ospitarono la Cancelleria."
+    },
+    {
+      "start": 41.47,
+      "end": 48.81,
+      "text": "Il cancelliere custodiva i documenti e gli statuti, si occupava dei registri e di numerosi aspetti dell’amministrazione locale."
+    },
+    {
+      "start": 49.05,
+      "end": 53.54,
+      "text": "In precedenza, le riunioni degli ufficiali si tenevano nel Palazzo Pretorio."
+    },
+    {
+      "start": 53.78,
+      "end": 58.26,
+      "text": "Dopo il 1661, invece, cominciarono a svolgersi nella casa del cancelliere."
+    },
+    {
+      "start": 58.5,
+      "end": 62.17,
+      "text": "Il governo del territorio stava trovando una nuova sede."
+    },
+    {
+      "start": 62.41,
+      "end": 65.67,
+      "text": "E anche l’edificio cambiava insieme alle sue funzioni."
+    },
+    {
+      "start": 65.91,
+      "end": 74.48,
+      "text": "Le Torri Gemelle entrarono progressivamente a far parte del complesso, gli ambienti vennero ampliati e la facciata fu resa più regolare."
+    },
+    {
+      "start": 74.72,
+      "end": 83.28,
+      "text": "Nel 1782 si decise persino di demolire una parte delle antiche mura e l’arco della porta che sorgevano accanto alla Cancelleria."
+    },
+    {
+      "start": 83.52,
+      "end": 84.33,
+      "text": "La motivazione?"
+    },
+    {
+      "start": 84.57,
+      "end": 86.21,
+      "text": "Dare più aria all’edificio."
+    },
+    {
+      "start": 86.45,
+      "end": 95.42,
+      "text": "Dopo tutto quello che vi ho raccontato sull’importanza delle fortificazioni, comprenderete che non è una decisione che avrei preso con particolare leggerezza."
+    },
+    {
+      "start": 95.66,
+      "end": 100.14,
+      "text": "Fortunatamente, però, quelle mura non dovevano più proteggere un castello assediato."
+    },
+    {
+      "start": 100.38,
+      "end": 102.42,
+      "text": "Il paese aveva altre necessità."
+    },
+    {
+      "start": 102.66,
+      "end": 106.74,
+      "text": "Oggi questo Palazzo è la sede del Comune di Vicopisano."
+    },
+    {
+      "start": 106.98,
+      "end": 117.99,
+      "text": "Negli ambienti che un tempo ospitavano il cancelliere si continua ad amministrare il territorio, anche se con istituzioni, responsabilità e cittadini molto diversi da quelli che conobbi."
+    },
+    {
+      "start": 118.23,
+      "end": 126.79,
+      "text": "All’inizio di questo percorso, appena tornato a Vicopisano, pensavo che avrei misurato il borgo osservando ciò che restava delle mie opere."
+    },
+    {
+      "start": 127.03,
+      "end": 131.11,
+      "text": "E le mie opere hanno resistito piuttosto bene devo ammettere."
+    },
+    {
+      "start": 131.35,
+      "end": 136.65,
+      "text": "Ma durante il cammino ho incontrato anche ciò che esisteva prima di me."
+    },
+    {
+      "start": 136.89,
+      "end": 143.41,
+      "text": "Adesso mi è chiaro che la mia Rocca rappresenta soltanto una parte della storia di Vicopisano."
+    },
+    {
+      "start": 143.65,
+      "end": 144.88,
+      "text": "Una parte importante."
+    },
+    {
+      "start": 145.12,
+      "end": 145.93,
+      "text": "Molto importante."
+    },
+    {
+      "start": 146.17,
+      "end": 147.39,
+      "text": "Ma non l’unica."
+    },
+    {
+      "start": 147.63,
+      "end": 153.75,
+      "text": "Un borgo medievale può conservare le proprie mura e diventare soltanto uno scenario da osservare."
+    },
+    {
+      "start": 153.99,
+      "end": 155.62,
+      "text": "Qui non è accaduto."
+    },
+    {
+      "start": 155.86,
+      "end": 160.35,
+      "text": "Dentro questi edifici le persone continuano ad abitare e a lavorare."
+    },
+    {
+      "start": 160.59,
+      "end": 169.56,
+      "text": "Le botteghe, i mercati, le associazioni e i circoli mantengono vivo il paese con mostre, spettacoli, incontri e feste durante tutto l’anno."
+    },
+    {
+      "start": 169.8,
+      "end": 175.51,
+      "text": "Forse il modo in cui Vicopisano è stata costruita ha contribuito a tutto questo."
+    },
+    {
+      "start": 175.75,
+      "end": 176.97,
+      "text": "Le strade raccolte."
+    },
+    {
+      "start": 177.21,
+      "end": 178.02,
+      "text": "Le piazze."
+    },
+    {
+      "start": 178.26,
+      "end": 181.12,
+      "text": "Gli edifici vicini gli uni agli altri."
+    },
+    {
+      "start": 181.36,
+      "end": 184.21,
+      "text": "Ma le pietre, da sole, non bastano."
+    },
+    {
+      "start": 184.45,
+      "end": 190.57,
+      "text": "Un paese rimane vivo perché qualcuno continua a sceglierlo, ad abitarlo e a prendersene cura."
+    },
+    {
+      "start": 190.81,
+      "end": 194.48,
+      "text": "Io avevo progettato Vicopisano perché sapesse resistere agli assedi."
+    },
+    {
+      "start": 194.72,
+      "end": 200.43,
+      "text": "Dopo quasi seicento anni ho scoperto che continua a resistere in un altro modo:"
+    },
+    {
+      "start": 200.67,
+      "end": 203.11,
+      "text": "continuando a essere un paese vivo."
+    },
+    {
+      "start": 203.35,
+      "end": 205.39,
+      "text": "E adesso, purtroppo, dobbiamo lasciarci."
+    },
+    {
+      "start": 205.63,
+      "end": 209.3,
+      "text": "La vostra lezione di architettura per oggi è terminata."
+    },
+    {
+      "start": 209.54,
+      "end": 219.74,
+      "text": "Se siete ancora curiosi e volete scoprire tutto ciò che Vicopisano può offrire, raggiungete l’Ufficio Turistico, ospitato nella Biblioteca Comunale ai piedi della Torre dell’Orologio."
+    },
+    {
+      "start": 219.98,
+      "end": 227.32,
+      "text": "Potrete chiedere informazioni sulle visite alla Rocca, al Palazzo Pretorio, al Camminamento del Soccorso e alla Torre dell’Orologio."
+    },
+    {
+      "start": 227.56,
+      "end": 233.67,
+      "text": "Oppure scegliere un’escursione sul Monte Pisano o scoprire le feste e gli eventi in programma."
+    },
+    {
+      "start": 233.91,
+      "end": 238.81,
+      "text": "Io, dopo quasi seicento anni, direi che per oggi ho camminato abbastanza."
+    },
+    {
+      "start": 239.05,
+      "end": 243.94,
+      "text": "E poi, modestamente, una lezione di architettura così richiede un certo riposo."
+    },
+    {
+      "start": 244.18,
+      "end": 248.26,
+      "text": "Questa traccia conclude l’itinerario audio realizzato dal Comune di Vicopisano."
+    },
+    {
+      "start": 248.5,
+      "end": 251.76,
+      "text": "Grazie per aver camminato insieme a Filippo Brunelleschi."
+    },
+    {
+      "start": 252.0,
+      "end": 261.62,
+      "text": "Se volete continuare a scoprire il borgo e il suo territorio, rivolgetevi all’Ufficio Turistico del Comune per conoscere visite, percorsi ed esperienze disponibili."
+    }
+  ]
+}
