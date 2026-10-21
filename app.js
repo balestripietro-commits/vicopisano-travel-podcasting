@@ -558,6 +558,7 @@ const STOP_ARTWORKS = {
   2: "tappa_2_torre_e_camminamento_del_soccorso.webp",
   3: "tappa_3_palazzo_pretorio.webp",
   4: "tappa_4_rocca_del_brunelleschi.webp",
+  6: "tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.webp",
   7: "tappa_5_torri_gemelle.webp",
   8: "tappa_7_palazzo_comunale.webp",
 
