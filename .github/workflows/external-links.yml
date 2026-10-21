@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 10
     env:
       CI: "true"
-      E2E_BASE_URL: https://transcendent-meerkat-166cbe.netlify.app
+      E2E_BASE_URL: https://balestripietro-commits.github.io/vicopisano-travel-podcasting/
       PLAYWRIGHT_BROWSER_CHANNEL: chromium
 
     steps:
@@ -58,4 +58,4 @@ jobs:
           name: external-links-report-${{ github.run_attempt }}
           path: work/external-links
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 3
