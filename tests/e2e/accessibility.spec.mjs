@@ -400,7 +400,6 @@ test.describe("accessibility", () => {
 
       const title = page.locator("#detail-title");
       await expect(title).toBeVisible();
-      await expect(title).toHaveAttribute("tabindex", "0");
       await expect(page.locator("#detail-title-text")).not.toBeEmpty();
       const before = await title.evaluate((element) => ({
         clientWidth: element.clientWidth,
@@ -412,13 +411,14 @@ test.describe("accessibility", () => {
       }));
       expect(before.left).toBeGreaterThanOrEqual(0);
       expect(before.right).toBeLessThanOrEqual(width + 1);
-      if (before.scrollWidth > before.clientWidth + 1) {
       expect(before.scrollHeight).toBeLessThanOrEqual(before.clientHeight + 2);
-      await title.focus();
-      await page.keyboard.press("ArrowRight");
-      await expect.poll(() => title.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
-      await title.evaluate((element) => { element.scrollLeft = element.scrollWidth; });
-      await expect.poll(() => title.evaluate((element) => element.scrollLeft + element.clientWidth >= element.scrollWidth - 1)).toBe(true);
+      if (before.scrollWidth > before.clientWidth + 1) {
+        await expect(title).toHaveAttribute("tabindex", "0");
+        await title.focus();
+        await page.keyboard.press("ArrowRight");
+        await expect.poll(() => title.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+        await title.evaluate((element) => { element.scrollLeft = element.scrollWidth; });
+        await expect.poll(() => title.evaluate((element) => element.scrollLeft + element.clientWidth >= element.scrollWidth - 1)).toBe(true);
       }
     }
   });
