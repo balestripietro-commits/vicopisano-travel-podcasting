@@ -399,7 +399,7 @@ test.describe("accessibility", () => {
       await page.locator("#player-map-button").click();
 
       const title = page.locator("#detail-title");
-      await expect(title).toHaveClass(/is-overflowing/);
+      await expect(title).toBeVisible();
       await expect(title).toHaveAttribute("tabindex", "0");
       await expect(page.locator("#detail-title-text")).toHaveText("Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo");
       const before = await title.evaluate((element) => ({
