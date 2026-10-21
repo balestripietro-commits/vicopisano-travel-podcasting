@@ -1398,6 +1398,13 @@ test("desktop Explore mode keeps all player controls in the contextual panel", a
   await expect(page.locator("#player-next-preview-image")).toBeVisible();
   await expect(page.locator("#detail-title")).toBeVisible();
   await expect(page.locator(".mini-player-main")).toBeHidden();
+  await page.evaluate(async () => {
+    const layoutElements = document.querySelectorAll(
+      "#player-overlay .player-artwork, #player-overlay .player-side, #player-overlay .player-stop-navigation, #player-overlay .player-command-row, #player-overlay .player-timeline",
+    );
+    const transitions = [...layoutElements].flatMap((element) => element.getAnimations());
+    await Promise.all(transitions.map((animation) => animation.finished.catch(() => {})));
+  });
 
   const [mapBox, playerBox] = await Promise.all([
     page.locator(".map-stage-frame").boundingBox(),
