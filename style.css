@@ -9438,3 +9438,7 @@ body.guide-open.guide-map-intro-focus .route-experience > .map-stage:has(> .map-
   cursor: wait;
   opacity: 0.7;
 }
+
+.onboarding-language-chips[hidden] {
+  display: none;
+}
