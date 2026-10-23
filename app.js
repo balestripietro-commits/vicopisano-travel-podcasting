@@ -5358,17 +5358,13 @@ function renderOnboardingLanguageSelector() {
 
       setCurrentLanguage(languageCode);
       replayAnimationClass(chip, "is-pulsing", 460);
-      if (shouldAskEmail()) {
-        showEmailStep();
-        return;
-      }
       setStoredValue(onboardingCompleteStorageKey, "true");
       closeOnboarding({ startGuide: true });
     },
   });
 }
 
-// URL dell'app web Google Apps Script che scrive nel Foglio. Vuoto = sportello email disattivato.
+// Primo passo dell'onboarding, prima della scelta lingua. URL dell'app web Google Apps Script che scrive nel Foglio; vuoto = sportello disattivato.
 const emailCollectionEndpoint = typeof window.__vicopisanoEmailEndpoint === "string"
   ? window.__vicopisanoEmailEndpoint
   : "https://script.google.com/macros/s/AKfycbzPt23L6MBAYVXcaDSrjTOw_rhOGcEvtSL-dTA4_4ixfo6YY3wqFBTHnNF-U_meQ4IQ/exec";
@@ -5389,10 +5385,10 @@ function shouldAskEmail() {
 
 function finishOnboardingAfterEmail() {
   setStoredValue(emailStepDoneStorageKey, "true");
-  setStoredValue(onboardingCompleteStorageKey, "true");
   onboardingEmailForm.hidden = true;
   onboardingLanguageChips.hidden = false;
-  closeOnboarding({ startGuide: true });
+  renderOnboardingTexts();
+  onboardingLanguageChips.querySelector("button")?.focus({ preventScroll: true });
 }
 
 function showEmailStep() {
@@ -5495,6 +5491,10 @@ function showOnboardingIfNeeded() {
   onboardingOverlay.classList.remove("is-hidden");
   document.body.classList.add("onboarding-open");
   setGuideBackgroundInert(true);
+  if (shouldAskEmail()) {
+    showEmailStep();
+    return;
+  }
   const focusFirstOnboardingControl = () => {
     onboardingLanguageChips?.querySelector("button")?.focus({ preventScroll: true });
   };

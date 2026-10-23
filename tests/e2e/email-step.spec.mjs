@@ -11,10 +11,15 @@ async function openWithEndpoint(page) {
     }
   }, fakeEndpoint);
   await page.goto("./?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#onboarding-email-form")).toBeVisible();
+  await expect(page.locator("#onboarding-language-chips")).toBeHidden();
+}
+
+async function chooseItalian(page) {
+  await expect(page.locator("#onboarding-language-chips")).toBeVisible();
   await page.locator("#onboarding-language-chips .onboarding-language-option")
     .filter({ hasText: /^IT\s/ })
     .click();
-  await expect(page.locator("#onboarding-email-form")).toBeVisible();
 }
 
 test("email step sends the address after consent and then continues", async ({ page }) => {
@@ -34,6 +39,8 @@ test("email step sends the address after consent and then continues", async ({ p
   await page.locator("#onboarding-email-input").fill("visitatore@example.com");
   await page.locator("#onboarding-email-consent").check();
   await page.locator("#onboarding-email-submit").click();
+  await expect(page.locator("#onboarding-email-form")).toBeHidden();
+  await chooseItalian(page);
   await expect(page.locator("#onboarding-overlay")).toBeHidden();
   await expect(page.locator("#guide-layer")).toBeVisible();
   expect(posts).toEqual([
@@ -54,6 +61,7 @@ test("email step can be skipped without sending anything", async ({ page }) => {
   await openWithEndpoint(page);
 
   await page.locator("#onboarding-email-skip").click();
+  await chooseItalian(page);
   await expect(page.locator("#onboarding-overlay")).toBeHidden();
   expect(sent).toBe(0);
 
