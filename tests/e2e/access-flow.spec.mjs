@@ -7,7 +7,7 @@ test("first access asks for language and later access remembers it", async ({ pa
     if (request.method() === "POST") localPostRequests += 1;
   });
 
-  await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
+  await page.goto("./?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
   await expect(page.locator("#email-gate-overlay")).toHaveCount(0);
   await expect(page.locator('form[name="email-demo-gate"]')).toHaveCount(0);
   await expect(page.locator("#onboarding-overlay")).toBeVisible();
@@ -37,4 +37,15 @@ test("first access asks for language and later access remembers it", async ({ pa
   await expect(page.locator("#onboarding-overlay")).toBeHidden();
   await expect(page.locator("#guide-layer")).toBeHidden();
   await expect(page.locator("html")).toHaveAttribute("lang", "it");
+});
+
+test.describe("browser in English", () => {
+  test.use({ locale: "en-US" });
+
+  test("opens in Italian while only Italian is available", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("vicopisano-language", "EN"));
+    await page.goto("./", { waitUntil: "domcontentloaded" });
+    await expect(page.locator("html")).toHaveAttribute("lang", "it");
+    await expect(page.locator("#onboarding-title")).toHaveText("Scegli la lingua per iniziare il percorso");
+  });
 });

@@ -8,7 +8,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 
 - Il playbook comune e la checklist di apertura sono nella macro-repository privata `LocalDev`, sotto `Travel podcasting/github-sites/Playbook-Siti-Comunali/`. La cartella locale è sorella di questo clone e non appartiene alla repository Vicopisano.
 - `PLAYBOOK_SITI_COMUNALI.md` in questa repo contiene l’audit e il registro specifico di Vicopisano. Non copiarlo come template per un altro Comune.
-- Il repository locale resta il master del sito. Il copione italiano aggiornato è il DOCX in Drive Delivering/Vicopisano/Copy-Tappe. L’aggiornamento del 19 ottobre 2026 introduce otto tracce italiane e una Torre dell’Orologio; i timing dei sottotitoli sono stimati dal copione e da verificare all’ascolto. I cue Rhubarb delle nuove voci restano da rigenerare.
+- Il repository locale resta il master del sito. Il copione italiano aggiornato è il DOCX in Drive Delivering/Vicopisano/Copy-Tappe. L’aggiornamento del 19 ottobre 2026 introduce otto tracce italiane e una Torre dell’Orologio; i timing dei sottotitoli sono stimati dal copione e da verificare all’ascolto. I cue Rhubarb delle otto voci sono stati rigenerati dai WAV consegnati il 21 ottobre 2026 con Rhubarb 1.14.0.
 - Ultima produzione verificata il 10 ottobre 2026 dalla GitHub Actions `Deploy production` run #16, commit `8aa0c7b`: E2E, deploy Netlify e smoke test completati con successo. [Apri la demo pubblica](https://transcendent-meerkat-166cbe.netlify.app/).
 
 ## Architettura attuale dell'interfaccia
@@ -44,6 +44,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - I controlli Play/Pausa sono centrati con una griglia esplicita, evitando che la diversa spaziatura laterale del glifo `pause` lo faccia apparire spostato.
 - Il tap su marker o tappa seleziona la traccia e avvia l'audio nel mini-player senza aprire il player esteso. Le immagini delle tappe usano sempre un ritaglio quadrato, comprese mini-player, anteprime, lista e full player mobile. Nella home desktop, l'anteprima della tappa usa una foto quadrata sotto al titolo e la colonna della mappa e' più ampia.
 - Ogni tap su un marker inquadra e colora in giallo il tratto del percorso fino alla tappa; ripetere il tap mantiene lo stesso criterio d'inquadratura e non centra solo il numero.
+- Il tratto dalla Tappa 5 alla Pieve di Santa Maria parte dalle coordinate esatte della Torre dell’Orologio, segue Via Lante verso nord-ovest, passa da Via del Municipio e Piazza Cavalca, raggiunge SP38 e termina alle coordinate della Pieve; la geometria precedente passava invece da Via del Castello.
 - Dopo la selezione compare una label temporanea vicino al marker: su desktop mostra miniatura, numero e titolo localizzati per intero sempre su una riga, con larghezza responsiva fino a 760 px; su mobile, sia nella home sia in Mappa + player, mostra soltanto la foto, con il titolo come testo alternativo accessibile. Resta visibile per circa quattro secondi, poi sfuma; un nuovo tap la sostituisce subito.
 - La selezione dalla lista usa una sola transizione coordinata: card, marker, camera e contenuti del player cambiano nello stesso ciclo di rendering, senza ritardi separati tra i componenti.
 - Le 8 tappe usano preset camera fissi per mantenere il tratto nel contesto; la vista mobile compensa il dock inferiore e non applica un secondo tap speciale sul solo marker. Lo zoom già raggiunto non viene ridotto e la camera non ripete l'animazione quando è già nella posizione corretta.
@@ -123,7 +124,7 @@ Per provarlo da smartphone, avvia il server con `HOST=0.0.0.0 npm run dev` su un
 
 ## Primo accesso, lingua e aiuto
 
-- L’ingresso non richiede né raccoglie l’email. Al primo accesso viene mostrata la scelta lingua; la lingua viene salvata in `localStorage` insieme al completamento dell’onboarding. Negli accessi successivi il sito apre direttamente con la lingua scelta, modificabile dal selettore in alto.
+- Il sito si apre sempre in italiano (`FORCED_INITIAL_LANGUAGE`, ignora lingua del browser, URL e lingua salvata). Dopo la scelta lingua compare, se `emailCollectionEndpoint` è valorizzato, lo sportello email facoltativo: consenso obbligatorio, pulsante Salta, campo trappola anti-bot. L'invio è un POST `text/plain` (modalità `no-cors`) all'app web Google Apps Script `apps-script/raccolta-email.gs`, che aggiunge una riga al foglio `Iscrizioni` (data, email, consenso, lingua, pagina) evitando i duplicati. L'email non viene salvata nel browser: `localStorage` conserva solo che il passaggio è stato completato. Con endpoint vuoto lo sportello è disattivato. Verificare e aggiornare lo scopo e l'informativa privacy prima di usarlo con il pubblico. Negli accessi successivi il sito apre direttamente con la lingua scelta, modificabile dal selettore in alto.
 - `assets/qr-demo-travel-podcasting.png` contiene il QR per `https://transcendent-meerkat-166cbe.netlify.app/`; è incluso nella copia ricorsiva di `assets/` in `dist/`.
 
 - La schermata di scelta lingua viene mostrata al primo accesso; negli accessi successivi resta attiva la lingua scelta in precedenza, modificabile dal selettore in alto.
@@ -255,7 +256,7 @@ Il sito supporta parametri URL condivisibili:
 - Rhubarb e installato localmente in `/Users/pietrobalestri/.local/bin/rhubarb`.
 - I cue di sincronizzazione sono salvati in `audio/cues/` e vengono caricati automaticamente quando parte un audio.
 - La logica del sito associa ogni file `audio/<lingua>/nome_file.mp3` al cue `audio/cues/nome_file.json`, lo precarica quando si seleziona la traccia e applica un anticipo visivo di 80 ms alla bocca; l'audio resta invariato e pausa, seek e salti mantengono l'allineamento.
-- I cue italiani delle tappe 1–7 sono stati rigenerati con Rhubarb `phonetic` direttamente dai WAV ricevuti; ogni JSON copre la durata del relativo MP3 e usa solo i valori bocca `A-H` e `X`. Revisione del 10 ottobre: versione Rhubarb 1.14.0.
+- I cue italiani delle tappe 1–8 sono stati rigenerati il 21 ottobre 2026 con Rhubarb `phonetic` direttamente dai WAV ricevuti; ogni JSON copre la durata del relativo MP3 e usa solo i valori bocca `A-H` e `X`. Versione Rhubarb: 1.14.0.
 - Le varianti straniere disponibili restano coperte dai cue esistenti della Tappa 1. Le tappe senza audio attivo non animano la mascotte: quando aggiungeremo nuovi MP3, andra generato anche il relativo JSON Rhubarb.
 
 ### Trascrizione sincronizzata
@@ -398,3 +399,11 @@ npm run dev
 Poi aprire `http://127.0.0.1:8000/design-system.html`.
 
 Non sono state aggiunte dipendenze o framework. Material 3 Expressive e Spectrum 2 sono usati come direzione progettuale, non come librerie installate.
+
+## Pubblicazione
+Il sito è pubblicato anche su [GitHub Pages](https://balestripietro-commits.github.io/vicopisano-travel-podcasting/). La repository è [pubblica](https://github.com/balestripietro-commits/vicopisano-travel-podcasting); GitHub Actions esegue `npm run build` e pubblica `dist/` a ogni push su `main` tramite `.github/workflows/deploy-pages.yml`. Netlify resta configurato come hosting preesistente mentre si aggiornano i link e il QR.
+
+
+## Verifica E2E
+
+La suite completa si esegue con `npm run test:e2e:dist` e gira sulle pull request o su richiesta manuale. Il push su `main` pubblica GitHub Pages e lancia uno smoke breve sul sito appena pubblicato, incluso il controllo dell’audio. In CI Playwright ritenta una volta e conserva le trace solo al primo retry; le diagnostiche scadono dopo 3 giorni.

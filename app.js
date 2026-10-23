@@ -329,6 +329,12 @@ const onboardingOverlay = document.getElementById("onboarding-overlay");
 const onboardingTitle = document.getElementById("onboarding-title");
 const onboardingHint = document.getElementById("onboarding-hint");
 const onboardingLanguageChips = document.getElementById("onboarding-language-chips");
+const onboardingEmailForm = document.getElementById("onboarding-email-form");
+const onboardingEmailInput = document.getElementById("onboarding-email-input");
+const onboardingEmailConsent = document.getElementById("onboarding-email-consent");
+const onboardingEmailError = document.getElementById("onboarding-email-error");
+const onboardingEmailSubmit = document.getElementById("onboarding-email-submit");
+const onboardingEmailSkip = document.getElementById("onboarding-email-skip");
 const languageUnavailableModal = document.getElementById("language-unavailable-modal");
 const languageUnavailableTitle = document.getElementById("language-unavailable-title");
 const languageUnavailableMessage = document.getElementById("language-unavailable-message");
@@ -1517,7 +1523,15 @@ function getBrowserLanguage() {
   return "EN";
 }
 
+// Finché è pronta solo la versione italiana, si apre sempre in italiano (ignora browser, URL e lingua salvata).
+// Per riattivare il rilevamento automatico, impostare a null quando le altre lingue sono approvate.
+const FORCED_INITIAL_LANGUAGE = "IT";
+
 function getInitialLanguage(urlLanguage) {
+  if (FORCED_INITIAL_LANGUAGE) {
+    return FORCED_INITIAL_LANGUAGE;
+  }
+
   return (
     normalizeLanguageCode(urlLanguage) ||
     normalizeLanguageCode(getStoredValue(LANGUAGE_STORAGE_KEY)) ||
@@ -5343,12 +5357,85 @@ function renderOnboardingLanguageSelector() {
       }
 
       setCurrentLanguage(languageCode);
-      setStoredValue(onboardingCompleteStorageKey, "true");
       replayAnimationClass(chip, "is-pulsing", 460);
+      if (shouldAskEmail()) {
+        showEmailStep();
+        return;
+      }
+      setStoredValue(onboardingCompleteStorageKey, "true");
       closeOnboarding({ startGuide: true });
     },
   });
 }
+
+// URL dell'app web Google Apps Script che scrive nel Foglio. Vuoto = sportello email disattivato.
+const emailCollectionEndpoint = typeof window.__vicopisanoEmailEndpoint === "string"
+  ? window.__vicopisanoEmailEndpoint
+  : "https://script.google.com/macros/s/AKfycbzPt23L6MBAYVXcaDSrjTOw_rhOGcEvtSL-dTA4_4ixfo6YY3wqFBTHnNF-U_meQ4IQ/exec";
+const emailStepDoneStorageKey = "vicopisano-email-step-done";
+const emailAddressPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const emailUiStrings = {
+  title: "Resta aggiornato sul percorso",
+  hint: "Lascia la tua email per ricevere novità su Travel podcasting. Puoi anche saltare.",
+  invalid: "Inserisci un'email valida e accetta il consenso.",
+  failed: "Non siamo riusciti a salvare l'email. Riprova o salta.",
+  sending: "Invio…",
+  submit: "Continua",
+};
+
+function shouldAskEmail() {
+  return Boolean(emailCollectionEndpoint) && getStoredValue(emailStepDoneStorageKey) !== "true";
+}
+
+function finishOnboardingAfterEmail() {
+  setStoredValue(emailStepDoneStorageKey, "true");
+  setStoredValue(onboardingCompleteStorageKey, "true");
+  onboardingEmailForm.hidden = true;
+  onboardingLanguageChips.hidden = false;
+  closeOnboarding({ startGuide: true });
+}
+
+function showEmailStep() {
+  onboardingTitle.textContent = emailUiStrings.title;
+  onboardingHint.textContent = emailUiStrings.hint;
+  onboardingLanguageChips.hidden = true;
+  onboardingEmailForm.hidden = false;
+  onboardingEmailInput.focus({ preventScroll: true });
+}
+
+async function submitEmailStep(event) {
+  event.preventDefault();
+  const email = onboardingEmailInput.value.trim();
+  const trap = onboardingEmailForm.elements.website.value;
+  if (!emailAddressPattern.test(email) || !onboardingEmailConsent.checked) {
+    onboardingEmailError.textContent = emailUiStrings.invalid;
+    onboardingEmailError.hidden = false;
+    return;
+  }
+  onboardingEmailError.hidden = true;
+  onboardingEmailSubmit.disabled = true;
+  onboardingEmailSubmit.textContent = emailUiStrings.sending;
+  try {
+    if (!trap) {
+      // text/plain evita il preflight CORS, che Apps Script non supporta; la risposta è opaca.
+      await fetch(emailCollectionEndpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ email, consent: true, language: currentLanguage, page: window.location.href }),
+      });
+    }
+    finishOnboardingAfterEmail();
+  } catch (error) {
+    onboardingEmailError.textContent = emailUiStrings.failed;
+    onboardingEmailError.hidden = false;
+    onboardingEmailSubmit.disabled = false;
+    onboardingEmailSubmit.textContent = emailUiStrings.submit;
+  }
+}
+
+onboardingEmailForm?.addEventListener("submit", submitEmailStep);
+onboardingEmailSkip?.addEventListener("click", finishOnboardingAfterEmail);
 
 function shouldShowOnboarding() {
   return getStoredValue(onboardingCompleteStorageKey) !== "true";

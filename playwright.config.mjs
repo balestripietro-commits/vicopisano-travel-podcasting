@@ -1,8 +1,20 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const port = Number(process.env.E2E_PORT || 4173);
-const remoteBaseURL = process.env.E2E_BASE_URL?.replace(/\/$/, "");
+const remoteBaseURL = process.env.E2E_BASE_URL
+  ? `${process.env.E2E_BASE_URL.replace(/\/+$/, "")}/`
+  : undefined;
 const baseURL = remoteBaseURL || `http://127.0.0.1:${port}`;
+// L'onboarding dei test salta lo sportello email; i test dedicati (email-step.spec.mjs) lo riattivano.
+const storageState = {
+  cookies: [],
+  origins: [
+    {
+      origin: new URL(baseURL).origin,
+      localStorage: [{ name: "vicopisano-email-step-done", value: "true" }],
+    },
+  ],
+};
 const staticRoot = process.env.E2E_STATIC_ROOT || ".";
 const lowMobileSpec = /low-mobile\.spec\.mjs/;
 const productionSmokeSpec = /production-smoke\.spec\.mjs/;
@@ -24,6 +36,7 @@ export default defineConfig({
   ],
   use: {
     baseURL,
+    storageState,
     channel: process.env.PLAYWRIGHT_BROWSER_CHANNEL || "chrome",
     headless: true,
     locale: "it-IT",

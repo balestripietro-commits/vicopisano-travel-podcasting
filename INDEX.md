@@ -6,7 +6,7 @@
 - Playbook centrale nella macro-repository privata `LocalDev`: [standard](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/PLAYBOOK_SITI_COMUNALI.md) e [checklist di apertura](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/CHECKLIST_APERTURA_COMUNE.md). Questi file sono fuori da questa repository annidata.
 - `PLAYBOOK_SITI_COMUNALI.md`: audit e registro specifico di Vicopisano; non è più la fonte delle procedure generali.
 - `DESIGN_SYSTEM.md`: principi, token e componenti del prodotto; audit runtime aggiornato il 9 ottobre 2026 e limiti della separazione fra core e tema annotati nel playbook.
-- Aggiornamento audio italiano del 19 ottobre 2026: otto MP3 consegnati da Iacopo e sequenza del sito portata a otto tappe. Le trascrizioni usano il copione aggiornato con timing stimato, da verificare all’ascolto; i cue Rhubarb delle nuove voci sono da rigenerare. Lingue straniere e intermezzo restano invariati.
+- Aggiornamento audio italiano del 19 ottobre 2026: otto MP3 consegnati da Iacopo e sequenza del sito portata a otto tappe. Le trascrizioni usano il copione aggiornato con timing stimato, da verificare all’ascolto. Il 21 ottobre 2026 i cue Rhubarb italiani delle otto tracce sono stati generati dai WAV consegnati con Rhubarb 1.14.0. Lingue straniere e intermezzo restano invariati.
 
 ## Root locale master del progetto
 
@@ -14,7 +14,7 @@
 - Produzione: [demo pubblica](https://transcendent-meerkat-166cbe.netlify.app/). Deploy verificato il 10 ottobre 2026 dalla GitHub Actions `Deploy production` run #16, commit `8aa0c7b`; E2E, deploy Netlify e smoke test completati con successo.
 ## Contenuto
 
-- L’ingresso non richiede l’email. Al primo accesso viene chiesta la lingua, salvata per gli accessi successivi; `tests/e2e/access-flow.spec.mjs` verifica il flusso e l’assenza del modulo email. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.
+- Il sito si apre sempre in italiano (`FORCED_INITIAL_LANGUAGE` in `app.js`, da impostare a `null` quando le altre lingue sono approvate). Al primo accesso viene chiesta la lingua, poi, se `emailCollectionEndpoint` in `app.js` è valorizzato, lo sportello email facoltativo (consenso obbligatorio, pulsante Salta). Le email vanno in un Foglio Google tramite l'Apps Script `apps-script/raccolta-email.gs`; con endpoint vuoto lo sportello è disattivato. Test: `tests/e2e/access-flow.spec.mjs` e `tests/e2e/email-step.spec.mjs`. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.
 
 - Il blocco introduttivo apre con un marcatore dorato prima di “Buondì!” e chiude con un marcatore della stessa misura accanto all’ultima parola della presentazione; la chiusura segue il testo anche quando va a capo su mobile.
 - Le tessere della mappa usano l'URL canonico `tile.openstreetmap.org` e mostrano sempre l'etichetta cliccabile `© OpenStreetMap`: centrata sul bordo inferiore e nel colore della cornice nella home desktop/mobile e in Explore desktop; nel full player Mappa + player mobile resta in alto a sinistra come sola scritta semitrasparente, senza targhetta, per non sovrapporsi a mascotte e dock. Il link porta al copyright senza coprire zoom o didascalia. Aprendo `index.html` come `file://`, le tessere non vengono richieste e appare un invito ad avviare il server locale.
@@ -23,6 +23,7 @@
 - `index.html`: pagina principale del prototipo statico.
 - Il pulsante Google Maps usa un pin `location_on` nel controllo della mappa; nel full player non viene mostrato.
 - Il tracciato verde della mappa è solo informativo e non mostra più il cursore da link; clic e trascinamento sul percorso raggiungono la mappa, mentre i marker restano selezionabili.
+- Tra la Tappa 5 (Torre dell’Orologio) e la Tappa 6 (Pieve di Santa Maria), il tracciato segue Via Lante verso nord-ovest, passa da Via del Municipio e Piazza Cavalca, raggiunge SP38 e termina alle coordinate della Pieve. Il precedente segmento coincideva con Via del Castello ed è stato corretto il 21 ottobre 2026.
 - Su mobile i pulsanti zoom `+ / −` di Leaflet sono nascosti sia sulla mappa normale sia nel full player: zoom e riduzione restano disponibili con i gesti delle dita. Su desktop i controlli restano visibili.
 - Durante la traccia transitoria, in entrambe le viste mobile sono nascosti i pulsanti guida `?`; in Mappa + player sono nascosti anche geolocalizzazione e Google Maps. La trascrizione mobile viene azzerata e ricollegata alla nuova sorgente audio anche se l'indice del cue coincide con il precedente. Nella home mobile il Play occupa tutta la larghezza della timeline; in Mappa + player (mobile e desktop) tutta quella dei controlli, con un margine verticale tra timeline e Play nel full player mobile. Nel mini-player desktop mantiene spazi uguali tra titolo e timeline senza aumentare l'altezza del dock. I controlli contestuali tornano al termine dell'intermezzo.
 - Il pulsante Aiuto nell'intestazione resta perfettamente circolare su desktop e mobile, con dimensioni fisse per breakpoint e cursore cliccabile.
@@ -111,12 +112,12 @@
 - `dev-server.mjs`: server statico locale con supporto HTTP Range per gli MP3; serve `npm run dev` e i test E2E, senza entrare nel sito pubblicato.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
 - `package.json` e `package-lock.json`: dipendenze versionate Playwright e Netlify CLI, comandi della suite E2E e deploy riproducibile.
-- `playwright.config.mjs`: configurazione E2E desktop, mobile standard e mobile basso `375x667` con Chrome locale, un worker e `dev-server.mjs` come server statico Range-aware; esclude il controllo remoto settimanale dalla suite ordinaria.
+- `playwright.config.mjs`: configurazione E2E desktop, mobile standard e mobile basso `375x667`; su CI usa un retry e salva la trace solo al primo retry.
 - `playwright.external-links.config.mjs`: configurazione Playwright isolata per il monitoraggio dei link sul dominio Netlify pubblico.
 - `tests/e2e/`: test automatici per tutorial, guide contestuali, player, mappa, responsive, localizzazione, reduced motion, viewport mobile bassa, smoke test e controllo remoto delle piattaforme.
-- `.github/workflows/e2e.yml`: workflow GitHub Actions che ignora modifiche esclusivamente Markdown ed esegue la suite sull'artefatto `dist/` per gli altri push e pull request verso `main`; non pubblica mai automaticamente.
+- `.github/workflows/e2e.yml`: suite completa sul build `dist/` nelle pull request e su avvio manuale; non ripete tutta la suite sul push a `main`.
 - `.github/workflows/deploy.yml`: workflow GitHub Actions manuale e confermato che ricostruisce, esegue gli E2E, pubblica su Netlify e verifica il dominio pubblico solo quando viene richiesta una pubblicazione di produzione.
-- `.github/workflows/external-links.yml`: controllo settimanale e manuale del sito pubblico per i link delle piattaforme, con riepilogo GitHub e artifact diagnostico conservato per 14 giorni.
+- `.github/workflows/external-links.yml`: controllo settimanale e manuale del sito pubblico per i link delle piattaforme, con riepilogo GitHub e trace diagnostiche conservate per 3 giorni.
 - `build-static.mjs`: build Netlify a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
 - `netlify.toml`: configurazione versionata del build `npm run build`, publish directory `dist/` e Node.js 22.
 - `logo_vicopisano.webp`: stemma lossless usato nell'intestazione e nell'intermezzo del player.
@@ -139,7 +140,7 @@
 - `audio/pt/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
 - `audio/ru/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
 - `audio/<lingua>/`: MP3 runtime organizzati per lingua ISO (`it`, `en`, `de`, `es`, `fr`, `pt`, `ru`).
-- audio/cues: le nuove tracce italiane hanno cue vuoti per non riutilizzare fonemi della versione precedente; rigenerare Rhubarb dai nuovi master. Le tracce straniere della Tappa 1 e l’intermezzo conservano i cue esistenti.
+- audio/cues: cue Rhubarb delle otto tracce italiane rigenerati il 21 ottobre 2026 dai WAV consegnati con Rhubarb 1.14.0; coprono la durata dei rispettivi MP3. Le tracce straniere della Tappa 1 e l’intermezzo conservano i cue esistenti.
 - audio/cues/transition_between_stops.json: cue Rhubarb già esistenti per l’intermezzo.
 - audio/transcripts: otto trascrizioni basate sul copione consegnato il 19 ottobre; timestamp stimati in proporzione alla lunghezza delle frasi, da riallineare e verificare all’ascolto prima della pubblicazione. La traccia transitoria usa segmenti in app.js.
 - Consegna audio italiana del 19 ottobre 2026: otto MP3, WAV e progetti .band di Iacopo Piccaluga sono in Delivering/Vicopisano/Audio def/Audio def per demo/Italiano/. Drive conserva i sorgenti; runtime e documentazione restano nella root locale.
@@ -165,3 +166,9 @@
 - `design-system.html` - pagina playground statica con componenti Fase 2, Typography Lab Georgia/Fraunces/Cormorant Garamond e confronto identificatore tappa.
 - Fase 2 produzione: `index.html` importa `design-system.css -> theme-vicopisano.css -> style.css`; `style.css` mantiene il livello runtime specifico Vicopisano.
 - Fase 2 componenti runtime: selettore lingua migrato a `TPChip`, Help/ricentratura/fullscreen a `TPIconButton`, card tappe a `TPStopCard` con stato selected evidente.
+
+## Pubblicazione GitHub Pages
+- Repository GitHub pubblica: https://github.com/balestripietro-commits/vicopisano-travel-podcasting.
+- Sito: https://balestripietro-commits.github.io/vicopisano-travel-podcasting/.
+- GitHub Actions compila `npm run build` e pubblica `dist/` a ogni push su `main`; workflow in `.github/workflows/deploy-pages.yml`.
+- Il deploy GitHub Pages è attivo dal 21 ottobre 2026. Netlify resta configurato come hosting preesistente finché link e QR non vengono aggiornati.
