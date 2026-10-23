@@ -5364,10 +5364,15 @@ function renderOnboardingLanguageSelector() {
   });
 }
 
-// Primo passo dell'onboarding, prima della scelta lingua. URL dell'app web Google Apps Script che scrive nel Foglio; vuoto = sportello disattivato.
+// Sportello email: primo passo dell'onboarding, prima della scelta lingua. Spento di default.
+// Per riattivarlo impostare EMAIL_GATE_ENABLED a true. Le email vanno nel Foglio Google "Iscrizioni Vicopisano"
+// tramite l'app web Google Apps Script (apps-script/raccolta-email.gs); la colonna Pagina distingue il sito.
+const EMAIL_GATE_ENABLED = false;
+const EMAIL_GATE_ENDPOINT = "https://script.google.com/macros/s/AKfycbzPt23L6MBAYVXcaDSrjTOw_rhOGcEvtSL-dTA4_4ixfo6YY3wqFBTHnNF-U_meQ4IQ/exec";
+// I test possono forzare un endpoint con window.__vicopisanoEmailEndpoint.
 const emailCollectionEndpoint = typeof window.__vicopisanoEmailEndpoint === "string"
   ? window.__vicopisanoEmailEndpoint
-  : "https://script.google.com/macros/s/AKfycbzPt23L6MBAYVXcaDSrjTOw_rhOGcEvtSL-dTA4_4ixfo6YY3wqFBTHnNF-U_meQ4IQ/exec";
+  : (EMAIL_GATE_ENABLED ? EMAIL_GATE_ENDPOINT : "");
 const emailStepDoneStorageKey = "vicopisano-email-step-done";
 const emailAddressPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const emailUiStrings = {
