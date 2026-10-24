@@ -140,7 +140,7 @@
 - `audio/pt/01_torre_quattro_porte_pt.mp3`: audio Tappa 1 in portoghese.
 - `audio/ru/01_torre_quattro_porte_ru.mp3`: audio Tappa 1 in russo.
 - `audio/<lingua>/`: MP3 runtime organizzati per lingua ISO (`it`, `en`, `de`, `es`, `fr`, `pt`, `ru`).
-- audio/cues: cue Rhubarb delle otto tracce italiane rigenerati il 21 ottobre 2026 dai WAV consegnati con Rhubarb 1.14.0; coprono la durata dei rispettivi MP3. Le tracce straniere della Tappa 1 e l’intermezzo conservano i cue esistenti.
+- audio/cues: cue Rhubarb delle otto tracce italiane rigenerati il 24 ottobre 2026 dagli MP3 runtime con Rhubarb 1.14.0 (i file committati il 20 ottobre erano vuoti); coprono la durata dei rispettivi MP3. Le tracce straniere della Tappa 1 e l’intermezzo conservano i cue esistenti.
 - audio/cues/transition_between_stops.json: cue Rhubarb già esistenti per l’intermezzo.
 - audio/transcripts: otto trascrizioni basate sul copione consegnato il 19 ottobre; timestamp stimati in proporzione alla lunghezza delle frasi, da riallineare e verificare all’ascolto prima della pubblicazione. La traccia transitoria usa segmenti in app.js.
 - Consegna audio italiana del 19 ottobre 2026: otto MP3, WAV e progetti .band di Iacopo Piccaluga sono in Delivering/Vicopisano/Audio def/Audio def per demo/Italiano/. Drive conserva i sorgenti; runtime e documentazione restano nella root locale.
