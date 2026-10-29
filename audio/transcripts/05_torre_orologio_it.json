@@ -13,10 +13,14 @@
   },
   "alignment": {
     "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
-    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
-    "matchedWords": 0.926,
+    "method": "Segment boundaries are the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is. Sentences of the script that are not spoken in the delivered MP3 are not shown as subtitles and are listed in scriptNotInAudio.",
+    "matchedWords": 0.992,
     "reviewRequired": true,
-    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication.",
+    "scriptNotInAudio": [
+      "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano.",
+      "Quando siete pronti, raggiungete la prossima tappa."
+    ]
   },
   "segments": [
     {
@@ -171,7 +175,7 @@
     },
     {
       "start": 135.64,
-      "end": 139.46,
+      "end": 139.8,
       "text": "Ma forse la cosa che mi incuriosisce di più è un’altra."
     },
     {
@@ -201,18 +205,8 @@
     },
     {
       "start": 157.72,
-      "end": 163.4,
+      "end": 163.7,
       "text": "Lì lasceremo, almeno per qualche minuto, torri, mura e fortificazioni"
-    },
-    {
-      "start": 163.4,
-      "end": 163.6,
-      "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
-    },
-    {
-      "start": 163.6,
-      "end": 164.1,
-      "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
   ]
 }

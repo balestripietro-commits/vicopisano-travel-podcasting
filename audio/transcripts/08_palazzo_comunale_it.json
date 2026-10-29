@@ -13,10 +13,15 @@
   },
   "alignment": {
     "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
-    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
-    "matchedWords": 0.893,
+    "method": "Segment boundaries are the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is. Sentences of the script that are not spoken in the delivered MP3 are not shown as subtitles and are listed in scriptNotInAudio.",
+    "matchedWords": 0.985,
     "reviewRequired": true,
-    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication.",
+    "scriptNotInAudio": [
+      "Questa traccia conclude l’itinerario audio realizzato dal Comune di Vicopisano.",
+      "Grazie per aver camminato insieme a Filippo Brunelleschi.",
+      "Se volete continuare a scoprire il borgo e il suo territorio, rivolgetevi all’Ufficio Turistico del Comune per conoscere visite, percorsi ed esperienze disponibili."
+    ]
   },
   "segments": [
     {
@@ -51,7 +56,7 @@
     },
     {
       "start": 29.08,
-      "end": 37.96,
+      "end": 38.22,
       "text": "La struttura che vedete si è formata in momenti diversi, riunendo edifici medievali e interventi realizzati fra il Seicento e l’Ottocento."
     },
     {
@@ -130,7 +135,7 @@
       "text": "Negli ambienti che un tempo ospitavano il cancelliere si continua ad amministrare il territorio, anche se con istituzioni, responsabilità e cittadini molto diversi da quelli che conobbi."
     },
     {
-      "start": 129.72,
+      "start": 128.6,
       "end": 138.14,
       "text": "All’inizio di questo percorso, appena tornato a Vicopisano, pensavo che avrei misurato il borgo osservando ciò che restava delle mie opere."
     },
@@ -181,7 +186,7 @@
     },
     {
       "start": 172.32,
-      "end": 182.1,
+      "end": 182.32,
       "text": "Le botteghe, i mercati, le associazioni e i circoli mantengono vivo il paese con mostre, spettacoli, incontri e feste durante tutto l’anno."
     },
     {
@@ -246,7 +251,7 @@
     },
     {
       "start": 235.78,
-      "end": 242.72,
+      "end": 243.64,
       "text": "Potrete chiedere informazioni sulle visite alla Rocca, al Palazzo Pretorio, al Camminamento del Soccorso e alla Torre dell’Orologio."
     },
     {
@@ -261,23 +266,8 @@
     },
     {
       "start": 255.42,
-      "end": 261.08,
+      "end": 261.38,
       "text": "E poi, modestamente, una lezione di architettura così richiede un certo riposo."
-    },
-    {
-      "start": 261.08,
-      "end": 261.28,
-      "text": "Questa traccia conclude l’itinerario audio realizzato dal Comune di Vicopisano."
-    },
-    {
-      "start": 261.28,
-      "end": 261.48,
-      "text": "Grazie per aver camminato insieme a Filippo Brunelleschi."
-    },
-    {
-      "start": 261.48,
-      "end": 261.62,
-      "text": "Se volete continuare a scoprire il borgo e il suo territorio, rivolgetevi all’Ufficio Turistico del Comune per conoscere visite, percorsi ed esperienze disponibili."
     }
   ]
 }

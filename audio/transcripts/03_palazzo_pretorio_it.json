@@ -13,8 +13,8 @@
   },
   "alignment": {
     "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
-    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
-    "matchedWords": 0.968,
+    "method": "Segment boundaries are the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is. Sentences of the script that are not spoken in the delivered MP3 are not shown as subtitles and are listed in scriptNotInAudio.",
+    "matchedWords": 0.989,
     "reviewRequired": true,
     "visibleTextRule": "Verify spoken wording and timing by listening before publication."
   },
@@ -221,11 +221,11 @@
     },
     {
       "start": 189.24,
-      "end": 190.92,
+      "end": 191.24,
       "text": "In poche parole..."
     },
     {
-      "start": 191.82,
+      "start": 191.24,
       "end": 197.18,
       "text": "l’acqua che aveva contribuito alla fortuna di Vicopisano non passava più dove passava prima."
     },

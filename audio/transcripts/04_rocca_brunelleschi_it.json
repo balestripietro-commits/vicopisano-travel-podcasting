@@ -13,10 +13,14 @@
   },
   "alignment": {
     "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
-    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
-    "matchedWords": 0.945,
+    "method": "Segment boundaries are the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is. Sentences of the script that are not spoken in the delivered MP3 are not shown as subtitles and are listed in scriptNotInAudio.",
+    "matchedWords": 0.993,
     "reviewRequired": true,
-    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication.",
+    "scriptNotInAudio": [
+      "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano.",
+      "Quando siete pronti, raggiungete la prossima tappa."
+    ]
   },
   "segments": [
     {
@@ -121,7 +125,7 @@
     },
     {
       "start": 104.34,
-      "end": 109.92,
+      "end": 110.24,
       "text": "Mi hanno detto che nel borgo organizzano persino un festival musicale chiamato Rocca’n’Roll."
     },
     {
@@ -191,18 +195,8 @@
     },
     {
       "start": 175.8,
-      "end": 178.98,
+      "end": 179.84,
       "text": "La prossima tappa ci porterà davanti alla Torre dell’Orologio."
-    },
-    {
-      "start": 178.98,
-      "end": 179.54,
-      "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
-    },
-    {
-      "start": 179.54,
-      "end": 179.88,
-      "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
   ]
 }

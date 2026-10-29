@@ -13,10 +13,17 @@
   },
   "alignment": {
     "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
-    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
-    "matchedWords": 0.903,
+    "method": "Segment boundaries are the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is. Sentences of the script that are not spoken in the delivered MP3 are not shown as subtitles and are listed in scriptNotInAudio.",
+    "matchedWords": 0.985,
     "reviewRequired": true,
-    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication.",
+    "scriptNotInAudio": [
+      "Quella sì, appartiene al sistema che progettai per Vicopisano.",
+      "E dopo quasi seicento anni è ancora perfettamente riconoscibile.",
+      "Permettetemi di considerarla una piccola soddisfazione.",
+      "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano.",
+      "Quando siete pronti, raggiungete la prossima tappa."
+    ]
   },
   "segments": [
     {
@@ -146,11 +153,11 @@
     },
     {
       "start": 118.54,
-      "end": 122.34,
+      "end": 122.62,
       "text": "Da una parte l’Arno, che conduceva verso Pisa e il mare."
     },
     {
-      "start": 123.26,
+      "start": 122.62,
       "end": 130.74,
       "text": "Dall’altra l’Auser, chiamato anche Serezza, che permetteva di raggiungere il Lago di Bientina e, da lì, la Lucchesia."
     },
@@ -356,33 +363,8 @@
     },
     {
       "start": 287.2,
-      "end": 292.0,
+      "end": 292.3,
       "text": "Alla prossima tappa incontreremo la Torre e il Camminamento del Soccorso."
-    },
-    {
-      "start": 292.0,
-      "end": 292.2,
-      "text": "Quella sì, appartiene al sistema che progettai per Vicopisano."
-    },
-    {
-      "start": 292.2,
-      "end": 292.4,
-      "text": "E dopo quasi seicento anni è ancora perfettamente riconoscibile."
-    },
-    {
-      "start": 292.4,
-      "end": 292.6,
-      "text": "Permettetemi di considerarla una piccola soddisfazione."
-    },
-    {
-      "start": 292.6,
-      "end": 292.8,
-      "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
-    },
-    {
-      "start": 292.8,
-      "end": 292.81,
-      "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
   ]
 }

@@ -13,10 +13,14 @@
   },
   "alignment": {
     "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
-    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
-    "matchedWords": 0.936,
+    "method": "Segment boundaries are the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is. Sentences of the script that are not spoken in the delivered MP3 are not shown as subtitles and are listed in scriptNotInAudio.",
+    "matchedWords": 0.991,
     "reviewRequired": true,
-    "visibleTextRule": "Verify spoken wording and timing by listening before publication."
+    "visibleTextRule": "Verify spoken wording and timing by listening before publication.",
+    "scriptNotInAudio": [
+      "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano.",
+      "Quando siete pronti, raggiungete la prossima tappa."
+    ]
   },
   "segments": [
     {
@@ -26,7 +30,7 @@
     },
     {
       "start": 2.2,
-      "end": 6.34,
+      "end": 7.08,
       "text": "Le nostre ultime due tappe sono davvero a pochi passi l’una dall’altra."
     },
     {
@@ -206,18 +210,8 @@
     },
     {
       "start": 187.64,
-      "end": 190.5,
+      "end": 190.8,
       "text": "La nostra ultima tappa sarà proprio qui."
-    },
-    {
-      "start": 190.5,
-      "end": 190.7,
-      "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
-    },
-    {
-      "start": 190.7,
-      "end": 191.2,
-      "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
   ]
 }
