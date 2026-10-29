@@ -6,7 +6,7 @@
 - Playbook centrale nella macro-repository privata `LocalDev`: [standard](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/PLAYBOOK_SITI_COMUNALI.md) e [checklist di apertura](https://github.com/balestripietro-commits/LocalDev/blob/main/Travel%20podcasting/github-sites/Playbook-Siti-Comunali/CHECKLIST_APERTURA_COMUNE.md). Questi file sono fuori da questa repository annidata.
 - `PLAYBOOK_SITI_COMUNALI.md`: audit e registro specifico di Vicopisano; non è più la fonte delle procedure generali.
 - `DESIGN_SYSTEM.md`: principi, token e componenti del prodotto; audit runtime aggiornato il 9 ottobre 2026 e limiti della separazione fra core e tema annotati nel playbook.
-- Aggiornamento audio italiano del 19 ottobre 2026: otto MP3 consegnati da Iacopo e sequenza del sito portata a otto tappe. Le trascrizioni usano il copione aggiornato con timing stimato, da verificare all’ascolto. Il 21 ottobre 2026 i cue Rhubarb italiani delle otto tracce sono stati generati dai WAV consegnati con Rhubarb 1.14.0. Lingue straniere e intermezzo restano invariati.
+- Aggiornamento audio italiano del 19 ottobre 2026: otto MP3 consegnati da Iacopo e sequenza del sito portata a otto tappe. Le trascrizioni usano il testo del copione aggiornato, con i tempi ricalcolati sull’audio il 29 ottobre 2026 (Whisper large-v3-turbo), da verificare all’ascolto. Il 21 ottobre 2026 i cue Rhubarb italiani delle otto tracce sono stati generati dai WAV consegnati con Rhubarb 1.14.0. Lingue straniere e intermezzo restano invariati.
 
 ## Root locale master del progetto
 
@@ -142,7 +142,7 @@
 - `audio/<lingua>/`: MP3 runtime organizzati per lingua ISO (`it`, `en`, `de`, `es`, `fr`, `pt`, `ru`).
 - audio/cues: cue Rhubarb delle otto tracce italiane rigenerati il 24 ottobre 2026 dagli MP3 runtime con Rhubarb 1.14.0 (i file committati il 20 ottobre erano vuoti); coprono la durata dei rispettivi MP3. Le tracce straniere della Tappa 1 e l’intermezzo conservano i cue esistenti.
 - audio/cues/transition_between_stops.json: cue Rhubarb già esistenti per l’intermezzo.
-- audio/transcripts: otto trascrizioni basate sul copione consegnato il 19 ottobre; timestamp stimati in proporzione alla lunghezza delle frasi, da riallineare e verificare all’ascolto prima della pubblicazione. La traccia transitoria usa segmenti in app.js.
+- audio/transcripts: otto trascrizioni basate sul copione consegnato il 19 ottobre; timestamp ricalcolati il 29 ottobre 2026 dalle parole effettivamente pronunciate (Whisper large-v3-turbo abbinato al copione), da verificare all’ascolto prima della pubblicazione. La traccia transitoria usa segmenti in app.js.
 - Consegna audio italiana del 19 ottobre 2026: otto MP3, WAV e progetti .band di Iacopo Piccaluga sono in Delivering/Vicopisano/Audio def/Audio def per demo/Italiano/. Drive conserva i sorgenti; runtime e documentazione restano nella root locale.
 - `audio/REVISIONE_TAPPA1_2026-10-09.md`: provenienza, confronto copione/trascrizioni, impostazioni di export e verifiche della revisione della Tappa 1.
 - `outputs/`: cartella riservata a deliverable utente.

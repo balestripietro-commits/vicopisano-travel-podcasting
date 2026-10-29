@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "estimated-timing-review-required",
+  "status": "aligned-asr-review-required",
   "language": "it",
   "stop": 7,
   "audio": {
@@ -12,210 +12,211 @@
     "version": "copione aggiornato, tracce 2026-10-19"
   },
   "alignment": {
-    "engine": "approved-script timing estimate",
-    "method": "Estimated from approved copy and MP3 duration; phrase timing is proportional to word count.",
+    "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
+    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
+    "matchedWords": 0.936,
     "reviewRequired": true,
     "visibleTextRule": "Verify spoken wording and timing by listening before publication."
   },
   "segments": [
     {
-      "start": 0,
-      "end": 2.5,
+      "start": 0.0,
+      "end": 2.2,
       "text": "Siamo tornati nel cuore del borgo."
     },
     {
-      "start": 2.74,
-      "end": 7.73,
+      "start": 2.2,
+      "end": 6.34,
       "text": "Le nostre ultime due tappe sono davvero a pochi passi l’una dall’altra."
     },
     {
-      "start": 7.97,
-      "end": 9.63,
+      "start": 7.08,
+      "end": 8.64,
       "text": "Ma andiamo con ordine."
     },
     {
-      "start": 9.87,
-      "end": 19.02,
+      "start": 9.42,
+      "end": 17.74,
       "text": "Spostate lo sguardo verso sinistra e cercate due torri che, a prima vista, non è nemmeno così facile riconoscere come una coppia."
     },
     {
-      "start": 19.26,
-      "end": 19.68,
+      "start": 18.2,
+      "end": 19.24,
       "text": "Eccole."
     },
     {
-      "start": 19.92,
-      "end": 21.16,
+      "start": 19.24,
+      "end": 21.02,
       "text": "Le Torri Gemelle."
     },
     {
-      "start": 21.4,
-      "end": 23.9,
+      "start": 21.02,
+      "end": 24.1,
       "text": "Il nome suggerisce che siano identiche."
     },
     {
-      "start": 24.14,
-      "end": 33.29,
+      "start": 24.1,
+      "end": 33.12,
       "text": "Ma, se permettete il parere di un architetto, quando si osserva un edificio antico la parola “identico” va usata con molta prudenza."
     },
     {
-      "start": 33.53,
-      "end": 36.02,
+      "start": 33.7,
+      "end": 37.0,
       "text": "Queste torri risalgono al dodicesimo secolo."
     },
     {
-      "start": 36.26,
-      "end": 44.17,
+      "start": 37.0,
+      "end": 46.16,
       "text": "Sono quindi più antiche della mia Rocca e, all’inizio del Trecento, facevano parte della precedente fortificazione pisana di Vicopisano."
     },
     {
-      "start": 44.41,
-      "end": 51.48,
+      "start": 46.78,
+      "end": 55.74,
       "text": "Quando Firenze conquistò il borgo, sottraendolo alla Repubblica di Pisa nel 1406, quella vecchia Rocca venne smantellata."
     },
     {
-      "start": 51.72,
-      "end": 57.54,
+      "start": 55.74,
+      "end": 61.26,
       "text": "Qualche tappa fa vi ho mostrato il sistema difensivo che progettai al suo posto."
     },
     {
-      "start": 57.78,
-      "end": 60.69,
+      "start": 61.26,
+      "end": 64.2,
       "text": "Le Torri Gemelle, però, rimasero in piedi."
     },
     {
-      "start": 60.93,
-      "end": 66.34,
+      "start": 64.2,
+      "end": 70.36,
       "text": "E così, ancora oggi, possiamo leggere due momenti diversi della storia di Vicopisano:"
     },
     {
-      "start": 66.58,
-      "end": 69.07,
+      "start": 70.36,
+      "end": 73.16,
       "text": "ciò che resta della fortificazione pisana..."
     },
     {
-      "start": 69.31,
-      "end": 72.64,
+      "start": 73.16,
+      "end": 76.92,
       "text": "e la fortezza fiorentina costruita dopo la conquista."
     },
     {
-      "start": 72.88,
-      "end": 74.54,
+      "start": 77.52,
+      "end": 79.94,
       "text": "Adesso guardate i materiali."
     },
     {
-      "start": 74.78,
-      "end": 82.69,
+      "start": 79.94,
+      "end": 88.22,
       "text": "Nella parte inferiore delle torri trovate ancora il verrucano, la pietra che abbiamo incontrato più volte durante il percorso."
     },
     {
-      "start": 82.93,
-      "end": 86.67,
+      "start": 88.76,
+      "end": 92.64,
       "text": "Più in alto, invece, la muratura prosegue in mattoni."
     },
     {
-      "start": 86.91,
-      "end": 98.97,
+      "start": 92.64,
+      "end": 105.66,
       "text": "Questo cambiamento ci racconta che entrambe le torri furono modificate e sopraelevate nel corso del tempo, probabilmente anche per riparare i danni provocati dai numerosi assedi subiti dal borgo."
     },
     {
-      "start": 99.21,
-      "end": 103.78,
+      "start": 105.66,
+      "end": 110.38,
       "text": "Ma le due torri non attraversarono quegli eventi nello stesso modo."
     },
     {
-      "start": 104.02,
-      "end": 109.43,
+      "start": 110.38,
+      "end": 116.98,
       "text": "In quella occidentale, la parte più antica in pietra raggiunge circa diciannove metri."
     },
     {
-      "start": 109.67,
-      "end": 113.0,
+      "start": 116.98,
+      "end": 121.2,
       "text": "Nella torre orientale, invece, arriva soltanto a otto."
     },
     {
-      "start": 113.24,
-      "end": 118.23,
+      "start": 121.2,
+      "end": 127.18,
       "text": "Una delle due, evidentemente, ebbe bisogno di essere ricostruita molto più dell’altra."
     },
     {
-      "start": 118.47,
-      "end": 119.3,
+      "start": 127.86,
+      "end": 129.48,
       "text": "Gemelle, dunque."
     },
     {
-      "start": 119.54,
-      "end": 121.2,
+      "start": 129.48,
+      "end": 131.62,
       "text": "Ma con cicatrici differenti."
     },
     {
-      "start": 121.44,
-      "end": 128.52,
+      "start": 131.62,
+      "end": 138.22,
       "text": "La torre orientale conserva anche i resti della Porta del Mercato, uno degli antichi accessi al castello."
     },
     {
-      "start": 128.76,
-      "end": 134.99,
+      "start": 138.22,
+      "end": 145.64,
       "text": "Se osservate attentamente, potete riconoscere anche un piccolo ingresso collocato in alto rispetto al terreno."
     },
     {
-      "start": 135.23,
-      "end": 139.81,
+      "start": 145.64,
+      "end": 150.24,
       "text": "Non è una porta pensata per essere raggiunta comodamente dalla strada."
     },
     {
-      "start": 140.05,
-      "end": 147.53,
+      "start": 150.24,
+      "end": 157.26,
       "text": "In origine si accedeva alla torre attraverso strutture di legno che potevano essere rimosse in caso di pericolo."
     },
     {
-      "start": 147.77,
-      "end": 155.68,
+      "start": 157.26,
+      "end": 164.08,
       "text": "Ma c’è anche un altro motivo per cui, viste da qui, le due torri non sembrano immediatamente una coppia."
     },
     {
-      "start": 155.92,
-      "end": 158.41,
+      "start": 164.64,
+      "end": 167.36,
       "text": "Guardate adesso l’edificio che avete davanti."
     },
     {
-      "start": 158.65,
-      "end": 161.15,
+      "start": 167.36,
+      "end": 170.4,
       "text": "È il Palazzo Comunale di Vicopisano."
     },
     {
-      "start": 161.39,
-      "end": 170.54,
+      "start": 170.4,
+      "end": 179.16,
       "text": "Nel corso del tempo è arrivato a inglobare e nascondere in parte il profilo delle Torri Gemelle, soprattutto quello della torre occidentale."
     },
     {
-      "start": 170.78,
-      "end": 173.69,
+      "start": 179.16,
+      "end": 181.88,
       "text": "E visto che ormai lo abbiamo davanti..."
     },
     {
-      "start": 173.93,
-      "end": 178.5,
+      "start": 182.34,
+      "end": 185.36,
       "text": "direi che è arrivato il momento di occuparci anche di lui."
     },
     {
-      "start": 178.74,
-      "end": 180.41,
+      "start": 185.36,
+      "end": 187.64,
       "text": "Fate ancora pochi passi."
     },
     {
-      "start": 180.65,
-      "end": 183.56,
+      "start": 187.64,
+      "end": 190.5,
       "text": "La nostra ultima tappa sarà proprio qui."
     },
     {
-      "start": 183.8,
-      "end": 188.37,
+      "start": 190.5,
+      "end": 190.7,
       "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
     },
     {
-      "start": 188.61,
-      "end": 191.76,
+      "start": 190.7,
+      "end": 191.2,
       "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
   ]

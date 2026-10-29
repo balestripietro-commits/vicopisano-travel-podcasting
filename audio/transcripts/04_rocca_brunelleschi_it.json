@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "status": "estimated-timing-review-required",
+  "status": "aligned-asr-review-required",
   "language": "it",
   "stop": 4,
   "audio": {
@@ -12,194 +12,195 @@
     "version": "copione aggiornato, tracce 2026-10-19"
   },
   "alignment": {
-    "engine": "approved-script timing estimate",
-    "method": "Estimated from approved copy and MP3 duration; phrase timing is proportional to word count.",
+    "engine": "Whisper large-v3-turbo (word timestamps) + approved-script matching",
+    "method": "Segment boundaries taken from the time of the first and last spoken word of each approved-script sentence, found by matching the script text to a word-level Whisper transcription of the delivered MP3. Script wording is kept as is.",
+    "matchedWords": 0.945,
     "reviewRequired": true,
     "visibleTextRule": "Verify spoken wording and timing by listening before publication."
   },
   "segments": [
     {
-      "start": 0,
-      "end": 0.41,
+      "start": 0.0,
+      "end": 0.52,
       "text": "Eccola."
     },
     {
-      "start": 0.65,
-      "end": 1.46,
+      "start": 1.06,
+      "end": 1.58,
       "text": "La Rocca."
     },
     {
-      "start": 1.7,
-      "end": 10.61,
+      "start": 2.04,
+      "end": 10.06,
       "text": "Quando mi affidarono il progetto, sulla sommità del colle si trovava già una torre del XII secolo: la Torre di Santa Maria."
     },
     {
-      "start": 10.85,
-      "end": 13.69,
+      "start": 10.56,
+      "end": 13.44,
       "text": "Avrei potuto demolirla e ricominciare da capo."
     },
     {
-      "start": 13.93,
-      "end": 19.19,
+      "start": 13.44,
+      "end": 19.44,
       "text": "Ma un buon architetto deve anche saper riconoscere ciò che può essere riutilizzato."
     },
     {
-      "start": 19.43,
-      "end": 26.32,
+      "start": 19.44,
+      "end": 27.1,
       "text": "Così la incorporai nella nuova fortificazione e la trasformai nel mastio: il cuore più protetto della Rocca."
     },
     {
-      "start": 26.56,
-      "end": 28.59,
+      "start": 27.1,
+      "end": 31.02,
       "text": "I lavori cominciarono nel 1435."
     },
     {
-      "start": 28.83,
-      "end": 37.34,
+      "start": 31.02,
+      "end": 39.76,
       "text": "Il principio su cui lavorai era semplice: una fortezza non doveva affidare la propria sicurezza a una sola linea di difesa."
     },
     {
-      "start": 37.58,
-      "end": 41.63,
+      "start": 39.76,
+      "end": 43.72,
       "text": "Se il nemico superava il primo ingresso, incontrava il cortile."
     },
     {
-      "start": 41.87,
-      "end": 48.35,
+      "start": 43.72,
+      "end": 50.24,
       "text": "Se conquistava il cortile, i difensori potevano rendere inutilizzabile la scala verso il cammino di ronda."
     },
     {
-      "start": 48.59,
-      "end": 55.89,
+      "start": 50.24,
+      "end": 58.36,
       "text": "E se riusciva ad avanzare ancora, il ponte levatoio del mastio poteva essere sollevato, isolando completamente la torre."
     },
     {
-      "start": 56.13,
-      "end": 58.15,
+      "start": 58.36,
+      "end": 61.18,
       "text": "Una fortezza dentro la fortezza."
     },
     {
-      "start": 58.39,
-      "end": 64.88,
+      "start": 61.18,
+      "end": 68.9,
       "text": "Il mastio possedeva persino una propria cisterna e poteva conservare viveri sufficienti a prolungare la resistenza."
     },
     {
-      "start": 65.12,
-      "end": 67.55,
+      "start": 69.58,
+      "end": 71.86,
       "text": "Ogni spazio era collegato agli altri."
     },
     {
-      "start": 67.79,
-      "end": 70.63,
+      "start": 71.86,
+      "end": 75.3,
       "text": "Ma, in caso di necessità, poteva separarsene."
     },
     {
-      "start": 70.87,
-      "end": 73.7,
+      "start": 75.76,
+      "end": 78.68,
       "text": "Non progettai questa Rocca perché fosse comoda."
     },
     {
-      "start": 73.94,
-      "end": 76.78,
+      "start": 79.26,
+      "end": 82.68,
       "text": "La progettai perché fosse difficile da conquistare."
     },
     {
-      "start": 77.02,
-      "end": 82.29,
+      "start": 82.68,
+      "end": 87.5,
       "text": "Ho scoperto, però, che oggi è un luogo molto più aperto e frequentato."
     },
     {
-      "start": 82.53,
-      "end": 93.47,
+      "start": 87.5,
+      "end": 97.8,
       "text": "Non soltanto dai turisti e dagli appassionati che desiderano conoscere le mie opere ma anche da chi viene qui per assistere a concerti, spettacoli e visite serali."
     },
     {
-      "start": 93.71,
-      "end": 99.78,
+      "start": 98.36,
+      "end": 104.34,
       "text": "Persone che salgono fin quassù non per assediare la Rocca, ma per trascorrervi una serata."
     },
     {
-      "start": 100.02,
-      "end": 105.29,
+      "start": 104.34,
+      "end": 109.92,
       "text": "Mi hanno detto che nel borgo organizzano persino un festival musicale chiamato Rocca’n’Roll."
     },
     {
-      "start": 105.53,
-      "end": 114.85,
+      "start": 110.76,
+      "end": 120.6,
       "text": "Devo riconoscere che una fortezza capace di resistere alle armi e, secoli dopo, anche alla musica moderna, ha certamente dimostrato una buona solidità."
     },
     {
-      "start": 115.09,
-      "end": 117.52,
+      "start": 120.6,
+      "end": 122.86,
       "text": "E poi c’è la Festa Medievale."
     },
     {
-      "start": 117.76,
-      "end": 126.27,
+      "start": 123.38,
+      "end": 133.2,
       "text": "Ogni anno, nel primo fine settimana di settembre, il borgo torna a riempirsi di torce, bandiere, figuranti, musici, duelli e taverne."
     },
     {
-      "start": 126.51,
-      "end": 130.97,
+      "start": 133.2,
+      "end": 138.38,
       "text": "Per qualche sera Vicopisano prova a ricreare l’atmosfera della città medievale."
     },
     {
-      "start": 131.21,
-      "end": 134.45,
+      "start": 138.38,
+      "end": 142.06,
       "text": "Sarei davvero curioso di assistere alla prossima edizione."
     },
     {
-      "start": 134.69,
-      "end": 137.53,
+      "start": 142.06,
+      "end": 145.14,
       "text": "Potrei controllare quanto sia fedele la ricostruzione."
     },
     {
-      "start": 137.77,
-      "end": 139.79,
+      "start": 145.14,
+      "end": 148.12,
       "text": "E magari offrire qualche suggerimento."
     },
     {
-      "start": 140.03,
-      "end": 141.66,
+      "start": 148.12,
+      "end": 150.36,
       "text": "Soltanto se richiesto, naturalmente."
     },
     {
-      "start": 141.9,
-      "end": 150.4,
+      "start": 151.02,
+      "end": 158.04,
       "text": "Sapere che queste strade tornano ad affollarsi e che la Rocca viene aperta anche di notte mi fa capire una cosa."
     },
     {
-      "start": 150.64,
-      "end": 156.72,
+      "start": 158.04,
+      "end": 163.44,
       "text": "Un edificio può continuare a vivere in modi che il suo architetto non aveva previsto."
     },
     {
-      "start": 156.96,
-      "end": 161.02,
+      "start": 163.44,
+      "end": 167.64,
       "text": "Io avevo progettato queste mura per tenere le persone fuori."
     },
     {
-      "start": 161.26,
-      "end": 165.31,
+      "start": 167.64,
+      "end": 172.2,
       "text": "Oggi, invece, le persone vengono accolte e invitate a entrare."
     },
     {
-      "start": 165.55,
-      "end": 167.98,
+      "start": 172.82,
+      "end": 175.8,
       "text": "Adesso lasciamo la Rocca e continuiamo."
     },
     {
-      "start": 168.22,
-      "end": 171.87,
+      "start": 175.8,
+      "end": 178.98,
       "text": "La prossima tappa ci porterà davanti alla Torre dell’Orologio."
     },
     {
-      "start": 172.11,
-      "end": 176.56,
+      "start": 178.98,
+      "end": 179.54,
       "text": "Questa traccia fa parte dell’itinerario audio realizzato dal Comune di Vicopisano."
     },
     {
-      "start": 176.8,
+      "start": 179.54,
       "end": 179.88,
       "text": "Quando siete pronti, raggiungete la prossima tappa."
     }
