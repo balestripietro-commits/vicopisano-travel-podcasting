@@ -725,7 +725,7 @@ const uiStrings = {
     prototype: "",
     introLead: "I am Filippo Brunelleschi.",
     intro:
-      "Once I studied these walls to imagine defenses, passages, and viewpoints. Now I guide you through the village's stories, stop by stop. Follow me through towers, walkways, and glimpses of the borgo: each stop opens a voice, a story, a fragment of Vicopisano.",
+      "Come and explore Vicopisano.\nI'll guide you through towers, walkways\nand hidden stories, one stop at a time.",
     instructionsTitle: "Instructions",
     instructionsText:
       "The map shows the full route, with stops from 1 to 8. You can select a stop from the list or click directly on the map: the site will highlight the chosen point, center the view, and open the dedicated content.",
@@ -790,7 +790,7 @@ const uiStrings = {
     openFirstStop: "Return to first stop",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
-    mainTitle: "Buon dì!",
+    mainTitle: "Buondì!",
     mapStageNote: "Touch the markers or use the stops below to open the route's audio player.",
     highlightTitle: "During listening",
     highlightText: "The map stays at the center of the experience, while the fixed player at the bottom accompanies you during listening without interrupting navigation. That way you can keep exploring the route in a simple, intuitive way.",
@@ -808,7 +808,7 @@ const uiStrings = {
     prototype: "",
     introLead: "Ich bin Filippo Brunelleschi.",
     intro:
-      "Einst betrachtete ich diese Mauern, um Verteidigungen, Übergänge und Blickpunkte zu erahnen. Jetzt begleite ich Sie Schritt für Schritt durch die Geschichten des Ortes. Folgen Sie mir durch Türme, Wehrgänge und Ausblicke: Jede Station öffnet eine Stimme, eine Geschichte, ein Stück Vicopisano.",
+      "Entdecken Sie Vicopisano mit mir:\nTürme, Wehrgänge und verborgene Geschichten –\nStation für Station.",
     instructionsTitle: "Anleitung",
     instructionsText:
       "Die Karte zeigt die gesamte Route mit den Stationen 1 bis 8. Sie können eine Station aus der Liste wählen oder direkt auf die Karte klicken: Die Website hebt den gewählten Punkt hervor, zentriert die Ansicht und öffnet die zugehörigen Inhalte.",
@@ -873,7 +873,7 @@ const uiStrings = {
     openFirstStop: "Zur ersten Station zurück",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
-    mainTitle: "Buon dì!",
+    mainTitle: "Buondì!",
     mapStageNote: "Tippen Sie auf die Marker oder nutzen Sie die Stationen unten, um den Audioplayer der Route zu öffnen.",
     highlightTitle: "Während des Hörens",
     highlightText: "Die Karte bleibt das Zentrum des Erlebnisses, während der feste Player unten Sie beim Hören begleitet, ohne die Navigation zu unterbrechen. So können Sie die Route einfach und intuitiv weiter erkunden.",
@@ -891,7 +891,7 @@ const uiStrings = {
     prototype: "",
     introLead: "Je suis Filippo Brunelleschi.",
     intro:
-      "Autrefois, j’observais ces murailles pour imaginer défenses, passages et points de vue. Aujourd’hui, je vous accompagne à travers les histoires du bourg, étape après étape. Suivez-moi entre tours, cheminements et aperçus du village : chaque étape ouvre une voix, une histoire, un fragment de Vicopisano.",
+      "Suivez-moi à Vicopisano :\nentre tours, chemins de ronde et histoires cachées,\nje vous guide d’étape en étape.",
     instructionsTitle: "Instructions",
     instructionsText:
       "La carte montre l’itinéraire complet de 1 à 7. Lorsque vous choisissez une étape, le site la met en évidence, centre la carte sur le point correspondant et ouvre les détails.",
@@ -956,7 +956,7 @@ const uiStrings = {
     openFirstStop: "Retour à la première étape",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
-    mainTitle: "Buon dì!",
+    mainTitle: "Buondì!",
     mapStageNote: "Touchez les marqueurs ou utilisez les étapes ci-dessous pour ouvrir le lecteur audio du parcours.",
     highlightTitle: "Expérience plein écran",
     highlightText: "La carte reste le cœur de l'expérience, tandis que le lecteur fixe en bas vous accompagne pendant l'écoute sans encombrer l'espace de navigation.",
@@ -974,7 +974,7 @@ const uiStrings = {
     prototype: "",
     introLead: "Soy Filippo Brunelleschi.",
     intro:
-      "Alguna vez observé estas murallas para imaginar defensas, pasajes y puntos de vista. Ahora te acompaño por las historias del pueblo, etapa tras etapa. Sígueme entre torres, pasarelas y rincones del borgo: cada etapa abre una voz, una historia, un fragmento de Vicopisano.",
+      "Descubre Vicopisano conmigo:\nentre torres, caminos de ronda e historias ocultas,\nte guiaré de parada en parada.",
     instructionsTitle: "Instrucciones",
     instructionsText:
       "El mapa muestra el recorrido completo del 1 al 8. Cuando eliges una etapa, el sitio la resalta, centra el mapa en el punto correspondiente y abre los detalles.",
@@ -1039,7 +1039,7 @@ const uiStrings = {
     openFirstStop: "Volver a la primera parada",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
-    mainTitle: "Buon dì!",
+    mainTitle: "Buondì!",
     mapStageNote: "Toca los marcadores o usa las etapas a continuación para abrir el reproductor de audio de la ruta.",
     highlightTitle: "Experiencia a pantalla completa",
     highlightText: "El mapa sigue siendo el corazón de la experiencia, mientras que el reproductor fijo en la parte inferior te acompaña durante la escucha sin restar espacio a la navegación.",
@@ -1057,7 +1057,7 @@ const uiStrings = {
     prototype: "",
     introLead: "Sou Filippo Brunelleschi.",
     intro:
-      "Em tempos observei estas muralhas para imaginar defesas, passagens e pontos de vista. Agora acompanho-o pelas histórias da vila, etapa após etapa. Siga-me entre torres, passadiços e recantos do borgo: cada etapa abre uma voz, uma história, um fragmento de Vicopisano.",
+      "Vem descobrir Vicopisano comigo:\nentre torres, caminhos de ronda e histórias escondidas,\nacompanho-te de paragem em paragem.",
     instructionsTitle: "Instruções",
     instructionsText:
       "O mapa mostra o percurso completo de 1 a 8. Quando você escolhe uma etapa, o site a destaca, centraliza o mapa no ponto correspondente e abre os detalhes.",
@@ -1122,7 +1122,7 @@ const uiStrings = {
     openFirstStop: "Voltar à primeira paragem",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
-    mainTitle: "Buon dì!",
+    mainTitle: "Buondì!",
     mapStageNote: "Toque nos marcadores ou use as etapas abaixo para abrir o reprodutor de áudio do percurso.",
     highlightTitle: "Experiência em ecrã inteiro",
     highlightText: "O mapa continua a ser o coração da experiência, enquanto o leitor fixo na parte inferior acompanha-o durante a audição sem ocupar espaço de navegação.",
@@ -1140,7 +1140,7 @@ const uiStrings = {
     prototype: "",
     introLead: "Я Филиппо Брунеллески.",
     intro:
-      "Когда-то я изучал эти стены, чтобы представить оборону, проходы и точки обзора. Теперь я веду вас по историям поселка, остановка за остановкой. Следуйте за мной через башни, переходы и виды борго: каждая остановка открывает голос, историю, частицу Vicopisano.",
+      "Откройте для себя Викописано:\nбашни, крепостные стены и тайные истории.\nЯ буду вашим проводником.",
     instructionsTitle: "Инструкции",
     instructionsText:
       "Карта показывает полный маршрут с остановками от 1 до 7. Выберите остановку в списке или нажмите на маркер: сайт выделит точку, отцентрирует карту и откроет соответствующие материалы.",
@@ -1205,7 +1205,7 @@ const uiStrings = {
     openFirstStop: "Вернуться к первой остановке",
     brandName: "Travel podcasting",
     brandTag: "Comune di Vicopisano",
-    mainTitle: "Buon dì!",
+    mainTitle: "Buondì!",
     mapStageNote: "Нажмите на маркеры или используйте список остановок ниже, чтобы открыть аудиоплеер маршрута.",
     highlightTitle: "Полноэкранный режим",
     highlightText: "Карта остается центром приложения, а закрепленный внизу проигрыватель сопровождает прослушивание, не мешая навигации.",
