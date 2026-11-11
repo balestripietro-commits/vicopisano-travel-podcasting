@@ -2204,6 +2204,11 @@ body.is-map-fullscreen .map-explore-stop {
   object-fit: cover;
 }
 
+/* Keep the Clock Tower tip visible in landscape artwork crops. */
+img[src*="tappa_5_torre_orologio.webp"] {
+  object-position: center top;
+}
+
 .detail-mascot-image {
   display: block;
   width: 100%;
