@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "pt",
+  "stop": 3,
+  "audio": {
+    "duration": 219.16,
+    "source": "audio/pt/03_palazzo_pretorio_pt.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9471,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.09,
+      "end": 3.06,
+      "text": "Por um momento, deixemos as minhas fortificações de lado."
+    },
+    {
+      "start": 3.06,
+      "end": 5.68,
+      "text": "À vossa frente está o Palazzo Pretorio."
+    },
+    {
+      "start": 5.68,
+      "end": 8.46,
+      "text": "Não, este edifício não é obra minha."
+    },
+    {
+      "start": 8.46,
+      "end": 12.96,
+      "text": "A sua parte mais antiga data dos séculos doze e treze, antes da minha chegada."
+    },
+    {
+      "start": 12.96,
+      "end": 20.72,
+      "text": "Olhem para a fachada: os grandes pilares, os arcos ogivais e aquela pedra amarelo-ocre que já devem começar a reconhecer."
+    },
+    {
+      "start": 20.72,
+      "end": 22.22,
+      "text": "O verrucano."
+    },
+    {
+      "start": 22.22,
+      "end": 25.78,
+      "text": "Um edifício não atravessa séculos de história sem mudar."
+    },
+    {
+      "start": 25.78,
+      "end": 27.22,
+      "text": "Eu bem vos tinha dito."
+    },
+    {
+      "start": 27.22,
+      "end": 29.62,
+      "text": "E este palácio é um excelente exemplo."
+    },
+    {
+      "start": 29.69,
+      "end": 37.88,
+      "text": "A sua função original não é inteiramente certa. É possível que estivesse ligado ao poder exercido sobre Vicopisano pelos arcebispos de Pisa."
+    },
+    {
+      "start": 37.88,
+      "end": 42.79,
+      "text": "Mas a sua história torna-se muito mais clara depois da conquista florentina de mil quatrocentos e seis."
+    },
+    {
+      "start": 43.9,
+      "end": 49.62,
+      "text": "Poucos anos mais tarde, em mil quatrocentos e onze, o edifício foi escolhido para sede do vigário."
+    },
+    {
+      "start": 49.62,
+      "end": 52.16,
+      "text": "O vigário não era o presidente da câmara."
+    },
+    {
+      "start": 52.16,
+      "end": 58.82,
+      "text": "Era o representante do governo florentino: administrava o território e exercia a justiça em nome de Florença."
+    },
+    {
+      "start": 58.89,
+      "end": 63.82,
+      "text": "A partir de então, o palácio acolheu os seus gabinetes, a sua residência…"
+    },
+    {
+      "start": 63.82,
+      "end": 65.7,
+      "text": "e também as prisões."
+    },
+    {
+      "start": 65.7,
+      "end": 72.5,
+      "text": "Ou seja, no mesmo edifício administrava-se o território, fazia-se justiça e, quando era preciso…"
+    },
+    {
+      "start": 72.5,
+      "end": 74.48,
+      "text": "fechava-se alguém à chave."
+    },
+    {
+      "start": 74.48,
+      "end": 76.98,
+      "text": "Mas agora olhem para os brasões nas paredes."
+    },
+    {
+      "start": 76.98,
+      "end": 83.98,
+      "text": "O palácio conserva quase cinquenta, alguns até provenientes das oficinas florentinas da família Della Robbia."
+    },
+    {
+      "start": 83.98,
+      "end": 88.42,
+      "text": "A partir do século quinze, cada vigário deixava aqui o seu próprio brasão."
+    },
+    {
+      "start": 88.51,
+      "end": 89.08,
+      "text": "Um nome."
+    },
+    {
+      "start": 89.08,
+      "end": 90.06,
+      "text": "Uma família."
+    },
+    {
+      "start": 90.06,
+      "end": 93.22,
+      "text": "A memória da sua passagem por Vicopisano."
+    },
+    {
+      "start": 93.22,
+      "end": 97.38,
+      "text": "E, para mim, estes brasões têm algo de particularmente interessante."
+    },
+    {
+      "start": 97.38,
+      "end": 100.62,
+      "text": "Contam-me o que aconteceu depois do meu tempo."
+    },
+    {
+      "start": 100.62,
+      "end": 104.02,
+      "text": "Depois da República Florentina vieram os Médici."
+    },
+    {
+      "start": 104.02,
+      "end": 105.74,
+      "text": "Depois, a Casa de Lorena."
+    },
+    {
+      "start": 105.74,
+      "end": 110.58,
+      "text": "Os poderes do vigário foram sendo reduzidos, até à extinção do vicariato em mil oitocentos e quarenta e oito."
+    },
+    {
+      "start": 111.78,
+      "end": 113.69,
+      "text": "Quatro séculos de governo…"
+    },
+    {
+      "start": 113.69,
+      "end": 115.5,
+      "text": "resumidos numa parede."
+    },
+    {
+      "start": 115.59,
+      "end": 120.09,
+      "text": "Mas, entretanto, não mudava apenas quem governava Vicopisano."
+    },
+    {
+      "start": 120.09,
+      "end": 121.94,
+      "text": "Mudava até a paisagem."
+    },
+    {
+      "start": 121.94,
+      "end": 127.6,
+      "text": "Lembram-se do Arno e da Serezza, os dois cursos de água de que vos falei no início do nosso percurso?"
+    },
+    {
+      "start": 127.6,
+      "end": 131.14,
+      "text": "Quando cheguei, o Arno passava muito mais perto da vila."
+    },
+    {
+      "start": 131.14,
+      "end": 142.04,
+      "text": "Formava uma grande curva e, juntamente com a Serezza, tinha contribuído durante séculos para fazer de Vicopisano um lugar estratégico para o comércio, as ligações e a defesa."
+    },
+    {
+      "start": 142.13,
+      "end": 146.22,
+      "text": "Depois, no século dezasseis, os Médici decidiram intervir."
+    },
+    {
+      "start": 146.22,
+      "end": 154.66,
+      "text": "A partir de mil quinhentos e sessenta, o curso do Arno foi retificado e afastado das muralhas, em direção ao traçado que ainda segue hoje."
+    },
+    {
+      "start": 154.66,
+      "end": 162.46,
+      "text": "Também a Serezza foi alterada, para alcançar o novo curso do rio e continuar a escoar as águas provenientes do lago de Bientina."
+    },
+    {
+      "start": 162.46,
+      "end": 163.67,
+      "text": "Em poucas palavras…"
+    },
+    {
+      "start": 163.67,
+      "end": 169.9,
+      "text": "a água que tinha contribuído para a prosperidade de Vicopisano já não passava por onde passava antes."
+    },
+    {
+      "start": 169.98,
+      "end": 172.56,
+      "text": "E isso também mudou o papel da vila."
+    },
+    {
+      "start": 172.56,
+      "end": 175.27,
+      "text": "A agricultura ganhou cada vez mais importância."
+    },
+    {
+      "start": 175.27,
+      "end": 183.68,
+      "text": "Mas Vicopisano continuou a ser um importante centro administrativo, sede do vigário, do tribunal e da chancelaria florentina."
+    },
+    {
+      "start": 183.68,
+      "end": 184.71,
+      "text": "Tenho de admitir:"
+    },
+    {
+      "start": 184.71,
+      "end": 189.21,
+      "text": "para alguém como eu, habituado a modificar muralhas, torres e caminhos…"
+    },
+    {
+      "start": 189.21,
+      "end": 193.52,
+      "text": "é impressionante ver que aqui chegaram a modificar o curso de um rio."
+    },
+    {
+      "start": 193.52,
+      "end": 197.51,
+      "text": "Pelos vistos, a história não deixa a sua marca apenas nos edifícios."
+    },
+    {
+      "start": 197.51,
+      "end": 201.14,
+      "text": "Por vezes deixa-a num território inteiro."
+    },
+    {
+      "start": 201.14,
+      "end": 205.82,
+      "text": "Seria pouco sensato voltar a Vicopisano, aborrecer-vos apenas com as minhas obras…"
+    },
+    {
+      "start": 205.82,
+      "end": 208.9,
+      "text": "e não reparar em tudo o que a vila viveu sem mim."
+    },
+    {
+      "start": 208.9,
+      "end": 212.58,
+      "text": "Mas agora podemos voltar a algo que conheço bastante melhor."
+    },
+    {
+      "start": 212.58,
+      "end": 216.6,
+      "text": "A próxima paragem vai levar-nos, finalmente, até à Rocca."
+    },
+    {
+      "start": 216.6,
+      "end": 219.04,
+      "text": "Permitam-me mais um pouco de legítimo orgulho."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

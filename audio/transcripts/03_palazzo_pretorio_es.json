@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "es",
+  "stop": 3,
+  "audio": {
+    "duration": 227.56,
+    "source": "audio/es/03_palazzo_pretorio_es.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9521,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.03,
+      "end": 3.32,
+      "text": "Dejemos por un momento mis fortificaciones a un lado."
+    },
+    {
+      "start": 3.32,
+      "end": 6.14,
+      "text": "Ante vosotros está el Palazzo Pretorio."
+    },
+    {
+      "start": 6.14,
+      "end": 9.22,
+      "text": "No, este edificio no es obra mía."
+    },
+    {
+      "start": 9.22,
+      "end": 14.0,
+      "text": "Su parte más antigua data de los siglos doce y trece, antes de mi llegada."
+    },
+    {
+      "start": 14.0,
+      "end": 23.06,
+      "text": "Mirad la fachada: los grandes pilares, los arcos apuntados y esa piedra de color amarillo ocre que ya deberíais empezar a reconocer."
+    },
+    {
+      "start": 23.06,
+      "end": 24.56,
+      "text": "El verrucano."
+    },
+    {
+      "start": 24.56,
+      "end": 27.88,
+      "text": "Un edificio no atraviesa siglos de historia sin cambiar."
+    },
+    {
+      "start": 27.88,
+      "end": 29.34,
+      "text": "Ya os lo había dicho."
+    },
+    {
+      "start": 29.37,
+      "end": 32.38,
+      "text": "Y este palacio es un ejemplo excelente."
+    },
+    {
+      "start": 32.38,
+      "end": 41.9,
+      "text": "Su función original no se conoce con total certeza. Es posible que estuviera relacionado con el poder que ejercían sobre Vicopisano los arzobispos de Pisa."
+    },
+    {
+      "start": 41.9,
+      "end": 46.59,
+      "text": "Pero su historia se vuelve mucho más clara tras la conquista florentina de mil cuatrocientos seis."
+    },
+    {
+      "start": 47.82,
+      "end": 54.14,
+      "text": "Pocos años después, en mil cuatrocientos once, el edificio fue elegido como sede del vicario."
+    },
+    {
+      "start": 54.17,
+      "end": 56.81,
+      "text": "El vicario no era el alcalde del pueblo."
+    },
+    {
+      "start": 56.81,
+      "end": 64.7,
+      "text": "Era el representante del gobierno florentino: administraba el territorio y ejercía la justicia en nombre de Florencia."
+    },
+    {
+      "start": 64.7,
+      "end": 69.05,
+      "text": "Desde entonces, el palacio albergó sus oficinas, su residencia…"
+    },
+    {
+      "start": 69.05,
+      "end": 70.92,
+      "text": "y también las cárceles."
+    },
+    {
+      "start": 70.92,
+      "end": 78.37,
+      "text": "En definitiva, en un mismo edificio se administraba el territorio, se impartía justicia y, cuando era necesario…"
+    },
+    {
+      "start": 78.37,
+      "end": 80.86,
+      "text": "se encerraba a alguien bajo llave."
+    },
+    {
+      "start": 80.89,
+      "end": 84.64,
+      "text": "Ahora, sin embargo, mirad los escudos de las paredes."
+    },
+    {
+      "start": 84.64,
+      "end": 92.14,
+      "text": "En el palacio se conservan casi cincuenta. Algunos proceden incluso de los talleres florentinos de los Della Robbia."
+    },
+    {
+      "start": 92.14,
+      "end": 96.34,
+      "text": "Desde el siglo quince, cada vicario dejaba aquí su propio escudo."
+    },
+    {
+      "start": 96.34,
+      "end": 97.17,
+      "text": "Un nombre."
+    },
+    {
+      "start": 97.17,
+      "end": 98.26,
+      "text": "Una familia."
+    },
+    {
+      "start": 98.26,
+      "end": 100.96,
+      "text": "El recuerdo de su paso por Vicopisano."
+    },
+    {
+      "start": 100.96,
+      "end": 105.42,
+      "text": "Y para mí, estos escudos tienen algo especialmente interesante."
+    },
+    {
+      "start": 105.42,
+      "end": 108.82,
+      "text": "Me cuentan lo que ocurrió después de mi época."
+    },
+    {
+      "start": 108.85,
+      "end": 112.2,
+      "text": "Tras la República florentina llegaron los Médici."
+    },
+    {
+      "start": 112.2,
+      "end": 114.22,
+      "text": "Después, la casa de Lorena."
+    },
+    {
+      "start": 114.22,
+      "end": 119.24,
+      "text": "El poder del vicario se fue reduciendo hasta la abolición del vicariato en mil ochocientos cuarenta y ocho."
+    },
+    {
+      "start": 120.62,
+      "end": 122.31,
+      "text": "Cuatro siglos de gobierno…"
+    },
+    {
+      "start": 122.31,
+      "end": 124.06,
+      "text": "resumidos en una pared."
+    },
+    {
+      "start": 124.06,
+      "end": 129.1,
+      "text": "Pero, mientras tanto, no solo cambiaba quién gobernaba Vicopisano."
+    },
+    {
+      "start": 129.1,
+      "end": 130.98,
+      "text": "También cambiaba el paisaje."
+    },
+    {
+      "start": 130.98,
+      "end": 136.98,
+      "text": "¿Recordáis el Arno y la Serezza, los dos cursos de agua de los que os hablé al principio del recorrido?"
+    },
+    {
+      "start": 137.01,
+      "end": 140.26,
+      "text": "Cuando llegué, el Arno pasaba mucho más cerca del pueblo."
+    },
+    {
+      "start": 140.26,
+      "end": 151.38,
+      "text": "Formaba un gran meandro y, junto con la Serezza, había contribuido durante siglos a hacer de Vicopisano un lugar estratégico para el comercio, las comunicaciones y la defensa."
+    },
+    {
+      "start": 151.38,
+      "end": 155.94,
+      "text": "Después, en el siglo dieciséis, los Médici decidieron intervenir."
+    },
+    {
+      "start": 155.94,
+      "end": 163.7,
+      "text": "A partir de mil quinientos sesenta, se rectificó el curso del Arno y se alejó de las murallas, hacia el trazado que sigue todavía hoy."
+    },
+    {
+      "start": 163.73,
+      "end": 171.62,
+      "text": "También se modificó la Serezza para que alcanzara el nuevo curso del río y siguiera evacuando las aguas procedentes del lago de Bientina."
+    },
+    {
+      "start": 171.62,
+      "end": 172.77,
+      "text": "En pocas palabras…"
+    },
+    {
+      "start": 172.77,
+      "end": 178.86,
+      "text": "el agua que había contribuido a la prosperidad de Vicopisano ya no pasaba por donde había pasado antes."
+    },
+    {
+      "start": 178.86,
+      "end": 181.64,
+      "text": "Y eso también cambió el papel del pueblo."
+    },
+    {
+      "start": 181.64,
+      "end": 184.9,
+      "text": "La agricultura fue adquiriendo cada vez más importancia."
+    },
+    {
+      "start": 184.9,
+      "end": 193.02,
+      "text": "Pero Vicopisano siguió siendo un importante centro administrativo, sede del vicario, del tribunal y de la cancillería florentina."
+    },
+    {
+      "start": 193.05,
+      "end": 194.22,
+      "text": "Debo admitirlo:"
+    },
+    {
+      "start": 194.22,
+      "end": 198.63,
+      "text": "para alguien como yo, acostumbrado a modificar murallas, torres y caminos…"
+    },
+    {
+      "start": 198.63,
+      "end": 202.9,
+      "text": "impresiona ver que aquí llegaron a modificar el curso de un río."
+    },
+    {
+      "start": 202.9,
+      "end": 206.82,
+      "text": "Está claro que la historia no deja su huella únicamente en los edificios."
+    },
+    {
+      "start": 206.82,
+      "end": 209.5,
+      "text": "A veces la deja en todo el territorio."
+    },
+    {
+      "start": 209.5,
+      "end": 213.55,
+      "text": "Sería absurdo volver a Vicopisano, aburriros hablando solo de mis obras…"
+    },
+    {
+      "start": 213.55,
+      "end": 216.98,
+      "text": "y no darme cuenta de todo lo que el pueblo ha vivido sin mí."
+    },
+    {
+      "start": 216.98,
+      "end": 220.54,
+      "text": "Pero ahora podemos volver a algo que conozco bastante mejor."
+    },
+    {
+      "start": 220.57,
+      "end": 224.34,
+      "text": "La próxima parada nos llevará por fin ante la Rocca."
+    },
+    {
+      "start": 224.34,
+      "end": 227.46,
+      "text": "Permitidme otro pequeño momento de legítimo orgullo."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

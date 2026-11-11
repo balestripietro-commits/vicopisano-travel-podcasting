@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "de",
+  "stop": 6,
+  "audio": {
+    "duration": 211.72,
+    "source": "audio/de/06_pieve_santa_maria_de.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9767,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.03,
+      "end": 2.94,
+      "text": "Nun stehen wir vor der Pieve di Santa Maria."
+    },
+    {
+      "start": 2.94,
+      "end": 5.06,
+      "text": "Ich muss Ihnen etwas gestehen."
+    },
+    {
+      "start": 5.06,
+      "end": 11.3,
+      "text": "Als ich an den Befestigungen von Vicopisano arbeitete, stand diese Kirche schon seit Jahrhunderten hier."
+    },
+    {
+      "start": 11.3,
+      "end": 19.4,
+      "text": "Aber damals beschäftigten mich die Mauern, die Hänge des Hügels, die Zugänge zum Ort und alles, was ihn sicherer machen konnte."
+    },
+    {
+      "start": 19.4,
+      "end": 24.02,
+      "text": "Ich glaube nicht, dass ich ihr die Aufmerksamkeit geschenkt habe, die sie verdient hätte."
+    },
+    {
+      "start": 24.02,
+      "end": 26.84,
+      "text": "Heute kann ich das endlich nachholen."
+    },
+    {
+      "start": 26.87,
+      "end": 31.22,
+      "text": "In ihrer heutigen Gestalt stammt die Kirche aus dem zwölften Jahrhundert."
+    },
+    {
+      "start": 31.22,
+      "end": 33.56,
+      "text": "Ihre Geschichte ist aber noch älter."
+    },
+    {
+      "start": 33.56,
+      "end": 43.16,
+      "text": "Erstmals wird sie in einer Urkunde aus dem Jahr neunhundertvierunddreißig erwähnt. Aus dem Text lässt sich schließen, dass sie damals schon einige Zeit bestanden hatte."
+    },
+    {
+      "start": 43.16,
+      "end": 49.16,
+      "text": "Sie ist die älteste und wichtigste der Kirchen, die in unmittelbarer Nähe von Vicopisano standen."
+    },
+    {
+      "start": 49.16,
+      "end": 52.9,
+      "text": "Und auch die einzige, die außerhalb der Mauern errichtet wurde."
+    },
+    {
+      "start": 52.9,
+      "end": 55.34,
+      "text": "Eine interessante Entscheidung."
+    },
+    {
+      "start": 55.37,
+      "end": 64.84,
+      "text": "Jetzt, da ich sie zum ersten Mal ohne ein zu planendes Verteidigungssystem aufmerksam betrachte, fällt mir eine noch aufschlussreichere Besonderheit auf."
+    },
+    {
+      "start": 64.84,
+      "end": 69.16,
+      "text": "Normalerweise lagen die Eingänge mittelalterlicher Kirchen im Westen."
+    },
+    {
+      "start": 69.16,
+      "end": 77.66,
+      "text": "Diese Kirche ist dagegen auf eines der alten Burgtore ausgerichtet: die Porta Maccioni, die später Porta della Rocca hieß."
+    },
+    {
+      "start": 77.66,
+      "end": 80.84,
+      "text": "Die Fassade folgt also nicht einfach einer Regel."
+    },
+    {
+      "start": 80.87,
+      "end": 87.24,
+      "text": "Sie wendet sich direkt dem Ort und den Menschen zu, die durch seine Mauern ein- und ausgingen."
+    },
+    {
+      "start": 87.24,
+      "end": 89.24,
+      "text": "Betrachten Sie sie jetzt genauer."
+    },
+    {
+      "start": 89.24,
+      "end": 96.2,
+      "text": "Das Mauerwerk besteht wieder aus Verrucano. Doch hier bildet der Stein weder einen Turm noch eine Wehrmauer."
+    },
+    {
+      "start": 96.2,
+      "end": 100.34,
+      "text": "Er ist nach den Proportionen der pisanischen Romanik angeordnet."
+    },
+    {
+      "start": 100.34,
+      "end": 102.75,
+      "text": "Drei Portale im unteren Bereich."
+    },
+    {
+      "start": 102.75,
+      "end": 105.28,
+      "text": "Halbsäulen und kleine Blendbögen."
+    },
+    {
+      "start": 105.28,
+      "end": 109.48,
+      "text": "Ein zweigeteiltes Bogenfenster in der Mitte des oberen Bereichs."
+    },
+    {
+      "start": 109.51,
+      "end": 111.88,
+      "text": "Nichts ist dem Zufall überlassen."
+    },
+    {
+      "start": 111.88,
+      "end": 115.8,
+      "text": "Wenn die Kirche geöffnet ist, empfehle ich Ihnen hineinzugehen."
+    },
+    {
+      "start": 115.8,
+      "end": 124.0,
+      "text": "Zwölf Granitsäulen trennen das Mittelschiff von den beiden Seitenschiffen. Einige Kapitelle und Säulen stammen aus Bauten der Römerzeit."
+    },
+    {
+      "start": 124.0,
+      "end": 127.36,
+      "text": "Ältere Steine, in einem neuen Bau wiederverwendet."
+    },
+    {
+      "start": 127.36,
+      "end": 132.24,
+      "text": "Eine Entscheidung, die ich, wie Sie inzwischen wissen dürften, vollkommen richtig finde."
+    },
+    {
+      "start": 132.24,
+      "end": 135.32,
+      "text": "Aber drinnen erwartet Sie nicht nur Architektur."
+    },
+    {
+      "start": 135.35,
+      "end": 142.16,
+      "text": "Gehen Sie zur Apsis, ganz hinten in der Kirche, und suchen Sie nach einer großen Gruppe geschnitzter Holzfiguren."
+    },
+    {
+      "start": 142.16,
+      "end": 147.6,
+      "text": "Es ist die Kreuzabnahme, entstanden in den ersten Jahrzehnten des dreizehnten Jahrhunderts."
+    },
+    {
+      "start": 147.6,
+      "end": 157.88,
+      "text": "Sie zeigt den Augenblick, in dem der Leichnam Christi vom Kreuz genommen wird, umgeben von Maria, dem heiligen Johannes, Josef von Arimathäa und Nikodemus."
+    },
+    {
+      "start": 157.88,
+      "end": 164.88,
+      "text": "Es ist eine der wenigen erhaltenen Holzgruppen dieser Art, bei denen fast alle ursprünglichen Figuren noch vorhanden sind."
+    },
+    {
+      "start": 164.91,
+      "end": 167.68,
+      "text": "Achten Sie besonders auf den Körper Christi."
+    },
+    {
+      "start": 167.68,
+      "end": 177.2,
+      "text": "Er wirkt nicht starr und unbeweglich: Beim Herabnehmen vom Kreuz krümmt er sich mit einer Freiheit, die von den damals üblicheren Darstellungen abweicht."
+    },
+    {
+      "start": 177.2,
+      "end": 185.38,
+      "text": "Ich bin froh, dass ich mir für diese Kirche endlich Zeit genommen und entdeckt habe, was ich während meiner Arbeit in Vicopisano vernachlässigt hatte."
+    },
+    {
+      "start": 185.38,
+      "end": 189.96,
+      "text": "Jetzt verstehe ich, dass eine Stadt nicht nur von dem lebt, was sie verteidigt."
+    },
+    {
+      "start": 189.96,
+      "end": 197.9,
+      "text": "Sie lebt auch von den Orten, mit denen die Menschen sich verbunden fühlen, an denen sie zusammenkommen und ihre Erinnerung bewahren."
+    },
+    {
+      "start": 197.9,
+      "end": 203.0,
+      "text": "Und wo wir gerade vom Gemeinschaftsleben sprechen: Gehen wir nun zurück ins Zentrum."
+    },
+    {
+      "start": 203.0,
+      "end": 207.88,
+      "text": "Zwei letzte Stationen erwarten uns noch, beide mitten in Vicopisano."
+    },
+    {
+      "start": 207.88,
+      "end": 211.7,
+      "text": "Beginnen wir mit den Torri Gemelle, den Zwillingstürmen."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

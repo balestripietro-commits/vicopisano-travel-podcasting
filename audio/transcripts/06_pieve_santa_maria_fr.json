@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "fr",
+  "stop": 6,
+  "audio": {
+    "duration": 181.16,
+    "source": "audio/fr/06_pieve_santa_maria_fr.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9748,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.04,
+      "end": 2.3,
+      "text": "Nous voici devant la Pieve di Santa Maria."
+    },
+    {
+      "start": 2.3,
+      "end": 4.24,
+      "text": "Je dois vous avouer quelque chose."
+    },
+    {
+      "start": 4.24,
+      "end": 9.36,
+      "text": "Quand je travaillais aux fortifications de Vicopisano, cette église était déjà là depuis des siècles."
+    },
+    {
+      "start": 9.36,
+      "end": 16.32,
+      "text": "Mais j'étais occupé à étudier les murailles, les pentes de la colline, les accès au village et tout ce qui pouvait le rendre plus sûr."
+    },
+    {
+      "start": 16.32,
+      "end": 19.3,
+      "text": "Je ne crois pas lui avoir accordé l'attention qu'elle méritait."
+    },
+    {
+      "start": 19.3,
+      "end": 22.16,
+      "text": "Aujourd'hui, enfin, je peux me rattraper."
+    },
+    {
+      "start": 22.16,
+      "end": 26.66,
+      "text": "L'église, dans les formes que vous voyez, remonte au douzième siècle."
+    },
+    {
+      "start": 26.66,
+      "end": 28.74,
+      "text": "Mais son histoire est plus ancienne encore."
+    },
+    {
+      "start": 28.78,
+      "end": 36.78,
+      "text": "Elle apparaît pour la première fois dans un document de neuf cent trente-quatre. Et à lire ce texte, elle semblait déjà exister depuis quelque temps."
+    },
+    {
+      "start": 36.78,
+      "end": 42.28,
+      "text": "C'est la plus ancienne et la principale des églises qui s'élevaient aux abords immédiats de Vicopisano."
+    },
+    {
+      "start": 42.28,
+      "end": 46.2,
+      "text": "Et c'est aussi la seule à avoir été construite à l'extérieur des remparts."
+    },
+    {
+      "start": 46.2,
+      "end": 48.1,
+      "text": "Un choix intéressant."
+    },
+    {
+      "start": 48.1,
+      "end": 56.3,
+      "text": "Maintenant que je l'observe attentivement, pour la première fois sans avoir de système défensif à concevoir, je remarque un détail encore plus significatif."
+    },
+    {
+      "start": 56.35,
+      "end": 61.0,
+      "text": "Habituellement, les églises médiévales avaient leur entrée tournée vers l'ouest."
+    },
+    {
+      "start": 61.0,
+      "end": 69.02,
+      "text": "Cette église, elle, regarde vers l'une des anciennes portes du château : Porta Maccioni, devenue plus tard Porta della Rocca."
+    },
+    {
+      "start": 69.02,
+      "end": 71.6,
+      "text": "La façade ne suit donc pas simplement une règle."
+    },
+    {
+      "start": 71.6,
+      "end": 76.68,
+      "text": "Elle se tourne directement vers le village et vers les gens qui entraient et sortaient de ses remparts."
+    },
+    {
+      "start": 76.68,
+      "end": 77.96,
+      "text": "Observez-la maintenant."
+    },
+    {
+      "start": 77.96,
+      "end": 84.74,
+      "text": "La maçonnerie est encore en verrucano, mais ici la pierre ne forme ni une tour ni une courtine défensive."
+    },
+    {
+      "start": 84.74,
+      "end": 88.04,
+      "text": "Elle s'organise selon les proportions de l'art roman pisan."
+    },
+    {
+      "start": 88.04,
+      "end": 90.23,
+      "text": "Trois portails dans la partie basse."
+    },
+    {
+      "start": 90.23,
+      "end": 93.92,
+      "text": "Des colonnes engagées et de petites arcatures aveugles."
+    },
+    {
+      "start": 93.92,
+      "end": 96.72,
+      "text": "Une fenêtre géminée au centre de la partie haute."
+    },
+    {
+      "start": 96.72,
+      "end": 98.2,
+      "text": "Rien n'est laissé au hasard."
+    },
+    {
+      "start": 98.2,
+      "end": 101.16,
+      "text": "Si vous trouvez l'église ouverte, je vous conseille d'entrer."
+    },
+    {
+      "start": 101.16,
+      "end": 109.36,
+      "text": "La nef et les deux bas-côtés sont séparés par douze colonnes de granit. Certains chapiteaux et certaines colonnes proviennent de bâtiments de l'époque romaine."
+    },
+    {
+      "start": 109.36,
+      "end": 113.0,
+      "text": "Des pierres plus anciennes, réutilisées dans une construction nouvelle."
+    },
+    {
+      "start": 113.03,
+      "end": 116.4,
+      "text": "Un choix que, vous l'aurez compris, j'approuve pleinement."
+    },
+    {
+      "start": 116.4,
+      "end": 119.44,
+      "text": "Mais à l'intérieur, il n'y a pas que de l'architecture."
+    },
+    {
+      "start": 119.44,
+      "end": 125.48,
+      "text": "Avancez jusqu'à l'abside, au fond de l'église, et cherchez un grand groupe de statues sculptées dans le bois."
+    },
+    {
+      "start": 125.48,
+      "end": 129.6,
+      "text": "C'est la Déposition, réalisée dans les premières décennies du treizième siècle."
+    },
+    {
+      "start": 129.6,
+      "end": 137.84,
+      "text": "Elle représente le moment où le corps du Christ est descendu de la croix, entouré de la Vierge, de saint Jean, de Joseph d'Arimathie et de Nicodème."
+    },
+    {
+      "start": 137.84,
+      "end": 143.46,
+      "text": "C'est l'un des rares groupes en bois de ce type qui nous soient parvenus avec presque toutes leurs figures d'origine."
+    },
+    {
+      "start": 143.46,
+      "end": 145.68,
+      "text": "Observez surtout le corps du Christ."
+    },
+    {
+      "start": 145.68,
+      "end": 154.12,
+      "text": "Il n'est ni raide ni immobile : il s'incurve alors qu'on le descend de la croix, avec une liberté qui s'éloigne des modèles les plus habituels de l'époque."
+    },
+    {
+      "start": 154.12,
+      "end": 160.72,
+      "text": "Je suis heureux de m'être enfin arrêté devant cette église et d'avoir découvert ce que j'avais négligé pendant mon travail à Vicopisano."
+    },
+    {
+      "start": 160.72,
+      "end": 164.44,
+      "text": "Je comprends maintenant qu'une ville ne vit pas seulement de ce qui la défend."
+    },
+    {
+      "start": 164.44,
+      "end": 169.74,
+      "text": "Elle vit aussi des lieux où les gens se reconnaissent, se rassemblent et conservent leur mémoire."
+    },
+    {
+      "start": 169.77,
+      "end": 173.94,
+      "text": "Et puisque nous parlons de la vie de la communauté, revenons maintenant vers le centre."
+    },
+    {
+      "start": 173.94,
+      "end": 177.98,
+      "text": "Deux dernières étapes nous attendent, toutes deux au cœur de Vicopisano."
+    },
+    {
+      "start": 177.98,
+      "end": 180.96,
+      "text": "Commençons par les Torri Gemelle, les Tours Jumelles."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

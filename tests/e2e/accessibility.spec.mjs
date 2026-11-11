@@ -140,31 +140,23 @@ test.describe("accessibility", () => {
     await expectNoAxeViolations(page, "#onboarding-overlay .onboarding-card");
   });
 
-  test("unavailable language feedback is a readable modal", async ({ page }) => {
+  test("available languages open the route without an unavailable modal", async ({ page }) => {
     test.setTimeout(150_000);
     await page.goto("/?tappa=1&lang=it", { waitUntil: "domcontentloaded" });
     await ensureOnboardingVisible(page);
-    const unavailableLanguages = [
-      ["EN", "Language unavailable", "Close"],
-      ["DE", "Sprache nicht verfügbar", "Schließen"],
-      ["FR", "Langue indisponible", "Fermer"],
-      ["ES", "Idioma no disponible", "Cerrar"],
-      ["PT", "Idioma indisponível", "Fechar"],
-      ["RU", "Язык недоступен", "Закрыть"],
-    ];
+    const availableLanguages = ["EN", "DE", "FR", "ES", "PT", "RU"];
     let axeChecked = false;
-    for (const [code, title, closeLabel] of unavailableLanguages) {
+    for (const code of availableLanguages) {
+      await page.goto(`/?tappa=1&lang=${code.toLowerCase()}`, { waitUntil: "domcontentloaded" });
+      await ensureOnboardingVisible(page);
       await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: new RegExp(`^${code}\\s`) }).click();
-      await expect(page.locator("#language-unavailable-modal")).toBeVisible({ timeout: 20_000 });
-      await expect(page.locator("#language-unavailable-title")).toHaveText(title);
-      await expect(page.locator("#language-unavailable-close")).toHaveAttribute("aria-label", closeLabel);
-      await expect(page.locator("#language-unavailable-close .material-symbols-rounded")).toHaveText("close");
+      await expect(page.locator("#language-unavailable-modal")).toBeHidden();
+      await expect(page.locator("html")).toHaveAttribute("lang", code.toLowerCase());
+      await expect(page.locator("#onboarding-overlay")).toBeHidden();
       if (!axeChecked) {
-        await expectNoAxeViolations(page, "#language-unavailable-modal .language-unavailable-card");
+        await expectNoAxeViolations(page, ".global-language-selector");
         axeChecked = true;
       }
-      await page.locator("#language-unavailable-close").click();
-      await expect(page.locator("#language-unavailable-modal")).toBeHidden();
     }
   });
 

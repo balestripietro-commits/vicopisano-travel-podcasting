@@ -441,6 +441,25 @@ const TRANSITION_TRANSCRIPT = {
     },
   ],
 };
+// Narrations, subtitles and the two reusable interludes are supplied together.
+// A language is enabled only when its complete route has been prepared.
+const multilingualCatalog = window.VICOPISANO_MULTILINGUAL || { tracks: [], interludes: {}, readyLanguages: [] };
+function isLanguageReady(code) {
+  return code === "IT" || multilingualCatalog.readyLanguages.includes(code);
+}
+let activeInterlude = null;
+function getInterlude(kind = "between") {
+  if (currentLanguage === "IT") {
+    return kind === "between" ? {
+      title: "In cammino verso la prossima tappa", audio: TRANSITION_AUDIO_PATH,
+      cues: TRANSITION_MOUTH_CUES_PATH, transcript: TRANSITION_TRANSCRIPT,
+    } : null;
+  }
+  return multilingualCatalog.interludes[currentLanguage]?.[kind] || null;
+}
+function getInterludeTitle() {
+  return activeInterlude?.title || "In cammino verso la prossima tappa";
+}
 // Rhubarb cues are already centred on the speech: on every Italian track the mouth
 // opens about 55 ms before the voice and closes about 65 ms after it (measured on
 // 559 phrase onsets), so no extra visual lead is added.
@@ -505,6 +524,9 @@ const MAP_TRANSCRIPT_SOURCES = [
   { stop: 7, language: "IT", audio: "audio/it/07_torri_gemelle.mp3", source: "audio/transcripts/07_torri_gemelle_it.json" },
   { stop: 8, language: "IT", audio: "audio/it/08_palazzo_comunale.mp3", source: "audio/transcripts/08_palazzo_comunale_it.json" }
 ];
+MAP_TRANSCRIPT_SOURCES.push(...multilingualCatalog.tracks
+  .filter((track) => track.subtitleSource)
+  .map((track) => ({ stop: track.stop, language: track.code, audio: track.audio, source: track.subtitleSource })));
 let playerOpenTransitionTimer = null;
 let playerCloseTransitionTimer = null;
 let mapFullscreenLayoutTimer = null;
@@ -649,7 +671,7 @@ const uiStrings = {
     audioUnavailable: "Audio non ancora disponibile",
     audioAvailableInLanguages: (count) => `Audio disponibile in ${count} lingue`,
     listAudioAvailableInLanguages: (count) => `${count} lingue disponibili`,
-    languageSelectorTitle: "Lingua disponibile per la Tappa 1",
+    languageSelectorTitle: "Lingua del percorso",
     descriptiveText: "Testo descrittivo",
     transcriptTitle: "Trascrizione",
     playerPrevious: "Torna alla tappa precedente",
@@ -732,7 +754,7 @@ const uiStrings = {
     audioUnavailable: "Audio not yet available",
     audioAvailableInLanguages: (count) => `Audio available in ${count} languages`,
     listAudioAvailableInLanguages: (count) => `${count} languages available`,
-    languageSelectorTitle: "Language available for Stop 1",
+    languageSelectorTitle: "Tour language",
     descriptiveText: "Descriptive text",
     transcriptTitle: "Transcript",
     playerPrevious: "Go to previous stop",
@@ -815,7 +837,7 @@ const uiStrings = {
     audioUnavailable: "Audio noch nicht verfügbar",
     audioAvailableInLanguages: (count) => `Audio in ${count} Sprachen verfügbar`,
     listAudioAvailableInLanguages: (count) => `${count} Sprachen verfügbar`,
-    languageSelectorTitle: "Verfügbare Sprache für Station 1",
+    languageSelectorTitle: "Sprache der Tour",
     descriptiveText: "Beschreibungstext",
     transcriptTitle: "Transkription",
     playerPrevious: "Zur vorherigen Station",
@@ -898,7 +920,7 @@ const uiStrings = {
     audioUnavailable: "Audio pas encore disponible",
     audioAvailableInLanguages: (count) => `Audio disponible en ${count} langues`,
     listAudioAvailableInLanguages: (count) => `${count} langues disponibles`,
-    languageSelectorTitle: "Langue disponible pour l’étape 1",
+    languageSelectorTitle: "Langue du parcours",
     descriptiveText: "Texte descriptif",
     transcriptTitle: "Transcription",
     playerPrevious: "Revenir à l’étape précédente",
@@ -981,7 +1003,7 @@ const uiStrings = {
     audioUnavailable: "Audio aún no disponible",
     audioAvailableInLanguages: (count) => `Audio disponible en ${count} idiomas`,
     listAudioAvailableInLanguages: (count) => `${count} idiomas disponibles`,
-    languageSelectorTitle: "Idioma disponible para la Etapa 1",
+    languageSelectorTitle: "Idioma del recorrido",
     descriptiveText: "Texto descriptivo",
     transcriptTitle: "Transcripción",
     playerPrevious: "Volver a la etapa anterior",
@@ -1064,7 +1086,7 @@ const uiStrings = {
     audioUnavailable: "Áudio ainda não disponível",
     audioAvailableInLanguages: (count) => `Áudio disponível em ${count} idiomas`,
     listAudioAvailableInLanguages: (count) => `${count} idiomas disponíveis`,
-    languageSelectorTitle: "Idioma disponível para a Etapa 1",
+    languageSelectorTitle: "Idioma do percurso",
     descriptiveText: "Texto descritivo",
     transcriptTitle: "Transcrição",
     playerPrevious: "Voltar para a etapa anterior",
@@ -1147,7 +1169,7 @@ const uiStrings = {
     audioUnavailable: "Аудио пока недоступно",
     audioAvailableInLanguages: (count) => `Аудио доступно на ${count} языках`,
     listAudioAvailableInLanguages: (count) => `Доступно языков: ${count}`,
-    languageSelectorTitle: "Доступный язык для остановки 1",
+    languageSelectorTitle: "Язык маршрута",
     descriptiveText: "Описание",
     transcriptTitle: "Расшифровка",
     playerPrevious: "Вернуться к предыдущей остановке",
@@ -1525,21 +1547,21 @@ function getBrowserLanguage() {
   return "EN";
 }
 
-// Finché è pronta solo la versione italiana, si apre sempre in italiano (ignora browser, URL e lingua salvata).
-// Per riattivare il rilevamento automatico, impostare a null quando le altre lingue sono approvate.
-const FORCED_INITIAL_LANGUAGE = "IT";
+// Honour direct links and the saved choice now that complete language packs exist.
+const FORCED_INITIAL_LANGUAGE = null;
 
 function getInitialLanguage(urlLanguage) {
   if (FORCED_INITIAL_LANGUAGE) {
     return FORCED_INITIAL_LANGUAGE;
   }
 
-  return (
+  const candidate = (
     normalizeLanguageCode(urlLanguage) ||
     normalizeLanguageCode(getStoredValue(LANGUAGE_STORAGE_KEY)) ||
     getBrowserLanguage() ||
     "EN"
   );
+  return isLanguageReady(candidate) ? candidate : "IT";
 }
 
 function syncSelectedLanguagesForCurrentLanguage() {
@@ -1572,6 +1594,8 @@ function syncUrlState({ replace = false } = {}) {
 }
 
 function setCurrentLanguage(languageCode, options = {}) {
+  const previousLanguage = currentLanguage;
+  const shouldKeepPlaying = Boolean(getActiveAudio() && !getActiveAudio().paused);
   currentLanguage = normalizeLanguageCode(languageCode) || "EN";
   syncSelectedLanguagesForCurrentLanguage();
   closeGlobalLanguageMenu();
@@ -1596,7 +1620,10 @@ function setCurrentLanguage(languageCode, options = {}) {
     if (activeStop) {
       focusStop(activeStop, {
         skipFly: true,
-        preservePlayback: true,
+        // A translated narration has a different duration: the same absolute
+        // second does not refer to the same sentence in a different language.
+        preservePlayback: previousLanguage === currentLanguage,
+        autoplay: previousLanguage !== currentLanguage && shouldKeepPlaying,
         replaceUrl: true,
         syncUrl: options.syncUrl,
       });
@@ -3421,7 +3448,7 @@ function buildLanguageChips(
         return;
       }
 
-      if (isRuntimeGlobal && languageCode !== "IT") {
+      if (isRuntimeGlobal && !isLanguageReady(languageCode)) {
         showLanguageUnavailable(languageCode, chip);
         replayAnimationClass(chip, "is-pulsing", 460);
         return;
@@ -3860,13 +3887,16 @@ function getMouthCuePath(audioPath) {
     return "";
   }
 
-  const fileName = audioPath.split("/").pop();
+  const fileName = audioPath.split("/").pop()?.split("?")[0];
 
   if (!fileName) {
     return "";
   }
 
-  return `audio/cues/${fileName.replace(/\.[^.]+$/, ".json")}`;
+  const version = /_[a-z]{2}\.mp3$/i.test(fileName) && !/_it\.mp3$/i.test(fileName)
+    ? `?v=${multilingualCatalog.assetVersion}`
+    : "";
+  return `audio/cues/${fileName.replace(/\.[^.]+$/, ".json")}${version}`;
 }
 
 function loadMascotCues(cuePath) {
@@ -4024,6 +4054,7 @@ function setTransitionAudioMode(isActive) {
   playerArtwork?.classList.toggle("is-transition-artwork", isTransitionAudioActive);
   if (!isTransitionAudioActive) {
     pendingTransitionStop = null;
+    activeInterlude = null;
   }
   updatePlaybackRateControl();
   updateStopNavigationControls();
@@ -4036,7 +4067,7 @@ function updateTransitionArtwork() {
 
   miniPlayerArtwork.src = TRANSITION_ARTWORK_PATH;
   miniPlayerArtwork.alt = "Logo del Comune di Vicopisano";
-  miniPlayerTitleTrack.textContent = "In cammino verso la prossima tappa";
+  miniPlayerTitleTrack.textContent = getInterludeTitle();
   miniPlayerTitle.title = miniPlayerTitleTrack.textContent;
   miniPlayerTitle.setAttribute("aria-label", miniPlayerTitleTrack.textContent);
   updateMiniPlayerTitleOverflow();
@@ -4045,11 +4076,11 @@ function updateTransitionArtwork() {
   detailMascotImage.src = MASCOT_FRAME_PATHS[currentMascotFrame] || MASCOT_REST_FRAME;
   detailMascotImage.alt = "Mascotte animata di Brunelleschi";
   detailNumber.textContent = "";
-  detailTitleText.textContent = "In cammino verso la prossima tappa";
+  detailTitleText.textContent = getInterludeTitle();
   detailTitle.title = detailTitleText.textContent;
   detailDuration.textContent = "";
   detailDuration.hidden = true;
-  detailDescription.textContent = TRANSITION_TRANSCRIPT.segments.map(({ text }) => text).join(" ");
+  detailDescription.textContent = (activeInterlude?.transcript || TRANSITION_TRANSCRIPT).segments.map(({ text }) => text).join(" ");
   playerTranscriptDock.hidden = false;
   setDetailArtworkMode("photo");
   schedulePlayerTitleOverflow();
@@ -4122,7 +4153,7 @@ function updateMediaSession(tappa, selectedOption) {
   }
 
   navigator.mediaSession.metadata = new MediaMetadata({
-    title: isTransitionAudioActive ? "In cammino verso la prossima tappa" : getStopTitle(tappa),
+    title: isTransitionAudioActive ? getInterludeTitle() : getStopTitle(tappa),
     artist: "Travel Podcasting Vicopisano",
     album: "Percorso di Vicopisano",
     artwork: [
@@ -4971,6 +5002,7 @@ function bindAudioLifecycle(audio) {
 
     if (isTransitionAudioActive && audio.dataset.transitionAudio === "true") {
       const nextStop = pendingTransitionStop;
+      const wasFinal = audio.dataset.interludeKind === "final";
       setTransitionAudioMode(false);
       if (nextStop) {
         focusStop(nextStop, {
@@ -4979,6 +5011,14 @@ function bindAudioLifecycle(audio) {
           openOverlay: overlayOpen,
           skipFly: overlayOpen,
         });
+      } else if (wasFinal) {
+        focusStop(tappe[tappe.length - 1], {
+          autoplay: false,
+          skipFly: true,
+          openOverlay: overlayOpen,
+          replaceUrl: true,
+        });
+        setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
       }
     }
   });
@@ -4998,6 +5038,7 @@ function handleAudioEnded(audio) {
 
     stopMascotLipSync();
     const nextStop = pendingTransitionStop;
+    const wasFinal = audio.dataset.interludeKind === "final";
     setTransitionAudioMode(false);
     if (nextStop) {
       focusStop(nextStop, {
@@ -5006,6 +5047,12 @@ function handleAudioEnded(audio) {
         openOverlay: overlayOpen,
         skipFly: overlayOpen,
       });
+    } else if (wasFinal) {
+      // Restore the final stop in pause, so replay and navigation work normally.
+      const lastStop = tappe[tappe.length - 1];
+      focusStop(lastStop, { autoplay: false, skipFly: true, openOverlay: overlayOpen, replaceUrl: true });
+      audioHasEnded = true;
+      updateMiniPlayerPlayback();
     }
     return;
   }
@@ -5033,13 +5080,19 @@ function handleAudioEnded(audio) {
     return;
   }
 
+  if (getInterlude("final")) {
+    startTransitionAudio(null, "final");
+    return;
+  }
+
   audioHasEnded = true;
   setAudioFeedbackByKey("");
   updateMiniPlayerPlayback();
 }
 
-function startTransitionAudio(nextStop) {
-  if (!nextStop || isTransitionAudioActive) {
+function startTransitionAudio(nextStop, kind = "between") {
+  const interlude = getInterlude(kind);
+  if ((!nextStop && kind !== "final") || isTransitionAudioActive || !interlude) {
     return;
   }
 
@@ -5056,18 +5109,20 @@ function startTransitionAudio(nextStop) {
   const transitionAudio = document.createElement("audio");
   transitionAudio.controls = false;
   transitionAudio.preload = "auto";
-  transitionAudio.src = TRANSITION_AUDIO_PATH;
-  transitionAudio.dataset.mouthCues = TRANSITION_MOUTH_CUES_PATH;
+  transitionAudio.src = interlude.audio;
+  transitionAudio.dataset.mouthCues = interlude.cues;
   transitionAudio.dataset.transitionAudio = "true";
+  transitionAudio.dataset.interludeKind = kind;
   transitionAudio.loop = false;
   transitionAudio.defaultPlaybackRate = 1;
   transitionAudio.playbackRate = 1;
   transitionAudio.volume = 1;
   transitionAudio.muted = false;
-  transitionAudio.setAttribute("aria-label", "In cammino verso la prossima tappa");
+  transitionAudio.setAttribute("aria-label", interlude.title);
 
   pendingTransitionStop = nextStop;
   setTransitionAudioMode(true);
+  activeInterlude = interlude;
   audioSessionToken += 1;
   audioPlayRequestToken += 1;
   transitionAudio.dataset.audioSession = String(audioSessionToken);
@@ -5079,7 +5134,7 @@ function startTransitionAudio(nextStop) {
   // Ignore any stop transcript fetch that was still resolving as the previous
   // audio ended, so its late response cannot replace the transition captions.
   mapCaptionLoadToken += 1;
-  activeMapTranscript = TRANSITION_TRANSCRIPT;
+  activeMapTranscript = interlude.transcript;
   activeMapCaptionText = "";
   mobileTranscriptLastSegment = null;
   mobileTranscriptModeKey = "";
@@ -5102,7 +5157,7 @@ function startTransitionAudio(nextStop) {
   updateTransitionArtwork();
   bindAudioLifecycle(transitionAudio);
   updateMediaSession(
-    { numero: "", titolo: "In cammino verso la prossima tappa" },
+    { numero: "", titolo: interlude.title },
     { codice: currentLanguage },
   );
   updateMiniPlayerPlayback();
@@ -5191,6 +5246,16 @@ function updateActiveRouteSegment(stopNumber, options = {}) {
 }
 
 function getAudioOptions(tappa) {
+  const translated = multilingualCatalog.tracks.filter((track) => track.stop === tappa.numero);
+  if (translated.length) {
+    const original = tappa.audioVarianti?.find((option) => option.codice === "IT") || {
+      codice: "IT", lingua: "Italiano", bandiera: "🇮🇹", fileAudio: tappa.fileAudio, audioDisponibile: tappa.audioDisponibile,
+    };
+    return [original, ...translated.map((track) => ({
+      codice: track.code, lingua: track.language, fileAudio: track.audio,
+      audioDisponibile: track.ready, trascrizione: track.text,
+    }))];
+  }
   if (Array.isArray(tappa.audioVarianti) && tappa.audioVarianti.length > 0) {
     return tappa.audioVarianti;
   }
@@ -5246,7 +5311,7 @@ function renderGlobalLanguageSelector() {
   const strings = getUiStrings(currentLanguage);
   buildLanguageChips(globalLanguageChips, {
     onSelect: (languageCode, chip) => {
-      if (languageCode !== "IT") {
+      if (!isLanguageReady(languageCode)) {
         showLanguageUnavailable(languageCode, chip);
         replayAnimationClass(chip, "is-pulsing", 460);
         return;
@@ -5351,7 +5416,7 @@ function renderOnboardingTexts() {
 function renderOnboardingLanguageSelector() {
   buildLanguageChips(onboardingLanguageChips, {
     onSelect: (languageCode, chip) => {
-      if (languageCode !== "IT") {
+      if (!isLanguageReady(languageCode)) {
         const languageStrings = getUiStrings(languageCode);
         showLanguageUnavailable(languageCode, chip);
         replayAnimationClass(chip, "is-pulsing", 460);
@@ -6188,9 +6253,11 @@ function closeGuide({ scrollAfterExploreClose = false } = {}) {
 
 function startGuide() {
   const firstStop = tappe[0];
-
-  if (firstStop && activeStopNumber !== firstStop.numero) {
-    focusStop(firstStop, {
+  // A visitor scanning a stop-specific QR must keep that stop when the
+  // first-visit guide opens, rather than silently being sent back to stop 1.
+  const guideStop = initialUrlState.stop || firstStop;
+  if (guideStop && activeStopNumber !== guideStop.numero) {
+    focusStop(guideStop, {
       skipFly: true,
       autoplay: false,
       openOverlay: false,

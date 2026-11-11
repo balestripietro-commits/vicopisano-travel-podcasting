@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "de",
+  "stop": 8,
+  "audio": {
+    "duration": 245.56,
+    "source": "audio/de/08_palazzo_comunale_de.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9566,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.09,
+      "end": 6.56,
+      "text": "Fast sind wir am Ende. Doch bevor wir uns verabschieden, verdient noch ein letztes Gebäude Ihre Aufmerksamkeit."
+    },
+    {
+      "start": 6.76,
+      "end": 10.64,
+      "text": "Vor uns steht der Palazzo Comunale, das Rathaus."
+    },
+    {
+      "start": 10.84,
+      "end": 15.2,
+      "text": "Wir haben es eben schon gesehen, als wir versuchten, die Zwillingstürme zu erkennen."
+    },
+    {
+      "start": 15.4,
+      "end": 18.2,
+      "text": "Jetzt aber betrachten wir den Palast selbst."
+    },
+    {
+      "start": 18.4,
+      "end": 22.08,
+      "text": "Auf den ersten Blick könnte man ihn für ein einziges Gebäude halten."
+    },
+    {
+      "start": 22.28,
+      "end": 28.36,
+      "text": "Nach unserem Rundgang wissen Sie natürlich, dass man dem ersten Eindruck nicht allzu sehr trauen sollte."
+    },
+    {
+      "start": 28.65,
+      "end": 37.84,
+      "text": "Der heutige Bau entstand zu unterschiedlichen Zeiten. Er vereint mittelalterliche Gebäude und Umbauten aus dem siebzehnten bis neunzehnten Jahrhundert."
+    },
+    {
+      "start": 38.04,
+      "end": 42.72,
+      "text": "Seit der zweiten Hälfte des siebzehnten Jahrhunderts war hier die Kanzlei untergebracht."
+    },
+    {
+      "start": 42.92,
+      "end": 51.04,
+      "text": "Der Kanzler verwahrte Dokumente und Statuten, führte die Register und kümmerte sich um zahlreiche Aufgaben der örtlichen Verwaltung."
+    },
+    {
+      "start": 51.24,
+      "end": 55.12,
+      "text": "Zuvor hatten die Amtsträger im Palazzo Pretorio getagt."
+    },
+    {
+      "start": 55.4,
+      "end": 60.52,
+      "text": "Nach sechzehnhunderteinundsechzig fanden ihre Sitzungen dagegen im Haus des Kanzlers statt."
+    },
+    {
+      "start": 60.72,
+      "end": 63.72,
+      "text": "Die Verwaltung des Gebiets fand einen neuen Sitz."
+    },
+    {
+      "start": 63.92,
+      "end": 67.28,
+      "text": "Und mit seinen Aufgaben veränderte sich auch das Gebäude."
+    },
+    {
+      "start": 67.48,
+      "end": 75.56,
+      "text": "Die Zwillingstürme wurden nach und nach Teil des Komplexes, die Räume wurden erweitert und die Fassade regelmäßiger gestaltet."
+    },
+    {
+      "start": 76.76,
+      "end": 83.24,
+      "text": "Siebzehnhundertzweiundachtzig beschloss man sogar, einen Teil der alten Mauern und den Torbogen neben der Kanzlei abzureißen."
+    },
+    {
+      "start": 83.53,
+      "end": 87.36,
+      "text": "Die Begründung? Man wollte dem Gebäude mehr Luft verschaffen."
+    },
+    {
+      "start": 87.56,
+      "end": 96.48,
+      "text": "Nach allem, was ich Ihnen über die Bedeutung von Befestigungen erzählt habe, verstehen Sie sicher, dass ich diese Entscheidung nicht gerade leichtfertig getroffen hätte."
+    },
+    {
+      "start": 96.68,
+      "end": 100.8,
+      "text": "Zum Glück mussten jene Mauern aber keine belagerte Burg mehr schützen."
+    },
+    {
+      "start": 101.0,
+      "end": 103.28,
+      "text": "Der Ort hatte andere Bedürfnisse."
+    },
+    {
+      "start": 103.48,
+      "end": 107.0,
+      "text": "Heute ist dieser Palast Sitz der Gemeinde Vicopisano."
+    },
+    {
+      "start": 107.2,
+      "end": 120.0,
+      "text": "In den Räumen, in denen einst der Kanzler untergebracht war, wird das Gebiet weiterhin verwaltet. Allerdings mit Institutionen, Zuständigkeiten und Bürgern, die sich deutlich von denen meiner Zeit unterscheiden."
+    },
+    {
+      "start": 120.2,
+      "end": 129.36,
+      "text": "Zu Beginn unseres Rundgangs, kurz nach meiner Rückkehr nach Vicopisano, dachte ich, ich würde den Ort daran messen, was von meinen Werken geblieben ist."
+    },
+    {
+      "start": 129.56,
+      "end": 133.44,
+      "text": "Und meine Werke haben sich recht gut gehalten, das muss ich zugeben."
+    },
+    {
+      "start": 133.64,
+      "end": 137.72,
+      "text": "Unterwegs bin ich aber auch dem begegnet, was schon vor mir da war."
+    },
+    {
+      "start": 138.01,
+      "end": 143.32,
+      "text": "Nun ist mir klar, dass meine Rocca nur einen Teil der Geschichte von Vicopisano ausmacht."
+    },
+    {
+      "start": 143.52,
+      "end": 144.76,
+      "text": "Einen wichtigen Teil."
+    },
+    {
+      "start": 144.76,
+      "end": 146.28,
+      "text": "Einen sehr wichtigen."
+    },
+    {
+      "start": 146.28,
+      "end": 148.16,
+      "text": "Aber nicht den einzigen."
+    },
+    {
+      "start": 148.36,
+      "end": 153.96,
+      "text": "Ein mittelalterlicher Ort kann seine Mauern bewahren und doch zu einer bloßen Kulisse werden."
+    },
+    {
+      "start": 154.16,
+      "end": 155.84,
+      "text": "Hier ist das nicht geschehen."
+    },
+    {
+      "start": 156.04,
+      "end": 159.56,
+      "text": "In diesen Gebäuden leben und arbeiten die Menschen weiterhin."
+    },
+    {
+      "start": 159.76,
+      "end": 169.96,
+      "text": "Geschäfte, Märkte, Vereine und örtliche Gemeinschaften halten den Ort mit Ausstellungen, Aufführungen, Begegnungen und Festen das ganze Jahr über lebendig."
+    },
+    {
+      "start": 170.16,
+      "end": 173.84,
+      "text": "Vielleicht hat auch die Bauweise von Vicopisano dazu beigetragen."
+    },
+    {
+      "start": 174.04,
+      "end": 176.24,
+      "text": "Die eng beieinanderliegenden Straßen."
+    },
+    {
+      "start": 176.24,
+      "end": 177.2,
+      "text": "Die Plätze."
+    },
+    {
+      "start": 177.2,
+      "end": 179.36,
+      "text": "Die Gebäude dicht an dicht."
+    },
+    {
+      "start": 179.56,
+      "end": 181.92,
+      "text": "Aber Steine allein reichen nicht aus."
+    },
+    {
+      "start": 182.12,
+      "end": 188.56,
+      "text": "Ein Ort bleibt lebendig, weil Menschen sich weiterhin für ihn entscheiden, dort wohnen und sich um ihn kümmern."
+    },
+    {
+      "start": 188.76,
+      "end": 193.24,
+      "text": "Ich hatte Vicopisano so entworfen, dass es Belagerungen standhalten konnte."
+    },
+    {
+      "start": 193.53,
+      "end": 198.48,
+      "text": "Nach fast sechshundert Jahren habe ich entdeckt, dass es auf andere Weise weiter standhält:"
+    },
+    {
+      "start": 198.68,
+      "end": 201.52,
+      "text": "indem es ein lebendiger Ort bleibt."
+    },
+    {
+      "start": 201.72,
+      "end": 203.84,
+      "text": "Nun müssen wir uns leider verabschieden."
+    },
+    {
+      "start": 204.04,
+      "end": 206.96,
+      "text": "Ihre Architekturlektion ist für heute beendet."
+    },
+    {
+      "start": 207.16,
+      "end": 218.16,
+      "text": "Wenn Sie noch neugierig sind und alles entdecken möchten, was Vicopisano zu bieten hat, gehen Sie zur Touristeninformation. Sie befindet sich in der Gemeindebibliothek am Fuß des Uhrturms."
+    },
+    {
+      "start": 218.36,
+      "end": 226.72,
+      "text": "Dort erhalten Sie Informationen zu Besichtigungen der Rocca, des Palazzo Pretorio, des Camminamento del Soccorso und des Uhrturms."
+    },
+    {
+      "start": 226.92,
+      "end": 233.96,
+      "text": "Oder Sie wählen eine Wanderung auf dem Monte Pisano oder erkundigen sich nach bevorstehenden Festen und Veranstaltungen."
+    },
+    {
+      "start": 234.16,
+      "end": 238.64,
+      "text": "Ich würde sagen, nach fast sechshundert Jahren bin ich für heute genug gelaufen."
+    },
+    {
+      "start": 238.84,
+      "end": 245.16,
+      "text": "Und außerdem: Eine solche Architekturlektion verdient, in aller Bescheidenheit, eine gewisse Erholung."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

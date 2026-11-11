@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "es",
+  "stop": 5,
+  "audio": {
+    "duration": 146.76,
+    "source": "audio/es/05_torre_orologio_es.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9802,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 3.6,
+      "text": "Al bajar de la Rocca, volvemos al interior del pueblo."
+    },
+    {
+      "start": 3.6,
+      "end": 6.56,
+      "text": "Y esta vez os recomiendo levantar la vista."
+    },
+    {
+      "start": 6.56,
+      "end": 11.6,
+      "text": "Ante vosotros está la Torre dell'Orologio, la torre del Reloj."
+    },
+    {
+      "start": 11.6,
+      "end": 14.19,
+      "text": "Desde lejos, mi Rocca domina Vicopisano."
+    },
+    {
+      "start": 14.19,
+      "end": 21.45,
+      "text": "Pero, al caminar por estas calles, sobre todo por Via Lante, es difícil no fijarse en esta torre."
+    },
+    {
+      "start": 21.45,
+      "end": 22.58,
+      "text": "Alta, estrecha…"
+    },
+    {
+      "start": 22.58,
+      "end": 24.74,
+      "text": "y realmente singular."
+    },
+    {
+      "start": 24.74,
+      "end": 26.83,
+      "text": "Y antes de que lo preguntéis:"
+    },
+    {
+      "start": 26.83,
+      "end": 29.4,
+      "text": "no, esta tampoco la construí yo."
+    },
+    {
+      "start": 29.45,
+      "end": 35.86,
+      "text": "Su estructura original data de los siglos doce y trece, así que ya estaba aquí mucho antes de mi llegada."
+    },
+    {
+      "start": 35.86,
+      "end": 43.42,
+      "text": "Probablemente nació como torre militar, para vigilar la carretera que llevaba al antiguo castillo, en la zona del Palazzo Pretorio."
+    },
+    {
+      "start": 43.42,
+      "end": 45.2,
+      "text": "Observadla con atención."
+    },
+    {
+      "start": 45.2,
+      "end": 48.23,
+      "text": "Está construida casi por completo en verrucano."
+    },
+    {
+      "start": 48.23,
+      "end": 52.88,
+      "text": "Y en sus muros todavía podéis ver una serie de grandes ménsulas de piedra."
+    },
+    {
+      "start": 52.88,
+      "end": 61.6,
+      "text": "En la Edad Media sostenían estructuras de madera que sobresalían de la torre y a las que se accedía por esas pequeñas puertas en arco que aún se ven hoy."
+    },
+    {
+      "start": 61.6,
+      "end": 70.18,
+      "text": "En una torre de uso militar, disponer de espacios salientes también permitía vigilar y defender mejor lo que ocurría al pie de las murallas."
+    },
+    {
+      "start": 70.18,
+      "end": 74.0,
+      "text": "Pero, con el tiempo, la torre dejó de servir para la defensa."
+    },
+    {
+      "start": 74.0,
+      "end": 75.85,
+      "text": "Y en lugar de derribarla…"
+    },
+    {
+      "start": 75.85,
+      "end": 77.42,
+      "text": "la transformaron."
+    },
+    {
+      "start": 77.42,
+      "end": 80.94,
+      "text": "Su altura la hacía perfecta para una nueva función:"
+    },
+    {
+      "start": 80.94,
+      "end": 83.08,
+      "text": "convertirse en campanario."
+    },
+    {
+      "start": 83.08,
+      "end": 86.72,
+      "text": "Y, unos siglos más tarde, llegó también el reloj."
+    },
+    {
+      "start": 86.77,
+      "end": 94.28,
+      "text": "Su presencia está documentada al menos desde el siglo dieciséis, mientras que el mecanismo que se conserva hoy data del dieciocho."
+    },
+    {
+      "start": 94.28,
+      "end": 95.93,
+      "text": "Una torre militar."
+    },
+    {
+      "start": 95.93,
+      "end": 97.97,
+      "text": "Después, un campanario."
+    },
+    {
+      "start": 97.97,
+      "end": 99.76,
+      "text": "Después, un reloj."
+    },
+    {
+      "start": 99.76,
+      "end": 101.96,
+      "text": "Debo admitir que me parece muy bien."
+    },
+    {
+      "start": 101.96,
+      "end": 106.72,
+      "text": "Un buen edificio no tiene por qué hacer eternamente aquello para lo que fue construido."
+    },
+    {
+      "start": 106.72,
+      "end": 110.5,
+      "text": "Debe ser capaz de seguir sirviendo a quienes viven a su alrededor."
+    },
+    {
+      "start": 110.5,
+      "end": 120.86,
+      "text": "Hoy, tras una importante restauración, la torre se puede visitar. Es posible subir hasta el cuerpo de campanas, desde donde se contempla Vicopisano y el Monte Pisano."
+    },
+    {
+      "start": 120.86,
+      "end": 124.16,
+      "text": "Pero quizá lo que más me intriga sea otra cosa."
+    },
+    {
+      "start": 124.16,
+      "end": 128.11,
+      "text": "Una construcción que nació para controlar el paso de las personas…"
+    },
+    {
+      "start": 128.11,
+      "end": 131.44,
+      "text": "hoy sirve sobre todo para marcar el paso del tiempo."
+    },
+    {
+      "start": 131.44,
+      "end": 133.76,
+      "text": "No está mal como transformación."
+    },
+    {
+      "start": 133.76,
+      "end": 135.6,
+      "text": "Ahora sigamos bajando."
+    },
+    {
+      "start": 135.6,
+      "end": 140.7,
+      "text": "La próxima parada nos llevará ante la Pieve di Santa Maria, la iglesia parroquial."
+    },
+    {
+      "start": 140.75,
+      "end": 146.6,
+      "text": "Allí dejaremos atrás, al menos durante unos minutos, torres, murallas y fortificaciones."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

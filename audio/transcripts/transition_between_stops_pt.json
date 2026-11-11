@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "pt",
+  "stop": null,
+  "audio": {
+    "duration": 8.4,
+    "source": "audio/pt/transition_between_stops_pt.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9915,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.04,
+      "end": 8.4,
+      "text": "Esta gravação faz parte do itinerário áudio realizado pelo Município de Vicopisano. Quando estiverem prontos, sigam para a próxima paragem."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

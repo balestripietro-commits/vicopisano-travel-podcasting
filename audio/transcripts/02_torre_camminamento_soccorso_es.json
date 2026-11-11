@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "es",
+  "stop": 2,
+  "audio": {
+    "duration": 126.025,
+    "source": "audio/es/02_torre_camminamento_soccorso_es.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.988,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.04,
+      "end": 1.41,
+      "text": "Ya hemos llegado."
+    },
+    {
+      "start": 1.41,
+      "end": 5.95,
+      "text": "Lo que veis delante es la Torre del Soccorso, la torre de Socorro."
+    },
+    {
+      "start": 5.95,
+      "end": 13.78,
+      "text": "Y el muro que sube por la colina hasta la Rocca, la fortaleza, es el Camminamento del Soccorso, un paso fortificado."
+    },
+    {
+      "start": 13.78,
+      "end": 16.13,
+      "text": "Esto sí es obra mía."
+    },
+    {
+      "start": 16.13,
+      "end": 20.73,
+      "text": "La torre, el paso y la Rocca forman un único sistema defensivo."
+    },
+    {
+      "start": 20.73,
+      "end": 23.51,
+      "text": "Una máquina construida en piedra."
+    },
+    {
+      "start": 23.51,
+      "end": 27.77,
+      "text": "El nombre, Soccorso, que significa socorro, ya explica su función."
+    },
+    {
+      "start": 27.77,
+      "end": 31.59,
+      "text": "Imaginad que Vicopisano está siendo atacado."
+    },
+    {
+      "start": 31.59,
+      "end": 37.06,
+      "text": "El enemigo entra en el pueblo, ocupa las calles y obliga a los soldados a refugiarse en la Rocca."
+    },
+    {
+      "start": 37.06,
+      "end": 42.31,
+      "text": "Una situación bastante desagradable, sobre todo para quienes están dentro."
+    },
+    {
+      "start": 42.31,
+      "end": 44.37,
+      "text": "Pero todavía quedaba esta vía."
+    },
+    {
+      "start": 44.37,
+      "end": 54.56,
+      "text": "Por la parte inferior de la torre podían entrar hombres, víveres y suministros desde el exterior. Desde allí, podían subir hasta la Rocca por el paso protegido."
+    },
+    {
+      "start": 54.59,
+      "end": 58.44,
+      "text": "Todo ello sin cruzar las calles controladas por el enemigo."
+    },
+    {
+      "start": 58.44,
+      "end": 60.94,
+      "text": "Por eso esto no es simplemente un muro."
+    },
+    {
+      "start": 60.94,
+      "end": 69.36,
+      "text": "Es un camino protegido, diseñado para funcionar precisamente cuando todas las demás vías habían dejado de ser seguras."
+    },
+    {
+      "start": 69.36,
+      "end": 72.56,
+      "text": "Cuando llegué a Vicopisano, me hice una pregunta."
+    },
+    {
+      "start": 72.56,
+      "end": 74.06,
+      "text": "¿Qué podía salir mal?"
+    },
+    {
+      "start": 74.06,
+      "end": 78.66,
+      "text": "Un asedio, la entrada de enemigos en el pueblo o el aislamiento de la Rocca."
+    },
+    {
+      "start": 78.66,
+      "end": 83.11,
+      "text": "¿Y qué podrían hacer los defensores en cada uno de esos casos?"
+    },
+    {
+      "start": 83.11,
+      "end": 86.68,
+      "text": "El Camminamento del Soccorso nació también de esas preguntas."
+    },
+    {
+      "start": 86.68,
+      "end": 94.07,
+      "text": "Debía funcionar incluso si el pueblo se rebelaba y la guarnición florentina se veía obligada a retirarse a la Rocca."
+    },
+    {
+      "start": 94.07,
+      "end": 102.73,
+      "text": "Florencia acababa de conquistar Vicopisano y, en un territorio recién ocupado, la confianza no era precisamente el material más abundante."
+    },
+    {
+      "start": 102.73,
+      "end": 108.04,
+      "text": "Y debo admitir que nunca he sido un gran experto ni en confianza ni en política."
+    },
+    {
+      "start": 108.04,
+      "end": 111.21,
+      "text": "Por eso preferí confiar en la piedra."
+    },
+    {
+      "start": 111.21,
+      "end": 114.2,
+      "text": "Hoy podéis recorrer el paso con bastante tranquilidad."
+    },
+    {
+      "start": 114.2,
+      "end": 120.88,
+      "text": "Sin armaduras, sin provisiones a la espalda y, sobre todo, sin nadie intentando conquistar el pueblo."
+    },
+    {
+      "start": 120.88,
+      "end": 123.03,
+      "text": "Ahora continuemos hacia el centro."
+    },
+    {
+      "start": 123.03,
+      "end": 126.025,
+      "text": "La próxima parada será en el Palazzo Pretorio."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

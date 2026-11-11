@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "fr",
+  "stop": 1,
+  "audio": {
+    "duration": 256.41,
+    "source": "audio/fr/01_torre_quattro_porte_fr.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.948,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.09,
+      "end": 3.9,
+      "text": "Après presque six cents ans, je suis enfin de retour à Vicopisano."
+    },
+    {
+      "start": 4.3,
+      "end": 8.3,
+      "text": "Et je dois avouer que retrouver ce bourg aussi paisible me fait un drôle d’effet."
+    },
+    {
+      "start": 8.74,
+      "end": 14.6,
+      "text": "Aujourd’hui, je vois des rues bien entretenues, des gens qui se promènent et des portes qu’on laisse ouvertes sans s’inquiéter."
+    },
+    {
+      "start": 15.1,
+      "end": 18.7,
+      "text": "Quand je suis arrivé… la situation était un peu différente."
+    },
+    {
+      "start": 19.3,
+      "end": 21.1,
+      "text": "Mais je ne me suis pas encore présenté."
+    },
+    {
+      "start": 21.1,
+      "end": 23.2,
+      "text": "Je m’appelle Filippo Brunelleschi."
+    },
+    {
+      "start": 23.6,
+      "end": 28.0,
+      "text": "Vous me connaissez peut-être pour la coupole de Santa Maria del Fiore, la cathédrale de Florence."
+    },
+    {
+      "start": 28.53,
+      "end": 37.1,
+      "text": "Mais il y a près de six cents ans, Florence m’a aussi envoyé ici, avec une mission bien précise : rendre Vicopisano beaucoup plus difficile à conquérir."
+    },
+    {
+      "start": 37.6,
+      "end": 41.04,
+      "text": "Alors, avant de vous montrer ce que j’ai réalisé, posons-nous une question."
+    },
+    {
+      "start": 41.5,
+      "end": 42.61,
+      "text": "Pourquoi Vicopisano ?"
+    },
+    {
+      "start": 43.36,
+      "end": 48.17,
+      "text": "Pourquoi Florence tenait-elle tant à contrôler et à fortifier un bourg qui paraît aujourd’hui si tranquille ?"
+    },
+    {
+      "start": 49.14,
+      "end": 51.62,
+      "text": "Pour le comprendre, il faut remonter loin dans le temps."
+    },
+    {
+      "start": 51.62,
+      "end": 52.74,
+      "text": "Bien avant moi."
+    },
+    {
+      "start": 53.36,
+      "end": 61.14,
+      "text": "Cette colline était probablement déjà fréquentée à l’époque étrusque : on a retrouvé dans les environs des objets remontant au moins au cinquième siècle avant Jésus-Christ."
+    },
+    {
+      "start": 61.54,
+      "end": 65.74,
+      "text": "Mais c’est au Moyen Âge que l’on commence à reconnaître le bourg qui allait devenir Vicopisano."
+    },
+    {
+      "start": 66.14,
+      "end": 68.14,
+      "text": "À l’époque, il portait même un autre nom."
+    },
+    {
+      "start": 68.14,
+      "end": 72.84,
+      "text": "Les documents mentionnent Auseris Sala, devenu ensuite Auserissola."
+    },
+    {
+      "start": 73.24,
+      "end": 79.24,
+      "text": "Plus bas, près de l’église paroissiale que nous découvrirons en chemin, se trouvait un autre village, appelé Vicus."
+    },
+    {
+      "start": 79.54,
+      "end": 82.74,
+      "text": "Avec le temps, les deux agglomérations ont fini par se rejoindre."
+    },
+    {
+      "start": 83.13,
+      "end": 87.0,
+      "text": "Et un nouveau nom apparaît dans les documents : Vicus Auserissola."
+    },
+    {
+      "start": 87.28,
+      "end": 91.74,
+      "text": "Mais il y a surtout une chose que l’on imagine difficilement en regardant autour de soi aujourd’hui."
+    },
+    {
+      "start": 91.74,
+      "end": 92.5,
+      "text": "L’eau."
+    },
+    {
+      "start": 92.9,
+      "end": 98.88,
+      "text": "Pendant des siècles, cette colline a occupé une position exceptionnelle, près du confluent de deux cours d’eau importants."
+    },
+    {
+      "start": 99.3,
+      "end": 102.16,
+      "text": "D’un côté, l’Arno menait vers Pise et la mer."
+    },
+    {
+      "start": 102.44,
+      "end": 109.16,
+      "text": "De l’autre, l’Auser, également appelé Serezza, permettait de rejoindre le lac de Bientina, puis la région de Lucques."
+    },
+    {
+      "start": 109.56,
+      "end": 111.67,
+      "text": "L’eau, c’était un moyen de circuler."
+    },
+    {
+      "start": 111.67,
+      "end": 112.3,
+      "text": "Du commerce."
+    },
+    {
+      "start": 112.3,
+      "end": 114.02,
+      "text": "Mais aussi une protection."
+    },
+    {
+      "start": 114.32,
+      "end": 120.86,
+      "text": "Les rivières protégeaient aussi le bourg fortifié. Elles alimentaient ses fossés et rendaient l’approche des remparts beaucoup plus difficile."
+    },
+    {
+      "start": 121.18,
+      "end": 125.26,
+      "text": "Bref, Vicopisano n’était pas simplement un petit bourg perché sur une colline."
+    },
+    {
+      "start": 125.52,
+      "end": 127.74,
+      "text": "C’était un point stratégique à contrôler."
+    },
+    {
+      "start": 127.98,
+      "end": 129.66,
+      "text": "Et Pise le savait très bien."
+    },
+    {
+      "start": 130.1,
+      "end": 131.56,
+      "text": "Puis Florence est arrivée."
+    },
+    {
+      "start": 131.82,
+      "end": 136.9,
+      "text": "En mille quatre cent six, après des mois de siège, Vicopisano est tombé aux mains des Florentins."
+    },
+    {
+      "start": 137.39,
+      "end": 139.49,
+      "text": "Mais conquérir un lieu est une chose."
+    },
+    {
+      "start": 139.49,
+      "end": 141.76,
+      "text": "Le garder sous son contrôle en est une autre."
+    },
+    {
+      "start": 142.16,
+      "end": 152.0,
+      "text": "C’est ainsi qu’en mille quatre cent trente-cinq, on m’a confié une mission qui n’avait rien de modeste : transformer cette place forte en une forteresse capable de résister à un nouveau siège."
+    },
+    {
+      "start": 152.36,
+      "end": 155.86,
+      "text": "Des remparts, des tours, des chemins de ronde, des ponts-levis…"
+    },
+    {
+      "start": 155.86,
+      "end": 157.28,
+      "text": "Il y avait de quoi faire."
+    },
+    {
+      "start": 157.52,
+      "end": 159.34,
+      "text": "Mais nous y reviendrons dans un instant."
+    },
+    {
+      "start": 159.72,
+      "end": 161.96,
+      "text": "Arrêtons-nous d’abord devant la tour que vous voyez."
+    },
+    {
+      "start": 162.24,
+      "end": 166.78,
+      "text": "On l’appelle aujourd’hui la Torre delle Quattro Porte, la tour des Quatre Portes."
+    },
+    {
+      "start": 167.29,
+      "end": 169.8,
+      "text": "Un passage s’ouvre sur chacun de ses quatre côtés."
+    },
+    {
+      "start": 170.24,
+      "end": 171.04,
+      "text": "Quatre arches."
+    },
+    {
+      "start": 171.04,
+      "end": 172.24,
+      "text": "Quatre directions."
+    },
+    {
+      "start": 172.62,
+      "end": 174.62,
+      "text": "Une disposition plutôt inhabituelle."
+    },
+    {
+      "start": 175.12,
+      "end": 181.34,
+      "text": "L’édifice était à la fois une tour de guet, une porte d’entrée du bourg fortifié et un point de passage le long des remparts."
+    },
+    {
+      "start": 181.34,
+      "end": 185.3,
+      "text": "Mais avant de m’attribuer aussi cette tour, mieux vaut préciser une chose."
+    },
+    {
+      "start": 185.72,
+      "end": 187.22,
+      "text": "Ce n’est pas moi qui l’ai construite."
+    },
+    {
+      "start": 187.58,
+      "end": 189.18,
+      "text": "Elle était là bien avant mon arrivée."
+    },
+    {
+      "start": 189.54,
+      "end": 192.74,
+      "text": "Et, après tout, je ne manque pas d’ouvrages dont je puisse me vanter."
+    },
+    {
+      "start": 193.56,
+      "end": 196.54,
+      "text": "Ses parties les plus anciennes datent de la fin du douzième siècle."
+    },
+    {
+      "start": 197.01,
+      "end": 201.66,
+      "text": "Au fil du temps, elle a été endommagée, réparée et remaniée à plusieurs reprises."
+    },
+    {
+      "start": 202.18,
+      "end": 206.34,
+      "text": "En l’observant attentivement, vous pouvez encore lire ces transformations dans sa maçonnerie."
+    },
+    {
+      "start": 206.92,
+      "end": 212.34,
+      "text": "Dans la partie basse domine le verrucano, la pierre locale que nous rencontrerons souvent sur notre parcours."
+    },
+    {
+      "start": 212.92,
+      "end": 214.7,
+      "text": "Plus haut, c’est la brique qui prend le relais."
+    },
+    {
+      "start": 215.2,
+      "end": 216.91,
+      "text": "Ce ne sont pas seulement des matériaux différents."
+    },
+    {
+      "start": 216.91,
+      "end": 219.82,
+      "text": "Ils racontent différentes périodes de la vie de la tour."
+    },
+    {
+      "start": 220.28,
+      "end": 223.34,
+      "text": "Et, à ce que je vois, Vicopisano aussi a changé."
+    },
+    {
+      "start": 223.9,
+      "end": 225.16,
+      "text": "Voilà pourquoi je suis revenu."
+    },
+    {
+      "start": 225.75,
+      "end": 233.8,
+      "text": "Je veux comprendre ce qu’il reste de la ville que j’ai connue, observer ses transformations… et vous expliquer pourquoi certains de ses édifices ont été construits ainsi."
+    },
+    {
+      "start": 234.46,
+      "end": 235.54,
+      "text": "Nous pouvons commencer ici."
+    },
+    {
+      "start": 235.9,
+      "end": 237.94,
+      "text": "Traversez la tour et entrez dans le bourg."
+    },
+    {
+      "start": 238.38,
+      "end": 245.42,
+      "text": "À la prochaine étape, nous découvrirons la Torre e Camminamento del Soccorso, la tour et le passage fortifié du Secours."
+    },
+    {
+      "start": 245.88,
+      "end": 249.38,
+      "text": "Cet ensemble-là fait bien partie du système que j’ai conçu pour Vicopisano."
+    },
+    {
+      "start": 249.76,
+      "end": 253.24,
+      "text": "Et après presque six cents ans, il reste parfaitement reconnaissable."
+    },
+    {
+      "start": 253.75,
+      "end": 255.96,
+      "text": "Vous me permettrez d’en tirer une certaine satisfaction."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

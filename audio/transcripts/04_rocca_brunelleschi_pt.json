@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "pt",
+  "stop": 4,
+  "audio": {
+    "duration": 160.12,
+    "source": "audio/pt/04_rocca_brunelleschi_pt.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9683,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.08,
+      "end": 1.32,
+      "text": "Cá está ela."
+    },
+    {
+      "start": 1.32,
+      "end": 2.32,
+      "text": "A Rocca."
+    },
+    {
+      "start": 2.32,
+      "end": 9.2,
+      "text": "Quando me confiaram o projeto, no cimo da colina já existia uma torre do século doze: a Torre di Santa Maria."
+    },
+    {
+      "start": 9.2,
+      "end": 12.0,
+      "text": "Podia tê-la demolido e recomeçado do zero."
+    },
+    {
+      "start": 12.0,
+      "end": 16.32,
+      "text": "Mas um bom arquiteto também deve saber reconhecer o que pode ser reutilizado."
+    },
+    {
+      "start": 16.32,
+      "end": 24.16,
+      "text": "Por isso, incorporei-a na nova fortificação e transformei-a na torre de menagem: o núcleo mais protegido da Rocca."
+    },
+    {
+      "start": 24.16,
+      "end": 27.36,
+      "text": "As obras começaram em mil quatrocentos e trinta e cinco."
+    },
+    {
+      "start": 27.36,
+      "end": 34.72,
+      "text": "O princípio que segui era simples: uma fortaleza não devia confiar a sua segurança a uma única linha de defesa."
+    },
+    {
+      "start": 34.72,
+      "end": 38.32,
+      "text": "Se o inimigo ultrapassasse a primeira entrada, encontrava o pátio."
+    },
+    {
+      "start": 38.32,
+      "end": 43.4,
+      "text": "Se conquistasse o pátio, os defensores podiam inutilizar a escada de acesso ao adarve."
+    },
+    {
+      "start": 43.4,
+      "end": 50.88,
+      "text": "E, se conseguisse avançar ainda mais, podia levantar-se a ponte levadiça da torre de menagem, isolando-a por completo."
+    },
+    {
+      "start": 50.88,
+      "end": 53.88,
+      "text": "Uma fortaleza dentro da fortaleza."
+    },
+    {
+      "start": 53.88,
+      "end": 60.72,
+      "text": "A torre de menagem tinha até uma cisterna própria e podia guardar mantimentos suficientes para prolongar a resistência."
+    },
+    {
+      "start": 60.72,
+      "end": 62.88,
+      "text": "Cada espaço estava ligado aos outros."
+    },
+    {
+      "start": 62.88,
+      "end": 67.2,
+      "text": "Mas, em caso de necessidade, podia ficar separado deles."
+    },
+    {
+      "start": 67.2,
+      "end": 69.88,
+      "text": "Não projetei esta Rocca para ser confortável."
+    },
+    {
+      "start": 69.88,
+      "end": 72.88,
+      "text": "Projetei-a para ser difícil de conquistar."
+    },
+    {
+      "start": 72.88,
+      "end": 77.4,
+      "text": "Descobri, porém, que hoje é um lugar muito mais aberto e frequentado."
+    },
+    {
+      "start": 77.4,
+      "end": 86.28,
+      "text": "Não apenas por turistas e entusiastas que querem conhecer as minhas obras, mas também por quem vem assistir a concertos, espetáculos e visitas noturnas."
+    },
+    {
+      "start": 86.34,
+      "end": 91.52,
+      "text": "Pessoas que sobem até aqui não para cercar a Rocca, mas para passar uma noite agradável."
+    },
+    {
+      "start": 91.52,
+      "end": 96.6,
+      "text": "Disseram-me que na vila até organizam um festival de música chamado Rocca'n'Roll."
+    },
+    {
+      "start": 96.6,
+      "end": 105.24,
+      "text": "Tenho de reconhecer que uma fortaleza capaz de resistir às armas e, séculos depois, também à música moderna demonstrou uma boa solidez."
+    },
+    {
+      "start": 105.24,
+      "end": 107.6,
+      "text": "E depois há a Festa Medievale."
+    },
+    {
+      "start": 107.6,
+      "end": 116.68,
+      "text": "Todos os anos, no primeiro fim de semana de setembro, a vila volta a encher-se de tochas, bandeiras, figurantes, músicos, duelos e tabernas."
+    },
+    {
+      "start": 116.68,
+      "end": 121.96,
+      "text": "Durante algumas noites, Vicopisano procura recriar o ambiente da vila medieval."
+    },
+    {
+      "start": 121.96,
+      "end": 125.12,
+      "text": "Teria muita curiosidade em assistir à próxima edição."
+    },
+    {
+      "start": 125.12,
+      "end": 128.08,
+      "text": "Podia verificar a fidelidade da reconstituição."
+    },
+    {
+      "start": 128.08,
+      "end": 130.04,
+      "text": "E talvez dar algumas sugestões."
+    },
+    {
+      "start": 130.04,
+      "end": 132.12,
+      "text": "Apenas se me pedissem, naturalmente."
+    },
+    {
+      "start": 132.12,
+      "end": 138.52,
+      "text": "Saber que estas ruas voltam a encher-se e que a Rocca também abre à noite faz-me compreender uma coisa."
+    },
+    {
+      "start": 138.6,
+      "end": 143.8,
+      "text": "Um edifício pode continuar a viver de formas que o seu arquiteto não tinha previsto."
+    },
+    {
+      "start": 143.8,
+      "end": 147.64,
+      "text": "Eu tinha projetado estas muralhas para manter as pessoas lá fora."
+    },
+    {
+      "start": 147.64,
+      "end": 152.52,
+      "text": "Hoje, pelo contrário, as pessoas são recebidas e convidadas a entrar."
+    },
+    {
+      "start": 152.52,
+      "end": 155.28,
+      "text": "Agora deixemos a Rocca e continuemos."
+    },
+    {
+      "start": 155.28,
+      "end": 160.08,
+      "text": "A próxima paragem vai levar-nos à Torre dell'Orologio, a Torre do Relógio."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

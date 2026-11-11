@@ -5,6 +5,7 @@ const outputDirectory = path.resolve(process.env.NETLIFY_PUBLISH_DIR || "dist");
 const rootFiles = [
   "index.html",
   "app.js",
+  "multilingual-data.js",
   "style.css",
   "design-system.css",
   "theme-vicopisano.css",

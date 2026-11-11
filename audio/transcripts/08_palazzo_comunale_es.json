@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "es",
+  "stop": 8,
+  "audio": {
+    "duration": 245.8,
+    "source": "audio/es/08_palazzo_comunale_es.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9598,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.03,
+      "end": 7.81,
+      "text": "Ya casi hemos terminado. Pero antes de despedirnos, todavía hay un último edificio que merece vuestra atención."
+    },
+    {
+      "start": 7.81,
+      "end": 12.12,
+      "text": "Ante nosotros está el Palazzo Comunale, el ayuntamiento."
+    },
+    {
+      "start": 12.12,
+      "end": 16.52,
+      "text": "Ya lo vimos hace un momento, cuando intentábamos distinguir las Torres Gemelas."
+    },
+    {
+      "start": 16.52,
+      "end": 19.78,
+      "text": "Ahora, sin embargo, observemos el palacio."
+    },
+    {
+      "start": 19.78,
+      "end": 23.64,
+      "text": "A primera vista podríais considerarlo un único edificio."
+    },
+    {
+      "start": 23.64,
+      "end": 30.37,
+      "text": "Naturalmente, después de nuestro recorrido, sabéis que no conviene fiarse demasiado de las primeras impresiones."
+    },
+    {
+      "start": 30.37,
+      "end": 39.0,
+      "text": "La construcción que veis se formó en distintas épocas, uniendo edificios medievales e intervenciones realizadas entre los siglos diecisiete y diecinueve."
+    },
+    {
+      "start": 39.0,
+      "end": 44.26,
+      "text": "Desde la segunda mitad del siglo diecisiete, estos espacios albergaron la cancillería."
+    },
+    {
+      "start": 44.26,
+      "end": 53.18,
+      "text": "El canciller custodiaba los documentos y los estatutos, llevaba los registros y se ocupaba de numerosos aspectos de la administración local."
+    },
+    {
+      "start": 53.18,
+      "end": 58.75,
+      "text": "Anteriormente, las reuniones de los oficiales se celebraban en el Palazzo Pretorio."
+    },
+    {
+      "start": 58.75,
+      "end": 63.35,
+      "text": "Después de mil seiscientos sesenta y uno, comenzaron a celebrarse en la casa del canciller."
+    },
+    {
+      "start": 63.35,
+      "end": 67.81,
+      "text": "El gobierno del territorio estaba encontrando una nueva sede."
+    },
+    {
+      "start": 67.81,
+      "end": 71.05,
+      "text": "Y el edificio cambiaba junto con sus funciones."
+    },
+    {
+      "start": 71.05,
+      "end": 80.42,
+      "text": "Las Torres Gemelas pasaron poco a poco a formar parte del conjunto, se ampliaron los espacios y la fachada adquirió un aspecto más regular."
+    },
+    {
+      "start": 80.42,
+      "end": 89.31,
+      "text": "En mil setecientos ochenta y dos se decidió incluso demoler parte de las antiguas murallas y el arco de la puerta que estaban junto a la cancillería."
+    },
+    {
+      "start": 89.31,
+      "end": 92.4,
+      "text": "¿El motivo? Dar más aire al edificio."
+    },
+    {
+      "start": 92.4,
+      "end": 99.83,
+      "text": "Después de todo lo que os he contado sobre la importancia de las fortificaciones, comprenderéis que no es una decisión que yo hubiera tomado a la ligera."
+    },
+    {
+      "start": 99.83,
+      "end": 105.63,
+      "text": "Pero, afortunadamente, aquellas murallas ya no tenían que proteger un castillo asediado."
+    },
+    {
+      "start": 105.63,
+      "end": 107.94,
+      "text": "El pueblo tenía otras necesidades."
+    },
+    {
+      "start": 107.97,
+      "end": 111.75,
+      "text": "Hoy este palacio es la sede del Ayuntamiento de Vicopisano."
+    },
+    {
+      "start": 111.75,
+      "end": 122.58,
+      "text": "En los espacios que antes ocupaba el canciller se sigue administrando el territorio, aunque con instituciones, responsabilidades y ciudadanos muy distintos de los que yo conocí."
+    },
+    {
+      "start": 122.58,
+      "end": 130.45,
+      "text": "Al comienzo del recorrido, recién llegado de nuevo a Vicopisano, pensaba que juzgaría el pueblo observando lo que quedaba de mis obras."
+    },
+    {
+      "start": 130.45,
+      "end": 134.82,
+      "text": "Y mis obras han resistido bastante bien, debo admitirlo."
+    },
+    {
+      "start": 134.82,
+      "end": 139.56,
+      "text": "Pero durante el paseo también he encontrado lo que existía antes de mí."
+    },
+    {
+      "start": 139.56,
+      "end": 144.74,
+      "text": "Ahora tengo claro que mi Rocca representa solo una parte de la historia de Vicopisano."
+    },
+    {
+      "start": 144.74,
+      "end": 146.25,
+      "text": "Una parte importante."
+    },
+    {
+      "start": 146.25,
+      "end": 147.38,
+      "text": "Muy importante."
+    },
+    {
+      "start": 147.38,
+      "end": 149.18,
+      "text": "Pero no la única."
+    },
+    {
+      "start": 149.18,
+      "end": 156.02,
+      "text": "Un pueblo medieval puede conservar sus murallas y convertirse únicamente en un decorado que contemplar."
+    },
+    {
+      "start": 156.02,
+      "end": 157.84,
+      "text": "Aquí no ha ocurrido eso."
+    },
+    {
+      "start": 157.84,
+      "end": 162.29,
+      "text": "Dentro de estos edificios la gente sigue viviendo y trabajando."
+    },
+    {
+      "start": 162.29,
+      "end": 173.62,
+      "text": "Las tiendas, los mercados, las asociaciones y los círculos locales mantienen vivo el pueblo con exposiciones, espectáculos, encuentros y fiestas durante todo el año."
+    },
+    {
+      "start": 173.62,
+      "end": 177.98,
+      "text": "Quizá la forma en que se construyó Vicopisano haya contribuido a ello."
+    },
+    {
+      "start": 177.98,
+      "end": 179.56,
+      "text": "Las calles recogidas."
+    },
+    {
+      "start": 179.56,
+      "end": 180.35,
+      "text": "Las plazas."
+    },
+    {
+      "start": 180.35,
+      "end": 182.55,
+      "text": "Los edificios próximos entre sí."
+    },
+    {
+      "start": 182.55,
+      "end": 186.14,
+      "text": "Pero las piedras, por sí solas, no bastan."
+    },
+    {
+      "start": 186.17,
+      "end": 191.7,
+      "text": "Un pueblo sigue vivo porque alguien sigue eligiéndolo, habitándolo y cuidándolo."
+    },
+    {
+      "start": 191.7,
+      "end": 195.74,
+      "text": "Yo había diseñado Vicopisano para que resistiera los asedios."
+    },
+    {
+      "start": 195.74,
+      "end": 201.41,
+      "text": "Después de casi seiscientos años he descubierto que sigue resistiendo de otra manera:"
+    },
+    {
+      "start": 201.41,
+      "end": 203.7,
+      "text": "al seguir siendo un pueblo vivo."
+    },
+    {
+      "start": 203.7,
+      "end": 207.31,
+      "text": "Y ahora, por desgracia, tenemos que despedirnos."
+    },
+    {
+      "start": 207.31,
+      "end": 209.98,
+      "text": "Vuestra lección de arquitectura ha terminado por hoy."
+    },
+    {
+      "start": 209.98,
+      "end": 220.63,
+      "text": "Si aún tenéis curiosidad y queréis descubrir todo lo que Vicopisano puede ofrecer, acercaos a la Oficina de Turismo, situada en la biblioteca municipal, al pie de la torre del Reloj."
+    },
+    {
+      "start": 220.63,
+      "end": 228.29,
+      "text": "Podréis informaros sobre las visitas a la Rocca, al Palazzo Pretorio, al Camminamento del Soccorso y a la torre del Reloj."
+    },
+    {
+      "start": 228.29,
+      "end": 233.94,
+      "text": "O elegir una excursión por el Monte Pisano, o descubrir las fiestas y los próximos eventos."
+    },
+    {
+      "start": 233.94,
+      "end": 240.26,
+      "text": "Yo, después de casi seiscientos años, diría que por hoy ya he caminado bastante."
+    },
+    {
+      "start": 240.26,
+      "end": 245.6,
+      "text": "Y además, modestia aparte, una lección de arquitectura así requiere un cierto descanso."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

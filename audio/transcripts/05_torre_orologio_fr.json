@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "fr",
+  "stop": 5,
+  "audio": {
+    "duration": 133.96,
+    "source": "audio/fr/05_torre_orologio_fr.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9708,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.09,
+      "end": 3.4,
+      "text": "En descendant de la Rocca, nous revenons dans les rues du village."
+    },
+    {
+      "start": 3.56,
+      "end": 6.44,
+      "text": "Et cette fois, je vous conseille de lever les yeux."
+    },
+    {
+      "start": 6.58,
+      "end": 10.98,
+      "text": "Devant vous se trouve la Torre dell'Orologio, la tour de l'Horloge."
+    },
+    {
+      "start": 11.18,
+      "end": 14.12,
+      "text": "De loin, c'est ma Rocca qui domine Vicopisano."
+    },
+    {
+      "start": 14.38,
+      "end": 20.4,
+      "text": "Mais lorsqu'on se promène dans ces rues, surtout le long de la Via Lante, difficile de ne pas remarquer cette tour."
+    },
+    {
+      "start": 20.58,
+      "end": 22.32,
+      "text": "Haute, étroite…"
+    },
+    {
+      "start": 22.32,
+      "end": 24.16,
+      "text": "et vraiment singulière."
+    },
+    {
+      "start": 24.3,
+      "end": 26.11,
+      "text": "Et avant que vous ne posiez la question :"
+    },
+    {
+      "start": 26.11,
+      "end": 28.88,
+      "text": "non, ce n'est pas moi qui l'ai construite non plus."
+    },
+    {
+      "start": 29.13,
+      "end": 34.7,
+      "text": "Sa structure d'origine remonte aux douzième et treizième siècles. Elle était donc là bien avant mon arrivée."
+    },
+    {
+      "start": 34.82,
+      "end": 42.84,
+      "text": "C'était probablement, à l'origine, une tour militaire destinée à surveiller la route qui menait à l'ancien château, dans le secteur du Palazzo Pretorio."
+    },
+    {
+      "start": 42.98,
+      "end": 44.52,
+      "text": "Regardez-la attentivement."
+    },
+    {
+      "start": 44.52,
+      "end": 47.6,
+      "text": "Elle est construite presque entièrement en verrucano."
+    },
+    {
+      "start": 47.74,
+      "end": 52.0,
+      "text": "Et sur ses murs, vous pouvez encore voir une série de grands corbeaux en pierre."
+    },
+    {
+      "start": 52.12,
+      "end": 59.22,
+      "text": "Au Moyen Âge, ils soutenaient des constructions en bois en saillie, auxquelles on accédait par ces petites portes en arc encore visibles aujourd'hui."
+    },
+    {
+      "start": 59.36,
+      "end": 66.6,
+      "text": "Dans une tour à vocation militaire, ces espaces en surplomb permettaient aussi de mieux surveiller et défendre les abords du pied des murailles."
+    },
+    {
+      "start": 66.72,
+      "end": 69.24,
+      "text": "Puis la tour a cessé de servir à la défense."
+    },
+    {
+      "start": 69.34,
+      "end": 71.15,
+      "text": "Et plutôt que de la démolir…"
+    },
+    {
+      "start": 71.15,
+      "end": 72.44,
+      "text": "on l'a transformée."
+    },
+    {
+      "start": 72.54,
+      "end": 75.24,
+      "text": "Sa hauteur la rendait parfaite pour une nouvelle mission :"
+    },
+    {
+      "start": 75.36,
+      "end": 77.04,
+      "text": "devenir un clocher."
+    },
+    {
+      "start": 77.16,
+      "end": 80.84,
+      "text": "Et, quelques siècles plus tard, l'horloge est arrivée à son tour."
+    },
+    {
+      "start": 80.98,
+      "end": 87.76,
+      "text": "Sa présence est attestée au moins depuis le seizième siècle, tandis que le mécanisme conservé aujourd'hui date du dix-huitième."
+    },
+    {
+      "start": 87.8,
+      "end": 89.32,
+      "text": "Une tour militaire."
+    },
+    {
+      "start": 89.32,
+      "end": 90.3,
+      "text": "Puis un clocher."
+    },
+    {
+      "start": 90.3,
+      "end": 91.6,
+      "text": "Puis une horloge."
+    },
+    {
+      "start": 91.6,
+      "end": 92.94,
+      "text": "Je dois dire que j'approuve."
+    },
+    {
+      "start": 92.94,
+      "end": 97.46,
+      "text": "Un bon bâtiment n'est pas obligé de faire éternellement ce pour quoi il a été construit."
+    },
+    {
+      "start": 97.46,
+      "end": 100.6,
+      "text": "Il doit pouvoir continuer à servir ceux qui vivent autour de lui."
+    },
+    {
+      "start": 100.6,
+      "end": 110.14,
+      "text": "Aujourd'hui, après une importante restauration, la tour se visite. On peut monter jusqu'à la chambre des cloches, d'où la vue s'ouvre sur Vicopisano et le Monte Pisano."
+    },
+    {
+      "start": 110.14,
+      "end": 113.52,
+      "text": "Mais ce qui m'intrigue le plus est peut-être autre chose."
+    },
+    {
+      "start": 113.61,
+      "end": 116.68,
+      "text": "Une construction née pour surveiller le passage des hommes…"
+    },
+    {
+      "start": 116.68,
+      "end": 119.82,
+      "text": "sert aujourd'hui surtout à marquer le passage du temps."
+    },
+    {
+      "start": 119.82,
+      "end": 121.76,
+      "text": "Pas mal, comme transformation."
+    },
+    {
+      "start": 121.76,
+      "end": 123.6,
+      "text": "Continuons maintenant à descendre."
+    },
+    {
+      "start": 123.6,
+      "end": 128.8,
+      "text": "La prochaine étape nous conduira devant la Pieve di Santa Maria, l'église paroissiale."
+    },
+    {
+      "start": 128.8,
+      "end": 133.96,
+      "text": "Là, au moins pour quelques minutes, nous laisserons de côté tours, murailles et fortifications."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

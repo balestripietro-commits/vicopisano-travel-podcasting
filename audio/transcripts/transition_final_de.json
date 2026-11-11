@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "de",
+  "stop": null,
+  "audio": {
+    "duration": 19.84,
+    "source": "audio/de/transition_final_de.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 1.0,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 19.82,
+      "text": "Diese Aufnahme beschließt den von der Gemeinde Vicopisano erstellten Audio-Rundgang. Vielen Dank, dass Sie Filippo Brunelleschi auf seinem Weg begleitet haben. Wenn Sie den Ort und seine Umgebung weiter entdecken möchten, informieren Sie sich bei der Touristeninformation der Gemeinde über mögliche Besichtigungen, Routen und Erlebnisse."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

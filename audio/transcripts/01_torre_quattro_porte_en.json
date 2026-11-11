@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 1,
+  "audio": {
+    "duration": 293.27,
+    "source": "audio/en/01_torre_quattro_porte_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9704,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.09,
+      "end": 5.69,
+      "text": "After nearly six hundred years, I'm finally back in Vicopisano."
+    },
+    {
+      "start": 5.69,
+      "end": 9.74,
+      "text": "And I must admit, it feels strange to find it so peaceful."
+    },
+    {
+      "start": 9.74,
+      "end": 17.2,
+      "text": "Today, I see well-kept streets, people out for a stroll, and doors left open without a second thought."
+    },
+    {
+      "start": 17.2,
+      "end": 21.09,
+      "text": "When I first came here… things were a little different."
+    },
+    {
+      "start": 21.09,
+      "end": 24.01,
+      "text": "But I haven't introduced myself yet."
+    },
+    {
+      "start": 24.01,
+      "end": 25.88,
+      "text": "I'm Filippo Brunelleschi."
+    },
+    {
+      "start": 25.88,
+      "end": 32.22,
+      "text": "You may know me as the architect of the dome of Santa Maria del Fiore, Florence Cathedral."
+    },
+    {
+      "start": 32.22,
+      "end": 42.32,
+      "text": "But nearly six hundred years ago, Florence sent me here too, with a very specific task: to make Vicopisano much harder to conquer."
+    },
+    {
+      "start": 42.32,
+      "end": 47.98,
+      "text": "So, before I show you what I built, there's a question worth asking."
+    },
+    {
+      "start": 47.98,
+      "end": 49.36,
+      "text": "Why Vicopisano?"
+    },
+    {
+      "start": 49.36,
+      "end": 56.27,
+      "text": "Why was Florence so determined to control and fortify a town that seems so peaceful today?"
+    },
+    {
+      "start": 56.27,
+      "end": 60.21,
+      "text": "To understand that, we need to go a long way back."
+    },
+    {
+      "start": 60.21,
+      "end": 62.04,
+      "text": "Long before my time."
+    },
+    {
+      "start": 62.04,
+      "end": 72.37,
+      "text": "People probably came to this hill as far back as Etruscan times. Objects found in the surrounding area date back at least to the fifth century before Christ."
+    },
+    {
+      "start": 72.37,
+      "end": 78.69,
+      "text": "But it's in the Middle Ages that the town we now call Vicopisano begins to take shape."
+    },
+    {
+      "start": 78.69,
+      "end": 81.56,
+      "text": "Back then, it even had a different name."
+    },
+    {
+      "start": 81.56,
+      "end": 86.16,
+      "text": "Documents mention Auseris Sala, which later became Auserissola."
+    },
+    {
+      "start": 86.8,
+      "end": 92.98,
+      "text": "Further down, near the parish church we will visit along the way, there was another settlement called Vicus."
+    },
+    {
+      "start": 92.98,
+      "end": 96.54,
+      "text": "Over time, the two settlements joined together."
+    },
+    {
+      "start": 96.54,
+      "end": 100.76,
+      "text": "And a new name appears in the documents: Vicus Auserissola."
+    },
+    {
+      "start": 100.76,
+      "end": 106.71,
+      "text": "But there is one thing in particular that is hard to imagine when you look around today."
+    },
+    {
+      "start": 106.79,
+      "end": 107.48,
+      "text": "Water."
+    },
+    {
+      "start": 107.48,
+      "end": 115.44,
+      "text": "For centuries, this hill occupied an exceptional position, close to the meeting point of two important waterways."
+    },
+    {
+      "start": 115.44,
+      "end": 119.89,
+      "text": "On one side, the Arno led towards Pisa and the sea."
+    },
+    {
+      "start": 119.89,
+      "end": 129.36,
+      "text": "On the other, the Auser, also known as the Serezza, gave access to Lake Bientina and, from there, the area around Lucca."
+    },
+    {
+      "start": 129.36,
+      "end": 131.57,
+      "text": "Water meant connections."
+    },
+    {
+      "start": 131.57,
+      "end": 132.4,
+      "text": "Trade."
+    },
+    {
+      "start": 132.4,
+      "end": 134.47,
+      "text": "But it also meant defence."
+    },
+    {
+      "start": 134.47,
+      "end": 142.71,
+      "text": "The rivers helped defend the fortified town. They filled its moats and made it much harder to approach the walls."
+    },
+    {
+      "start": 142.71,
+      "end": 146.37,
+      "text": "So Vicopisano wasn't just a small town on a hill."
+    },
+    {
+      "start": 146.37,
+      "end": 149.64,
+      "text": "It was a strategic position worth controlling."
+    },
+    {
+      "start": 149.64,
+      "end": 152.16,
+      "text": "And Pisa knew that very well."
+    },
+    {
+      "start": 152.16,
+      "end": 154.0,
+      "text": "Then Florence arrived."
+    },
+    {
+      "start": 154.56,
+      "end": 161.5,
+      "text": "In fourteen hundred and six, after months of siege, Vicopisano fell into Florentine hands."
+    },
+    {
+      "start": 161.5,
+      "end": 163.79,
+      "text": "But conquering a place is one thing."
+    },
+    {
+      "start": 163.79,
+      "end": 166.06,
+      "text": "Holding on to it is another."
+    },
+    {
+      "start": 166.06,
+      "end": 177.09,
+      "text": "So, in fourteen thirty-five, I was given a rather ambitious task: to turn the old stronghold into a fortress that could withstand another siege."
+    },
+    {
+      "start": 177.09,
+      "end": 180.5,
+      "text": "Walls, towers, protected walkways, drawbridges…"
+    },
+    {
+      "start": 180.5,
+      "end": 182.11,
+      "text": "There was plenty to do."
+    },
+    {
+      "start": 182.11,
+      "end": 184.56,
+      "text": "But we'll come to that in a moment."
+    },
+    {
+      "start": 184.56,
+      "end": 187.76,
+      "text": "First, take a look at the tower in front of you."
+    },
+    {
+      "start": 187.76,
+      "end": 193.6,
+      "text": "Today, it's called the Torre delle Quattro Porte, the Tower of the Four Gates."
+    },
+    {
+      "start": 193.6,
+      "end": 197.01,
+      "text": "A passage opens on each of its four sides."
+    },
+    {
+      "start": 197.01,
+      "end": 198.72,
+      "text": "Four arches."
+    },
+    {
+      "start": 198.72,
+      "end": 200.0,
+      "text": "Four directions."
+    },
+    {
+      "start": 200.0,
+      "end": 202.16,
+      "text": "A rather unusual arrangement."
+    },
+    {
+      "start": 202.16,
+      "end": 209.94,
+      "text": "It served as a watchtower, a gateway into the fortified town, and a passage along the walls, all at once."
+    },
+    {
+      "start": 209.94,
+      "end": 215.96,
+      "text": "But before you give me credit for this tower as well, I should make one thing clear."
+    },
+    {
+      "start": 215.96,
+      "end": 217.35,
+      "text": "I didn't build it."
+    },
+    {
+      "start": 217.35,
+      "end": 220.08,
+      "text": "It was here long before I arrived."
+    },
+    {
+      "start": 220.13,
+      "end": 223.28,
+      "text": "I have plenty of buildings of my own to boast about, after all."
+    },
+    {
+      "start": 223.28,
+      "end": 228.05,
+      "text": "The oldest parts of the tower date from the late twelfth century."
+    },
+    {
+      "start": 228.05,
+      "end": 232.8,
+      "text": "Over time, it was damaged, repaired and altered on several occasions."
+    },
+    {
+      "start": 233.44,
+      "end": 237.81,
+      "text": "Look closely, and you can still trace those changes in the stonework."
+    },
+    {
+      "start": 237.81,
+      "end": 244.16,
+      "text": "The lower section is mainly built of verrucano, the local stone we'll see again and again along the way."
+    },
+    {
+      "start": 244.81,
+      "end": 246.64,
+      "text": "Higher up, brick takes over."
+    },
+    {
+      "start": 246.64,
+      "end": 250.08,
+      "text": "These aren't just different building materials."
+    },
+    {
+      "start": 250.08,
+      "end": 253.11,
+      "text": "They mark different stages in the tower's history."
+    },
+    {
+      "start": 253.11,
+      "end": 257.44,
+      "text": "And, from what I can see, Vicopisano itself has changed too."
+    },
+    {
+      "start": 258.08,
+      "end": 259.6,
+      "text": "That's why I've come back."
+    },
+    {
+      "start": 259.6,
+      "end": 268.56,
+      "text": "I want to see what's left of the town I knew, discover how it's changed… and explain why some of its buildings were built the way they were."
+    },
+    {
+      "start": 269.37,
+      "end": 270.6,
+      "text": "Let's start here."
+    },
+    {
+      "start": 270.6,
+      "end": 273.42,
+      "text": "Walk through the tower and enter the town."
+    },
+    {
+      "start": 273.42,
+      "end": 280.82,
+      "text": "At our next stop, we'll see the Torre del Soccorso and its fortified walkway, the Camminamento del Soccorso."
+    },
+    {
+      "start": 280.82,
+      "end": 285.7,
+      "text": "Now that really is part of the system I designed for Vicopisano."
+    },
+    {
+      "start": 285.7,
+      "end": 290.56,
+      "text": "And nearly six hundred years later, it's still clearly recognisable."
+    },
+    {
+      "start": 290.56,
+      "end": 293.24,
+      "text": "Allow me to take a little satisfaction in that."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

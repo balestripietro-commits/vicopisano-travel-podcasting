@@ -42,10 +42,10 @@ test("first access asks for language and later access remembers it", async ({ pa
 test.describe("browser in English", () => {
   test.use({ locale: "en-US" });
 
-  test("opens in Italian while only Italian is available", async ({ page }) => {
+  test("opens in the remembered available language", async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem("vicopisano-language", "EN"));
     await page.goto("./", { waitUntil: "domcontentloaded" });
-    await expect(page.locator("html")).toHaveAttribute("lang", "it");
-    await expect(page.locator("#onboarding-title")).toHaveText("Scegli la lingua per iniziare il percorso");
+    await expect(page.locator("html")).toHaveAttribute("lang", "en");
+    await expect(page.locator("#onboarding-title")).toHaveText("Choose your language to start the route");
   });
 });

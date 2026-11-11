@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "fr",
+  "stop": 3,
+  "audio": {
+    "duration": 207.8,
+    "source": "audio/fr/03_palazzo_pretorio_fr.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9403,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.03,
+      "end": 2.44,
+      "text": "Laissons un instant mes fortifications de côté."
+    },
+    {
+      "start": 2.44,
+      "end": 5.32,
+      "text": "Devant vous se trouve le Palazzo Pretorio."
+    },
+    {
+      "start": 5.32,
+      "end": 7.68,
+      "text": "Non, ce bâtiment n'est pas mon œuvre."
+    },
+    {
+      "start": 7.68,
+      "end": 12.04,
+      "text": "Sa partie la plus ancienne remonte aux douzième et treizième siècles, avant mon arrivée."
+    },
+    {
+      "start": 12.04,
+      "end": 19.48,
+      "text": "Regardez la façade : les grands piliers, les arcs brisés et cette pierre jaune ocre que vous devriez commencer à reconnaître."
+    },
+    {
+      "start": 19.48,
+      "end": 21.08,
+      "text": "Le verrucano."
+    },
+    {
+      "start": 21.08,
+      "end": 24.16,
+      "text": "Un bâtiment ne traverse pas des siècles d'histoire sans changer."
+    },
+    {
+      "start": 24.16,
+      "end": 25.52,
+      "text": "Je vous avais prévenus."
+    },
+    {
+      "start": 25.52,
+      "end": 28.24,
+      "text": "Et ce palais en est un excellent exemple."
+    },
+    {
+      "start": 28.27,
+      "end": 35.44,
+      "text": "Sa fonction d'origine n'est pas tout à fait certaine. Il était peut-être lié au pouvoir exercé sur Vicopisano par les archevêques de Pise."
+    },
+    {
+      "start": 35.44,
+      "end": 39.4,
+      "text": "Mais son histoire devient bien plus claire après la conquête florentine de mille quatre cent six."
+    },
+    {
+      "start": 40.44,
+      "end": 45.48,
+      "text": "Quelques années plus tard, en mille quatre cent onze, le bâtiment devient le siège du vicaire."
+    },
+    {
+      "start": 45.48,
+      "end": 47.6,
+      "text": "Le vicaire n'était pas le maire du village."
+    },
+    {
+      "start": 47.6,
+      "end": 54.24,
+      "text": "C'était le représentant du gouvernement florentin : il administrait le territoire et rendait la justice au nom de Florence."
+    },
+    {
+      "start": 54.27,
+      "end": 58.08,
+      "text": "Dès lors, le palais accueillait ses bureaux, sa résidence…"
+    },
+    {
+      "start": 58.08,
+      "end": 59.72,
+      "text": "et les prisons aussi."
+    },
+    {
+      "start": 59.72,
+      "end": 66.08,
+      "text": "Bref, dans le même bâtiment, on administrait le territoire, on rendait la justice et, quand il le fallait…"
+    },
+    {
+      "start": 66.08,
+      "end": 68.52,
+      "text": "on enfermait quelqu'un à double tour."
+    },
+    {
+      "start": 68.52,
+      "end": 71.24,
+      "text": "Maintenant, regardez les armoiries sur les murs."
+    },
+    {
+      "start": 71.24,
+      "end": 77.32,
+      "text": "Le palais en conserve près de cinquante, dont certaines proviennent même des ateliers florentins des Della Robbia."
+    },
+    {
+      "start": 77.32,
+      "end": 81.64,
+      "text": "À partir du quinzième siècle, chaque vicaire laissait ici ses propres armoiries."
+    },
+    {
+      "start": 81.67,
+      "end": 82.21,
+      "text": "Un nom."
+    },
+    {
+      "start": 82.21,
+      "end": 83.21,
+      "text": "Une famille."
+    },
+    {
+      "start": 83.21,
+      "end": 86.28,
+      "text": "Le souvenir de son passage à Vicopisano."
+    },
+    {
+      "start": 86.28,
+      "end": 90.28,
+      "text": "Et pour moi, ces armoiries ont quelque chose de particulièrement intéressant."
+    },
+    {
+      "start": 90.28,
+      "end": 93.4,
+      "text": "Elles me racontent ce qui s'est passé après mon époque."
+    },
+    {
+      "start": 93.4,
+      "end": 96.56,
+      "text": "Après la République florentine sont venus les Médicis."
+    },
+    {
+      "start": 96.56,
+      "end": 98.04,
+      "text": "Puis les Lorraine."
+    },
+    {
+      "start": 98.04,
+      "end": 103.44,
+      "text": "Les pouvoirs du vicaire ont été progressivement réduits, jusqu'à la suppression du vicariat en mille huit cent quarante-huit."
+    },
+    {
+      "start": 104.36,
+      "end": 106.37,
+      "text": "Quatre siècles de gouvernement…"
+    },
+    {
+      "start": 106.37,
+      "end": 107.96,
+      "text": "résumés sur un mur."
+    },
+    {
+      "start": 107.99,
+      "end": 112.2,
+      "text": "Mais pendant ce temps, les dirigeants de Vicopisano n'étaient pas les seuls à changer."
+    },
+    {
+      "start": 112.2,
+      "end": 114.76,
+      "text": "Le paysage lui-même se transformait."
+    },
+    {
+      "start": 114.76,
+      "end": 120.16,
+      "text": "Vous vous souvenez de l'Arno et de la Serezza, les deux cours d'eau dont je vous ai parlé au début de notre parcours ?"
+    },
+    {
+      "start": 120.16,
+      "end": 123.88,
+      "text": "À mon arrivée, l'Arno coulait beaucoup plus près du village."
+    },
+    {
+      "start": 123.88,
+      "end": 134.12,
+      "text": "Il formait une grande boucle et, avec la Serezza, avait contribué pendant des siècles à faire de Vicopisano un lieu stratégique pour le commerce, les communications et la défense."
+    },
+    {
+      "start": 134.15,
+      "end": 138.24,
+      "text": "Puis, au seizième siècle, les Médicis ont décidé d'intervenir."
+    },
+    {
+      "start": 138.24,
+      "end": 145.6,
+      "text": "À partir de mille cinq cent soixante, le cours de l'Arno a été rectifié et éloigné des remparts, vers le tracé qu'il suit encore aujourd'hui."
+    },
+    {
+      "start": 145.6,
+      "end": 153.0,
+      "text": "La Serezza a été modifiée elle aussi, pour rejoindre le nouveau cours du fleuve et continuer à évacuer les eaux du lac de Bientina."
+    },
+    {
+      "start": 153.0,
+      "end": 153.93,
+      "text": "Autrement dit…"
+    },
+    {
+      "start": 153.93,
+      "end": 159.04,
+      "text": "l'eau qui avait contribué à la prospérité de Vicopisano ne passait plus au même endroit."
+    },
+    {
+      "start": 159.04,
+      "end": 161.52,
+      "text": "Et le rôle du village a changé, lui aussi."
+    },
+    {
+      "start": 161.55,
+      "end": 164.28,
+      "text": "L'agriculture a pris une importance croissante."
+    },
+    {
+      "start": 164.28,
+      "end": 171.76,
+      "text": "Mais Vicopisano est resté un important centre administratif, siège du vicaire, du tribunal et de la chancellerie florentine."
+    },
+    {
+      "start": 171.76,
+      "end": 172.91,
+      "text": "Je dois l'avouer :"
+    },
+    {
+      "start": 172.91,
+      "end": 177.8,
+      "text": "pour quelqu'un comme moi, habitué à modifier des murailles, des tours et des passages…"
+    },
+    {
+      "start": 177.8,
+      "end": 183.04,
+      "text": "découvrir qu'ici on est allé jusqu'à modifier le cours d'un fleuve fait un certain effet."
+    },
+    {
+      "start": 183.04,
+      "end": 187.16,
+      "text": "Manifestement, l'histoire ne laisse pas ses traces uniquement sur les bâtiments."
+    },
+    {
+      "start": 187.16,
+      "end": 190.16,
+      "text": "Parfois, elle les laisse sur tout un territoire."
+    },
+    {
+      "start": 190.19,
+      "end": 195.24,
+      "text": "Il serait bien sot de revenir à Vicopisano, de vous ennuyer en ne parlant que de mes œuvres…"
+    },
+    {
+      "start": 195.24,
+      "end": 198.04,
+      "text": "et de ne pas voir tout ce que le village a vécu sans moi."
+    },
+    {
+      "start": 198.04,
+      "end": 201.56,
+      "text": "Mais maintenant, revenons à quelque chose que je connais nettement mieux."
+    },
+    {
+      "start": 201.56,
+      "end": 204.96,
+      "text": "La prochaine étape nous conduira enfin devant la Rocca."
+    },
+    {
+      "start": 204.96,
+      "end": 207.76,
+      "text": "Accordez-moi encore un peu de fierté bien légitime."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

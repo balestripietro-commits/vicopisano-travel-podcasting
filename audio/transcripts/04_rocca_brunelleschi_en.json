@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 4,
+  "audio": {
+    "duration": 168.36,
+    "source": "audio/en/04_rocca_brunelleschi_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9759,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 1.44,
+      "text": "There it is."
+    },
+    {
+      "start": 1.44,
+      "end": 2.84,
+      "text": "The Rocca."
+    },
+    {
+      "start": 2.84,
+      "end": 9.87,
+      "text": "When I was given the commission, a twelfth-century tower already stood on top of the hill: the Torre di Santa Maria."
+    },
+    {
+      "start": 9.87,
+      "end": 12.88,
+      "text": "I could have demolished it and started again."
+    },
+    {
+      "start": 13.6,
+      "end": 18.04,
+      "text": "But a good architect must also recognise what can be reused."
+    },
+    {
+      "start": 18.04,
+      "end": 26.48,
+      "text": "So I incorporated it into the new fortification and made it the keep: the most secure heart of the Rocca."
+    },
+    {
+      "start": 26.48,
+      "end": 29.76,
+      "text": "Work began in fourteen thirty-five."
+    },
+    {
+      "start": 30.32,
+      "end": 37.3,
+      "text": "The principle I followed was simple: a fortress shouldn't rely on a single line of defence to keep it safe."
+    },
+    {
+      "start": 37.3,
+      "end": 41.86,
+      "text": "If the enemy got through the first entrance, they reached the courtyard."
+    },
+    {
+      "start": 41.86,
+      "end": 47.52,
+      "text": "If they took the courtyard, the defenders could make the staircase up to the wall walk unusable."
+    },
+    {
+      "start": 48.08,
+      "end": 55.44,
+      "text": "And if they advanced further still, the keep's drawbridge could be raised, cutting the tower off completely."
+    },
+    {
+      "start": 55.44,
+      "end": 58.02,
+      "text": "A fortress within a fortress."
+    },
+    {
+      "start": 58.02,
+      "end": 63.52,
+      "text": "The keep even had its own cistern and could store enough provisions to hold out for longer."
+    },
+    {
+      "start": 63.52,
+      "end": 66.73,
+      "text": "Every space was connected to the others."
+    },
+    {
+      "start": 66.73,
+      "end": 69.91,
+      "text": "But, when necessary, it could be cut off from them."
+    },
+    {
+      "start": 69.91,
+      "end": 73.84,
+      "text": "I didn't design this Rocca to be comfortable."
+    },
+    {
+      "start": 73.84,
+      "end": 76.73,
+      "text": "I designed it to be difficult to conquer."
+    },
+    {
+      "start": 76.73,
+      "end": 81.98,
+      "text": "I've discovered, though, that today it's a much more welcoming and lively place."
+    },
+    {
+      "start": 81.98,
+      "end": 91.56,
+      "text": "Not just for tourists and enthusiasts who want to learn about my work, but also for people coming to concerts, performances and evening visits."
+    },
+    {
+      "start": 91.56,
+      "end": 97.84,
+      "text": "People who climb all the way up here not to besiege the Rocca, but to spend an evening in it."
+    },
+    {
+      "start": 97.84,
+      "end": 101.99,
+      "text": "I'm told the town even hosts a music festival called Rocca'n'Roll."
+    },
+    {
+      "start": 101.99,
+      "end": 111.2,
+      "text": "I have to admit that a fortress able to withstand weapons and, centuries later, modern music has certainly proved its sound construction."
+    },
+    {
+      "start": 111.76,
+      "end": 114.6,
+      "text": "And then there's the Festa Medievale."
+    },
+    {
+      "start": 114.6,
+      "end": 125.68,
+      "text": "Every year, on the first weekend in September, the town fills once again with torches, flags, costumed performers, musicians, duels and taverns."
+    },
+    {
+      "start": 125.68,
+      "end": 131.92,
+      "text": "For a few evenings, Vicopisano sets out to recreate the atmosphere of the medieval town."
+    },
+    {
+      "start": 131.96,
+      "end": 134.6,
+      "text": "I'd be very curious to see the next edition."
+    },
+    {
+      "start": 134.6,
+      "end": 137.68,
+      "text": "I could check how faithful the reconstruction is."
+    },
+    {
+      "start": 137.68,
+      "end": 140.25,
+      "text": "And perhaps offer a few suggestions."
+    },
+    {
+      "start": 140.25,
+      "end": 141.6,
+      "text": "Only if asked, of course."
+    },
+    {
+      "start": 142.24,
+      "end": 149.91,
+      "text": "Knowing that these streets fill with people again, and that the Rocca opens at night too, makes me realise something."
+    },
+    {
+      "start": 149.91,
+      "end": 154.0,
+      "text": "A building can go on living in ways its architect never imagined."
+    },
+    {
+      "start": 154.56,
+      "end": 157.52,
+      "text": "I designed these walls to keep people out."
+    },
+    {
+      "start": 157.52,
+      "end": 160.64,
+      "text": "Today, people are welcomed and invited in."
+    },
+    {
+      "start": 161.51,
+      "end": 164.32,
+      "text": "Now let's leave the Rocca and carry on."
+    },
+    {
+      "start": 164.32,
+      "end": 168.36,
+      "text": "Our next stop will be the Torre dell'Orologio, the Clock Tower."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

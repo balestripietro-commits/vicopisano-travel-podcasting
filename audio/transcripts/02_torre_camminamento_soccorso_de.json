@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "de",
+  "stop": 2,
+  "audio": {
+    "duration": 131.95,
+    "source": "audio/de/02_torre_camminamento_soccorso_de.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9904,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 1.28,
+      "text": "Da sind wir."
+    },
+    {
+      "start": 1.28,
+      "end": 3.72,
+      "text": "Vor Ihnen steht die Torre del Soccorso."
+    },
+    {
+      "start": 3.72,
+      "end": 12.4,
+      "text": "Die Mauer, die den Hügel zur Rocca, also zur Festung, hinaufführt, ist der Camminamento del Soccorso, ein geschützter Verbindungsweg."
+    },
+    {
+      "start": 12.4,
+      "end": 15.4,
+      "text": "Das hier ist tatsächlich mein Werk."
+    },
+    {
+      "start": 15.4,
+      "end": 20.64,
+      "text": "Der Turm, der Verbindungsweg und die Rocca bilden ein einziges Verteidigungssystem."
+    },
+    {
+      "start": 20.64,
+      "end": 23.04,
+      "text": "Eine Maschine aus Stein."
+    },
+    {
+      "start": 23.04,
+      "end": 28.7,
+      "text": "Der Name Soccorso, also Hilfe oder Entsatz, verrät bereits ihre Aufgabe."
+    },
+    {
+      "start": 28.7,
+      "end": 32.08,
+      "text": "Stellen Sie sich vor, Vicopisano wird angegriffen."
+    },
+    {
+      "start": 32.08,
+      "end": 38.88,
+      "text": "Der Feind dringt in den Ort ein, besetzt die Straßen und zwingt die Soldaten, sich in die Rocca zurückzuziehen."
+    },
+    {
+      "start": 38.88,
+      "end": 42.56,
+      "text": "Eine recht unangenehme Lage, vor allem für die Eingeschlossenen."
+    },
+    {
+      "start": 42.56,
+      "end": 45.4,
+      "text": "Doch dann blieb immer noch dieser Weg."
+    },
+    {
+      "start": 45.4,
+      "end": 55.07,
+      "text": "Durch den unteren Teil des Turms konnten Männer, Lebensmittel und Nachschub von außen hereingelangen. Über den geschützten Verbindungsweg ging es dann hinauf zur Rocca."
+    },
+    {
+      "start": 55.07,
+      "end": 60.19,
+      "text": "Und das, ohne die vom Feind kontrollierten Straßen überqueren zu müssen."
+    },
+    {
+      "start": 60.19,
+      "end": 62.6,
+      "text": "Deshalb ist dies nicht einfach nur eine Mauer."
+    },
+    {
+      "start": 62.6,
+      "end": 69.04,
+      "text": "Es ist ein geschützter Weg, der gerade dann funktionieren sollte, wenn alle anderen Wege nicht mehr sicher waren."
+    },
+    {
+      "start": 69.04,
+      "end": 73.24,
+      "text": "Als ich nach Vicopisano kam, stellte ich mir eine Frage."
+    },
+    {
+      "start": 73.24,
+      "end": 75.48,
+      "text": "Was könnte schiefgehen?"
+    },
+    {
+      "start": 75.48,
+      "end": 79.92,
+      "text": "Eine Belagerung, Feinde im Ort oder eine abgeschnittene Rocca."
+    },
+    {
+      "start": 79.92,
+      "end": 83.73,
+      "text": "Und was könnten die Verteidiger in jedem dieser Fälle tun?"
+    },
+    {
+      "start": 83.73,
+      "end": 87.68,
+      "text": "Auch aus solchen Fragen entstand der Camminamento del Soccorso."
+    },
+    {
+      "start": 87.68,
+      "end": 97.22,
+      "text": "Er musste sogar dann funktionieren, wenn sich die Bewohner erhoben und die florentinische Garnison gezwungen war, sich in die Rocca zurückzuziehen."
+    },
+    {
+      "start": 97.22,
+      "end": 106.11,
+      "text": "Florenz hatte Vicopisano erst vor Kurzem erobert, und Vertrauen war in einem frisch besetzten Gebiet nicht gerade der am reichlichsten vorhandene Baustoff."
+    },
+    {
+      "start": 106.11,
+      "end": 112.48,
+      "text": "Und ich muss zugeben: Weder mit Vertrauen noch mit Politik habe ich mich je besonders gut ausgekannt."
+    },
+    {
+      "start": 112.48,
+      "end": 115.58,
+      "text": "Deshalb verließ ich mich lieber auf Stein."
+    },
+    {
+      "start": 115.58,
+      "end": 119.27,
+      "text": "Heute können Sie den Verbindungsweg ziemlich unbesorgt begehen."
+    },
+    {
+      "start": 119.27,
+      "end": 125.46,
+      "text": "Ohne Rüstung, ohne Vorräte auf dem Rücken und vor allem ohne jemanden, der den Ort erobern will."
+    },
+    {
+      "start": 125.46,
+      "end": 128.32,
+      "text": "Gehen wir nun weiter in Richtung Ortsmitte."
+    },
+    {
+      "start": 128.32,
+      "end": 131.44,
+      "text": "Die nächste Station ist der Palazzo Pretorio."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "de",
+  "stop": 4,
+  "audio": {
+    "duration": 170.84,
+    "source": "audio/de/04_rocca_brunelleschi_de.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9654,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.04,
+      "end": 1.3,
+      "text": "Da ist sie."
+    },
+    {
+      "start": 1.3,
+      "end": 2.92,
+      "text": "Die Rocca."
+    },
+    {
+      "start": 2.92,
+      "end": 10.96,
+      "text": "Als ich den Auftrag erhielt, stand auf der Hügelkuppe bereits ein Turm aus dem zwölften Jahrhundert: die Torre di Santa Maria."
+    },
+    {
+      "start": 10.96,
+      "end": 14.6,
+      "text": "Ich hätte ihn abreißen und ganz von vorn anfangen können."
+    },
+    {
+      "start": 14.6,
+      "end": 19.2,
+      "text": "Aber ein guter Architekt muss auch erkennen, was sich wiederverwenden lässt."
+    },
+    {
+      "start": 19.2,
+      "end": 27.16,
+      "text": "Also bezog ich ihn in die neue Befestigung ein und machte ihn zum Hauptturm: dem am besten geschützten Kern der Rocca."
+    },
+    {
+      "start": 27.21,
+      "end": 30.52,
+      "text": "Die Arbeiten begannen vierzehnhundertfünfunddreißig."
+    },
+    {
+      "start": 30.52,
+      "end": 37.92,
+      "text": "Mein Grundsatz war einfach: Eine Festung durfte ihre Sicherheit nicht einer einzigen Verteidigungslinie anvertrauen."
+    },
+    {
+      "start": 37.92,
+      "end": 42.08,
+      "text": "Überwand der Feind den ersten Zugang, gelangte er in den Hof."
+    },
+    {
+      "start": 42.08,
+      "end": 47.38,
+      "text": "Eroberte er den Hof, konnten die Verteidiger die Treppe zum Wehrgang unbrauchbar machen."
+    },
+    {
+      "start": 47.38,
+      "end": 54.64,
+      "text": "Und rückte er noch weiter vor, ließ sich die Zugbrücke des Hauptturms hochziehen und der Turm vollständig abtrennen."
+    },
+    {
+      "start": 54.68,
+      "end": 57.4,
+      "text": "Eine Festung in der Festung."
+    },
+    {
+      "start": 57.4,
+      "end": 64.62,
+      "text": "Der Hauptturm hatte sogar eine eigene Zisterne und konnte genügend Vorräte aufnehmen, um länger Widerstand zu leisten."
+    },
+    {
+      "start": 64.62,
+      "end": 67.4,
+      "text": "Jeder Bereich war mit den anderen verbunden."
+    },
+    {
+      "start": 67.4,
+      "end": 70.54,
+      "text": "Aber bei Bedarf ließ er sich von ihnen abtrennen."
+    },
+    {
+      "start": 70.54,
+      "end": 74.04,
+      "text": "Ich habe diese Rocca nicht entworfen, damit sie bequem war."
+    },
+    {
+      "start": 74.04,
+      "end": 77.86,
+      "text": "Ich habe sie entworfen, damit sie schwer zu erobern war."
+    },
+    {
+      "start": 77.86,
+      "end": 83.7,
+      "text": "Inzwischen habe ich allerdings erfahren, dass sie heute ein viel offenerer und belebterer Ort ist."
+    },
+    {
+      "start": 83.75,
+      "end": 91.5,
+      "text": "Nicht nur für Touristen und Liebhaber meiner Werke, sondern auch für Menschen, die zu Konzerten, Aufführungen und Abendführungen kommen."
+    },
+    {
+      "start": 91.5,
+      "end": 97.72,
+      "text": "Menschen, die nicht hier hinaufsteigen, um die Rocca zu belagern, sondern um einen Abend in ihr zu verbringen."
+    },
+    {
+      "start": 97.72,
+      "end": 103.0,
+      "text": "Man hat mir erzählt, im Ort gebe es sogar ein Musikfestival namens Rocca'n'Roll."
+    },
+    {
+      "start": 103.0,
+      "end": 112.5,
+      "text": "Ich muss anerkennen: Eine Festung, die Waffen und Jahrhunderte später auch moderner Musik standhält, hat ihre solide Bauweise durchaus bewiesen."
+    },
+    {
+      "start": 112.54,
+      "end": 115.4,
+      "text": "Und dann ist da noch die Festa Medievale."
+    },
+    {
+      "start": 115.4,
+      "end": 125.64,
+      "text": "Jedes Jahr am ersten Septemberwochenende füllen sich die Gassen wieder mit Fackeln, Fahnen, kostümierten Darstellern, Musikern, Zweikämpfen und Tavernen."
+    },
+    {
+      "start": 125.64,
+      "end": 132.08,
+      "text": "Für einige Abende versucht Vicopisano, die Atmosphäre der mittelalterlichen Stadt wieder aufleben zu lassen."
+    },
+    {
+      "start": 132.08,
+      "end": 135.18,
+      "text": "Ich wäre wirklich neugierig auf die nächste Ausgabe."
+    },
+    {
+      "start": 135.18,
+      "end": 138.92,
+      "text": "Ich könnte überprüfen, wie originalgetreu die Darstellung ist."
+    },
+    {
+      "start": 138.92,
+      "end": 141.22,
+      "text": "Und vielleicht ein paar Hinweise geben."
+    },
+    {
+      "start": 141.26,
+      "end": 143.66,
+      "text": "Natürlich nur, wenn man mich darum bittet."
+    },
+    {
+      "start": 143.66,
+      "end": 150.04,
+      "text": "Dass diese Straßen wieder voller Menschen sind und die Rocca auch nachts geöffnet wird, lässt mich eines erkennen."
+    },
+    {
+      "start": 150.04,
+      "end": 155.28,
+      "text": "Ein Gebäude kann auf eine Weise weiterleben, die sein Architekt nicht vorgesehen hat."
+    },
+    {
+      "start": 155.28,
+      "end": 159.06,
+      "text": "Ich hatte diese Mauern entworfen, um Menschen draußen zu halten."
+    },
+    {
+      "start": 159.06,
+      "end": 163.38,
+      "text": "Heute werden die Menschen willkommen geheißen und hereingebeten."
+    },
+    {
+      "start": 163.38,
+      "end": 166.18,
+      "text": "Verlassen wir nun die Rocca und gehen wir weiter."
+    },
+    {
+      "start": 166.18,
+      "end": 170.84,
+      "text": "Unsere nächste Station ist die Torre dell'Orologio, der Uhrturm."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

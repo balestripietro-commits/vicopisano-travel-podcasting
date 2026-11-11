@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 3,
+  "audio": {
+    "duration": 241.0,
+    "source": "audio/en/03_palazzo_pretorio_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9603,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.12,
+      "end": 3.94,
+      "text": "For a moment, let's leave my fortifications aside."
+    },
+    {
+      "start": 3.94,
+      "end": 6.98,
+      "text": "In front of you is Palazzo Pretorio."
+    },
+    {
+      "start": 6.98,
+      "end": 9.52,
+      "text": "No, this building isn't my work."
+    },
+    {
+      "start": 9.52,
+      "end": 14.88,
+      "text": "Its oldest part dates from the twelfth and thirteenth centuries, before I arrived."
+    },
+    {
+      "start": 14.88,
+      "end": 24.12,
+      "text": "Look at the façade: the great pillars, the pointed arches, and that yellowish ochre stone you should be starting to recognise by now."
+    },
+    {
+      "start": 24.12,
+      "end": 25.9,
+      "text": "Verrucano."
+    },
+    {
+      "start": 25.9,
+      "end": 30.32,
+      "text": "A building doesn't come through centuries of history without changing."
+    },
+    {
+      "start": 30.32,
+      "end": 31.82,
+      "text": "I did warn you."
+    },
+    {
+      "start": 31.82,
+      "end": 34.88,
+      "text": "And this palace is an excellent example."
+    },
+    {
+      "start": 34.88,
+      "end": 44.4,
+      "text": "Its original purpose isn't entirely certain. It may have been connected with the power the archbishops of Pisa exercised over Vicopisano."
+    },
+    {
+      "start": 44.4,
+      "end": 49.01,
+      "text": "But its history becomes much clearer after the Florentine conquest of fourteen hundred and six."
+    },
+    {
+      "start": 50.6,
+      "end": 56.64,
+      "text": "A few years later, in fourteen eleven, the building was chosen as the seat of the Vicario."
+    },
+    {
+      "start": 56.76,
+      "end": 59.2,
+      "text": "The Vicario wasn't the town's mayor."
+    },
+    {
+      "start": 59.2,
+      "end": 66.68,
+      "text": "He represented the Florentine government: he administered the territory and dispensed justice in Florence's name."
+    },
+    {
+      "start": 66.68,
+      "end": 70.82,
+      "text": "From then on, the palace housed his offices, his residence…"
+    },
+    {
+      "start": 70.82,
+      "end": 73.12,
+      "text": "and the prisons as well."
+    },
+    {
+      "start": 73.12,
+      "end": 80.64,
+      "text": "In other words, the same building was used to govern the territory, administer justice and, when necessary…"
+    },
+    {
+      "start": 80.64,
+      "end": 82.28,
+      "text": "lock someone up."
+    },
+    {
+      "start": 82.28,
+      "end": 85.72,
+      "text": "Now, though, look at the coats of arms on the walls."
+    },
+    {
+      "start": 85.84,
+      "end": 92.6,
+      "text": "Almost fifty survive in the palace, some even from the Florentine workshops of the Della Robbia family."
+    },
+    {
+      "start": 92.6,
+      "end": 97.9,
+      "text": "From the fifteenth century onwards, each Vicario left his own coat of arms here."
+    },
+    {
+      "start": 97.9,
+      "end": 98.74,
+      "text": "A name."
+    },
+    {
+      "start": 98.74,
+      "end": 99.9,
+      "text": "A family."
+    },
+    {
+      "start": 99.9,
+      "end": 102.84,
+      "text": "A record of his time in Vicopisano."
+    },
+    {
+      "start": 102.84,
+      "end": 107.72,
+      "text": "And for me, there's something particularly interesting about these coats of arms."
+    },
+    {
+      "start": 107.72,
+      "end": 111.16,
+      "text": "They tell me what happened after my lifetime."
+    },
+    {
+      "start": 111.16,
+      "end": 114.4,
+      "text": "The Florentine Republic was followed by the Medici."
+    },
+    {
+      "start": 114.52,
+      "end": 116.36,
+      "text": "Then the House of Lorraine."
+    },
+    {
+      "start": 116.36,
+      "end": 121.45,
+      "text": "The Vicario's powers were gradually reduced, until the office was abolished in eighteen forty-eight."
+    },
+    {
+      "start": 122.68,
+      "end": 125.19,
+      "text": "Four centuries of government…"
+    },
+    {
+      "start": 125.19,
+      "end": 127.3,
+      "text": "summed up on a wall."
+    },
+    {
+      "start": 127.3,
+      "end": 131.41,
+      "text": "But it wasn't just the rulers of Vicopisano who were changing."
+    },
+    {
+      "start": 131.41,
+      "end": 133.64,
+      "text": "Even the landscape changed."
+    },
+    {
+      "start": 133.64,
+      "end": 139.88,
+      "text": "Remember the Arno and the Serezza, the two waterways I told you about at the start of our walk?"
+    },
+    {
+      "start": 139.88,
+      "end": 144.36,
+      "text": "When I arrived, the Arno flowed much closer to the town."
+    },
+    {
+      "start": 144.48,
+      "end": 155.28,
+      "text": "It formed a great bend and, together with the Serezza, had helped make Vicopisano a strategic place for trade, transport and defence for centuries."
+    },
+    {
+      "start": 155.28,
+      "end": 160.28,
+      "text": "Then, in the sixteenth century, the Medici decided to intervene."
+    },
+    {
+      "start": 160.28,
+      "end": 169.4,
+      "text": "From fifteen sixty onwards, the Arno's course was straightened and moved further from the walls, towards the route it still follows today."
+    },
+    {
+      "start": 169.4,
+      "end": 176.84,
+      "text": "The Serezza was altered too, to reach the river's new course and keep draining the waters from Lake Bientina."
+    },
+    {
+      "start": 176.84,
+      "end": 177.96,
+      "text": "Put simply…"
+    },
+    {
+      "start": 177.96,
+      "end": 183.74,
+      "text": "the water that had helped Vicopisano prosper no longer flowed where it once had."
+    },
+    {
+      "start": 183.74,
+      "end": 187.2,
+      "text": "And that changed the town's role as well."
+    },
+    {
+      "start": 187.2,
+      "end": 190.32,
+      "text": "Agriculture became increasingly important."
+    },
+    {
+      "start": 190.32,
+      "end": 199.08,
+      "text": "But Vicopisano remained an important administrative centre, home to the Vicario, the court and the Florentine chancery."
+    },
+    {
+      "start": 199.08,
+      "end": 200.2,
+      "text": "I must admit:"
+    },
+    {
+      "start": 200.2,
+      "end": 205.2,
+      "text": "for someone like me, used to altering walls, towers and passageways…"
+    },
+    {
+      "start": 205.2,
+      "end": 211.64,
+      "text": "it's quite something to discover that here they went as far as changing the course of a river."
+    },
+    {
+      "start": 211.64,
+      "end": 215.76,
+      "text": "Clearly, history doesn't leave its mark only on buildings."
+    },
+    {
+      "start": 215.76,
+      "end": 220.2,
+      "text": "Sometimes it leaves its mark on the whole landscape."
+    },
+    {
+      "start": 220.2,
+      "end": 225.52,
+      "text": "It would be foolish to return to Vicopisano, bore you with nothing but my own work…"
+    },
+    {
+      "start": 225.52,
+      "end": 229.6,
+      "text": "and overlook everything the town has lived through without me."
+    },
+    {
+      "start": 229.72,
+      "end": 233.76,
+      "text": "Now, though, we can return to something I know rather better."
+    },
+    {
+      "start": 233.76,
+      "end": 237.68,
+      "text": "Our next stop will finally bring us to the Rocca."
+    },
+    {
+      "start": 237.68,
+      "end": 241.0,
+      "text": "Allow me another little moment of well-earned pride."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

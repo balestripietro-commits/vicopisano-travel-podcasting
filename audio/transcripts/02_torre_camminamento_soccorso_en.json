@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 2,
+  "audio": {
+    "duration": 129.53,
+    "source": "audio/en/02_torre_camminamento_soccorso_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9901,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.07,
+      "end": 1.24,
+      "text": "Here we are."
+    },
+    {
+      "start": 1.24,
+      "end": 5.22,
+      "text": "The tower in front of you is the Torre del Soccorso."
+    },
+    {
+      "start": 5.22,
+      "end": 13.52,
+      "text": "And the wall running up the hill to the Rocca, the fortress, is the Camminamento del Soccorso, a fortified walkway."
+    },
+    {
+      "start": 13.52,
+      "end": 16.04,
+      "text": "Now, this is my work."
+    },
+    {
+      "start": 16.04,
+      "end": 21.34,
+      "text": "The tower, the passage and the Rocca form a single defensive system."
+    },
+    {
+      "start": 21.34,
+      "end": 24.0,
+      "text": "A machine built of stone."
+    },
+    {
+      "start": 24.0,
+      "end": 29.2,
+      "text": "The name Soccorso means relief. That tells you what it was for."
+    },
+    {
+      "start": 29.27,
+      "end": 32.04,
+      "text": "Imagine Vicopisano under attack."
+    },
+    {
+      "start": 32.04,
+      "end": 38.92,
+      "text": "The enemy enters the town, occupies the streets and forces the soldiers to retreat into the Rocca."
+    },
+    {
+      "start": 38.92,
+      "end": 42.92,
+      "text": "A rather unpleasant situation, especially for those inside."
+    },
+    {
+      "start": 42.92,
+      "end": 46.0,
+      "text": "But even then, this route remained."
+    },
+    {
+      "start": 46.0,
+      "end": 55.32,
+      "text": "Men, food and supplies could come in from outside through the bottom of the tower, reach the protected walkway and make their way up to the Rocca."
+    },
+    {
+      "start": 55.32,
+      "end": 59.08,
+      "text": "All without crossing streets controlled by the enemy."
+    },
+    {
+      "start": 59.15,
+      "end": 61.64,
+      "text": "That's why this isn't just a wall."
+    },
+    {
+      "start": 61.64,
+      "end": 68.12,
+      "text": "It's a protected route, designed to remain usable when all the other routes were no longer safe."
+    },
+    {
+      "start": 68.12,
+      "end": 72.36,
+      "text": "When I arrived in Vicopisano, I asked myself a question."
+    },
+    {
+      "start": 72.36,
+      "end": 74.12,
+      "text": "What could go wrong?"
+    },
+    {
+      "start": 74.12,
+      "end": 79.28,
+      "text": "A siege, enemies entering the town, or the Rocca being cut off."
+    },
+    {
+      "start": 79.28,
+      "end": 83.0,
+      "text": "And in each case, what could the defenders do?"
+    },
+    {
+      "start": 83.0,
+      "end": 87.24,
+      "text": "The Camminamento del Soccorso grew out of questions like these."
+    },
+    {
+      "start": 87.31,
+      "end": 93.88,
+      "text": "It even had to work if the town rebelled and the Florentine garrison was forced to withdraw into the Rocca."
+    },
+    {
+      "start": 93.88,
+      "end": 103.16,
+      "text": "Florence had only recently conquered Vicopisano, and trust was not exactly the most plentiful material in a newly occupied territory."
+    },
+    {
+      "start": 103.16,
+      "end": 108.96,
+      "text": "And I must admit, I've never been much of an expert in either trust or politics."
+    },
+    {
+      "start": 108.96,
+      "end": 112.28,
+      "text": "So I preferred to rely on stone."
+    },
+    {
+      "start": 112.28,
+      "end": 116.68,
+      "text": "Today, you can walk along the passage with rather more peace of mind."
+    },
+    {
+      "start": 116.75,
+      "end": 123.48,
+      "text": "No armour, no supplies on your back and, above all, nobody trying to conquer the town."
+    },
+    {
+      "start": 123.48,
+      "end": 126.4,
+      "text": "Now, let's head towards the town centre."
+    },
+    {
+      "start": 126.4,
+      "end": 129.53,
+      "text": "Our next stop will be Palazzo Pretorio."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

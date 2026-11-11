@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "es",
+  "stop": 6,
+  "audio": {
+    "duration": 201.08,
+    "source": "audio/es/06_pieve_santa_maria_es.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.971,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.03,
+      "end": 3.52,
+      "text": "Aquí estamos, ante la Pieve di Santa Maria."
+    },
+    {
+      "start": 3.52,
+      "end": 5.52,
+      "text": "Debo admitir una cosa."
+    },
+    {
+      "start": 5.52,
+      "end": 10.61,
+      "text": "Cuando trabajaba en las fortificaciones de Vicopisano, esta iglesia llevaba aquí siglos."
+    },
+    {
+      "start": 10.61,
+      "end": 19.02,
+      "text": "Pero entonces estaba ocupado estudiando las murallas, las pendientes de la colina, los accesos al pueblo y todo lo que podía hacerlo más seguro."
+    },
+    {
+      "start": 19.02,
+      "end": 22.38,
+      "text": "No creo haberle prestado la atención que merecía."
+    },
+    {
+      "start": 22.38,
+      "end": 25.52,
+      "text": "Hoy, por fin, puedo remediarlo."
+    },
+    {
+      "start": 25.52,
+      "end": 28.44,
+      "text": "La iglesia, con la forma que veis, data del siglo doce."
+    },
+    {
+      "start": 29.13,
+      "end": 31.99,
+      "text": "Pero su historia es aún más antigua."
+    },
+    {
+      "start": 31.99,
+      "end": 40.61,
+      "text": "Aparece por primera vez en un documento del año novecientos treinta y cuatro y, por lo que se lee en él, parece que ya existía desde hacía algún tiempo."
+    },
+    {
+      "start": 40.61,
+      "end": 46.34,
+      "text": "Es la más antigua y la principal de las iglesias que había en las inmediaciones de Vicopisano."
+    },
+    {
+      "start": 46.34,
+      "end": 50.48,
+      "text": "Y también es la única que se construyó fuera de las murallas."
+    },
+    {
+      "start": 50.48,
+      "end": 52.34,
+      "text": "Una decisión interesante."
+    },
+    {
+      "start": 52.34,
+      "end": 60.66,
+      "text": "Y ahora que la observo con atención, por primera vez sin tener un sistema defensivo que diseñar, descubro un detalle aún más significativo."
+    },
+    {
+      "start": 60.66,
+      "end": 66.3,
+      "text": "Normalmente, las iglesias medievales se orientaban con la entrada hacia el oeste."
+    },
+    {
+      "start": 66.3,
+      "end": 75.11,
+      "text": "Esta iglesia, en cambio, mira hacia una de las antiguas puertas del castillo: Porta Maccioni, conocida después como Porta della Rocca."
+    },
+    {
+      "start": 75.11,
+      "end": 78.61,
+      "text": "La fachada, por tanto, no sigue simplemente una regla."
+    },
+    {
+      "start": 78.61,
+      "end": 84.7,
+      "text": "Se dirige directamente al pueblo y a las personas que entraban y salían por sus murallas."
+    },
+    {
+      "start": 84.7,
+      "end": 86.45,
+      "text": "Ahora observadla."
+    },
+    {
+      "start": 86.45,
+      "end": 92.19,
+      "text": "Los muros vuelven a ser de verrucano, pero aquí la piedra no forma una torre ni un muro defensivo."
+    },
+    {
+      "start": 92.19,
+      "end": 95.95,
+      "text": "Se organiza siguiendo las proporciones del románico pisano."
+    },
+    {
+      "start": 95.95,
+      "end": 98.41,
+      "text": "Tres portadas en la parte inferior."
+    },
+    {
+      "start": 98.41,
+      "end": 101.16,
+      "text": "Semicolumnas y pequeños arquillos ciegos."
+    },
+    {
+      "start": 101.16,
+      "end": 104.66,
+      "text": "Una ventana geminada en el centro de la parte superior."
+    },
+    {
+      "start": 104.66,
+      "end": 106.82,
+      "text": "Nada se deja al azar."
+    },
+    {
+      "start": 106.82,
+      "end": 110.38,
+      "text": "Si encontráis la iglesia abierta, os recomiendo entrar."
+    },
+    {
+      "start": 110.38,
+      "end": 118.13,
+      "text": "Las tres naves están separadas por doce columnas de granito, y algunos capiteles y columnas proceden de edificios de época romana."
+    },
+    {
+      "start": 118.13,
+      "end": 122.76,
+      "text": "Piedras más antiguas, reutilizadas en una construcción nueva."
+    },
+    {
+      "start": 122.76,
+      "end": 127.78,
+      "text": "Una decisión que, como ya habréis comprendido, apruebo plenamente."
+    },
+    {
+      "start": 127.78,
+      "end": 130.99,
+      "text": "Pero dentro no solo encontraréis arquitectura."
+    },
+    {
+      "start": 130.99,
+      "end": 137.03,
+      "text": "Acercaos al ábside, al fondo de la iglesia, y buscad un gran conjunto de figuras talladas en madera."
+    },
+    {
+      "start": 137.03,
+      "end": 141.26,
+      "text": "Es el Descendimiento, realizado en las primeras décadas del siglo trece."
+    },
+    {
+      "start": 141.69,
+      "end": 150.14,
+      "text": "Representa el momento en que se baja de la cruz el cuerpo de Cristo, rodeado de la Virgen, san Juan, José de Arimatea y Nicodemo."
+    },
+    {
+      "start": 150.14,
+      "end": 158.54,
+      "text": "Es uno de los pocos conjuntos de madera de este tipo que han llegado hasta nosotros conservando casi todas las figuras originales."
+    },
+    {
+      "start": 158.54,
+      "end": 161.13,
+      "text": "Observad sobre todo el cuerpo de Cristo."
+    },
+    {
+      "start": 161.13,
+      "end": 169.32,
+      "text": "No parece rígido e inmóvil: se curva mientras lo bajan de la cruz, con una libertad que se aleja de los modelos más habituales de la época."
+    },
+    {
+      "start": 169.32,
+      "end": 176.4,
+      "text": "Me alegra haberme detenido por fin en esta iglesia y haber descubierto lo que pasé por alto durante mi trabajo en Vicopisano."
+    },
+    {
+      "start": 176.4,
+      "end": 181.41,
+      "text": "Ahora comprendo que una ciudad no vive únicamente de aquello que la defiende."
+    },
+    {
+      "start": 181.41,
+      "end": 187.7,
+      "text": "También vive de los lugares en los que la gente se reconoce, se reúne y conserva su memoria."
+    },
+    {
+      "start": 187.7,
+      "end": 192.42,
+      "text": "Y, hablando de la vida de la comunidad, volvamos ahora hacia el centro."
+    },
+    {
+      "start": 192.42,
+      "end": 197.68,
+      "text": "Aún nos esperan dos últimas paradas, ambas en el corazón de Vicopisano."
+    },
+    {
+      "start": 197.68,
+      "end": 201.02,
+      "text": "Empecemos por las Torri Gemelle, las Torres Gemelas."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

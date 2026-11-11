@@ -408,3 +408,8 @@ Il sito è pubblicato anche su [GitHub Pages](https://balestripietro-commits.git
 ## Verifica E2E
 
 La suite completa si esegue con `npm run test:e2e:dist` e gira sulle pull request o su richiesta manuale. Il push su `main` pubblica GitHub Pages e lancia uno smoke breve sul sito appena pubblicato, incluso il controllo dell’audio. In CI Playwright ritenta una volta e conserva le trace solo al primo retry; le diagnostiche scadono dopo 3 giorni.
+
+## Audio multilingua
+
+Le sei lingue aggiuntive e i due incisi riutilizzabili per lingua sono
+documentati in [docs/MULTILINGUE.md](docs/MULTILINGUE.md).

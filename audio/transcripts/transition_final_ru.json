@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "ru",
+  "stop": null,
+  "audio": {
+    "duration": 22.24,
+    "source": "audio/ru/transition_final_ru.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9965,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.02,
+      "end": 22.24,
+      "text": "Эта запись завершает аудиомаршрут, созданный муниципалитетом Викописано. Спасибо, что прошли этот путь вместе с Филиппо Брунеллески. Если вы хотите и дальше знакомиться с городком и его окрестностями, обратитесь в муниципальное туристическое бюро, чтобы узнать о доступных посещениях, маршрутах и других возможностях знакомства с этим краем."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

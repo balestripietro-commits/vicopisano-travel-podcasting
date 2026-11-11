@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 7,
+  "audio": {
+    "duration": 173.24,
+    "source": "audio/en/07_torri_gemelle_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9732,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.1,
+      "end": 1.99,
+      "text": "We're back in the heart of the town."
+    },
+    {
+      "start": 1.99,
+      "end": 6.16,
+      "text": "Our final two stops really are just a few steps apart."
+    },
+    {
+      "start": 6.16,
+      "end": 9.29,
+      "text": "But let's take them one at a time."
+    },
+    {
+      "start": 9.29,
+      "end": 16.8,
+      "text": "Look to your left and find two towers which, at first glance, aren't even that easy to recognise as a pair."
+    },
+    {
+      "start": 16.8,
+      "end": 18.44,
+      "text": "There they are."
+    },
+    {
+      "start": 18.44,
+      "end": 21.92,
+      "text": "The Torri Gemelle, the Twin Towers."
+    },
+    {
+      "start": 21.92,
+      "end": 24.41,
+      "text": "The name suggests they're identical."
+    },
+    {
+      "start": 24.41,
+      "end": 33.52,
+      "text": "But, if you'll allow an architect's opinion, when looking at an old building you should use the word identical very carefully."
+    },
+    {
+      "start": 33.52,
+      "end": 36.37,
+      "text": "These towers date from the twelfth century."
+    },
+    {
+      "start": 36.37,
+      "end": 46.04,
+      "text": "So they're older than my Rocca, and by the early fourteenth century they formed part of Vicopisano's earlier Pisan fortification."
+    },
+    {
+      "start": 46.04,
+      "end": 54.62,
+      "text": "When Florence conquered the town, taking it from the Republic of Pisa in fourteen hundred and six, that old fortress was dismantled."
+    },
+    {
+      "start": 54.69,
+      "end": 59.54,
+      "text": "A few stops ago, I showed you the defensive system I designed to replace it."
+    },
+    {
+      "start": 59.54,
+      "end": 62.9,
+      "text": "The Twin Towers, though, remained standing."
+    },
+    {
+      "start": 62.9,
+      "end": 68.52,
+      "text": "And so, even today, we can read two different chapters of Vicopisano's history:"
+    },
+    {
+      "start": 68.52,
+      "end": 71.61,
+      "text": "what remains of the Pisan fortification…"
+    },
+    {
+      "start": 71.61,
+      "end": 76.02,
+      "text": "and the Florentine fortress built after the conquest."
+    },
+    {
+      "start": 76.02,
+      "end": 78.02,
+      "text": "Now look at the materials."
+    },
+    {
+      "start": 78.02,
+      "end": 84.92,
+      "text": "In the lower parts of the towers you'll find verrucano again, the stone we've seen several times along the way."
+    },
+    {
+      "start": 84.92,
+      "end": 88.08,
+      "text": "Higher up, the walls continue in brick."
+    },
+    {
+      "start": 88.08,
+      "end": 98.27,
+      "text": "This change tells us that both towers were altered and made taller over time, probably also to repair damage caused by the many sieges the town endured."
+    },
+    {
+      "start": 98.27,
+      "end": 102.8,
+      "text": "But the two towers didn't come through those events in the same way."
+    },
+    {
+      "start": 102.8,
+      "end": 107.78,
+      "text": "In the western one, the oldest stone section reaches about nineteen metres."
+    },
+    {
+      "start": 107.78,
+      "end": 111.05,
+      "text": "In the eastern tower, it reaches only eight."
+    },
+    {
+      "start": 111.05,
+      "end": 115.71,
+      "text": "Clearly, one of them needed far more rebuilding than the other."
+    },
+    {
+      "start": 115.71,
+      "end": 116.69,
+      "text": "Twins, then."
+    },
+    {
+      "start": 116.69,
+      "end": 119.21,
+      "text": "But with different scars."
+    },
+    {
+      "start": 119.21,
+      "end": 127.01,
+      "text": "The eastern tower also preserves the remains of Porta del Mercato, one of the old entrances to the fortified town."
+    },
+    {
+      "start": 127.01,
+      "end": 131.95,
+      "text": "Look closely and you can also make out a small doorway high above ground level."
+    },
+    {
+      "start": 131.95,
+      "end": 136.03,
+      "text": "It wasn't a door meant to be conveniently reached from the street."
+    },
+    {
+      "start": 136.03,
+      "end": 142.48,
+      "text": "Originally, access to the tower was through wooden structures that could be removed in times of danger."
+    },
+    {
+      "start": 142.48,
+      "end": 149.22,
+      "text": "But there's another reason why, seen from here, the two towers don't immediately look like a pair."
+    },
+    {
+      "start": 149.22,
+      "end": 151.19,
+      "text": "Now look at the building in front of you."
+    },
+    {
+      "start": 151.19,
+      "end": 155.42,
+      "text": "It's Vicopisano's Palazzo Comunale, the town hall."
+    },
+    {
+      "start": 155.42,
+      "end": 163.74,
+      "text": "Over time, it came to incorporate the Twin Towers and partly conceal their outlines, especially that of the western tower."
+    },
+    {
+      "start": 163.74,
+      "end": 165.87,
+      "text": "And since it's already in front of us…"
+    },
+    {
+      "start": 165.87,
+      "end": 169.46,
+      "text": "I'd say it's time we gave it some attention too."
+    },
+    {
+      "start": 169.46,
+      "end": 170.98,
+      "text": "Just a few more steps."
+    },
+    {
+      "start": 170.98,
+      "end": 173.02,
+      "text": "Our final stop is right here."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "de",
+  "stop": 5,
+  "audio": {
+    "duration": 150.28,
+    "source": "audio/de/05_torre_orologio_de.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9735,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.06,
+      "end": 4.02,
+      "text": "Auf dem Weg von der Rocca hinunter kommen wir wieder in den Ortskern."
+    },
+    {
+      "start": 4.02,
+      "end": 7.56,
+      "text": "Und diesmal empfehle ich Ihnen, nach oben zu schauen."
+    },
+    {
+      "start": 7.56,
+      "end": 11.76,
+      "text": "Vor Ihnen steht die Torre dell'Orologio, der Uhrturm."
+    },
+    {
+      "start": 11.76,
+      "end": 15.74,
+      "text": "Aus der Ferne beherrscht meine Rocca das Bild von Vicopisano."
+    },
+    {
+      "start": 15.74,
+      "end": 22.38,
+      "text": "Aber wer durch diese Straßen geht, besonders die Via Lante entlang, kann diesen Turm kaum übersehen."
+    },
+    {
+      "start": 22.38,
+      "end": 24.58,
+      "text": "Hoch, schmal…"
+    },
+    {
+      "start": 24.58,
+      "end": 27.26,
+      "text": "und ausgesprochen eigenwillig."
+    },
+    {
+      "start": 27.33,
+      "end": 28.72,
+      "text": "Und bevor Sie fragen:"
+    },
+    {
+      "start": 28.72,
+      "end": 31.64,
+      "text": "Nein, auch diesen habe ich nicht gebaut."
+    },
+    {
+      "start": 31.64,
+      "end": 38.98,
+      "text": "Sein ursprünglicher Bau stammt aus dem zwölften und dreizehnten Jahrhundert. Er stand also schon lange vor meiner Ankunft hier."
+    },
+    {
+      "start": 38.98,
+      "end": 46.08,
+      "text": "Wahrscheinlich entstand er als Wehrturm, um die Straße zur alten Burg im Bereich des Palazzo Pretorio zu überwachen."
+    },
+    {
+      "start": 46.08,
+      "end": 47.62,
+      "text": "Sehen Sie genau hin."
+    },
+    {
+      "start": 47.62,
+      "end": 50.58,
+      "text": "Er besteht fast vollständig aus Verrucano."
+    },
+    {
+      "start": 50.58,
+      "end": 55.24,
+      "text": "Und an den Wänden erkennen Sie noch eine Reihe großer steinerner Konsolen."
+    },
+    {
+      "start": 55.3,
+      "end": 65.08,
+      "text": "Im Mittelalter trugen sie hölzerne Vorbauten, die außen aus dem Turm herausragten. Man betrat sie durch jene kleinen Bogeneingänge, die heute noch sichtbar sind."
+    },
+    {
+      "start": 65.08,
+      "end": 74.72,
+      "text": "Bei einem Turm mit militärischer Aufgabe erlaubten solche vorspringenden Bereiche auch, das Geschehen am Fuß der Mauern besser zu überwachen und zu verteidigen."
+    },
+    {
+      "start": 74.72,
+      "end": 78.62,
+      "text": "Irgendwann wurde der Turm aber nicht mehr zur Verteidigung gebraucht."
+    },
+    {
+      "start": 78.62,
+      "end": 80.59,
+      "text": "Und statt ihn abzureißen…"
+    },
+    {
+      "start": 80.59,
+      "end": 82.02,
+      "text": "baute man ihn um."
+    },
+    {
+      "start": 82.08,
+      "end": 86.29,
+      "text": "Seine Höhe machte ihn für eine neue Aufgabe geradezu ideal:"
+    },
+    {
+      "start": 86.29,
+      "end": 87.66,
+      "text": "als Glockenturm."
+    },
+    {
+      "start": 87.66,
+      "end": 91.14,
+      "text": "Und einige Jahrhunderte später kam auch die Uhr hinzu."
+    },
+    {
+      "start": 91.14,
+      "end": 97.68,
+      "text": "Sie ist hier mindestens seit dem sechzehnten Jahrhundert belegt. Das heute erhaltene Uhrwerk stammt dagegen aus dem achtzehnten."
+    },
+    {
+      "start": 98.36,
+      "end": 99.66,
+      "text": "Ein Wehrturm."
+    },
+    {
+      "start": 99.66,
+      "end": 101.45,
+      "text": "Dann ein Glockenturm."
+    },
+    {
+      "start": 101.45,
+      "end": 102.74,
+      "text": "Dann eine Uhr."
+    },
+    {
+      "start": 102.74,
+      "end": 104.96,
+      "text": "Ich muss sagen: Das gefällt mir."
+    },
+    {
+      "start": 104.96,
+      "end": 109.54,
+      "text": "Ein gutes Gebäude muss nicht für immer dem Zweck dienen, für den es gebaut wurde."
+    },
+    {
+      "start": 109.6,
+      "end": 113.72,
+      "text": "Es muss den Menschen in seiner Umgebung weiterhin nützlich sein können."
+    },
+    {
+      "start": 113.72,
+      "end": 124.96,
+      "text": "Heute kann man den Turm nach einer umfassenden Restaurierung besichtigen und bis zur Glockenstube hinaufsteigen. Von dort öffnet sich der Blick auf Vicopisano und den Monte Pisano."
+    },
+    {
+      "start": 124.96,
+      "end": 128.4,
+      "text": "Am meisten fasziniert mich aber vielleicht etwas anderes."
+    },
+    {
+      "start": 128.4,
+      "end": 132.58,
+      "text": "Ein Bauwerk, das einst den Durchgang der Menschen überwachte…"
+    },
+    {
+      "start": 132.58,
+      "end": 135.36,
+      "text": "zeigt heute vor allem das Vergehen der Zeit an."
+    },
+    {
+      "start": 135.36,
+      "end": 137.2,
+      "text": "Keine schlechte Verwandlung."
+    },
+    {
+      "start": 137.2,
+      "end": 139.24,
+      "text": "Gehen wir nun weiter bergab."
+    },
+    {
+      "start": 139.31,
+      "end": 144.32,
+      "text": "Die nächste Station führt uns zur Pieve di Santa Maria, der Pfarrkirche."
+    },
+    {
+      "start": 144.32,
+      "end": 150.28,
+      "text": "Dort lassen wir Türme, Mauern und Befestigungen zumindest für ein paar Minuten hinter uns."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

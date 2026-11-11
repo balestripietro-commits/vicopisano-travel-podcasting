@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 6,
+  "audio": {
+    "duration": 214.52,
+    "source": "audio/en/06_pieve_santa_maria_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9681,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.1,
+      "end": 2.6,
+      "text": "Here we are at the Pieve di Santa Maria."
+    },
+    {
+      "start": 3.24,
+      "end": 4.84,
+      "text": "I have to admit something."
+    },
+    {
+      "start": 5.4,
+      "end": 11.92,
+      "text": "When I was working on Vicopisano's fortifications, this church had already stood here for centuries."
+    },
+    {
+      "start": 12.4,
+      "end": 20.72,
+      "text": "But I was busy studying the walls, the slopes of the hill, the entrances to the town and everything that might make it safer."
+    },
+    {
+      "start": 21.24,
+      "end": 23.96,
+      "text": "I don't think I gave it the attention it deserved."
+    },
+    {
+      "start": 24.4,
+      "end": 27.64,
+      "text": "Today, at last, I can make up for that."
+    },
+    {
+      "start": 28.5,
+      "end": 32.72,
+      "text": "The church, in the form you see today, dates from the twelfth century."
+    },
+    {
+      "start": 33.12,
+      "end": 35.64,
+      "text": "But its history goes back even further."
+    },
+    {
+      "start": 36.24,
+      "end": 45.2,
+      "text": "It's first mentioned in a document from nine hundred and thirty-four, and from what it says, the church seems to have existed for some time already."
+    },
+    {
+      "start": 45.76,
+      "end": 52.16,
+      "text": "It's the oldest and the principal church among those that stood in the immediate surroundings of Vicopisano."
+    },
+    {
+      "start": 52.6,
+      "end": 56.68,
+      "text": "And it's also the only one built outside the walls."
+    },
+    {
+      "start": 57.14,
+      "end": 58.32,
+      "text": "An interesting choice."
+    },
+    {
+      "start": 58.92,
+      "end": 67.28,
+      "text": "And now, looking carefully for the first time without a defensive system to design, I notice an even more telling detail."
+    },
+    {
+      "start": 67.88,
+      "end": 71.84,
+      "text": "Medieval churches usually had their entrances facing west."
+    },
+    {
+      "start": 72.32,
+      "end": 80.8,
+      "text": "This church, though, faces one of the old gates of the fortified town: Porta Maccioni, later known as Porta della Rocca."
+    },
+    {
+      "start": 81.4,
+      "end": 84.48,
+      "text": "So the façade doesn't simply follow a rule."
+    },
+    {
+      "start": 84.82,
+      "end": 90.48,
+      "text": "It faces directly towards the town and the people coming and going through its walls."
+    },
+    {
+      "start": 91.08,
+      "end": 92.76,
+      "text": "Now take a closer look."
+    },
+    {
+      "start": 93.16,
+      "end": 99.96,
+      "text": "Once again, the stonework is verrucano, but here it doesn't form a tower or a defensive wall."
+    },
+    {
+      "start": 100.32,
+      "end": 104.84,
+      "text": "It's arranged according to the proportions of Pisan Romanesque architecture."
+    },
+    {
+      "start": 105.28,
+      "end": 106.92,
+      "text": "Three doorways below."
+    },
+    {
+      "start": 107.32,
+      "end": 110.6,
+      "text": "Engaged columns and small blind arches."
+    },
+    {
+      "start": 110.96,
+      "end": 114.0,
+      "text": "A two-light window in the centre of the upper section."
+    },
+    {
+      "start": 114.54,
+      "end": 116.4,
+      "text": "Nothing is left to chance."
+    },
+    {
+      "start": 116.84,
+      "end": 120.32,
+      "text": "If you find the church open, I recommend going inside."
+    },
+    {
+      "start": 120.88,
+      "end": 129.52,
+      "text": "The nave and two aisles are divided by twelve granite columns. Some of the capitals and columns come from buildings of Roman times."
+    },
+    {
+      "start": 129.92,
+      "end": 132.96,
+      "text": "Older stones, reused in a new building."
+    },
+    {
+      "start": 133.4,
+      "end": 138.2,
+      "text": "A choice which, as you've probably gathered by now, I thoroughly approve of."
+    },
+    {
+      "start": 138.72,
+      "end": 140.88,
+      "text": "But there's more than architecture inside."
+    },
+    {
+      "start": 141.4,
+      "end": 147.4,
+      "text": "Go to the apse, at the far end of the church, and look for a large group of carved wooden figures."
+    },
+    {
+      "start": 147.84,
+      "end": 152.28,
+      "text": "It's the Deposition, made in the early decades of the thirteenth century."
+    },
+    {
+      "start": 152.68,
+      "end": 162.68,
+      "text": "It shows the moment when Christ's body is taken down from the cross, surrounded by the Virgin Mary, Saint John, Joseph of Arimathea and Nicodemus."
+    },
+    {
+      "start": 163.12,
+      "end": 168.8,
+      "text": "It's one of the few wooden groups of this kind to have survived with almost all its original figures."
+    },
+    {
+      "start": 169.28,
+      "end": 171.72,
+      "text": "Look especially at Christ's body."
+    },
+    {
+      "start": 172.22,
+      "end": 181.0,
+      "text": "It isn't stiff and motionless: it curves as it's lowered from the cross, with a freedom that departs from the more familiar models of the time."
+    },
+    {
+      "start": 181.56,
+      "end": 187.64,
+      "text": "I'm glad I've finally paused at this church and discovered what I overlooked while working in Vicopisano."
+    },
+    {
+      "start": 188.16,
+      "end": 193.0,
+      "text": "Now I understand that a town doesn't live only through the things that defend it."
+    },
+    {
+      "start": 193.4,
+      "end": 200.6,
+      "text": "It lives through the places where people find a sense of belonging, come together and preserve their shared memory."
+    },
+    {
+      "start": 201.34,
+      "end": 205.4,
+      "text": "And speaking of community life, let's head back towards the centre."
+    },
+    {
+      "start": 205.8,
+      "end": 210.4,
+      "text": "We still have two final stops, both in the heart of Vicopisano."
+    },
+    {
+      "start": 210.72,
+      "end": 214.52,
+      "text": "Let's start with the Torri Gemelle, the Twin Towers."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

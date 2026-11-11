@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "fr",
+  "stop": 8,
+  "audio": {
+    "duration": 217.64,
+    "source": "audio/fr/08_palazzo_comunale_fr.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9634,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 5.74,
+      "text": "Nous y sommes presque. Mais avant de nous quitter, un dernier bâtiment mérite encore votre attention."
+    },
+    {
+      "start": 5.74,
+      "end": 9.5,
+      "text": "Devant nous se trouve le Palazzo Comunale, la mairie."
+    },
+    {
+      "start": 9.5,
+      "end": 13.34,
+      "text": "Nous l'avons déjà aperçu tout à l'heure, en essayant de distinguer les Tours Jumelles."
+    },
+    {
+      "start": 13.34,
+      "end": 15.86,
+      "text": "Mais maintenant, observons le palais."
+    },
+    {
+      "start": 15.86,
+      "end": 19.12,
+      "text": "À première vue, vous pourriez y voir un seul bâtiment."
+    },
+    {
+      "start": 19.12,
+      "end": 25.56,
+      "text": "Bien entendu, après le parcours que nous venons de faire, vous savez qu'il ne faut pas trop se fier aux premières impressions."
+    },
+    {
+      "start": 25.61,
+      "end": 34.88,
+      "text": "La construction que vous voyez s'est formée à différentes époques, en réunissant des bâtiments médiévaux et des aménagements réalisés entre le dix-septième et le dix-neuvième siècle."
+    },
+    {
+      "start": 34.88,
+      "end": 39.68,
+      "text": "À partir de la seconde moitié du dix-septième siècle, ces locaux ont accueilli la chancellerie."
+    },
+    {
+      "start": 39.68,
+      "end": 46.88,
+      "text": "Le chancelier conservait les documents et les statuts, tenait les registres et s'occupait de nombreux aspects de l'administration locale."
+    },
+    {
+      "start": 46.88,
+      "end": 51.08,
+      "text": "Auparavant, les réunions des officiers se tenaient au Palazzo Pretorio."
+    },
+    {
+      "start": 51.13,
+      "end": 55.84,
+      "text": "Après mille six cent soixante et un, elles ont commencé à se dérouler dans la maison du chancelier."
+    },
+    {
+      "start": 55.84,
+      "end": 59.04,
+      "text": "L'administration du territoire trouvait un nouveau siège."
+    },
+    {
+      "start": 59.04,
+      "end": 61.56,
+      "text": "Et le bâtiment changeait avec ses fonctions."
+    },
+    {
+      "start": 61.56,
+      "end": 69.32,
+      "text": "Les Tours Jumelles ont progressivement été intégrées à l'ensemble, les espaces ont été agrandis et la façade a été rendue plus régulière."
+    },
+    {
+      "start": 69.32,
+      "end": 77.2,
+      "text": "En mille sept cent quatre-vingt-deux, on a même décidé de démolir une partie des anciens remparts et l'arc de la porte qui se trouvaient à côté de la chancellerie."
+    },
+    {
+      "start": 77.2,
+      "end": 80.12,
+      "text": "La raison ? Donner plus d'air au bâtiment."
+    },
+    {
+      "start": 80.17,
+      "end": 87.36,
+      "text": "Après tout ce que je vous ai raconté sur l'importance des fortifications, vous comprendrez que ce n'est pas une décision que j'aurais prise à la légère."
+    },
+    {
+      "start": 87.36,
+      "end": 91.0,
+      "text": "Heureusement, ces murailles n'avaient plus à protéger un château assiégé."
+    },
+    {
+      "start": 91.0,
+      "end": 93.16,
+      "text": "Le village avait d'autres besoins."
+    },
+    {
+      "start": 93.16,
+      "end": 97.2,
+      "text": "Aujourd'hui, ce palais est le siège de la municipalité de Vicopisano."
+    },
+    {
+      "start": 97.2,
+      "end": 107.92,
+      "text": "Dans les locaux qui accueillaient autrefois le chancelier, on continue d'administrer le territoire, même si les institutions, les responsabilités et les habitants sont très différents de ceux que j'ai connus."
+    },
+    {
+      "start": 107.97,
+      "end": 115.72,
+      "text": "Au début de ce parcours, à peine revenu à Vicopisano, je pensais prendre la mesure du village en observant ce qui restait de mes œuvres."
+    },
+    {
+      "start": 115.72,
+      "end": 119.0,
+      "text": "Et je dois reconnaître qu'elles ont plutôt bien résisté."
+    },
+    {
+      "start": 119.0,
+      "end": 123.44,
+      "text": "Mais au fil de la promenade, j'ai aussi découvert ce qui existait avant moi."
+    },
+    {
+      "start": 123.44,
+      "end": 128.2,
+      "text": "Je comprends maintenant que ma Rocca ne représente qu'une partie de l'histoire de Vicopisano."
+    },
+    {
+      "start": 128.2,
+      "end": 129.69,
+      "text": "Une partie importante."
+    },
+    {
+      "start": 129.69,
+      "end": 131.08,
+      "text": "Très importante."
+    },
+    {
+      "start": 131.08,
+      "end": 132.32,
+      "text": "Mais pas la seule."
+    },
+    {
+      "start": 132.32,
+      "end": 137.08,
+      "text": "Un village médiéval peut conserver ses remparts et devenir un simple décor à contempler."
+    },
+    {
+      "start": 137.13,
+      "end": 139.2,
+      "text": "Ce n'est pas ce qui s'est passé ici."
+    },
+    {
+      "start": 139.2,
+      "end": 142.8,
+      "text": "Dans ces bâtiments, les gens continuent d'habiter et de travailler."
+    },
+    {
+      "start": 142.8,
+      "end": 152.64,
+      "text": "Les boutiques, les marchés, les associations et les cercles locaux font vivre le village avec des expositions, des spectacles, des rencontres et des fêtes tout au long de l'année."
+    },
+    {
+      "start": 152.64,
+      "end": 156.4,
+      "text": "Peut-être la façon dont Vicopisano a été construit y a-t-elle contribué."
+    },
+    {
+      "start": 156.64,
+      "end": 158.12,
+      "text": "Les rues resserrées."
+    },
+    {
+      "start": 158.12,
+      "end": 158.86,
+      "text": "Les places."
+    },
+    {
+      "start": 158.86,
+      "end": 161.04,
+      "text": "Les bâtiments proches les uns des autres."
+    },
+    {
+      "start": 161.04,
+      "end": 164.04,
+      "text": "Mais les pierres, à elles seules, ne suffisent pas."
+    },
+    {
+      "start": 164.09,
+      "end": 169.68,
+      "text": "Un village reste vivant parce que des gens continuent de le choisir, d'y habiter et d'en prendre soin."
+    },
+    {
+      "start": 169.68,
+      "end": 172.76,
+      "text": "J'avais conçu Vicopisano pour qu'il résiste aux sièges."
+    },
+    {
+      "start": 172.76,
+      "end": 177.72,
+      "text": "Après presque six cents ans, j'ai découvert qu'il continue de résister d'une autre manière :"
+    },
+    {
+      "start": 177.72,
+      "end": 179.88,
+      "text": "en restant un village vivant."
+    },
+    {
+      "start": 179.88,
+      "end": 183.16,
+      "text": "Et maintenant, malheureusement, il nous faut nous quitter."
+    },
+    {
+      "start": 183.16,
+      "end": 185.92,
+      "text": "Votre leçon d'architecture est terminée pour aujourd'hui."
+    },
+    {
+      "start": 185.92,
+      "end": 195.76,
+      "text": "Si vous êtes encore curieux et souhaitez découvrir tout ce que Vicopisano peut offrir, rendez-vous à l'Office de tourisme, installé dans la bibliothèque municipale au pied de la tour de l'Horloge."
+    },
+    {
+      "start": 195.76,
+      "end": 202.88,
+      "text": "Vous pourrez vous renseigner sur les visites de la Rocca, du Palazzo Pretorio, du Camminamento del Soccorso et de la tour de l'Horloge."
+    },
+    {
+      "start": 202.88,
+      "end": 208.16,
+      "text": "Ou choisir une randonnée sur le Monte Pisano, ou découvrir les fêtes et les événements à venir."
+    },
+    {
+      "start": 208.16,
+      "end": 212.72,
+      "text": "Moi, après presque six cents ans, je crois avoir assez marché pour aujourd'hui."
+    },
+    {
+      "start": 212.72,
+      "end": 217.64,
+      "text": "Et puis, en toute modestie, une telle leçon d'architecture mérite bien un peu de repos."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

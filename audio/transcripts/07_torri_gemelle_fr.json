@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "fr",
+  "stop": 7,
+  "audio": {
+    "duration": 153.88,
+    "source": "audio/fr/07_torri_gemelle_fr.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9654,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.05,
+      "end": 2.32,
+      "text": "Nous voici de retour au cœur du village."
+    },
+    {
+      "start": 2.32,
+      "end": 5.74,
+      "text": "Nos deux dernières étapes ne sont vraiment qu'à quelques pas l'une de l'autre."
+    },
+    {
+      "start": 5.74,
+      "end": 7.76,
+      "text": "Mais procédons dans l'ordre."
+    },
+    {
+      "start": 7.76,
+      "end": 14.74,
+      "text": "Regardez vers la gauche et cherchez deux tours qu'il n'est même pas si facile, au premier coup d'œil, de reconnaître comme une paire."
+    },
+    {
+      "start": 14.74,
+      "end": 15.74,
+      "text": "Les voilà."
+    },
+    {
+      "start": 15.74,
+      "end": 18.84,
+      "text": "Les Torri Gemelle, les Tours Jumelles."
+    },
+    {
+      "start": 18.84,
+      "end": 20.84,
+      "text": "Le nom laisse penser qu'elles sont identiques."
+    },
+    {
+      "start": 20.84,
+      "end": 29.96,
+      "text": "Mais, si vous permettez à un architecte de donner son avis, quand on observe un bâtiment ancien, il faut employer le mot identique avec beaucoup de prudence."
+    },
+    {
+      "start": 30.01,
+      "end": 32.31,
+      "text": "Ces tours remontent au douzième siècle."
+    },
+    {
+      "start": 32.31,
+      "end": 40.34,
+      "text": "Elles sont donc plus anciennes que ma Rocca. Au début du quatorzième siècle, elles faisaient partie des anciennes fortifications pisanes de Vicopisano."
+    },
+    {
+      "start": 40.34,
+      "end": 47.44,
+      "text": "Quand Florence a conquis le village, le prenant à la République de Pise en mille quatre cent six, cette ancienne forteresse a été démantelée."
+    },
+    {
+      "start": 47.44,
+      "end": 52.38,
+      "text": "Il y a quelques étapes, je vous ai montré le système défensif que j'ai conçu pour la remplacer."
+    },
+    {
+      "start": 52.38,
+      "end": 55.26,
+      "text": "Les Tours Jumelles, elles, sont restées debout."
+    },
+    {
+      "start": 55.3,
+      "end": 60.36,
+      "text": "Ainsi, aujourd'hui encore, nous pouvons lire deux moments différents de l'histoire de Vicopisano :"
+    },
+    {
+      "start": 60.36,
+      "end": 62.86,
+      "text": "ce qui reste des fortifications pisanes…"
+    },
+    {
+      "start": 62.86,
+      "end": 66.22,
+      "text": "et la forteresse florentine construite après la conquête."
+    },
+    {
+      "start": 66.22,
+      "end": 68.22,
+      "text": "Regardez maintenant les matériaux."
+    },
+    {
+      "start": 68.22,
+      "end": 74.98,
+      "text": "Dans la partie basse des tours, vous retrouvez le verrucano, cette pierre que nous avons rencontrée plusieurs fois pendant le parcours."
+    },
+    {
+      "start": 74.98,
+      "end": 77.74,
+      "text": "Plus haut, la maçonnerie se poursuit en briques."
+    },
+    {
+      "start": 77.74,
+      "end": 87.3,
+      "text": "Ce changement nous apprend que les deux tours ont été modifiées et surélevées au fil du temps, probablement aussi pour réparer les dégâts causés par les nombreux sièges subis par le village."
+    },
+    {
+      "start": 87.3,
+      "end": 90.16,
+      "text": "Mais elles n'ont pas traversé ces événements de la même façon."
+    },
+    {
+      "start": 90.16,
+      "end": 95.28,
+      "text": "Dans la tour occidentale, la partie la plus ancienne en pierre atteint environ dix-neuf mètres."
+    },
+    {
+      "start": 95.28,
+      "end": 97.79,
+      "text": "Dans la tour orientale, elle n'en atteint que huit."
+    },
+    {
+      "start": 98.26,
+      "end": 102.36,
+      "text": "L'une des deux a manifestement dû être reconstruite bien davantage que l'autre."
+    },
+    {
+      "start": 102.36,
+      "end": 103.7,
+      "text": "Jumelles, donc."
+    },
+    {
+      "start": 103.7,
+      "end": 106.1,
+      "text": "Mais avec des cicatrices différentes."
+    },
+    {
+      "start": 106.1,
+      "end": 111.84,
+      "text": "La tour orientale conserve aussi les vestiges de Porta del Mercato, l'un des anciens accès au château."
+    },
+    {
+      "start": 111.86,
+      "end": 117.58,
+      "text": "Si vous regardez attentivement, vous pouvez aussi distinguer une petite porte placée bien au-dessus du sol."
+    },
+    {
+      "start": 117.58,
+      "end": 120.94,
+      "text": "Ce n'est pas une porte conçue pour être atteinte facilement depuis la rue."
+    },
+    {
+      "start": 120.94,
+      "end": 125.98,
+      "text": "À l'origine, on accédait à la tour par des structures en bois qu'on pouvait retirer en cas de danger."
+    },
+    {
+      "start": 125.98,
+      "end": 131.98,
+      "text": "Mais il y a une autre raison pour laquelle, vues d'ici, ces deux tours ne semblent pas immédiatement former une paire."
+    },
+    {
+      "start": 131.98,
+      "end": 134.25,
+      "text": "Regardez maintenant le bâtiment devant vous."
+    },
+    {
+      "start": 134.25,
+      "end": 137.6,
+      "text": "C'est le Palazzo Comunale, la mairie de Vicopisano."
+    },
+    {
+      "start": 137.62,
+      "end": 144.5,
+      "text": "Au fil du temps, il a fini par englober et masquer en partie la silhouette des Tours Jumelles, surtout celle de la tour occidentale."
+    },
+    {
+      "start": 144.5,
+      "end": 147.72,
+      "text": "Et puisque nous l'avons désormais sous les yeux…"
+    },
+    {
+      "start": 147.72,
+      "end": 150.48,
+      "text": "je dirais qu'il est temps de nous intéresser à lui aussi."
+    },
+    {
+      "start": 150.48,
+      "end": 151.71,
+      "text": "Encore quelques pas."
+    },
+    {
+      "start": 151.71,
+      "end": 153.88,
+      "text": "Notre dernière étape sera juste ici."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "es",
+  "stop": 7,
+  "audio": {
+    "duration": 174.36,
+    "source": "audio/es/07_torri_gemelle_es.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9691,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.03,
+      "end": 2.46,
+      "text": "Hemos vuelto al corazón del pueblo."
+    },
+    {
+      "start": 2.46,
+      "end": 6.94,
+      "text": "Nuestras dos últimas paradas están realmente a pocos pasos una de otra."
+    },
+    {
+      "start": 6.94,
+      "end": 9.12,
+      "text": "Pero vayamos por orden."
+    },
+    {
+      "start": 9.12,
+      "end": 16.25,
+      "text": "Mirad hacia la izquierda y buscad dos torres que, a primera vista, no resulta tan fácil reconocer como una pareja."
+    },
+    {
+      "start": 16.25,
+      "end": 17.47,
+      "text": "Ahí están."
+    },
+    {
+      "start": 17.47,
+      "end": 21.24,
+      "text": "Las Torri Gemelle, las Torres Gemelas."
+    },
+    {
+      "start": 21.24,
+      "end": 23.48,
+      "text": "El nombre sugiere que son idénticas."
+    },
+    {
+      "start": 23.48,
+      "end": 32.76,
+      "text": "Pero, si me permitís la opinión de un arquitecto, al observar un edificio antiguo conviene usar la palabra idéntico con mucha prudencia."
+    },
+    {
+      "start": 32.76,
+      "end": 34.16,
+      "text": "Estas torres datan del siglo doce."
+    },
+    {
+      "start": 34.52,
+      "end": 42.95,
+      "text": "Son, por tanto, más antiguas que mi Rocca y, a principios del siglo catorce, formaban parte de la anterior fortificación pisana de Vicopisano."
+    },
+    {
+      "start": 42.95,
+      "end": 52.66,
+      "text": "Cuando Florencia conquistó el pueblo, arrebatándoselo a la República de Pisa en mil cuatrocientos seis, aquella antigua fortaleza fue desmantelada."
+    },
+    {
+      "start": 52.66,
+      "end": 57.59,
+      "text": "Hace unas cuantas paradas os mostré el sistema defensivo que diseñé para sustituirla."
+    },
+    {
+      "start": 57.59,
+      "end": 61.36,
+      "text": "Las Torres Gemelas, sin embargo, quedaron en pie."
+    },
+    {
+      "start": 61.36,
+      "end": 66.61,
+      "text": "Así, todavía hoy, podemos leer dos momentos distintos de la historia de Vicopisano:"
+    },
+    {
+      "start": 66.61,
+      "end": 69.04,
+      "text": "lo que queda de la fortificación pisana…"
+    },
+    {
+      "start": 69.04,
+      "end": 73.19,
+      "text": "y la fortaleza florentina construida tras la conquista."
+    },
+    {
+      "start": 73.19,
+      "end": 75.2,
+      "text": "Ahora mirad los materiales."
+    },
+    {
+      "start": 75.2,
+      "end": 82.7,
+      "text": "En la parte inferior de las torres volvemos a encontrar el verrucano, la piedra que hemos visto varias veces durante el recorrido."
+    },
+    {
+      "start": 82.7,
+      "end": 86.4,
+      "text": "Más arriba, los muros continúan en ladrillo."
+    },
+    {
+      "start": 86.4,
+      "end": 96.55,
+      "text": "Este cambio nos dice que ambas torres fueron modificadas y elevadas con el tiempo, probablemente también para reparar los daños de los numerosos asedios que sufrió el pueblo."
+    },
+    {
+      "start": 96.55,
+      "end": 101.32,
+      "text": "Pero las dos torres no atravesaron aquellos acontecimientos de la misma manera."
+    },
+    {
+      "start": 101.32,
+      "end": 106.5,
+      "text": "En la occidental, la parte más antigua de piedra alcanza unos diecinueve metros."
+    },
+    {
+      "start": 106.5,
+      "end": 109.54,
+      "text": "En la oriental, en cambio, solo llega a ocho."
+    },
+    {
+      "start": 109.99,
+      "end": 114.94,
+      "text": "Evidentemente, una de ellas necesitó mucha más reconstrucción que la otra."
+    },
+    {
+      "start": 114.94,
+      "end": 116.37,
+      "text": "Gemelas, por tanto."
+    },
+    {
+      "start": 116.37,
+      "end": 119.4,
+      "text": "Pero con cicatrices distintas."
+    },
+    {
+      "start": 119.4,
+      "end": 126.28,
+      "text": "La torre oriental conserva también los restos de Porta del Mercato, uno de los antiguos accesos al castillo."
+    },
+    {
+      "start": 126.28,
+      "end": 132.84,
+      "text": "Si observáis con atención, también podéis distinguir una pequeña entrada situada a bastante altura sobre el suelo."
+    },
+    {
+      "start": 132.84,
+      "end": 136.64,
+      "text": "No es una puerta pensada para acceder cómodamente desde la calle."
+    },
+    {
+      "start": 136.64,
+      "end": 143.25,
+      "text": "En su origen se entraba en la torre por estructuras de madera que podían retirarse en caso de peligro."
+    },
+    {
+      "start": 143.25,
+      "end": 149.88,
+      "text": "Pero hay otro motivo por el que, vistas desde aquí, las dos torres no parecen inmediatamente una pareja."
+    },
+    {
+      "start": 149.88,
+      "end": 152.28,
+      "text": "Mirad ahora el edificio que tenéis delante."
+    },
+    {
+      "start": 152.28,
+      "end": 156.16,
+      "text": "Es el Palazzo Comunale, el ayuntamiento de Vicopisano."
+    },
+    {
+      "start": 156.16,
+      "end": 164.36,
+      "text": "Con el tiempo terminó por incorporar y ocultar en parte la silueta de las Torres Gemelas, sobre todo la de la torre occidental."
+    },
+    {
+      "start": 164.36,
+      "end": 166.56,
+      "text": "Y, puesto que ya lo tenemos delante…"
+    },
+    {
+      "start": 166.56,
+      "end": 170.69,
+      "text": "diría que ha llegado el momento de ocuparnos también de él."
+    },
+    {
+      "start": 170.69,
+      "end": 171.72,
+      "text": "Unos pasos más."
+    },
+    {
+      "start": 171.72,
+      "end": 174.18,
+      "text": "Nuestra última parada estará justo aquí."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

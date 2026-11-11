@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "ru",
+  "stop": null,
+  "audio": {
+    "duration": 8.88,
+    "source": "audio/ru/transition_between_stops_ru.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.982,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.04,
+      "end": 8.82,
+      "text": "Эта запись входит в аудиомаршрут, созданный муниципалитетом Викописано. Когда будете готовы, отправляйтесь к следующей остановке."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

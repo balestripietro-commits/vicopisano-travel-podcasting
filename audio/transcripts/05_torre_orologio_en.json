@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "en",
+  "stop": 5,
+  "audio": {
+    "duration": 157.48,
+    "source": "audio/en/05_torre_orologio_en.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9777,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.08,
+      "end": 4.68,
+      "text": "As we come down from the Rocca, we return to the streets of the town."
+    },
+    {
+      "start": 4.68,
+      "end": 7.92,
+      "text": "And this time, I suggest you look up."
+    },
+    {
+      "start": 7.92,
+      "end": 12.64,
+      "text": "In front of you is the Torre dell'Orologio, the Clock Tower."
+    },
+    {
+      "start": 12.64,
+      "end": 17.34,
+      "text": "From a distance, it's my Rocca that dominates Vicopisano."
+    },
+    {
+      "start": 17.34,
+      "end": 24.32,
+      "text": "But walking through these streets, especially along Via Lante, it's hard not to notice this tower."
+    },
+    {
+      "start": 24.46,
+      "end": 26.53,
+      "text": "Tall, narrow…"
+    },
+    {
+      "start": 26.53,
+      "end": 28.72,
+      "text": "and decidedly distinctive."
+    },
+    {
+      "start": 28.8,
+      "end": 29.96,
+      "text": "And before you ask:"
+    },
+    {
+      "start": 29.96,
+      "end": 32.88,
+      "text": "no, I didn't build this one either."
+    },
+    {
+      "start": 32.88,
+      "end": 40.52,
+      "text": "Its original structure dates from the twelfth and thirteenth centuries, so it was already here long before I arrived."
+    },
+    {
+      "start": 40.52,
+      "end": 48.68,
+      "text": "It was probably built as a military tower, to watch over the road leading to the old stronghold, around Palazzo Pretorio."
+    },
+    {
+      "start": 48.68,
+      "end": 50.16,
+      "text": "Look at it carefully."
+    },
+    {
+      "start": 50.37,
+      "end": 53.68,
+      "text": "It's built almost entirely of verrucano."
+    },
+    {
+      "start": 53.76,
+      "end": 59.12,
+      "text": "And along its walls you can still see a series of large stone corbels."
+    },
+    {
+      "start": 59.12,
+      "end": 68.0,
+      "text": "In the Middle Ages, they supported projecting wooden structures, reached through those small arched doorways you can still see today."
+    },
+    {
+      "start": 68.0,
+      "end": 78.44,
+      "text": "On a tower built for military purposes, spaces projecting outwards also made it easier to watch over and defend the area at the foot of the walls."
+    },
+    {
+      "start": 78.44,
+      "end": 82.4,
+      "text": "But then the tower ceased to serve a defensive purpose."
+    },
+    {
+      "start": 82.48,
+      "end": 84.85,
+      "text": "And rather than pull it down…"
+    },
+    {
+      "start": 84.85,
+      "end": 86.6,
+      "text": "they transformed it."
+    },
+    {
+      "start": 86.6,
+      "end": 89.71,
+      "text": "Its height made it ideal for a new task:"
+    },
+    {
+      "start": 89.88,
+      "end": 92.0,
+      "text": "becoming a bell tower."
+    },
+    {
+      "start": 92.0,
+      "end": 96.0,
+      "text": "And, a few centuries later, the clock arrived too."
+    },
+    {
+      "start": 96.0,
+      "end": 103.6,
+      "text": "It's documented here from at least the sixteenth century, while the mechanism that survives today dates from the eighteenth."
+    },
+    {
+      "start": 103.6,
+      "end": 105.08,
+      "text": "A military tower."
+    },
+    {
+      "start": 105.08,
+      "end": 106.8,
+      "text": "Then a bell tower."
+    },
+    {
+      "start": 106.8,
+      "end": 108.48,
+      "text": "Then a clock."
+    },
+    {
+      "start": 108.48,
+      "end": 110.8,
+      "text": "I have to say, I approve."
+    },
+    {
+      "start": 110.86,
+      "end": 115.8,
+      "text": "A good building doesn't necessarily have to do the job it was built for forever."
+    },
+    {
+      "start": 115.8,
+      "end": 119.28,
+      "text": "It needs to go on serving the people around it."
+    },
+    {
+      "start": 119.28,
+      "end": 130.16,
+      "text": "Today, following major restoration work, the tower is open to visitors. You can climb to the bell chamber, with views over Vicopisano and Monte Pisano."
+    },
+    {
+      "start": 130.16,
+      "end": 133.76,
+      "text": "But perhaps what intrigues me most is something else."
+    },
+    {
+      "start": 133.76,
+      "end": 137.2,
+      "text": "A structure built to watch people passing by…"
+    },
+    {
+      "start": 137.28,
+      "end": 141.04,
+      "text": "is now used mainly to mark the passing of time."
+    },
+    {
+      "start": 141.04,
+      "end": 143.44,
+      "text": "Not a bad transformation."
+    },
+    {
+      "start": 143.44,
+      "end": 146.0,
+      "text": "Now let's continue downhill."
+    },
+    {
+      "start": 146.0,
+      "end": 151.12,
+      "text": "Our next stop will take us to the Pieve di Santa Maria, the parish church."
+    },
+    {
+      "start": 151.12,
+      "end": 157.48,
+      "text": "There, at least for a few minutes, we'll leave towers, walls and fortifications behind."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}

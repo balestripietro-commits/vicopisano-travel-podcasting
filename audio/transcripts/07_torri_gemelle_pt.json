@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "status": "aligned-local-asr-review-required",
+  "language": "pt",
+  "stop": 7,
+  "audio": {
+    "duration": 161.08,
+    "source": "audio/pt/07_torri_gemelle_pt.mp3"
+  },
+  "alignment": {
+    "engine": "Whisper.cpp small local DTW + approved-script matching",
+    "matchedCharacters": 0.9739,
+    "reviewRequired": true,
+    "external_audio_transfer": false,
+    "scriptNotInAudioOrUnmatched": []
+  },
+  "segments": [
+    {
+      "start": 0.08,
+      "end": 2.0,
+      "text": "Voltámos ao coração da vila."
+    },
+    {
+      "start": 2.0,
+      "end": 6.28,
+      "text": "As nossas duas últimas paragens ficam mesmo a poucos passos uma da outra."
+    },
+    {
+      "start": 6.28,
+      "end": 8.28,
+      "text": "Mas vamos por partes."
+    },
+    {
+      "start": 8.28,
+      "end": 15.48,
+      "text": "Olhem para a esquerda e procurem duas torres que, à primeira vista, nem são assim tão fáceis de reconhecer como um par."
+    },
+    {
+      "start": 15.48,
+      "end": 16.48,
+      "text": "Ali estão."
+    },
+    {
+      "start": 16.48,
+      "end": 19.68,
+      "text": "As Torri Gemelle, as Torres Gémeas."
+    },
+    {
+      "start": 19.68,
+      "end": 21.71,
+      "text": "O nome sugere que são idênticas."
+    },
+    {
+      "start": 21.71,
+      "end": 29.88,
+      "text": "Mas, se me permitem a opinião de um arquiteto, ao observar um edifício antigo convém usar a palavra idêntico com muita prudência."
+    },
+    {
+      "start": 29.92,
+      "end": 31.47,
+      "text": "Estas torres datam do século doze."
+    },
+    {
+      "start": 31.9,
+      "end": 40.9,
+      "text": "São, por isso, mais antigas do que a minha Rocca e, no início do século catorze, faziam parte da anterior fortificação pisana de Vicopisano."
+    },
+    {
+      "start": 40.9,
+      "end": 47.4,
+      "text": "Quando Florença conquistou a vila à República de Pisa, em mil quatrocentos e seis, aquela antiga fortaleza foi desmantelada."
+    },
+    {
+      "start": 47.4,
+      "end": 52.24,
+      "text": "Há algumas paragens mostrei-vos o sistema defensivo que projetei para a substituir."
+    },
+    {
+      "start": 52.24,
+      "end": 54.98,
+      "text": "As Torres Gémeas, porém, ficaram de pé."
+    },
+    {
+      "start": 55.03,
+      "end": 60.28,
+      "text": "E assim, ainda hoje, podemos ler dois momentos diferentes da história de Vicopisano:"
+    },
+    {
+      "start": 60.28,
+      "end": 62.32,
+      "text": "o que resta da fortificação pisana…"
+    },
+    {
+      "start": 62.32,
+      "end": 66.24,
+      "text": "e a fortaleza florentina construída depois da conquista."
+    },
+    {
+      "start": 66.24,
+      "end": 68.52,
+      "text": "Agora olhem para os materiais."
+    },
+    {
+      "start": 68.52,
+      "end": 75.04,
+      "text": "Na parte inferior das torres voltam a encontrar o verrucano, a pedra que vimos várias vezes durante o percurso."
+    },
+    {
+      "start": 75.04,
+      "end": 78.44,
+      "text": "Mais acima, as paredes continuam em tijolo."
+    },
+    {
+      "start": 78.44,
+      "end": 89.4,
+      "text": "Esta mudança diz-nos que ambas as torres foram modificadas e aumentadas em altura ao longo do tempo, provavelmente também para reparar os danos causados pelos numerosos cercos que a vila sofreu."
+    },
+    {
+      "start": 89.4,
+      "end": 93.88,
+      "text": "Mas as duas torres não atravessaram esses acontecimentos da mesma maneira."
+    },
+    {
+      "start": 93.88,
+      "end": 99.12,
+      "text": "Na torre ocidental, a parte mais antiga em pedra chega a cerca de dezanove metros."
+    },
+    {
+      "start": 99.12,
+      "end": 101.51,
+      "text": "Na torre oriental, chega apenas a oito."
+    },
+    {
+      "start": 102.08,
+      "end": 106.88,
+      "text": "É evidente que uma delas precisou de ser reconstruída muito mais do que a outra."
+    },
+    {
+      "start": 106.88,
+      "end": 108.07,
+      "text": "Gémeas, portanto."
+    },
+    {
+      "start": 108.07,
+      "end": 110.08,
+      "text": "Mas com cicatrizes diferentes."
+    },
+    {
+      "start": 110.12,
+      "end": 116.34,
+      "text": "A torre oriental também conserva os vestígios da Porta del Mercato, um dos antigos acessos ao castelo."
+    },
+    {
+      "start": 116.34,
+      "end": 122.08,
+      "text": "Se observarem com atenção, podem ainda distinguir uma pequena entrada bem acima do nível do chão."
+    },
+    {
+      "start": 122.08,
+      "end": 126.0,
+      "text": "Não é uma porta pensada para se alcançar comodamente a partir da rua."
+    },
+    {
+      "start": 126.0,
+      "end": 132.34,
+      "text": "Originalmente, entrava-se na torre através de estruturas de madeira que podiam ser retiradas em caso de perigo."
+    },
+    {
+      "start": 132.34,
+      "end": 138.52,
+      "text": "Mas há outro motivo pelo qual, vistas daqui, as duas torres não parecem imediatamente um par."
+    },
+    {
+      "start": 138.56,
+      "end": 140.92,
+      "text": "Olhem agora para o edifício à vossa frente."
+    },
+    {
+      "start": 140.92,
+      "end": 144.48,
+      "text": "É o Palazzo Comunale, a Câmara Municipal de Vicopisano."
+    },
+    {
+      "start": 144.48,
+      "end": 152.16,
+      "text": "Com o tempo, acabou por incorporar e esconder em parte a silhueta das Torres Gémeas, sobretudo a da torre ocidental."
+    },
+    {
+      "start": 152.16,
+      "end": 154.19,
+      "text": "E, já que o temos diante dos olhos…"
+    },
+    {
+      "start": 154.19,
+      "end": 157.76,
+      "text": "diria que chegou a altura de nos ocuparmos também dele."
+    },
+    {
+      "start": 157.76,
+      "end": 158.76,
+      "text": "Mais uns passos."
+    },
+    {
+      "start": 158.76,
+      "end": 160.8,
+      "text": "A nossa última paragem será mesmo aqui."
+    }
+  ],
+  "editorialScript": {
+    "version": "approved Italian route translated and double checked, November 2026",
+    "independentNativeReview": false
+  }
+}
