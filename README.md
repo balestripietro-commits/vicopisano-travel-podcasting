@@ -9,7 +9,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Il playbook comune e la checklist di apertura sono nella macro-repository privata `LocalDev`, sotto `Travel podcasting/github-sites/Playbook-Siti-Comunali/`. La cartella locale è sorella di questo clone e non appartiene alla repository Vicopisano.
 - `PLAYBOOK_SITI_COMUNALI.md` in questa repo contiene l’audit e il registro specifico di Vicopisano. Non copiarlo come template per un altro Comune.
 - Il repository locale resta il master del sito. Il copione italiano aggiornato è il DOCX in Drive Delivering/Vicopisano/Copy-Tappe. L’aggiornamento del 19 ottobre 2026 introduce otto tracce italiane e una Torre dell’Orologio; dal 29 ottobre 2026 i timing dei sottotitoli sono ricalcolati sull’audio con Whisper large-v3-turbo (parole abbinate all’89–97%), da verificare comunque all’ascolto. I cue Rhubarb delle otto voci sono stati rigenerati dai WAV consegnati il 21 ottobre 2026 con Rhubarb 1.14.0.
-- Ultima produzione verificata il 10 ottobre 2026 dalla GitHub Actions `Deploy production` run #16, commit `8aa0c7b`: E2E, deploy Netlify e smoke test completati con successo. [Apri la demo pubblica](https://transcendent-meerkat-166cbe.netlify.app/).
+- Produzione: [sito pubblico su GitHub Pages](https://balestripietro-commits.github.io/vicopisano-travel-podcasting/). Da novembre 2026 la consegna avviene solo tramite GitHub: Netlify non è più usato per pubblicare.
 
 ## Architettura attuale dell'interfaccia
 
@@ -125,7 +125,7 @@ Per provarlo da smartphone, avvia il server con `HOST=0.0.0.0 npm run dev` su un
 ## Primo accesso, lingua e aiuto
 
 - Il sito si apre sempre in italiano (`FORCED_INITIAL_LANGUAGE`, ignora lingua del browser, URL e lingua salvata). Al primo accesso compare per primo, prima della scelta lingua, se `emailCollectionEndpoint` è valorizzato, lo sportello email facoltativo: consenso obbligatorio, pulsante Salta, campo trappola anti-bot. L'invio è un POST `text/plain` (modalità `no-cors`) all'app web Google Apps Script `apps-script/raccolta-email.gs`, che aggiunge una riga al foglio `Iscrizioni` (data, email, consenso, lingua, pagina) evitando i duplicati. L'email non viene salvata nel browser: `localStorage` conserva solo che il passaggio è stato completato. Dal 23 ottobre 2026 lo sportello è spento (`EMAIL_GATE_ENABLED = false` in `app.js`, endpoint conservato in `EMAIL_GATE_ENDPOINT`): per riattivarlo basta impostare `true` e aggiornare la versione `?v=` di `app.js` e `style.css` in `index.html`. Verificare e aggiornare lo scopo e l'informativa privacy prima di usarlo con il pubblico. Negli accessi successivi il sito apre direttamente con la lingua scelta, modificabile dal selettore in alto.
-- `assets/qr-demo-travel-podcasting.png` contiene il QR per `https://transcendent-meerkat-166cbe.netlify.app/`; è incluso nella copia ricorsiva di `assets/` in `dist/`.
+- `assets/qr-demo-travel-podcasting.png` contiene il QR; è incluso nella copia ricorsiva di `assets/` in `dist/`. **Da verificare/rigenerare:** all'ultimo controllo puntava ancora al vecchio indirizzo Netlify, non a GitHub Pages.
 
 - La schermata di scelta lingua viene mostrata al primo accesso; negli accessi successivi resta attiva la lingua scelta in precedenza, modificabile dal selettore in alto.
 - Nella schermata iniziale è attivo solo l'italiano; se si seleziona un'altra lingua, il sito mostra un avviso localizzato e resta nella schermata di scelta.
@@ -164,7 +164,7 @@ npm run test:e2e:mobile
 npm run test:e2e:mobile-low
 npm run test:e2e:a11y
 npm run test:e2e:dist
-E2E_BASE_URL=https://transcendent-meerkat-166cbe.netlify.app npm run test:e2e:smoke
+E2E_BASE_URL=https://balestripietro-commits.github.io/vicopisano-travel-podcasting/ npm run test:e2e:smoke
 ```
 
 ### Test manuale VoiceOver
@@ -194,17 +194,17 @@ I test coprono:
 
 ### E2E e deploy su GitHub Actions
 
-La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni push e pull request verso `main`, oltre a supportare l'avvio manuale. Se un commit modifica esclusivamente file Markdown (`**/*.md`), i test non partono. Il runner usa Node.js 22, installa Chromium nel solo ambiente CI e mantiene un worker per stabilità. In caso di errore prova ad allegare report, screenshot e trace Playwright come artifact per 14 giorni; se GitHub rifiuta l'upload (per esempio per quota esaurita), questo non cambia l'esito dei test. Non esegue mai un deploy Netlify.
+La workflow `.github/workflows/e2e.yml` esegue automaticamente `npm run test:e2e:dist` a ogni pull request verso `main`, oltre a supportare l'avvio manuale. Se la modifica riguarda solo file Markdown (`**/*.md`), i test non partono. Il runner usa Node.js 22 e installa Chromium nel solo ambiente CI. Non pubblica nulla.
 
-La pubblicazione è intenzionalmente separata nella workflow `.github/workflows/deploy.yml`: si avvia manualmente dalla pagina Actions di GitHub, selezionando il branch `main` e confermando `Confirm deployment of main to the public Netlify site`. Prima di pubblicare, ricostruisce `dist/`, esegue gli E2E e, solo se sono verdi, pubblica su Netlify. Subito dopo apre il dominio pubblico su desktop, mobile standard e mobile basso `375x667` e verifica titolo, mappa, marker, mini-player, errori runtime e overflow orizzontale. I report diagnostici in caso di errore sono best-effort e non bloccano il job se GitHub non può archiviarli. Il job usa i repository secret `NETLIFY_AUTH_TOKEN` e `NETLIFY_SITE_ID`, che non sono salvati nei sorgenti.
+La pubblicazione è separata nella workflow `.github/workflows/deploy-pages.yml`: parte a ogni push su `main` (quindi a ogni merge di una pull request) o manualmente da Actions. Ricostruisce `dist/` con `npm run build` e lo pubblica su GitHub Pages. Non esegue gli E2E né uno smoke test sul sito pubblicato: i test girano sulla pull request prima del merge.
 
-La pipeline usa `netlify-cli` `27.4.0` come dipendenza di sviluppo esatta, registrata nel `package-lock.json`. Il deploy richiama il binario gia installato da `npm ci`, senza scaricare dinamicamente una versione della CLI durante lo step Netlify.
+Per questo il merge su `main` va fatto solo con il check `Playwright E2E` verde sulla pull request. Se un deploy fallisce, la versione precedente resta online finché una nuova esecuzione non termina correttamente.
 
-Il check pubblicato da GitHub si chiama `Playwright E2E`. Sul repository privato con GitHub Free il check non puo bloccare i merge, ma una regressione impedisce comunque la pubblicazione Netlify. La versione di produzione precedente resta online finche una nuova esecuzione non termina correttamente.
+Il check pubblicato da GitHub si chiama `Playwright E2E`.
 
 ### Controllo settimanale dei link esterni
 
-La workflow `.github/workflows/external-links.yml` controlla il dominio Netlify pubblico ogni lunedi alle 08:17 nel fuso `Europe/Madrid` e puo essere avviata manualmente dalla sezione Actions di GitHub. Non parte sui push, non esegue deploy e usa soltanto il test dedicato `tests/e2e/external-links.spec.mjs`, escluso dalla suite E2E ordinaria.
+La workflow `.github/workflows/external-links.yml` controlla il sito pubblicato su GitHub Pages ogni lunedi alle 08:17 nel fuso `Europe/Madrid` e puo essere avviata manualmente dalla sezione Actions di GitHub. Non parte sui push, non esegue deploy e usa soltanto il test dedicato `tests/e2e/external-links.spec.mjs`, escluso dalla suite E2E ordinaria.
 
 Il controllo verifica gli URL delle piattaforme izi.TRAVEL, Loquis e Spotify realmente configurati nel sito. I badge senza URL risultano `PENDING` e non sono sondati; URL configurati ma malformati fanno fallire il job. Le risposte HTTP `200-399` sono valide; `401`, `403` e `429` diventano avvisi per evitare falsi allarmi su servizi protetti o limitati; `404`, `410`, errori `5xx`, DNS, TLS e timeout fanno fallire il job.
 
@@ -216,20 +216,20 @@ npm run test:external-links
 
 Ogni esecuzione pubblica un riepilogo nella pagina della GitHub Action e conserva per 14 giorni un artifact `external-links-report-*` con report Markdown, JSON e diagnostica Playwright. In caso di errore il job prova una seconda volta le condizioni di rete transitorie prima di segnalare il guasto.
 
-## Deploy Netlify
+## Deploy GitHub Pages
 
-Il deploy di produzione usa la configurazione versionata in `netlify.toml`:
+Il deploy di produzione usa `.github/workflows/deploy-pages.yml`:
 
 - comando di build: `npm run build`;
 - cartella pubblicata: `dist/`;
 - runtime: Node.js 22;
-- branch di produzione atteso nel pannello Netlify: `main`.
+- branch di produzione: `main`, pubblicato come sito GitHub Pages.
 
 La build copia in `dist/` soltanto HTML, JavaScript, CSS, immagini, audio e cue della mascotte. Le foto delle tappe e il logo runtime sono WebP; i JPEG/PNG sorgente sono conservati nel master locale ma esclusi dal deploy. Test, documentazione, `node_modules` e cartelle di lavoro non vengono pubblicati.
 
-I build Git automatici del progetto Netlify devono restare nello stato `Stopped builds`: la produzione viene aggiornata esclusivamente dalla workflow GitHub manuale, dopo il superamento degli E2E. Riattivare i build automatici aggirerebbe questo controllo.
+Il sito è su GitHub Pages; Netlify non è più usato (il file `netlify.toml` e la dipendenza `netlify-cli` sono residui da rimuovere). Non riattivare build automatici su altri servizi: la produzione si aggiorna solo dal merge su `main`.
 
-Verifica locale dell'artefatto destinato a Netlify:
+Verifica locale dell'artefatto pubblicato:
 
 ```bash
 npm run build
@@ -402,12 +402,12 @@ Poi aprire `http://127.0.0.1:8000/design-system.html`.
 Non sono state aggiunte dipendenze o framework. Material 3 Expressive e Spectrum 2 sono usati come direzione progettuale, non come librerie installate.
 
 ## Pubblicazione
-Il sito è pubblicato anche su [GitHub Pages](https://balestripietro-commits.github.io/vicopisano-travel-podcasting/). La repository è [pubblica](https://github.com/balestripietro-commits/vicopisano-travel-podcasting); GitHub Actions esegue `npm run build` e pubblica `dist/` a ogni push su `main` tramite `.github/workflows/deploy-pages.yml`. Netlify resta configurato come hosting preesistente mentre si aggiornano i link e il QR.
+Il sito è pubblicato su [GitHub Pages](https://balestripietro-commits.github.io/vicopisano-travel-podcasting/). La repository è [pubblica](https://github.com/balestripietro-commits/vicopisano-travel-podcasting); GitHub Actions esegue `npm run build` e pubblica `dist/` a ogni push su `main` tramite `.github/workflows/deploy-pages.yml`. Netlify non è più usato.
 
 
 ## Verifica E2E
 
-La suite completa si esegue con `npm run test:e2e:dist` e gira sulle pull request o su richiesta manuale. Il push su `main` pubblica GitHub Pages e lancia uno smoke breve sul sito appena pubblicato, incluso il controllo dell’audio. In CI Playwright ritenta una volta e conserva le trace solo al primo retry; le diagnostiche scadono dopo 3 giorni.
+La suite completa si esegue con `npm run test:e2e:dist` e gira sulle pull request o su richiesta manuale. Il push su `main` pubblica GitHub Pages senza rilanciare i test: vanno quindi verdi sulla pull request prima del merge. In CI Playwright ritenta una volta e conserva le trace solo al primo retry; le diagnostiche scadono dopo 3 giorni.
 
 ## Audio multilingua
 
