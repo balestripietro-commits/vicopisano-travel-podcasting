@@ -50,8 +50,7 @@
 - Nella prima schermata solo l'italiano avvia il sito; le altre lingue mostrano un avviso nella lingua selezionata perché non sono ancora disponibili.
 - Anche il selettore lingua globale dell'intestazione mantiene bloccate le lingue non ancora disponibili e mostra lo stesso avviso localizzato in un dialogo bianco opaco, senza cambiare tappa, audio, URL o schermata. Dopo la chiusura il focus torna all'opzione del selettore che ha aperto l'avviso.
 - L'avviso delle lingue non disponibili traduce titolo e nome accessibile del pulsante di chiusura; il pulsante mostra solo una X centrata in un cerchio touch da 52 px con focus tastiera evidente.
-- I pulsanti di condivisione sono stati rimossi dalla home e dal full player. I tre badge izi.TRAVEL, Loquis e Spotify sono visibili ma senza link finché le destinazioni non sono pronte; al clic mostrano un messaggio di indisponibilità nella pagina. Un URL HTTPS configurato in futuro viene validato localmente prima dell'apertura, mentre il monitor periodico controlla le risposte dei siti esterni.
-- La sezione piattaforme esterne occupa tutta la larghezza disponibile, con i tre badge distribuiti nella stessa riga su desktop.
+- I pulsanti di condivisione sono stati rimossi dalla home e dal full player. Dal 12 novembre 2026 è stata rimossa anche la fascia «Presto anche su» (izi.TRAVEL, Loquis, Spotify), su desktop e mobile.
 - Su desktop i pulsanti flottanti di ricentratura e indicazioni vengono nascosti per lasciare la mappa pulita; restano disponibili su mobile.
 - I tre controlli geografici non compaiono sulla mappa desktop; il pulsante fullscreen è stato rimosso anche dalla mappa mobile, mentre l'esperienza estesa resta raggiungibile dal player.
 - Nella home mobile ricentratura e indicazioni sono raccolte in un unico gruppo verticale Material. In Mappa + player mobile sono invece nella barra del dock, dopo Cambia schermata; il `?` della guida occupa la parte destra della stessa barra accanto alla X, con lo stesso simbolo e stile dell'aiuto della home. Il gruppo flottante sulla mappa è nascosto e la distanza tra barra e titolo della tappa è maggiore.
@@ -113,11 +112,9 @@
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
 - `package.json` e `package-lock.json`: dipendenze versionate Playwright (e `netlify-cli`, residuo da rimuovere), comandi della suite E2E.
 - `playwright.config.mjs`: configurazione E2E desktop, mobile standard e mobile basso `375x667`; su CI usa un retry e salva la trace solo al primo retry.
-- `playwright.external-links.config.mjs`: configurazione Playwright isolata per il monitoraggio dei link sul sito pubblicato.
-- `tests/e2e/`: test automatici per tutorial, guide contestuali, player, mappa, responsive, localizzazione, reduced motion, viewport mobile bassa, smoke test e controllo remoto delle piattaforme.
+- `tests/e2e/`: test automatici per tutorial, guide contestuali, player, mappa, responsive, localizzazione, reduced motion, viewport mobile bassa e smoke test.
 - `.github/workflows/e2e.yml`: suite completa sul build `dist/` nelle pull request e su avvio manuale; non ripete tutta la suite sul push a `main`.
 - `.github/workflows/deploy-pages.yml`: workflow GitHub Actions che ricostruisce `dist/` e lo pubblica su GitHub Pages a ogni push su `main` (o a richiesta). `.github/workflows/e2e.yml` esegue gli E2E sulle pull request verso `main`.
-- `.github/workflows/external-links.yml`: controllo settimanale e manuale del sito pubblico per i link delle piattaforme, con riepilogo GitHub e trace diagnostiche conservate per 3 giorni.
 - `build-static.mjs`: build a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
 - `netlify.toml`: residuo della vecchia pubblicazione Netlify, non più usato; da rimuovere.
 - `logo_vicopisano.webp`: stemma lossless usato nell'intestazione e nell'intermezzo del player.

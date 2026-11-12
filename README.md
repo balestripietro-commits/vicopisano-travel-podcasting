@@ -20,7 +20,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
   - mappa dominante a tutta larghezza del contenuto con caption sovrapposta;
   - sezione tappe separata sotto la mappa, in card grid;
   - sezioni editoriali di supporto sotto la mappa;
-  - blocco finale a tutta larghezza per izi.TRAVEL, Loquis e Spotify: i badge restano visibili, ma non aprono collegamenti finché le destinazioni non sono pronte; i pulsanti Condividi non sono più presenti.
+  - nessuna fascia finale di piattaforme esterne e nessun pulsante Condividi: la home termina con l'elenco delle tappe.
 - La linea del percorso è decorativa e non intercetta i clic: passando sopra il tracciato non appare la manina, e trascinamento/clic raggiungono la mappa. La selezione delle tappe avviene dai marker o dalla lista.
 - Mini-player fisso in basso sempre visibile quando esiste una tappa attiva. Su desktop si estende quasi per tutta la larghezza della pagina, lasciando 24 px ai lati; su mobile mantiene il layout compatto.
 - I controlli zoom `+ / −` della mappa sono nascosti su mobile, sia nella home sia nel full player, dove si usa il pinch con le dita; su desktop restano presenti.
@@ -73,8 +73,7 @@ Prototipo minimo funzionante di sito web statico con mappa Leaflet.js + OpenStre
 - Il controllo mappa con icona posizione ricentra tutte le tappe nella mappa normale desktop e resta disponibile anche in Explore desktop. Su mobile chiede la geolocalizzazione reale: se il punto è dentro i limiti geografici della mappa, lo mostra anche quando era fuori dall'inquadratura corrente e conferma `Posizione trovata sulla mappa.`; se è fuori dall'area coperta dal percorso, mantiene la vista delle tappe e avvisa `Sei fuori dall'area del percorso. Ti mostro le tappe di Vicopisano.`. Il messaggio resta coerente anche ai tocchi successivi sul controllo.
 - L'interfaccia contiene traduzioni per sette lingue, ma i due selettori di ingresso e intestazione consentono per ora solo l'italiano. Scegliendo EN, DE, FR, ES, PT o RU compare lo stesso dialogo breve nella lingua richiesta; tappa, audio, URL e schermata restano invariati e alla chiusura il focus torna all'opzione scelta.
 - Il dialogo per le lingue non disponibili localizza titolo, messaggio e nome accessibile della chiusura. Il pulsante visibile è una X centrata in un cerchio da 52 px, con focus tastiera evidente.
-- I pulsanti di condivisione della home e del full player sono stati rimossi. I tre badge izi.TRAVEL, Loquis e Spotify non hanno per ora un URL: al clic mostrano un avviso nella pagina e non cambiano scheda, tappa o audio. La sezione li distribuisce in una riga unica su desktop.
-- Se in futuro si configura un URL HTTPS per un badge tramite `data-platform-url`, il clic lo apre in una nuova scheda; URL assenti o malformati e assenza di rete mostrano un messaggio senza navigare. Il browser non può verificare in modo affidabile la risposta HTTP di una destinazione esterna al clic: quel controllo resta affidato alla suite periodica dei link.
+- I pulsanti di condivisione della home e del full player sono stati rimossi. Dal 12 novembre 2026 è stata rimossa anche la fascia «Presto anche su» con i badge izi.TRAVEL, Loquis e Spotify (desktop e mobile): la home termina con l'elenco delle tappe.
 - Su desktop i pulsanti flottanti di ricentratura e indicazioni sono nascosti per ridurre il rumore visivo; su mobile restano disponibili.
 - I controlli geografici sono nascosti su desktop; il pulsante fullscreen non viene più mostrato sulla mappa mobile e l'estensione resta accessibile dal player.
 - Nella home mobile ricentratura e indicazioni sono raccolte in un unico gruppo verticale Material, con pulsanti da 48 px, distanza uniforme, contenitore condiviso e margini compatibili con le safe area. Nel full player Mappa + player si trovano invece nella barra inferiore accanto al cambio schermata.
@@ -201,20 +200,6 @@ La pubblicazione è separata nella workflow `.github/workflows/deploy-pages.yml`
 Per questo il merge su `main` va fatto solo con il check `Playwright E2E` verde sulla pull request. Se un deploy fallisce, la versione precedente resta online finché una nuova esecuzione non termina correttamente.
 
 Il check pubblicato da GitHub si chiama `Playwright E2E`.
-
-### Controllo settimanale dei link esterni
-
-La workflow `.github/workflows/external-links.yml` controlla il sito pubblicato su GitHub Pages ogni lunedi alle 08:17 nel fuso `Europe/Madrid` e puo essere avviata manualmente dalla sezione Actions di GitHub. Non parte sui push, non esegue deploy e usa soltanto il test dedicato `tests/e2e/external-links.spec.mjs`, escluso dalla suite E2E ordinaria.
-
-Il controllo verifica gli URL delle piattaforme izi.TRAVEL, Loquis e Spotify realmente configurati nel sito. I badge senza URL risultano `PENDING` e non sono sondati; URL configurati ma malformati fanno fallire il job. Le risposte HTTP `200-399` sono valide; `401`, `403` e `429` diventano avvisi per evitare falsi allarmi su servizi protetti o limitati; `404`, `410`, errori `5xx`, DNS, TLS e timeout fanno fallire il job.
-
-Esecuzione locale contro la produzione:
-
-```bash
-npm run test:external-links
-```
-
-Ogni esecuzione pubblica un riepilogo nella pagina della GitHub Action e conserva per 14 giorni un artifact `external-links-report-*` con report Markdown, JSON e diagnostica Playwright. In caso di errore il job prova una seconda volta le condizioni di rete transitorie prima di segnalare il guasto.
 
 ## Deploy GitHub Pages
 
