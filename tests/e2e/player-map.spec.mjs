@@ -548,7 +548,7 @@ test("mobile map captions remain complete and clear of mascot and dock at phone 
     await expect(caption).toBeVisible();
     await expect(caption).toContainText("Vicopisano");
     const layout = await page.evaluate(() => {
-      const cue = activeMapTranscript.segments.find((item) => item.text.startsWith("Quando arrivai qui"));
+      const cue = activeMapTranscript.segments.find((item) => item.text.startsWith("Questo colle era probabilmente"));
       const captionElement = document.querySelector("#map-live-caption");
       const originalText = captionElement.textContent;
       const pages = [];
@@ -746,8 +746,7 @@ test("mobile contextual guides spotlight one control and preserve player state",
 
   await page.locator("#player-map-button").click();
   await expect(page.locator("#player-overlay")).not.toHaveClass(/is-mobile-map-player/);
-  await expect(page.locator("#detail-title")).toHaveClass(/is-overflowing/);
-  await expect(page.locator("#detail-title-text")).toContainText("Santa Maria Addolorata");
+  await expect(page.locator("#detail-title-text")).toHaveText("Pieve di Santa Maria");
   expect(await page.locator("#detail-title-text").evaluate((element) => getComputedStyle(element).animationIterationCount)).toBe("1");
   await page.locator("#player-listen-help-button").click();
   await checkStep("1/3", null);
@@ -890,7 +889,7 @@ test("Italian master audio keeps the map subtitle synchronized and fades it afte
     audio.dispatchEvent(new Event("seeked"));
     audio.dispatchEvent(new Event("timeupdate"));
   });
-  await expect(caption).toContainText(/torre delle quattro porte/i);
+  await expect(caption).toContainText(/Medioevo/i);
   await expect(caption).toHaveCSS("white-space", "pre-line");
   await expect(caption).toHaveCSS("display", "block");
   await page.locator("#mini-player-toggle").click();
@@ -928,7 +927,7 @@ test("long captions remain complete and clear of the player across viewport size
     await page.setViewportSize({ width, height });
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(resolve)));
     const result = await page.evaluate((isExpanded) => {
-      const cue = activeMapTranscript.segments.find((item) => item.text.startsWith("Questo cambiamento ci racconta"));
+      const cue = activeMapTranscript.segments.find((item) => item.text.startsWith("Nel Medioevo sostenevano gli sporti"));
       const caption = document.querySelector("#map-live-caption");
       caption.hidden = false;
       caption.classList.add("is-visible");
@@ -1162,7 +1161,7 @@ test("switching from mobile map to listening immediately reveals the current tra
         frameBottom: frame.bottom,
       };
     });
-    expect(position.text).toContain("grandi cardini in pietra");
+    expect(position.text).toContain("Vicus Auserissola");
     expect(position.scrollTop).toBeGreaterThan(20);
     expect(position.activeTop).toBeGreaterThanOrEqual(position.frameTop - 2);
     expect(position.activeBottom).toBeLessThanOrEqual(position.frameBottom + 2);
@@ -1778,8 +1777,10 @@ test("real narration seeks in the mini-player and desktop Explore", async ({ pag
     await page.touchscreen.tap(miniBox.x + miniBox.width * 0.5, miniBox.y + miniBox.height / 2);
   }
   await expect.poll(() => audio.evaluate((element) => element.currentTime)).toBeGreaterThan(90);
+  // Il pulsante -10 deve riportare indietro rispetto al punto raggiunto con il clic sulla timeline.
+  const afterSeek = await audio.evaluate((element) => element.currentTime);
   await page.locator("#mini-player-prev").click();
-  await expect.poll(() => audio.evaluate((element) => element.currentTime)).toBeLessThan(110);
+  await expect.poll(() => audio.evaluate((element) => element.currentTime)).toBeLessThan(afterSeek - 5);
 
   if (testInfo.project.name === "desktop-chrome") {
     await openFullPlayer(page);
@@ -1795,7 +1796,7 @@ test("real narration seeks in the mini-player and desktop Explore", async ({ pag
     const fullBox = await fullTimeline.boundingBox();
     expect(fullBox).not.toBeNull();
     await page.mouse.click(fullBox.x + fullBox.width * 0.25, fullBox.y + fullBox.height / 2);
-    await expect.poll(() => audio.evaluate((element) => element.currentTime)).toBeLessThan(75);
+    await expect.poll(() => audio.evaluate((element) => element.currentTime / element.duration)).toBeLessThan(0.3);
     const before = await audio.evaluate((element) => element.currentTime);
     await page.locator("#player-next-button").click();
     await expect.poll(() => audio.evaluate((element) => element.currentTime)).toBeGreaterThan(before + 9);

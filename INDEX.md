@@ -11,7 +11,7 @@
 ## Root locale master del progetto
 
 - `/Users/pietrobalestri/LocalDev/Travel podcasting/github-sites/Vicopisano`
-- Produzione: [demo pubblica](https://transcendent-meerkat-166cbe.netlify.app/). Deploy verificato il 10 ottobre 2026 dalla GitHub Actions `Deploy production` run #16, commit `8aa0c7b`; E2E, deploy Netlify e smoke test completati con successo.
+- Produzione: [sito pubblico su GitHub Pages](https://balestripietro-commits.github.io/vicopisano-travel-podcasting/), pubblicato dalla workflow `deploy-pages.yml` a ogni push su `main`. Netlify non è più usato.
 ## Contenuto
 
 - Il sito si apre sempre in italiano (`FORCED_INITIAL_LANGUAGE` in `app.js`, da impostare a `null` quando le altre lingue sono approvate). Al primo accesso compare prima, se `emailCollectionEndpoint` in `app.js` è valorizzato, lo sportello email facoltativo (consenso obbligatorio, pulsante Salta). Dal 23/10/2026 è spento: si riattiva con `EMAIL_GATE_ENABLED = true` in `app.js`. Le email vanno in un Foglio Google tramite l'Apps Script `apps-script/raccolta-email.gs`; con endpoint vuoto lo sportello è disattivato. Test: `tests/e2e/access-flow.spec.mjs` e `tests/e2e/email-step.spec.mjs`. Il QR `assets/qr-demo-travel-podcasting.png` punta all’URL pubblico della demo.
@@ -50,8 +50,7 @@
 - Nella prima schermata solo l'italiano avvia il sito; le altre lingue mostrano un avviso nella lingua selezionata perché non sono ancora disponibili.
 - Anche il selettore lingua globale dell'intestazione mantiene bloccate le lingue non ancora disponibili e mostra lo stesso avviso localizzato in un dialogo bianco opaco, senza cambiare tappa, audio, URL o schermata. Dopo la chiusura il focus torna all'opzione del selettore che ha aperto l'avviso.
 - L'avviso delle lingue non disponibili traduce titolo e nome accessibile del pulsante di chiusura; il pulsante mostra solo una X centrata in un cerchio touch da 52 px con focus tastiera evidente.
-- I pulsanti di condivisione sono stati rimossi dalla home e dal full player. I tre badge izi.TRAVEL, Loquis e Spotify sono visibili ma senza link finché le destinazioni non sono pronte; al clic mostrano un messaggio di indisponibilità nella pagina. Un URL HTTPS configurato in futuro viene validato localmente prima dell'apertura, mentre il monitor periodico controlla le risposte dei siti esterni.
-- La sezione piattaforme esterne occupa tutta la larghezza disponibile, con i tre badge distribuiti nella stessa riga su desktop.
+- I pulsanti di condivisione sono stati rimossi dalla home e dal full player. Dal 12 novembre 2026 è stata rimossa anche la fascia «Presto anche su» (izi.TRAVEL, Loquis, Spotify), su desktop e mobile.
 - Su desktop i pulsanti flottanti di ricentratura e indicazioni vengono nascosti per lasciare la mappa pulita; restano disponibili su mobile.
 - I tre controlli geografici non compaiono sulla mappa desktop; il pulsante fullscreen è stato rimosso anche dalla mappa mobile, mentre l'esperienza estesa resta raggiungibile dal player.
 - Nella home mobile ricentratura e indicazioni sono raccolte in un unico gruppo verticale Material. In Mappa + player mobile sono invece nella barra del dock, dopo Cambia schermata; il `?` della guida occupa la parte destra della stessa barra accanto alla X, con lo stesso simbolo e stile dell'aiuto della home. Il gruppo flottante sulla mappa è nascosto e la distanza tra barra e titolo della tappa è maggiore.
@@ -111,15 +110,13 @@
 - `app.js`: sorgente unica dei dati delle 8 tappe e logica interattiva per mappa, lingue, mini-player, overlay audio mobile, guida iniziale e due guide contestuali del full player mobile, e stati motion della mascotte.
 - `dev-server.mjs`: server statico locale con supporto HTTP Range per gli MP3; serve `npm run dev` e i test E2E, senza entrare nel sito pubblicato.
 - `README.md`: istruzioni operative minime per esecuzione e manutenzione.
-- `package.json` e `package-lock.json`: dipendenze versionate Playwright e Netlify CLI, comandi della suite E2E e deploy riproducibile.
+- `package.json` e `package-lock.json`: dipendenze versionate Playwright (e `netlify-cli`, residuo da rimuovere), comandi della suite E2E.
 - `playwright.config.mjs`: configurazione E2E desktop, mobile standard e mobile basso `375x667`; su CI usa un retry e salva la trace solo al primo retry.
-- `playwright.external-links.config.mjs`: configurazione Playwright isolata per il monitoraggio dei link sul dominio Netlify pubblico.
-- `tests/e2e/`: test automatici per tutorial, guide contestuali, player, mappa, responsive, localizzazione, reduced motion, viewport mobile bassa, smoke test e controllo remoto delle piattaforme.
+- `tests/e2e/`: test automatici per tutorial, guide contestuali, player, mappa, responsive, localizzazione, reduced motion, viewport mobile bassa e smoke test.
 - `.github/workflows/e2e.yml`: suite completa sul build `dist/` nelle pull request e su avvio manuale; non ripete tutta la suite sul push a `main`.
-- `.github/workflows/deploy.yml`: workflow GitHub Actions manuale e confermato che ricostruisce, esegue gli E2E, pubblica su Netlify e verifica il dominio pubblico solo quando viene richiesta una pubblicazione di produzione.
-- `.github/workflows/external-links.yml`: controllo settimanale e manuale del sito pubblico per i link delle piattaforme, con riepilogo GitHub e trace diagnostiche conservate per 3 giorni.
-- `build-static.mjs`: build Netlify a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
-- `netlify.toml`: configurazione versionata del build `npm run build`, publish directory `dist/` e Node.js 22.
+- `.github/workflows/deploy-pages.yml`: workflow GitHub Actions che ricostruisce `dist/` e lo pubblica su GitHub Pages a ogni push su `main` (o a richiesta). `.github/workflows/e2e.yml` esegue gli E2E sulle pull request verso `main`.
+- `build-static.mjs`: build a whitelist che prepara in `dist/` soltanto i file necessari al sito pubblico.
+- `netlify.toml`: residuo della vecchia pubblicazione Netlify, non più usato; da rimuovere.
 - `logo_vicopisano.webp`: stemma lossless usato nell'intestazione e nell'intermezzo del player.
 - Le foto runtime disponibili sono WebP; non è stata consegnata una foto dedicata per Torre dell’Orologio e Pieve di Santa Maria, che mostrano il placeholder. I JPEG originali restano nel master e non vengono inclusi nel deploy.
 - `mascotte_vicopisano.webp`: immagine mascotte ottimizzata per il runtime.
@@ -147,7 +144,7 @@
 - `audio/REVISIONE_TAPPA1_2026-10-09.md`: provenienza, confronto copione/trascrizioni, impostazioni di export e verifiche della revisione della Tappa 1.
 - `outputs/`: cartella riservata a deliverable utente.
 - `work/`: cartella di lavoro temporanea.
-- `dist/`: output locale temporaneo del build Netlify, escluso da Git.
+- `dist/`: output locale temporaneo del build, escluso da Git.
 
 ## Design system Phase 1, Phase 2 e Phase 3
 
@@ -171,4 +168,4 @@
 - Repository GitHub pubblica: https://github.com/balestripietro-commits/vicopisano-travel-podcasting.
 - Sito: https://balestripietro-commits.github.io/vicopisano-travel-podcasting/.
 - GitHub Actions compila `npm run build` e pubblica `dist/` a ogni push su `main`; workflow in `.github/workflows/deploy-pages.yml`.
-- Il deploy GitHub Pages è attivo dal 21 ottobre 2026. Netlify resta configurato come hosting preesistente finché link e QR non vengono aggiornati.
+- Il deploy GitHub Pages è attivo dal 21 ottobre 2026 ed è l'unico canale di pubblicazione. Il QR in `assets/qr-demo-travel-podcasting.png` va verificato: puntava al vecchio indirizzo Netlify.
