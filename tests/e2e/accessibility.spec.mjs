@@ -379,21 +379,23 @@ test.describe("accessibility", () => {
   test("long listening titles remain readable with reduced motion", async ({ page }, testInfo) => {
     test.setTimeout(120_000);
     test.skip(testInfo.project.name !== "desktop-chrome", "Responsive reduced-motion audit runs once.");
-    for (const width of [320, 375]) {
+    // Dopo la revisione dei titoli, solo «Torre e Camminamento del Soccorso» è abbastanza lungo
+    // da attivare lo scorrimento, e solo alla larghezza di 320 px.
+    for (const width of [320]) {
       await page.setViewportSize({ width, height: 667 });
       await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.goto("/?tappa=6&lang=it", { waitUntil: "domcontentloaded" });
+      await page.goto("/?tappa=2&lang=it", { waitUntil: "domcontentloaded" });
       await ensureOnboardingVisible(page);
       await page.locator("#onboarding-language-chips .onboarding-language-option").filter({ hasText: /^IT\s/ }).click();
       await page.locator("#guide-skip-button").click();
-      await page.locator(".stop-button").nth(5).click();
+      await page.locator(".stop-button").nth(1).click();
       await page.locator("#mini-player-open").click();
       await page.locator("#player-map-button").click();
 
       const title = page.locator("#detail-title");
       await expect(title).toHaveClass(/is-overflowing/);
       await expect(title).toHaveAttribute("tabindex", "0");
-      await expect(page.locator("#detail-title-text")).toHaveText("Parrocchia di Santa Maria Addolorata e San Giovanni Apostolo");
+      await expect(page.locator("#detail-title-text")).toHaveText("Torre e Camminamento del Soccorso");
       const before = await title.evaluate((element) => ({
         clientWidth: element.clientWidth,
         scrollWidth: element.scrollWidth,
