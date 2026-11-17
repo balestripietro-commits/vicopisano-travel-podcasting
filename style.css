@@ -253,11 +253,10 @@ button:active,
 }
 
 .brand-divider {
-  width: 2px;
-  height: 44px;
-  margin: 0 6px;
-  border-radius: 2px;
-  background: rgba(36, 92, 82, 0.18);
+  width: 1px;
+  height: 54px;
+  margin: 0 14px;
+  background: linear-gradient(180deg, transparent, rgba(36, 92, 82, 0.35) 18%, rgba(36, 92, 82, 0.35) 82%, transparent);
   flex: 0 0 auto;
 }
 
@@ -9536,7 +9535,7 @@ body {
 }
 
 @media (max-width: 640px) {
-  .brand-divider { height: 34px; margin: 0 2px; }
+  .brand-divider { height: 40px; margin: 0 8px; }
   .brand-tp { gap: 6px; }
   .brand-tp .brand-name { font-size: 0.8rem; white-space: normal; max-width: 5.4em; }
   .brand-segno { height: 32px; }
