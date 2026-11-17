@@ -5165,13 +5165,17 @@ function startTransitionAudio(nextStop, kind = "between") {
   }
 }
 
-function createMarkerIcon(stopNumber) {
+const STOP_SHAPE_PATHS = {"torre": "M50 390V80Q50 30 100 30Q150 30 150 80V105Q150 130 175 130H225Q250 130 250 105V80Q250 30 300 30Q350 30 350 80V390Q350 400 340 400H60Q50 400 50 390Z", "arco": "M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z", "tassello": "M200 20A180 180 0 0 0 20 200A180 180 0 0 0 200 380H345Q380 380 380 345V200A180 180 0 0 0 200 20Z", "foglia": "M200 20H380V200A180 180 0 0 1 200 380H20V200A180 180 0 0 1 200 20Z", "lente": "M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z"};
+
+function createMarkerIcon(stopNumber, stopTitle) {
+  const shape = getStopShape(stopTitle);
+  const path = STOP_SHAPE_PATHS[shape] || STOP_SHAPE_PATHS.lente;
   return L.divIcon({
     className: "",
-    html: `<div class="map-marker tp-map-marker" aria-hidden="true"><span class="map-marker-number">${stopNumber}</span></div>`,
+    html: `<div class="map-marker tp-map-marker" data-shape="${shape}" aria-hidden="true"><svg viewBox="-20 -20 440 440" focusable="false"><path d="${path}"/></svg><span class="map-marker-number">${stopNumber}</span></div>`,
     iconSize: [40, 40],
     iconAnchor: [20, 20],
-    popupAnchor: [0, -18],
+    popupAnchor: [0, -20],
   });
 }
 
@@ -7655,6 +7659,7 @@ function renderStopsList() {
     button.setAttribute("aria-current", "false");
 
     button.innerHTML = `
+      <img class="stop-thumb" data-shape="${getStopShape(tappa.titolo)}" src="${STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK}" alt="" loading="lazy" decoding="async" />
       <span class="stop-index">${tappa.numero}</span>
       <span>
         <strong class="stop-title">${getStopTitle(tappa)}</strong>
@@ -7720,7 +7725,7 @@ function renderMap() {
 
   tappe.forEach((tappa) => {
     const marker = L.marker([tappa.latitudine, tappa.longitudine], {
-      icon: createMarkerIcon(tappa.numero),
+      icon: createMarkerIcon(tappa.numero, tappa.titolo),
       title: `${tappa.numero}. ${getStopTitle(tappa)}`,
     })
       .addTo(map);
