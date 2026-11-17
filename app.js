@@ -6167,15 +6167,15 @@ function renderGuideStep() {
   const isLastGuideStep = activeGuideStepIndex === steps.length - 1;
   const prevGuideLabel = strings.guideBack || "Indietro";
   const nextGuideLabel = isLastGuideStep ? strings.guideDone : strings.guideNext;
-  guideSkipButton.textContent = "×";
+  guideSkipButton.innerHTML = '<span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>';
   guideSkipButton.setAttribute("aria-label", strings.guideSkip);
   guideSkipButton.title = strings.guideSkip;
-  guidePrevButton.textContent = "←";
+  guidePrevButton.innerHTML = '<span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_back</span>';
   guidePrevButton.disabled = isFirstGuideStep;
   guidePrevButton.classList.toggle("is-disabled", isFirstGuideStep);
   guidePrevButton.setAttribute("aria-label", prevGuideLabel);
   guidePrevButton.title = prevGuideLabel;
-  guideNextButton.textContent = isLastGuideStep ? "✓" : "→";
+  guideNextButton.innerHTML = isLastGuideStep ? '<svg class="guide-check" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><path d="M44 104 L86 146 L158 60" fill="none" stroke="currentColor" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>';
   guideNextButton.setAttribute("aria-label", nextGuideLabel);
   guideNextButton.title = nextGuideLabel;
   guideLayer.classList.remove("is-hidden");

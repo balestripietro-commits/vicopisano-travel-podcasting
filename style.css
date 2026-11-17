@@ -10077,9 +10077,9 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
 .brand-icon[data-icon="article"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M44%2062%20H156%20M44%20100%20H156%20M44%20138%20H100'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Ccircle%20cx='142'%20cy='138'%20r='13'%20fill='%23000'/%3E%3C/svg%3E"); }
 .brand-icon[data-icon="swap_horiz"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Ccircle%20cx='72'%20cy='92'%20r='34'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Crect%20x='96'%20y='100'%20width='70'%20height='62'%20rx='16'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Ccircle%20cx='150'%20cy='50'%20r='12'%20fill='%23000'/%3E%3C/svg%3E"); }
 .brand-icon[data-icon="photo"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Ccircle%20cx='72'%20cy='92'%20r='34'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Crect%20x='96'%20y='100'%20width='70'%20height='62'%20rx='16'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Ccircle%20cx='150'%20cy='50'%20r='12'%20fill='%23000'/%3E%3C/svg%3E"); }
-.brand-icon[data-icon="close"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M54%2054%20L146%20146%20M146%2054%20L54%20146'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: none; }
-.brand-icon[data-icon="arrow_back"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: none; }
-.brand-icon[data-icon="arrow_forward"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cg%20transform='matrix%28-1%200%200%201%20200%200%29'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"); --ic-d: none; }
+.brand-icon[data-icon="close"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M54%2054%20L146%20146%20M146%2054%20L54%20146'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E"); }
+.brand-icon[data-icon="arrow_back"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E"); }
+.brand-icon[data-icon="arrow_forward"] { --ic-m: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cg%20transform='matrix%28-1%200%200%201%20200%200%29'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='15'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"); --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E"); }
 
 /* Solo audio */
 .solo-moon svg { width: 26px; height: 26px; display: block; }
@@ -10137,3 +10137,20 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
   .solo-audio * { transition: none; }
 }
 .easy-read-button { width: auto; min-width: 44px; padding: 0 10px; }
+
+/* tutorial: pulsanti con icone del brand */
+.guide-button .material-symbols-rounded{font-size:1.6rem}
+.guide-button .guide-check{width:1.5rem;height:1.5rem;display:block}
+
+/* Comandi del player: tasto centrale davvero al centro (la velocità sta a destra, a sinistra uno spazio uguale) */
+.player-controls { display: grid !important; grid-template-columns: 40px repeat(2, minmax(0, 1fr)) 76px repeat(2, minmax(0, 1fr)) 40px !important; align-items: center; justify-items: center; column-gap: 0; }
+.player-controls > .player-transport-group { display: contents !important; }
+#player-previous-track { grid-column: 2 !important; grid-row: 1 !important; }
+#player-prev-button { grid-column: 3 !important; grid-row: 1 !important; }
+#player-play-button { grid-column: 4 !important; grid-row: 1 !important; }
+#player-next-button { grid-column: 5 !important; grid-row: 1 !important; }
+#player-next-track { grid-column: 6 !important; grid-row: 1 !important; }
+.player-controls > #player-speed-button { grid-column: 7 !important; grid-row: 1 !important; width: 40px; min-width: 0; padding: 0; }
+.TPMiniPlayer .mini-player-controls { display: grid !important; grid-template-columns: 40px minmax(0, 1fr) 40px; align-items: center; column-gap: 4px; width: 100%; }
+.TPMiniPlayer .mini-player-controls > .mini-player-transport-group { grid-column: 2; display: flex; justify-content: space-between; gap: 0; width: 100%; min-width: 0; }
+.TPMiniPlayer .mini-player-controls > #mini-player-speed-button { grid-column: 3; width: 40px; min-width: 0; padding: 0; justify-self: center; }

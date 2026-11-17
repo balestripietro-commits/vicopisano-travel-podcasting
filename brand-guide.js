@@ -187,14 +187,6 @@
     if (soloFocusBefore && soloFocusBefore.focus) soloFocusBefore.focus();
   }
   function addSoloButtons() {
-    var host = document.querySelector(".player-topbar-leading");
-    if (host && !$("solo-audio-open")) {
-      var b = document.createElement("button");
-      b.type = "button"; b.id = "solo-audio-open"; b.className = "player-topbar-button";
-      b.innerHTML = '<span class="solo-moon" aria-hidden="true">' + SVG.moon + "</span>";
-      b.addEventListener("click", soloOpen);
-      host.appendChild(b);
-    }
     var lbl = SL().label, ob = $("solo-audio-open");
     if (ob) { ob.setAttribute("aria-label", lbl); ob.title = lbl; }
   }
