@@ -259,7 +259,7 @@ button:active,
 
 .brand-anim svg {
   display: block;
-  height: 58px;
+  height: 46px;
   width: auto;
   max-width: 100%;
 }
@@ -9529,5 +9529,5 @@ body {
 }
 
 @media (max-width: 640px) {
-  .brand-anim svg { height: 44px; }
+  .brand-anim svg { height: 38px; }
 }
