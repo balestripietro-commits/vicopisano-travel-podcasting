@@ -7663,7 +7663,7 @@ function renderStopsList() {
     button.setAttribute("aria-current", "false");
 
     button.innerHTML = `
-      <img class="stop-thumb" data-shape="${getStopShape(tappa.titolo)}" src="${STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK}" alt="" loading="lazy" decoding="async" />
+      <img class="stop-thumb" data-shape="${getStopShape(tappa.titolo)}" src="${STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK}" alt="" decoding="async" />
       <span class="stop-index">${tappa.numero}</span>
       <span>
         <strong class="stop-title">${getStopTitle(tappa)}</strong>
