@@ -9516,12 +9516,6 @@ body {
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 }
-.stop-preview-image[data-shape="cupola"],
-.mini-player-artwork[data-shape="cupola"] {
-  border-radius: 0;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M30 400V380A170 230 0 0 1 370 380V400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M30 400V380A170 230 0 0 1 370 380V400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
-}
 .stop-preview-image[data-shape="tassello"],
 .mini-player-artwork[data-shape="tassello"] {
   border-radius: 0;

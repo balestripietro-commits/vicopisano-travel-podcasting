@@ -323,7 +323,6 @@ const stopPreviewImage = document.getElementById("stop-preview-image");
 const STOP_SHAPE_RULES = [
   ["torre", /\btorri?\b/i],
   ["arco", /\b(pieve|chiesa|parrocchia|porta|porte|ingresso)\b/i],
-  ["cupola", /\b(rocca|castello|cupola)\b/i],
   ["tassello", /\b(palazzo|museo|villa|teatro)\b/i],
   ["foglia", /\b(parco|giardino|piazza|bosco|boschetto)\b/i]
 ];
