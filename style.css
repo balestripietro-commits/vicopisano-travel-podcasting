@@ -230,10 +230,9 @@ button:active,
 }
 
 .hero-logo {
-  width: 54px;
+  width: 52px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(36, 92, 82, 0.12));
 }
 
 .header-actions {
@@ -9446,4 +9445,18 @@ body.guide-open.guide-map-intro-focus .route-experience > .map-stage:has(> .map-
 
 #onboarding-language-chips[hidden] {
   display: none;
+}
+
+/* Ritocchi 17/11/2026: identità grafica (forme del brand, sfondo crema piatto) */
+body {
+  background: #fff8ef;
+}
+
+.stop-preview > .stop-preview-image,
+.route-experience > .stop-preview .stop-preview-image {
+  border-radius: 0;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 }
