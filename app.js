@@ -321,7 +321,7 @@ const stopPreviewNumber = document.getElementById("stop-preview-number");
 const stopPreviewTitle = document.getElementById("stop-preview-title");
 const stopPreviewImage = document.getElementById("stop-preview-image");
 const STOP_SHAPE_RULES = [
-  ["torre", /\btorri?\b/i],
+  ["torre", /\b(torre|torri)\b/i],
   ["arco", /\b(pieve|chiesa|parrocchia|porta|porte|ingresso)\b/i],
   ["tassello", /\b(palazzo|museo|villa|teatro)\b/i],
   ["foglia", /\b(parco|giardino|piazza|bosco|boschetto)\b/i]
@@ -4060,6 +4060,7 @@ function updateTransitionArtwork() {
   updateMiniPlayerTitleOverflow();
   detailArtworkImage.src = TRANSITION_ARTWORK_PATH;
   detailArtworkImage.alt = "Stemma di Vicopisano";
+  delete detailArtworkImage.dataset.shape;
   detailMascotImage.src = MASCOT_FRAME_PATHS[currentMascotFrame] || MASCOT_REST_FRAME;
   detailMascotImage.alt = "Mascotte animata di Brunelleschi";
   detailNumber.textContent = "";
@@ -7010,6 +7011,7 @@ function updateMiniPlayer(tappa, selectedOption) {
   miniPlayerArtwork.dataset.shape = getStopShape(tappa.titolo);
   detailArtworkImage.src = artworkSrc;
   detailArtworkImage.alt = `Immagine tappa ${tappa.numero}`;
+  detailArtworkImage.dataset.shape = getStopShape(tappa.titolo);
 
   if (detailMascotImage) {
     detailMascotImage.src = MASCOT_FRAME_PATHS[currentMascotFrame] || MASCOT_REST_FRAME;
