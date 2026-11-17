@@ -9476,16 +9476,51 @@ body.guide-open.guide-map-intro-focus .route-experience > .map-stage:has(> .map-
   display: none;
 }
 
-/* Ritocchi 17/11/2026: identità grafica (forme del brand, sfondo crema piatto) */
+/* Ritocchi 17/11/2026: identità grafica */
 body {
   background: #fff8ef;
 }
 
 .stop-preview > .stop-preview-image,
 .route-experience > .stop-preview .stop-preview-image {
-  border-radius: 0;
   aspect-ratio: 1 / 1;
   height: auto;
+}
+
+/* Forma della foto secondo il nome della tappa (regola nel Playbook di produzione dei siti) */
+.stop-preview-image[data-shape="torre"],
+.mini-player-artwork[data-shape="torre"] {
+  border-radius: 0;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M50 390V80Q50 30 100 30Q150 30 150 80V105Q150 130 175 130H225Q250 130 250 105V80Q250 30 300 30Q350 30 350 80V390Q350 400 340 400H60Q50 400 50 390Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M50 390V80Q50 30 100 30Q150 30 150 80V105Q150 130 175 130H225Q250 130 250 105V80Q250 30 300 30Q350 30 350 80V390Q350 400 340 400H60Q50 400 50 390Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview-image[data-shape="arco"],
+.mini-player-artwork[data-shape="arco"] {
+  border-radius: 0;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview-image[data-shape="cupola"],
+.mini-player-artwork[data-shape="cupola"] {
+  border-radius: 0;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M30 400V380A170 230 0 0 1 370 380V400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M30 400V380A170 230 0 0 1 370 380V400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview-image[data-shape="tassello"],
+.mini-player-artwork[data-shape="tassello"] {
+  border-radius: 0;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M200 20A180 180 0 0 0 20 200A180 180 0 0 0 200 380H345Q380 380 380 345V200A180 180 0 0 0 200 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M200 20A180 180 0 0 0 20 200A180 180 0 0 0 200 380H345Q380 380 380 345V200A180 180 0 0 0 200 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview-image[data-shape="foglia"],
+.mini-player-artwork[data-shape="foglia"] {
+  border-radius: 0;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M200 20H380V200A180 180 0 0 1 200 380H20V200A180 180 0 0 1 200 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M200 20H380V200A180 180 0 0 1 200 380H20V200A180 180 0 0 1 200 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview-image[data-shape="lente"],
+.mini-player-artwork[data-shape="lente"] {
+  border-radius: 0;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 }

@@ -320,6 +320,20 @@ const stopPreview = document.getElementById("stop-preview");
 const stopPreviewNumber = document.getElementById("stop-preview-number");
 const stopPreviewTitle = document.getElementById("stop-preview-title");
 const stopPreviewImage = document.getElementById("stop-preview-image");
+const STOP_SHAPE_RULES = [
+  ["torre", /\btorri?\b/i],
+  ["arco", /\b(pieve|chiesa|parrocchia|porta|porte|ingresso)\b/i],
+  ["cupola", /\b(rocca|castello|cupola)\b/i],
+  ["tassello", /\b(palazzo|museo|villa|teatro)\b/i],
+  ["foglia", /\b(parco|giardino|piazza|bosco|boschetto)\b/i]
+];
+
+function getStopShape(title) {
+  const text = String(title || "");
+  const rule = STOP_SHAPE_RULES.find(([, pattern]) => pattern.test(text));
+  return rule ? rule[0] : "lente";
+}
+
 const globalLanguageChips = document.getElementById("global-language-chips");
 const globalLanguageSelector = document.querySelector(".global-language-selector");
 const globalLanguageCurrent = document.getElementById("global-language-current");
@@ -3128,6 +3142,7 @@ function updateStopPreview(tappa, { animate = false } = {}) {
   stopPreviewTitle.textContent = title;
   stopPreviewImage.src = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
   stopPreviewImage.alt = `Immagine ${title}`;
+  stopPreviewImage.dataset.shape = getStopShape(tappa.titolo);
 
   if (animate && !reducedMotionQuery.matches) {
     replayAnimationClass(stopPreview, "is-entering", getRouteSelectionDuration());
@@ -4039,6 +4054,7 @@ function updateTransitionArtwork() {
 
   miniPlayerArtwork.src = TRANSITION_ARTWORK_PATH;
   miniPlayerArtwork.alt = "Logo del Comune di Vicopisano";
+  delete miniPlayerArtwork.dataset.shape;
   miniPlayerTitleTrack.textContent = getInterludeTitle();
   miniPlayerTitle.title = miniPlayerTitleTrack.textContent;
   miniPlayerTitle.setAttribute("aria-label", miniPlayerTitleTrack.textContent);
@@ -6992,6 +7008,7 @@ function updateMiniPlayer(tappa, selectedOption) {
   const artworkSrc = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
   miniPlayerArtwork.src = artworkSrc;
   miniPlayerArtwork.alt = `Artwork tappa ${tappa.numero}`;
+  miniPlayerArtwork.dataset.shape = getStopShape(tappa.titolo);
   detailArtworkImage.src = artworkSrc;
   detailArtworkImage.alt = `Immagine tappa ${tappa.numero}`;
 
