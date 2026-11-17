@@ -9,7 +9,6 @@ const rootFiles = [
   "brand-guide.js",
   "languages-extra.js",
   "multilingual-extra.js",
-  "sw.js",
   "multilingual-data.js",
   "style.css",
   "design-system.css",

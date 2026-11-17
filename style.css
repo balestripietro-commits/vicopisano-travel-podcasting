@@ -9984,49 +9984,15 @@ body {
   min-width: 46px;
   height: 36px;
   padding: 0 12px;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
-  border-radius: 999px;
+  border: 0;
   background: transparent;
   font-weight: 700;
 }
-
-/* Guida in cammino */
-.walk-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin: 0 0 14px;
-  padding: 14px 16px;
-  border-radius: 20px;
-  background: var(--tp-color-primary-container);
-  color: var(--tp-color-on-primary-container);
-}
-.walk-card > div:first-child { flex: 1 1 200px; }
-.walk-card strong { display: block; font-size: 1.05rem; }
-.walk-card p { margin: 4px 0 0; font-size: 0.92rem; }
-.walk-toggle {
-  min-height: 44px;
-  padding: 0 20px;
-  border-radius: 999px;
-  border: 0;
-  background: var(--tp-color-primary);
-  color: #fff;
-  font: 700 0.95rem var(--tp-font-ui);
-  cursor: pointer;
-}
-.walk-toggle.is-off { background: transparent; color: inherit; border: 1.5px solid currentColor; min-height: 36px; padding: 0 14px; }
-.walk-dir { display: flex; align-items: center; gap: 12px; flex: 1 1 200px; color: var(--tp-color-primary); }
-.walk-dir svg { flex: 0 0 auto; width: 52px; height: 52px; }
-.walk-dist { display: block; font: 700 1.5rem var(--tp-font-display, inherit); }
-.walk-note, .walk-denied { flex-basis: 100%; font-size: 0.8rem; opacity: 0.85; }
-.walk-denied { color: var(--tp-color-error); opacity: 1; }
 
 /* Lettura facile */
 .easy-read-button { width: 44px; height: 44px; padding: 0; font: 800 0.95rem var(--tp-font-ui); color: var(--tp-color-primary); }
 .easy-read-button[aria-pressed="true"] { background: var(--tp-color-primary); color: #fff; }
 html.easy-read { font-size: 118%; }
-html.easy-read body { --tp-color-on-surface: #0b2a25; color: #0b2a25; }
 html.easy-read .player-mobile-live-transcript, html.easy-read .detail-copy, html.easy-read .stop-title { font-size: 1.15em; line-height: 1.55; }
 html.easy-read button, html.easy-read .stop-button { min-height: 48px; }
 html.easy-read :focus-visible { outline: 4px solid var(--tp-color-tertiary); outline-offset: 3px; }
@@ -10058,3 +10024,26 @@ html[dir="rtl"] .mini-player-timeline,
 html[dir="rtl"] .mini-player-center,
 html[dir="rtl"] .play-ring { direction: ltr; }
 html[dir="rtl"] .stop-collection-row { direction: rtl; }
+
+/* Titolo del player compatto nel carattere del brand */
+.mini-player-text strong#mini-player-title { font-family: Petrona, Georgia, serif; font-weight: 700; font-size: 1.05rem; letter-spacing: 0; }
+.mini-player-time, .player-time, .mini-player-speed-label, .player-speed-label { font-family: var(--tp-font-ui); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* Solo su computer: niente chilometri nella scheda delle tappe */
+@media (min-width: 900px) { .stop-collection .chip-km { display: none; } }
+
+/* Il tasto play è sempre un cerchio, uguale nel player della home e in quello a schermo intero */
+#player-play-button,
+.TPPlayerSheet #player-play-button,
+.player-overlay #player-play-button {
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  min-height: 72px;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border-radius: 50%;
+  flex: 0 0 72px;
+}
+#mini-player-toggle { width: 56px; height: 56px; min-width: 56px; aspect-ratio: 1 / 1; border-radius: 50%; padding: 0; }
+.player-transport-group, .mini-player-transport-group { align-items: center; gap: 12px; }

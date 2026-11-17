@@ -436,7 +436,8 @@ const heroMascot = document.getElementById("hero-mascot");
 const appShell = document.querySelector(".app-shell");
 const playerSheet = document.querySelector(".player-sheet");
 
-const PLAYBACK_RATES = [1, 1.25, 1.5];
+const PLAYBACK_RATES = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+const DEFAULT_PLAYBACK_RATE = 1;
 const TRANSITION_AUDIO_PATH = "audio/it/transition_between_stops.mp3";
 const TRANSITION_ARTWORK_PATH = "logo_vicopisano.webp";
 const TRANSITION_MOUTH_CUES_PATH = "audio/cues/transition_between_stops.json";
@@ -488,7 +489,7 @@ let activeStopNumber = null;
 let currentLanguage = "IT";
 let overlayOpen = false;
 let currentSelectedOption = null;
-let currentPlaybackRate = PLAYBACK_RATES[0];
+let currentPlaybackRate = DEFAULT_PLAYBACK_RATE;
 let audioHasEnded = false;
 let isSeekingFromOverlay = false;
 let isSeekingFromMiniPlayer = false;
@@ -5125,7 +5126,7 @@ function startTransitionAudio(nextStop, kind = "between") {
   audioSessionToken += 1;
   audioPlayRequestToken += 1;
   transitionAudio.dataset.audioSession = String(audioSessionToken);
-  currentPlaybackRate = PLAYBACK_RATES[0];
+  currentPlaybackRate = DEFAULT_PLAYBACK_RATE;
   stopMascotLipSync();
   audioWrapper.replaceChildren(transitionAudio);
   currentAudio = transitionAudio;
@@ -6628,7 +6629,7 @@ function updatePlaybackRateControl() {
   if (playerSpeedButton && playerSpeedLabel) {
     playerSpeedLabel.textContent = label;
     playerSpeedButton.dataset.rate = String(currentPlaybackRate);
-    playerSpeedButton.classList.toggle("is-active", currentPlaybackRate !== PLAYBACK_RATES[0]);
+    playerSpeedButton.classList.toggle("is-active", currentPlaybackRate !== DEFAULT_PLAYBACK_RATE);
     playerSpeedButton.setAttribute("aria-label", accessibleLabel);
     playerSpeedButton.title = accessibleLabel;
   }
@@ -6636,7 +6637,7 @@ function updatePlaybackRateControl() {
   if (miniPlayerSpeedButton && miniPlayerSpeedLabel) {
     miniPlayerSpeedLabel.textContent = label;
     miniPlayerSpeedButton.dataset.rate = String(currentPlaybackRate);
-    miniPlayerSpeedButton.classList.toggle("is-active", currentPlaybackRate !== PLAYBACK_RATES[0]);
+    miniPlayerSpeedButton.classList.toggle("is-active", currentPlaybackRate !== DEFAULT_PLAYBACK_RATE);
     miniPlayerSpeedButton.setAttribute("aria-label", accessibleLabel);
     miniPlayerSpeedButton.title = accessibleLabel;
   }

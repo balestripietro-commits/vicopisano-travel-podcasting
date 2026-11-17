@@ -96,7 +96,7 @@
     var status = left === 0 ? tr().all : (left === 1 ? fill(tr().rem1, { m: remMin }) : fill(tr().remN, { k: left, m: remMin }));
     var segs = tappe.map(function (t) { return '<i class="seg' + (heard.has(t.numero) ? " is-heard" : "") + '"></i>'; }).join("");
     var chips = '<span class="chip">' + fill(tr().stopsN, { n: tappe.length }) + '</span><span class="chip">' + total + ' ' + (tr().minU || 'min') + '</span>' +
-      (km ? '<span class="chip">' + km.toLocaleString(String(document.documentElement.lang || "it"), { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + ' ' + (tr().kmU || 'km') + '</span>' : "");
+      (km ? '<span class="chip chip-km">' + km.toLocaleString(String(document.documentElement.lang || "it"), { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + ' ' + (tr().kmU || 'km') + '</span>' : "");
     collection.innerHTML = '<div class="stop-collection-head"><strong>' + tr().coll + '</strong><span>' + heard.size + " " + tr().of + " " + tappe.length +
       '</span></div><div class="stop-collection-chips">' + chips + '</div><div class="stop-collection-segs">' + segs + '</div><div class="stop-collection-status">' + status +
       '</div><div class="stop-collection-row">' + items + '</div><button type="button" class="stop-collection-passport">' + tr().pBtn + '</button>';
@@ -256,6 +256,13 @@
     if (link) { link.setAttribute("aria-label", tr().logo); link.title = tr().logo; }
     renderCollection();
   }
+
+  /* All'apertura il sito resta in cima (mascotte e titolo), senza saltare alla mappa */
+  var moved = false;
+  ["touchstart", "wheel", "keydown", "mousedown"].forEach(function (ev) { window.addEventListener(ev, function () { moved = true; }, { passive: true, once: true }); });
+  try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) { /* ignora */ }
+  function toTop() { if (!moved && !location.hash) window.scrollTo(0, 0); }
+  window.addEventListener("load", function () { toTop(); setTimeout(toTop, 500); setTimeout(toTop, 1500); });
 
   function start() {
     applyHeard();
