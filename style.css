@@ -9892,3 +9892,17 @@ body {
 }
 .stop-button.is-heard .stop-index::before { font-size: 0.95rem; }
 .stop-button > span:last-child { grid-column: 2; grid-row: 1; }
+
+/* Anello del play: segue la forma del tasto (tondo o arrotondato) */
+#player-play-button::after,
+#mini-player-toggle::after {
+  inset: -7px;
+  border-radius: inherit;
+  padding: 4px;
+  background: conic-gradient(var(--tp-color-tertiary) var(--ring), rgba(255, 255, 255, 0.2) 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+#mini-player-toggle::after { inset: -5px; padding: 3px; }
