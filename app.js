@@ -4322,6 +4322,7 @@ function updateNextStopPreview(tappa) {
     playerNextPreviewTitle.textContent = `${nextStop.numero}. ${getStopTitle(nextStop)}`;
     playerNextPreviewImage.src = STOP_ARTWORKS[nextStop.numero] || WHITE_ARTWORK;
     playerNextPreviewImage.alt = `Immagine ${getStopTitle(nextStop)}`;
+    playerNextPreviewImage.dataset.shape = getStopShape(nextStop.titolo);
     const nextActionLabel = strings.openNextStop || "Apri prossima tappa";
     const nextActionIcon = playerNextStopButton?.querySelector(".material-symbols-rounded");
     if (nextActionIcon) {
@@ -4347,6 +4348,7 @@ function updatePreviousStopPreview(tappa) {
     playerPreviousPreviewTitle.textContent = `${previousStop.numero}. ${getStopTitle(previousStop)}`;
     playerPreviousPreviewImage.src = STOP_ARTWORKS[previousStop.numero] || WHITE_ARTWORK;
     playerPreviousPreviewImage.alt = `Immagine ${getStopTitle(previousStop)}`;
+    playerPreviousPreviewImage.dataset.shape = getStopShape(previousStop.titolo);
     playerPreviousStopButton?.setAttribute("aria-label", strings.playerPrevious);
     playerPreviousStopButton.title = strings.playerPrevious;
   }
