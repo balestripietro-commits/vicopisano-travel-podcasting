@@ -9937,3 +9937,25 @@ body {
 .tp-stamp b { display: block; font-size: 1.05rem; }
 .tp-stamp span { font: 600 0.8rem var(--tp-font-ui); opacity: 0.75; }
 .tp-stamp:not(.is-done) { opacity: 0.6; }
+
+/* Anello del play: vero cerchio con tratto arrotondato che segue l'avanzamento */
+#player-play-button::after,
+#mini-player-toggle::after { content: none; }
+#player-play-button,
+.TPPlayerSheet #player-play-button { border-radius: 50%; }
+.play-ring {
+  position: absolute;
+  inset: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+  overflow: visible;
+}
+#mini-player-toggle .play-ring { inset: -7px; width: calc(100% + 14px); height: calc(100% + 14px); }
+.play-ring circle { fill: none; stroke-width: 4.5; stroke-linecap: round; }
+.play-ring-bg { stroke: rgba(255, 255, 255, 0.22); }
+.play-ring-fg { stroke: var(--tp-color-tertiary); transition: stroke-dashoffset 400ms linear; }
+
+/* Tasti di tappa con le virgolette del segno e la stanghetta */
+.brand-skip { width: 30px; height: 30px; display: block; }

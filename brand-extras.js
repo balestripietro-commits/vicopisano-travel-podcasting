@@ -199,11 +199,24 @@
     if (typeof tappe !== "undefined" && heard.size === tappe.length) showComplete();
   }
 
+  function ensureRing(el) {
+    if (el.querySelector(".play-ring")) return;
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "play-ring");
+    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute("aria-hidden", "true");
+    svg.innerHTML = '<circle class="play-ring-bg" cx="50" cy="50" r="46" pathLength="100"/><circle class="play-ring-fg" cx="50" cy="50" r="46" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>';
+    el.appendChild(svg);
+  }
   function setRing(ratio) {
-    var deg = Math.round(Math.max(0, Math.min(1, ratio || 0)) * 360) + "deg";
+    var off = 100 - Math.round(Math.max(0, Math.min(1, ratio || 0)) * 1000) / 10;
     ["player-play-button", "mini-player-toggle"].forEach(function (id) {
       var el = document.getElementById(id);
-      if (el) el.style.setProperty("--ring", deg);
+      if (!el) return;
+      ensureRing(el);
+      var fg = el.querySelector(".play-ring-fg");
+      if (fg) fg.setAttribute("stroke-dashoffset", String(off));
     });
   }
 
