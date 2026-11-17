@@ -26,9 +26,9 @@
   --tp-color-warning: #b36a00;
   --tp-color-error: #b3261e;
 
-  --tp-legacy-stop-purple: #245c52;
-  --tp-legacy-stop-purple-strong: #1b4a41;
-  --tp-legacy-stop-purple-glow: rgba(232, 195, 109, 0.45);
+  --tp-legacy-stop-purple: #7d4fe0;
+  --tp-legacy-stop-purple-strong: #7143d2;
+  --tp-legacy-stop-purple-glow: rgba(143, 99, 232, 0.28);
   --tp-stop-identifier-vicopisano: var(--tp-color-secondary);
   --tp-stop-identifier-vicopisano-glow: rgba(44, 109, 163, 0.24);
   --tp-stop-identifier-travel-tertiary: var(--tp-legacy-stop-purple);
