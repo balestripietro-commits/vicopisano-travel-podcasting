@@ -9661,3 +9661,224 @@ body {
   object-fit: cover;
   background: var(--tp-color-surface-container);
 }
+
+/* ===== Extra di identità: forme, anello, tappe ascoltate, caricamento ===== */
+.col-thumb[data-shape="torre"],
+.tp-complete-thumb[data-shape="torre"] {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M50%20390V80Q50%2030%20100%2030Q150%2030%20150%2080V105Q150%20130%20175%20130H225Q250%20130%20250%20105V80Q250%2030%20300%2030Q350%2030%20350%2080V390Q350%20400%20340%20400H60Q50%20400%2050%20390Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M50%20390V80Q50%2030%20100%2030Q150%2030%20150%2080V105Q150%20130%20175%20130H225Q250%20130%20250%20105V80Q250%2030%20300%2030Q350%2030%20350%2080V390Q350%20400%20340%20400H60Q50%20400%2050%20390Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview[data-shape="torre"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M50%20390V80Q50%2030%20100%2030Q150%2030%20150%2080V105Q150%20130%20175%20130H225Q250%20130%20250%20105V80Q250%2030%20300%2030Q350%2030%20350%2080V390Q350%20400%20340%20400H60Q50%20400%2050%20390Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M50%20390V80Q50%2030%20100%2030Q150%2030%20150%2080V105Q150%20130%20175%20130H225Q250%20130%20250%20105V80Q250%2030%20300%2030Q350%2030%20350%2080V390Q350%20400%20340%20400H60Q50%20400%2050%20390Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.col-thumb[data-shape="arco"],
+.tp-complete-thumb[data-shape="arco"] {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M80%20400Q40%20400%2040%20360V200A160%20160%200%200%201%20360%20200V360Q360%20400%20320%20400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M80%20400Q40%20400%2040%20360V200A160%20160%200%200%201%20360%20200V360Q360%20400%20320%20400Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview[data-shape="arco"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M80%20400Q40%20400%2040%20360V200A160%20160%200%200%201%20360%20200V360Q360%20400%20320%20400Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M80%20400Q40%20400%2040%20360V200A160%20160%200%200%201%20360%20200V360Q360%20400%20320%20400Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.col-thumb[data-shape="tassello"],
+.tp-complete-thumb[data-shape="tassello"] {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020A180%20180%200%200%200%2020%20200A180%20180%200%200%200%20200%20380H345Q380%20380%20380%20345V200A180%20180%200%200%200%20200%2020Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020A180%20180%200%200%200%2020%20200A180%20180%200%200%200%20200%20380H345Q380%20380%20380%20345V200A180%20180%200%200%200%20200%2020Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview[data-shape="tassello"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020A180%20180%200%200%200%2020%20200A180%20180%200%200%200%20200%20380H345Q380%20380%20380%20345V200A180%20180%200%200%200%20200%2020Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020A180%20180%200%200%200%2020%20200A180%20180%200%200%200%20200%20380H345Q380%20380%20380%20345V200A180%20180%200%200%200%20200%2020Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.col-thumb[data-shape="foglia"],
+.tp-complete-thumb[data-shape="foglia"] {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020H380V200A180%20180%200%200%201%20200%20380H20V200A180%20180%200%200%201%20200%2020Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020H380V200A180%20180%200%200%201%20200%20380H20V200A180%20180%200%200%201%20200%2020Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview[data-shape="foglia"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020H380V200A180%20180%200%200%201%20200%20380H20V200A180%20180%200%200%201%20200%2020Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M200%2020H380V200A180%20180%200%200%201%20200%20380H20V200A180%20180%200%200%201%20200%2020Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.col-thumb[data-shape="lente"],
+.tp-complete-thumb[data-shape="lente"] {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M110%2020H290Q315%2020%20330%2045L385%20170Q395%20200%20385%20230L330%20355Q315%20380%20290%20380H110Q85%20380%2070%20355L15%20230Q5%20200%2015%20170L70%2045Q85%2020%20110%2020Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M110%2020H290Q315%2020%20330%2045L385%20170Q395%20200%20385%20230L330%20355Q315%20380%20290%20380H110Q85%20380%2070%20355L15%20230Q5%20200%2015%20170L70%2045Q85%2020%20110%2020Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.stop-preview[data-shape="lente"]::before {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M110%2020H290Q315%2020%20330%2045L385%20170Q395%20200%20385%20230L330%20355Q315%20380%20290%20380H110Q85%20380%2070%20355L15%20230Q5%20200%2015%20170L70%2045Q85%2020%20110%2020Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M110%2020H290Q315%2020%20330%2045L385%20170Q395%20200%20385%20230L330%20355Q315%20380%20290%20380H110Q85%20380%2070%20355L15%20230Q5%20200%2015%20170L70%2045Q85%2020%20110%2020Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* E · forma gigante e tenue dietro il titolo della tappa */
+.stop-preview { position: relative; isolation: isolate; }
+.stop-preview[data-shape]::before {
+  content: "";
+  position: absolute;
+  right: -34px;
+  top: -30px;
+  width: 190px;
+  height: 190px;
+  background: var(--tp-color-primary);
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* H · anello d'oro attorno al play */
+#player-play-button,
+#mini-player-toggle { position: relative; --ring: 0deg; }
+#player-play-button::after,
+#mini-player-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  background: conic-gradient(var(--tp-color-tertiary) var(--ring), rgba(255, 255, 255, 0.2) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+  pointer-events: none;
+}
+#mini-player-toggle::after { inset: -5px; }
+
+/* A · frecce di tappa con il segno e cursore a puntino oro */
+.player-next-stop-button svg { width: 28px; height: 28px; display: block; }
+.TPPlayerSheet .player-progress-input::-webkit-slider-thumb,
+.mini-player-progress-input::-webkit-slider-thumb {
+  background: var(--tp-color-tertiary);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+}
+.TPPlayerSheet .player-progress-input::-moz-range-thumb,
+.mini-player-progress-input::-moz-range-thumb {
+  background: var(--tp-color-tertiary);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+}
+
+/* I · tappa ascoltata: spunta oro e alone sulla mappa */
+.stop-button.is-heard .stop-index {
+  background: var(--tp-color-tertiary);
+  color: var(--tp-color-primary);
+  font-size: 0;
+  box-shadow: 0 0 0 5px rgba(232, 195, 109, 0.28);
+}
+.stop-button.is-heard .stop-index::before {
+  content: "\2713";
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.map-marker.tp-map-marker.is-heard path { stroke: var(--tp-color-tertiary); stroke-width: 28; }
+
+/* B · collezione delle tappe ascoltate */
+.stop-collection {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: var(--tp-color-surface-container);
+}
+.stop-collection-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; color: var(--tp-color-primary); }
+.stop-collection-head span { font-size: 0.9rem; opacity: 0.8; }
+.stop-collection-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.col-thumb { width: 52px; height: 52px; object-fit: cover; filter: grayscale(1) opacity(0.32); transition: filter 400ms ease; }
+.col-thumb.is-heard { filter: none; }
+
+/* C · percorso completato */
+.tp-complete[hidden] { display: none; }
+.tp-complete {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(14, 51, 45, 0.78);
+}
+.tp-complete-card {
+  width: min(560px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  padding: 28px 22px;
+  border-radius: 28px;
+  background: var(--tp-color-primary);
+  color: #fff8ef;
+  text-align: center;
+}
+.tp-complete-card h2 { font-size: clamp(1.5rem, 5vw, 2rem); margin: 0 0 18px; }
+.tp-complete-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+.tp-complete-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.tp-complete-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.tp-complete-actions button {
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 248, 239, 0.5);
+  background: transparent;
+  color: inherit;
+  font: 700 1rem var(--tp-font-ui);
+  cursor: pointer;
+}
+.tp-complete-actions .tp-complete-share { background: var(--tp-color-tertiary); color: var(--tp-color-primary); border-color: transparent; }
+.tp-complete-promo { margin-top: 16px; font-size: 0.95rem; opacity: 0.9; }
+.tp-complete-promo a { color: var(--tp-color-tertiary); font-weight: 700; }
+
+/* G · cambio tappa: la forma si "ricompone" */
+@keyframes tp-shape-swap {
+  0% { opacity: 0; filter: blur(6px); scale: 0.88; }
+  100% { opacity: 1; filter: blur(0); scale: 1; }
+}
+.shape-swap { animation: tp-shape-swap 460ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+
+/* L · la tua posizione è il puntino oro del brand */
+.map-user-location-marker { fill: #e8c36d !important; fill-opacity: 1 !important; stroke: #ffffff !important; stroke-width: 4px !important; }
+.map-user-location-accuracy { fill: #e8c36d !important; stroke: #e8c36d !important; fill-opacity: 0.18 !important; }
+
+/* F · tracciato: percorso futuro tenue, tappa attiva con anello d'oro pulsante */
+.leaflet-overlay-pane .map-route-base { opacity: 0.42; }
+.map-marker.tp-map-marker.is-selected::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 3px solid var(--tp-color-tertiary);
+  border-radius: 50%;
+  animation: tp-marker-pulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes tp-marker-pulse { 0% { transform: scale(0.8); opacity: 0.9; } 100% { transform: scale(1.35); opacity: 0; } }
+
+/* M · schermata di caricamento */
+.tp-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: grid;
+  place-items: center;
+  background: #fff8ef;
+  transition: opacity 500ms ease;
+}
+.tp-splash.is-hiding { opacity: 0; pointer-events: none; }
+.tp-splash svg { width: min(86vw, 460px); height: auto; }
+@media (prefers-reduced-motion: reduce) { .tp-splash { display: none; } .shape-swap { animation: none; } }
+
+/* O · invito per altri Comuni */
+.promo-comuni {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 28px 0 120px;
+  padding: 22px;
+  border-radius: 28px;
+  background: var(--tp-color-primary);
+  color: #fff8ef;
+}
+.promo-comuni img { width: 64px; flex: 0 0 auto; }
+.promo-comuni strong { display: block; font-size: 1.3rem; line-height: 1.15; }
+.promo-comuni span { display: block; margin: 6px 0 12px; opacity: 0.85; font-size: 0.95rem; }
+.promo-comuni a {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: var(--tp-color-tertiary);
+  color: var(--tp-color-primary);
+  font: 700 1rem var(--tp-font-ui);
+  text-decoration: none;
+}

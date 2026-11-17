@@ -3142,6 +3142,7 @@ function updateStopPreview(tappa, { animate = false } = {}) {
   stopPreviewImage.src = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
   stopPreviewImage.alt = `Immagine ${title}`;
   stopPreviewImage.dataset.shape = getStopShape(tappa.titolo);
+  stopPreview.dataset.shape = getStopShape(tappa.titolo);
 
   if (animate && !reducedMotionQuery.matches) {
     replayAnimationClass(stopPreview, "is-entering", getRouteSelectionDuration());
@@ -4453,6 +4454,7 @@ function updateMiniPlayerPlayback() {
       ? (audio.currentTime / seekDuration) * 100
       : 0;
   miniPlayerProgressBar.style.width = `${Math.max(0, Math.min(progress, 100))}%`;
+  if (!isTransitionAudioActive) window.TPExtras?.progress(activeStopNumber, Math.max(0, Math.min(progress, 100)) / 100);
   miniPlayerCurrentTime.textContent = formatPlayerTime(audio.currentTime);
   miniPlayerDurationTotal.textContent = seekDuration !== null
     ? formatPlayerTime(seekDuration)
@@ -5059,6 +5061,7 @@ function handleAudioEnded(audio) {
     return;
   }
 
+  window.TPExtras?.ended(activeStopNumber);
   stopMascotLipSync();
   mascotMotionController?.end();
 
@@ -5172,7 +5175,7 @@ function createMarkerIcon(stopNumber, stopTitle) {
   const path = STOP_SHAPE_PATHS[shape] || STOP_SHAPE_PATHS.lente;
   return L.divIcon({
     className: "",
-    html: `<div class="map-marker tp-map-marker" data-shape="${shape}" aria-hidden="true"><svg viewBox="-20 -20 440 440" focusable="false"><path d="${path}"/></svg><span class="map-marker-number">${stopNumber}</span></div>`,
+    html: `<div class="map-marker tp-map-marker" data-stop="${stopNumber}" data-shape="${shape}" aria-hidden="true"><svg viewBox="-20 -20 440 440" focusable="false"><path d="${path}"/></svg><span class="map-marker-number">${stopNumber}</span></div>`,
     iconSize: [40, 40],
     iconAnchor: [20, 20],
     popupAnchor: [0, -20],
@@ -7396,7 +7399,8 @@ function bindPlayerControls() {
 
 function updateShareLinks() {
   const strings = getUiStrings(currentLanguage);
-  const pageUrl = window.location.href;
+  const shareStop = activeStopNumber || Number(new URLSearchParams(window.location.search).get("tappa")) || 1;
+  const pageUrl = new URL(`tappa/${shareStop}/?lang=${currentLanguage.toLowerCase()}`, window.location.href).href;
   const shareText = `${document.title} - ${strings.intro}`;
   const encodedUrl = encodeURIComponent(pageUrl);
   const encodedText = encodeURIComponent(shareText);

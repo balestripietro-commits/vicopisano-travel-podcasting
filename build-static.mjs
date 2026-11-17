@@ -5,6 +5,7 @@ const outputDirectory = path.resolve(process.env.NETLIFY_PUBLISH_DIR || "dist");
 const rootFiles = [
   "index.html",
   "app.js",
+  "brand-extras.js",
   "multilingual-data.js",
   "style.css",
   "design-system.css",
@@ -12,7 +13,7 @@ const rootFiles = [
   "logo_vicopisano.webp",
   "mascotte_vicopisano.webp",
 ];
-const runtimeDirectories = ["assets", "audio"];
+const runtimeDirectories = ["assets", "audio", "condivisione", "tappa"];
 const stopArtworkPattern = /^tappa_\d+_.+\.webp$/i;
 
 const rootEntries = await readdir(".", { withFileTypes: true });
