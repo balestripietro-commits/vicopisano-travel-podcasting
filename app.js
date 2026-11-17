@@ -5169,6 +5169,13 @@ function startTransitionAudio(nextStop, kind = "between") {
       if (!isLiveAudio(transitionAudio) || requestToken !== audioPlayRequestToken || error?.name === "AbortError") {
         return;
       }
+      // Con lo schermo bloccato alcuni telefoni non lasciano partire un secondo audio da soli:
+      // meglio saltare il messaggio di passaggio che restare in silenzio.
+      if (error?.name === "NotAllowedError" && kind !== "final" && nextStop) {
+        setTransitionAudioMode(false);
+        focusStop(nextStop, { autoplay: false, animateRoute: true, openOverlay: overlayOpen, skipFly: overlayOpen });
+        return;
+      }
       setAudioFeedbackByKey(navigator.onLine ? "audioLoadError" : "offlineStatus");
       updateMiniPlayerPlayback();
     });
