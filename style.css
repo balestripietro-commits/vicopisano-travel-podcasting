@@ -252,31 +252,25 @@ button:active,
   filter: drop-shadow(0 10px 20px rgba(36, 92, 82, 0.12));
 }
 
-.brand-divider {
-  width: 1px;
-  height: 54px;
-  margin: 0 14px;
-  background: linear-gradient(180deg, transparent, rgba(36, 92, 82, 0.35) 18%, rgba(36, 92, 82, 0.35) 82%, transparent);
-  flex: 0 0 auto;
+.brand-anim {
+  min-width: 0;
+  flex: 0 1 auto;
 }
 
-.brand-tp {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-tp .brand-name {
-  white-space: normal;
-  max-width: 5.6em;
-  font-size: 1.15rem;
-  line-height: 1.05;
-}
-
-.brand-segno {
+.brand-anim svg {
+  display: block;
   height: 44px;
   width: auto;
-  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+.brand-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .header-actions {
@@ -9535,10 +9529,5 @@ body {
 }
 
 @media (max-width: 640px) {
-  .brand-divider { height: 40px; margin: 0 8px; }
-  .brand-tp { gap: 6px; }
-  .brand-tp .brand-name { font-size: 0.8rem; white-space: normal; max-width: 5.4em; }
-  .brand-segno { height: 32px; }
-  .brand-tag { font-size: 0.72rem; white-space: normal; max-width: 6.2em; }
-  .brand-lockup { gap: 6px; min-width: 0; }
+  .brand-anim svg { height: 34px; }
 }
