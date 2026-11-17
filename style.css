@@ -9906,3 +9906,34 @@ body {
   mask-composite: exclude;
 }
 #mini-player-toggle::after { inset: -5px; padding: 3px; }
+
+/* Durata e avanzamento, passaporto dei borghi */
+.stop-collection-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.stop-collection .chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--tp-color-primary-container);
+  color: var(--tp-color-on-primary-container);
+  font: 700 0.85rem var(--tp-font-ui);
+}
+.stop-collection-segs { display: flex; gap: 5px; margin-bottom: 8px; }
+.stop-collection-segs .seg { flex: 1; height: 8px; border-radius: 6px; background: var(--tp-color-primary-container); }
+.stop-collection-segs .seg.is-heard { background: var(--tp-color-primary); }
+.stop-collection-status { font-weight: 700; margin-bottom: 12px; color: var(--tp-color-primary); }
+.stop-collection-passport {
+  margin-top: 14px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--tp-color-primary);
+  background: transparent;
+  color: var(--tp-color-primary);
+  font: 700 0.95rem var(--tp-font-ui);
+  cursor: pointer;
+}
+.tp-passport-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin-bottom: 14px; }
+.tp-stamp { text-align: center; }
+.tp-stamp svg { width: 100%; max-width: 130px; height: auto; display: block; margin: 0 auto 6px; }
+.tp-stamp b { display: block; font-size: 1.05rem; }
+.tp-stamp span { font: 600 0.8rem var(--tp-font-ui); opacity: 0.75; }
+.tp-stamp:not(.is-done) { opacity: 0.6; }

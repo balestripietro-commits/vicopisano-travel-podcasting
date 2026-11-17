@@ -4147,9 +4147,9 @@ function updateMediaSession(tappa, selectedOption) {
     album: "Percorso di Vicopisano",
     artwork: [
       {
-        src: isTransitionAudioActive ? TRANSITION_ARTWORK_PATH : (STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK),
+        src: isTransitionAudioActive ? TRANSITION_ARTWORK_PATH : `assets/lock/tappa-${tappa.numero}.png`,
         sizes: "512x512",
-        type: "image/jpeg",
+        type: isTransitionAudioActive ? "image/jpeg" : "image/png",
       },
     ],
   });
@@ -4159,6 +4159,8 @@ function updateMediaSession(tappa, selectedOption) {
     pause: () => { getActiveAudio()?.pause(); },
     seekbackward: () => { if (!isTransitionAudioActive) seekCurrentAudio(-10); },
     seekforward: () => { if (!isTransitionAudioActive) seekCurrentAudio(10); },
+    previoustrack: () => { document.getElementById("player-previous-stop-button")?.click(); },
+    nexttrack: () => { document.getElementById("player-next-stop-button")?.click(); },
   };
 
   Object.entries(actions).forEach(([action, handler]) => {
