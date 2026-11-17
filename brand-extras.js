@@ -8,6 +8,21 @@
   try { heard = new Set(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch (e) { /* senza memoria locale */ }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(Array.from(heard))); } catch (e) { /* ignora */ } }
 
+  var LANDING = "https://balestripietro-commits.github.io/landing-page-travel-podcasting/";
+  var T = {
+    it: { coll: "Le tue tappe", of: "di", heard: "Tappa {n} ascoltata", todo: "Tappa {n} da ascoltare", done: "Hai ascoltato tutto il percorso", share: "Condividi il percorso", close: "Chiudi", shareTitle: "Ho ascoltato tutto il percorso di Vicopisano", copied: "Link copiato", copy: "Copia il link", logo: "Travel Podcasting: scopri il progetto (si apre in una nuova scheda)" },
+    en: { coll: "Your stops", of: "of", heard: "Stop {n} listened", todo: "Stop {n} not yet listened", done: "You have listened to the whole route", share: "Share the route", close: "Close", shareTitle: "I listened to the whole Vicopisano route", copied: "Link copied", copy: "Copy the link", logo: "Travel Podcasting: discover the project (opens in a new tab)" },
+    de: { coll: "Deine Stationen", of: "von", heard: "Station {n} gehört", todo: "Station {n} noch nicht gehört", done: "Du hast die ganze Route gehört", share: "Route teilen", close: "Schließen", shareTitle: "Ich habe die ganze Route durch Vicopisano gehört", copied: "Link kopiert", copy: "Link kopieren", logo: "Travel Podcasting: das Projekt entdecken (öffnet in neuem Tab)" },
+    fr: { coll: "Vos étapes", of: "sur", heard: "Étape {n} écoutée", todo: "Étape {n} pas encore écoutée", done: "Vous avez écouté tout le parcours", share: "Partager le parcours", close: "Fermer", shareTitle: "J'ai écouté tout le parcours de Vicopisano", copied: "Lien copié", copy: "Copier le lien", logo: "Travel Podcasting : découvrir le projet (s'ouvre dans un nouvel onglet)" },
+    es: { coll: "Tus etapas", of: "de", heard: "Etapa {n} escuchada", todo: "Etapa {n} por escuchar", done: "Has escuchado todo el recorrido", share: "Compartir el recorrido", close: "Cerrar", shareTitle: "He escuchado todo el recorrido de Vicopisano", copied: "Enlace copiado", copy: "Copiar el enlace", logo: "Travel Podcasting: conoce el proyecto (se abre en una pestaña nueva)" },
+    pt: { coll: "As suas etapas", of: "de", heard: "Etapa {n} ouvida", todo: "Etapa {n} por ouvir", done: "Ouviu todo o percurso", share: "Partilhar o percurso", close: "Fechar", shareTitle: "Ouvi todo o percurso de Vicopisano", copied: "Ligação copiada", copy: "Copiar a ligação", logo: "Travel Podcasting: conheça o projeto (abre num novo separador)" },
+    ru: { coll: "Ваши остановки", of: "из", heard: "Остановка {n} прослушана", todo: "Остановка {n} ещё не прослушана", done: "Вы прослушали весь маршрут", share: "Поделиться маршрутом", close: "Закрыть", shareTitle: "Я прослушал(а) весь маршрут по Викопизано", copied: "Ссылка скопирована", copy: "Скопировать ссылку", logo: "Travel Podcasting: узнать о проекте (откроется в новой вкладке)" }
+  };
+  function tr() {
+    var code = String((typeof currentLanguage !== "undefined" ? currentLanguage : document.documentElement.lang) || "it").toLowerCase();
+    return T[code] || T.it;
+  }
+
   var collection = null;
   var overlay = null;
 
@@ -26,9 +41,9 @@
     var items = tappe.map(function (t) {
       var on = heard.has(t.numero);
       return '<img class="col-thumb' + (on ? " is-heard" : "") + '" data-shape="' + getStopShape(t.titolo) +
-        '" src="' + art(t) + '" alt="' + (on ? "Tappa " + t.numero + " ascoltata" : "Tappa " + t.numero + " da ascoltare") + '" loading="lazy" decoding="async">';
+        '" src="' + art(t) + '" alt="' + (on ? tr().heard : tr().todo).replace("{n}", t.numero) + '" loading="lazy" decoding="async">';
     }).join("");
-    collection.innerHTML = '<div class="stop-collection-head"><strong>Le tue tappe</strong><span>' + heard.size + " di " + tappe.length +
+    collection.innerHTML = '<div class="stop-collection-head"><strong>' + tr().coll + '</strong><span>' + heard.size + " " + tr().of + " " + tappe.length +
       '</span></div><div class="stop-collection-row">' + items + "</div>";
   }
 
@@ -45,9 +60,9 @@
 
   function share() {
     var url = new URL("./", window.location.href).href;
-    var data = { title: "Ho ascoltato tutto il percorso di Vicopisano", text: "Travel Podcasting · Vicopisano", url: url };
+    var data = { title: tr().shareTitle, text: "Travel Podcasting · Vicopisano", url: url };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
-    try { navigator.clipboard.writeText(url); alert("Link copiato"); } catch (e) { window.prompt("Copia il link", url); }
+    try { navigator.clipboard.writeText(url); alert(tr().copied); } catch (e) { window.prompt(tr().copy, url); }
   }
 
   function showComplete() {
@@ -61,17 +76,19 @@
       var mosaic = tappe.map(function (t) {
         return '<img class="tp-complete-thumb" data-shape="' + getStopShape(t.titolo) + '" src="' + art(t) + '" alt="">';
       }).join("");
-      overlay.innerHTML = '<div class="tp-complete-card"><h2 id="tp-complete-title">Hai ascoltato tutto il percorso</h2>' +
+      overlay.innerHTML = '<div class="tp-complete-card"><h2 id="tp-complete-title"></h2>' +
         '<div class="tp-complete-mosaic">' + mosaic + "</div>" +
-        '<div class="tp-complete-actions"><button type="button" class="tp-complete-share">Condividi il percorso</button>' +
-        '<button type="button" class="tp-complete-close">Chiudi</button></div>' +
-        '<p class="tp-complete-promo">Vuoi un percorso così nel tuo Comune? <a href="https://balestripietro-commits.github.io/landing-page-travel-podcasting/" target="_blank" rel="noopener">Parliamone</a></p></div>';
+        '<div class="tp-complete-actions"><button type="button" class="tp-complete-share"></button>' +
+        '<button type="button" class="tp-complete-close"></button></div></div>';
       document.body.appendChild(overlay);
       overlay.querySelector(".tp-complete-share").addEventListener("click", share);
       overlay.querySelector(".tp-complete-close").addEventListener("click", function () { overlay.hidden = true; });
       overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.hidden = true; });
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") overlay.hidden = true; });
     }
+    overlay.querySelector("#tp-complete-title").textContent = tr().done;
+    overlay.querySelector(".tp-complete-share").textContent = tr().share;
+    overlay.querySelector(".tp-complete-close").textContent = tr().close;
     overlay.hidden = false;
     var close = overlay.querySelector(".tp-complete-close");
     if (close) close.focus();
@@ -119,8 +136,16 @@
     });
   }
 
+  function applyLang() {
+    var link = document.getElementById("brand-link");
+    if (link) { link.setAttribute("aria-label", tr().logo); link.title = tr().logo; }
+    renderCollection();
+  }
+
   function start() {
     applyHeard();
+    applyLang();
+    new MutationObserver(applyLang).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     watchShapes();
     var list = document.getElementById("stops-list");
     if (list) new MutationObserver(applyHeard).observe(list, { childList: true });
