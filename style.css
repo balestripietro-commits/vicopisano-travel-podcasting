@@ -252,15 +252,31 @@ button:active,
   filter: drop-shadow(0 10px 20px rgba(36, 92, 82, 0.12));
 }
 
-.brand-name {
+.brand-divider {
+  width: 2px;
+  height: 44px;
+  margin: 0 6px;
+  border-radius: 2px;
+  background: rgba(36, 92, 82, 0.18);
+  flex: 0 0 auto;
+}
+
+.brand-tp {
   display: flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 10px;
+}
+
+.brand-tp .brand-name {
+  white-space: normal;
+  max-width: 5.6em;
+  font-size: 1.15rem;
+  line-height: 1.05;
 }
 
 .brand-segno {
-  width: 1.9em;
-  height: auto;
+  height: 44px;
+  width: auto;
   flex: 0 0 auto;
 }
 
@@ -9523,4 +9539,13 @@ body {
   border-radius: 0;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cpath d='M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+@media (max-width: 640px) {
+  .brand-divider { height: 34px; margin: 0 2px; }
+  .brand-tp { gap: 6px; }
+  .brand-tp .brand-name { font-size: 0.8rem; white-space: normal; max-width: 5.4em; }
+  .brand-segno { height: 32px; }
+  .brand-tag { font-size: 0.72rem; white-space: normal; max-width: 6.2em; }
+  .brand-lockup { gap: 6px; min-width: 0; }
 }
