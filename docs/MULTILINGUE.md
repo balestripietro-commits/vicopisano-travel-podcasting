@@ -54,3 +54,14 @@ npx playwright test tests/e2e/multilingual-audio.spec.mjs
 Il test controlla gli asset delle sei lingue, le otto tappe, i due incisi,
 il player, i sottotitoli e il mantenimento della lingua nei link diretti.
 Le tracce italiane e i relativi sottotitoli non sono stati modificati.
+
+## Cinese e arabo (17/11/2026)
+
+Aggiunte due lingue: cinese semplificato (ZH) e arabo moderno standard (AR), dalle revisioni v01 di Iacopo.
+
+- Audio: `audio/zh` e `audio/ar` (MP3 mono 128 kbit/s dalle tracce unite A+B). Mancano i due incisi istituzionali: dopo la narrazione il player passa direttamente alla tappa successiva.
+- Sottotitoli: testo del copione approvato (`docs/lingue-extra/script_*.txt`), con i tempi da riconoscimento Whisper locale (large-v3-turbo), distribuiti in proporzione ai caratteri. Possono scostarsi di 1-3 secondi nei passaggi lunghi. Stato nei JSON: `aligned-local-asr-review-required`.
+- Cue della bocca: energia della voce, come per le altre lingue.
+- Interfaccia: `languages-extra.js` (testi tradotti da bozza, da far rivedere a un madrelingua); catalogo: `multilingual-extra.js`. L'arabo imposta `dir="rtl"`; mappa, barra di avanzamento e controlli restano da sinistra a destra.
+- Rigenerare: `python3 docs/lingue-extra/build_lang.py <repo> <cartella di lavoro>` (richiede ffmpeg e numpy; la cartella di lavoro contiene `work/` con gli MP3 e `asr/` con il riconoscimento).
+- Da fare prima della diffusione: revisione madrelingua di testi e audio, incisi istituzionali, test E2E aggiornati a 8 lingue.

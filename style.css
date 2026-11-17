@@ -10041,3 +10041,20 @@ html.easy-read :focus-visible { outline: 4px solid var(--tp-color-tertiary); out
   .material-symbols-rounded[data-icon="skip_next"],
   .mini-player-controls .brand-skip { width: 26px; height: 26px; }
 }
+
+/* Cinese e arabo: caratteri adatti e scrittura da destra a sinistra */
+html:lang(zh) *:not(.material-symbols-rounded):not(svg *) { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
+html:lang(ar) *:not(.material-symbols-rounded):not(svg *) { font-family: "Geeza Pro", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif; }
+html[dir="rtl"] #map,
+html[dir="rtl"] .leaflet-container,
+html[dir="rtl"] input[type="range"],
+html[dir="rtl"] .player-timeline,
+html[dir="rtl"] .player-controls,
+html[dir="rtl"] .player-transport-group,
+html[dir="rtl"] .mini-player-controls,
+html[dir="rtl"] .brand-anim,
+html[dir="rtl"] .stop-collection-segs,
+html[dir="rtl"] .mini-player-timeline,
+html[dir="rtl"] .mini-player-center,
+html[dir="rtl"] .play-ring { direction: ltr; }
+html[dir="rtl"] .stop-collection-row { direction: rtl; }

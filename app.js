@@ -3058,6 +3058,8 @@ function updateMapExploreStop(tappa = activeStopNumber ? tappe.find((item) => it
   mapExploreOpenPlayer?.setAttribute("aria-label", strings.playerExpand);
 }
 
+window.TPLangExtra?.apply({ siteLanguages, uiStrings, onboardingUiStrings, statusMessages, playerContextGuideCopy, stopTitles, stopDescriptions });
+
 function getDirectionsLabel() {
   const labels = {
     IT: "Apri indicazioni",
@@ -3067,6 +3069,8 @@ function getDirectionsLabel() {
     ES: "Abrir indicaciones",
     PT: "Abrir direções",
     RU: "Открыть маршрут",
+    ZH: "打开路线指引",
+    AR: "افتح الاتجاهات",
   };
 
   return labels[currentLanguage] || labels.IT;
@@ -7417,6 +7421,7 @@ function updateShareLinks() {
 function renderStaticTexts() {
   const strings = getUiStrings(currentLanguage);
   document.documentElement.lang = currentLanguage.toLowerCase();
+  document.documentElement.dir = currentLanguage === "AR" ? "rtl" : "ltr";
   eyebrowText.textContent = strings.prototype;
   if (introLeadText) introLeadText.textContent = strings.introLead;
   introText.textContent = strings.intro;
