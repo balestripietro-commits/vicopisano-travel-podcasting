@@ -6,6 +6,8 @@ const rootFiles = [
   "index.html",
   "app.js",
   "brand-extras.js",
+  "brand-guide.js",
+  "sw.js",
   "multilingual-data.js",
   "style.css",
   "design-system.css",

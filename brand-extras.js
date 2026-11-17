@@ -226,6 +226,7 @@
       if (ratio >= 0.9) mark(stop);
     },
     ended: function (stop) { mark(stop); },
+    isHeard: function (n) { return heard.has(n); },
   };
 
   /* Cambio forma: piccola animazione quando cambiano foto o forma */

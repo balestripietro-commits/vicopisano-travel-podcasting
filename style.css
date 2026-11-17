@@ -9959,3 +9959,85 @@ body {
 
 /* Tasti di tappa con le virgolette del segno e la stanghetta */
 .brand-skip { width: 30px; height: 30px; display: block; }
+
+/* Salti di 10 secondi e tasti di tappa disegnati con il segno */
+.material-symbols-rounded[data-icon="replay_10"],
+.material-symbols-rounded[data-icon="forward_10"],
+.material-symbols-rounded[data-icon="skip_previous"],
+.material-symbols-rounded[data-icon="skip_next"] {
+  font-size: 0 !important;
+  width: 34px;
+  height: 34px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: var(--tp-icon-mask) center / contain no-repeat;
+  mask: var(--tp-icon-mask) center / contain no-repeat;
+}
+.material-symbols-rounded[data-icon="replay_10"] { --tp-icon-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cg%20transform='translate%286%2024%29%20scale%28.82%29'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/g%3E%3Cpath%20d='M120%2080%20L138%2066%20V136'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Crect%20x='152'%20y='64'%20width='34'%20height='72'%20rx='17'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.material-symbols-rounded[data-icon="forward_10"] { --tp-icon-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M20%2080%20L38%2066%20V136'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Crect%20x='52'%20y='64'%20width='34'%20height='72'%20rx='17'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Cg%20transform='translate%28194%2024%29%20scale%28-.82%20.82%29'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"); }
+.material-symbols-rounded[data-icon="skip_previous"] { --tp-icon-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M32%2060V140'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Cg%20transform='translate%2846%200%29'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"); }
+.material-symbols-rounded[data-icon="skip_next"] { --tp-icon-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cpath%20d='M168%2060V140'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3Cg%20transform='matrix%28-1%200%200%201%20154%200%29'%3E%3Cpath%20d='M52%2062%20L30%2088%20Q22%20100%2030%20112%20L52%20138%20M82%2062%20L60%2088%20Q52%20100%2060%20112%20L82%20138'%20fill='none'%20stroke='%23000'%20stroke-width='17'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"); }
+
+/* Velocità: pillola a linea sottile */
+#player-speed-button,
+#mini-player-speed-button {
+  min-width: 46px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: transparent;
+  font-weight: 700;
+}
+
+/* Guida in cammino */
+.walk-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: var(--tp-color-primary-container);
+  color: var(--tp-color-on-primary-container);
+}
+.walk-card > div:first-child { flex: 1 1 200px; }
+.walk-card strong { display: block; font-size: 1.05rem; }
+.walk-card p { margin: 4px 0 0; font-size: 0.92rem; }
+.walk-toggle {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--tp-color-primary);
+  color: #fff;
+  font: 700 0.95rem var(--tp-font-ui);
+  cursor: pointer;
+}
+.walk-toggle.is-off { background: transparent; color: inherit; border: 1.5px solid currentColor; min-height: 36px; padding: 0 14px; }
+.walk-dir { display: flex; align-items: center; gap: 12px; flex: 1 1 200px; color: var(--tp-color-primary); }
+.walk-dir svg { flex: 0 0 auto; width: 52px; height: 52px; }
+.walk-dist { display: block; font: 700 1.5rem var(--tp-font-display, inherit); }
+.walk-note, .walk-denied { flex-basis: 100%; font-size: 0.8rem; opacity: 0.85; }
+.walk-denied { color: var(--tp-color-error); opacity: 1; }
+
+/* Lettura facile */
+.easy-read-button { width: 44px; height: 44px; padding: 0; font: 800 0.95rem var(--tp-font-ui); color: var(--tp-color-primary); }
+.easy-read-button[aria-pressed="true"] { background: var(--tp-color-primary); color: #fff; }
+html.easy-read { font-size: 118%; }
+html.easy-read body { --tp-color-on-surface: #0b2a25; color: #0b2a25; }
+html.easy-read .player-mobile-live-transcript, html.easy-read .detail-copy, html.easy-read .stop-title { font-size: 1.15em; line-height: 1.55; }
+html.easy-read button, html.easy-read .stop-button { min-height: 48px; }
+html.easy-read :focus-visible { outline: 4px solid var(--tp-color-tertiary); outline-offset: 3px; }
+
+@media (max-width: 340px) {
+  .mini-player-controls .mini-player-control,
+  .mini-player-controls .mini-player-toggle { width: 36px; min-width: 36px; height: 36px; }
+  .mini-player-transport-group { gap: 2px; }
+  .material-symbols-rounded[data-icon="replay_10"],
+  .material-symbols-rounded[data-icon="forward_10"],
+  .material-symbols-rounded[data-icon="skip_previous"],
+  .material-symbols-rounded[data-icon="skip_next"],
+  .mini-player-controls .brand-skip { width: 26px; height: 26px; }
+}
