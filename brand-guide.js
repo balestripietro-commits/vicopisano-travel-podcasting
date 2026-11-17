@@ -17,14 +17,30 @@
   function f(s, o) { return String(s).replace(/\{(\w+)\}/g, function (m, k) { return o[k] != null ? o[k] : m; }); }
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 
-  /* ---- icone dei salti: attributo data-icon per poterle disegnare con il segno ---- */
+  /* ---- icone nel brand: sostituisce le icone Material con quelle del segno ---- */
+  var BRAND_ICONS = ["help", "language", "expand_more", "my_location", "location_on", "fullscreen", "fullscreen_exit", "open_in_full", "map", "headphones", "article", "swap_horiz", "photo", "close", "arrow_back", "arrow_forward"];
+  function tagIcon(s) {
+    var name = s.textContent.trim();
+    s.setAttribute("data-icon", name);
+    var on = BRAND_ICONS.indexOf(name) >= 0 && !s.classList.contains("playback-icon");
+    s.classList.toggle("brand-icon", on);
+    if (on && !s.style.getPropertyValue("--ic-size")) {
+      var fs = parseFloat(getComputedStyle(s).fontSize);
+      if (fs > 0) s.style.setProperty("--ic-size", fs + "px");
+    }
+  }
   function watchIcons() {
-    ["player-prev-button", "player-next-button", "mini-player-prev", "mini-player-next"].forEach(function (id) {
-      var b = document.getElementById(id), s = b && b.querySelector(".material-symbols-rounded");
-      if (!s) return;
-      function tag() { s.setAttribute("data-icon", s.textContent.trim()); }
-      tag();
-      new MutationObserver(tag).observe(s, { childList: true, characterData: true, subtree: true });
+    document.querySelectorAll(".material-symbols-rounded").forEach(function (s) {
+      // la dimensione si legge prima di nascondere il testo
+      if (!s.classList.contains("brand-icon")) {
+        var name = s.textContent.trim();
+        if (BRAND_ICONS.indexOf(name) >= 0 && !s.classList.contains("playback-icon")) {
+          var fs = parseFloat(getComputedStyle(s).fontSize);
+          if (fs > 0) s.style.setProperty("--ic-size", fs + "px");
+        }
+      }
+      tagIcon(s);
+      new MutationObserver(function () { tagIcon(s); }).observe(s, { childList: true, characterData: true, subtree: true });
     });
   }
 
