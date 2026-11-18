@@ -237,7 +237,7 @@ test("map selection bubble shows only the stop photo on mobile", async ({ page }
   };
 
   const homeBubble = await selectAndReadBubble(1);
-  expect(homeBubble.imageSrc).toMatch(/tappa_1_torre_delle_quattro_porte\.webp/);
+  expect(homeBubble.imageSrc).toMatch(/tappa-1-forma\.webp/);
   if (testInfo.project.name === "desktop-chrome") {
     expect(homeBubble.text).toContain("Tappa 1");
     expect(homeBubble.titleCount).toBe(1);
@@ -655,8 +655,11 @@ test("mini player cycles playback speed like the full player", async ({ page }) 
   await expect.poll(() => page.locator("audio").evaluate((audio) => audio.playbackRate)).toBe(1.25);
   await speedButton.click();
   await expect(speedButton).toHaveText("x1,5");
-  await speedButton.click();
-  await expect(speedButton).toHaveText("x1");
+  // Velocità da 0,5 a 2 con passi di 0,25 (dal 17/11/2026)
+  for (const label of ["x1,75", "x2", "x0,5", "x0,75", "x1"]) {
+    await speedButton.click();
+    await expect(speedButton).toHaveText(label);
+  }
   await expect.poll(() => page.locator("audio").evaluate((audio) => audio.playbackRate)).toBe(1);
   await expectNoRuntimeErrors(errors);
 });

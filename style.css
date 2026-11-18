@@ -10228,3 +10228,8 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
 #player-speed-button, #mini-player-speed-button { min-width: 44px !important; height: 44px !important; }
 .player-controls, .TPMiniPlayer .mini-player-controls { grid-template-columns: 44px repeat(2, minmax(0, 1fr)) 76px repeat(2, minmax(0, 1fr)) 44px !important; }
 .TPMiniPlayer .mini-player-controls { grid-template-columns: 44px minmax(0, 1fr) 44px !important; }
+@media (max-width: 380px) {
+  .TPMiniPlayer .mini-player-controls { grid-template-columns: minmax(0, 1fr) 44px !important; }
+  .TPMiniPlayer .mini-player-controls > .mini-player-transport-group { grid-column: 1; }
+  .TPMiniPlayer .mini-player-controls > #mini-player-speed-button { grid-column: 2; }
+}

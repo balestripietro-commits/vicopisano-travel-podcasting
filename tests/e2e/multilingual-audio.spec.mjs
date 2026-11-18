@@ -8,8 +8,9 @@ test("all six language packs have eight distinct narrations and two reusable int
   test.setTimeout(120_000);
   await enterSite(page);
   const catalog = await page.evaluate(() => window.VICOPISANO_MULTILINGUAL);
-  expect(catalog.readyLanguages.slice().sort()).toEqual(codes.map(x => x.toUpperCase()).sort());
-  expect(catalog.tracks).toHaveLength(48);
+  // Dal 17/11/2026 ci sono anche cinese e arabo (audio di revisione, controllati a parte).
+  expect(catalog.readyLanguages.slice().sort()).toEqual([...codes, "zh", "ar"].map(x => x.toUpperCase()).sort());
+  expect(catalog.tracks).toHaveLength(64);
   for (const code of codes) {
     const tracks = catalog.tracks.filter(track => track.code === code.toUpperCase());
     expect(tracks.map(track => track.stop)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
