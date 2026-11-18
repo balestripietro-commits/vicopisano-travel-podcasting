@@ -4573,7 +4573,8 @@ function getTimedMapCaptionText(segment, time) {
     parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight) -
     parseFloat(styles.borderLeftWidth) - parseFloat(styles.borderRightWidth);
   const font = `${styles.fontStyle} ${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
-  const key = `${Math.floor(contentWidth)}:${font}`;
+  const linesPerPage = document.body.classList.contains("is-mobile-map-player-mode") ? 3 : 2;
+  const key = `${Math.floor(contentWidth)}:${font}:${linesPerPage}`;
   let cached = mapCaptionPageCache.get(segment);
 
   if (!cached || cached.key !== key) {
@@ -4594,7 +4595,7 @@ function getTimedMapCaptionText(segment, time) {
           continue;
         }
         lines.push(line);
-        if (lines.length === 2) {
+        if (lines.length === linesPerPage) {
           pages.push(lines.join("\n"));
           lines = [];
         }

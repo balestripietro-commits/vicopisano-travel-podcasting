@@ -10280,3 +10280,13 @@ html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font
     right: calc(max(12px, env(safe-area-inset-right)) + 72px);
   }
 }
+
+/* Play tondo sempre: la larghezza di flex (56 px) lo allargava rispetto all'altezza e l'anello diventava un ovale */
+#mini-player-toggle, #player-play-button { flex: 0 0 var(--pc-play) !important; align-self: center; width: var(--pc-play) !important; height: var(--pc-play) !important; aspect-ratio: 1 / 1; }
+.TPMiniPlayer .mini-player-transport-group .mini-player-toggle { flex: 0 0 var(--pc-play) !important; width: var(--pc-play) !important; min-width: 0 !important; }
+
+/* Trascrizione: barra oro staccata dal testo, didascalia sulla mappa del telefono più grande e su tre righe */
+.player-mobile-transcript-segment { padding-left: 16px; }
+@media (max-width: 1023px) {
+  body.is-mobile-map-player-mode .map-live-caption:not([hidden]) { font-size: clamp(1rem, 4.4vw, 1.1rem); line-height: 1.32; padding: 9px 12px; }
+}
