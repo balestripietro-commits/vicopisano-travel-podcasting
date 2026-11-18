@@ -10268,3 +10268,15 @@ html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font
 .player-mobile-transcript-segment.is-active { color: var(--tp-transcript-active) !important; opacity: 1; border-left-color: var(--tp-transcript-bar); }
 .map-live-caption { background: var(--tp-caption-map-surface) !important; color: var(--tp-transcript-text) !important; border: 1.5px solid var(--tp-transcript-bar) !important; }
 .map-live-caption * { color: inherit !important; }
+
+/* Mappa + player su telefono: posizione e indicazioni stanno nel riquadro in alto a destra della mappa (come nella home);
+   la barra del player tiene solo ascolto, aiuto e chiudi. */
+@media (max-width: 1023px) {
+  body.is-mobile-map-player-mode .map-floating-controls { display: flex !important; top: 12px; right: 12px; z-index: 1996; }
+  .player-overlay.TPPlayerSheet.is-mobile-map-player #player-recenter-button,
+  .player-overlay.TPPlayerSheet.is-mobile-map-player #player-map-directions-button { display: none !important; }
+  body.is-mobile-map-player-mode .map-live-caption:not([hidden]) {
+    top: calc(max(12px, env(safe-area-inset-top)) + 22px);
+    right: calc(max(12px, env(safe-area-inset-right)) + 72px);
+  }
+}
