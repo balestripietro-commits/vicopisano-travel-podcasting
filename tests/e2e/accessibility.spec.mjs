@@ -393,26 +393,17 @@ test.describe("accessibility", () => {
       await page.locator("#player-map-button").click();
 
       const title = page.locator("#detail-title");
-      await expect(title).toHaveClass(/is-overflowing/);
-      await expect(title).toHaveAttribute("tabindex", "0");
+      // Dal 18/11/2026 il titolo va a capo su due righe: niente scorrimento, niente testo tagliato.
       await expect(page.locator("#detail-title-text")).toHaveText("Torre e Camminamento del Soccorso");
-      const before = await title.evaluate((element) => ({
+      const box = await title.evaluate((element) => ({
         clientWidth: element.clientWidth,
         scrollWidth: element.scrollWidth,
-        clientHeight: element.clientHeight,
-        scrollHeight: element.scrollHeight,
         left: element.getBoundingClientRect().left,
         right: element.getBoundingClientRect().right,
       }));
-      expect(before.left).toBeGreaterThanOrEqual(0);
-      expect(before.right).toBeLessThanOrEqual(width + 1);
-      expect(before.scrollWidth).toBeGreaterThan(before.clientWidth);
-      expect(before.scrollHeight).toBeLessThanOrEqual(before.clientHeight + 2);
-      await title.focus();
-      await page.keyboard.press("ArrowRight");
-      await expect.poll(() => title.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
-      await title.evaluate((element) => { element.scrollLeft = element.scrollWidth; });
-      await expect.poll(() => title.evaluate((element) => element.scrollLeft + element.clientWidth >= element.scrollWidth - 1)).toBe(true);
+      expect(box.left).toBeGreaterThanOrEqual(0);
+      expect(box.right).toBeLessThanOrEqual(width + 1);
+      expect(box.scrollWidth).toBeLessThanOrEqual(box.clientWidth + 1);
     }
   });
 });

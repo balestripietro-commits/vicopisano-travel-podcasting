@@ -10220,3 +10220,11 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M110%2030H290Q370%2030%20370%20110V290Q370%20370%20290%20370H110Q30%20370%2030%20290V110Q30%2030%20110%2030Z'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20400%20400'%3E%3Cpath%20d='M110%2030H290Q370%2030%20370%20110V290Q370%20370%20290%20370H110Q30%20370%2030%20290V110Q30%2030%20110%2030Z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
+
+/* Controlli almeno 44 px (test di accessibilità) e testi piccoli con contrasto sufficiente */
+.TPMiniPlayer .mini-player-controls { --pc-btn: 44px; --pc-ic: 26px; --pc-play: 50px; }
+.stop-collection-head > span { color: #3f6a60; }
+.stop-collection-head > span { opacity: 1; }
+#player-speed-button, #mini-player-speed-button { min-width: 44px !important; height: 44px !important; }
+.player-controls, .TPMiniPlayer .mini-player-controls { grid-template-columns: 44px repeat(2, minmax(0, 1fr)) 76px repeat(2, minmax(0, 1fr)) 44px !important; }
+.TPMiniPlayer .mini-player-controls { grid-template-columns: 44px minmax(0, 1fr) 44px !important; }

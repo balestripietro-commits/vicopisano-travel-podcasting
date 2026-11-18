@@ -3420,7 +3420,18 @@ function buildLanguageChips(
       languageTitle || strings.languageSelectorTitle || "Lingua disponibile";
   }
 
-  siteLanguages.forEach((languageCode) => {
+  // Primo accesso: la lingua del browser passa in testa e resta evidenziata, ma si sceglie comunque
+  const browserLanguage = (() => {
+    const codes = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""])
+      .map((value) => String(value || "").toLowerCase().split("-")[0]);
+    return codes.find((code) => siteLanguages.some((item) => String(item).toLowerCase() === code)) || "";
+  })();
+  const orderedLanguages = container === onboardingLanguageChips && browserLanguage
+    ? [...siteLanguages].sort((left, right) =>
+        Number(String(right).toLowerCase() === browserLanguage) - Number(String(left).toLowerCase() === browserLanguage))
+    : siteLanguages;
+
+  orderedLanguages.forEach((languageCode) => {
     const chip = document.createElement("button");
     const languageName = getLanguageDisplayName(languageCode, languageCode);
     const isRuntimeGlobal = container === globalLanguageChips;
@@ -3430,7 +3441,9 @@ function buildLanguageChips(
     chip.classList.toggle("runtime-language-option", isRuntimeGlobal);
     chip.classList.toggle("onboarding-language-option", isOnboarding);
     chip.textContent = isRuntimeGlobal || isOnboarding ? `${languageCode} · ${languageName}` : languageCode;
-    chip.classList.toggle("is-active", languageCode === currentLanguage);
+    const isSuggested = isOnboarding && String(languageCode).toLowerCase() === browserLanguage;
+    chip.classList.toggle("is-suggested", isSuggested);
+    chip.classList.toggle("is-active", isOnboarding && browserLanguage ? isSuggested : languageCode === currentLanguage);
     if (container === playerLanguageChips || container === globalLanguageChips) {
       chip.setAttribute("role", "option");
       chip.setAttribute("aria-selected", languageCode === currentLanguage ? "true" : "false");
