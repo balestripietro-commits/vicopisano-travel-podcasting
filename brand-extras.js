@@ -265,53 +265,8 @@
     hopMascot(t.classList.contains("mascot-motion-shell") ? t : t.querySelector(".mascot-motion-shell"));
   }, true);
 
-  /* Mascotte viva a riposo: ciglia, sguardo laterale e saluto (la bocca resta quella già animata) */
-  var EYES_BASE = "assets/mascotte-mouth/occhi_";
-  var EYE_BOX = { x: 700, y: 520, w: 620, h: 310, full: 2048 };
+  /* Animazioni della mascotte riportabili su altre mascotte (Calci...): solo movimento del corpo, nessun disegno specifico */
   var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function placeEyes(shell) {
-    var img = shell.querySelector("img:not([class*='mascot-eye'])");
-    if (!img || !img.offsetWidth) return null;
-    var wrap = shell._eyes;
-    if (!wrap) {
-      wrap = document.createElement("div");
-      wrap.className = "mascot-eyes";
-      wrap.setAttribute("aria-hidden", "true");
-      ["sx", "dx"].forEach(function (n) {
-        var e = document.createElement("img");
-        e.className = "mascot-eye mascot-eye-" + n; e.alt = ""; e.decoding = "async"; e.src = EYES_BASE + n + ".webp";
-        wrap.appendChild(e);
-      });
-      shell.appendChild(wrap);
-      shell._eyes = wrap;
-    }
-    var cs = getComputedStyle(img), w = img.offsetWidth, h = img.offsetHeight;
-    var scale = cs.objectFit === "cover" ? Math.max(w, h) / EYE_BOX.full : Math.min(w, h) / EYE_BOX.full;
-    var dw = EYE_BOX.full * scale, dh = EYE_BOX.full * scale;
-    var oy = /bottom/.test(cs.objectPosition) ? h - dh : (/top/.test(cs.objectPosition) ? 0 : (h - dh) / 2);
-    var ox = (w - dw) / 2;
-    wrap.style.cssText = "left:" + (img.offsetLeft + ox + EYE_BOX.x * scale) + "px;top:" + (img.offsetTop + oy + EYE_BOX.y * scale) + "px;width:" + (EYE_BOX.w * scale) + "px;height:" + (EYE_BOX.h * scale) + "px;";
-    return wrap;
-  }
-  function visibleShells(onlyIdle) {
-    return Array.prototype.filter.call(document.querySelectorAll(".mascot-breathing-shell"), function (sh) {
-      if (!sh.offsetParent || document.hidden) return false;
-      return onlyIdle ? !sh.classList.contains("is-speaking") : true;
-    });
-  }
-  function glance(sh) {
-    var w = placeEyes(sh); if (!w || w.classList.contains("is-blink")) return;
-    var cls = Math.random() < 0.5 ? "is-look-sx" : "is-look-dx";
-    w.classList.add(cls);
-    setTimeout(function () { w.classList.remove(cls); }, 1100 + Math.random() * 700);
-  }
-  function loop(fn, min, spread, onlyIdle) {
-    setTimeout(function () {
-      visibleShells(onlyIdle).forEach(fn);
-      loop(fn, min, spread, onlyIdle);
-    }, min + Math.random() * spread);
-  }
-
   function greet() {
     document.querySelectorAll(".mascot-motion-shell").forEach(function (sh) {
       if (!sh.offsetParent) return;
