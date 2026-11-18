@@ -10257,7 +10257,7 @@ html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font
 /* Trascrizione (proposta E del 18/11/2026): senza riquadro pieno, filetto oro, testo chiaro sul fondo del player,
    riga attiva in oro. Token del tema: ogni Comune li ridefinisce (contrasto minimo 4,5:1 sul fondo del player). */
 :root {
-  --tp-transcript-surface: transparent;
+  --tp-transcript-surface: rgb(9, 47, 44);
   --tp-transcript-text: #e6efea;
   --tp-transcript-active: #e8c36d;
   --tp-transcript-bar: #e8c36d;
