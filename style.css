@@ -10330,3 +10330,13 @@ body.is-mobile-map-player-mode .map-explore-mascot, body.is-mobile-map-player-mo
 }
 .mascot-motion-shell.is-greeting { animation: tp-mascot-greet 1100ms cubic-bezier(0.3, 0.7, 0.4, 1) both; transform-origin: center bottom; }
 @media (prefers-reduced-motion: reduce) { .mascot-motion-shell.is-greeting, .mascot-eyes { animation: none; display: none; } }
+
+/* Sbadiglio: si stira un poco verso l'alto e torna giù */
+@keyframes tp-mascot-yawn {
+  0%   { translate: 0 0; scale: 1 1; }
+  35%  { translate: 0 -7px; scale: 0.98 1.05; }
+  70%  { translate: 0 -7px; scale: 0.98 1.05; }
+  100% { translate: 0 0; scale: 1 1; }
+}
+.mascot-motion-shell.is-yawning { animation: tp-mascot-yawn 2200ms ease-in-out both; transform-origin: center bottom; }
+@media (prefers-reduced-motion: reduce) { .mascot-motion-shell.is-yawning { animation: none; } }
