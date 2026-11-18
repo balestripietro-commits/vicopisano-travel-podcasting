@@ -10254,15 +10254,17 @@ html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font
   }
 }
 
-/* Trascrizione (proposta B del 18/11/2026): riquadro crema, testo verde, riga attiva in grassetto con barra oro.
-   Token del tema: ogni Comune li ridefinisce con un tono del proprio colore (contrasto minimo 4,5:1). */
+/* Trascrizione (proposta E del 18/11/2026): senza riquadro pieno, filetto oro, testo chiaro sul fondo del player,
+   riga attiva in oro. Token del tema: ogni Comune li ridefinisce (contrasto minimo 4,5:1 sul fondo del player). */
 :root {
-  --tp-transcript-surface: #fff8ef;
-  --tp-transcript-text: #245c52;
+  --tp-transcript-surface: transparent;
+  --tp-transcript-text: #e6efea;
+  --tp-transcript-active: #e8c36d;
   --tp-transcript-bar: #e8c36d;
+  --tp-caption-map-surface: rgba(18, 59, 53, 0.9);
 }
-.player-mobile-live-transcript { background: var(--tp-transcript-surface) !important; border-color: var(--tp-transcript-bar) !important; }
-.player-mobile-transcript-segment { color: color-mix(in srgb, var(--tp-transcript-text) 78%, var(--tp-transcript-surface)) !important; border-left: 3px solid transparent; padding-left: 8px; }
-.player-mobile-transcript-segment.is-active { color: var(--tp-transcript-text) !important; border-left-color: var(--tp-transcript-bar); }
-.map-live-caption { background: var(--tp-transcript-surface) !important; color: var(--tp-transcript-text) !important; border: 1px solid var(--tp-transcript-bar) !important; }
+.player-mobile-live-transcript { background: var(--tp-transcript-surface) !important; border: 1.5px solid var(--tp-transcript-bar) !important; box-shadow: none !important; }
+.player-mobile-transcript-segment { color: var(--tp-transcript-text) !important; opacity: 0.78; border-left: 3px solid transparent; padding-left: 8px; }
+.player-mobile-transcript-segment.is-active { color: var(--tp-transcript-active) !important; opacity: 1; border-left-color: var(--tp-transcript-bar); }
+.map-live-caption { background: var(--tp-caption-map-surface) !important; color: var(--tp-transcript-text) !important; border: 1.5px solid var(--tp-transcript-bar) !important; }
 .map-live-caption * { color: inherit !important; }
