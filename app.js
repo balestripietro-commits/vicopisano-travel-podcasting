@@ -598,13 +598,13 @@ const WHITE_ARTWORK =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><rect width="1200" height="1200" fill="#ffffff"/><rect x="24" y="24" width="1152" height="1152" rx="48" fill="none" stroke="#edf0f2" stroke-width="18"/></svg>'
   );
 const STOP_ARTWORKS = {
-  1: "tappa_1_torre_delle_quattro_porte.webp",
-  2: "tappa_2_torre_e_camminamento_del_soccorso.webp",
+  1: "assets/tappe/tappa-1-forma.webp",
+  2: "assets/tappe/tappa-2-forma.webp",
   3: "tappa_3_palazzo_pretorio.webp",
-  4: "tappa_4_rocca_del_brunelleschi.webp",
-  5: "tappa_5_torre_orologio.webp",
+  4: "assets/tappe/tappa-4-forma.webp",
+  5: "assets/tappe/tappa-5-forma.webp",
   6: "tappa_6_parrocchia_di_santa_maria_addolorata_e_san_giovanni_apostolo.webp",
-  7: "tappa_5_torri_gemelle.webp",
+  7: "assets/tappe/tappa-7-forma.webp",
   8: "tappa_7_palazzo_comunale.webp",
 
 };
@@ -6167,15 +6167,15 @@ function renderGuideStep() {
   const isLastGuideStep = activeGuideStepIndex === steps.length - 1;
   const prevGuideLabel = strings.guideBack || "Indietro";
   const nextGuideLabel = isLastGuideStep ? strings.guideDone : strings.guideNext;
-  guideSkipButton.innerHTML = '<span translate="no" class="material-symbols-rounded" aria-hidden="true">close</span>';
+  guideSkipButton.innerHTML = '<span translate="no" class="material-symbols-rounded brand-icon" data-icon="close" aria-hidden="true">close</span>';
   guideSkipButton.setAttribute("aria-label", strings.guideSkip);
   guideSkipButton.title = strings.guideSkip;
-  guidePrevButton.innerHTML = '<span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_back</span>';
+  guidePrevButton.innerHTML = '<span translate="no" class="material-symbols-rounded brand-icon" data-icon="arrow_back" aria-hidden="true">arrow_back</span>';
   guidePrevButton.disabled = isFirstGuideStep;
   guidePrevButton.classList.toggle("is-disabled", isFirstGuideStep);
   guidePrevButton.setAttribute("aria-label", prevGuideLabel);
   guidePrevButton.title = prevGuideLabel;
-  guideNextButton.innerHTML = isLastGuideStep ? '<svg class="guide-check" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><path d="M44 104 L86 146 L158 60" fill="none" stroke="currentColor" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<span translate="no" class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>';
+  guideNextButton.innerHTML = isLastGuideStep ? '<svg class="guide-check" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><path d="M44 104 L86 146 L158 60" fill="none" stroke="currentColor" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '<span translate="no" class="material-symbols-rounded brand-icon" data-icon="arrow_forward" aria-hidden="true">arrow_forward</span>';
   guideNextButton.setAttribute("aria-label", nextGuideLabel);
   guideNextButton.title = nextGuideLabel;
   guideLayer.classList.remove("is-hidden");

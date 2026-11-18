@@ -10154,3 +10154,35 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
 .TPMiniPlayer .mini-player-controls { display: grid !important; grid-template-columns: 40px minmax(0, 1fr) 40px; align-items: center; column-gap: 4px; width: 100%; }
 .TPMiniPlayer .mini-player-controls > .mini-player-transport-group { grid-column: 2; display: flex; justify-content: space-between; gap: 0; width: 100%; min-width: 0; }
 .TPMiniPlayer .mini-player-controls > #mini-player-speed-button { grid-column: 3; width: 40px; min-width: 0; padding: 0; justify-self: center; }
+
+/* ===== Player: stesse proporzioni ovunque (mini e schermo intero) ===== */
+.player-controls { --pc-btn: 44px; --pc-ic: 28px; --pc-play: 60px; }
+.TPMiniPlayer .mini-player-controls { --pc-btn: 38px; --pc-ic: 24px; --pc-play: 46px; }
+.player-controls .player-control-button:not(.is-primary):not(.player-speed-button),
+.TPMiniPlayer .mini-player-control {
+  width: var(--pc-btn) !important; height: var(--pc-btn) !important; min-width: 0 !important; min-height: 0 !important;
+  padding: 0 !important; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+}
+.player-controls .player-control-button .material-symbols-rounded,
+.player-controls .player-control-button .brand-skip,
+.TPMiniPlayer .mini-player-control .material-symbols-rounded,
+.TPMiniPlayer .mini-player-control .brand-skip { width: var(--pc-ic) !important; height: var(--pc-ic) !important; }
+#player-play-button, #mini-player-toggle {
+  width: var(--pc-play) !important; height: var(--pc-play) !important; min-width: 0 !important; min-height: 0 !important;
+  aspect-ratio: 1 / 1; border-radius: 50% !important; padding: 0 !important;
+}
+#player-play-button .playback-icon, #mini-player-toggle .playback-icon { font-size: calc(var(--pc-play) * 0.5) !important; }
+.play-ring, #mini-player-toggle .play-ring { inset: -6px; width: calc(100% + 12px); height: calc(100% + 12px); }
+.play-ring circle { stroke-width: 4; }
+#player-speed-button, #mini-player-speed-button {
+  width: auto !important; min-width: 40px !important; height: 32px !important; padding: 0 6px !important;
+  font: 700 0.85rem var(--tp-font-ui); letter-spacing: 0;
+}
+
+/* Titolo del player: a capo su due righe, mai tagliato né scorrevole */
+.player-overlay .player-title-row h2,
+.player-overlay .player-title-row .player-title-text {
+  white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
+  animation: none !important; transform: none !important; font-size: clamp(1.35rem, 6.2vw, 1.9rem) !important; line-height: 1.12;
+  max-width: 100%; text-wrap: balance;
+}
