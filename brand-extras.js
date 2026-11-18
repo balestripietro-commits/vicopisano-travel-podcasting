@@ -252,8 +252,6 @@
   /* Un tocco sulla mascotte, in qualsiasi schermata, la fa saltare (home, mappa, player) */
   function hopMascot(shell) {
     if (!shell) return;
-    var br = shell.querySelector(".mascot-breathing-shell");
-    if (br) { br._idleSec = 0; if (br._yawnCancel) br._yawnCancel(); }
     shell.classList.remove("is-hopping");
     void shell.offsetWidth;
     shell.classList.add("is-hopping");
@@ -310,7 +308,7 @@
     }, 130);
   }
   function glance(sh) {
-    var w = placeEyes(sh); if (!w || w.classList.contains("is-blink") || sh._yawning) return;
+    var w = placeEyes(sh); if (!w || w.classList.contains("is-blink")) return;
     var cls = Math.random() < 0.5 ? "is-look-sx" : "is-look-dx";
     w.classList.add(cls);
     setTimeout(function () { w.classList.remove(cls); }, 1100 + Math.random() * 700);
@@ -322,31 +320,6 @@
     }, min + Math.random() * spread);
   }
 
-  /* Dopo 20 secondi senza parlare: sbadiglio (bocca a «o», occhi chiusi, si stira un poco), poi torna com'era */
-  function yawn(sh) {
-    var img = sh.querySelector("img:not([class*='mascot-eye'])"), w = placeEyes(sh);
-    if (!img || !w) return;
-    var orig = img.getAttribute("src") || "", open = orig.replace(/mascotte_[A-HX]\.webp/, "mascotte_F.webp");
-    if (open === orig) return;
-    var ms = sh.closest(".mascot-motion-shell") || sh;
-    sh._yawning = true;
-    img.setAttribute("src", open); w.classList.add("is-blink"); ms.classList.remove("is-yawning"); void ms.offsetWidth; ms.classList.add("is-yawning");
-    var done = function () {
-      if (!sh._yawning) return;
-      sh._yawning = false; clearTimeout(sh._yawnTimer);
-      ms.classList.remove("is-yawning"); w.classList.remove("is-blink");
-      if (!sh.classList.contains("is-speaking")) img.setAttribute("src", orig);
-    };
-    sh._yawnCancel = done;
-    sh._yawnTimer = setTimeout(done, 2300);
-  }
-  setInterval(function () {
-    visibleShells(false).forEach(function (sh) {
-      if (sh.classList.contains("is-speaking")) { sh._idleSec = 0; return; }
-      sh._idleSec = (sh._idleSec || 0) + 1;
-      if (sh._idleSec >= 20 && !sh._yawning) { sh._idleSec = -20; yawn(sh); }
-    });
-  }, 1000);
   function greet() {
     document.querySelectorAll(".mascot-motion-shell").forEach(function (sh) {
       if (!sh.offsetParent) return;
@@ -355,7 +328,7 @@
     });
   }
   if (!reducedMotion) {
-    loop(function (sh) { if (!sh._yawning) blinkOnce(sh, Math.random() < 0.15 ? 2 : 1); }, 5500, 6500, false);
+    loop(function (sh) { blinkOnce(sh, Math.random() < 0.15 ? 2 : 1); }, 5500, 6500, false);
     loop(glance, 6500, 5500, true);
     var titleEl = document.getElementById("detail-title-text");
     if (titleEl) new MutationObserver(function () { setTimeout(greet, 350); }).observe(titleEl, { childList: true, characterData: true, subtree: true });
