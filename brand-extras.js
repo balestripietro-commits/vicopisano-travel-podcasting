@@ -277,7 +277,7 @@
       wrap = document.createElement("div");
       wrap.className = "mascot-eyes";
       wrap.setAttribute("aria-hidden", "true");
-      ["blink", "sx", "dx"].forEach(function (n) {
+      ["sx", "dx"].forEach(function (n) {
         var e = document.createElement("img");
         e.className = "mascot-eye mascot-eye-" + n; e.alt = ""; e.decoding = "async"; e.src = EYES_BASE + n + ".webp";
         wrap.appendChild(e);
@@ -298,14 +298,6 @@
       if (!sh.offsetParent || document.hidden) return false;
       return onlyIdle ? !sh.classList.contains("is-speaking") : true;
     });
-  }
-  function blinkOnce(sh, times) {
-    var w = placeEyes(sh); if (!w) return;
-    w.classList.add("is-blink");
-    setTimeout(function () {
-      w.classList.remove("is-blink");
-      if (times > 1) setTimeout(function () { blinkOnce(sh, times - 1); }, 190);
-    }, 130);
   }
   function glance(sh) {
     var w = placeEyes(sh); if (!w || w.classList.contains("is-blink")) return;
@@ -328,8 +320,7 @@
     });
   }
   if (!reducedMotion) {
-    loop(function (sh) { blinkOnce(sh, Math.random() < 0.15 ? 2 : 1); }, 5500, 6500, false);
-    loop(glance, 6500, 5500, true);
+    loop(glance, 12000, 13000, true);
     var titleEl = document.getElementById("detail-title-text");
     if (titleEl) new MutationObserver(function () { setTimeout(greet, 350); }).observe(titleEl, { childList: true, characterData: true, subtree: true });
     new MutationObserver(function (list) {
