@@ -10298,3 +10298,5 @@ html.tp-splash-lock, html.tp-splash-lock body { overflow: hidden !important; ove
 /* Anello del play nel mini player: stessa distanza dal tasto che nel player a schermo intero (prima toccava il bordo) */
 .TPMiniPlayer #mini-player-toggle .play-ring { inset: -8px !important; width: calc(100% + 16px) !important; height: calc(100% + 16px) !important; }
 .TPMiniPlayer #mini-player-toggle .play-ring circle { stroke-width: 3.6; }
+html.tp-splash-lock { scrollbar-width: none; -ms-overflow-style: none; }
+html.tp-splash-lock::-webkit-scrollbar, html.tp-splash-lock body::-webkit-scrollbar { display: none; width: 0; height: 0; }
