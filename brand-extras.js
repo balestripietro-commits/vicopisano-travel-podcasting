@@ -82,8 +82,8 @@
     }
     var items = tappe.map(function (t) {
       var on = heard.has(t.numero);
-      return '<img class="col-thumb' + (on ? " is-heard" : "") + '" data-shape="' + (window.getPhotoShape||getStopShape)(t.titolo) +
-        '" src="' + art(t) + '" alt="' + (on ? tr().heard : tr().todo).replace("{n}", t.numero) + '" decoding="async">';
+      return '<button type="button" class="col-thumb-btn" data-stop="' + t.numero + '" aria-label="' + t.numero + ". " + String(t.titolo).replace(/"/g, "&quot;") + '"><img class="col-thumb' + (on ? " is-heard" : "") + '" data-shape="' + (window.getPhotoShape||getStopShape)(t.titolo) +
+        '" src="' + art(t) + '" alt="' + (on ? tr().heard : tr().todo).replace("{n}", t.numero) + '" decoding="async"></button>';
     }).join("");
     var km = routeKm(), walk = km / 4.5 * 60, sec = 0, remSec = 0, left = 0;
     tappe.forEach(function (t) {
@@ -100,6 +100,13 @@
     collection.innerHTML = '<div class="stop-collection-head"><strong>' + tr().coll + '</strong><span>' + heard.size + " " + tr().of + " " + tappe.length +
       '</span></div><div class="stop-collection-chips">' + chips + '</div><div class="stop-collection-segs">' + segs + '</div><div class="stop-collection-status">' + status +
       '</div><div class="stop-collection-row">' + items + '</div>';
+    collection.querySelectorAll(".col-thumb-btn").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var idx = tappe.findIndex(function (t) { return String(t.numero) === b.dataset.stop; });
+        var target = document.querySelectorAll(".stop-button")[idx];
+        if (target) target.click();
+      });
+    });
   }
 
   function applyHeard() {

@@ -10235,3 +10235,11 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
 }
 
 .stop-collection-passport, .tp-passport-grid { display: none !important; }
+
+/* Arabo (da destra a sinistra): virgoletta iniziale a destra, finale a sinistra dell'ultima riga */
+html[dir="rtl"] .intro-copy { padding-left: 0; padding-right: 2.4em; }
+html[dir="rtl"] .intro-copy::before { left: auto; right: 0; font-style: normal; font-family: Georgia, "Times New Roman", serif; }
+html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font-style: normal; font-family: Georgia, "Times New Roman", serif; }
+.col-thumb-btn { border: 0; background: none; padding: 0; margin: 0; cursor: pointer; border-radius: 12px; line-height: 0; -webkit-tap-highlight-color: transparent; }
+.col-thumb-btn:focus-visible { outline: 3px solid var(--tp-color-tertiary, #e8c36d); outline-offset: 3px; }
+.col-thumb-btn:active .col-thumb { transform: scale(0.94); }
