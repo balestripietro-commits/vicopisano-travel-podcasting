@@ -99,9 +99,7 @@
       (km ? '<span class="chip chip-km">' + km.toLocaleString(String(document.documentElement.lang || "it"), { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + ' ' + (tr().kmU || 'km') + '</span>' : "");
     collection.innerHTML = '<div class="stop-collection-head"><strong>' + tr().coll + '</strong><span>' + heard.size + " " + tr().of + " " + tappe.length +
       '</span></div><div class="stop-collection-chips">' + chips + '</div><div class="stop-collection-segs">' + segs + '</div><div class="stop-collection-status">' + status +
-      '</div><div class="stop-collection-row">' + items + '</div><button type="button" class="stop-collection-passport">' + tr().pBtn + '</button>';
-    var pb = collection.querySelector(".stop-collection-passport");
-    if (pb) pb.addEventListener("click", showPassport);
+      '</div><div class="stop-collection-row">' + items + '</div>';
   }
 
   function applyHeard() {
@@ -122,37 +120,6 @@
     if (!id) return;
     var p = readPassport();
     if (!p[id]) { p[id] = { date: new Date().toISOString().slice(0, 10) }; try { localStorage.setItem(PASSPORT_KEY, JSON.stringify(p)); } catch (e) { /* ignora */ } }
-  }
-  var passportEl = null;
-  function stampSvg(c, done) {
-    var d = SHAPE_PATHS[c.shape] || SHAPE_PATHS.lente;
-    var img = done && c.photo ? '<image href="' + (STOP_ARTWORKS[c.photo] || "") + '" x="-80" width="560" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#pc-' + c.id + ')"/>' : "";
-    var base = '<path d="' + d + '" fill="' + (done ? "#E8C36D" : "#e4ddd0") + '"/>';
-    return '<svg viewBox="0 0 400 400" aria-hidden="true"><defs><clipPath id="pc-' + c.id + '"><path d="' + d + '"/></clipPath></defs>' + base + img +
-      (done ? '<circle cx="320" cy="320" r="46" fill="#245C52" stroke="#fff" stroke-width="10"/><path d="M296 320l17 18 32-38" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>' : "") + "</svg>";
-  }
-  function showPassport() {
-    if (!passportEl) {
-      passportEl = document.createElement("div");
-      passportEl.className = "tp-complete tp-passport";
-      passportEl.setAttribute("role", "dialog");
-      passportEl.setAttribute("aria-modal", "true");
-      passportEl.hidden = true;
-      document.body.appendChild(passportEl);
-      passportEl.addEventListener("click", function (e) { if (e.target === passportEl) passportEl.hidden = true; });
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") passportEl.hidden = true; });
-    }
-    var p = readPassport();
-    var items = COMUNI.map(function (c) {
-      var done = !!p[c.id];
-      return '<div class="tp-stamp' + (done ? " is-done" : "") + '">' + stampSvg(c, done) + "<b>" + c.name + "</b><span>" + (done ? tr().pDone : tr().pTodo) + "</span></div>";
-    }).join("");
-    passportEl.setAttribute("aria-label", tr().pBtn);
-    passportEl.innerHTML = '<div class="tp-complete-card"><h2>' + tr().pBtn + '</h2><div class="tp-passport-grid">' + items + '</div><p class="tp-complete-promo">' + tr().pHint +
-      '</p><div class="tp-complete-actions"><button type="button" class="tp-complete-close">' + tr().close + "</button></div></div>";
-    passportEl.querySelector(".tp-complete-close").addEventListener("click", function () { passportEl.hidden = true; });
-    passportEl.hidden = false;
-    passportEl.querySelector(".tp-complete-close").focus();
   }
 
   function share() {

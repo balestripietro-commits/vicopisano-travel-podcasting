@@ -10233,3 +10233,5 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
   .TPMiniPlayer .mini-player-controls > .mini-player-transport-group { grid-column: 1; }
   .TPMiniPlayer .mini-player-controls > #mini-player-speed-button { grid-column: 2; }
 }
+
+.stop-collection-passport, .tp-passport-grid { display: none !important; }
