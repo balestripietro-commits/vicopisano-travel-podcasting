@@ -10352,3 +10352,6 @@ body.is-mobile-map-player-mode .map-explore-mascot, body.is-mobile-map-player-mo
   .TPMiniPlayer .mini-player-controls { grid-template-columns: repeat(6, 48px) !important; }
 }
 .player-controls > *, .player-controls .player-transport-group > *, .TPMiniPlayer .mini-player-controls > *, .TPMiniPlayer .mini-player-transport-group > * { justify-self: center !important; align-self: center !important; }
+
+/* Selettore lingua: niente puntino oro sul mondo né sotto la freccia */
+.brand-icon[data-icon="language"], .brand-icon[data-icon="expand_more"] { --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E"); }
