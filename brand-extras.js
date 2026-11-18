@@ -232,7 +232,7 @@
 
   /* Un tocco sulla mascotte, in qualsiasi schermata, la fa saltare (home, mappa, player) */
   function hopMascot(shell) {
-    if (!shell) return;
+    if (!shell || shell.classList.contains("mascot-motion-shell--hero")) return; /* la mascotte della home ha già il suo salto */
     shell.classList.remove("is-hopping");
     void shell.offsetWidth;
     shell.classList.add("is-hopping");

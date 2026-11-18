@@ -978,7 +978,7 @@ test("long captions remain complete and clear of the player across viewport size
     expect(result.actual).toBe(result.expected);
     // A wider desktop caption can fit the same cue on a single page.
     expect(result.pageCount).toBeGreaterThanOrEqual(1);
-    expect(result.maximumLines).toBeLessThanOrEqual(2.15);
+    expect(result.maximumLines).toBeLessThanOrEqual(width < 1024 ? 3.15 : 2.15); // sul telefono la didascalia ha tre righe (dal 18/11/2026)
     expect(result.horizontalOverflow).toBe(false);
     expect(result.top).toBeGreaterThanOrEqual(0);
     expect(result.bottom).toBeLessThanOrEqual(height);

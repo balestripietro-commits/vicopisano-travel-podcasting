@@ -10355,3 +10355,11 @@ body.is-mobile-map-player-mode .map-explore-mascot, body.is-mobile-map-player-mo
 
 /* Selettore lingua: niente puntino oro sul mondo né sotto la freccia */
 .brand-icon[data-icon="language"], .brand-icon[data-icon="expand_more"] { --ic-d: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201%201'%3E%3C/svg%3E"); }
+
+/* Audio di passaggio: resta solo il play, largo quanto la riga (come prima dei comandi a colonne uguali) */
+body.is-transition-audio .player-controls, body.is-transition-audio .TPMiniPlayer .mini-player-controls { display: flex !important; justify-content: center; }
+body.is-transition-audio #player-play-button, body.is-transition-audio #mini-player-toggle {
+  flex: 1 1 100% !important; width: 100% !important; max-width: none !important; aspect-ratio: auto !important;
+  border-radius: var(--tp-radius-lg) !important; height: auto !important; min-height: var(--pc-play) !important;
+}
+body.is-transition-audio .play-ring { display: none !important; }
