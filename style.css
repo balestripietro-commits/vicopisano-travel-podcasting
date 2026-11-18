@@ -10300,3 +10300,17 @@ html.tp-splash-lock, html.tp-splash-lock body { overflow: hidden !important; ove
 .TPMiniPlayer #mini-player-toggle .play-ring circle { stroke-width: 3.6; }
 html.tp-splash-lock { scrollbar-width: none; -ms-overflow-style: none; }
 html.tp-splash-lock::-webkit-scrollbar, html.tp-splash-lock body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.player-mobile-live-transcript .player-mobile-live-transcript-scroll .player-mobile-transcript-segment { padding-left: 16px !important; }
+
+/* Salto della mascotte al tocco (usa le proprietà translate e scale, così non disturba le altre animazioni) */
+@keyframes tp-mascot-hop {
+  0%   { translate: 0 0; scale: 1 1; }
+  15%  { translate: 0 0; scale: 1.07 0.92; }
+  45%  { translate: 0 -26px; scale: 0.97 1.05; }
+  75%  { translate: 0 0; scale: 1.06 0.93; }
+  100% { translate: 0 0; scale: 1 1; }
+}
+.mascot-motion-shell.is-hopping { animation: tp-mascot-hop 560ms cubic-bezier(0.3, 0.7, 0.4, 1) both; transform-origin: center bottom; }
+.mascot-motion-shell, .map-explore-mascot-image, .mascot-motion-shell img { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+body.is-mobile-map-player-mode .map-explore-mascot, body.is-mobile-map-player-mode .map-explore-mascot-motion { pointer-events: auto !important; }
+@media (prefers-reduced-motion: reduce) { .mascot-motion-shell.is-hopping { animation: none; } }

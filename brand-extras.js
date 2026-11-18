@@ -249,6 +249,22 @@
     if (pane) new MutationObserver(function () { applyHeard(); }).observe(pane, { childList: true });
   }
 
+  /* Un tocco sulla mascotte, in qualsiasi schermata, la fa saltare (home, mappa, player) */
+  function hopMascot(shell) {
+    if (!shell) return;
+    shell.classList.remove("is-hopping");
+    void shell.offsetWidth;
+    shell.classList.add("is-hopping");
+    try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) { /* ignora */ }
+    clearTimeout(shell._hopTimer);
+    shell._hopTimer = setTimeout(function () { shell.classList.remove("is-hopping"); }, 700);
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target && e.target.closest ? e.target.closest(".mascot-motion-shell, .map-explore-mascot") : null;
+    if (!t) return;
+    hopMascot(t.classList.contains("mascot-motion-shell") ? t : t.querySelector(".mascot-motion-shell"));
+  }, true);
+
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
 })();
