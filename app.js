@@ -323,9 +323,15 @@ const stopPreviewImage = document.getElementById("stop-preview-image");
 const STOP_SHAPE_RULES = [
   ["torre", /\b(torre|torri)\b/i],
   ["arco", /\b(pieve|chiesa|parrocchia|porta|porte|ingresso)\b/i],
-  ["tassello", /\b(palazzo|museo|villa|teatro)\b/i],
+  ["blocco", /\b(palazzo|museo|villa|teatro)\b/i],
   ["foglia", /\b(parco|giardino|piazza|bosco|boschetto)\b/i]
 ];
+
+// Forma della foto: segue quella del numero sulla mappa, ma le torri (la foto non ci entra) usano il tassello
+function getPhotoShape(title) {
+  const shape = getStopShape(title);
+  return shape === "torre" ? "tassello" : shape;
+}
 
 function getStopShape(title) {
   const text = String(title || "");
@@ -3146,8 +3152,8 @@ function updateStopPreview(tappa, { animate = false } = {}) {
   stopPreviewTitle.textContent = title;
   stopPreviewImage.src = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
   stopPreviewImage.alt = `Immagine ${title}`;
-  stopPreviewImage.dataset.shape = getStopShape(tappa.titolo);
-  stopPreview.dataset.shape = getStopShape(tappa.titolo);
+  stopPreviewImage.dataset.shape = getPhotoShape(tappa.titolo);
+  stopPreview.dataset.shape = getPhotoShape(tappa.titolo);
 
   if (animate && !reducedMotionQuery.matches) {
     replayAnimationClass(stopPreview, "is-entering", getRouteSelectionDuration());
@@ -4330,7 +4336,7 @@ function updateNextStopPreview(tappa) {
     playerNextPreviewTitle.textContent = `${nextStop.numero}. ${getStopTitle(nextStop)}`;
     playerNextPreviewImage.src = STOP_ARTWORKS[nextStop.numero] || WHITE_ARTWORK;
     playerNextPreviewImage.alt = `Immagine ${getStopTitle(nextStop)}`;
-    playerNextPreviewImage.dataset.shape = getStopShape(nextStop.titolo);
+    playerNextPreviewImage.dataset.shape = getPhotoShape(nextStop.titolo);
     const nextActionLabel = strings.openNextStop || "Apri prossima tappa";
     const nextActionIcon = playerNextStopButton?.querySelector(".material-symbols-rounded");
     if (nextActionIcon) {
@@ -4356,7 +4362,7 @@ function updatePreviousStopPreview(tappa) {
     playerPreviousPreviewTitle.textContent = `${previousStop.numero}. ${getStopTitle(previousStop)}`;
     playerPreviousPreviewImage.src = STOP_ARTWORKS[previousStop.numero] || WHITE_ARTWORK;
     playerPreviousPreviewImage.alt = `Immagine ${getStopTitle(previousStop)}`;
-    playerPreviousPreviewImage.dataset.shape = getStopShape(previousStop.titolo);
+    playerPreviousPreviewImage.dataset.shape = getPhotoShape(previousStop.titolo);
     playerPreviousStopButton?.setAttribute("aria-label", strings.playerPrevious);
     playerPreviousStopButton.title = strings.playerPrevious;
   }
@@ -5182,7 +5188,7 @@ function startTransitionAudio(nextStop, kind = "between") {
   }
 }
 
-const STOP_SHAPE_PATHS = {"torre": "M50 390V80Q50 30 100 30Q150 30 150 80V105Q150 130 175 130H225Q250 130 250 105V80Q250 30 300 30Q350 30 350 80V390Q350 400 340 400H60Q50 400 50 390Z", "arco": "M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z", "tassello": "M200 20A180 180 0 0 0 20 200A180 180 0 0 0 200 380H345Q380 380 380 345V200A180 180 0 0 0 200 20Z", "foglia": "M200 20H380V200A180 180 0 0 1 200 380H20V200A180 180 0 0 1 200 20Z", "lente": "M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z"};
+const STOP_SHAPE_PATHS = {"torre": "M50 390V80Q50 30 100 30Q150 30 150 80V105Q150 130 175 130H225Q250 130 250 105V80Q250 30 300 30Q350 30 350 80V390Q350 400 340 400H60Q50 400 50 390Z", "arco": "M80 400Q40 400 40 360V200A160 160 0 0 1 360 200V360Q360 400 320 400Z", "tassello": "M200 20A180 180 0 0 0 20 200A180 180 0 0 0 200 380H345Q380 380 380 345V200A180 180 0 0 0 200 20Z", "foglia": "M200 20H380V200A180 180 0 0 1 200 380H20V200A180 180 0 0 1 200 20Z", "blocco": "M110 30H290Q370 30 370 110V290Q370 370 290 370H110Q30 370 30 290V110Q30 30 110 30Z", "lente": "M110 20H290Q315 20 330 45L385 170Q395 200 385 230L330 355Q315 380 290 380H110Q85 380 70 355L15 230Q5 200 15 170L70 45Q85 20 110 20Z"};
 
 function createMarkerIcon(stopNumber, stopTitle) {
   const shape = getStopShape(stopTitle);
@@ -7031,10 +7037,10 @@ function updateMiniPlayer(tappa, selectedOption) {
   const artworkSrc = STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK;
   miniPlayerArtwork.src = artworkSrc;
   miniPlayerArtwork.alt = `Artwork tappa ${tappa.numero}`;
-  miniPlayerArtwork.dataset.shape = getStopShape(tappa.titolo);
+  miniPlayerArtwork.dataset.shape = getPhotoShape(tappa.titolo);
   detailArtworkImage.src = artworkSrc;
   detailArtworkImage.alt = `Immagine tappa ${tappa.numero}`;
-  detailArtworkImage.dataset.shape = getStopShape(tappa.titolo);
+  detailArtworkImage.dataset.shape = getPhotoShape(tappa.titolo);
 
   if (detailMascotImage) {
     detailMascotImage.src = MASCOT_FRAME_PATHS[currentMascotFrame] || MASCOT_REST_FRAME;
@@ -7678,7 +7684,7 @@ function renderStopsList() {
     button.setAttribute("aria-current", "false");
 
     button.innerHTML = `
-      <img class="stop-thumb" data-shape="${getStopShape(tappa.titolo)}" src="${STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK}" alt="" decoding="async" />
+      <img class="stop-thumb" data-shape="${getPhotoShape(tappa.titolo)}" src="${STOP_ARTWORKS[tappa.numero] || WHITE_ARTWORK}" alt="" decoding="async" />
       <span class="stop-index">${tappa.numero}</span>
       <span>
         <strong class="stop-title">${getStopTitle(tappa)}</strong>

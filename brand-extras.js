@@ -82,7 +82,7 @@
     }
     var items = tappe.map(function (t) {
       var on = heard.has(t.numero);
-      return '<img class="col-thumb' + (on ? " is-heard" : "") + '" data-shape="' + getStopShape(t.titolo) +
+      return '<img class="col-thumb' + (on ? " is-heard" : "") + '" data-shape="' + (window.getPhotoShape||getStopShape)(t.titolo) +
         '" src="' + art(t) + '" alt="' + (on ? tr().heard : tr().todo).replace("{n}", t.numero) + '" decoding="async">';
     }).join("");
     var km = routeKm(), walk = km / 4.5 * 60, sec = 0, remSec = 0, left = 0;
@@ -171,7 +171,7 @@
       overlay.setAttribute("aria-labelledby", "tp-complete-title");
       overlay.hidden = true;
       var mosaic = tappe.map(function (t) {
-        return '<img class="tp-complete-thumb" data-shape="' + getStopShape(t.titolo) + '" src="' + art(t) + '" alt="">';
+        return '<img class="tp-complete-thumb" data-shape="' + (window.getPhotoShape||getStopShape)(t.titolo) + '" src="' + art(t) + '" alt="">';
       }).join("");
       overlay.innerHTML = '<div class="tp-complete-card"><h2 id="tp-complete-title"></h2>' +
         '<div class="tp-complete-mosaic">' + mosaic + "</div>" +
