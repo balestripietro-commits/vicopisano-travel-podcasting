@@ -10290,3 +10290,11 @@ html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font
 @media (max-width: 1023px) {
   body.is-mobile-map-player-mode .map-live-caption:not([hidden]) { font-size: clamp(1rem, 4.4vw, 1.1rem); line-height: 1.32; padding: 9px 12px; }
 }
+
+/* Durante l'animazione iniziale la pagina non scorre */
+html.tp-splash-lock, html.tp-splash-lock body { overflow: hidden !important; overscroll-behavior: none; height: 100%; }
+.tp-splash { touch-action: none; overscroll-behavior: none; }
+
+/* Anello del play nel mini player: stessa distanza dal tasto che nel player a schermo intero (prima toccava il bordo) */
+.TPMiniPlayer #mini-player-toggle .play-ring { inset: -8px !important; width: calc(100% + 16px) !important; height: calc(100% + 16px) !important; }
+.TPMiniPlayer #mini-player-toggle .play-ring circle { stroke-width: 3.6; }
