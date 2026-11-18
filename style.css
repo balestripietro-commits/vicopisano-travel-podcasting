@@ -9791,7 +9791,7 @@ body {
   display: grid;
   place-items: center;
   padding: 20px;
-  background: rgba(14, 51, 45, 0.78);
+  background: var(--tp-caption-surface, rgba(14, 51, 45, 0.78));
 }
 .tp-complete-card {
   width: min(560px, 100%);
@@ -9829,8 +9829,8 @@ body {
 .shape-swap { animation: tp-shape-swap 460ms cubic-bezier(0.65, 0, 0.35, 1) both; }
 
 /* L · la tua posizione è il puntino oro del brand */
-.map-user-location-marker { fill: #e8c36d !important; fill-opacity: 1 !important; stroke: #ffffff !important; stroke-width: 4px !important; }
-.map-user-location-accuracy { fill: #e8c36d !important; stroke: #e8c36d !important; fill-opacity: 0.18 !important; }
+.map-user-location-marker { fill: var(--tp-color-tertiary, #e8c36d) !important; fill-opacity: 1 !important; stroke: #ffffff !important; stroke-width: 4px !important; }
+.map-user-location-accuracy { fill: var(--tp-color-tertiary, #e8c36d) !important; stroke: var(--tp-color-tertiary, #e8c36d) !important; fill-opacity: 0.18 !important; }
 
 /* F · tracciato: percorso futuro tenue, tappa attiva con anello d'oro pulsante */
 .leaflet-overlay-pane .map-route-base { opacity: 0.42; }
@@ -10118,7 +10118,7 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
 .solo-seek { flex: 1; accent-color: var(--tp-color-tertiary); height: 32px; }
 .solo-controls { display: flex; align-items: center; justify-content: center; gap: 10px; direction: ltr; margin: 8px 0; }
 .solo-btn { width: 64px; height: 64px; padding: 14px; border: 0; background: transparent; color: #fff8ef; border-radius: 50%; }
-.solo-btn.solo-play { width: 104px; height: 104px; padding: 26px; background: var(--tp-color-tertiary); color: #1b3f39; }
+.solo-btn.solo-play { width: 104px; height: 104px; padding: 26px; background: var(--tp-color-tertiary); color: var(--tp-color-primary-dark, #1b3f39); }
 .solo-btn:focus-visible, .solo-speed:focus-visible, .solo-close:focus-visible { outline: 4px solid var(--tp-color-tertiary); outline-offset: 3px; }
 .solo-speed { min-width: 64px; height: 48px; padding: 0 16px; border: 0; background: transparent; color: #fff8ef; font: 700 1.2rem var(--tp-font-ui); }
 .solo-hint { max-width: 32ch; margin: 12px 0 0; font-size: 0.95rem; opacity: 0.75; }
@@ -10223,7 +10223,7 @@ html[dir="rtl"] .stop-collection-row { direction: rtl; }
 
 /* Controlli almeno 44 px (test di accessibilità) e testi piccoli con contrasto sufficiente */
 .TPMiniPlayer .mini-player-controls { --pc-btn: 44px; --pc-ic: 26px; --pc-play: 50px; }
-.stop-collection-head > span { color: #3f6a60; }
+.stop-collection-head > span { color: var(--tp-color-primary, #3f6a60); }
 .stop-collection-head > span { opacity: 1; }
 #player-speed-button, #mini-player-speed-button { min-width: 44px !important; height: 44px !important; }
 .player-controls, .TPMiniPlayer .mini-player-controls { grid-template-columns: 44px repeat(2, minmax(0, 1fr)) 76px repeat(2, minmax(0, 1fr)) 44px !important; }
@@ -10257,11 +10257,11 @@ html[dir="rtl"] .intro-quote::after { margin-left: 0; margin-right: 0.08em; font
 /* Trascrizione (proposta E del 18/11/2026): senza riquadro pieno, filetto oro, testo chiaro sul fondo del player,
    riga attiva in oro. Token del tema: ogni Comune li ridefinisce (contrasto minimo 4,5:1 sul fondo del player). */
 :root {
-  --tp-transcript-surface: rgb(9, 47, 44);
+  --tp-transcript-surface: var(--tp-player-surface-sheet-deep, rgb(9, 47, 44));
   --tp-transcript-text: #e6efea;
-  --tp-transcript-active: #e8c36d;
-  --tp-transcript-bar: #e8c36d;
-  --tp-caption-map-surface: rgba(18, 59, 53, 0.9);
+  --tp-transcript-active: var(--tp-color-tertiary, #e8c36d);
+  --tp-transcript-bar: var(--tp-color-tertiary, #e8c36d);
+  --tp-caption-map-surface: var(--tp-caption-surface, rgba(18, 59, 53, 0.9));
 }
 .player-mobile-live-transcript { background: var(--tp-transcript-surface) !important; border: 1.5px solid var(--tp-transcript-bar) !important; box-shadow: none !important; }
 .player-mobile-transcript-segment { color: var(--tp-transcript-text) !important; opacity: 0.78; border-left: 3px solid transparent; padding-left: 8px; }

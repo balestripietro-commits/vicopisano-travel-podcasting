@@ -31,18 +31,9 @@
     zh: { stopsN: "{n}个站点", rem1: "还剩1站 · 约{m}分钟", remN: "还剩{k}站 · 约{m}分钟", all: "路线已完成", total: "收听加步行约{m}分钟", pBtn: "你的村镇护照", pDone: "路线已完成", pTodo: "待探索", stamp: "已为你的护照盖章", pHint: "每完成一条路线，就得到一枚村镇形状的印章。", minU: "分钟", kmU: "公里" },
     ar: { stopsN: "{n} محطات", rem1: "بقيت محطة واحدة · نحو {m} دقيقة", remN: "بقيت {k} محطات · نحو {m} دقيقة", all: "اكتمل المسار", total: "نحو {m} دقيقة بين الاستماع والمشي", pBtn: "جواز سفر القرى", pDone: "اكتمل المسار", pTodo: "للاكتشاف", stamp: "أُضيف ختم إلى جواز سفركم", pHint: "كل مسار مكتمل هو ختم بشكل القرية.", minU: "د", kmU: "كم" }
   };
-  var STOP_SECONDS = { 1: 293, 2: 135, 3: 259, 4: 180, 5: 165, 6: 217, 7: 192, 8: 262 };
-  var PASSPORT_KEY = "tp-passaporto";
-  var COMUNI = [
-    { id: "vicopisano", name: "Vicopisano", shape: "torre", photo: 1 },
-    { id: "calci", name: "Calci", shape: "arco", photo: null }
-  ];
-  var SHAPE_PATHS = {
-    torre: "M60 340V92Q60 50 100 50Q140 50 140 92V108Q140 128 160 128H240Q260 128 260 108V92Q260 50 300 50Q340 50 340 92V340Q340 360 320 360H80Q60 360 60 340Z",
-    arco: "M80 360Q60 360 60 340V200A140 140 0 0 1 340 200V340Q340 360 320 360Z",
-    tassello: "M200 50A150 150 0 0 0 50 200A150 150 0 0 0 200 350H335Q350 350 350 335V200A150 150 0 0 0 200 50Z",
-    lente: "M110 40H290Q310 40 322 58L378 182Q384 200 378 218L322 342Q310 360 290 360H110Q90 360 78 342L22 218Q16 200 22 182L78 58Q90 40 110 40Z"
-  };
+  /* Dati del sito: durata di ogni traccia in secondi e nome del Comune (si impostano in index.html con window.TP_SITE) */
+  var CFG = window.TP_SITE || {};
+  var STOP_SECONDS = CFG.stopSeconds || {};
   function routeKm() {
     try {
       var c = routeGeoJson.features[0].geometry.coordinates, km = 0, R = 6371;
@@ -120,18 +111,9 @@
     renderCollection();
   }
 
-  /* Passaporto dei borghi: un timbro per ogni percorso completato (stessa origine = stessi dati tra i siti dei Comuni) */
-  function readPassport() { try { return JSON.parse(localStorage.getItem(PASSPORT_KEY) || "{}"); } catch (e) { return {}; } }
-  function stampThis() {
-    var id = document.documentElement.dataset.tpTheme || "";
-    if (!id) return;
-    var p = readPassport();
-    if (!p[id]) { p[id] = { date: new Date().toISOString().slice(0, 10) }; try { localStorage.setItem(PASSPORT_KEY, JSON.stringify(p)); } catch (e) { /* ignora */ } }
-  }
-
   function share() {
     var url = new URL("./", window.location.href).href;
-    var data = { title: tr().shareTitle, text: "Travel Podcasting · Vicopisano", url: url };
+    var data = { title: tr().shareTitle, text: "Travel Podcasting · " + (CFG.name || ""), url: url };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     try { navigator.clipboard.writeText(url); alert(tr().copied); } catch (e) { window.prompt(tr().copy, url); }
   }
@@ -160,7 +142,6 @@
     overlay.querySelector("#tp-complete-title").textContent = tr().done;
     overlay.querySelector(".tp-complete-share").textContent = tr().share;
     overlay.querySelector(".tp-complete-close").textContent = tr().close;
-    stampThis();
     var st = overlay.querySelector(".tp-complete-stamp");
     if (!st) { st = document.createElement("p"); st.className = "tp-complete-promo tp-complete-stamp"; overlay.querySelector(".tp-complete-card").appendChild(st); }
     st.textContent = tr().stamp;
@@ -275,7 +256,6 @@
     });
   }
   if (!reducedMotion) {
-    loop(glance, 12000, 13000, true);
     var titleEl = document.getElementById("detail-title-text");
     if (titleEl) new MutationObserver(function () { setTimeout(greet, 350); }).observe(titleEl, { childList: true, characterData: true, subtree: true });
     new MutationObserver(function (list) {
