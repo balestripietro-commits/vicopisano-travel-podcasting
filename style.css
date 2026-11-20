@@ -10409,15 +10409,6 @@ body.is-transition-audio .play-ring { display: none !important; }
   body .player-overlay.TPPlayerSheet .player-controls .player-control-button.is-primary .playback-icon {
     font-size: 1.25rem !important;
   }
-  /* Player mappa: i tre pulsanti (audio, ?, chiudi) in alto a sinistra */
-  body .player-overlay.TPPlayerSheet.is-mobile-map-player .player-topbar {
-    justify-content: flex-start !important;
-    gap: 8px;
-  }
-  body .player-overlay.TPPlayerSheet.is-mobile-map-player .player-topbar-leading,
-  body .player-overlay.TPPlayerSheet.is-mobile-map-player .player-topbar-trailing {
-    margin: 0 !important;
-  }
 }
 
 /* Etichetta tappa sulla mappa: stessa forma delle foto degli audio */
