@@ -10386,6 +10386,7 @@ body.is-transition-audio .play-ring { display: none !important; }
 
 /* ---- Full player come il player della home (mobile e tablet) ---- */
 @media (max-width: 1023px) {
+  .player-controls { --pc-btn: 44px; --pc-ic: 26px; --pc-play: 50px; }
   body .player-overlay.TPPlayerSheet .player-controls .player-control-button.is-primary,
   body .player-overlay.TPPlayerSheet .player-transport-group .player-control-button.is-primary {
     width: 50px !important;
