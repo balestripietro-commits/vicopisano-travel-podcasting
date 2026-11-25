@@ -17,6 +17,8 @@ const rootFiles = [
   "logo_vicopisano.webp",
   "mascotte_vicopisano.webp",
   "tp-controlli.js",
+  "tp-avvio.js",
+  "tp-sito.js",
   "tp-controlli.css",
   "fonts-google.css",
 ];
