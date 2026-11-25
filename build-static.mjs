@@ -16,6 +16,9 @@ const rootFiles = [
   "theme-vicopisano.css",
   "logo_vicopisano.webp",
   "mascotte_vicopisano.webp",
+  "tp-controlli.js",
+  "tp-controlli.css",
+  "fonts-google.css",
 ];
 const runtimeDirectories = ["assets", "audio", "condivisione", "tappa"];
 const stopArtworkPattern = /^tappa_\d+_.+\.webp$/i;
