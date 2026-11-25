@@ -169,3 +169,12 @@
 - Sito: https://balestripietro-commits.github.io/vicopisano-travel-podcasting/.
 - GitHub Actions compila `npm run build` e pubblica `dist/` a ogni push su `main`; workflow in `.github/workflows/deploy-pages.yml`.
 - Il deploy GitHub Pages è attivo dal 21 ottobre 2026 ed è l'unico canale di pubblicazione. Il QR in `assets/qr-demo-travel-podcasting.png` va verificato: puntava al vecchio indirizzo Netlify.
+
+## Revisione prima della pubblicazione (25/11/2026)
+- `tp-controlli.js` / `tp-controlli.css` (identici in ogni sito): velocità con menu a tendina accanto alla durata, cinque comandi del player centrati, legenda delle forme sotto la mappa, riga «Racconta … · voce generata con l'intelligenza artificiale» nel player, nota AI sotto la presentazione, piè di pagina con titolare (Pietro Balestri, libero professionista, P.IVA 02589890504) e link a privacy e cookie. Narratore in `window.TP_SITE.narrator`.
+- Dimensione del testo: menu a tendina in testata (normale, grande, molto grande) in `brand-guide.js`, al posto del pulsante A+ che ciclava. La presentazione non viene più troncata con il testo grande.
+- Forme delle tappe fissate per numero in `window.TP_SITE.shapes` (index.html): restano uguali in tutte le lingue. Le regole sui titoli in `app.js` restano come ripiego.
+- Leaflet 1.9.4 (`assets/leaflet/`) e font Google (Material Symbols Rounded, Roboto Flex: `fonts-google.css`, `assets/fonts/`) serviti dal sito: nessuna richiesta a unpkg o Google. Restano esterne solo le tessere OpenStreetMap.
+- Audio ricodificato: 64 kbps mono la voce, 96 kbps mono intermezzo e finale.
+- Animazione di apertura solo alla prima visita (`localStorage`), al massimo 6 secondi.
+- Sito indicizzabile: meta description, canonical e Open Graph in `index.html`. Informativa unica: https://balestripietro-commits.github.io/landing-page-travel-podcasting/privacy.html
